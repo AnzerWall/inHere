@@ -8,5 +8,8 @@ export default{
   },
   '/home':{
     component: Index
+  },
+  '/test': {
+    component: Index
   }
 }
