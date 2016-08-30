@@ -1,5 +1,5 @@
 <template>
-  <div>Hello World</div>
+  <div>Hello My World</div>
   <img src="../assets/logo.png">
 </template>
 <style>

@@ -1,5 +1,5 @@
 <template>
-  <div>Hello The World</div>
+  <div>Hello The World 等等</div>
   <img src="../assets/logo.png">
 </template>
 <style>
