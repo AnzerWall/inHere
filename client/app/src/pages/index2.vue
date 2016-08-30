@@ -1,5 +1,5 @@
 <template>
-  <div>Hello World2</div>
+  <div>Hello World2vgfg</div>
   <img src="../assets/logo.png">
 </template>
 <style>
@@ -9,6 +9,8 @@
 
 
   export default{
+    data(){
 
+    }
   }
 </script>
