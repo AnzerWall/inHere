@@ -1,5 +1,5 @@
 <template>
-  <div>Hello World2vgfg</div>
+  <div>Hello The World</div>
   <img src="../assets/logo.png">
 </template>
 <style>
