@@ -5,5 +5,8 @@ import Index from 'pages/Index.vue'
 export default{
   '/': {
     component: Index
+  },
+  '/home':{
+    component: Index
   }
 }
