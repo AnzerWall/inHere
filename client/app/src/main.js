@@ -11,6 +11,6 @@ FastClick.attach(document.body);
 Vue.use(VueRouter);
 const router = new VueRouter();
 router.map(RouteConfig);
-router.redirect(RedirectConfig)
+router.redirect(RedirectConfig);
 //启动
 router.start(App, '#app');
