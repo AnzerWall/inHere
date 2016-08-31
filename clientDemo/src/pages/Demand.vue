@@ -15,7 +15,7 @@
 module.exports = {
     components:{
         'navbar':require('../components/Navbar.vue'),
-        'svg-add':require('../svg/Add.vue')
+        'svg-add':require('../svg/demand/Add.vue')
     }
 }
 </script>

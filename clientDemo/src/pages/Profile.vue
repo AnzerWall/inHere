@@ -19,7 +19,7 @@
                 .timeline-title 我的过去
                 .timeline-list
                     timeline-item(v-for="item in timeline",:time="item.time")
-                        task-card(:data="item.task")
+                        demand-card(:data="item.task")
 
 </template>
 
@@ -28,7 +28,7 @@ module.exports = {
     components: {
         'navbar': require('../components/Navbar.vue'),
         'feature': require('../components/Feature.vue'),
-        'task-card': require('../components/TaskCard.vue'),
+        'demand-card': require('../components/DemandCard.vue'),
         'svg-setting':require('../svg/Setting.vue'),
         'svg-qimochengji':require('../svg/features/Qimochengji.vue'),
         'svg-siliujichengji':require('../svg/features/Siliujichengji.vue'),
@@ -46,6 +46,7 @@ module.exports = {
             timeline:[{
                 time:1472581345635,
                 task:{
+                    type:'task',
                     text: '有没有人可以帮忙拿个快递到F1?',
                     color: '#2196F3',
                     tag: '快递',
@@ -55,6 +56,7 @@ module.exports = {
             },{
                 time:1472581045635,
                 task:{
+                    type:'task',
                     text: '出一条全新的牛仔a字裙，49元，适合平时穿SM码数的美眉，想买的评论',
                     color: '#FFC107',
                     tag: '转让',
@@ -71,6 +73,7 @@ module.exports = {
             }, {
                 time:1472580045635,
                 task:{
+                    type:'task',
                     text: '谁能帮小泽妹纸我打个饭？',
                     color: '#EC407A',
                     tag: '帮忙',

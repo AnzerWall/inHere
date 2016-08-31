@@ -13,10 +13,10 @@
 <script>
 module.exports = {
     components:{
-        'svg-demand':require('../svg/Demand.vue'),
-        'svg-square':require('../svg/Square.vue'),
-        'svg-message':require('../svg/Message.vue'),
-        'svg-profile':require('../svg/Profile.vue'),
+        'svg-demand':require('../svg/tabbar/Demand.vue'),
+        'svg-square':require('../svg/tabbar/Square.vue'),
+        'svg-message':require('../svg/tabbar/Message.vue'),
+        'svg-profile':require('../svg/tabbar/Profile.vue'),
     }
 }
 </script>

@@ -3,17 +3,18 @@ var VueRouter = require('vue-router');
 
 Vue.use(VueRouter)
 
-
-// var mint = require('mint-ui');
-// var Swipe = mint.Swipe;
-// var SwipeItem =mint.SwipeItem;
-// Vue.component(Swipe.name, Swipe);
-// Vue.component(SwipeItem.name, SwipeItem);
-
-
 Vue.config.debug = true
 
 var App = require('./App.vue');
+
+
+
+var mint = require('mint-ui');
+var Swipe = mint.Swipe;
+var SwipeItem = mint.SwipeItem;
+
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 
 var router = new VueRouter()
 

@@ -1,22 +1,24 @@
 <template lang="jade">
     .task
-        task-card(v-for="item in data",:data="item")
+        demand-card(v-for="item in data",:data.sync="item")
 </template>
 
 <script>
 module.exports = {
     components: {
-        'task-card': require('../../components/TaskCard.vue')
+        'demand-card': require('../../components/DemandCard.vue')
     },
     data: function() {
         return {
             data: [{
+                type:'task',
                 text: '有没有人可以帮忙拿个快递到F1?',
                 color: '#2196F3',
                 tag: '快递',
                 time: 1472581345635,
                 pay: 15
             }, {
+                type:'task',
                 text: '出一条全新的牛仔a字裙，49元，适合平时穿SM码数的美眉，想买的评论',
                 color: '#FFC107',
                 tag: '转让',
@@ -30,17 +32,20 @@ module.exports = {
                 time: 1472581045635,
                 pay: 49
             }, {
+                type:'task',
                 text: '谁能帮小泽妹纸我打个饭？',
                 color: '#EC407A',
                 tag: '帮忙',
                 time: 1472580045635
             },{
+                type:'task',
                 text: '有没有人可以帮忙拿个快递到F1?',
                 color: '#2196F3',
                 tag: '快递',
                 time: 1472581345635,
                 pay: 15
             }, {
+                type:'task',
                 text: '出一条全新的牛仔a字裙，49元，适合平时穿SM码数的美眉，想买的评论',
                 color: '#FFC107',
                 tag: '转让',
@@ -54,6 +59,7 @@ module.exports = {
                 time: 1472581045635,
                 pay: 49
             }, {
+                type:'task',
                 text: '谁能帮小泽妹纸我打个饭？',
                 color: '#EC407A',
                 tag: '帮忙',
