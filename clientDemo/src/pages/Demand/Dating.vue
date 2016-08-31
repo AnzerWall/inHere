@@ -15,8 +15,8 @@ module.exports = {
                 text: '有没有妹纸想一起去北岭山?',
                 color: '#EC407A',
                 sex:2,
-                likeNum:8,
-                joinNum:1,
+                likeNum:233,
+                joinNum:233,
                 liked:true,
                 time: 1472581345635
             },{
