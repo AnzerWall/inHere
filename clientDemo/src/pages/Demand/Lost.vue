@@ -22,7 +22,7 @@ module.exports = {
                 time: 1472581345635
             },{
                 type:'lost',
-                thing:'飞机',
+                thing:'银行卡',
                 text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
                 imgs:[{
                     src:'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
