@@ -19,12 +19,6 @@ var moment = require('moment');
 module.exports = {
     props:{
         data:Object
-        // color:String,
-        // text:String,
-        // imgs:Array,
-        // pay:Number,
-        // time:Number,
-        // tag:String
     },
     components:{
         'svg-pay':require('../svg/Pay.vue')

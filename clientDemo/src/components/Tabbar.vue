@@ -1,12 +1,12 @@
 <template lang="jade">
     .tabbar
-        .tabbar-tab(@click="jumpTo('/demand')",:class="{cur:tabSelected=='/demand'}")
+        .tabbar-tab(v-link="{path:'/demand',activeClass:'/demand'}")
             svg-demand
-        .tabbar-tab(@click="jumpTo('/square')",:class="{cur:tabSelected=='/square'}")
+        .tabbar-tab(v-link="{path:'/square',activeClass:'/square'}")
             svg-square
-        .tabbar-tab(@click="jumpTo('/message')",:class="{cur:tabSelected=='/message'}")
+        .tabbar-tab(v-link="{path:'/message',activeClass:'/message'}")
             svg-message
-        .tabbar-tab(@click="jumpTo('/profile')",:class="{cur:tabSelected=='/profile'}")
+        .tabbar-tab(v-link="{path:'/profile',activeClass:'/profile'}")
             svg-profile
 </template>
 
@@ -17,20 +17,6 @@ module.exports = {
         'svg-square':require('../svg/Square.vue'),
         'svg-message':require('../svg/Message.vue'),
         'svg-profile':require('../svg/Profile.vue'),
-    },
-    data:function(){
-        return {
-                tabSelected:'/demand'
-            };
-    },
-    methods:{
-        jumpTo:function (url) {
-            this.$router.go(url);
-            var tmp = this.$route.path;
-            var last = url;
-            console.log(last);
-            this.tabSelected = last;
-        }
     }
 }
 </script>

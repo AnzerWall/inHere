@@ -13183,20 +13183,6 @@
 	        'svg-square': __webpack_require__(16),
 	        'svg-message': __webpack_require__(18),
 	        'svg-profile': __webpack_require__(20)
-	    },
-	    data: function data() {
-	        return {
-	            tabSelected: '/demand'
-	        };
-	    },
-	    methods: {
-	        jumpTo: function jumpTo(url) {
-	            this.$router.go(url);
-	            var tmp = this.$route.path;
-	            var last = url;
-	            console.log(last);
-	            this.tabSelected = last;
-	        }
 	    }
 	};
 
@@ -13320,7 +13306,7 @@
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tabbar\"><div @click=\"jumpTo('/demand')\" :class=\"{cur:tabSelected=='/demand'}\" class=\"tabbar-tab\"><svg-demand></svg-demand></div><div @click=\"jumpTo('/square')\" :class=\"{cur:tabSelected=='/square'}\" class=\"tabbar-tab\"><svg-square></svg-square></div><div @click=\"jumpTo('/message')\" :class=\"{cur:tabSelected=='/message'}\" class=\"tabbar-tab\"><svg-message></svg-message></div><div @click=\"jumpTo('/profile')\" :class=\"{cur:tabSelected=='/profile'}\" class=\"tabbar-tab\"><svg-profile></svg-profile></div></div>";
+	module.exports = "<div class=\"tabbar\"><div v-link=\"{path:'/demand',activeClass:'/demand'}\" class=\"tabbar-tab\"><svg-demand></svg-demand></div><div v-link=\"{path:'/square',activeClass:'/square'}\" class=\"tabbar-tab\"><svg-square></svg-square></div><div v-link=\"{path:'/message',activeClass:'/message'}\" class=\"tabbar-tab\"><svg-message></svg-message></div><div v-link=\"{path:'/profile',activeClass:'/profile'}\" class=\"tabbar-tab\"><svg-profile></svg-profile></div></div>";
 
 /***/ },
 /* 23 */
