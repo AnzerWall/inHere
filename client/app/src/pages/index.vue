@@ -1,8 +1,7 @@
 <template>
   <div>不知道放什么的首页</div>
 </template>
-<style>
-
+<style scoped>
 </style>
 <script type="text/ecmascript-6">
 
