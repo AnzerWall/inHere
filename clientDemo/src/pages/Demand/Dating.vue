@@ -16,7 +16,7 @@ module.exports = {
                 color: '#EC407A',
                 sex:2,
                 likeNum:8,
-                joinNum:1,
+                joinNum:3,
                 liked:true,
                 time: 1472581345635
             },{
