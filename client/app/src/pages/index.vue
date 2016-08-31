@@ -1,5 +1,6 @@
 <template>
   <div>不知道放什么的首页</div>
+  <div></div>
 </template>
 <style scoped>
 </style>
