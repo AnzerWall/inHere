@@ -13306,7 +13306,7 @@
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"tabbar\"><div v-link=\"{path:'/demand',activeClass:'/demand'}\" class=\"tabbar-tab\"><svg-demand></svg-demand></div><div v-link=\"{path:'/square',activeClass:'/square'}\" class=\"tabbar-tab\"><svg-square></svg-square></div><div v-link=\"{path:'/message',activeClass:'/message'}\" class=\"tabbar-tab\"><svg-message></svg-message></div><div v-link=\"{path:'/profile',activeClass:'/profile'}\" class=\"tabbar-tab\"><svg-profile></svg-profile></div></div>";
+	module.exports = "<div class=\"tabbar\"><div v-link=\"{path:'/demand',activeClass:'cur'}\" class=\"tabbar-tab\"><svg-demand></svg-demand></div><div v-link=\"{path:'/square',activeClass:'cur'}\" class=\"tabbar-tab\"><svg-square></svg-square></div><div v-link=\"{path:'/message',activeClass:'cur'}\" class=\"tabbar-tab\"><svg-message></svg-message></div><div v-link=\"{path:'/profile',activeClass:'cur'}\" class=\"tabbar-tab\"><svg-profile></svg-profile></div></div>";
 
 /***/ },
 /* 23 */

@@ -1,12 +1,12 @@
 <template lang="jade">
     .tabbar
-        .tabbar-tab(v-link="{path:'/demand',activeClass:'/demand'}")
+        .tabbar-tab(v-link="{path:'/demand',activeClass:'cur'}")
             svg-demand
-        .tabbar-tab(v-link="{path:'/square',activeClass:'/square'}")
+        .tabbar-tab(v-link="{path:'/square',activeClass:'cur'}")
             svg-square
-        .tabbar-tab(v-link="{path:'/message',activeClass:'/message'}")
+        .tabbar-tab(v-link="{path:'/message',activeClass:'cur'}")
             svg-message
-        .tabbar-tab(v-link="{path:'/profile',activeClass:'/profile'}")
+        .tabbar-tab(v-link="{path:'/profile',activeClass:'cur'}")
             svg-profile
 </template>
 
