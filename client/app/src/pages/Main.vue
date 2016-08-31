@@ -40,6 +40,7 @@
   }
 
   .main-tabbar {
+    background-color: white;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -47,7 +48,6 @@
     height: 52px;
     border-top: #ccc solid 1px;
     display: flex;
-
   }
 </style>
 <script>
