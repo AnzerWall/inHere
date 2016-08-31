@@ -1,6 +1,5 @@
 <template>
-  <div>Hello The World 等</div>
-  <img src="../assets/logo.png">
+  <div>测试路由用的其他页</div>
 </template>
 <style>
 
@@ -10,7 +9,9 @@
 
   export default{
     data(){
+      return {
 
+      }
     }
   }
 </script>

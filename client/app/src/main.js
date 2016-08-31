@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App'
+import App from './app'
 import  VueRouter from 'vue-router'
 import RouteConfig from './router.js'
 
