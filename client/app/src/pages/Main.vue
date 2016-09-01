@@ -24,7 +24,8 @@
 </template>
 <style scoped>
   .main-content {
-    padding-bottom: 53px;
+    margin-bottom: 53px;
+
   }
 
   .main-tabbar-item {
@@ -48,6 +49,7 @@
     height: 52px;
     border-top: #ccc solid 1px;
     display: flex;
+    z-index: 1000;
   }
 </style>
 <script>
