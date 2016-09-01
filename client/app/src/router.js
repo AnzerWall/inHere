@@ -1,15 +1,35 @@
 /**
  * Created by anzer on 2016/8/29.
  */
-import Index from 'pages/Index.vue'
+import Index from 'pages/index.vue'
+import Main from 'pages/main.vue'
+import Other from 'pages/other.vue'
+import Demand from 'pages/main/demand.vue'
+import Square from 'pages/main/square.vue'
+import Message from 'pages/main/message.vue'
+import Profile from 'pages/main/profile.vue'
 export default{
   '/': {
-    component: Index
+    component: Main,
+    subRoutes: {
+      '/': {
+        component: Index
+      },
+      '/demand': {
+        component: Demand
+      },
+      '/square': {
+        component: Square
+      },
+      '/message': {
+        component: Message
+      },
+      '/profile': {
+        component: Profile
+      }
+    }
   },
-  '/home':{
-    component: Index
-  },
-  '/test': {
-    component: Index
+  '/other': {
+    component: Other
   }
 }
