@@ -1,30 +1,39 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <div class="main-content">
-      <router-view></router-view>
+      <router-view ></router-view>
+    </div>
+    <div class="main-tabbar-wrapper">
+      <div class="main-tabbar">
+        <div class="main-tabbar-item"  v-link="{path:'/demand',activeClass: 'current'}">
+          <demand-icon></demand-icon>
+        </div>
+        <div class="main-tabbar-item" v-link="{path:'/square',activeClass: 'current'}">
+          <square-icon></square-icon>
+        </div>
+        <div class="main-tabbar-item" v-link="{path:'/message',activeClass: 'current'}">
+          <message-icon></message-icon>
+        </div>
+        <div class="main-tabbar-item" v-link="{path:'/profile',activeClass: 'current'}">
+          <profile-icon></profile-icon>
+        </div>
+
+      </div>
     </div>
 
-    <div class="main-tabbar">
-      <div class="main-tabbar-item"  v-link="{path:'/demand',activeClass: 'current'}">
-        <demand-icon></demand-icon>
-      </div>
-      <div class="main-tabbar-item" v-link="{path:'/square',activeClass: 'current'}">
-        <square-icon></square-icon>
-      </div>
-      <div class="main-tabbar-item" v-link="{path:'/message',activeClass: 'current'}">
-        <message-icon></message-icon>
-      </div>
-      <div class="main-tabbar-item" v-link="{path:'/profile',activeClass: 'current'}">
-        <profile-icon></profile-icon>
-      </div>
-
-    </div>
 
   </div>
 </template>
 <style scoped>
+  .main-wrapper{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
   .main-content {
-    padding-bottom: 53px;
+    overflow: auto;
+    height: 100%;
+    flex-shrink: 1;
   }
 
   .main-tabbar-item {
@@ -33,13 +42,18 @@
     justify-content: center;
     align-items: center;
     opacity: 0.15;
+    background-color: white;
   }
 
   .main-tabbar-item.current {
     opacity: 0.9;
   }
-
-  .main-tabbar {
+  .main-tabbar-wrapper{
+    flex-shrink:1;
+    position: relative;
+    height: 52px;
+  }
+  .main-tabbar-wrapper .main-tabbar {
     background-color: white;
     position: fixed;
     bottom: 0;
@@ -48,6 +62,7 @@
     height: 52px;
     border-top: #ccc solid 1px;
     display: flex;
+    z-index: 100;
   }
 </style>
 <script>
