@@ -4,6 +4,7 @@
             .demand-card-tags(v-if="!isDetail && data.type=='lost'",:style="{color:data.color}")
                 .tag {{data.isLost?'失物':'拾获'}}
                 .tag {{data.thing}}
+                .tag {{timeStr(data.time)}}
             .demand-card-tags(v-if="!isDetail && data.type=='dating'",:style="{color:data.color}")
                 .tag {{sexStr(data.sex)}}
                 .tag {{timeStr(data.time)}}
@@ -41,7 +42,7 @@ module.exports = {
     },
     methods:{
         timeStr:function (timestamp) {
-            return moment(timestamp).format('h:mm A');
+            return moment(timestamp).format('MM-DD h:mm A');
         },
         sexStr:function(th){
             switch(th){

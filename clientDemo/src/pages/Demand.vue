@@ -27,8 +27,6 @@ module.exports = {
     .navbar {
         .nav-tabs {
             .nav-tab {
-                font-size: 1.1em;
-                font-weight: bold;
                 display: inline-block;
                 padding:0 10px;
                 opacity: 0.15;

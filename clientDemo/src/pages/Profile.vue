@@ -5,6 +5,10 @@
             svg-setting.setting
         .profile-content
             .features
+                feature(name="我的目标",color="#7300FF")
+                    svg-wodemubiao
+                feature(name="我的回答",color="#09CE88")
+                    svg-wodehuida
                 feature(name="期末成绩",color="#4F8794")
                     svg-qimochengji
                 feature(name="四六级成绩",color="#FFA600")
@@ -35,6 +39,8 @@ module.exports = {
         'svg-fankajilu':require('../svg/features/Fankajilu.vue'),
         'svg-shuifeichaxun':require('../svg/features/Shuifeichaxun.vue'),
         'svg-kuaidichaxun':require('../svg/features/Kuaidichaxun.vue'),
+        'svg-wodehuida':require('../svg/features/Wodehuida.vue'),
+        'svg-wodemubiao':require('../svg/features/Wodemubiao.vue'),
         'timeline-item': require('../components/TimelineItem.vue'),
     },
     data:function () {

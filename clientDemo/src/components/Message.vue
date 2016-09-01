@@ -1,5 +1,5 @@
 <template lang="jade">
-    .message-item
+    .message-item(:style="{opacity:new?'1':'0.3'}")
         .message-title(:style="{color:color}")
             .point(:style="{background:color}")
             span {{title}}
@@ -9,6 +9,7 @@
 <script>
 module.exports = {
     props:{
+        new:Boolean,
         title:String,
         text:String,
         color:String
