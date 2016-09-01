@@ -41,21 +41,20 @@ router.map({
             }
         }
     },
-    '/demand/task/:id':{
-        component: require('./pages/Demand/TaskDetail.vue')
+    '/demand/detail/:type':{
+        component: require('./pages/Demand/Detail.vue')
     },
-    '/demand/lost/:id':{
-        component: require('./pages/Demand/LostDetail.vue')
-    },
-    '/demand/dating/:id':{
-        component: require('./pages/Demand/DatingDetail.vue')
-    },
+    // '/demand/lost/:id':{
+    //     component: require('./pages/Demand/LostDetail.vue')
+    // },
+    // '/demand/dating/:id':{
+    //     component: require('./pages/Demand/DatingDetail.vue')
+    // },
 })
 
 router.redirect({
     '*': '/main/demand',
-    '/main/demand':'/main/demand/task',
-    '/main/demand/*':'/main/demand/task'
+    '/main/*':'/main/demand/task'
 })
 
 router.beforeEach(function () {
