@@ -23,11 +23,14 @@ module.exports = {
                 color: '#FFC107',
                 tag: '转让',
                 imgs: [{
-                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg'
+                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
+                    w:570,h:760
                 }, {
-                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg'
+                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
+                    w:570,h:760
                 }, {
-                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg'
+                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
+                    w:570,h:760
                 }],
                 time: 1472581045635,
                 pay: 49

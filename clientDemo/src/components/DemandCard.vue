@@ -1,5 +1,5 @@
 <template lang="jade">
-    .demand-card(v-if="data",:style="{background:data.color,marginBottom:isDetail?'0':null}",v-link="'/demand/'+data.type+'/'+data.id")
+    .demand-card(v-if="data",:style="{background:data.color,marginBottom:isDetail?'0':null}",@click="clickCard")
         .demand-card-content
             .demand-card-tags(v-if="!isDetail && data.type=='lost'",:style="{color:data.color}")
                 .tag {{data.isLost?'失物':'拾获'}}
@@ -7,11 +7,14 @@
                 .tag {{timeStr(data.time)}}
             .demand-card-tags(v-if="!isDetail && data.type=='dating'",:style="{color:data.color}")
                 .tag {{sexStr(data.sex)}}
+                .tag {{data.address}}
                 .tag {{timeStr(data.time)}}
             .text {{data.text}}
             .imgs.hide-scroll(v-if="data.imgs")
-                img(v-for="item in data.imgs",:src="item.src")
+                img(v-for="item in data.imgs",:src="item.src",@click.stop="clickImg($index,data.imgs)")
             .imgs-space(v-if="data.imgs")
+                div(@click.stop="")
+                    photo-swipe(v-ref:viewer)
         .demand-card-bottom(v-if="data.type=='task'")
             .left
                 .time {{timeStr(data.time)}}
@@ -24,8 +27,8 @@
             .left 参加人数：{{data.joinNum}}
             .right
                 span {{data.likeNum}}
-                svg-liked.like(v-if="data.liked")
-                svg-like.like(v-else)
+                svg-liked.like(v-if="data.liked",@click.stop="clickLike")
+                svg-like.like(v-else,@click.stop="clickLike")
 </template>
 
 <script>
@@ -36,20 +39,31 @@ module.exports = {
         data:Object
     },
     components:{
+        'photo-swipe':require('./photoswipe.vue'),
         'svg-pay':require('../svg/demand/Pay.vue'),
         'svg-like':require('../svg/demand/Like.vue'),
         'svg-liked':require('../svg/demand/Liked.vue')
     },
     methods:{
-        timeStr:function (timestamp) {
+        timeStr(timestamp) {
             return moment(timestamp).format('MM-DD h:mm A');
         },
-        sexStr:function(th){
+        sexStr(th){
             switch(th){
                 case 1:return '求男生';
                 case 2:return '求女生';
             }
             return '性别不限'
+        },
+        clickImg(index,list){
+            this.$refs.viewer.show(index,list);
+            return true;
+        },
+        clickCard(){
+            this.$router.go('/demand/detail/'+this.data.type)
+        },
+        clickLike(){
+            this.data.liked = !this.data.liked;
         }
     }
 }
@@ -108,14 +122,17 @@ module.exports = {
         line-height:35px;
         background: rgba(0,0,0,.1);
         font-size: 0.8em;
+        display: flex;
+        justify-content: space-between;
         &.btn {
+            display: block;
             height:55px;
             line-height: 55px;
             text-align: center;
             font-weight: bold;
         }
         .left {
-            float:left;
+            // float:left;
             .time {
                 display: inline-block;
                 margin-right:15px;
@@ -126,7 +143,7 @@ module.exports = {
             }
         }
         .right {
-            float:right;
+            // float:right;
             svg {
                 margin-left:5px;
                 fill:white;

@@ -72,36 +72,35 @@
 	                component: __webpack_require__(29),
 	                subRoutes:{
 	                    '/task':{component:__webpack_require__(41)},
-	                    '/lost':{component:__webpack_require__(160)},
-	                    '/dating':{component:__webpack_require__(165)},
+	                    '/lost':{component:__webpack_require__(172)},
+	                    '/dating':{component:__webpack_require__(177)},
 	                }
 	            },
 	            '/square': {
-	                component: __webpack_require__(170),
+	                component: __webpack_require__(182),
 	            },
 	            '/message': {
-	                component: __webpack_require__(180),
+	                component: __webpack_require__(192),
 	            },
 	            '/profile': {
-	                component: __webpack_require__(199),
+	                component: __webpack_require__(211),
 	            }
 	        }
 	    },
-	    '/demand/task/:id':{
-	        component: __webpack_require__(226)
+	    '/demand/detail/:type':{
+	        component: __webpack_require__(269)
 	    },
-	    '/demand/lost/:id':{
-	        component: __webpack_require__(243)
-	    },
-	    '/demand/dating/:id':{
-	        component: __webpack_require__(248)
-	    },
+	    // '/demand/lost/:id':{
+	    //     component: require('./pages/Demand/LostDetail.vue')
+	    // },
+	    // '/demand/dating/:id':{
+	    //     component: require('./pages/Demand/DatingDetail.vue')
+	    // },
 	})
 	
 	router.redirect({
 	    '*': '/main/demand',
-	    '/main/demand':'/main/demand/task',
-	    '/main/demand/*':'/main/demand/task'
+	    '/main/*':'/main/demand/task'
 	})
 	
 	router.beforeEach(function () {
@@ -13628,7 +13627,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Demand/Task.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(159)
+	__vue_template__ = __webpack_require__(171)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13711,11 +13710,14 @@
 	                color: '#FFC107',
 	                tag: '转让',
 	                imgs: [{
-	                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg'
+	                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
+	                    w: 570, h: 760
 	                }, {
-	                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg'
+	                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
+	                    w: 570, h: 760
 	                }, {
-	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg'
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
+	                    w: 570, h: 760
 	                }],
 	                time: 1472581045635,
 	                pay: 49
@@ -13768,7 +13770,7 @@
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/DemandCard.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(158)
+	__vue_template__ = __webpack_require__(170)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -13821,7 +13823,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".demand-card {\n  border-radius: 4px;\n  color: white;\n  margin: 10px; }\n  .demand-card .demand-card-tags {\n    margin-bottom: 5px; }\n    .demand-card .demand-card-tags .tag {\n      display: inline-block;\n      margin-right: 5px;\n      background: white;\n      padding: 5px 8px;\n      line-height: 1em;\n      font-size: 0.9em;\n      height: 1em;\n      border-radius: 4px; }\n  .demand-card .demand-card-content {\n    padding: 15px 15px 30px; }\n    .demand-card .demand-card-content .imgs-space {\n      height: 200px;\n      width: 100%; }\n    .demand-card .demand-card-content .imgs {\n      position: absolute;\n      width: 100%;\n      padding-bottom: 10px;\n      left: 0;\n      white-space: nowrap;\n      overflow-x: auto;\n      margin-top: 10px; }\n      .demand-card .demand-card-content .imgs img {\n        border: solid 3px white;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        margin-right: 10px;\n        height: 190px; }\n        .demand-card .demand-card-content .imgs img:first-child {\n          margin-left: 25px; }\n        .demand-card .demand-card-content .imgs img:last-child {\n          margin-right: 25px; }\n  .demand-card .demand-card-bottom {\n    padding: 0 15px;\n    height: 35px;\n    line-height: 35px;\n    background: rgba(0, 0, 0, 0.1);\n    font-size: 0.8em; }\n    .demand-card .demand-card-bottom.btn {\n      height: 55px;\n      line-height: 55px;\n      text-align: center;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .left {\n      float: left; }\n      .demand-card .demand-card-bottom .left .time {\n        display: inline-block;\n        margin-right: 15px; }\n      .demand-card .demand-card-bottom .left .tag {\n        display: inline-block;\n        font-weight: bold; }\n    .demand-card .demand-card-bottom .right {\n      float: right; }\n      .demand-card .demand-card-bottom .right svg {\n        margin-left: 5px;\n        fill: white;\n        vertical-align: middle; }\n        .demand-card .demand-card-bottom .right svg.like {\n          -webkit-transform: translateY(-7px);\n                  transform: translateY(-7px); }\n", "", {"version":3,"sources":["/./src/components/DemandCard.vue"],"names":[],"mappings":"AAAA;EACE,mBAAmB;EACnB,aAAa;EACb,aAAa,EAAE;EACf;IACE,mBAAmB,EAAE;IACrB;MACE,sBAAsB;MACtB,kBAAkB;MAClB,kBAAkB;MAClB,iBAAiB;MACjB,iBAAiB;MACjB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB,EAAE;EACzB;IACE,wBAAwB,EAAE;IAC1B;MACE,cAAc;MACd,YAAY,EAAE;IAChB;MACE,mBAAmB;MACnB,YAAY;MACZ,qBAAqB;MACrB,QAAQ;MACR,oBAAoB;MACpB,iBAAiB;MACjB,iBAAiB,EAAE;MACnB;QACE,wBAAwB;QACxB,yCAAyC;QACzC,mBAAmB;QACnB,cAAc,EAAE;QAChB;UACE,kBAAkB,EAAE;QACtB;UACE,mBAAmB,EAAE;EAC7B;IACE,gBAAgB;IAChB,aAAa;IACb,kBAAkB;IAClB,+BAA+B;IAC/B,iBAAiB,EAAE;IACnB;MACE,aAAa;MACb,kBAAkB;MAClB,mBAAmB;MACnB,kBAAkB,EAAE;IACtB;MACE,YAAY,EAAE;MACd;QACE,sBAAsB;QACtB,mBAAmB,EAAE;MACvB;QACE,sBAAsB;QACtB,kBAAkB,EAAE;IACxB;MACE,aAAa,EAAE;MACf;QACE,iBAAiB;QACjB,YAAY;QACZ,uBAAuB,EAAE;QACzB;UACE,oCAA4B;kBAA5B,4BAA4B,EAAE","file":"DemandCard.vue","sourcesContent":[".demand-card {\n  border-radius: 4px;\n  color: white;\n  margin: 10px; }\n  .demand-card .demand-card-tags {\n    margin-bottom: 5px; }\n    .demand-card .demand-card-tags .tag {\n      display: inline-block;\n      margin-right: 5px;\n      background: white;\n      padding: 5px 8px;\n      line-height: 1em;\n      font-size: 0.9em;\n      height: 1em;\n      border-radius: 4px; }\n  .demand-card .demand-card-content {\n    padding: 15px 15px 30px; }\n    .demand-card .demand-card-content .imgs-space {\n      height: 200px;\n      width: 100%; }\n    .demand-card .demand-card-content .imgs {\n      position: absolute;\n      width: 100%;\n      padding-bottom: 10px;\n      left: 0;\n      white-space: nowrap;\n      overflow-x: auto;\n      margin-top: 10px; }\n      .demand-card .demand-card-content .imgs img {\n        border: solid 3px white;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        margin-right: 10px;\n        height: 190px; }\n        .demand-card .demand-card-content .imgs img:first-child {\n          margin-left: 25px; }\n        .demand-card .demand-card-content .imgs img:last-child {\n          margin-right: 25px; }\n  .demand-card .demand-card-bottom {\n    padding: 0 15px;\n    height: 35px;\n    line-height: 35px;\n    background: rgba(0, 0, 0, 0.1);\n    font-size: 0.8em; }\n    .demand-card .demand-card-bottom.btn {\n      height: 55px;\n      line-height: 55px;\n      text-align: center;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .left {\n      float: left; }\n      .demand-card .demand-card-bottom .left .time {\n        display: inline-block;\n        margin-right: 15px; }\n      .demand-card .demand-card-bottom .left .tag {\n        display: inline-block;\n        font-weight: bold; }\n    .demand-card .demand-card-bottom .right {\n      float: right; }\n      .demand-card .demand-card-bottom .right svg {\n        margin-left: 5px;\n        fill: white;\n        vertical-align: middle; }\n        .demand-card .demand-card-bottom .right svg.like {\n          transform: translateY(-7px); }\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".demand-card {\n  border-radius: 4px;\n  color: white;\n  margin: 10px; }\n  .demand-card .demand-card-tags {\n    margin-bottom: 5px; }\n    .demand-card .demand-card-tags .tag {\n      display: inline-block;\n      margin-right: 5px;\n      background: white;\n      padding: 5px 8px;\n      line-height: 1em;\n      font-size: 0.9em;\n      height: 1em;\n      border-radius: 4px; }\n  .demand-card .demand-card-content {\n    padding: 15px 15px 30px; }\n    .demand-card .demand-card-content .imgs-space {\n      height: 200px;\n      width: 100%; }\n    .demand-card .demand-card-content .imgs {\n      position: absolute;\n      width: 100%;\n      padding-bottom: 10px;\n      left: 0;\n      white-space: nowrap;\n      overflow-x: auto;\n      margin-top: 10px; }\n      .demand-card .demand-card-content .imgs img {\n        border: solid 3px white;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        margin-right: 10px;\n        height: 190px; }\n        .demand-card .demand-card-content .imgs img:first-child {\n          margin-left: 25px; }\n        .demand-card .demand-card-content .imgs img:last-child {\n          margin-right: 25px; }\n  .demand-card .demand-card-bottom {\n    padding: 0 15px;\n    height: 35px;\n    line-height: 35px;\n    background: rgba(0, 0, 0, 0.1);\n    font-size: 0.8em;\n    display: -webkit-box;\n    display: -webkit-flex;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: justify;\n    -webkit-justify-content: space-between;\n        -ms-flex-pack: justify;\n            justify-content: space-between; }\n    .demand-card .demand-card-bottom.btn {\n      display: block;\n      height: 55px;\n      line-height: 55px;\n      text-align: center;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .left .time {\n      display: inline-block;\n      margin-right: 15px; }\n    .demand-card .demand-card-bottom .left .tag {\n      display: inline-block;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .right svg {\n      margin-left: 5px;\n      fill: white;\n      vertical-align: middle; }\n      .demand-card .demand-card-bottom .right svg.like {\n        -webkit-transform: translateY(-7px);\n                transform: translateY(-7px); }\n", "", {"version":3,"sources":["/./src/components/DemandCard.vue"],"names":[],"mappings":"AAAA;EACE,mBAAmB;EACnB,aAAa;EACb,aAAa,EAAE;EACf;IACE,mBAAmB,EAAE;IACrB;MACE,sBAAsB;MACtB,kBAAkB;MAClB,kBAAkB;MAClB,iBAAiB;MACjB,iBAAiB;MACjB,iBAAiB;MACjB,YAAY;MACZ,mBAAmB,EAAE;EACzB;IACE,wBAAwB,EAAE;IAC1B;MACE,cAAc;MACd,YAAY,EAAE;IAChB;MACE,mBAAmB;MACnB,YAAY;MACZ,qBAAqB;MACrB,QAAQ;MACR,oBAAoB;MACpB,iBAAiB;MACjB,iBAAiB,EAAE;MACnB;QACE,wBAAwB;QACxB,yCAAyC;QACzC,mBAAmB;QACnB,cAAc,EAAE;QAChB;UACE,kBAAkB,EAAE;QACtB;UACE,mBAAmB,EAAE;EAC7B;IACE,gBAAgB;IAChB,aAAa;IACb,kBAAkB;IAClB,+BAA+B;IAC/B,iBAAiB;IACjB,qBAAc;IAAd,sBAAc;IAAd,qBAAc;IAAd,cAAc;IACd,0BAA+B;IAA/B,uCAA+B;QAA/B,uBAA+B;YAA/B,+BAA+B,EAAE;IACjC;MACE,eAAe;MACf,aAAa;MACb,kBAAkB;MAClB,mBAAmB;MACnB,kBAAkB,EAAE;IACtB;MACE,sBAAsB;MACtB,mBAAmB,EAAE;IACvB;MACE,sBAAsB;MACtB,kBAAkB,EAAE;IACtB;MACE,iBAAiB;MACjB,YAAY;MACZ,uBAAuB,EAAE;MACzB;QACE,oCAA4B;gBAA5B,4BAA4B,EAAE","file":"DemandCard.vue","sourcesContent":[".demand-card {\n  border-radius: 4px;\n  color: white;\n  margin: 10px; }\n  .demand-card .demand-card-tags {\n    margin-bottom: 5px; }\n    .demand-card .demand-card-tags .tag {\n      display: inline-block;\n      margin-right: 5px;\n      background: white;\n      padding: 5px 8px;\n      line-height: 1em;\n      font-size: 0.9em;\n      height: 1em;\n      border-radius: 4px; }\n  .demand-card .demand-card-content {\n    padding: 15px 15px 30px; }\n    .demand-card .demand-card-content .imgs-space {\n      height: 200px;\n      width: 100%; }\n    .demand-card .demand-card-content .imgs {\n      position: absolute;\n      width: 100%;\n      padding-bottom: 10px;\n      left: 0;\n      white-space: nowrap;\n      overflow-x: auto;\n      margin-top: 10px; }\n      .demand-card .demand-card-content .imgs img {\n        border: solid 3px white;\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);\n        margin-right: 10px;\n        height: 190px; }\n        .demand-card .demand-card-content .imgs img:first-child {\n          margin-left: 25px; }\n        .demand-card .demand-card-content .imgs img:last-child {\n          margin-right: 25px; }\n  .demand-card .demand-card-bottom {\n    padding: 0 15px;\n    height: 35px;\n    line-height: 35px;\n    background: rgba(0, 0, 0, 0.1);\n    font-size: 0.8em;\n    display: flex;\n    justify-content: space-between; }\n    .demand-card .demand-card-bottom.btn {\n      display: block;\n      height: 55px;\n      line-height: 55px;\n      text-align: center;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .left .time {\n      display: inline-block;\n      margin-right: 15px; }\n    .demand-card .demand-card-bottom .left .tag {\n      display: inline-block;\n      font-weight: bold; }\n    .demand-card .demand-card-bottom .right svg {\n      margin-left: 5px;\n      fill: white;\n      vertical-align: middle; }\n      .demand-card .demand-card-bottom .right svg.like {\n        transform: translateY(-7px); }\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
@@ -13839,9 +13841,10 @@
 	        data: Object
 	    },
 	    components: {
-	        'svg-pay': __webpack_require__(152),
-	        'svg-like': __webpack_require__(154),
-	        'svg-liked': __webpack_require__(156)
+	        'photo-swipe': __webpack_require__(152),
+	        'svg-pay': __webpack_require__(164),
+	        'svg-like': __webpack_require__(166),
+	        'svg-liked': __webpack_require__(168)
 	    },
 	    methods: {
 	        timeStr: function timeStr(timestamp) {
@@ -13855,6 +13858,16 @@
 	                    return '求女生';
 	            }
 	            return '性别不限';
+	        },
+	        clickImg: function clickImg(index, list) {
+	            this.$refs.viewer.show(index, list);
+	            return true;
+	        },
+	        clickCard: function clickCard() {
+	            this.$router.go('/demand/detail/' + this.data.type);
+	        },
+	        clickLike: function clickLike() {
+	            this.data.liked = !this.data.liked;
 	        }
 	    }
 	};
@@ -27657,7 +27670,4765 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(153)
+	__webpack_require__(153)
+	__vue_script__ = __webpack_require__(160)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/components/photoswipe.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(163)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/components/photoswipe.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 153 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(154);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./photoswipe.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./photoswipe.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 154 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	exports.i(__webpack_require__(155), "");
+	exports.i(__webpack_require__(156), "");
+	
+	// module
+	exports.push([module.id, "\n/*导入图片预览插件的样式*/\n", "", {"version":3,"sources":["/./src/components/photoswipe.vue?a2c8a010"],"names":[],"mappings":";AAsEA,eAAA","file":"photoswipe.vue","sourcesContent":["<template>\n  <!--以下是图片预览插件固定元素-->\n  <!-- Root element of PhotoSwipe. Must have class pswp. -->\n  <div class=\"pswp\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n\n    <!-- Background of PhotoSwipe.\n         It's a separate element as animating opacity is faster than rgba(). -->\n    <div class=\"pswp__bg\"></div>\n\n    <!-- Slides wrapper with overflow:hidden. -->\n    <div class=\"pswp__scroll-wrap\">\n\n      <!-- Container that holds slides.\n          PhotoSwipe keeps only 3 of them in the DOM to save memory.\n          Don't modify these 3 pswp__item elements, data is added later on. -->\n      <div class=\"pswp__container\">\n        <div class=\"pswp__item\"></div>\n        <div class=\"pswp__item\"></div>\n        <div class=\"pswp__item\"></div>\n      </div>\n\n      <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\n      <div class=\"pswp__ui pswp__ui--hidden\">\n\n        <div class=\"pswp__top-bar\">\n\n          <!--  Controls are self-explanatory. Order can be changed. -->\n\n          <div class=\"pswp__counter\"></div>\n\n          <button class=\"pswp__button pswp__button--close\" title=\"Close (Esc)\"></button>\n\n          <button class=\"pswp__button pswp__button--share\" title=\"Share\"></button>\n\n          <button class=\"pswp__button pswp__button--fs\" title=\"Toggle fullscreen\"></button>\n\n          <button class=\"pswp__button pswp__button--zoom\" title=\"Zoom in/out\"></button>\n\n          <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\n          <!-- element will get class pswp__preloader--active when preloader is running -->\n          <div class=\"pswp__preloader\">\n            <div class=\"pswp__preloader__icn\">\n              <div class=\"pswp__preloader__cut\">\n                <div class=\"pswp__preloader__donut\"></div>\n              </div>\n            </div>\n          </div>\n        </div>\n\n        <div class=\"pswp__share-modal pswp__share-modal--hidden pswp__single-tap\">\n          <div class=\"pswp__share-tooltip\"></div>\n        </div>\n\n        <button class=\"pswp__button pswp__button--arrow--left\" title=\"Previous (arrow left)\">\n        </button>\n\n        <button class=\"pswp__button pswp__button--arrow--right\" title=\"Next (arrow right)\">\n        </button>\n\n        <div class=\"pswp__caption\">\n          <div class=\"pswp__caption__center\"></div>\n        </div>\n\n      </div>\n\n    </div>\n\n  </div>\n</template>\n<style>\n  /*导入图片预览插件的样式*/\n  @import '~photoswipe/dist/photoswipe.css';\n  @import '~photoswipe/dist/default-skin/default-skin.css';\n</style>\n<script type=\"text/ecmascript-6\">\n  //导入图片预览插件的JS\n  import PhotoSwipe from 'photoswipe/dist/photoswipe'\n  import UI from 'photoswipe/dist/photoswipe-ui-default'\n\n    export default{\n      methods:{\n        show (index,list) {\n          let options = {\n            history: false,\n\n             shareEl: false,\n            tapToClose: true,\n            index: index\n          };\n         // this.is_show=true;\n          this.photoswipe = new PhotoSwipe(this.$el, UI, list, options);\n          this.photoswipe.init();\n\n\n        },\n        close () {\n          this.photoswipe.close();\n       //   this.is_show=false;\n        }\n      },\n\n      data(){\n        return {\n          is_show:false\n        }\n      }\n    }\n</script>\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 155 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\tStyles for basic PhotoSwipe functionality (sliding area, open/close transitions)\n*/\n/* pswp = photoswipe */\n.pswp {\n  display: none;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  overflow: hidden;\n  -ms-touch-action: none;\n  touch-action: none;\n  z-index: 1500;\n  -webkit-text-size-adjust: 100%;\n  /* create separate layer, to avoid paint on window.onscroll in webkit/blink */\n  -webkit-backface-visibility: hidden;\n  outline: none; }\n  .pswp * {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box; }\n  .pswp img {\n    max-width: none; }\n\n/* style is added when JS option showHideOpacity is set to true */\n.pswp--animate_opacity {\n  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */\n  opacity: 0.001;\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--open {\n  display: block; }\n\n.pswp--zoom-allowed .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-zoom-in;\n  cursor: -moz-zoom-in;\n  cursor: zoom-in; }\n\n.pswp--zoomed-in .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grab;\n  cursor: -moz-grab;\n  cursor: grab; }\n\n.pswp--dragging .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grabbing;\n  cursor: -moz-grabbing;\n  cursor: grabbing; }\n\n/*\n\tBackground is added as a separate element.\n\tAs animating opacity is much faster than animating rgba() background-color.\n*/\n.pswp__bg {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: #000;\n  opacity: 0;\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__scroll-wrap {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -ms-touch-action: none;\n  touch-action: none;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0; }\n\n/* Prevent selection and tap highlights */\n.pswp__container,\n.pswp__img {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-touch-callout: none; }\n\n.pswp__zoom-wrap {\n  position: absolute;\n  width: 100%;\n  -webkit-transform-origin: left top;\n  -ms-transform-origin: left top;\n  transform-origin: left top;\n  /* for open/close transition */\n  -webkit-transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp__bg {\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--animated-in .pswp__bg,\n.pswp--animated-in .pswp__zoom-wrap {\n  -webkit-transition: none;\n  transition: none; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -webkit-backface-visibility: hidden; }\n\n.pswp__item {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  overflow: hidden; }\n\n.pswp__img {\n  position: absolute;\n  width: auto;\n  height: auto;\n  top: 0;\n  left: 0; }\n\n/*\n\tstretched thumbnail or div placeholder element (see below)\n\tstyle is added to avoid flickering in webkit/blink when layers overlap\n*/\n.pswp__img--placeholder {\n  -webkit-backface-visibility: hidden; }\n\n/*\n\tdiv element that matches size of large image\n\tlarge image loads on top of it\n*/\n.pswp__img--placeholder--blank {\n  background: #222; }\n\n.pswp--ie .pswp__img {\n  width: 100% !important;\n  height: auto !important;\n  left: 0;\n  top: 0; }\n\n/*\n\tError message appears when image is not loaded\n\t(JS option errorMsg controls markup)\n*/\n.pswp__error-msg {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  text-align: center;\n  font-size: 14px;\n  line-height: 16px;\n  margin-top: -8px;\n  color: #CCC; }\n\n.pswp__error-msg a {\n  color: #CCC;\n  text-decoration: underline; }\n", "", {"version":3,"sources":["/../node_modules/photoswipe/dist/photoswipe.css"],"names":[],"mappings":"AAAA,2EAA2E;AAC3E;;EAEE;AACF,uBAAuB;AACvB;EACE,cAAc;EACd,mBAAmB;EACnB,YAAY;EACZ,aAAa;EACb,QAAQ;EACR,OAAO;EACP,iBAAiB;EACjB,uBAAuB;EACvB,mBAAmB;EACnB,cAAc;EACd,+BAA+B;EAC/B,8EAA8E;EAC9E,oCAAoC;EACpC,cAAc,EAAE;EAChB;IACE,+BAA+B;YACvB,uBAAuB,EAAE;EACnC;IACE,gBAAgB,EAAE;;AAEtB,kEAAkE;AAClE;EACE,oGAAoG;EACpG,eAAe;EACf,qBAAqB;EACrB,+BAA+B;EAC/B,gEAAgE;UACxD,wDAAwD,EAAE;;AAEpE;EACE,eAAe,EAAE;;AAEnB;EACE,uBAAuB;EACvB,wBAAwB;EACxB,qBAAqB;EACrB,gBAAgB,EAAE;;AAEpB;EACE,uBAAuB;EACvB,qBAAqB;EACrB,kBAAkB;EAClB,aAAa,EAAE;;AAEjB;EACE,uBAAuB;EACvB,yBAAyB;EACzB,sBAAsB;EACtB,iBAAiB,EAAE;;AAErB;;;EAGE;AACF;EACE,mBAAmB;EACnB,QAAQ;EACR,OAAO;EACP,YAAY;EACZ,aAAa;EACb,iBAAiB;EACjB,WAAW;EACX,oCAAoC;EACpC,qBAAqB,EAAE;;AAEzB;EACE,mBAAmB;EACnB,QAAQ;EACR,OAAO;EACP,YAAY;EACZ,aAAa;EACb,iBAAiB,EAAE;;AAErB;;EAEE,uBAAuB;EACvB,mBAAmB;EACnB,mBAAmB;EACnB,QAAQ;EACR,SAAS;EACT,OAAO;EACP,UAAU,EAAE;;AAEd,0CAA0C;AAC1C;;EAEE,0BAA0B;EAC1B,uBAAuB;EACvB,sBAAsB;MAClB,kBAAkB;EACtB,yCAAyC;EACzC,4BAA4B,EAAE;;AAEhC;EACE,mBAAmB;EACnB,YAAY;EACZ,mCAAmC;EACnC,+BAA+B;EAC/B,2BAA2B;EAC3B,+BAA+B;EAC/B,0EAA0E;UAClE,0DAA0D,EAAE;;AAEtE;EACE,qBAAqB;EACrB,+BAA+B;EAC/B,gEAAgE;UACxD,wDAAwD,EAAE;;AAEpE;;EAEE,yBAAyB;EACzB,iBAAiB,EAAE;;AAErB;;EAEE,oCAAoC,EAAE;;AAExC;EACE,mBAAmB;EACnB,QAAQ;EACR,SAAS;EACT,OAAO;EACP,UAAU;EACV,iBAAiB,EAAE;;AAErB;EACE,mBAAmB;EACnB,YAAY;EACZ,aAAa;EACb,OAAO;EACP,QAAQ,EAAE;;AAEZ;;;EAGE;AACF;EACE,oCAAoC,EAAE;;AAExC;;;EAGE;AACF;EACE,iBAAiB,EAAE;;AAErB;EACE,uBAAuB;EACvB,wBAAwB;EACxB,QAAQ;EACR,OAAO,EAAE;;AAEX;;;EAGE;AACF;EACE,mBAAmB;EACnB,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,mBAAmB;EACnB,gBAAgB;EAChB,kBAAkB;EAClB,iBAAiB;EACjB,YAAY,EAAE;;AAEhB;EACE,YAAY;EACZ,2BAA2B,EAAE","file":"photoswipe.css","sourcesContent":["/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\tStyles for basic PhotoSwipe functionality (sliding area, open/close transitions)\n*/\n/* pswp = photoswipe */\n.pswp {\n  display: none;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  overflow: hidden;\n  -ms-touch-action: none;\n  touch-action: none;\n  z-index: 1500;\n  -webkit-text-size-adjust: 100%;\n  /* create separate layer, to avoid paint on window.onscroll in webkit/blink */\n  -webkit-backface-visibility: hidden;\n  outline: none; }\n  .pswp * {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box; }\n  .pswp img {\n    max-width: none; }\n\n/* style is added when JS option showHideOpacity is set to true */\n.pswp--animate_opacity {\n  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */\n  opacity: 0.001;\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--open {\n  display: block; }\n\n.pswp--zoom-allowed .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-zoom-in;\n  cursor: -moz-zoom-in;\n  cursor: zoom-in; }\n\n.pswp--zoomed-in .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grab;\n  cursor: -moz-grab;\n  cursor: grab; }\n\n.pswp--dragging .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grabbing;\n  cursor: -moz-grabbing;\n  cursor: grabbing; }\n\n/*\n\tBackground is added as a separate element.\n\tAs animating opacity is much faster than animating rgba() background-color.\n*/\n.pswp__bg {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: #000;\n  opacity: 0;\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__scroll-wrap {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -ms-touch-action: none;\n  touch-action: none;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0; }\n\n/* Prevent selection and tap highlights */\n.pswp__container,\n.pswp__img {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-touch-callout: none; }\n\n.pswp__zoom-wrap {\n  position: absolute;\n  width: 100%;\n  -webkit-transform-origin: left top;\n  -ms-transform-origin: left top;\n  transform-origin: left top;\n  /* for open/close transition */\n  -webkit-transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp__bg {\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--animated-in .pswp__bg,\n.pswp--animated-in .pswp__zoom-wrap {\n  -webkit-transition: none;\n  transition: none; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -webkit-backface-visibility: hidden; }\n\n.pswp__item {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  overflow: hidden; }\n\n.pswp__img {\n  position: absolute;\n  width: auto;\n  height: auto;\n  top: 0;\n  left: 0; }\n\n/*\n\tstretched thumbnail or div placeholder element (see below)\n\tstyle is added to avoid flickering in webkit/blink when layers overlap\n*/\n.pswp__img--placeholder {\n  -webkit-backface-visibility: hidden; }\n\n/*\n\tdiv element that matches size of large image\n\tlarge image loads on top of it\n*/\n.pswp__img--placeholder--blank {\n  background: #222; }\n\n.pswp--ie .pswp__img {\n  width: 100% !important;\n  height: auto !important;\n  left: 0;\n  top: 0; }\n\n/*\n\tError message appears when image is not loaded\n\t(JS option errorMsg controls markup)\n*/\n.pswp__error-msg {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  text-align: center;\n  font-size: 14px;\n  line-height: 16px;\n  margin-top: -8px;\n  color: #CCC; }\n\n.pswp__error-msg a {\n  color: #CCC;\n  text-decoration: underline; }\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 156 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\n\tContents:\n\n\t1. Buttons\n\t2. Share modal and links\n\t3. Index indicator (\"1 of X\" counter)\n\t4. Caption\n\t5. Loading indicator\n\t6. Additional styles (root element, top bar, idle state, hidden state, etc.)\n\n*/\n/*\n\t\n\t1. Buttons\n\n */\n/* <button> css reset */\n.pswp__button {\n  width: 44px;\n  height: 44px;\n  position: relative;\n  background: none;\n  cursor: pointer;\n  overflow: visible;\n  -webkit-appearance: none;\n  display: block;\n  border: 0;\n  padding: 0;\n  margin: 0;\n  float: right;\n  opacity: 0.75;\n  -webkit-transition: opacity 0.2s;\n          transition: opacity 0.2s;\n  -webkit-box-shadow: none;\n          box-shadow: none; }\n  .pswp__button:focus,\n  .pswp__button:hover {\n    opacity: 1; }\n  .pswp__button:active {\n    outline: none;\n    opacity: 0.9; }\n  .pswp__button::-moz-focus-inner {\n    padding: 0;\n    border: 0; }\n\n/* pswp__ui--over-close class it added when mouse is over element that should close gallery */\n.pswp__ui--over-close .pswp__button--close {\n  opacity: 1; }\n\n.pswp__button,\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  background: url(" + __webpack_require__(157) + ") 0 0 no-repeat;\n  background-size: 264px 88px;\n  width: 44px;\n  height: 44px; }\n\n@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {\n  /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */\n  .pswp--svg .pswp__button,\n  .pswp--svg .pswp__button--arrow--left:before,\n  .pswp--svg .pswp__button--arrow--right:before {\n    background-image: url(" + __webpack_require__(158) + "); }\n  .pswp--svg .pswp__button--arrow--left,\n  .pswp--svg .pswp__button--arrow--right {\n    background: none; } }\n\n.pswp__button--close {\n  background-position: 0 -44px; }\n\n.pswp__button--share {\n  background-position: -44px -44px; }\n\n.pswp__button--fs {\n  display: none; }\n\n.pswp--supports-fs .pswp__button--fs {\n  display: block; }\n\n.pswp--fs .pswp__button--fs {\n  background-position: -44px 0; }\n\n.pswp__button--zoom {\n  display: none;\n  background-position: -88px 0; }\n\n.pswp--zoom-allowed .pswp__button--zoom {\n  display: block; }\n\n.pswp--zoomed-in .pswp__button--zoom {\n  background-position: -132px 0; }\n\n/* no arrows on touch screens */\n.pswp--touch .pswp__button--arrow--left,\n.pswp--touch .pswp__button--arrow--right {\n  visibility: hidden; }\n\n/*\n\tArrow buttons hit area\n\t(icon is added to :before pseudo-element)\n*/\n.pswp__button--arrow--left,\n.pswp__button--arrow--right {\n  background: none;\n  top: 50%;\n  margin-top: -50px;\n  width: 70px;\n  height: 100px;\n  position: absolute; }\n\n.pswp__button--arrow--left {\n  left: 0; }\n\n.pswp__button--arrow--right {\n  right: 0; }\n\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  content: '';\n  top: 35px;\n  background-color: rgba(0, 0, 0, 0.3);\n  height: 30px;\n  width: 32px;\n  position: absolute; }\n\n.pswp__button--arrow--left:before {\n  left: 6px;\n  background-position: -138px -44px; }\n\n.pswp__button--arrow--right:before {\n  right: 6px;\n  background-position: -94px -44px; }\n\n/*\n\n\t2. Share modal/popup and links\n\n */\n.pswp__counter,\n.pswp__share-modal {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none; }\n\n.pswp__share-modal {\n  display: block;\n  background: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  padding: 10px;\n  position: absolute;\n  z-index: 1600;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__share-modal--hidden {\n  display: none; }\n\n.pswp__share-tooltip {\n  z-index: 1620;\n  position: absolute;\n  background: #FFF;\n  top: 56px;\n  border-radius: 2px;\n  display: block;\n  width: auto;\n  right: 44px;\n  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n  -webkit-transform: translateY(6px);\n      -ms-transform: translateY(6px);\n          transform: translateY(6px);\n  -webkit-transition: -webkit-transform 0.25s;\n          transition: transform 0.25s;\n  -webkit-backface-visibility: hidden;\n  will-change: transform; }\n  .pswp__share-tooltip a {\n    display: block;\n    padding: 8px 12px;\n    color: #000;\n    text-decoration: none;\n    font-size: 14px;\n    line-height: 18px; }\n    .pswp__share-tooltip a:hover {\n      text-decoration: none;\n      color: #000; }\n    .pswp__share-tooltip a:first-child {\n      /* round corners on the first/last list item */\n      border-radius: 2px 2px 0 0; }\n    .pswp__share-tooltip a:last-child {\n      border-radius: 0 0 2px 2px; }\n\n.pswp__share-modal--fade-in {\n  opacity: 1; }\n  .pswp__share-modal--fade-in .pswp__share-tooltip {\n    -webkit-transform: translateY(0);\n        -ms-transform: translateY(0);\n            transform: translateY(0); }\n\n/* increase size of share links on touch devices */\n.pswp--touch .pswp__share-tooltip a {\n  padding: 16px 12px; }\n\na.pswp__share--facebook:before {\n  content: '';\n  display: block;\n  width: 0;\n  height: 0;\n  position: absolute;\n  top: -12px;\n  right: 15px;\n  border: 6px solid transparent;\n  border-bottom-color: #FFF;\n  -webkit-pointer-events: none;\n  -moz-pointer-events: none;\n  pointer-events: none; }\n\na.pswp__share--facebook:hover {\n  background: #3E5C9A;\n  color: #FFF; }\n  a.pswp__share--facebook:hover:before {\n    border-bottom-color: #3E5C9A; }\n\na.pswp__share--twitter:hover {\n  background: #55ACEE;\n  color: #FFF; }\n\na.pswp__share--pinterest:hover {\n  background: #CCC;\n  color: #CE272D; }\n\na.pswp__share--download:hover {\n  background: #DDD; }\n\n/*\n\n\t3. Index indicator (\"1 of X\" counter)\n\n */\n.pswp__counter {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  font-size: 13px;\n  line-height: 44px;\n  color: #FFF;\n  opacity: 0.75;\n  padding: 0 10px; }\n\n/*\n\t\n\t4. Caption\n\n */\n.pswp__caption {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  min-height: 44px; }\n  .pswp__caption small {\n    font-size: 11px;\n    color: #BBB; }\n\n.pswp__caption__center {\n  text-align: left;\n  max-width: 420px;\n  margin: 0 auto;\n  font-size: 13px;\n  padding: 10px;\n  line-height: 20px;\n  color: #CCC; }\n\n.pswp__caption--empty {\n  display: none; }\n\n/* Fake caption element, used to calculate height of next/prev image */\n.pswp__caption--fake {\n  visibility: hidden; }\n\n/*\n\n\t5. Loading indicator (preloader)\n\n\tYou can play with it here - http://codepen.io/dimsemenov/pen/yyBWoR\n\n */\n.pswp__preloader {\n  width: 44px;\n  height: 44px;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  margin-left: -22px;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  will-change: opacity;\n  direction: ltr; }\n\n.pswp__preloader__icn {\n  width: 20px;\n  height: 20px;\n  margin: 12px; }\n\n.pswp__preloader--active {\n  opacity: 1; }\n  .pswp__preloader--active .pswp__preloader__icn {\n    /* We use .gif in browsers that don't support CSS animation */\n    background: url(" + __webpack_require__(159) + ") 0 0 no-repeat; }\n\n.pswp--css_animation .pswp__preloader--active {\n  opacity: 1; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {\n    -webkit-animation: clockwise 500ms linear infinite;\n            animation: clockwise 500ms linear infinite; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {\n    -webkit-animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;\n            animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite; }\n\n.pswp--css_animation .pswp__preloader__icn {\n  background: none;\n  opacity: 0.75;\n  width: 14px;\n  height: 14px;\n  position: absolute;\n  left: 15px;\n  top: 15px;\n  margin: 0; }\n\n.pswp--css_animation .pswp__preloader__cut {\n  /* \n\t\t\tThe idea of animating inner circle is based on Polymer (\"material\") loading indicator \n\t\t\t by Keanu Lee https://blog.keanulee.com/2014/10/20/the-tale-of-three-spinners.html\n\t\t*/\n  position: relative;\n  width: 7px;\n  height: 14px;\n  overflow: hidden; }\n\n.pswp--css_animation .pswp__preloader__donut {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 14px;\n  height: 14px;\n  border: 2px solid #FFF;\n  border-radius: 50%;\n  border-left-color: transparent;\n  border-bottom-color: transparent;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: none;\n  margin: 0; }\n\n@media screen and (max-width: 1024px) {\n  .pswp__preloader {\n    position: relative;\n    left: auto;\n    top: auto;\n    margin: 0;\n    float: right; } }\n\n@-webkit-keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@-webkit-keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n@keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n/*\n\t\n\t6. Additional styles\n\n */\n/* root element of UI */\n.pswp__ui {\n  -webkit-font-smoothing: auto;\n  visibility: visible;\n  opacity: 1;\n  z-index: 1550; }\n\n/* top black bar with buttons and \"1 of X\" indicator */\n.pswp__top-bar {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  width: 100%; }\n\n.pswp__caption,\n.pswp__top-bar,\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  -webkit-backface-visibility: hidden;\n  will-change: opacity;\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n/* pswp--has_mouse class is added only when two subsequent mousemove events occur */\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  visibility: visible; }\n\n.pswp__top-bar,\n.pswp__caption {\n  background-color: rgba(0, 0, 0, 0.5); }\n\n/* pswp__ui--fit class is added when main image \"fits\" between top bar and bottom bar (caption) */\n.pswp__ui--fit .pswp__top-bar,\n.pswp__ui--fit .pswp__caption {\n  background-color: rgba(0, 0, 0, 0.3); }\n\n/* pswp__ui--idle class is added when mouse isn't moving for several seconds (JS option timeToIdle) */\n.pswp__ui--idle .pswp__top-bar {\n  opacity: 0; }\n\n.pswp__ui--idle .pswp__button--arrow--left,\n.pswp__ui--idle .pswp__button--arrow--right {\n  opacity: 0; }\n\n/*\n\tpswp__ui--hidden class is added when controls are hidden\n\te.g. when user taps to toggle visibility of controls\n*/\n.pswp__ui--hidden .pswp__top-bar,\n.pswp__ui--hidden .pswp__caption,\n.pswp__ui--hidden .pswp__button--arrow--left,\n.pswp__ui--hidden .pswp__button--arrow--right {\n  /* Force paint & create composition layer for controls. */\n  opacity: 0.001; }\n\n/* pswp__ui--one-slide class is added when there is just one item in gallery */\n.pswp__ui--one-slide .pswp__button--arrow--left,\n.pswp__ui--one-slide .pswp__button--arrow--right,\n.pswp__ui--one-slide .pswp__counter {\n  display: none; }\n\n.pswp__element--disabled {\n  display: none !important; }\n\n.pswp--minimal--dark .pswp__top-bar {\n  background: none; }\n", "", {"version":3,"sources":["/../node_modules/photoswipe/dist/default-skin/default-skin.css"],"names":[],"mappings":"AAAA,iFAAiF;AACjF;;;;;;;;;;;EAWE;AACF;;;;GAIG;AACH,wBAAwB;AACxB;EACE,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,iBAAiB;EACjB,gBAAgB;EAChB,kBAAkB;EAClB,yBAAyB;EACzB,eAAe;EACf,UAAU;EACV,WAAW;EACX,UAAU;EACV,aAAa;EACb,cAAc;EACd,iCAAiC;UACzB,yBAAyB;EACjC,yBAAyB;UACjB,iBAAiB,EAAE;EAC3B;;IAEE,WAAW,EAAE;EACf;IACE,cAAc;IACd,aAAa,EAAE;EACjB;IACE,WAAW;IACX,UAAU,EAAE;;AAEhB,8FAA8F;AAC9F;EACE,WAAW,EAAE;;AAEf;;;EAGE,wDAAgD;EAChD,4BAA4B;EAC5B,YAAY;EACZ,aAAa,EAAE;;AAEjB;EACE,iFAAiF;EACjF;;;IAGE,gDAAwC,EAAE;EAC5C;;IAEE,iBAAiB,EAAE,EAAE;;AAEzB;EACE,6BAA6B,EAAE;;AAEjC;EACE,iCAAiC,EAAE;;AAErC;EACE,cAAc,EAAE;;AAElB;EACE,eAAe,EAAE;;AAEnB;EACE,6BAA6B,EAAE;;AAEjC;EACE,cAAc;EACd,6BAA6B,EAAE;;AAEjC;EACE,eAAe,EAAE;;AAEnB;EACE,8BAA8B,EAAE;;AAElC,gCAAgC;AAChC;;EAEE,mBAAmB,EAAE;;AAEvB;;;EAGE;AACF;;EAEE,iBAAiB;EACjB,SAAS;EACT,kBAAkB;EAClB,YAAY;EACZ,cAAc;EACd,mBAAmB,EAAE;;AAEvB;EACE,QAAQ,EAAE;;AAEZ;EACE,SAAS,EAAE;;AAEb;;EAEE,YAAY;EACZ,UAAU;EACV,qCAAqC;EACrC,aAAa;EACb,YAAY;EACZ,mBAAmB,EAAE;;AAEvB;EACE,UAAU;EACV,kCAAkC,EAAE;;AAEtC;EACE,WAAW;EACX,iCAAiC,EAAE;;AAErC;;;;GAIG;AACH;;EAEE,0BAA0B;EAC1B,uBAAuB;EACvB,sBAAsB;MAClB,kBAAkB,EAAE;;AAE1B;EACE,eAAe;EACf,+BAA+B;EAC/B,YAAY;EACZ,aAAa;EACb,OAAO;EACP,QAAQ;EACR,cAAc;EACd,mBAAmB;EACnB,cAAc;EACd,WAAW;EACX,2CAA2C;UACnC,mCAAmC;EAC3C,oCAAoC;EACpC,qBAAqB,EAAE;;AAEzB;EACE,cAAc,EAAE;;AAElB;EACE,cAAc;EACd,mBAAmB;EACnB,iBAAiB;EACjB,UAAU;EACV,mBAAmB;EACnB,eAAe;EACf,YAAY;EACZ,YAAY;EACZ,kDAAkD;UAC1C,0CAA0C;EAClD,mCAAmC;MAC/B,+BAA+B;UAC3B,2BAA2B;EACnC,4CAA4C;UACpC,4BAA4B;EACpC,oCAAoC;EACpC,uBAAuB,EAAE;EACzB;IACE,eAAe;IACf,kBAAkB;IAClB,YAAY;IACZ,sBAAsB;IACtB,gBAAgB;IAChB,kBAAkB,EAAE;IACpB;MACE,sBAAsB;MACtB,YAAY,EAAE;IAChB;MACE,+CAA+C;MAC/C,2BAA2B,EAAE;IAC/B;MACE,2BAA2B,EAAE;;AAEnC;EACE,WAAW,EAAE;EACb;IACE,iCAAiC;QAC7B,6BAA6B;YACzB,yBAAyB,EAAE;;AAEvC,mDAAmD;AACnD;EACE,mBAAmB,EAAE;;AAEvB;EACE,YAAY;EACZ,eAAe;EACf,SAAS;EACT,UAAU;EACV,mBAAmB;EACnB,WAAW;EACX,YAAY;EACZ,8BAA8B;EAC9B,0BAA0B;EAC1B,6BAA6B;EAC7B,0BAA0B;EAC1B,qBAAqB,EAAE;;AAEzB;EACE,oBAAoB;EACpB,YAAY,EAAE;EACd;IACE,6BAA6B,EAAE;;AAEnC;EACE,oBAAoB;EACpB,YAAY,EAAE;;AAEhB;EACE,iBAAiB;EACjB,eAAe,EAAE;;AAEnB;EACE,iBAAiB,EAAE;;AAErB;;;;GAIG;AACH;EACE,mBAAmB;EACnB,QAAQ;EACR,OAAO;EACP,aAAa;EACb,gBAAgB;EAChB,kBAAkB;EAClB,YAAY;EACZ,cAAc;EACd,gBAAgB,EAAE;;AAEpB;;;;GAIG;AACH;EACE,mBAAmB;EACnB,QAAQ;EACR,UAAU;EACV,YAAY;EACZ,iBAAiB,EAAE;EACnB;IACE,gBAAgB;IAChB,YAAY,EAAE;;AAElB;EACE,iBAAiB;EACjB,iBAAiB;EACjB,eAAe;EACf,gBAAgB;EAChB,cAAc;EACd,kBAAkB;EAClB,YAAY,EAAE;;AAEhB;EACE,cAAc,EAAE;;AAElB,uEAAuE;AACvE;EACE,mBAAmB,EAAE;;AAEvB;;;;;;GAMG;AACH;EACE,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,OAAO;EACP,UAAU;EACV,mBAAmB;EACnB,WAAW;EACX,2CAA2C;UACnC,mCAAmC;EAC3C,qBAAqB;EACrB,eAAe,EAAE;;AAEnB;EACE,YAAY;EACZ,aAAa;EACb,aAAa,EAAE;;AAEjB;EACE,WAAW,EAAE;EACb;IACE,8DAA8D;IAC9D,wDAA6C,EAAE;;AAEnD;EACE,WAAW,EAAE;EACb;IACE,mDAAmD;YAC3C,2CAA2C,EAAE;EACvD;IACE,8EAA8E;YACtE,sEAAsE,EAAE;;AAEpF;EACE,iBAAiB;EACjB,cAAc;EACd,YAAY;EACZ,aAAa;EACb,mBAAmB;EACnB,WAAW;EACX,UAAU;EACV,UAAU,EAAE;;AAEd;EACE;;;IAGE;EACF,mBAAmB;EACnB,WAAW;EACX,aAAa;EACb,iBAAiB,EAAE;;AAErB;EACE,+BAA+B;UACvB,uBAAuB;EAC/B,YAAY;EACZ,aAAa;EACb,uBAAuB;EACvB,mBAAmB;EACnB,+BAA+B;EAC/B,iCAAiC;EACjC,mBAAmB;EACnB,OAAO;EACP,QAAQ;EACR,iBAAiB;EACjB,UAAU,EAAE;;AAEd;EACE;IACE,mBAAmB;IACnB,WAAW;IACX,UAAU;IACV,UAAU;IACV,aAAa,EAAE,EAAE;;AAErB;EACE;IACE,gCAAgC;YACxB,wBAAwB,EAAE;EACpC;IACE,kCAAkC;YAC1B,0BAA0B,EAAE,EAAE;;AAE1C;EACE;IACE,gCAAgC;YACxB,wBAAwB,EAAE;EACpC;IACE,kCAAkC;YAC1B,0BAA0B,EAAE,EAAE;;AAE1C;EACE;IACE,6BAA6B;YACrB,qBAAqB,EAAE;EACjC;IACE,mCAAmC;YAC3B,2BAA2B,EAAE;EACvC;IACE,6BAA6B;YACrB,qBAAqB,EAAE,EAAE;;AAErC;EACE;IACE,6BAA6B;YACrB,qBAAqB,EAAE;EACjC;IACE,mCAAmC;YAC3B,2BAA2B,EAAE;EACvC;IACE,6BAA6B;YACrB,qBAAqB,EAAE,EAAE;;AAErC;;;;GAIG;AACH,wBAAwB;AACxB;EACE,6BAA6B;EAC7B,oBAAoB;EACpB,WAAW;EACX,cAAc,EAAE;;AAElB,uDAAuD;AACvD;EACE,mBAAmB;EACnB,QAAQ;EACR,OAAO;EACP,aAAa;EACb,YAAY,EAAE;;AAEhB;;;;EAIE,oCAAoC;EACpC,qBAAqB;EACrB,gEAAgE;UACxD,wDAAwD,EAAE;;AAEpE,oFAAoF;AACpF;;EAEE,oBAAoB,EAAE;;AAExB;;EAEE,qCAAqC,EAAE;;AAEzC,kGAAkG;AAClG;;EAEE,qCAAqC,EAAE;;AAEzC,sGAAsG;AACtG;EACE,WAAW,EAAE;;AAEf;;EAEE,WAAW,EAAE;;AAEf;;;EAGE;AACF;;;;EAIE,0DAA0D;EAC1D,eAAe,EAAE;;AAEnB,+EAA+E;AAC/E;;;EAGE,cAAc,EAAE;;AAElB;EACE,yBAAyB,EAAE;;AAE7B;EACE,iBAAiB,EAAE","file":"default-skin.css","sourcesContent":["/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\n\tContents:\n\n\t1. Buttons\n\t2. Share modal and links\n\t3. Index indicator (\"1 of X\" counter)\n\t4. Caption\n\t5. Loading indicator\n\t6. Additional styles (root element, top bar, idle state, hidden state, etc.)\n\n*/\n/*\n\t\n\t1. Buttons\n\n */\n/* <button> css reset */\n.pswp__button {\n  width: 44px;\n  height: 44px;\n  position: relative;\n  background: none;\n  cursor: pointer;\n  overflow: visible;\n  -webkit-appearance: none;\n  display: block;\n  border: 0;\n  padding: 0;\n  margin: 0;\n  float: right;\n  opacity: 0.75;\n  -webkit-transition: opacity 0.2s;\n          transition: opacity 0.2s;\n  -webkit-box-shadow: none;\n          box-shadow: none; }\n  .pswp__button:focus,\n  .pswp__button:hover {\n    opacity: 1; }\n  .pswp__button:active {\n    outline: none;\n    opacity: 0.9; }\n  .pswp__button::-moz-focus-inner {\n    padding: 0;\n    border: 0; }\n\n/* pswp__ui--over-close class it added when mouse is over element that should close gallery */\n.pswp__ui--over-close .pswp__button--close {\n  opacity: 1; }\n\n.pswp__button,\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  background: url(default-skin.png) 0 0 no-repeat;\n  background-size: 264px 88px;\n  width: 44px;\n  height: 44px; }\n\n@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {\n  /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */\n  .pswp--svg .pswp__button,\n  .pswp--svg .pswp__button--arrow--left:before,\n  .pswp--svg .pswp__button--arrow--right:before {\n    background-image: url(default-skin.svg); }\n  .pswp--svg .pswp__button--arrow--left,\n  .pswp--svg .pswp__button--arrow--right {\n    background: none; } }\n\n.pswp__button--close {\n  background-position: 0 -44px; }\n\n.pswp__button--share {\n  background-position: -44px -44px; }\n\n.pswp__button--fs {\n  display: none; }\n\n.pswp--supports-fs .pswp__button--fs {\n  display: block; }\n\n.pswp--fs .pswp__button--fs {\n  background-position: -44px 0; }\n\n.pswp__button--zoom {\n  display: none;\n  background-position: -88px 0; }\n\n.pswp--zoom-allowed .pswp__button--zoom {\n  display: block; }\n\n.pswp--zoomed-in .pswp__button--zoom {\n  background-position: -132px 0; }\n\n/* no arrows on touch screens */\n.pswp--touch .pswp__button--arrow--left,\n.pswp--touch .pswp__button--arrow--right {\n  visibility: hidden; }\n\n/*\n\tArrow buttons hit area\n\t(icon is added to :before pseudo-element)\n*/\n.pswp__button--arrow--left,\n.pswp__button--arrow--right {\n  background: none;\n  top: 50%;\n  margin-top: -50px;\n  width: 70px;\n  height: 100px;\n  position: absolute; }\n\n.pswp__button--arrow--left {\n  left: 0; }\n\n.pswp__button--arrow--right {\n  right: 0; }\n\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  content: '';\n  top: 35px;\n  background-color: rgba(0, 0, 0, 0.3);\n  height: 30px;\n  width: 32px;\n  position: absolute; }\n\n.pswp__button--arrow--left:before {\n  left: 6px;\n  background-position: -138px -44px; }\n\n.pswp__button--arrow--right:before {\n  right: 6px;\n  background-position: -94px -44px; }\n\n/*\n\n\t2. Share modal/popup and links\n\n */\n.pswp__counter,\n.pswp__share-modal {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none; }\n\n.pswp__share-modal {\n  display: block;\n  background: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  padding: 10px;\n  position: absolute;\n  z-index: 1600;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__share-modal--hidden {\n  display: none; }\n\n.pswp__share-tooltip {\n  z-index: 1620;\n  position: absolute;\n  background: #FFF;\n  top: 56px;\n  border-radius: 2px;\n  display: block;\n  width: auto;\n  right: 44px;\n  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n  -webkit-transform: translateY(6px);\n      -ms-transform: translateY(6px);\n          transform: translateY(6px);\n  -webkit-transition: -webkit-transform 0.25s;\n          transition: transform 0.25s;\n  -webkit-backface-visibility: hidden;\n  will-change: transform; }\n  .pswp__share-tooltip a {\n    display: block;\n    padding: 8px 12px;\n    color: #000;\n    text-decoration: none;\n    font-size: 14px;\n    line-height: 18px; }\n    .pswp__share-tooltip a:hover {\n      text-decoration: none;\n      color: #000; }\n    .pswp__share-tooltip a:first-child {\n      /* round corners on the first/last list item */\n      border-radius: 2px 2px 0 0; }\n    .pswp__share-tooltip a:last-child {\n      border-radius: 0 0 2px 2px; }\n\n.pswp__share-modal--fade-in {\n  opacity: 1; }\n  .pswp__share-modal--fade-in .pswp__share-tooltip {\n    -webkit-transform: translateY(0);\n        -ms-transform: translateY(0);\n            transform: translateY(0); }\n\n/* increase size of share links on touch devices */\n.pswp--touch .pswp__share-tooltip a {\n  padding: 16px 12px; }\n\na.pswp__share--facebook:before {\n  content: '';\n  display: block;\n  width: 0;\n  height: 0;\n  position: absolute;\n  top: -12px;\n  right: 15px;\n  border: 6px solid transparent;\n  border-bottom-color: #FFF;\n  -webkit-pointer-events: none;\n  -moz-pointer-events: none;\n  pointer-events: none; }\n\na.pswp__share--facebook:hover {\n  background: #3E5C9A;\n  color: #FFF; }\n  a.pswp__share--facebook:hover:before {\n    border-bottom-color: #3E5C9A; }\n\na.pswp__share--twitter:hover {\n  background: #55ACEE;\n  color: #FFF; }\n\na.pswp__share--pinterest:hover {\n  background: #CCC;\n  color: #CE272D; }\n\na.pswp__share--download:hover {\n  background: #DDD; }\n\n/*\n\n\t3. Index indicator (\"1 of X\" counter)\n\n */\n.pswp__counter {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  font-size: 13px;\n  line-height: 44px;\n  color: #FFF;\n  opacity: 0.75;\n  padding: 0 10px; }\n\n/*\n\t\n\t4. Caption\n\n */\n.pswp__caption {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  min-height: 44px; }\n  .pswp__caption small {\n    font-size: 11px;\n    color: #BBB; }\n\n.pswp__caption__center {\n  text-align: left;\n  max-width: 420px;\n  margin: 0 auto;\n  font-size: 13px;\n  padding: 10px;\n  line-height: 20px;\n  color: #CCC; }\n\n.pswp__caption--empty {\n  display: none; }\n\n/* Fake caption element, used to calculate height of next/prev image */\n.pswp__caption--fake {\n  visibility: hidden; }\n\n/*\n\n\t5. Loading indicator (preloader)\n\n\tYou can play with it here - http://codepen.io/dimsemenov/pen/yyBWoR\n\n */\n.pswp__preloader {\n  width: 44px;\n  height: 44px;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  margin-left: -22px;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  will-change: opacity;\n  direction: ltr; }\n\n.pswp__preloader__icn {\n  width: 20px;\n  height: 20px;\n  margin: 12px; }\n\n.pswp__preloader--active {\n  opacity: 1; }\n  .pswp__preloader--active .pswp__preloader__icn {\n    /* We use .gif in browsers that don't support CSS animation */\n    background: url(preloader.gif) 0 0 no-repeat; }\n\n.pswp--css_animation .pswp__preloader--active {\n  opacity: 1; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {\n    -webkit-animation: clockwise 500ms linear infinite;\n            animation: clockwise 500ms linear infinite; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {\n    -webkit-animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;\n            animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite; }\n\n.pswp--css_animation .pswp__preloader__icn {\n  background: none;\n  opacity: 0.75;\n  width: 14px;\n  height: 14px;\n  position: absolute;\n  left: 15px;\n  top: 15px;\n  margin: 0; }\n\n.pswp--css_animation .pswp__preloader__cut {\n  /* \n\t\t\tThe idea of animating inner circle is based on Polymer (\"material\") loading indicator \n\t\t\t by Keanu Lee https://blog.keanulee.com/2014/10/20/the-tale-of-three-spinners.html\n\t\t*/\n  position: relative;\n  width: 7px;\n  height: 14px;\n  overflow: hidden; }\n\n.pswp--css_animation .pswp__preloader__donut {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 14px;\n  height: 14px;\n  border: 2px solid #FFF;\n  border-radius: 50%;\n  border-left-color: transparent;\n  border-bottom-color: transparent;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: none;\n  margin: 0; }\n\n@media screen and (max-width: 1024px) {\n  .pswp__preloader {\n    position: relative;\n    left: auto;\n    top: auto;\n    margin: 0;\n    float: right; } }\n\n@-webkit-keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@-webkit-keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n@keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n/*\n\t\n\t6. Additional styles\n\n */\n/* root element of UI */\n.pswp__ui {\n  -webkit-font-smoothing: auto;\n  visibility: visible;\n  opacity: 1;\n  z-index: 1550; }\n\n/* top black bar with buttons and \"1 of X\" indicator */\n.pswp__top-bar {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  width: 100%; }\n\n.pswp__caption,\n.pswp__top-bar,\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  -webkit-backface-visibility: hidden;\n  will-change: opacity;\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n/* pswp--has_mouse class is added only when two subsequent mousemove events occur */\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  visibility: visible; }\n\n.pswp__top-bar,\n.pswp__caption {\n  background-color: rgba(0, 0, 0, 0.5); }\n\n/* pswp__ui--fit class is added when main image \"fits\" between top bar and bottom bar (caption) */\n.pswp__ui--fit .pswp__top-bar,\n.pswp__ui--fit .pswp__caption {\n  background-color: rgba(0, 0, 0, 0.3); }\n\n/* pswp__ui--idle class is added when mouse isn't moving for several seconds (JS option timeToIdle) */\n.pswp__ui--idle .pswp__top-bar {\n  opacity: 0; }\n\n.pswp__ui--idle .pswp__button--arrow--left,\n.pswp__ui--idle .pswp__button--arrow--right {\n  opacity: 0; }\n\n/*\n\tpswp__ui--hidden class is added when controls are hidden\n\te.g. when user taps to toggle visibility of controls\n*/\n.pswp__ui--hidden .pswp__top-bar,\n.pswp__ui--hidden .pswp__caption,\n.pswp__ui--hidden .pswp__button--arrow--left,\n.pswp__ui--hidden .pswp__button--arrow--right {\n  /* Force paint & create composition layer for controls. */\n  opacity: 0.001; }\n\n/* pswp__ui--one-slide class is added when there is just one item in gallery */\n.pswp__ui--one-slide .pswp__button--arrow--left,\n.pswp__ui--one-slide .pswp__button--arrow--right,\n.pswp__ui--one-slide .pswp__counter {\n  display: none; }\n\n.pswp__element--disabled {\n  display: none !important; }\n\n.pswp--minimal--dark .pswp__top-bar {\n  background: none; }\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 157 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "b555f6fb31c33446b3418566395be436.png";
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "b257fa9c5ac8c515ac4d77a667ce2943.svg";
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "e34aafbb485a96eaf2a789b2bf3af6fe.gif";
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _photoswipe = __webpack_require__(161);
+	
+	var _photoswipe2 = _interopRequireDefault(_photoswipe);
+	
+	var _photoswipeUiDefault = __webpack_require__(162);
+	
+	var _photoswipeUiDefault2 = _interopRequireDefault(_photoswipeUiDefault);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+	  methods: {
+	    show: function show(index, list) {
+	      var options = {
+	        history: false,
+	
+	        shareEl: false,
+	        tapToClose: true,
+	        index: index
+	      };
+	
+	      this.photoswipe = new _photoswipe2.default(this.$el, _photoswipeUiDefault2.default, list, options);
+	      this.photoswipe.init();
+	    },
+	    close: function close() {
+	      this.photoswipe.close();
+	    }
+	  },
+	
+	  data: function data() {
+	    return {
+	      is_show: false
+	    };
+	  }
+	};
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe - v4.1.1 - 2015-12-24
+	* http://photoswipe.com
+	* Copyright (c) 2015 Dmitry Semenov; */
+	(function (root, factory) { 
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof exports === 'object') {
+			module.exports = factory();
+		} else {
+			root.PhotoSwipe = factory();
+		}
+	})(this, function () {
+	
+		'use strict';
+		var PhotoSwipe = function(template, UiClass, items, options){
+	
+	/*>>framework-bridge*/
+	/**
+	 *
+	 * Set of generic functions used by gallery.
+	 * 
+	 * You're free to modify anything here as long as functionality is kept.
+	 * 
+	 */
+	var framework = {
+		features: null,
+		bind: function(target, type, listener, unbind) {
+			var methodName = (unbind ? 'remove' : 'add') + 'EventListener';
+			type = type.split(' ');
+			for(var i = 0; i < type.length; i++) {
+				if(type[i]) {
+					target[methodName]( type[i], listener, false);
+				}
+			}
+		},
+		isArray: function(obj) {
+			return (obj instanceof Array);
+		},
+		createEl: function(classes, tag) {
+			var el = document.createElement(tag || 'div');
+			if(classes) {
+				el.className = classes;
+			}
+			return el;
+		},
+		getScrollY: function() {
+			var yOffset = window.pageYOffset;
+			return yOffset !== undefined ? yOffset : document.documentElement.scrollTop;
+		},
+		unbind: function(target, type, listener) {
+			framework.bind(target,type,listener,true);
+		},
+		removeClass: function(el, className) {
+			var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+			el.className = el.className.replace(reg, ' ').replace(/^\s\s*/, '').replace(/\s\s*$/, ''); 
+		},
+		addClass: function(el, className) {
+			if( !framework.hasClass(el,className) ) {
+				el.className += (el.className ? ' ' : '') + className;
+			}
+		},
+		hasClass: function(el, className) {
+			return el.className && new RegExp('(^|\\s)' + className + '(\\s|$)').test(el.className);
+		},
+		getChildByClass: function(parentEl, childClassName) {
+			var node = parentEl.firstChild;
+			while(node) {
+				if( framework.hasClass(node, childClassName) ) {
+					return node;
+				}
+				node = node.nextSibling;
+			}
+		},
+		arraySearch: function(array, value, key) {
+			var i = array.length;
+			while(i--) {
+				if(array[i][key] === value) {
+					return i;
+				} 
+			}
+			return -1;
+		},
+		extend: function(o1, o2, preventOverwrite) {
+			for (var prop in o2) {
+				if (o2.hasOwnProperty(prop)) {
+					if(preventOverwrite && o1.hasOwnProperty(prop)) {
+						continue;
+					}
+					o1[prop] = o2[prop];
+				}
+			}
+		},
+		easing: {
+			sine: {
+				out: function(k) {
+					return Math.sin(k * (Math.PI / 2));
+				},
+				inOut: function(k) {
+					return - (Math.cos(Math.PI * k) - 1) / 2;
+				}
+			},
+			cubic: {
+				out: function(k) {
+					return --k * k * k + 1;
+				}
+			}
+			/*
+				elastic: {
+					out: function ( k ) {
+	
+						var s, a = 0.1, p = 0.4;
+						if ( k === 0 ) return 0;
+						if ( k === 1 ) return 1;
+						if ( !a || a < 1 ) { a = 1; s = p / 4; }
+						else s = p * Math.asin( 1 / a ) / ( 2 * Math.PI );
+						return ( a * Math.pow( 2, - 10 * k) * Math.sin( ( k - s ) * ( 2 * Math.PI ) / p ) + 1 );
+	
+					},
+				},
+				back: {
+					out: function ( k ) {
+						var s = 1.70158;
+						return --k * k * ( ( s + 1 ) * k + s ) + 1;
+					}
+				}
+			*/
+		},
+	
+		/**
+		 * 
+		 * @return {object}
+		 * 
+		 * {
+		 *  raf : request animation frame function
+		 *  caf : cancel animation frame function
+		 *  transfrom : transform property key (with vendor), or null if not supported
+		 *  oldIE : IE8 or below
+		 * }
+		 * 
+		 */
+		detectFeatures: function() {
+			if(framework.features) {
+				return framework.features;
+			}
+			var helperEl = framework.createEl(),
+				helperStyle = helperEl.style,
+				vendor = '',
+				features = {};
+	
+			// IE8 and below
+			features.oldIE = document.all && !document.addEventListener;
+	
+			features.touch = 'ontouchstart' in window;
+	
+			if(window.requestAnimationFrame) {
+				features.raf = window.requestAnimationFrame;
+				features.caf = window.cancelAnimationFrame;
+			}
+	
+			features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
+	
+			// fix false-positive detection of old Android in new IE
+			// (IE11 ua string contains "Android 4.0")
+			
+			if(!features.pointerEvent) { 
+	
+				var ua = navigator.userAgent;
+	
+				// Detect if device is iPhone or iPod and if it's older than iOS 8
+				// http://stackoverflow.com/a/14223920
+				// 
+				// This detection is made because of buggy top/bottom toolbars
+				// that don't trigger window.resize event.
+				// For more info refer to _isFixedPosition variable in core.js
+	
+				if (/iP(hone|od)/.test(navigator.platform)) {
+					var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+					if(v && v.length > 0) {
+						v = parseInt(v[1], 10);
+						if(v >= 1 && v < 8 ) {
+							features.isOldIOSPhone = true;
+						}
+					}
+				}
+	
+				// Detect old Android (before KitKat)
+				// due to bugs related to position:fixed
+				// http://stackoverflow.com/questions/7184573/pick-up-the-android-version-in-the-browser-by-javascript
+				
+				var match = ua.match(/Android\s([0-9\.]*)/);
+				var androidversion =  match ? match[1] : 0;
+				androidversion = parseFloat(androidversion);
+				if(androidversion >= 1 ) {
+					if(androidversion < 4.4) {
+						features.isOldAndroid = true; // for fixed position bug & performance
+					}
+					features.androidVersion = androidversion; // for touchend bug
+				}	
+				features.isMobileOpera = /opera mini|opera mobi/i.test(ua);
+	
+				// p.s. yes, yes, UA sniffing is bad, propose your solution for above bugs.
+			}
+			
+			var styleChecks = ['transform', 'perspective', 'animationName'],
+				vendors = ['', 'webkit','Moz','ms','O'],
+				styleCheckItem,
+				styleName;
+	
+			for(var i = 0; i < 4; i++) {
+				vendor = vendors[i];
+	
+				for(var a = 0; a < 3; a++) {
+					styleCheckItem = styleChecks[a];
+	
+					// uppercase first letter of property name, if vendor is present
+					styleName = vendor + (vendor ? 
+											styleCheckItem.charAt(0).toUpperCase() + styleCheckItem.slice(1) : 
+											styleCheckItem);
+				
+					if(!features[styleCheckItem] && styleName in helperStyle ) {
+						features[styleCheckItem] = styleName;
+					}
+				}
+	
+				if(vendor && !features.raf) {
+					vendor = vendor.toLowerCase();
+					features.raf = window[vendor+'RequestAnimationFrame'];
+					if(features.raf) {
+						features.caf = window[vendor+'CancelAnimationFrame'] || 
+										window[vendor+'CancelRequestAnimationFrame'];
+					}
+				}
+			}
+				
+			if(!features.raf) {
+				var lastTime = 0;
+				features.raf = function(fn) {
+					var currTime = new Date().getTime();
+					var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+					var id = window.setTimeout(function() { fn(currTime + timeToCall); }, timeToCall);
+					lastTime = currTime + timeToCall;
+					return id;
+				};
+				features.caf = function(id) { clearTimeout(id); };
+			}
+	
+			// Detect SVG support
+			features.svg = !!document.createElementNS && 
+							!!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect;
+	
+			framework.features = features;
+	
+			return features;
+		}
+	};
+	
+	framework.detectFeatures();
+	
+	// Override addEventListener for old versions of IE
+	if(framework.features.oldIE) {
+	
+		framework.bind = function(target, type, listener, unbind) {
+			
+			type = type.split(' ');
+	
+			var methodName = (unbind ? 'detach' : 'attach') + 'Event',
+				evName,
+				_handleEv = function() {
+					listener.handleEvent.call(listener);
+				};
+	
+			for(var i = 0; i < type.length; i++) {
+				evName = type[i];
+				if(evName) {
+	
+					if(typeof listener === 'object' && listener.handleEvent) {
+						if(!unbind) {
+							listener['oldIE' + evName] = _handleEv;
+						} else {
+							if(!listener['oldIE' + evName]) {
+								return false;
+							}
+						}
+	
+						target[methodName]( 'on' + evName, listener['oldIE' + evName]);
+					} else {
+						target[methodName]( 'on' + evName, listener);
+					}
+	
+				}
+			}
+		};
+		
+	}
+	
+	/*>>framework-bridge*/
+	
+	/*>>core*/
+	//function(template, UiClass, items, options)
+	
+	var self = this;
+	
+	/**
+	 * Static vars, don't change unless you know what you're doing.
+	 */
+	var DOUBLE_TAP_RADIUS = 25, 
+		NUM_HOLDERS = 3;
+	
+	/**
+	 * Options
+	 */
+	var _options = {
+		allowPanToNext:true,
+		spacing: 0.12,
+		bgOpacity: 1,
+		mouseUsed: false,
+		loop: true,
+		pinchToClose: true,
+		closeOnScroll: true,
+		closeOnVerticalDrag: true,
+		verticalDragRange: 0.75,
+		hideAnimationDuration: 333,
+		showAnimationDuration: 333,
+		showHideOpacity: false,
+		focus: true,
+		escKey: true,
+		arrowKeys: true,
+		mainScrollEndFriction: 0.35,
+		panEndFriction: 0.35,
+		isClickableElement: function(el) {
+	        return el.tagName === 'A';
+	    },
+	    getDoubleTapZoom: function(isMouseClick, item) {
+	    	if(isMouseClick) {
+	    		return 1;
+	    	} else {
+	    		return item.initialZoomLevel < 0.7 ? 1 : 1.33;
+	    	}
+	    },
+	    maxSpreadZoom: 1.33,
+		modal: true,
+	
+		// not fully implemented yet
+		scaleMode: 'fit' // TODO
+	};
+	framework.extend(_options, options);
+	
+	
+	/**
+	 * Private helper variables & functions
+	 */
+	
+	var _getEmptyPoint = function() { 
+			return {x:0,y:0}; 
+		};
+	
+	var _isOpen,
+		_isDestroying,
+		_closedByScroll,
+		_currentItemIndex,
+		_containerStyle,
+		_containerShiftIndex,
+		_currPanDist = _getEmptyPoint(),
+		_startPanOffset = _getEmptyPoint(),
+		_panOffset = _getEmptyPoint(),
+		_upMoveEvents, // drag move, drag end & drag cancel events array
+		_downEvents, // drag start events array
+		_globalEventHandlers,
+		_viewportSize = {},
+		_currZoomLevel,
+		_startZoomLevel,
+		_translatePrefix,
+		_translateSufix,
+		_updateSizeInterval,
+		_itemsNeedUpdate,
+		_currPositionIndex = 0,
+		_offset = {},
+		_slideSize = _getEmptyPoint(), // size of slide area, including spacing
+		_itemHolders,
+		_prevItemIndex,
+		_indexDiff = 0, // difference of indexes since last content update
+		_dragStartEvent,
+		_dragMoveEvent,
+		_dragEndEvent,
+		_dragCancelEvent,
+		_transformKey,
+		_pointerEventEnabled,
+		_isFixedPosition = true,
+		_likelyTouchDevice,
+		_modules = [],
+		_requestAF,
+		_cancelAF,
+		_initalClassName,
+		_initalWindowScrollY,
+		_oldIE,
+		_currentWindowScrollY,
+		_features,
+		_windowVisibleSize = {},
+		_renderMaxResolution = false,
+	
+		// Registers PhotoSWipe module (History, Controller ...)
+		_registerModule = function(name, module) {
+			framework.extend(self, module.publicMethods);
+			_modules.push(name);
+		},
+	
+		_getLoopedId = function(index) {
+			var numSlides = _getNumItems();
+			if(index > numSlides - 1) {
+				return index - numSlides;
+			} else  if(index < 0) {
+				return numSlides + index;
+			}
+			return index;
+		},
+		
+		// Micro bind/trigger
+		_listeners = {},
+		_listen = function(name, fn) {
+			if(!_listeners[name]) {
+				_listeners[name] = [];
+			}
+			return _listeners[name].push(fn);
+		},
+		_shout = function(name) {
+			var listeners = _listeners[name];
+	
+			if(listeners) {
+				var args = Array.prototype.slice.call(arguments);
+				args.shift();
+	
+				for(var i = 0; i < listeners.length; i++) {
+					listeners[i].apply(self, args);
+				}
+			}
+		},
+	
+		_getCurrentTime = function() {
+			return new Date().getTime();
+		},
+		_applyBgOpacity = function(opacity) {
+			_bgOpacity = opacity;
+			self.bg.style.opacity = opacity * _options.bgOpacity;
+		},
+	
+		_applyZoomTransform = function(styleObj,x,y,zoom,item) {
+			if(!_renderMaxResolution || (item && item !== self.currItem) ) {
+				zoom = zoom / (item ? item.fitRatio : self.currItem.fitRatio);	
+			}
+				
+			styleObj[_transformKey] = _translatePrefix + x + 'px, ' + y + 'px' + _translateSufix + ' scale(' + zoom + ')';
+		},
+		_applyCurrentZoomPan = function( allowRenderResolution ) {
+			if(_currZoomElementStyle) {
+	
+				if(allowRenderResolution) {
+					if(_currZoomLevel > self.currItem.fitRatio) {
+						if(!_renderMaxResolution) {
+							_setImageSize(self.currItem, false, true);
+							_renderMaxResolution = true;
+						}
+					} else {
+						if(_renderMaxResolution) {
+							_setImageSize(self.currItem);
+							_renderMaxResolution = false;
+						}
+					}
+				}
+				
+	
+				_applyZoomTransform(_currZoomElementStyle, _panOffset.x, _panOffset.y, _currZoomLevel);
+			}
+		},
+		_applyZoomPanToItem = function(item) {
+			if(item.container) {
+	
+				_applyZoomTransform(item.container.style, 
+									item.initialPosition.x, 
+									item.initialPosition.y, 
+									item.initialZoomLevel,
+									item);
+			}
+		},
+		_setTranslateX = function(x, elStyle) {
+			elStyle[_transformKey] = _translatePrefix + x + 'px, 0px' + _translateSufix;
+		},
+		_moveMainScroll = function(x, dragging) {
+	
+			if(!_options.loop && dragging) {
+				var newSlideIndexOffset = _currentItemIndex + (_slideSize.x * _currPositionIndex - x) / _slideSize.x,
+					delta = Math.round(x - _mainScrollPos.x);
+	
+				if( (newSlideIndexOffset < 0 && delta > 0) || 
+					(newSlideIndexOffset >= _getNumItems() - 1 && delta < 0) ) {
+					x = _mainScrollPos.x + delta * _options.mainScrollEndFriction;
+				} 
+			}
+			
+			_mainScrollPos.x = x;
+			_setTranslateX(x, _containerStyle);
+		},
+		_calculatePanOffset = function(axis, zoomLevel) {
+			var m = _midZoomPoint[axis] - _offset[axis];
+			return _startPanOffset[axis] + _currPanDist[axis] + m - m * ( zoomLevel / _startZoomLevel );
+		},
+		
+		_equalizePoints = function(p1, p2) {
+			p1.x = p2.x;
+			p1.y = p2.y;
+			if(p2.id) {
+				p1.id = p2.id;
+			}
+		},
+		_roundPoint = function(p) {
+			p.x = Math.round(p.x);
+			p.y = Math.round(p.y);
+		},
+	
+		_mouseMoveTimeout = null,
+		_onFirstMouseMove = function() {
+			// Wait until mouse move event is fired at least twice during 100ms
+			// We do this, because some mobile browsers trigger it on touchstart
+			if(_mouseMoveTimeout ) { 
+				framework.unbind(document, 'mousemove', _onFirstMouseMove);
+				framework.addClass(template, 'pswp--has_mouse');
+				_options.mouseUsed = true;
+				_shout('mouseUsed');
+			}
+			_mouseMoveTimeout = setTimeout(function() {
+				_mouseMoveTimeout = null;
+			}, 100);
+		},
+	
+		_bindEvents = function() {
+			framework.bind(document, 'keydown', self);
+	
+			if(_features.transform) {
+				// don't bind click event in browsers that don't support transform (mostly IE8)
+				framework.bind(self.scrollWrap, 'click', self);
+			}
+			
+	
+			if(!_options.mouseUsed) {
+				framework.bind(document, 'mousemove', _onFirstMouseMove);
+			}
+	
+			framework.bind(window, 'resize scroll', self);
+	
+			_shout('bindEvents');
+		},
+	
+		_unbindEvents = function() {
+			framework.unbind(window, 'resize', self);
+			framework.unbind(window, 'scroll', _globalEventHandlers.scroll);
+			framework.unbind(document, 'keydown', self);
+			framework.unbind(document, 'mousemove', _onFirstMouseMove);
+	
+			if(_features.transform) {
+				framework.unbind(self.scrollWrap, 'click', self);
+			}
+	
+			if(_isDragging) {
+				framework.unbind(window, _upMoveEvents, self);
+			}
+	
+			_shout('unbindEvents');
+		},
+		
+		_calculatePanBounds = function(zoomLevel, update) {
+			var bounds = _calculateItemSize( self.currItem, _viewportSize, zoomLevel );
+			if(update) {
+				_currPanBounds = bounds;
+			}
+			return bounds;
+		},
+		
+		_getMinZoomLevel = function(item) {
+			if(!item) {
+				item = self.currItem;
+			}
+			return item.initialZoomLevel;
+		},
+		_getMaxZoomLevel = function(item) {
+			if(!item) {
+				item = self.currItem;
+			}
+			return item.w > 0 ? _options.maxSpreadZoom : 1;
+		},
+	
+		// Return true if offset is out of the bounds
+		_modifyDestPanOffset = function(axis, destPanBounds, destPanOffset, destZoomLevel) {
+			if(destZoomLevel === self.currItem.initialZoomLevel) {
+				destPanOffset[axis] = self.currItem.initialPosition[axis];
+				return true;
+			} else {
+				destPanOffset[axis] = _calculatePanOffset(axis, destZoomLevel); 
+	
+				if(destPanOffset[axis] > destPanBounds.min[axis]) {
+					destPanOffset[axis] = destPanBounds.min[axis];
+					return true;
+				} else if(destPanOffset[axis] < destPanBounds.max[axis] ) {
+					destPanOffset[axis] = destPanBounds.max[axis];
+					return true;
+				}
+			}
+			return false;
+		},
+	
+		_setupTransforms = function() {
+	
+			if(_transformKey) {
+				// setup 3d transforms
+				var allow3dTransform = _features.perspective && !_likelyTouchDevice;
+				_translatePrefix = 'translate' + (allow3dTransform ? '3d(' : '(');
+				_translateSufix = _features.perspective ? ', 0px)' : ')';	
+				return;
+			}
+	
+			// Override zoom/pan/move functions in case old browser is used (most likely IE)
+			// (so they use left/top/width/height, instead of CSS transform)
+		
+			_transformKey = 'left';
+			framework.addClass(template, 'pswp--ie');
+	
+			_setTranslateX = function(x, elStyle) {
+				elStyle.left = x + 'px';
+			};
+			_applyZoomPanToItem = function(item) {
+	
+				var zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+					s = item.container.style,
+					w = zoomRatio * item.w,
+					h = zoomRatio * item.h;
+	
+				s.width = w + 'px';
+				s.height = h + 'px';
+				s.left = item.initialPosition.x + 'px';
+				s.top = item.initialPosition.y + 'px';
+	
+			};
+			_applyCurrentZoomPan = function() {
+				if(_currZoomElementStyle) {
+	
+					var s = _currZoomElementStyle,
+						item = self.currItem,
+						zoomRatio = item.fitRatio > 1 ? 1 : item.fitRatio,
+						w = zoomRatio * item.w,
+						h = zoomRatio * item.h;
+	
+					s.width = w + 'px';
+					s.height = h + 'px';
+	
+	
+					s.left = _panOffset.x + 'px';
+					s.top = _panOffset.y + 'px';
+				}
+				
+			};
+		},
+	
+		_onKeyDown = function(e) {
+			var keydownAction = '';
+			if(_options.escKey && e.keyCode === 27) { 
+				keydownAction = 'close';
+			} else if(_options.arrowKeys) {
+				if(e.keyCode === 37) {
+					keydownAction = 'prev';
+				} else if(e.keyCode === 39) { 
+					keydownAction = 'next';
+				}
+			}
+	
+			if(keydownAction) {
+				// don't do anything if special key pressed to prevent from overriding default browser actions
+				// e.g. in Chrome on Mac cmd+arrow-left returns to previous page
+				if( !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey ) {
+					if(e.preventDefault) {
+						e.preventDefault();
+					} else {
+						e.returnValue = false;
+					} 
+					self[keydownAction]();
+				}
+			}
+		},
+	
+		_onGlobalClick = function(e) {
+			if(!e) {
+				return;
+			}
+	
+			// don't allow click event to pass through when triggering after drag or some other gesture
+			if(_moved || _zoomStarted || _mainScrollAnimating || _verticalDragInitiated) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+		},
+	
+		_updatePageScrollOffset = function() {
+			self.setScrollOffset(0, framework.getScrollY());		
+		};
+		
+	
+	
+		
+	
+	
+	
+	// Micro animation engine
+	var _animations = {},
+		_numAnimations = 0,
+		_stopAnimation = function(name) {
+			if(_animations[name]) {
+				if(_animations[name].raf) {
+					_cancelAF( _animations[name].raf );
+				}
+				_numAnimations--;
+				delete _animations[name];
+			}
+		},
+		_registerStartAnimation = function(name) {
+			if(_animations[name]) {
+				_stopAnimation(name);
+			}
+			if(!_animations[name]) {
+				_numAnimations++;
+				_animations[name] = {};
+			}
+		},
+		_stopAllAnimations = function() {
+			for (var prop in _animations) {
+	
+				if( _animations.hasOwnProperty( prop ) ) {
+					_stopAnimation(prop);
+				} 
+				
+			}
+		},
+		_animateProp = function(name, b, endProp, d, easingFn, onUpdate, onComplete) {
+			var startAnimTime = _getCurrentTime(), t;
+			_registerStartAnimation(name);
+	
+			var animloop = function(){
+				if ( _animations[name] ) {
+					
+					t = _getCurrentTime() - startAnimTime; // time diff
+					//b - beginning (start prop)
+					//d - anim duration
+	
+					if ( t >= d ) {
+						_stopAnimation(name);
+						onUpdate(endProp);
+						if(onComplete) {
+							onComplete();
+						}
+						return;
+					}
+					onUpdate( (endProp - b) * easingFn(t/d) + b );
+	
+					_animations[name].raf = _requestAF(animloop);
+				}
+			};
+			animloop();
+		};
+		
+	
+	
+	var publicMethods = {
+	
+		// make a few local variables and functions public
+		shout: _shout,
+		listen: _listen,
+		viewportSize: _viewportSize,
+		options: _options,
+	
+		isMainScrollAnimating: function() {
+			return _mainScrollAnimating;
+		},
+		getZoomLevel: function() {
+			return _currZoomLevel;
+		},
+		getCurrentIndex: function() {
+			return _currentItemIndex;
+		},
+		isDragging: function() {
+			return _isDragging;
+		},	
+		isZooming: function() {
+			return _isZooming;
+		},
+		setScrollOffset: function(x,y) {
+			_offset.x = x;
+			_currentWindowScrollY = _offset.y = y;
+			_shout('updateScrollOffset', _offset);
+		},
+		applyZoomPan: function(zoomLevel,panX,panY,allowRenderResolution) {
+			_panOffset.x = panX;
+			_panOffset.y = panY;
+			_currZoomLevel = zoomLevel;
+			_applyCurrentZoomPan( allowRenderResolution );
+		},
+	
+		init: function() {
+	
+			if(_isOpen || _isDestroying) {
+				return;
+			}
+	
+			var i;
+	
+			self.framework = framework; // basic functionality
+			self.template = template; // root DOM element of PhotoSwipe
+			self.bg = framework.getChildByClass(template, 'pswp__bg');
+	
+			_initalClassName = template.className;
+			_isOpen = true;
+					
+			_features = framework.detectFeatures();
+			_requestAF = _features.raf;
+			_cancelAF = _features.caf;
+			_transformKey = _features.transform;
+			_oldIE = _features.oldIE;
+			
+			self.scrollWrap = framework.getChildByClass(template, 'pswp__scroll-wrap');
+			self.container = framework.getChildByClass(self.scrollWrap, 'pswp__container');
+	
+			_containerStyle = self.container.style; // for fast access
+	
+			// Objects that hold slides (there are only 3 in DOM)
+			self.itemHolders = _itemHolders = [
+				{el:self.container.children[0] , wrap:0, index: -1},
+				{el:self.container.children[1] , wrap:0, index: -1},
+				{el:self.container.children[2] , wrap:0, index: -1}
+			];
+	
+			// hide nearby item holders until initial zoom animation finishes (to avoid extra Paints)
+			_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'none';
+	
+			_setupTransforms();
+	
+			// Setup global events
+			_globalEventHandlers = {
+				resize: self.updateSize,
+				scroll: _updatePageScrollOffset,
+				keydown: _onKeyDown,
+				click: _onGlobalClick
+			};
+	
+			// disable show/hide effects on old browsers that don't support CSS animations or transforms, 
+			// old IOS, Android and Opera mobile. Blackberry seems to work fine, even older models.
+			var oldPhone = _features.isOldIOSPhone || _features.isOldAndroid || _features.isMobileOpera;
+			if(!_features.animationName || !_features.transform || oldPhone) {
+				_options.showAnimationDuration = _options.hideAnimationDuration = 0;
+			}
+	
+			// init modules
+			for(i = 0; i < _modules.length; i++) {
+				self['init' + _modules[i]]();
+			}
+			
+			// init
+			if(UiClass) {
+				var ui = self.ui = new UiClass(self, framework);
+				ui.init();
+			}
+	
+			_shout('firstUpdate');
+			_currentItemIndex = _currentItemIndex || _options.index || 0;
+			// validate index
+			if( isNaN(_currentItemIndex) || _currentItemIndex < 0 || _currentItemIndex >= _getNumItems() ) {
+				_currentItemIndex = 0;
+			}
+			self.currItem = _getItemAt( _currentItemIndex );
+	
+			
+			if(_features.isOldIOSPhone || _features.isOldAndroid) {
+				_isFixedPosition = false;
+			}
+			
+			template.setAttribute('aria-hidden', 'false');
+			if(_options.modal) {
+				if(!_isFixedPosition) {
+					template.style.position = 'absolute';
+					template.style.top = framework.getScrollY() + 'px';
+				} else {
+					template.style.position = 'fixed';
+				}
+			}
+	
+			if(_currentWindowScrollY === undefined) {
+				_shout('initialLayout');
+				_currentWindowScrollY = _initalWindowScrollY = framework.getScrollY();
+			}
+			
+			// add classes to root element of PhotoSwipe
+			var rootClasses = 'pswp--open ';
+			if(_options.mainClass) {
+				rootClasses += _options.mainClass + ' ';
+			}
+			if(_options.showHideOpacity) {
+				rootClasses += 'pswp--animate_opacity ';
+			}
+			rootClasses += _likelyTouchDevice ? 'pswp--touch' : 'pswp--notouch';
+			rootClasses += _features.animationName ? ' pswp--css_animation' : '';
+			rootClasses += _features.svg ? ' pswp--svg' : '';
+			framework.addClass(template, rootClasses);
+	
+			self.updateSize();
+	
+			// initial update
+			_containerShiftIndex = -1;
+			_indexDiff = null;
+			for(i = 0; i < NUM_HOLDERS; i++) {
+				_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, _itemHolders[i].el.style);
+			}
+	
+			if(!_oldIE) {
+				framework.bind(self.scrollWrap, _downEvents, self); // no dragging for old IE
+			}	
+	
+			_listen('initialZoomInEnd', function() {
+				self.setContent(_itemHolders[0], _currentItemIndex-1);
+				self.setContent(_itemHolders[2], _currentItemIndex+1);
+	
+				_itemHolders[0].el.style.display = _itemHolders[2].el.style.display = 'block';
+	
+				if(_options.focus) {
+					// focus causes layout, 
+					// which causes lag during the animation, 
+					// that's why we delay it untill the initial zoom transition ends
+					template.focus();
+				}
+				 
+	
+				_bindEvents();
+			});
+	
+			// set content for center slide (first time)
+			self.setContent(_itemHolders[1], _currentItemIndex);
+			
+			self.updateCurrItem();
+	
+			_shout('afterInit');
+	
+			if(!_isFixedPosition) {
+	
+				// On all versions of iOS lower than 8.0, we check size of viewport every second.
+				// 
+				// This is done to detect when Safari top & bottom bars appear, 
+				// as this action doesn't trigger any events (like resize). 
+				// 
+				// On iOS8 they fixed this.
+				// 
+				// 10 Nov 2014: iOS 7 usage ~40%. iOS 8 usage 56%.
+				
+				_updateSizeInterval = setInterval(function() {
+					if(!_numAnimations && !_isDragging && !_isZooming && (_currZoomLevel === self.currItem.initialZoomLevel)  ) {
+						self.updateSize();
+					}
+				}, 1000);
+			}
+	
+			framework.addClass(template, 'pswp--visible');
+		},
+	
+		// Close the gallery, then destroy it
+		close: function() {
+			if(!_isOpen) {
+				return;
+			}
+	
+			_isOpen = false;
+			_isDestroying = true;
+			_shout('close');
+			_unbindEvents();
+	
+			_showOrHide(self.currItem, null, true, self.destroy);
+		},
+	
+		// destroys the gallery (unbinds events, cleans up intervals and timeouts to avoid memory leaks)
+		destroy: function() {
+			_shout('destroy');
+	
+			if(_showOrHideTimeout) {
+				clearTimeout(_showOrHideTimeout);
+			}
+			
+			template.setAttribute('aria-hidden', 'true');
+			template.className = _initalClassName;
+	
+			if(_updateSizeInterval) {
+				clearInterval(_updateSizeInterval);
+			}
+	
+			framework.unbind(self.scrollWrap, _downEvents, self);
+	
+			// we unbind scroll event at the end, as closing animation may depend on it
+			framework.unbind(window, 'scroll', self);
+	
+			_stopDragUpdateLoop();
+	
+			_stopAllAnimations();
+	
+			_listeners = null;
+		},
+	
+		/**
+		 * Pan image to position
+		 * @param {Number} x     
+		 * @param {Number} y     
+		 * @param {Boolean} force Will ignore bounds if set to true.
+		 */
+		panTo: function(x,y,force) {
+			if(!force) {
+				if(x > _currPanBounds.min.x) {
+					x = _currPanBounds.min.x;
+				} else if(x < _currPanBounds.max.x) {
+					x = _currPanBounds.max.x;
+				}
+	
+				if(y > _currPanBounds.min.y) {
+					y = _currPanBounds.min.y;
+				} else if(y < _currPanBounds.max.y) {
+					y = _currPanBounds.max.y;
+				}
+			}
+			
+			_panOffset.x = x;
+			_panOffset.y = y;
+			_applyCurrentZoomPan();
+		},
+		
+		handleEvent: function (e) {
+			e = e || window.event;
+			if(_globalEventHandlers[e.type]) {
+				_globalEventHandlers[e.type](e);
+			}
+		},
+	
+	
+		goTo: function(index) {
+	
+			index = _getLoopedId(index);
+	
+			var diff = index - _currentItemIndex;
+			_indexDiff = diff;
+	
+			_currentItemIndex = index;
+			self.currItem = _getItemAt( _currentItemIndex );
+			_currPositionIndex -= diff;
+			
+			_moveMainScroll(_slideSize.x * _currPositionIndex);
+			
+	
+			_stopAllAnimations();
+			_mainScrollAnimating = false;
+	
+			self.updateCurrItem();
+		},
+		next: function() {
+			self.goTo( _currentItemIndex + 1);
+		},
+		prev: function() {
+			self.goTo( _currentItemIndex - 1);
+		},
+	
+		// update current zoom/pan objects
+		updateCurrZoomItem: function(emulateSetContent) {
+			if(emulateSetContent) {
+				_shout('beforeChange', 0);
+			}
+	
+			// itemHolder[1] is middle (current) item
+			if(_itemHolders[1].el.children.length) {
+				var zoomElement = _itemHolders[1].el.children[0];
+				if( framework.hasClass(zoomElement, 'pswp__zoom-wrap') ) {
+					_currZoomElementStyle = zoomElement.style;
+				} else {
+					_currZoomElementStyle = null;
+				}
+			} else {
+				_currZoomElementStyle = null;
+			}
+			
+			_currPanBounds = self.currItem.bounds;	
+			_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+	
+			_panOffset.x = _currPanBounds.center.x;
+			_panOffset.y = _currPanBounds.center.y;
+	
+			if(emulateSetContent) {
+				_shout('afterChange');
+			}
+		},
+	
+	
+		invalidateCurrItems: function() {
+			_itemsNeedUpdate = true;
+			for(var i = 0; i < NUM_HOLDERS; i++) {
+				if( _itemHolders[i].item ) {
+					_itemHolders[i].item.needsUpdate = true;
+				}
+			}
+		},
+	
+		updateCurrItem: function(beforeAnimation) {
+	
+			if(_indexDiff === 0) {
+				return;
+			}
+	
+			var diffAbs = Math.abs(_indexDiff),
+				tempHolder;
+	
+			if(beforeAnimation && diffAbs < 2) {
+				return;
+			}
+	
+	
+			self.currItem = _getItemAt( _currentItemIndex );
+			_renderMaxResolution = false;
+			
+			_shout('beforeChange', _indexDiff);
+	
+			if(diffAbs >= NUM_HOLDERS) {
+				_containerShiftIndex += _indexDiff + (_indexDiff > 0 ? -NUM_HOLDERS : NUM_HOLDERS);
+				diffAbs = NUM_HOLDERS;
+			}
+			for(var i = 0; i < diffAbs; i++) {
+				if(_indexDiff > 0) {
+					tempHolder = _itemHolders.shift();
+					_itemHolders[NUM_HOLDERS-1] = tempHolder; // move first to last
+	
+					_containerShiftIndex++;
+					_setTranslateX( (_containerShiftIndex+2) * _slideSize.x, tempHolder.el.style);
+					self.setContent(tempHolder, _currentItemIndex - diffAbs + i + 1 + 1);
+				} else {
+					tempHolder = _itemHolders.pop();
+					_itemHolders.unshift( tempHolder ); // move last to first
+	
+					_containerShiftIndex--;
+					_setTranslateX( _containerShiftIndex * _slideSize.x, tempHolder.el.style);
+					self.setContent(tempHolder, _currentItemIndex + diffAbs - i - 1 - 1);
+				}
+				
+			}
+	
+			// reset zoom/pan on previous item
+			if(_currZoomElementStyle && Math.abs(_indexDiff) === 1) {
+	
+				var prevItem = _getItemAt(_prevItemIndex);
+				if(prevItem.initialZoomLevel !== _currZoomLevel) {
+					_calculateItemSize(prevItem , _viewportSize );
+					_setImageSize(prevItem);
+					_applyZoomPanToItem( prevItem ); 				
+				}
+	
+			}
+	
+			// reset diff after update
+			_indexDiff = 0;
+	
+			self.updateCurrZoomItem();
+	
+			_prevItemIndex = _currentItemIndex;
+	
+			_shout('afterChange');
+			
+		},
+	
+	
+	
+		updateSize: function(force) {
+			
+			if(!_isFixedPosition && _options.modal) {
+				var windowScrollY = framework.getScrollY();
+				if(_currentWindowScrollY !== windowScrollY) {
+					template.style.top = windowScrollY + 'px';
+					_currentWindowScrollY = windowScrollY;
+				}
+				if(!force && _windowVisibleSize.x === window.innerWidth && _windowVisibleSize.y === window.innerHeight) {
+					return;
+				}
+				_windowVisibleSize.x = window.innerWidth;
+				_windowVisibleSize.y = window.innerHeight;
+	
+				//template.style.width = _windowVisibleSize.x + 'px';
+				template.style.height = _windowVisibleSize.y + 'px';
+			}
+	
+	
+	
+			_viewportSize.x = self.scrollWrap.clientWidth;
+			_viewportSize.y = self.scrollWrap.clientHeight;
+	
+			_updatePageScrollOffset();
+	
+			_slideSize.x = _viewportSize.x + Math.round(_viewportSize.x * _options.spacing);
+			_slideSize.y = _viewportSize.y;
+	
+			_moveMainScroll(_slideSize.x * _currPositionIndex);
+	
+			_shout('beforeResize'); // even may be used for example to switch image sources
+	
+	
+			// don't re-calculate size on inital size update
+			if(_containerShiftIndex !== undefined) {
+	
+				var holder,
+					item,
+					hIndex;
+	
+				for(var i = 0; i < NUM_HOLDERS; i++) {
+					holder = _itemHolders[i];
+					_setTranslateX( (i+_containerShiftIndex) * _slideSize.x, holder.el.style);
+	
+					hIndex = _currentItemIndex+i-1;
+	
+					if(_options.loop && _getNumItems() > 2) {
+						hIndex = _getLoopedId(hIndex);
+					}
+	
+					// update zoom level on items and refresh source (if needsUpdate)
+					item = _getItemAt( hIndex );
+	
+					// re-render gallery item if `needsUpdate`,
+					// or doesn't have `bounds` (entirely new slide object)
+					if( item && (_itemsNeedUpdate || item.needsUpdate || !item.bounds) ) {
+	
+						self.cleanSlide( item );
+						
+						self.setContent( holder, hIndex );
+	
+						// if "center" slide
+						if(i === 1) {
+							self.currItem = item;
+							self.updateCurrZoomItem(true);
+						}
+	
+						item.needsUpdate = false;
+	
+					} else if(holder.index === -1 && hIndex >= 0) {
+						// add content first time
+						self.setContent( holder, hIndex );
+					}
+					if(item && item.container) {
+						_calculateItemSize(item, _viewportSize);
+						_setImageSize(item);
+						_applyZoomPanToItem( item );
+					}
+					
+				}
+				_itemsNeedUpdate = false;
+			}	
+	
+			_startZoomLevel = _currZoomLevel = self.currItem.initialZoomLevel;
+			_currPanBounds = self.currItem.bounds;
+	
+			if(_currPanBounds) {
+				_panOffset.x = _currPanBounds.center.x;
+				_panOffset.y = _currPanBounds.center.y;
+				_applyCurrentZoomPan( true );
+			}
+			
+			_shout('resize');
+		},
+		
+		// Zoom current item to
+		zoomTo: function(destZoomLevel, centerPoint, speed, easingFn, updateFn) {
+			/*
+				if(destZoomLevel === 'fit') {
+					destZoomLevel = self.currItem.fitRatio;
+				} else if(destZoomLevel === 'fill') {
+					destZoomLevel = self.currItem.fillRatio;
+				}
+			*/
+	
+			if(centerPoint) {
+				_startZoomLevel = _currZoomLevel;
+				_midZoomPoint.x = Math.abs(centerPoint.x) - _panOffset.x ;
+				_midZoomPoint.y = Math.abs(centerPoint.y) - _panOffset.y ;
+				_equalizePoints(_startPanOffset, _panOffset);
+			}
+	
+			var destPanBounds = _calculatePanBounds(destZoomLevel, false),
+				destPanOffset = {};
+	
+			_modifyDestPanOffset('x', destPanBounds, destPanOffset, destZoomLevel);
+			_modifyDestPanOffset('y', destPanBounds, destPanOffset, destZoomLevel);
+	
+			var initialZoomLevel = _currZoomLevel;
+			var initialPanOffset = {
+				x: _panOffset.x,
+				y: _panOffset.y
+			};
+	
+			_roundPoint(destPanOffset);
+	
+			var onUpdate = function(now) {
+				if(now === 1) {
+					_currZoomLevel = destZoomLevel;
+					_panOffset.x = destPanOffset.x;
+					_panOffset.y = destPanOffset.y;
+				} else {
+					_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+					_panOffset.x = (destPanOffset.x - initialPanOffset.x) * now + initialPanOffset.x;
+					_panOffset.y = (destPanOffset.y - initialPanOffset.y) * now + initialPanOffset.y;
+				}
+	
+				if(updateFn) {
+					updateFn(now);
+				}
+	
+				_applyCurrentZoomPan( now === 1 );
+			};
+	
+			if(speed) {
+				_animateProp('customZoomTo', 0, 1, speed, easingFn || framework.easing.sine.inOut, onUpdate);
+			} else {
+				onUpdate(1);
+			}
+		}
+	
+	
+	};
+	
+	
+	/*>>core*/
+	
+	/*>>gestures*/
+	/**
+	 * Mouse/touch/pointer event handlers.
+	 * 
+	 * separated from @core.js for readability
+	 */
+	
+	var MIN_SWIPE_DISTANCE = 30,
+		DIRECTION_CHECK_OFFSET = 10; // amount of pixels to drag to determine direction of swipe
+	
+	var _gestureStartTime,
+		_gestureCheckSpeedTime,
+	
+		// pool of objects that are used during dragging of zooming
+		p = {}, // first point
+		p2 = {}, // second point (for zoom gesture)
+		delta = {},
+		_currPoint = {},
+		_startPoint = {},
+		_currPointers = [],
+		_startMainScrollPos = {},
+		_releaseAnimData,
+		_posPoints = [], // array of points during dragging, used to determine type of gesture
+		_tempPoint = {},
+	
+		_isZoomingIn,
+		_verticalDragInitiated,
+		_oldAndroidTouchEndTimeout,
+		_currZoomedItemIndex = 0,
+		_centerPoint = _getEmptyPoint(),
+		_lastReleaseTime = 0,
+		_isDragging, // at least one pointer is down
+		_isMultitouch, // at least two _pointers are down
+		_zoomStarted, // zoom level changed during zoom gesture
+		_moved,
+		_dragAnimFrame,
+		_mainScrollShifted,
+		_currentPoints, // array of current touch points
+		_isZooming,
+		_currPointsDistance,
+		_startPointsDistance,
+		_currPanBounds,
+		_mainScrollPos = _getEmptyPoint(),
+		_currZoomElementStyle,
+		_mainScrollAnimating, // true, if animation after swipe gesture is running
+		_midZoomPoint = _getEmptyPoint(),
+		_currCenterPoint = _getEmptyPoint(),
+		_direction,
+		_isFirstMove,
+		_opacityChanged,
+		_bgOpacity,
+		_wasOverInitialZoom,
+	
+		_isEqualPoints = function(p1, p2) {
+			return p1.x === p2.x && p1.y === p2.y;
+		},
+		_isNearbyPoints = function(touch0, touch1) {
+			return Math.abs(touch0.x - touch1.x) < DOUBLE_TAP_RADIUS && Math.abs(touch0.y - touch1.y) < DOUBLE_TAP_RADIUS;
+		},
+		_calculatePointsDistance = function(p1, p2) {
+			_tempPoint.x = Math.abs( p1.x - p2.x );
+			_tempPoint.y = Math.abs( p1.y - p2.y );
+			return Math.sqrt(_tempPoint.x * _tempPoint.x + _tempPoint.y * _tempPoint.y);
+		},
+		_stopDragUpdateLoop = function() {
+			if(_dragAnimFrame) {
+				_cancelAF(_dragAnimFrame);
+				_dragAnimFrame = null;
+			}
+		},
+		_dragUpdateLoop = function() {
+			if(_isDragging) {
+				_dragAnimFrame = _requestAF(_dragUpdateLoop);
+				_renderMovement();
+			}
+		},
+		_canPan = function() {
+			return !(_options.scaleMode === 'fit' && _currZoomLevel ===  self.currItem.initialZoomLevel);
+		},
+		
+		// find the closest parent DOM element
+		_closestElement = function(el, fn) {
+		  	if(!el || el === document) {
+		  		return false;
+		  	}
+	
+		  	// don't search elements above pswp__scroll-wrap
+		  	if(el.getAttribute('class') && el.getAttribute('class').indexOf('pswp__scroll-wrap') > -1 ) {
+		  		return false;
+		  	}
+	
+		  	if( fn(el) ) {
+		  		return el;
+		  	}
+	
+		  	return _closestElement(el.parentNode, fn);
+		},
+	
+		_preventObj = {},
+		_preventDefaultEventBehaviour = function(e, isDown) {
+		    _preventObj.prevent = !_closestElement(e.target, _options.isClickableElement);
+	
+			_shout('preventDragEvent', e, isDown, _preventObj);
+			return _preventObj.prevent;
+	
+		},
+		_convertTouchToPoint = function(touch, p) {
+			p.x = touch.pageX;
+			p.y = touch.pageY;
+			p.id = touch.identifier;
+			return p;
+		},
+		_findCenterOfPoints = function(p1, p2, pCenter) {
+			pCenter.x = (p1.x + p2.x) * 0.5;
+			pCenter.y = (p1.y + p2.y) * 0.5;
+		},
+		_pushPosPoint = function(time, x, y) {
+			if(time - _gestureCheckSpeedTime > 50) {
+				var o = _posPoints.length > 2 ? _posPoints.shift() : {};
+				o.x = x;
+				o.y = y; 
+				_posPoints.push(o);
+				_gestureCheckSpeedTime = time;
+			}
+		},
+	
+		_calculateVerticalDragOpacityRatio = function() {
+			var yOffset = _panOffset.y - self.currItem.initialPosition.y; // difference between initial and current position
+			return 1 -  Math.abs( yOffset / (_viewportSize.y / 2)  );
+		},
+	
+		
+		// points pool, reused during touch events
+		_ePoint1 = {},
+		_ePoint2 = {},
+		_tempPointsArr = [],
+		_tempCounter,
+		_getTouchPoints = function(e) {
+			// clean up previous points, without recreating array
+			while(_tempPointsArr.length > 0) {
+				_tempPointsArr.pop();
+			}
+	
+			if(!_pointerEventEnabled) {
+				if(e.type.indexOf('touch') > -1) {
+	
+					if(e.touches && e.touches.length > 0) {
+						_tempPointsArr[0] = _convertTouchToPoint(e.touches[0], _ePoint1);
+						if(e.touches.length > 1) {
+							_tempPointsArr[1] = _convertTouchToPoint(e.touches[1], _ePoint2);
+						}
+					}
+					
+				} else {
+					_ePoint1.x = e.pageX;
+					_ePoint1.y = e.pageY;
+					_ePoint1.id = '';
+					_tempPointsArr[0] = _ePoint1;//_ePoint1;
+				}
+			} else {
+				_tempCounter = 0;
+				// we can use forEach, as pointer events are supported only in modern browsers
+				_currPointers.forEach(function(p) {
+					if(_tempCounter === 0) {
+						_tempPointsArr[0] = p;
+					} else if(_tempCounter === 1) {
+						_tempPointsArr[1] = p;
+					}
+					_tempCounter++;
+	
+				});
+			}
+			return _tempPointsArr;
+		},
+	
+		_panOrMoveMainScroll = function(axis, delta) {
+	
+			var panFriction,
+				overDiff = 0,
+				newOffset = _panOffset[axis] + delta[axis],
+				startOverDiff,
+				dir = delta[axis] > 0,
+				newMainScrollPosition = _mainScrollPos.x + delta.x,
+				mainScrollDiff = _mainScrollPos.x - _startMainScrollPos.x,
+				newPanPos,
+				newMainScrollPos;
+	
+			// calculate fdistance over the bounds and friction
+			if(newOffset > _currPanBounds.min[axis] || newOffset < _currPanBounds.max[axis]) {
+				panFriction = _options.panEndFriction;
+				// Linear increasing of friction, so at 1/4 of viewport it's at max value. 
+				// Looks not as nice as was expected. Left for history.
+				// panFriction = (1 - (_panOffset[axis] + delta[axis] + panBounds.min[axis]) / (_viewportSize[axis] / 4) );
+			} else {
+				panFriction = 1;
+			}
+			
+			newOffset = _panOffset[axis] + delta[axis] * panFriction;
+	
+			// move main scroll or start panning
+			if(_options.allowPanToNext || _currZoomLevel === self.currItem.initialZoomLevel) {
+	
+	
+				if(!_currZoomElementStyle) {
+					
+					newMainScrollPos = newMainScrollPosition;
+	
+				} else if(_direction === 'h' && axis === 'x' && !_zoomStarted ) {
+					
+					if(dir) {
+						if(newOffset > _currPanBounds.min[axis]) {
+							panFriction = _options.panEndFriction;
+							overDiff = _currPanBounds.min[axis] - newOffset;
+							startOverDiff = _currPanBounds.min[axis] - _startPanOffset[axis];
+						}
+						
+						// drag right
+						if( (startOverDiff <= 0 || mainScrollDiff < 0) && _getNumItems() > 1 ) {
+							newMainScrollPos = newMainScrollPosition;
+							if(mainScrollDiff < 0 && newMainScrollPosition > _startMainScrollPos.x) {
+								newMainScrollPos = _startMainScrollPos.x;
+							}
+						} else {
+							if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+								newPanPos = newOffset;
+							}
+							
+						}
+	
+					} else {
+	
+						if(newOffset < _currPanBounds.max[axis] ) {
+							panFriction =_options.panEndFriction;
+							overDiff = newOffset - _currPanBounds.max[axis];
+							startOverDiff = _startPanOffset[axis] - _currPanBounds.max[axis];
+						}
+	
+						if( (startOverDiff <= 0 || mainScrollDiff > 0) && _getNumItems() > 1 ) {
+							newMainScrollPos = newMainScrollPosition;
+	
+							if(mainScrollDiff > 0 && newMainScrollPosition < _startMainScrollPos.x) {
+								newMainScrollPos = _startMainScrollPos.x;
+							}
+	
+						} else {
+							if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+								newPanPos = newOffset;
+							}
+						}
+	
+					}
+	
+	
+					//
+				}
+	
+				if(axis === 'x') {
+	
+					if(newMainScrollPos !== undefined) {
+						_moveMainScroll(newMainScrollPos, true);
+						if(newMainScrollPos === _startMainScrollPos.x) {
+							_mainScrollShifted = false;
+						} else {
+							_mainScrollShifted = true;
+						}
+					}
+	
+					if(_currPanBounds.min.x !== _currPanBounds.max.x) {
+						if(newPanPos !== undefined) {
+							_panOffset.x = newPanPos;
+						} else if(!_mainScrollShifted) {
+							_panOffset.x += delta.x * panFriction;
+						}
+					}
+	
+					return newMainScrollPos !== undefined;
+				}
+	
+			}
+	
+			if(!_mainScrollAnimating) {
+				
+				if(!_mainScrollShifted) {
+					if(_currZoomLevel > self.currItem.fitRatio) {
+						_panOffset[axis] += delta[axis] * panFriction;
+					
+					}
+				}
+	
+				
+			}
+			
+		},
+	
+		// Pointerdown/touchstart/mousedown handler
+		_onDragStart = function(e) {
+	
+			// Allow dragging only via left mouse button.
+			// As this handler is not added in IE8 - we ignore e.which
+			// 
+			// http://www.quirksmode.org/js/events_properties.html
+			// https://developer.mozilla.org/en-US/docs/Web/API/event.button
+			if(e.type === 'mousedown' && e.button > 0  ) {
+				return;
+			}
+	
+			if(_initialZoomRunning) {
+				e.preventDefault();
+				return;
+			}
+	
+			if(_oldAndroidTouchEndTimeout && e.type === 'mousedown') {
+				return;
+			}
+	
+			if(_preventDefaultEventBehaviour(e, true)) {
+				e.preventDefault();
+			}
+	
+	
+	
+			_shout('pointerDown');
+	
+			if(_pointerEventEnabled) {
+				var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+				if(pointerIndex < 0) {
+					pointerIndex = _currPointers.length;
+				}
+				_currPointers[pointerIndex] = {x:e.pageX, y:e.pageY, id: e.pointerId};
+			}
+			
+	
+	
+			var startPointsList = _getTouchPoints(e),
+				numPoints = startPointsList.length;
+	
+			_currentPoints = null;
+	
+			_stopAllAnimations();
+	
+			// init drag
+			if(!_isDragging || numPoints === 1) {
+	
+				
+	
+				_isDragging = _isFirstMove = true;
+				framework.bind(window, _upMoveEvents, self);
+	
+				_isZoomingIn = 
+					_wasOverInitialZoom = 
+					_opacityChanged = 
+					_verticalDragInitiated = 
+					_mainScrollShifted = 
+					_moved = 
+					_isMultitouch = 
+					_zoomStarted = false;
+	
+				_direction = null;
+	
+				_shout('firstTouchStart', startPointsList);
+	
+				_equalizePoints(_startPanOffset, _panOffset);
+	
+				_currPanDist.x = _currPanDist.y = 0;
+				_equalizePoints(_currPoint, startPointsList[0]);
+				_equalizePoints(_startPoint, _currPoint);
+	
+				//_equalizePoints(_startMainScrollPos, _mainScrollPos);
+				_startMainScrollPos.x = _slideSize.x * _currPositionIndex;
+	
+				_posPoints = [{
+					x: _currPoint.x,
+					y: _currPoint.y
+				}];
+	
+				_gestureCheckSpeedTime = _gestureStartTime = _getCurrentTime();
+	
+				//_mainScrollAnimationEnd(true);
+				_calculatePanBounds( _currZoomLevel, true );
+				
+				// Start rendering
+				_stopDragUpdateLoop();
+				_dragUpdateLoop();
+				
+			}
+	
+			// init zoom
+			if(!_isZooming && numPoints > 1 && !_mainScrollAnimating && !_mainScrollShifted) {
+				_startZoomLevel = _currZoomLevel;
+				_zoomStarted = false; // true if zoom changed at least once
+	
+				_isZooming = _isMultitouch = true;
+				_currPanDist.y = _currPanDist.x = 0;
+	
+				_equalizePoints(_startPanOffset, _panOffset);
+	
+				_equalizePoints(p, startPointsList[0]);
+				_equalizePoints(p2, startPointsList[1]);
+	
+				_findCenterOfPoints(p, p2, _currCenterPoint);
+	
+				_midZoomPoint.x = Math.abs(_currCenterPoint.x) - _panOffset.x;
+				_midZoomPoint.y = Math.abs(_currCenterPoint.y) - _panOffset.y;
+				_currPointsDistance = _startPointsDistance = _calculatePointsDistance(p, p2);
+			}
+	
+	
+		},
+	
+		// Pointermove/touchmove/mousemove handler
+		_onDragMove = function(e) {
+	
+			e.preventDefault();
+	
+			if(_pointerEventEnabled) {
+				var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+				if(pointerIndex > -1) {
+					var p = _currPointers[pointerIndex];
+					p.x = e.pageX;
+					p.y = e.pageY; 
+				}
+			}
+	
+			if(_isDragging) {
+				var touchesList = _getTouchPoints(e);
+				if(!_direction && !_moved && !_isZooming) {
+	
+					if(_mainScrollPos.x !== _slideSize.x * _currPositionIndex) {
+						// if main scroll position is shifted – direction is always horizontal
+						_direction = 'h';
+					} else {
+						var diff = Math.abs(touchesList[0].x - _currPoint.x) - Math.abs(touchesList[0].y - _currPoint.y);
+						// check the direction of movement
+						if(Math.abs(diff) >= DIRECTION_CHECK_OFFSET) {
+							_direction = diff > 0 ? 'h' : 'v';
+							_currentPoints = touchesList;
+						}
+					}
+					
+				} else {
+					_currentPoints = touchesList;
+				}
+			}	
+		},
+		// 
+		_renderMovement =  function() {
+	
+			if(!_currentPoints) {
+				return;
+			}
+	
+			var numPoints = _currentPoints.length;
+	
+			if(numPoints === 0) {
+				return;
+			}
+	
+			_equalizePoints(p, _currentPoints[0]);
+	
+			delta.x = p.x - _currPoint.x;
+			delta.y = p.y - _currPoint.y;
+	
+			if(_isZooming && numPoints > 1) {
+				// Handle behaviour for more than 1 point
+	
+				_currPoint.x = p.x;
+				_currPoint.y = p.y;
+			
+				// check if one of two points changed
+				if( !delta.x && !delta.y && _isEqualPoints(_currentPoints[1], p2) ) {
+					return;
+				}
+	
+				_equalizePoints(p2, _currentPoints[1]);
+	
+	
+				if(!_zoomStarted) {
+					_zoomStarted = true;
+					_shout('zoomGestureStarted');
+				}
+				
+				// Distance between two points
+				var pointsDistance = _calculatePointsDistance(p,p2);
+	
+				var zoomLevel = _calculateZoomLevel(pointsDistance);
+	
+				// slightly over the of initial zoom level
+				if(zoomLevel > self.currItem.initialZoomLevel + self.currItem.initialZoomLevel / 15) {
+					_wasOverInitialZoom = true;
+				}
+	
+				// Apply the friction if zoom level is out of the bounds
+				var zoomFriction = 1,
+					minZoomLevel = _getMinZoomLevel(),
+					maxZoomLevel = _getMaxZoomLevel();
+	
+				if ( zoomLevel < minZoomLevel ) {
+					
+					if(_options.pinchToClose && !_wasOverInitialZoom && _startZoomLevel <= self.currItem.initialZoomLevel) {
+						// fade out background if zooming out
+						var minusDiff = minZoomLevel - zoomLevel;
+						var percent = 1 - minusDiff / (minZoomLevel / 1.2);
+	
+						_applyBgOpacity(percent);
+						_shout('onPinchClose', percent);
+						_opacityChanged = true;
+					} else {
+						zoomFriction = (minZoomLevel - zoomLevel) / minZoomLevel;
+						if(zoomFriction > 1) {
+							zoomFriction = 1;
+						}
+						zoomLevel = minZoomLevel - zoomFriction * (minZoomLevel / 3);
+					}
+					
+				} else if ( zoomLevel > maxZoomLevel ) {
+					// 1.5 - extra zoom level above the max. E.g. if max is x6, real max 6 + 1.5 = 7.5
+					zoomFriction = (zoomLevel - maxZoomLevel) / ( minZoomLevel * 6 );
+					if(zoomFriction > 1) {
+						zoomFriction = 1;
+					}
+					zoomLevel = maxZoomLevel + zoomFriction * minZoomLevel;
+				}
+	
+				if(zoomFriction < 0) {
+					zoomFriction = 0;
+				}
+	
+				// distance between touch points after friction is applied
+				_currPointsDistance = pointsDistance;
+	
+				// _centerPoint - The point in the middle of two pointers
+				_findCenterOfPoints(p, p2, _centerPoint);
+			
+				// paning with two pointers pressed
+				_currPanDist.x += _centerPoint.x - _currCenterPoint.x;
+				_currPanDist.y += _centerPoint.y - _currCenterPoint.y;
+				_equalizePoints(_currCenterPoint, _centerPoint);
+	
+				_panOffset.x = _calculatePanOffset('x', zoomLevel);
+				_panOffset.y = _calculatePanOffset('y', zoomLevel);
+	
+				_isZoomingIn = zoomLevel > _currZoomLevel;
+				_currZoomLevel = zoomLevel;
+				_applyCurrentZoomPan();
+	
+			} else {
+	
+				// handle behaviour for one point (dragging or panning)
+	
+				if(!_direction) {
+					return;
+				}
+	
+				if(_isFirstMove) {
+					_isFirstMove = false;
+	
+					// subtract drag distance that was used during the detection direction  
+	
+					if( Math.abs(delta.x) >= DIRECTION_CHECK_OFFSET) {
+						delta.x -= _currentPoints[0].x - _startPoint.x;
+					}
+					
+					if( Math.abs(delta.y) >= DIRECTION_CHECK_OFFSET) {
+						delta.y -= _currentPoints[0].y - _startPoint.y;
+					}
+				}
+	
+				_currPoint.x = p.x;
+				_currPoint.y = p.y;
+	
+				// do nothing if pointers position hasn't changed
+				if(delta.x === 0 && delta.y === 0) {
+					return;
+				}
+	
+				if(_direction === 'v' && _options.closeOnVerticalDrag) {
+					if(!_canPan()) {
+						_currPanDist.y += delta.y;
+						_panOffset.y += delta.y;
+	
+						var opacityRatio = _calculateVerticalDragOpacityRatio();
+	
+						_verticalDragInitiated = true;
+						_shout('onVerticalDrag', opacityRatio);
+	
+						_applyBgOpacity(opacityRatio);
+						_applyCurrentZoomPan();
+						return ;
+					}
+				}
+	
+				_pushPosPoint(_getCurrentTime(), p.x, p.y);
+	
+				_moved = true;
+				_currPanBounds = self.currItem.bounds;
+				
+				var mainScrollChanged = _panOrMoveMainScroll('x', delta);
+				if(!mainScrollChanged) {
+					_panOrMoveMainScroll('y', delta);
+	
+					_roundPoint(_panOffset);
+					_applyCurrentZoomPan();
+				}
+	
+			}
+	
+		},
+		
+		// Pointerup/pointercancel/touchend/touchcancel/mouseup event handler
+		_onDragRelease = function(e) {
+	
+			if(_features.isOldAndroid ) {
+	
+				if(_oldAndroidTouchEndTimeout && e.type === 'mouseup') {
+					return;
+				}
+	
+				// on Android (v4.1, 4.2, 4.3 & possibly older) 
+				// ghost mousedown/up event isn't preventable via e.preventDefault,
+				// which causes fake mousedown event
+				// so we block mousedown/up for 600ms
+				if( e.type.indexOf('touch') > -1 ) {
+					clearTimeout(_oldAndroidTouchEndTimeout);
+					_oldAndroidTouchEndTimeout = setTimeout(function() {
+						_oldAndroidTouchEndTimeout = 0;
+					}, 600);
+				}
+				
+			}
+	
+			_shout('pointerUp');
+	
+			if(_preventDefaultEventBehaviour(e, false)) {
+				e.preventDefault();
+			}
+	
+			var releasePoint;
+	
+			if(_pointerEventEnabled) {
+				var pointerIndex = framework.arraySearch(_currPointers, e.pointerId, 'id');
+				
+				if(pointerIndex > -1) {
+					releasePoint = _currPointers.splice(pointerIndex, 1)[0];
+	
+					if(navigator.pointerEnabled) {
+						releasePoint.type = e.pointerType || 'mouse';
+					} else {
+						var MSPOINTER_TYPES = {
+							4: 'mouse', // event.MSPOINTER_TYPE_MOUSE
+							2: 'touch', // event.MSPOINTER_TYPE_TOUCH 
+							3: 'pen' // event.MSPOINTER_TYPE_PEN
+						};
+						releasePoint.type = MSPOINTER_TYPES[e.pointerType];
+	
+						if(!releasePoint.type) {
+							releasePoint.type = e.pointerType || 'mouse';
+						}
+					}
+	
+				}
+			}
+	
+			var touchList = _getTouchPoints(e),
+				gestureType,
+				numPoints = touchList.length;
+	
+			if(e.type === 'mouseup') {
+				numPoints = 0;
+			}
+	
+			// Do nothing if there were 3 touch points or more
+			if(numPoints === 2) {
+				_currentPoints = null;
+				return true;
+			}
+	
+			// if second pointer released
+			if(numPoints === 1) {
+				_equalizePoints(_startPoint, touchList[0]);
+			}				
+	
+	
+			// pointer hasn't moved, send "tap release" point
+			if(numPoints === 0 && !_direction && !_mainScrollAnimating) {
+				if(!releasePoint) {
+					if(e.type === 'mouseup') {
+						releasePoint = {x: e.pageX, y: e.pageY, type:'mouse'};
+					} else if(e.changedTouches && e.changedTouches[0]) {
+						releasePoint = {x: e.changedTouches[0].pageX, y: e.changedTouches[0].pageY, type:'touch'};
+					}		
+				}
+	
+				_shout('touchRelease', e, releasePoint);
+			}
+	
+			// Difference in time between releasing of two last touch points (zoom gesture)
+			var releaseTimeDiff = -1;
+	
+			// Gesture completed, no pointers left
+			if(numPoints === 0) {
+				_isDragging = false;
+				framework.unbind(window, _upMoveEvents, self);
+	
+				_stopDragUpdateLoop();
+	
+				if(_isZooming) {
+					// Two points released at the same time
+					releaseTimeDiff = 0;
+				} else if(_lastReleaseTime !== -1) {
+					releaseTimeDiff = _getCurrentTime() - _lastReleaseTime;
+				}
+			}
+			_lastReleaseTime = numPoints === 1 ? _getCurrentTime() : -1;
+			
+			if(releaseTimeDiff !== -1 && releaseTimeDiff < 150) {
+				gestureType = 'zoom';
+			} else {
+				gestureType = 'swipe';
+			}
+	
+			if(_isZooming && numPoints < 2) {
+				_isZooming = false;
+	
+				// Only second point released
+				if(numPoints === 1) {
+					gestureType = 'zoomPointerUp';
+				}
+				_shout('zoomGestureEnded');
+			}
+	
+			_currentPoints = null;
+			if(!_moved && !_zoomStarted && !_mainScrollAnimating && !_verticalDragInitiated) {
+				// nothing to animate
+				return;
+			}
+		
+			_stopAllAnimations();
+	
+			
+			if(!_releaseAnimData) {
+				_releaseAnimData = _initDragReleaseAnimationData();
+			}
+			
+			_releaseAnimData.calculateSwipeSpeed('x');
+	
+	
+			if(_verticalDragInitiated) {
+	
+				var opacityRatio = _calculateVerticalDragOpacityRatio();
+	
+				if(opacityRatio < _options.verticalDragRange) {
+					self.close();
+				} else {
+					var initalPanY = _panOffset.y,
+						initialBgOpacity = _bgOpacity;
+	
+					_animateProp('verticalDrag', 0, 1, 300, framework.easing.cubic.out, function(now) {
+						
+						_panOffset.y = (self.currItem.initialPosition.y - initalPanY) * now + initalPanY;
+	
+						_applyBgOpacity(  (1 - initialBgOpacity) * now + initialBgOpacity );
+						_applyCurrentZoomPan();
+					});
+	
+					_shout('onVerticalDrag', 1);
+				}
+	
+				return;
+			}
+	
+	
+			// main scroll 
+			if(  (_mainScrollShifted || _mainScrollAnimating) && numPoints === 0) {
+				var itemChanged = _finishSwipeMainScrollGesture(gestureType, _releaseAnimData);
+				if(itemChanged) {
+					return;
+				}
+				gestureType = 'zoomPointerUp';
+			}
+	
+			// prevent zoom/pan animation when main scroll animation runs
+			if(_mainScrollAnimating) {
+				return;
+			}
+			
+			// Complete simple zoom gesture (reset zoom level if it's out of the bounds)  
+			if(gestureType !== 'swipe') {
+				_completeZoomGesture();
+				return;
+			}
+		
+			// Complete pan gesture if main scroll is not shifted, and it's possible to pan current image
+			if(!_mainScrollShifted && _currZoomLevel > self.currItem.fitRatio) {
+				_completePanGesture(_releaseAnimData);
+			}
+		},
+	
+	
+		// Returns object with data about gesture
+		// It's created only once and then reused
+		_initDragReleaseAnimationData  = function() {
+			// temp local vars
+			var lastFlickDuration,
+				tempReleasePos;
+	
+			// s = this
+			var s = {
+				lastFlickOffset: {},
+				lastFlickDist: {},
+				lastFlickSpeed: {},
+				slowDownRatio:  {},
+				slowDownRatioReverse:  {},
+				speedDecelerationRatio:  {},
+				speedDecelerationRatioAbs:  {},
+				distanceOffset:  {},
+				backAnimDestination: {},
+				backAnimStarted: {},
+				calculateSwipeSpeed: function(axis) {
+					
+	
+					if( _posPoints.length > 1) {
+						lastFlickDuration = _getCurrentTime() - _gestureCheckSpeedTime + 50;
+						tempReleasePos = _posPoints[_posPoints.length-2][axis];
+					} else {
+						lastFlickDuration = _getCurrentTime() - _gestureStartTime; // total gesture duration
+						tempReleasePos = _startPoint[axis];
+					}
+					s.lastFlickOffset[axis] = _currPoint[axis] - tempReleasePos;
+					s.lastFlickDist[axis] = Math.abs(s.lastFlickOffset[axis]);
+					if(s.lastFlickDist[axis] > 20) {
+						s.lastFlickSpeed[axis] = s.lastFlickOffset[axis] / lastFlickDuration;
+					} else {
+						s.lastFlickSpeed[axis] = 0;
+					}
+					if( Math.abs(s.lastFlickSpeed[axis]) < 0.1 ) {
+						s.lastFlickSpeed[axis] = 0;
+					}
+					
+					s.slowDownRatio[axis] = 0.95;
+					s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+					s.speedDecelerationRatio[axis] = 1;
+				},
+	
+				calculateOverBoundsAnimOffset: function(axis, speed) {
+					if(!s.backAnimStarted[axis]) {
+	
+						if(_panOffset[axis] > _currPanBounds.min[axis]) {
+							s.backAnimDestination[axis] = _currPanBounds.min[axis];
+							
+						} else if(_panOffset[axis] < _currPanBounds.max[axis]) {
+							s.backAnimDestination[axis] = _currPanBounds.max[axis];
+						}
+	
+						if(s.backAnimDestination[axis] !== undefined) {
+							s.slowDownRatio[axis] = 0.7;
+							s.slowDownRatioReverse[axis] = 1 - s.slowDownRatio[axis];
+							if(s.speedDecelerationRatioAbs[axis] < 0.05) {
+	
+								s.lastFlickSpeed[axis] = 0;
+								s.backAnimStarted[axis] = true;
+	
+								_animateProp('bounceZoomPan'+axis,_panOffset[axis], 
+									s.backAnimDestination[axis], 
+									speed || 300, 
+									framework.easing.sine.out, 
+									function(pos) {
+										_panOffset[axis] = pos;
+										_applyCurrentZoomPan();
+									}
+								);
+	
+							}
+						}
+					}
+				},
+	
+				// Reduces the speed by slowDownRatio (per 10ms)
+				calculateAnimOffset: function(axis) {
+					if(!s.backAnimStarted[axis]) {
+						s.speedDecelerationRatio[axis] = s.speedDecelerationRatio[axis] * (s.slowDownRatio[axis] + 
+													s.slowDownRatioReverse[axis] - 
+													s.slowDownRatioReverse[axis] * s.timeDiff / 10);
+	
+						s.speedDecelerationRatioAbs[axis] = Math.abs(s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis]);
+						s.distanceOffset[axis] = s.lastFlickSpeed[axis] * s.speedDecelerationRatio[axis] * s.timeDiff;
+						_panOffset[axis] += s.distanceOffset[axis];
+	
+					}
+				},
+	
+				panAnimLoop: function() {
+					if ( _animations.zoomPan ) {
+						_animations.zoomPan.raf = _requestAF(s.panAnimLoop);
+	
+						s.now = _getCurrentTime();
+						s.timeDiff = s.now - s.lastNow;
+						s.lastNow = s.now;
+						
+						s.calculateAnimOffset('x');
+						s.calculateAnimOffset('y');
+	
+						_applyCurrentZoomPan();
+						
+						s.calculateOverBoundsAnimOffset('x');
+						s.calculateOverBoundsAnimOffset('y');
+	
+	
+						if (s.speedDecelerationRatioAbs.x < 0.05 && s.speedDecelerationRatioAbs.y < 0.05) {
+	
+							// round pan position
+							_panOffset.x = Math.round(_panOffset.x);
+							_panOffset.y = Math.round(_panOffset.y);
+							_applyCurrentZoomPan();
+							
+							_stopAnimation('zoomPan');
+							return;
+						}
+					}
+	
+				}
+			};
+			return s;
+		},
+	
+		_completePanGesture = function(animData) {
+			// calculate swipe speed for Y axis (paanning)
+			animData.calculateSwipeSpeed('y');
+	
+			_currPanBounds = self.currItem.bounds;
+			
+			animData.backAnimDestination = {};
+			animData.backAnimStarted = {};
+	
+			// Avoid acceleration animation if speed is too low
+			if(Math.abs(animData.lastFlickSpeed.x) <= 0.05 && Math.abs(animData.lastFlickSpeed.y) <= 0.05 ) {
+				animData.speedDecelerationRatioAbs.x = animData.speedDecelerationRatioAbs.y = 0;
+	
+				// Run pan drag release animation. E.g. if you drag image and release finger without momentum.
+				animData.calculateOverBoundsAnimOffset('x');
+				animData.calculateOverBoundsAnimOffset('y');
+				return true;
+			}
+	
+			// Animation loop that controls the acceleration after pan gesture ends
+			_registerStartAnimation('zoomPan');
+			animData.lastNow = _getCurrentTime();
+			animData.panAnimLoop();
+		},
+	
+	
+		_finishSwipeMainScrollGesture = function(gestureType, _releaseAnimData) {
+			var itemChanged;
+			if(!_mainScrollAnimating) {
+				_currZoomedItemIndex = _currentItemIndex;
+			}
+	
+	
+			
+			var itemsDiff;
+	
+			if(gestureType === 'swipe') {
+				var totalShiftDist = _currPoint.x - _startPoint.x,
+					isFastLastFlick = _releaseAnimData.lastFlickDist.x < 10;
+	
+				// if container is shifted for more than MIN_SWIPE_DISTANCE, 
+				// and last flick gesture was in right direction
+				if(totalShiftDist > MIN_SWIPE_DISTANCE && 
+					(isFastLastFlick || _releaseAnimData.lastFlickOffset.x > 20) ) {
+					// go to prev item
+					itemsDiff = -1;
+				} else if(totalShiftDist < -MIN_SWIPE_DISTANCE && 
+					(isFastLastFlick || _releaseAnimData.lastFlickOffset.x < -20) ) {
+					// go to next item
+					itemsDiff = 1;
+				}
+			}
+	
+			var nextCircle;
+	
+			if(itemsDiff) {
+				
+				_currentItemIndex += itemsDiff;
+	
+				if(_currentItemIndex < 0) {
+					_currentItemIndex = _options.loop ? _getNumItems()-1 : 0;
+					nextCircle = true;
+				} else if(_currentItemIndex >= _getNumItems()) {
+					_currentItemIndex = _options.loop ? 0 : _getNumItems()-1;
+					nextCircle = true;
+				}
+	
+				if(!nextCircle || _options.loop) {
+					_indexDiff += itemsDiff;
+					_currPositionIndex -= itemsDiff;
+					itemChanged = true;
+				}
+				
+	
+				
+			}
+	
+			var animateToX = _slideSize.x * _currPositionIndex;
+			var animateToDist = Math.abs( animateToX - _mainScrollPos.x );
+			var finishAnimDuration;
+	
+	
+			if(!itemChanged && animateToX > _mainScrollPos.x !== _releaseAnimData.lastFlickSpeed.x > 0) {
+				// "return to current" duration, e.g. when dragging from slide 0 to -1
+				finishAnimDuration = 333; 
+			} else {
+				finishAnimDuration = Math.abs(_releaseAnimData.lastFlickSpeed.x) > 0 ? 
+										animateToDist / Math.abs(_releaseAnimData.lastFlickSpeed.x) : 
+										333;
+	
+				finishAnimDuration = Math.min(finishAnimDuration, 400);
+				finishAnimDuration = Math.max(finishAnimDuration, 250);
+			}
+	
+			if(_currZoomedItemIndex === _currentItemIndex) {
+				itemChanged = false;
+			}
+			
+			_mainScrollAnimating = true;
+			
+			_shout('mainScrollAnimStart');
+	
+			_animateProp('mainScroll', _mainScrollPos.x, animateToX, finishAnimDuration, framework.easing.cubic.out, 
+				_moveMainScroll,
+				function() {
+					_stopAllAnimations();
+					_mainScrollAnimating = false;
+					_currZoomedItemIndex = -1;
+					
+					if(itemChanged || _currZoomedItemIndex !== _currentItemIndex) {
+						self.updateCurrItem();
+					}
+					
+					_shout('mainScrollAnimComplete');
+				}
+			);
+	
+			if(itemChanged) {
+				self.updateCurrItem(true);
+			}
+	
+			return itemChanged;
+		},
+	
+		_calculateZoomLevel = function(touchesDistance) {
+			return  1 / _startPointsDistance * touchesDistance * _startZoomLevel;
+		},
+	
+		// Resets zoom if it's out of bounds
+		_completeZoomGesture = function() {
+			var destZoomLevel = _currZoomLevel,
+				minZoomLevel = _getMinZoomLevel(),
+				maxZoomLevel = _getMaxZoomLevel();
+	
+			if ( _currZoomLevel < minZoomLevel ) {
+				destZoomLevel = minZoomLevel;
+			} else if ( _currZoomLevel > maxZoomLevel ) {
+				destZoomLevel = maxZoomLevel;
+			}
+	
+			var destOpacity = 1,
+				onUpdate,
+				initialOpacity = _bgOpacity;
+	
+			if(_opacityChanged && !_isZoomingIn && !_wasOverInitialZoom && _currZoomLevel < minZoomLevel) {
+				//_closedByScroll = true;
+				self.close();
+				return true;
+			}
+	
+			if(_opacityChanged) {
+				onUpdate = function(now) {
+					_applyBgOpacity(  (destOpacity - initialOpacity) * now + initialOpacity );
+				};
+			}
+	
+			self.zoomTo(destZoomLevel, 0, 200,  framework.easing.cubic.out, onUpdate);
+			return true;
+		};
+	
+	
+	_registerModule('Gestures', {
+		publicMethods: {
+	
+			initGestures: function() {
+	
+				// helper function that builds touch/pointer/mouse events
+				var addEventNames = function(pref, down, move, up, cancel) {
+					_dragStartEvent = pref + down;
+					_dragMoveEvent = pref + move;
+					_dragEndEvent = pref + up;
+					if(cancel) {
+						_dragCancelEvent = pref + cancel;
+					} else {
+						_dragCancelEvent = '';
+					}
+				};
+	
+				_pointerEventEnabled = _features.pointerEvent;
+				if(_pointerEventEnabled && _features.touch) {
+					// we don't need touch events, if browser supports pointer events
+					_features.touch = false;
+				}
+	
+				if(_pointerEventEnabled) {
+					if(navigator.pointerEnabled) {
+						addEventNames('pointer', 'down', 'move', 'up', 'cancel');
+					} else {
+						// IE10 pointer events are case-sensitive
+						addEventNames('MSPointer', 'Down', 'Move', 'Up', 'Cancel');
+					}
+				} else if(_features.touch) {
+					addEventNames('touch', 'start', 'move', 'end', 'cancel');
+					_likelyTouchDevice = true;
+				} else {
+					addEventNames('mouse', 'down', 'move', 'up');	
+				}
+	
+				_upMoveEvents = _dragMoveEvent + ' ' + _dragEndEvent  + ' ' +  _dragCancelEvent;
+				_downEvents = _dragStartEvent;
+	
+				if(_pointerEventEnabled && !_likelyTouchDevice) {
+					_likelyTouchDevice = (navigator.maxTouchPoints > 1) || (navigator.msMaxTouchPoints > 1);
+				}
+				// make variable public
+				self.likelyTouchDevice = _likelyTouchDevice; 
+				
+				_globalEventHandlers[_dragStartEvent] = _onDragStart;
+				_globalEventHandlers[_dragMoveEvent] = _onDragMove;
+				_globalEventHandlers[_dragEndEvent] = _onDragRelease; // the Kraken
+	
+				if(_dragCancelEvent) {
+					_globalEventHandlers[_dragCancelEvent] = _globalEventHandlers[_dragEndEvent];
+				}
+	
+				// Bind mouse events on device with detected hardware touch support, in case it supports multiple types of input.
+				if(_features.touch) {
+					_downEvents += ' mousedown';
+					_upMoveEvents += ' mousemove mouseup';
+					_globalEventHandlers.mousedown = _globalEventHandlers[_dragStartEvent];
+					_globalEventHandlers.mousemove = _globalEventHandlers[_dragMoveEvent];
+					_globalEventHandlers.mouseup = _globalEventHandlers[_dragEndEvent];
+				}
+	
+				if(!_likelyTouchDevice) {
+					// don't allow pan to next slide from zoomed state on Desktop
+					_options.allowPanToNext = false;
+				}
+			}
+	
+		}
+	});
+	
+	
+	/*>>gestures*/
+	
+	/*>>show-hide-transition*/
+	/**
+	 * show-hide-transition.js:
+	 *
+	 * Manages initial opening or closing transition.
+	 *
+	 * If you're not planning to use transition for gallery at all,
+	 * you may set options hideAnimationDuration and showAnimationDuration to 0,
+	 * and just delete startAnimation function.
+	 * 
+	 */
+	
+	
+	var _showOrHideTimeout,
+		_showOrHide = function(item, img, out, completeFn) {
+	
+			if(_showOrHideTimeout) {
+				clearTimeout(_showOrHideTimeout);
+			}
+	
+			_initialZoomRunning = true;
+			_initialContentSet = true;
+			
+			// dimensions of small thumbnail {x:,y:,w:}.
+			// Height is optional, as calculated based on large image.
+			var thumbBounds; 
+			if(item.initialLayout) {
+				thumbBounds = item.initialLayout;
+				item.initialLayout = null;
+			} else {
+				thumbBounds = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+			}
+	
+			var duration = out ? _options.hideAnimationDuration : _options.showAnimationDuration;
+	
+			var onComplete = function() {
+				_stopAnimation('initialZoom');
+				if(!out) {
+					_applyBgOpacity(1);
+					if(img) {
+						img.style.display = 'block';
+					}
+					framework.addClass(template, 'pswp--animated-in');
+					_shout('initialZoom' + (out ? 'OutEnd' : 'InEnd'));
+				} else {
+					self.template.removeAttribute('style');
+					self.bg.removeAttribute('style');
+				}
+	
+				if(completeFn) {
+					completeFn();
+				}
+				_initialZoomRunning = false;
+			};
+	
+			// if bounds aren't provided, just open gallery without animation
+			if(!duration || !thumbBounds || thumbBounds.x === undefined) {
+	
+				_shout('initialZoom' + (out ? 'Out' : 'In') );
+	
+				_currZoomLevel = item.initialZoomLevel;
+				_equalizePoints(_panOffset,  item.initialPosition );
+				_applyCurrentZoomPan();
+	
+				template.style.opacity = out ? 0 : 1;
+				_applyBgOpacity(1);
+	
+				if(duration) {
+					setTimeout(function() {
+						onComplete();
+					}, duration);
+				} else {
+					onComplete();
+				}
+	
+				return;
+			}
+	
+			var startAnimation = function() {
+				var closeWithRaf = _closedByScroll,
+					fadeEverything = !self.currItem.src || self.currItem.loadError || _options.showHideOpacity;
+				
+				// apply hw-acceleration to image
+				if(item.miniImg) {
+					item.miniImg.style.webkitBackfaceVisibility = 'hidden';
+				}
+	
+				if(!out) {
+					_currZoomLevel = thumbBounds.w / item.w;
+					_panOffset.x = thumbBounds.x;
+					_panOffset.y = thumbBounds.y - _initalWindowScrollY;
+	
+					self[fadeEverything ? 'template' : 'bg'].style.opacity = 0.001;
+					_applyCurrentZoomPan();
+				}
+	
+				_registerStartAnimation('initialZoom');
+				
+				if(out && !closeWithRaf) {
+					framework.removeClass(template, 'pswp--animated-in');
+				}
+	
+				if(fadeEverything) {
+					if(out) {
+						framework[ (closeWithRaf ? 'remove' : 'add') + 'Class' ](template, 'pswp--animate_opacity');
+					} else {
+						setTimeout(function() {
+							framework.addClass(template, 'pswp--animate_opacity');
+						}, 30);
+					}
+				}
+	
+				_showOrHideTimeout = setTimeout(function() {
+	
+					_shout('initialZoom' + (out ? 'Out' : 'In') );
+					
+	
+					if(!out) {
+	
+						// "in" animation always uses CSS transitions (instead of rAF).
+						// CSS transition work faster here, 
+						// as developer may also want to animate other things, 
+						// like ui on top of sliding area, which can be animated just via CSS
+						
+						_currZoomLevel = item.initialZoomLevel;
+						_equalizePoints(_panOffset,  item.initialPosition );
+						_applyCurrentZoomPan();
+						_applyBgOpacity(1);
+	
+						if(fadeEverything) {
+							template.style.opacity = 1;
+						} else {
+							_applyBgOpacity(1);
+						}
+	
+						_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+					} else {
+	
+						// "out" animation uses rAF only when PhotoSwipe is closed by browser scroll, to recalculate position
+						var destZoomLevel = thumbBounds.w / item.w,
+							initialPanOffset = {
+								x: _panOffset.x,
+								y: _panOffset.y
+							},
+							initialZoomLevel = _currZoomLevel,
+							initalBgOpacity = _bgOpacity,
+							onUpdate = function(now) {
+								
+								if(now === 1) {
+									_currZoomLevel = destZoomLevel;
+									_panOffset.x = thumbBounds.x;
+									_panOffset.y = thumbBounds.y  - _currentWindowScrollY;
+								} else {
+									_currZoomLevel = (destZoomLevel - initialZoomLevel) * now + initialZoomLevel;
+									_panOffset.x = (thumbBounds.x - initialPanOffset.x) * now + initialPanOffset.x;
+									_panOffset.y = (thumbBounds.y - _currentWindowScrollY - initialPanOffset.y) * now + initialPanOffset.y;
+								}
+								
+								_applyCurrentZoomPan();
+								if(fadeEverything) {
+									template.style.opacity = 1 - now;
+								} else {
+									_applyBgOpacity( initalBgOpacity - now * initalBgOpacity );
+								}
+							};
+	
+						if(closeWithRaf) {
+							_animateProp('initialZoom', 0, 1, duration, framework.easing.cubic.out, onUpdate, onComplete);
+						} else {
+							onUpdate(1);
+							_showOrHideTimeout = setTimeout(onComplete, duration + 20);
+						}
+					}
+				
+				}, out ? 25 : 90); // Main purpose of this delay is to give browser time to paint and
+						// create composite layers of PhotoSwipe UI parts (background, controls, caption, arrows).
+						// Which avoids lag at the beginning of scale transition.
+			};
+			startAnimation();
+	
+			
+		};
+	
+	/*>>show-hide-transition*/
+	
+	/*>>items-controller*/
+	/**
+	*
+	* Controller manages gallery items, their dimensions, and their content.
+	* 
+	*/
+	
+	var _items,
+		_tempPanAreaSize = {},
+		_imagesToAppendPool = [],
+		_initialContentSet,
+		_initialZoomRunning,
+		_controllerDefaultOptions = {
+			index: 0,
+			errorMsg: '<div class="pswp__error-msg"><a href="%url%" target="_blank">The image</a> could not be loaded.</div>',
+			forceProgressiveLoading: false, // TODO
+			preload: [1,1],
+			getNumItemsFn: function() {
+				return _items.length;
+			}
+		};
+	
+	
+	var _getItemAt,
+		_getNumItems,
+		_initialIsLoop,
+		_getZeroBounds = function() {
+			return {
+				center:{x:0,y:0}, 
+				max:{x:0,y:0}, 
+				min:{x:0,y:0}
+			};
+		},
+		_calculateSingleItemPanBounds = function(item, realPanElementW, realPanElementH ) {
+			var bounds = item.bounds;
+	
+			// position of element when it's centered
+			bounds.center.x = Math.round((_tempPanAreaSize.x - realPanElementW) / 2);
+			bounds.center.y = Math.round((_tempPanAreaSize.y - realPanElementH) / 2) + item.vGap.top;
+	
+			// maximum pan position
+			bounds.max.x = (realPanElementW > _tempPanAreaSize.x) ? 
+								Math.round(_tempPanAreaSize.x - realPanElementW) : 
+								bounds.center.x;
+			
+			bounds.max.y = (realPanElementH > _tempPanAreaSize.y) ? 
+								Math.round(_tempPanAreaSize.y - realPanElementH) + item.vGap.top : 
+								bounds.center.y;
+			
+			// minimum pan position
+			bounds.min.x = (realPanElementW > _tempPanAreaSize.x) ? 0 : bounds.center.x;
+			bounds.min.y = (realPanElementH > _tempPanAreaSize.y) ? item.vGap.top : bounds.center.y;
+		},
+		_calculateItemSize = function(item, viewportSize, zoomLevel) {
+	
+			if (item.src && !item.loadError) {
+				var isInitial = !zoomLevel;
+				
+				if(isInitial) {
+					if(!item.vGap) {
+						item.vGap = {top:0,bottom:0};
+					}
+					// allows overriding vertical margin for individual items
+					_shout('parseVerticalMargin', item);
+				}
+	
+	
+				_tempPanAreaSize.x = viewportSize.x;
+				_tempPanAreaSize.y = viewportSize.y - item.vGap.top - item.vGap.bottom;
+	
+				if (isInitial) {
+					var hRatio = _tempPanAreaSize.x / item.w;
+					var vRatio = _tempPanAreaSize.y / item.h;
+	
+					item.fitRatio = hRatio < vRatio ? hRatio : vRatio;
+					//item.fillRatio = hRatio > vRatio ? hRatio : vRatio;
+	
+					var scaleMode = _options.scaleMode;
+	
+					if (scaleMode === 'orig') {
+						zoomLevel = 1;
+					} else if (scaleMode === 'fit') {
+						zoomLevel = item.fitRatio;
+					}
+	
+					if (zoomLevel > 1) {
+						zoomLevel = 1;
+					}
+	
+					item.initialZoomLevel = zoomLevel;
+					
+					if(!item.bounds) {
+						// reuse bounds object
+						item.bounds = _getZeroBounds(); 
+					}
+				}
+	
+				if(!zoomLevel) {
+					return;
+				}
+	
+				_calculateSingleItemPanBounds(item, item.w * zoomLevel, item.h * zoomLevel);
+	
+				if (isInitial && zoomLevel === item.initialZoomLevel) {
+					item.initialPosition = item.bounds.center;
+				}
+	
+				return item.bounds;
+			} else {
+				item.w = item.h = 0;
+				item.initialZoomLevel = item.fitRatio = 1;
+				item.bounds = _getZeroBounds();
+				item.initialPosition = item.bounds.center;
+	
+				// if it's not image, we return zero bounds (content is not zoomable)
+				return item.bounds;
+			}
+			
+		},
+	
+		
+	
+	
+		_appendImage = function(index, item, baseDiv, img, preventAnimation, keepPlaceholder) {
+			
+	
+			if(item.loadError) {
+				return;
+			}
+	
+			if(img) {
+	
+				item.imageAppended = true;
+				_setImageSize(item, img, (item === self.currItem && _renderMaxResolution) );
+				
+				baseDiv.appendChild(img);
+	
+				if(keepPlaceholder) {
+					setTimeout(function() {
+						if(item && item.loaded && item.placeholder) {
+							item.placeholder.style.display = 'none';
+							item.placeholder = null;
+						}
+					}, 500);
+				}
+			}
+		},
+		
+	
+	
+		_preloadImage = function(item) {
+			item.loading = true;
+			item.loaded = false;
+			var img = item.img = framework.createEl('pswp__img', 'img');
+			var onComplete = function() {
+				item.loading = false;
+				item.loaded = true;
+	
+				if(item.loadComplete) {
+					item.loadComplete(item);
+				} else {
+					item.img = null; // no need to store image object
+				}
+				img.onload = img.onerror = null;
+				img = null;
+			};
+			img.onload = onComplete;
+			img.onerror = function() {
+				item.loadError = true;
+				onComplete();
+			};		
+	
+			img.src = item.src;// + '?a=' + Math.random();
+	
+			return img;
+		},
+		_checkForError = function(item, cleanUp) {
+			if(item.src && item.loadError && item.container) {
+	
+				if(cleanUp) {
+					item.container.innerHTML = '';
+				}
+	
+				item.container.innerHTML = _options.errorMsg.replace('%url%',  item.src );
+				return true;
+				
+			}
+		},
+		_setImageSize = function(item, img, maxRes) {
+			if(!item.src) {
+				return;
+			}
+	
+			if(!img) {
+				img = item.container.lastChild;
+			}
+	
+			var w = maxRes ? item.w : Math.round(item.w * item.fitRatio),
+				h = maxRes ? item.h : Math.round(item.h * item.fitRatio);
+			
+			if(item.placeholder && !item.loaded) {
+				item.placeholder.style.width = w + 'px';
+				item.placeholder.style.height = h + 'px';
+			}
+	
+			img.style.width = w + 'px';
+			img.style.height = h + 'px';
+		},
+		_appendImagesPool = function() {
+	
+			if(_imagesToAppendPool.length) {
+				var poolItem;
+	
+				for(var i = 0; i < _imagesToAppendPool.length; i++) {
+					poolItem = _imagesToAppendPool[i];
+					if( poolItem.holder.index === poolItem.index ) {
+						_appendImage(poolItem.index, poolItem.item, poolItem.baseDiv, poolItem.img, false, poolItem.clearPlaceholder);
+					}
+				}
+				_imagesToAppendPool = [];
+			}
+		};
+		
+	
+	
+	_registerModule('Controller', {
+	
+		publicMethods: {
+	
+			lazyLoadItem: function(index) {
+				index = _getLoopedId(index);
+				var item = _getItemAt(index);
+	
+				if(!item || ((item.loaded || item.loading) && !_itemsNeedUpdate)) {
+					return;
+				}
+	
+				_shout('gettingData', index, item);
+	
+				if (!item.src) {
+					return;
+				}
+	
+				_preloadImage(item);
+			},
+			initController: function() {
+				framework.extend(_options, _controllerDefaultOptions, true);
+				self.items = _items = items;
+				_getItemAt = self.getItemAt;
+				_getNumItems = _options.getNumItemsFn; //self.getNumItems;
+	
+	
+	
+				_initialIsLoop = _options.loop;
+				if(_getNumItems() < 3) {
+					_options.loop = false; // disable loop if less then 3 items
+				}
+	
+				_listen('beforeChange', function(diff) {
+	
+					var p = _options.preload,
+						isNext = diff === null ? true : (diff >= 0),
+						preloadBefore = Math.min(p[0], _getNumItems() ),
+						preloadAfter = Math.min(p[1], _getNumItems() ),
+						i;
+	
+	
+					for(i = 1; i <= (isNext ? preloadAfter : preloadBefore); i++) {
+						self.lazyLoadItem(_currentItemIndex+i);
+					}
+					for(i = 1; i <= (isNext ? preloadBefore : preloadAfter); i++) {
+						self.lazyLoadItem(_currentItemIndex-i);
+					}
+				});
+	
+				_listen('initialLayout', function() {
+					self.currItem.initialLayout = _options.getThumbBoundsFn && _options.getThumbBoundsFn(_currentItemIndex);
+				});
+	
+				_listen('mainScrollAnimComplete', _appendImagesPool);
+				_listen('initialZoomInEnd', _appendImagesPool);
+	
+	
+	
+				_listen('destroy', function() {
+					var item;
+					for(var i = 0; i < _items.length; i++) {
+						item = _items[i];
+						// remove reference to DOM elements, for GC
+						if(item.container) {
+							item.container = null; 
+						}
+						if(item.placeholder) {
+							item.placeholder = null;
+						}
+						if(item.img) {
+							item.img = null;
+						}
+						if(item.preloader) {
+							item.preloader = null;
+						}
+						if(item.loadError) {
+							item.loaded = item.loadError = false;
+						}
+					}
+					_imagesToAppendPool = null;
+				});
+			},
+	
+	
+			getItemAt: function(index) {
+				if (index >= 0) {
+					return _items[index] !== undefined ? _items[index] : false;
+				}
+				return false;
+			},
+	
+			allowProgressiveImg: function() {
+				// 1. Progressive image loading isn't working on webkit/blink 
+				//    when hw-acceleration (e.g. translateZ) is applied to IMG element.
+				//    That's why in PhotoSwipe parent element gets zoom transform, not image itself.
+				//    
+				// 2. Progressive image loading sometimes blinks in webkit/blink when applying animation to parent element.
+				//    That's why it's disabled on touch devices (mainly because of swipe transition)
+				//    
+				// 3. Progressive image loading sometimes doesn't work in IE (up to 11).
+	
+				// Don't allow progressive loading on non-large touch devices
+				return _options.forceProgressiveLoading || !_likelyTouchDevice || _options.mouseUsed || screen.width > 1200; 
+				// 1200 - to eliminate touch devices with large screen (like Chromebook Pixel)
+			},
+	
+			setContent: function(holder, index) {
+	
+				if(_options.loop) {
+					index = _getLoopedId(index);
+				}
+	
+				var prevItem = self.getItemAt(holder.index);
+				if(prevItem) {
+					prevItem.container = null;
+				}
+		
+				var item = self.getItemAt(index),
+					img;
+				
+				if(!item) {
+					holder.el.innerHTML = '';
+					return;
+				}
+	
+				// allow to override data
+				_shout('gettingData', index, item);
+	
+				holder.index = index;
+				holder.item = item;
+	
+				// base container DIV is created only once for each of 3 holders
+				var baseDiv = item.container = framework.createEl('pswp__zoom-wrap'); 
+	
+				
+	
+				if(!item.src && item.html) {
+					if(item.html.tagName) {
+						baseDiv.appendChild(item.html);
+					} else {
+						baseDiv.innerHTML = item.html;
+					}
+				}
+	
+				_checkForError(item);
+	
+				_calculateItemSize(item, _viewportSize);
+				
+				if(item.src && !item.loadError && !item.loaded) {
+	
+					item.loadComplete = function(item) {
+	
+						// gallery closed before image finished loading
+						if(!_isOpen) {
+							return;
+						}
+	
+						// check if holder hasn't changed while image was loading
+						if(holder && holder.index === index ) {
+							if( _checkForError(item, true) ) {
+								item.loadComplete = item.img = null;
+								_calculateItemSize(item, _viewportSize);
+								_applyZoomPanToItem(item);
+	
+								if(holder.index === _currentItemIndex) {
+									// recalculate dimensions
+									self.updateCurrZoomItem();
+								}
+								return;
+							}
+							if( !item.imageAppended ) {
+								if(_features.transform && (_mainScrollAnimating || _initialZoomRunning) ) {
+									_imagesToAppendPool.push({
+										item:item,
+										baseDiv:baseDiv,
+										img:item.img,
+										index:index,
+										holder:holder,
+										clearPlaceholder:true
+									});
+								} else {
+									_appendImage(index, item, baseDiv, item.img, _mainScrollAnimating || _initialZoomRunning, true);
+								}
+							} else {
+								// remove preloader & mini-img
+								if(!_initialZoomRunning && item.placeholder) {
+									item.placeholder.style.display = 'none';
+									item.placeholder = null;
+								}
+							}
+						}
+	
+						item.loadComplete = null;
+						item.img = null; // no need to store image element after it's added
+	
+						_shout('imageLoadComplete', index, item);
+					};
+	
+					if(framework.features.transform) {
+						
+						var placeholderClassName = 'pswp__img pswp__img--placeholder'; 
+						placeholderClassName += (item.msrc ? '' : ' pswp__img--placeholder--blank');
+	
+						var placeholder = framework.createEl(placeholderClassName, item.msrc ? 'img' : '');
+						if(item.msrc) {
+							placeholder.src = item.msrc;
+						}
+						
+						_setImageSize(item, placeholder);
+	
+						baseDiv.appendChild(placeholder);
+						item.placeholder = placeholder;
+	
+					}
+					
+	
+					
+	
+					if(!item.loading) {
+						_preloadImage(item);
+					}
+	
+	
+					if( self.allowProgressiveImg() ) {
+						// just append image
+						if(!_initialContentSet && _features.transform) {
+							_imagesToAppendPool.push({
+								item:item, 
+								baseDiv:baseDiv, 
+								img:item.img, 
+								index:index, 
+								holder:holder
+							});
+						} else {
+							_appendImage(index, item, baseDiv, item.img, true, true);
+						}
+					}
+					
+				} else if(item.src && !item.loadError) {
+					// image object is created every time, due to bugs of image loading & delay when switching images
+					img = framework.createEl('pswp__img', 'img');
+					img.style.opacity = 1;
+					img.src = item.src;
+					_setImageSize(item, img);
+					_appendImage(index, item, baseDiv, img, true);
+				}
+				
+	
+				if(!_initialContentSet && index === _currentItemIndex) {
+					_currZoomElementStyle = baseDiv.style;
+					_showOrHide(item, (img ||item.img) );
+				} else {
+					_applyZoomPanToItem(item);
+				}
+	
+				holder.el.innerHTML = '';
+				holder.el.appendChild(baseDiv);
+			},
+	
+			cleanSlide: function( item ) {
+				if(item.img ) {
+					item.img.onload = item.img.onerror = null;
+				}
+				item.loaded = item.loading = item.img = item.imageAppended = false;
+			}
+	
+		}
+	});
+	
+	/*>>items-controller*/
+	
+	/*>>tap*/
+	/**
+	 * tap.js:
+	 *
+	 * Displatches tap and double-tap events.
+	 * 
+	 */
+	
+	var tapTimer,
+		tapReleasePoint = {},
+		_dispatchTapEvent = function(origEvent, releasePoint, pointerType) {		
+			var e = document.createEvent( 'CustomEvent' ),
+				eDetail = {
+					origEvent:origEvent, 
+					target:origEvent.target, 
+					releasePoint: releasePoint, 
+					pointerType:pointerType || 'touch'
+				};
+	
+			e.initCustomEvent( 'pswpTap', true, true, eDetail );
+			origEvent.target.dispatchEvent(e);
+		};
+	
+	_registerModule('Tap', {
+		publicMethods: {
+			initTap: function() {
+				_listen('firstTouchStart', self.onTapStart);
+				_listen('touchRelease', self.onTapRelease);
+				_listen('destroy', function() {
+					tapReleasePoint = {};
+					tapTimer = null;
+				});
+			},
+			onTapStart: function(touchList) {
+				if(touchList.length > 1) {
+					clearTimeout(tapTimer);
+					tapTimer = null;
+				}
+			},
+			onTapRelease: function(e, releasePoint) {
+				if(!releasePoint) {
+					return;
+				}
+	
+				if(!_moved && !_isMultitouch && !_numAnimations) {
+					var p0 = releasePoint;
+					if(tapTimer) {
+						clearTimeout(tapTimer);
+						tapTimer = null;
+	
+						// Check if taped on the same place
+						if ( _isNearbyPoints(p0, tapReleasePoint) ) {
+							_shout('doubleTap', p0);
+							return;
+						}
+					}
+	
+					if(releasePoint.type === 'mouse') {
+						_dispatchTapEvent(e, releasePoint, 'mouse');
+						return;
+					}
+	
+					var clickedTagName = e.target.tagName.toUpperCase();
+					// avoid double tap delay on buttons and elements that have class pswp__single-tap
+					if(clickedTagName === 'BUTTON' || framework.hasClass(e.target, 'pswp__single-tap') ) {
+						_dispatchTapEvent(e, releasePoint);
+						return;
+					}
+	
+					_equalizePoints(tapReleasePoint, p0);
+	
+					tapTimer = setTimeout(function() {
+						_dispatchTapEvent(e, releasePoint);
+						tapTimer = null;
+					}, 300);
+				}
+			}
+		}
+	});
+	
+	/*>>tap*/
+	
+	/*>>desktop-zoom*/
+	/**
+	 *
+	 * desktop-zoom.js:
+	 *
+	 * - Binds mousewheel event for paning zoomed image.
+	 * - Manages "dragging", "zoomed-in", "zoom-out" classes.
+	 *   (which are used for cursors and zoom icon)
+	 * - Adds toggleDesktopZoom function.
+	 * 
+	 */
+	
+	var _wheelDelta;
+		
+	_registerModule('DesktopZoom', {
+	
+		publicMethods: {
+	
+			initDesktopZoom: function() {
+	
+				if(_oldIE) {
+					// no zoom for old IE (<=8)
+					return;
+				}
+	
+				if(_likelyTouchDevice) {
+					// if detected hardware touch support, we wait until mouse is used,
+					// and only then apply desktop-zoom features
+					_listen('mouseUsed', function() {
+						self.setupDesktopZoom();
+					});
+				} else {
+					self.setupDesktopZoom(true);
+				}
+	
+			},
+	
+			setupDesktopZoom: function(onInit) {
+	
+				_wheelDelta = {};
+	
+				var events = 'wheel mousewheel DOMMouseScroll';
+				
+				_listen('bindEvents', function() {
+					framework.bind(template, events,  self.handleMouseWheel);
+				});
+	
+				_listen('unbindEvents', function() {
+					if(_wheelDelta) {
+						framework.unbind(template, events, self.handleMouseWheel);
+					}
+				});
+	
+				self.mouseZoomedIn = false;
+	
+				var hasDraggingClass,
+					updateZoomable = function() {
+						if(self.mouseZoomedIn) {
+							framework.removeClass(template, 'pswp--zoomed-in');
+							self.mouseZoomedIn = false;
+						}
+						if(_currZoomLevel < 1) {
+							framework.addClass(template, 'pswp--zoom-allowed');
+						} else {
+							framework.removeClass(template, 'pswp--zoom-allowed');
+						}
+						removeDraggingClass();
+					},
+					removeDraggingClass = function() {
+						if(hasDraggingClass) {
+							framework.removeClass(template, 'pswp--dragging');
+							hasDraggingClass = false;
+						}
+					};
+	
+				_listen('resize' , updateZoomable);
+				_listen('afterChange' , updateZoomable);
+				_listen('pointerDown', function() {
+					if(self.mouseZoomedIn) {
+						hasDraggingClass = true;
+						framework.addClass(template, 'pswp--dragging');
+					}
+				});
+				_listen('pointerUp', removeDraggingClass);
+	
+				if(!onInit) {
+					updateZoomable();
+				}
+				
+			},
+	
+			handleMouseWheel: function(e) {
+	
+				if(_currZoomLevel <= self.currItem.fitRatio) {
+					if( _options.modal ) {
+	
+						if (!_options.closeOnScroll || _numAnimations || _isDragging) {
+							e.preventDefault();
+						} else if(_transformKey && Math.abs(e.deltaY) > 2) {
+							// close PhotoSwipe
+							// if browser supports transforms & scroll changed enough
+							_closedByScroll = true;
+							self.close();
+						}
+	
+					}
+					return true;
+				}
+	
+				// allow just one event to fire
+				e.stopPropagation();
+	
+				// https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+				_wheelDelta.x = 0;
+	
+				if('deltaX' in e) {
+					if(e.deltaMode === 1 /* DOM_DELTA_LINE */) {
+						// 18 - average line height
+						_wheelDelta.x = e.deltaX * 18;
+						_wheelDelta.y = e.deltaY * 18;
+					} else {
+						_wheelDelta.x = e.deltaX;
+						_wheelDelta.y = e.deltaY;
+					}
+				} else if('wheelDelta' in e) {
+					if(e.wheelDeltaX) {
+						_wheelDelta.x = -0.16 * e.wheelDeltaX;
+					}
+					if(e.wheelDeltaY) {
+						_wheelDelta.y = -0.16 * e.wheelDeltaY;
+					} else {
+						_wheelDelta.y = -0.16 * e.wheelDelta;
+					}
+				} else if('detail' in e) {
+					_wheelDelta.y = e.detail;
+				} else {
+					return;
+				}
+	
+				_calculatePanBounds(_currZoomLevel, true);
+	
+				var newPanX = _panOffset.x - _wheelDelta.x,
+					newPanY = _panOffset.y - _wheelDelta.y;
+	
+				// only prevent scrolling in nonmodal mode when not at edges
+				if (_options.modal ||
+					(
+					newPanX <= _currPanBounds.min.x && newPanX >= _currPanBounds.max.x &&
+					newPanY <= _currPanBounds.min.y && newPanY >= _currPanBounds.max.y
+					) ) {
+					e.preventDefault();
+				}
+	
+				// TODO: use rAF instead of mousewheel?
+				self.panTo(newPanX, newPanY);
+			},
+	
+			toggleDesktopZoom: function(centerPoint) {
+				centerPoint = centerPoint || {x:_viewportSize.x/2 + _offset.x, y:_viewportSize.y/2 + _offset.y };
+	
+				var doubleTapZoomLevel = _options.getDoubleTapZoom(true, self.currItem);
+				var zoomOut = _currZoomLevel === doubleTapZoomLevel;
+				
+				self.mouseZoomedIn = !zoomOut;
+	
+				self.zoomTo(zoomOut ? self.currItem.initialZoomLevel : doubleTapZoomLevel, centerPoint, 333);
+				framework[ (!zoomOut ? 'add' : 'remove') + 'Class'](template, 'pswp--zoomed-in');
+			}
+	
+		}
+	});
+	
+	
+	/*>>desktop-zoom*/
+	
+	/*>>history*/
+	/**
+	 *
+	 * history.js:
+	 *
+	 * - Back button to close gallery.
+	 * 
+	 * - Unique URL for each slide: example.com/&pid=1&gid=3
+	 *   (where PID is picture index, and GID and gallery index)
+	 *   
+	 * - Switch URL when slides change.
+	 * 
+	 */
+	
+	
+	var _historyDefaultOptions = {
+		history: true,
+		galleryUID: 1
+	};
+	
+	var _historyUpdateTimeout,
+		_hashChangeTimeout,
+		_hashAnimCheckTimeout,
+		_hashChangedByScript,
+		_hashChangedByHistory,
+		_hashReseted,
+		_initialHash,
+		_historyChanged,
+		_closedFromURL,
+		_urlChangedOnce,
+		_windowLoc,
+	
+		_supportsPushState,
+	
+		_getHash = function() {
+			return _windowLoc.hash.substring(1);
+		},
+		_cleanHistoryTimeouts = function() {
+	
+			if(_historyUpdateTimeout) {
+				clearTimeout(_historyUpdateTimeout);
+			}
+	
+			if(_hashAnimCheckTimeout) {
+				clearTimeout(_hashAnimCheckTimeout);
+			}
+		},
+	
+		// pid - Picture index
+		// gid - Gallery index
+		_parseItemIndexFromURL = function() {
+			var hash = _getHash(),
+				params = {};
+	
+			if(hash.length < 5) { // pid=1
+				return params;
+			}
+	
+			var i, vars = hash.split('&');
+			for (i = 0; i < vars.length; i++) {
+				if(!vars[i]) {
+					continue;
+				}
+				var pair = vars[i].split('=');	
+				if(pair.length < 2) {
+					continue;
+				}
+				params[pair[0]] = pair[1];
+			}
+			if(_options.galleryPIDs) {
+				// detect custom pid in hash and search for it among the items collection
+				var searchfor = params.pid;
+				params.pid = 0; // if custom pid cannot be found, fallback to the first item
+				for(i = 0; i < _items.length; i++) {
+					if(_items[i].pid === searchfor) {
+						params.pid = i;
+						break;
+					}
+				}
+			} else {
+				params.pid = parseInt(params.pid,10)-1;
+			}
+			if( params.pid < 0 ) {
+				params.pid = 0;
+			}
+			return params;
+		},
+		_updateHash = function() {
+	
+			if(_hashAnimCheckTimeout) {
+				clearTimeout(_hashAnimCheckTimeout);
+			}
+	
+	
+			if(_numAnimations || _isDragging) {
+				// changing browser URL forces layout/paint in some browsers, which causes noticable lag during animation
+				// that's why we update hash only when no animations running
+				_hashAnimCheckTimeout = setTimeout(_updateHash, 500);
+				return;
+			}
+			
+			if(_hashChangedByScript) {
+				clearTimeout(_hashChangeTimeout);
+			} else {
+				_hashChangedByScript = true;
+			}
+	
+	
+			var pid = (_currentItemIndex + 1);
+			var item = _getItemAt( _currentItemIndex );
+			if(item.hasOwnProperty('pid')) {
+				// carry forward any custom pid assigned to the item
+				pid = item.pid;
+			}
+			var newHash = _initialHash + '&'  +  'gid=' + _options.galleryUID + '&' + 'pid=' + pid;
+	
+			if(!_historyChanged) {
+				if(_windowLoc.hash.indexOf(newHash) === -1) {
+					_urlChangedOnce = true;
+				}
+				// first time - add new hisory record, then just replace
+			}
+	
+			var newURL = _windowLoc.href.split('#')[0] + '#' +  newHash;
+	
+			if( _supportsPushState ) {
+	
+				if('#' + newHash !== window.location.hash) {
+					history[_historyChanged ? 'replaceState' : 'pushState']('', document.title, newURL);
+				}
+	
+			} else {
+				if(_historyChanged) {
+					_windowLoc.replace( newURL );
+				} else {
+					_windowLoc.hash = newHash;
+				}
+			}
+			
+			
+	
+			_historyChanged = true;
+			_hashChangeTimeout = setTimeout(function() {
+				_hashChangedByScript = false;
+			}, 60);
+		};
+	
+	
+	
+		
+	
+	_registerModule('History', {
+	
+		
+	
+		publicMethods: {
+			initHistory: function() {
+	
+				framework.extend(_options, _historyDefaultOptions, true);
+	
+				if( !_options.history ) {
+					return;
+				}
+	
+	
+				_windowLoc = window.location;
+				_urlChangedOnce = false;
+				_closedFromURL = false;
+				_historyChanged = false;
+				_initialHash = _getHash();
+				_supportsPushState = ('pushState' in history);
+	
+	
+				if(_initialHash.indexOf('gid=') > -1) {
+					_initialHash = _initialHash.split('&gid=')[0];
+					_initialHash = _initialHash.split('?gid=')[0];
+				}
+				
+	
+				_listen('afterChange', self.updateURL);
+				_listen('unbindEvents', function() {
+					framework.unbind(window, 'hashchange', self.onHashChange);
+				});
+	
+	
+				var returnToOriginal = function() {
+					_hashReseted = true;
+					if(!_closedFromURL) {
+	
+						if(_urlChangedOnce) {
+							history.back();
+						} else {
+	
+							if(_initialHash) {
+								_windowLoc.hash = _initialHash;
+							} else {
+								if (_supportsPushState) {
+	
+									// remove hash from url without refreshing it or scrolling to top
+									history.pushState('', document.title,  _windowLoc.pathname + _windowLoc.search );
+								} else {
+									_windowLoc.hash = '';
+								}
+							}
+						}
+						
+					}
+	
+					_cleanHistoryTimeouts();
+				};
+	
+	
+				_listen('unbindEvents', function() {
+					if(_closedByScroll) {
+						// if PhotoSwipe is closed by scroll, we go "back" before the closing animation starts
+						// this is done to keep the scroll position
+						returnToOriginal();
+					}
+				});
+				_listen('destroy', function() {
+					if(!_hashReseted) {
+						returnToOriginal();
+					}
+				});
+				_listen('firstUpdate', function() {
+					_currentItemIndex = _parseItemIndexFromURL().pid;
+				});
+	
+				
+	
+				
+				var index = _initialHash.indexOf('pid=');
+				if(index > -1) {
+					_initialHash = _initialHash.substring(0, index);
+					if(_initialHash.slice(-1) === '&') {
+						_initialHash = _initialHash.slice(0, -1);
+					}
+				}
+				
+	
+				setTimeout(function() {
+					if(_isOpen) { // hasn't destroyed yet
+						framework.bind(window, 'hashchange', self.onHashChange);
+					}
+				}, 40);
+				
+			},
+			onHashChange: function() {
+	
+				if(_getHash() === _initialHash) {
+	
+					_closedFromURL = true;
+					self.close();
+					return;
+				}
+				if(!_hashChangedByScript) {
+	
+					_hashChangedByHistory = true;
+					self.goTo( _parseItemIndexFromURL().pid );
+					_hashChangedByHistory = false;
+				}
+				
+			},
+			updateURL: function() {
+	
+				// Delay the update of URL, to avoid lag during transition, 
+				// and to not to trigger actions like "refresh page sound" or "blinking favicon" to often
+				
+				_cleanHistoryTimeouts();
+				
+	
+				if(_hashChangedByHistory) {
+					return;
+				}
+	
+				if(!_historyChanged) {
+					_updateHash(); // first time
+				} else {
+					_historyUpdateTimeout = setTimeout(_updateHash, 800);
+				}
+			}
+		
+		}
+	});
+	
+	
+	/*>>history*/
+		framework.extend(self, publicMethods); };
+		return PhotoSwipe;
+	});
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe Default UI - 4.1.1 - 2015-12-24
+	* http://photoswipe.com
+	* Copyright (c) 2015 Dmitry Semenov; */
+	/**
+	*
+	* UI on top of main sliding area (caption, arrows, close button, etc.).
+	* Built just using public methods/properties of PhotoSwipe.
+	* 
+	*/
+	(function (root, factory) { 
+		if (true) {
+			!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else if (typeof exports === 'object') {
+			module.exports = factory();
+		} else {
+			root.PhotoSwipeUI_Default = factory();
+		}
+	})(this, function () {
+	
+		'use strict';
+	
+	
+	
+	var PhotoSwipeUI_Default =
+	 function(pswp, framework) {
+	
+		var ui = this;
+		var _overlayUIUpdated = false,
+			_controlsVisible = true,
+			_fullscrenAPI,
+			_controls,
+			_captionContainer,
+			_fakeCaptionContainer,
+			_indexIndicator,
+			_shareButton,
+			_shareModal,
+			_shareModalHidden = true,
+			_initalCloseOnScrollValue,
+			_isIdle,
+			_listen,
+	
+			_loadingIndicator,
+			_loadingIndicatorHidden,
+			_loadingIndicatorTimeout,
+	
+			_galleryHasOneSlide,
+	
+			_options,
+			_defaultUIOptions = {
+				barsSize: {top:44, bottom:'auto'},
+				closeElClasses: ['item', 'caption', 'zoom-wrap', 'ui', 'top-bar'], 
+				timeToIdle: 4000, 
+				timeToIdleOutside: 1000,
+				loadingIndicatorDelay: 1000, // 2s
+				
+				addCaptionHTMLFn: function(item, captionEl /*, isFake */) {
+					if(!item.title) {
+						captionEl.children[0].innerHTML = '';
+						return false;
+					}
+					captionEl.children[0].innerHTML = item.title;
+					return true;
+				},
+	
+				closeEl:true,
+				captionEl: true,
+				fullscreenEl: true,
+				zoomEl: true,
+				shareEl: true,
+				counterEl: true,
+				arrowEl: true,
+				preloaderEl: true,
+	
+				tapToClose: false,
+				tapToToggleControls: true,
+	
+				clickToCloseNonZoomable: true,
+	
+				shareButtons: [
+					{id:'facebook', label:'Share on Facebook', url:'https://www.facebook.com/sharer/sharer.php?u={{url}}'},
+					{id:'twitter', label:'Tweet', url:'https://twitter.com/intent/tweet?text={{text}}&url={{url}}'},
+					{id:'pinterest', label:'Pin it', url:'http://www.pinterest.com/pin/create/button/'+
+														'?url={{url}}&media={{image_url}}&description={{text}}'},
+					{id:'download', label:'Download image', url:'{{raw_image_url}}', download:true}
+				],
+				getImageURLForShare: function( /* shareButtonData */ ) {
+					return pswp.currItem.src || '';
+				},
+				getPageURLForShare: function( /* shareButtonData */ ) {
+					return window.location.href;
+				},
+				getTextForShare: function( /* shareButtonData */ ) {
+					return pswp.currItem.title || '';
+				},
+					
+				indexIndicatorSep: ' / ',
+				fitControlsWidth: 1200
+	
+			},
+			_blockControlsTap,
+			_blockControlsTapTimeout;
+	
+	
+	
+		var _onControlsTap = function(e) {
+				if(_blockControlsTap) {
+					return true;
+				}
+	
+	
+				e = e || window.event;
+	
+				if(_options.timeToIdle && _options.mouseUsed && !_isIdle) {
+					// reset idle timer
+					_onIdleMouseMove();
+				}
+	
+	
+				var target = e.target || e.srcElement,
+					uiElement,
+					clickedClass = target.getAttribute('class') || '',
+					found;
+	
+				for(var i = 0; i < _uiElements.length; i++) {
+					uiElement = _uiElements[i];
+					if(uiElement.onTap && clickedClass.indexOf('pswp__' + uiElement.name ) > -1 ) {
+						uiElement.onTap();
+						found = true;
+	
+					}
+				}
+	
+				if(found) {
+					if(e.stopPropagation) {
+						e.stopPropagation();
+					}
+					_blockControlsTap = true;
+	
+					// Some versions of Android don't prevent ghost click event 
+					// when preventDefault() was called on touchstart and/or touchend.
+					// 
+					// This happens on v4.3, 4.2, 4.1, 
+					// older versions strangely work correctly, 
+					// but just in case we add delay on all of them)	
+					var tapDelay = framework.features.isOldAndroid ? 600 : 30;
+					_blockControlsTapTimeout = setTimeout(function() {
+						_blockControlsTap = false;
+					}, tapDelay);
+				}
+	
+			},
+			_fitControlsInViewport = function() {
+				return !pswp.likelyTouchDevice || _options.mouseUsed || screen.width > _options.fitControlsWidth;
+			},
+			_togglePswpClass = function(el, cName, add) {
+				framework[ (add ? 'add' : 'remove') + 'Class' ](el, 'pswp__' + cName);
+			},
+	
+			// add class when there is just one item in the gallery
+			// (by default it hides left/right arrows and 1ofX counter)
+			_countNumItems = function() {
+				var hasOneSlide = (_options.getNumItemsFn() === 1);
+	
+				if(hasOneSlide !== _galleryHasOneSlide) {
+					_togglePswpClass(_controls, 'ui--one-slide', hasOneSlide);
+					_galleryHasOneSlide = hasOneSlide;
+				}
+			},
+			_toggleShareModalClass = function() {
+				_togglePswpClass(_shareModal, 'share-modal--hidden', _shareModalHidden);
+			},
+			_toggleShareModal = function() {
+	
+				_shareModalHidden = !_shareModalHidden;
+				
+				
+				if(!_shareModalHidden) {
+					_toggleShareModalClass();
+					setTimeout(function() {
+						if(!_shareModalHidden) {
+							framework.addClass(_shareModal, 'pswp__share-modal--fade-in');
+						}
+					}, 30);
+				} else {
+					framework.removeClass(_shareModal, 'pswp__share-modal--fade-in');
+					setTimeout(function() {
+						if(_shareModalHidden) {
+							_toggleShareModalClass();
+						}
+					}, 300);
+				}
+				
+				if(!_shareModalHidden) {
+					_updateShareURLs();
+				}
+				return false;
+			},
+	
+			_openWindowPopup = function(e) {
+				e = e || window.event;
+				var target = e.target || e.srcElement;
+	
+				pswp.shout('shareLinkClick', e, target);
+	
+				if(!target.href) {
+					return false;
+				}
+	
+				if( target.hasAttribute('download') ) {
+					return true;
+				}
+	
+				window.open(target.href, 'pswp_share', 'scrollbars=yes,resizable=yes,toolbar=no,'+
+											'location=yes,width=550,height=420,top=100,left=' + 
+											(window.screen ? Math.round(screen.width / 2 - 275) : 100)  );
+	
+				if(!_shareModalHidden) {
+					_toggleShareModal();
+				}
+				
+				return false;
+			},
+			_updateShareURLs = function() {
+				var shareButtonOut = '',
+					shareButtonData,
+					shareURL,
+					image_url,
+					page_url,
+					share_text;
+	
+				for(var i = 0; i < _options.shareButtons.length; i++) {
+					shareButtonData = _options.shareButtons[i];
+	
+					image_url = _options.getImageURLForShare(shareButtonData);
+					page_url = _options.getPageURLForShare(shareButtonData);
+					share_text = _options.getTextForShare(shareButtonData);
+	
+					shareURL = shareButtonData.url.replace('{{url}}', encodeURIComponent(page_url) )
+										.replace('{{image_url}}', encodeURIComponent(image_url) )
+										.replace('{{raw_image_url}}', image_url )
+										.replace('{{text}}', encodeURIComponent(share_text) );
+	
+					shareButtonOut += '<a href="' + shareURL + '" target="_blank" '+
+										'class="pswp__share--' + shareButtonData.id + '"' +
+										(shareButtonData.download ? 'download' : '') + '>' + 
+										shareButtonData.label + '</a>';
+	
+					if(_options.parseShareButtonOut) {
+						shareButtonOut = _options.parseShareButtonOut(shareButtonData, shareButtonOut);
+					}
+				}
+				_shareModal.children[0].innerHTML = shareButtonOut;
+				_shareModal.children[0].onclick = _openWindowPopup;
+	
+			},
+			_hasCloseClass = function(target) {
+				for(var  i = 0; i < _options.closeElClasses.length; i++) {
+					if( framework.hasClass(target, 'pswp__' + _options.closeElClasses[i]) ) {
+						return true;
+					}
+				}
+			},
+			_idleInterval,
+			_idleTimer,
+			_idleIncrement = 0,
+			_onIdleMouseMove = function() {
+				clearTimeout(_idleTimer);
+				_idleIncrement = 0;
+				if(_isIdle) {
+					ui.setIdle(false);
+				}
+			},
+			_onMouseLeaveWindow = function(e) {
+				e = e ? e : window.event;
+				var from = e.relatedTarget || e.toElement;
+				if (!from || from.nodeName === 'HTML') {
+					clearTimeout(_idleTimer);
+					_idleTimer = setTimeout(function() {
+						ui.setIdle(true);
+					}, _options.timeToIdleOutside);
+				}
+			},
+			_setupFullscreenAPI = function() {
+				if(_options.fullscreenEl && !framework.features.isOldAndroid) {
+					if(!_fullscrenAPI) {
+						_fullscrenAPI = ui.getFullscreenAPI();
+					}
+					if(_fullscrenAPI) {
+						framework.bind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+						ui.updateFullscreen();
+						framework.addClass(pswp.template, 'pswp--supports-fs');
+					} else {
+						framework.removeClass(pswp.template, 'pswp--supports-fs');
+					}
+				}
+			},
+			_setupLoadingIndicator = function() {
+				// Setup loading indicator
+				if(_options.preloaderEl) {
+				
+					_toggleLoadingIndicator(true);
+	
+					_listen('beforeChange', function() {
+	
+						clearTimeout(_loadingIndicatorTimeout);
+	
+						// display loading indicator with delay
+						_loadingIndicatorTimeout = setTimeout(function() {
+	
+							if(pswp.currItem && pswp.currItem.loading) {
+	
+								if( !pswp.allowProgressiveImg() || (pswp.currItem.img && !pswp.currItem.img.naturalWidth)  ) {
+									// show preloader if progressive loading is not enabled, 
+									// or image width is not defined yet (because of slow connection)
+									_toggleLoadingIndicator(false); 
+									// items-controller.js function allowProgressiveImg
+								}
+								
+							} else {
+								_toggleLoadingIndicator(true); // hide preloader
+							}
+	
+						}, _options.loadingIndicatorDelay);
+						
+					});
+					_listen('imageLoadComplete', function(index, item) {
+						if(pswp.currItem === item) {
+							_toggleLoadingIndicator(true);
+						}
+					});
+	
+				}
+			},
+			_toggleLoadingIndicator = function(hide) {
+				if( _loadingIndicatorHidden !== hide ) {
+					_togglePswpClass(_loadingIndicator, 'preloader--active', !hide);
+					_loadingIndicatorHidden = hide;
+				}
+			},
+			_applyNavBarGaps = function(item) {
+				var gap = item.vGap;
+	
+				if( _fitControlsInViewport() ) {
+					
+					var bars = _options.barsSize; 
+					if(_options.captionEl && bars.bottom === 'auto') {
+						if(!_fakeCaptionContainer) {
+							_fakeCaptionContainer = framework.createEl('pswp__caption pswp__caption--fake');
+							_fakeCaptionContainer.appendChild( framework.createEl('pswp__caption__center') );
+							_controls.insertBefore(_fakeCaptionContainer, _captionContainer);
+							framework.addClass(_controls, 'pswp__ui--fit');
+						}
+						if( _options.addCaptionHTMLFn(item, _fakeCaptionContainer, true) ) {
+	
+							var captionSize = _fakeCaptionContainer.clientHeight;
+							gap.bottom = parseInt(captionSize,10) || 44;
+						} else {
+							gap.bottom = bars.top; // if no caption, set size of bottom gap to size of top
+						}
+					} else {
+						gap.bottom = bars.bottom === 'auto' ? 0 : bars.bottom;
+					}
+					
+					// height of top bar is static, no need to calculate it
+					gap.top = bars.top;
+				} else {
+					gap.top = gap.bottom = 0;
+				}
+			},
+			_setupIdle = function() {
+				// Hide controls when mouse is used
+				if(_options.timeToIdle) {
+					_listen('mouseUsed', function() {
+						
+						framework.bind(document, 'mousemove', _onIdleMouseMove);
+						framework.bind(document, 'mouseout', _onMouseLeaveWindow);
+	
+						_idleInterval = setInterval(function() {
+							_idleIncrement++;
+							if(_idleIncrement === 2) {
+								ui.setIdle(true);
+							}
+						}, _options.timeToIdle / 2);
+					});
+				}
+			},
+			_setupHidingControlsDuringGestures = function() {
+	
+				// Hide controls on vertical drag
+				_listen('onVerticalDrag', function(now) {
+					if(_controlsVisible && now < 0.95) {
+						ui.hideControls();
+					} else if(!_controlsVisible && now >= 0.95) {
+						ui.showControls();
+					}
+				});
+	
+				// Hide controls when pinching to close
+				var pinchControlsHidden;
+				_listen('onPinchClose' , function(now) {
+					if(_controlsVisible && now < 0.9) {
+						ui.hideControls();
+						pinchControlsHidden = true;
+					} else if(pinchControlsHidden && !_controlsVisible && now > 0.9) {
+						ui.showControls();
+					}
+				});
+	
+				_listen('zoomGestureEnded', function() {
+					pinchControlsHidden = false;
+					if(pinchControlsHidden && !_controlsVisible) {
+						ui.showControls();
+					}
+				});
+	
+			};
+	
+	
+	
+		var _uiElements = [
+			{ 
+				name: 'caption', 
+				option: 'captionEl',
+				onInit: function(el) {  
+					_captionContainer = el; 
+				} 
+			},
+			{ 
+				name: 'share-modal', 
+				option: 'shareEl',
+				onInit: function(el) {  
+					_shareModal = el;
+				},
+				onTap: function() {
+					_toggleShareModal();
+				} 
+			},
+			{ 
+				name: 'button--share', 
+				option: 'shareEl',
+				onInit: function(el) { 
+					_shareButton = el;
+				},
+				onTap: function() {
+					_toggleShareModal();
+				} 
+			},
+			{ 
+				name: 'button--zoom', 
+				option: 'zoomEl',
+				onTap: pswp.toggleDesktopZoom
+			},
+			{ 
+				name: 'counter', 
+				option: 'counterEl',
+				onInit: function(el) {  
+					_indexIndicator = el;
+				} 
+			},
+			{ 
+				name: 'button--close', 
+				option: 'closeEl',
+				onTap: pswp.close
+			},
+			{ 
+				name: 'button--arrow--left', 
+				option: 'arrowEl',
+				onTap: pswp.prev
+			},
+			{ 
+				name: 'button--arrow--right', 
+				option: 'arrowEl',
+				onTap: pswp.next
+			},
+			{ 
+				name: 'button--fs', 
+				option: 'fullscreenEl',
+				onTap: function() {  
+					if(_fullscrenAPI.isFullscreen()) {
+						_fullscrenAPI.exit();
+					} else {
+						_fullscrenAPI.enter();
+					}
+				} 
+			},
+			{ 
+				name: 'preloader', 
+				option: 'preloaderEl',
+				onInit: function(el) {  
+					_loadingIndicator = el;
+				} 
+			}
+	
+		];
+	
+		var _setupUIElements = function() {
+			var item,
+				classAttr,
+				uiElement;
+	
+			var loopThroughChildElements = function(sChildren) {
+				if(!sChildren) {
+					return;
+				}
+	
+				var l = sChildren.length;
+				for(var i = 0; i < l; i++) {
+					item = sChildren[i];
+					classAttr = item.className;
+	
+					for(var a = 0; a < _uiElements.length; a++) {
+						uiElement = _uiElements[a];
+	
+						if(classAttr.indexOf('pswp__' + uiElement.name) > -1  ) {
+	
+							if( _options[uiElement.option] ) { // if element is not disabled from options
+								
+								framework.removeClass(item, 'pswp__element--disabled');
+								if(uiElement.onInit) {
+									uiElement.onInit(item);
+								}
+								
+								//item.style.display = 'block';
+							} else {
+								framework.addClass(item, 'pswp__element--disabled');
+								//item.style.display = 'none';
+							}
+						}
+					}
+				}
+			};
+			loopThroughChildElements(_controls.children);
+	
+			var topBar =  framework.getChildByClass(_controls, 'pswp__top-bar');
+			if(topBar) {
+				loopThroughChildElements( topBar.children );
+			}
+		};
+	
+	
+		
+	
+		ui.init = function() {
+	
+			// extend options
+			framework.extend(pswp.options, _defaultUIOptions, true);
+	
+			// create local link for fast access
+			_options = pswp.options;
+	
+			// find pswp__ui element
+			_controls = framework.getChildByClass(pswp.scrollWrap, 'pswp__ui');
+	
+			// create local link
+			_listen = pswp.listen;
+	
+	
+			_setupHidingControlsDuringGestures();
+	
+			// update controls when slides change
+			_listen('beforeChange', ui.update);
+	
+			// toggle zoom on double-tap
+			_listen('doubleTap', function(point) {
+				var initialZoomLevel = pswp.currItem.initialZoomLevel;
+				if(pswp.getZoomLevel() !== initialZoomLevel) {
+					pswp.zoomTo(initialZoomLevel, point, 333);
+				} else {
+					pswp.zoomTo(_options.getDoubleTapZoom(false, pswp.currItem), point, 333);
+				}
+			});
+	
+			// Allow text selection in caption
+			_listen('preventDragEvent', function(e, isDown, preventObj) {
+				var t = e.target || e.srcElement;
+				if(
+					t && 
+					t.getAttribute('class') && e.type.indexOf('mouse') > -1 && 
+					( t.getAttribute('class').indexOf('__caption') > 0 || (/(SMALL|STRONG|EM)/i).test(t.tagName) ) 
+				) {
+					preventObj.prevent = false;
+				}
+			});
+	
+			// bind events for UI
+			_listen('bindEvents', function() {
+				framework.bind(_controls, 'pswpTap click', _onControlsTap);
+				framework.bind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+	
+				if(!pswp.likelyTouchDevice) {
+					framework.bind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+				}
+			});
+	
+			// unbind events for UI
+			_listen('unbindEvents', function() {
+				if(!_shareModalHidden) {
+					_toggleShareModal();
+				}
+	
+				if(_idleInterval) {
+					clearInterval(_idleInterval);
+				}
+				framework.unbind(document, 'mouseout', _onMouseLeaveWindow);
+				framework.unbind(document, 'mousemove', _onIdleMouseMove);
+				framework.unbind(_controls, 'pswpTap click', _onControlsTap);
+				framework.unbind(pswp.scrollWrap, 'pswpTap', ui.onGlobalTap);
+				framework.unbind(pswp.scrollWrap, 'mouseover', ui.onMouseOver);
+	
+				if(_fullscrenAPI) {
+					framework.unbind(document, _fullscrenAPI.eventK, ui.updateFullscreen);
+					if(_fullscrenAPI.isFullscreen()) {
+						_options.hideAnimationDuration = 0;
+						_fullscrenAPI.exit();
+					}
+					_fullscrenAPI = null;
+				}
+			});
+	
+	
+			// clean up things when gallery is destroyed
+			_listen('destroy', function() {
+				if(_options.captionEl) {
+					if(_fakeCaptionContainer) {
+						_controls.removeChild(_fakeCaptionContainer);
+					}
+					framework.removeClass(_captionContainer, 'pswp__caption--empty');
+				}
+	
+				if(_shareModal) {
+					_shareModal.children[0].onclick = null;
+				}
+				framework.removeClass(_controls, 'pswp__ui--over-close');
+				framework.addClass( _controls, 'pswp__ui--hidden');
+				ui.setIdle(false);
+			});
+			
+	
+			if(!_options.showAnimationDuration) {
+				framework.removeClass( _controls, 'pswp__ui--hidden');
+			}
+			_listen('initialZoomIn', function() {
+				if(_options.showAnimationDuration) {
+					framework.removeClass( _controls, 'pswp__ui--hidden');
+				}
+			});
+			_listen('initialZoomOut', function() {
+				framework.addClass( _controls, 'pswp__ui--hidden');
+			});
+	
+			_listen('parseVerticalMargin', _applyNavBarGaps);
+			
+			_setupUIElements();
+	
+			if(_options.shareEl && _shareButton && _shareModal) {
+				_shareModalHidden = true;
+			}
+	
+			_countNumItems();
+	
+			_setupIdle();
+	
+			_setupFullscreenAPI();
+	
+			_setupLoadingIndicator();
+		};
+	
+		ui.setIdle = function(isIdle) {
+			_isIdle = isIdle;
+			_togglePswpClass(_controls, 'ui--idle', isIdle);
+		};
+	
+		ui.update = function() {
+			// Don't update UI if it's hidden
+			if(_controlsVisible && pswp.currItem) {
+				
+				ui.updateIndexIndicator();
+	
+				if(_options.captionEl) {
+					_options.addCaptionHTMLFn(pswp.currItem, _captionContainer);
+	
+					_togglePswpClass(_captionContainer, 'caption--empty', !pswp.currItem.title);
+				}
+	
+				_overlayUIUpdated = true;
+	
+			} else {
+				_overlayUIUpdated = false;
+			}
+	
+			if(!_shareModalHidden) {
+				_toggleShareModal();
+			}
+	
+			_countNumItems();
+		};
+	
+		ui.updateFullscreen = function(e) {
+	
+			if(e) {
+				// some browsers change window scroll position during the fullscreen
+				// so PhotoSwipe updates it just in case
+				setTimeout(function() {
+					pswp.setScrollOffset( 0, framework.getScrollY() );
+				}, 50);
+			}
+			
+			// toogle pswp--fs class on root element
+			framework[ (_fullscrenAPI.isFullscreen() ? 'add' : 'remove') + 'Class' ](pswp.template, 'pswp--fs');
+		};
+	
+		ui.updateIndexIndicator = function() {
+			if(_options.counterEl) {
+				_indexIndicator.innerHTML = (pswp.getCurrentIndex()+1) + 
+											_options.indexIndicatorSep + 
+											_options.getNumItemsFn();
+			}
+		};
+		
+		ui.onGlobalTap = function(e) {
+			e = e || window.event;
+			var target = e.target || e.srcElement;
+	
+			if(_blockControlsTap) {
+				return;
+			}
+	
+			if(e.detail && e.detail.pointerType === 'mouse') {
+	
+				// close gallery if clicked outside of the image
+				if(_hasCloseClass(target)) {
+					pswp.close();
+					return;
+				}
+	
+				if(framework.hasClass(target, 'pswp__img')) {
+					if(pswp.getZoomLevel() === 1 && pswp.getZoomLevel() <= pswp.currItem.fitRatio) {
+						if(_options.clickToCloseNonZoomable) {
+							pswp.close();
+						}
+					} else {
+						pswp.toggleDesktopZoom(e.detail.releasePoint);
+					}
+				}
+				
+			} else {
+	
+				// tap anywhere (except buttons) to toggle visibility of controls
+				if(_options.tapToToggleControls) {
+					if(_controlsVisible) {
+						ui.hideControls();
+					} else {
+						ui.showControls();
+					}
+				}
+	
+				// tap to close gallery
+				if(_options.tapToClose && (framework.hasClass(target, 'pswp__img') || _hasCloseClass(target)) ) {
+					pswp.close();
+					return;
+				}
+				
+			}
+		};
+		ui.onMouseOver = function(e) {
+			e = e || window.event;
+			var target = e.target || e.srcElement;
+	
+			// add class when mouse is over an element that should close the gallery
+			_togglePswpClass(_controls, 'ui--over-close', _hasCloseClass(target));
+		};
+	
+		ui.hideControls = function() {
+			framework.addClass(_controls,'pswp__ui--hidden');
+			_controlsVisible = false;
+		};
+	
+		ui.showControls = function() {
+			_controlsVisible = true;
+			if(!_overlayUIUpdated) {
+				ui.update();
+			}
+			framework.removeClass(_controls,'pswp__ui--hidden');
+		};
+	
+		ui.supportsFullscreen = function() {
+			var d = document;
+			return !!(d.exitFullscreen || d.mozCancelFullScreen || d.webkitExitFullscreen || d.msExitFullscreen);
+		};
+	
+		ui.getFullscreenAPI = function() {
+			var dE = document.documentElement,
+				api,
+				tF = 'fullscreenchange';
+	
+			if (dE.requestFullscreen) {
+				api = {
+					enterK: 'requestFullscreen',
+					exitK: 'exitFullscreen',
+					elementK: 'fullscreenElement',
+					eventK: tF
+				};
+	
+			} else if(dE.mozRequestFullScreen ) {
+				api = {
+					enterK: 'mozRequestFullScreen',
+					exitK: 'mozCancelFullScreen',
+					elementK: 'mozFullScreenElement',
+					eventK: 'moz' + tF
+				};
+	
+				
+	
+			} else if(dE.webkitRequestFullscreen) {
+				api = {
+					enterK: 'webkitRequestFullscreen',
+					exitK: 'webkitExitFullscreen',
+					elementK: 'webkitFullscreenElement',
+					eventK: 'webkit' + tF
+				};
+	
+			} else if(dE.msRequestFullscreen) {
+				api = {
+					enterK: 'msRequestFullscreen',
+					exitK: 'msExitFullscreen',
+					elementK: 'msFullscreenElement',
+					eventK: 'MSFullscreenChange'
+				};
+			}
+	
+			if(api) {
+				api.enter = function() { 
+					// disable close-on-scroll in fullscreen
+					_initalCloseOnScrollValue = _options.closeOnScroll; 
+					_options.closeOnScroll = false; 
+	
+					if(this.enterK === 'webkitRequestFullscreen') {
+						pswp.template[this.enterK]( Element.ALLOW_KEYBOARD_INPUT );
+					} else {
+						return pswp.template[this.enterK](); 
+					}
+				};
+				api.exit = function() { 
+					_options.closeOnScroll = _initalCloseOnScrollValue;
+	
+					return document[this.exitK](); 
+	
+				};
+				api.isFullscreen = function() { return document[this.elementK]; };
+			}
+	
+			return api;
+		};
+	
+	
+	
+	};
+	return PhotoSwipeUI_Default;
+	
+	
+	});
+
+
+/***/ },
+/* 163 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<!--以下是图片预览插件固定元素-->\n<!-- Root element of PhotoSwipe. Must have class pswp. -->\n<div class=\"pswp\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n\n  <!-- Background of PhotoSwipe.\n       It's a separate element as animating opacity is faster than rgba(). -->\n  <div class=\"pswp__bg\"></div>\n\n  <!-- Slides wrapper with overflow:hidden. -->\n  <div class=\"pswp__scroll-wrap\">\n\n    <!-- Container that holds slides.\n        PhotoSwipe keeps only 3 of them in the DOM to save memory.\n        Don't modify these 3 pswp__item elements, data is added later on. -->\n    <div class=\"pswp__container\">\n      <div class=\"pswp__item\"></div>\n      <div class=\"pswp__item\"></div>\n      <div class=\"pswp__item\"></div>\n    </div>\n\n    <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->\n    <div class=\"pswp__ui pswp__ui--hidden\">\n\n      <div class=\"pswp__top-bar\">\n\n        <!--  Controls are self-explanatory. Order can be changed. -->\n\n        <div class=\"pswp__counter\"></div>\n\n        <button class=\"pswp__button pswp__button--close\" title=\"Close (Esc)\"></button>\n\n        <button class=\"pswp__button pswp__button--share\" title=\"Share\"></button>\n\n        <button class=\"pswp__button pswp__button--fs\" title=\"Toggle fullscreen\"></button>\n\n        <button class=\"pswp__button pswp__button--zoom\" title=\"Zoom in/out\"></button>\n\n        <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->\n        <!-- element will get class pswp__preloader--active when preloader is running -->\n        <div class=\"pswp__preloader\">\n          <div class=\"pswp__preloader__icn\">\n            <div class=\"pswp__preloader__cut\">\n              <div class=\"pswp__preloader__donut\"></div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"pswp__share-modal pswp__share-modal--hidden pswp__single-tap\">\n        <div class=\"pswp__share-tooltip\"></div>\n      </div>\n\n      <button class=\"pswp__button pswp__button--arrow--left\" title=\"Previous (arrow left)\">\n      </button>\n\n      <button class=\"pswp__button pswp__button--arrow--right\" title=\"Next (arrow right)\">\n      </button>\n\n      <div class=\"pswp__caption\">\n        <div class=\"pswp__caption__center\"></div>\n      </div>\n\n    </div>\n\n  </div>\n\n</div>\n";
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_template__ = __webpack_require__(165)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27676,17 +32447,17 @@
 	})()}
 
 /***/ },
-/* 153 */
+/* 165 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"15px\" height=\"13px\" viewBox=\"0 0 15 13\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"task\" transform=\"translate(-337.000000, -173.000000)\" fill=\"#FFFFFF\">\n            <g id=\"Group-6\">\n                <g id=\"Group-9\" transform=\"translate(11.000000, 93.000000)\">\n                    <g id=\"task_card\">\n                        <path d=\"M339.521127,83.028169 L339.521127,81.5140845 L327.478873,81.5140845 L327.478873,83.028169 L339.521127,83.028169 L339.521127,83.028169 Z M339.521127,90.528169 L339.521127,86.0211268 L327.478873,86.0211268 L327.478873,90.528169 L339.521127,90.528169 L339.521127,90.528169 Z M339.521127,80 C339.943664,80 340.295772,80.1467132 340.577465,80.4401397 C340.859157,80.7335685 341,81.091547 341,81.5140845 L341,90.528169 C341,90.9507063 340.859157,91.3086839 340.577465,91.6021127 C340.295772,91.8955414 339.943664,92.0422535 339.521127,92.0422535 L327.478873,92.0422535 C327.056336,92.0422535 326.704227,91.8955414 326.422535,91.6021127 C326.140844,91.3086839 326,90.9507063 326,90.528169 L326,81.5140845 C326,81.091547 326.140844,80.7335685 326.422535,80.4401397 C326.704227,80.1467132 327.056336,80 327.478873,80 L339.521127,80 L339.521127,80 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
 
 /***/ },
-/* 154 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(155)
+	__vue_template__ = __webpack_require__(167)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27705,17 +32476,17 @@
 	})()}
 
 /***/ },
-/* 155 */
+/* 167 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"28px\" height=\"27px\" viewBox=\"0 0 28 27\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Group</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"task-copy-2\" transform=\"translate(-319.000000, -291.000000)\" fill=\"#FFFFFF\">\n            <g id=\"Group-6\">\n                <g id=\"Group-9\" transform=\"translate(11.000000, 94.000000)\">\n                    <g id=\"task_card\">\n                        <g id=\"Group\" transform=\"translate(308.000000, 197.000000)\">\n                            <path d=\"M28,13.3 C28,11.4625 26.5125,10.5 24.5,10.5 L18.6375,10.5 C19.075,8.925 19.25,7.4375 19.25,6.125 C19.25,1.05 17.85,0 16.625,0 C15.8375,0 15.225,0.0875 14.4375,0.525 C14.175,0.7 14.0875,0.875 14,1.1375 L13.125,5.8625 C12.1625,8.3125 9.8,10.5 7.875,11.9875 L7.875,24.5 C8.575,24.5 9.275,24.85 10.15,25.2875 C11.1125,25.725 12.075,26.25 13.125,26.25 L21.4375,26.25 C23.1875,26.25 24.5,24.85 24.5,23.625 C24.5,23.3625 24.5,23.1875 24.4125,23.0125 C25.4625,22.575 26.25,21.7 26.25,20.5625 C26.25,20.0375 26.1625,19.6 25.9875,19.1625 C26.6875,18.725 27.3,17.9375 27.3,17.0625 C27.3,16.5375 27.0375,16.0125 26.775,15.575 C27.475,15.05 28,14.175 28,13.3 L28,13.3 Z M26.1625,13.3 C26.1625,14.4375 25.025,14.525 24.85,15.05 C24.675,15.6625 25.55,15.8375 25.55,16.8875 C25.55,17.9375 24.2375,17.9375 24.0625,18.55 C23.8875,19.25 24.5,19.425 24.5,20.475 L24.5,20.65 C24.325,21.525 23.0125,21.6125 22.75,21.9625 C22.4875,22.4 22.75,22.575 22.75,23.5375 C22.75,24.0625 22.1375,24.4125 21.4375,24.4125 L13.125,24.4125 C12.425,24.4125 11.725,24.0625 10.85,23.625 C10.15,23.275 9.45,22.925 8.75,22.75 L8.75,13.5625 C10.9375,11.9 13.7375,9.45 14.7875,6.3875 L14.7875,6.2125 L15.575,1.8375 C15.925,1.75 16.1875,1.75 16.625,1.75 C16.8,1.75 17.5,2.8 17.5,6.125 C17.5,7.4375 17.2375,8.8375 16.8,10.5 L16.625,10.5 C16.1,10.5 15.75,10.85 15.75,11.375 C15.75,11.9 16.1,12.25 16.625,12.25 L24.5,12.25 C25.375,12.25 26.1625,12.6875 26.1625,13.3 L26.1625,13.3 Z\" id=\"Shape\"></path>\n                            <path d=\"M7,26.25 L1.75,26.25 C0.7875,26.25 0,25.4625 0,24.5 L0,12.25 C0,11.2875 0.7875,10.5 1.75,10.5 L7,10.5 C7.9625,10.5 8.75,11.2875 8.75,12.25 L8.75,24.5 C8.75,25.4625 7.9625,26.25 7,26.25 L7,26.25 Z M1.75,12.25 L1.75,24.5 L7,24.5 L7,12.25 L1.75,12.25 L1.75,12.25 Z\" id=\"Shape\"></path>\n                        </g>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n\n";
 
 /***/ },
-/* 156 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(157)
+	__vue_template__ = __webpack_require__(169)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27734,35 +32505,35 @@
 	})()}
 
 /***/ },
-/* 157 */
+/* 169 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"28px\" height=\"27px\" viewBox=\"0 0 28 27\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Group</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"task-copy-2\" transform=\"translate(-319.000000, -538.000000)\" fill=\"#FFFFFF\">\n            <g id=\"Group-6\">\n                <g id=\"Group-9-Copy\" transform=\"translate(11.000000, 341.000000)\">\n                    <g id=\"task_card\">\n                        <g id=\"Group\" transform=\"translate(308.000000, 197.000000)\">\n                            <path d=\"M28,13.3 C28,11.4625 26.5125,10.5 24.5,10.5 L18.6375,10.5 C19.075,8.925 19.25,7.4375 19.25,6.125 C19.25,1.05 17.85,0 16.625,0 C15.8375,0 15.225,0.0875 14.4375,0.525 C14.175,0.7 14.0875,0.875 14,1.1375 L13.125,5.8625 C12.1625,8.3125 9.8,10.5 7.875,11.9875 L7.875,24.5 C8.575,24.5 9.275,24.85 10.15,25.2875 C11.1125,25.725 12.075,26.25 13.125,26.25 L21.4375,26.25 C23.1875,26.25 24.5,24.85 24.5,23.625 C24.5,23.3625 24.5,23.1875 24.4125,23.0125 C25.4625,22.575 26.25,21.7 26.25,20.5625 C26.25,20.0375 26.1625,19.6 25.9875,19.1625 C26.6875,18.725 27.3,17.9375 27.3,17.0625 C27.3,16.5375 27.0375,16.0125 26.775,15.575 C27.475,15.05 28,14.175 28,13.3 L28,13.3 Z\" id=\"Shape\"></path>\n                            <path d=\"M26.1625,13.3 C26.1625,14.4375 25.025,14.525 24.85,15.05 C24.675,15.6625 25.55,15.8375 25.55,16.8875 C25.55,17.9375 24.2375,17.9375 24.0625,18.55 C23.8875,19.25 24.5,19.425 24.5,20.475 L24.5,20.65 C24.325,21.525 23.0125,21.6125 22.75,21.9625 C22.4875,22.4 22.75,22.575 22.75,23.5375 C22.75,24.0625 22.1375,24.4125 21.4375,24.4125 L13.125,24.4125 C12.425,24.4125 11.725,24.0625 10.85,23.625 C10.15,23.275 9.45,22.925 8.75,22.75 L8.75,13.5625 C10.9375,11.9 13.7375,9.45 14.7875,6.3875 L14.7875,6.2125 L15.575,1.8375 C15.925,1.75 16.1875,1.75 16.625,1.75 C16.8,1.75 17.5,2.8 17.5,6.125 C17.5,7.4375 17.2375,8.8375 16.8,10.5 L16.625,10.5 C16.1,10.5 15.75,10.85 15.75,11.375 C15.75,11.9 16.1,12.25 16.625,12.25 L24.5,12.25 C25.375,12.25 26.1625,12.6875 26.1625,13.3 L26.1625,13.3 Z\" id=\"Path\"></path>\n                            <path d=\"M7,26.25 L1.75,26.25 C0.7875,26.25 0,25.4625 0,24.5 L0,12.25 C0,11.2875 0.7875,10.5 1.75,10.5 L7,10.5 C7.9625,10.5 8.75,11.2875 8.75,12.25 L8.75,24.5 C8.75,25.4625 7.9625,26.25 7,26.25 L7,26.25 Z M1.75,12.25 L1.75,24.5 L7,24.5 L7,12.25 L1.75,12.25 L1.75,12.25 Z\" id=\"Shape\"></path>\n                        </g>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n\n";
 
 /***/ },
-/* 158 */
+/* 170 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-if=\"data\" :style=\"{background:data.color,marginBottom:isDetail?'0':null}\" v-link=\"'/demand/'+data.type+'/'+data.id\" class=\"demand-card\"><div class=\"demand-card-content\"><div v-if=\"!isDetail &amp;&amp; data.type=='lost'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{data.isLost?'失物':'拾获'}}</div><div class=\"tag\">{{data.thing}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div v-if=\"!isDetail &amp;&amp; data.type=='dating'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{sexStr(data.sex)}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div class=\"text\">{{data.text}}</div><div v-if=\"data.imgs\" class=\"imgs hide-scroll\"><img v-for=\"item in data.imgs\" :src=\"item.src\"/></div><div v-if=\"data.imgs\" class=\"imgs-space\"></div></div><div v-if=\"data.type=='task'\" class=\"demand-card-bottom\"><div class=\"left\"><div class=\"time\">{{timeStr(data.time)}}</div><div class=\"tag\">{{'#'+data.tag}}</div></div><div v-if=\"data.pay\" class=\"right\"> <span>{{'¥'+data.pay}}</span><svg-pay></svg-pay></div></div><div v-if=\"data.type=='lost'\" class=\"demand-card-bottom btn\">联&nbsp;系&nbsp;TA</div><div v-if=\"data.type=='dating'\" class=\"demand-card-bottom\"><div class=\"left\">参加人数：{{data.joinNum}}</div><div class=\"right\"><span>{{data.likeNum}}</span><svg-liked v-if=\"data.liked\" class=\"like\"></svg-liked><svg-like v-else=\"v-else\" class=\"like\"></svg-like></div></div></div>";
+	module.exports = "<div v-if=\"data\" :style=\"{background:data.color,marginBottom:isDetail?'0':null}\" @click=\"clickCard\" class=\"demand-card\"><div class=\"demand-card-content\"><div v-if=\"!isDetail &amp;&amp; data.type=='lost'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{data.isLost?'失物':'拾获'}}</div><div class=\"tag\">{{data.thing}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div v-if=\"!isDetail &amp;&amp; data.type=='dating'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{sexStr(data.sex)}}</div><div class=\"tag\">{{data.address}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div class=\"text\">{{data.text}}</div><div v-if=\"data.imgs\" class=\"imgs hide-scroll\"><img v-for=\"item in data.imgs\" :src=\"item.src\" @click.stop=\"clickImg($index,data.imgs)\"/></div><div v-if=\"data.imgs\" class=\"imgs-space\"><div @click.stop=\"\"><photo-swipe v-ref:viewer=\"v-ref:viewer\"></photo-swipe></div></div></div><div v-if=\"data.type=='task'\" class=\"demand-card-bottom\"><div class=\"left\"><div class=\"time\">{{timeStr(data.time)}}</div><div class=\"tag\">{{'#'+data.tag}}</div></div><div v-if=\"data.pay\" class=\"right\"> <span>{{'¥'+data.pay}}</span><svg-pay></svg-pay></div></div><div v-if=\"data.type=='lost'\" class=\"demand-card-bottom btn\">联&nbsp;系&nbsp;TA</div><div v-if=\"data.type=='dating'\" class=\"demand-card-bottom\"><div class=\"left\">参加人数：{{data.joinNum}}</div><div class=\"right\"><span>{{data.likeNum}}</span><svg-liked v-if=\"data.liked\" @click.stop=\"clickLike\" class=\"like\"></svg-liked><svg-like v-else=\"v-else\" @click.stop=\"clickLike\" class=\"like\"></svg-like></div></div></div>";
 
 /***/ },
-/* 159 */
+/* 171 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task\"><demand-card v-for=\"item in data\" :data.sync=\"item\"></demand-card></div>";
 
 /***/ },
-/* 160 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(161)
-	__vue_script__ = __webpack_require__(163)
+	__webpack_require__(173)
+	__vue_script__ = __webpack_require__(175)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Demand/Lost.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(164)
+	__vue_template__ = __webpack_require__(176)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27781,13 +32552,13 @@
 	})()}
 
 /***/ },
-/* 161 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(162);
+	var content = __webpack_require__(174);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -27807,7 +32578,7 @@
 	}
 
 /***/ },
-/* 162 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -27821,7 +32592,7 @@
 
 
 /***/ },
-/* 163 */
+/* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27838,7 +32609,8 @@
 	                text: '我不见了一只米奇图案的杯子',
 	                color: '#2196F3',
 	                imgs: [{
-	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f6m9tthnccj20iw0b20sr.jpg'
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f6m9tthnccj20iw0b20sr.jpg',
+	                    w: 680, h: 398
 	                }],
 	                isLost: true,
 	                time: 1472581345635
@@ -27847,7 +32619,8 @@
 	                thing: '银行卡',
 	                text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
 	                imgs: [{
-	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg',
+	                    w: 570, h: 760
 	                }],
 	                color: '#0CC998',
 	                isLost: false,
@@ -27879,23 +32652,23 @@
 	};
 
 /***/ },
-/* 164 */
+/* 176 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"lost\"><demand-card v-for=\"item in data\" :data.sync=\"item\"></demand-card></div>";
 
 /***/ },
-/* 165 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(166)
-	__vue_script__ = __webpack_require__(168)
+	__webpack_require__(178)
+	__vue_script__ = __webpack_require__(180)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Demand/Dating.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(169)
+	__vue_template__ = __webpack_require__(181)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -27914,13 +32687,13 @@
 	})()}
 
 /***/ },
-/* 166 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(167);
+	var content = __webpack_require__(179);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -27940,7 +32713,7 @@
 	}
 
 /***/ },
-/* 167 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -27954,7 +32727,7 @@
 
 
 /***/ },
-/* 168 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27969,6 +32742,7 @@
 	                type: 'dating',
 	                text: '有没有妹纸想一起去北岭山?',
 	                color: '#EC407A',
+	                address: '北岭山',
 	                sex: 2,
 	                likeNum: 8,
 	                joinNum: 0,
@@ -27978,6 +32752,7 @@
 	                type: 'dating',
 	                text: '有没有男生想一起去打工的?',
 	                color: '#2196F3',
+	                address: '玩具厂',
 	                sex: 1,
 	                likeNum: 0,
 	                joinNum: 2,
@@ -27987,6 +32762,7 @@
 	                type: 'dating',
 	                text: '求帮忙搬宿舍？',
 	                color: '#FFC107',
+	                address: '宿舍',
 	                sex: 0,
 	                likeNum: 1,
 	                joinNum: 8,
@@ -27996,6 +32772,7 @@
 	                type: 'dating',
 	                text: '下课去后山',
 	                color: '#FFC107',
+	                address: '后山',
 	                sex: 0,
 	                likeNum: 1,
 	                joinNum: 8,
@@ -28007,23 +32784,23 @@
 	};
 
 /***/ },
-/* 169 */
+/* 181 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"dating\"><demand-card v-for=\"item in data\" :data.sync=\"item\"></demand-card></div>";
 
 /***/ },
-/* 170 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(171)
-	__vue_script__ = __webpack_require__(173)
+	__webpack_require__(183)
+	__vue_script__ = __webpack_require__(185)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Square.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(179)
+	__vue_template__ = __webpack_require__(191)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28042,13 +32819,13 @@
 	})()}
 
 /***/ },
-/* 171 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(172);
+	var content = __webpack_require__(184);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28068,7 +32845,7 @@
 	}
 
 /***/ },
-/* 172 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28082,14 +32859,14 @@
 
 
 /***/ },
-/* 173 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = {
 	    components: {
-	        'square-item': __webpack_require__(174)
+	        'square-item': __webpack_require__(186)
 	    },
 	    data: function data() {
 	        return {
@@ -28100,7 +32877,8 @@
 	            nuo: {
 	                title: '有诺必行',
 	                color: '#18B803',
-	                subtitle: '我的目标',
+	                subtitle: '最火的目标',
+	                detail: '大家都在做 "吃尽肇庆学院一条街"',
 	                hot: [{
 	                    text: '论如何成为IT达人',
 	                    url: '#'
@@ -28168,17 +32946,17 @@
 	};
 
 /***/ },
-/* 174 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(175)
-	__vue_script__ = __webpack_require__(177)
+	__webpack_require__(187)
+	__vue_script__ = __webpack_require__(189)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/SquareItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(178)
+	__vue_template__ = __webpack_require__(190)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28197,13 +32975,13 @@
 	})()}
 
 /***/ },
-/* 175 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(188);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28223,7 +33001,7 @@
 	}
 
 /***/ },
-/* 176 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28237,7 +33015,7 @@
 
 
 /***/ },
-/* 177 */
+/* 189 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28253,29 +33031,29 @@
 	};
 
 /***/ },
-/* 178 */
+/* 190 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"square-item\"><div :style=\"{color:color}\" class=\"square-item-title\">{{'* '+title}}</div><div v-if=\"hot\" class=\"square-item-hot hide-scroll\"><a v-for=\"item in hot\" :href=\"item.url\" class=\"hot-item\"><div :style=\"{background:color,opacity:(1-$index*0.2)}\">{{'# '+item.text}}</div></a><a v-if=\"more\" :href=\"more.url\" class=\"hot-item more\"><div :style=\"{background:color,opacity:(1-hot.length*0.2)}\">{{more.text}}</div></a></div><div v-if=\"subtitle\" class=\"square-item-detail\"><div :style=\"{color:color}\" class=\"detail-title\">{{'# '+subtitle}}</div><div class=\"detail-content\"><slot></slot></div></div></div>";
 
 /***/ },
-/* 179 */
+/* 191 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"square\"><div class=\"activity-swipe\"><div class=\"activity-swipe-item\"><div class=\"title\"><div class=\"h1\">{{{swipe.title}}}</div><div class=\"h2\">{{swipe.author}}</div></div></div></div><square-item :color=\"nuo.color\" :title=\"nuo.title\" :hot=\"nuo.hot\" :more=\"nuo.more\" :subtitle=\"nuo.subtitle\"><div v-for=\"item in nuo.list\" class=\"nuo-item\"><span class=\"text\">{{item.name}}</span><input type=\"checkbox\" v-model=\"item.value\" class=\"checkbox\"/></div></square-item><square-item :color=\"ask.color\" :title=\"ask.title\" :hot=\"ask.hot\" :more=\"ask.more\" :subtitle=\"ask.subtitle\">{{ask.detail}}</square-item><square-item :color=\"cao.color\" :title=\"cao.title\" :hot=\"cao.hot\" :more=\"cao.more\" :subtitle=\"cao.subtitle\">{{cao.detail}}</square-item><div class=\"canteen-btn\">深&nbsp;夜&nbsp;食&nbsp;堂</div></div>";
+	module.exports = "<div class=\"square\"><div class=\"activity-swipe\"><div class=\"activity-swipe-item\"><div class=\"title\"><div class=\"h1\">{{{swipe.title}}}</div><div class=\"h2\">{{swipe.author}}</div></div></div></div><square-item :color=\"nuo.color\" :title=\"nuo.title\" :hot=\"nuo.hot\" :more=\"nuo.more\" :subtitle=\"nuo.subtitle\">{{nuo.detail}}</square-item><square-item :color=\"ask.color\" :title=\"ask.title\" :hot=\"ask.hot\" :more=\"ask.more\" :subtitle=\"ask.subtitle\">{{ask.detail}}</square-item><square-item :color=\"cao.color\" :title=\"cao.title\" :hot=\"cao.hot\" :more=\"cao.more\" :subtitle=\"cao.subtitle\">{{cao.detail}}</square-item><div class=\"canteen-btn\">深&nbsp;夜&nbsp;食&nbsp;堂</div></div>";
 
 /***/ },
-/* 180 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(181)
-	__vue_script__ = __webpack_require__(183)
+	__webpack_require__(193)
+	__vue_script__ = __webpack_require__(195)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Message.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(198)
+	__vue_template__ = __webpack_require__(210)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28294,13 +33072,13 @@
 	})()}
 
 /***/ },
-/* 181 */
+/* 193 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(182);
+	var content = __webpack_require__(194);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28320,7 +33098,7 @@
 	}
 
 /***/ },
-/* 182 */
+/* 194 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28334,7 +33112,7 @@
 
 
 /***/ },
-/* 183 */
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28342,9 +33120,9 @@
 	module.exports = {
 	    components: {
 	        'navbar': __webpack_require__(33),
-	        'svg-chat': __webpack_require__(184),
-	        'message-vip': __webpack_require__(186),
-	        'message': __webpack_require__(193)
+	        'svg-chat': __webpack_require__(196),
+	        'message-vip': __webpack_require__(198),
+	        'message': __webpack_require__(205)
 	    },
 	    data: function data() {
 	        return {
@@ -28388,11 +33166,11 @@
 	};
 
 /***/ },
-/* 184 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(185)
+	__vue_template__ = __webpack_require__(197)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28411,23 +33189,23 @@
 	})()}
 
 /***/ },
-/* 185 */
+/* 197 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"32px\" height=\"32px\" viewBox=\"0 0 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"message_list\" transform=\"translate(-18.000000, -41.000000)\" fill=\"#D5D5D5\">\n            <g id=\"Group-10\">\n                <g id=\"Group-8\">\n                    <path d=\"M18,57 C18,54.8333227 18.422218,52.7611221 19.2666667,50.7833344 C20.1111155,48.8055467 21.2472149,47.102784 22.6749995,45.6749995 C24.102784,44.2472149 25.8055467,43.1111168 27.7833344,42.2666667 C29.7611221,41.4222165 31.8333227,41 34,41 C36.1666773,41 38.2388779,41.4222165 40.2166656,42.2666667 C42.1944533,43.1111168 43.897216,44.2472149 45.3250005,45.6749995 C46.7527851,47.102784 47.8888832,48.8055467 48.7333333,50.7833344 C49.5777835,52.7611221 50,54.8333227 50,57 C50,59.1666773 49.5777835,61.2388779 48.7333333,63.2166656 C47.8888832,65.1944533 46.7527851,66.897216 45.3250005,68.3250005 C43.897216,69.7527851 42.1944533,70.8888845 40.2166656,71.7333333 C38.2388779,72.577782 36.1666773,73 34,73 C31.8333227,73 29.7611221,72.577782 27.7833344,71.7333333 C25.8055467,70.8888845 24.102784,69.7527851 22.6749995,68.3250005 C21.2472149,66.897216 20.1111155,65.1944533 19.2666667,63.2166656 C18.422218,61.2388779 18,59.1666773 18,57 L18,57 Z M21.0166665,57 C21.0166665,59.3555669 21.5972164,61.5305472 22.7583317,63.5250005 C23.9194496,65.5194539 25.4944341,67.097216 27.4833323,68.2583339 C29.4722304,69.4194505 31.6444331,70 34,70 C36.3555669,70 38.5305472,69.4194505 40.5250005,68.2583339 C42.5194539,67.097216 44.0999936,65.5194539 45.2666667,63.5250005 C46.4333397,61.5305472 47.0166656,59.3555669 47.0166656,57 C47.0166656,55.2444373 46.6722261,53.5638955 45.9833344,51.9583317 C45.2944427,50.352768 44.3694507,48.9694507 43.2083328,47.8083328 C42.0472149,46.6472149 40.66112,45.7222272 39.0500011,45.0333312 C37.4388821,44.3444395 35.7555627,44 34,44 C32.2444373,44 30.5638955,44.3444395 28.9583317,45.0333312 C27.352768,45.7222272 25.9694507,46.6472149 24.8083328,47.8083328 C23.6472149,48.9694507 22.7250048,50.352768 22.0416666,51.9583317 C21.35833,53.5638955 21.0166665,55.2444373 21.0166665,57 L21.0166665,57 Z M25.0500011,50.1666688 C25.1944448,50.0111104 25.455552,50.0055552 25.8333355,50.1499989 L43.8833323,57.4333312 C44.1277781,57.5222229 44.2972203,57.6333312 44.3916672,57.7666688 C44.4861099,57.9000021 44.4972245,58.0388864 44.4249984,58.1833344 C44.3527765,58.3277781 44.2055552,58.4555563 43.9833344,58.5666688 L40.7666688,60.1166677 L38.5166677,64.0833323 C38.3055531,64.4055552 38.0361131,64.5833344 37.7083349,64.6166656 C37.3805525,64.6500011 37.0777771,64.5277781 36.8,64.2500011 L36.3666688,63.8 C36.3333333,63.7666645 36.3111125,63.7499989 36.2999979,63.7499989 L35.3166677,62.7499989 L32.9000021,63.8833323 C32.5444437,64.0388907 32.1777792,64.0472235 31.8,63.9083349 C31.4222208,63.7694421 31.1444437,63.5222229 30.9666645,63.1666645 L25.0999979,50.9333333 C24.9222229,50.5777749 24.9055531,50.3222229 25.0500011,50.1666688 L25.0500011,50.1666688 Z M28.5000021,52.4 C28.4888875,52.4222208 28.5166677,52.4749995 28.5833344,52.5583317 C28.6500011,52.6416683 28.7555541,52.7499989 28.9000021,52.8833323 L35.3333333,58.6166656 C35.6444459,58.8833365 36.0249984,59.0583339 36.4749995,59.1416661 C36.9250005,59.2249984 37.3166635,59.1944448 37.6500011,59.0500011 C37.9944448,58.9055531 38.1638869,58.7055573 38.1583317,58.4500011 C38.1527765,58.1944448 37.972224,57.9611136 37.6166656,57.7499989 L29.0666667,52.6500011 C28.8888875,52.5499989 28.7527765,52.4777771 28.6583339,52.4333355 C28.5638869,52.3888896 28.5111125,52.3777792 28.5000021,52.4 L28.5000021,52.4 Z\" id=\"Page-1\"></path>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
 
 /***/ },
-/* 186 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(187)
-	__vue_script__ = __webpack_require__(189)
+	__webpack_require__(199)
+	__vue_script__ = __webpack_require__(201)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/MessageVip.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(192)
+	__vue_template__ = __webpack_require__(204)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28446,13 +33224,13 @@
 	})()}
 
 /***/ },
-/* 187 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(188);
+	var content = __webpack_require__(200);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28472,7 +33250,7 @@
 	}
 
 /***/ },
-/* 188 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28486,14 +33264,14 @@
 
 
 /***/ },
-/* 189 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	module.exports = {
 	    components: {
-	        'svg-message-vip': __webpack_require__(190)
+	        'svg-message-vip': __webpack_require__(202)
 	    },
 	    props: {
 	        title: String,
@@ -28502,11 +33280,11 @@
 	};
 
 /***/ },
-/* 190 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(191)
+	__vue_template__ = __webpack_require__(203)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28525,29 +33303,29 @@
 	})()}
 
 /***/ },
-/* 191 */
+/* 203 */
 /***/ function(module, exports) {
 
 	module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"16px\" height=\"16px\" viewBox=\"0 0 16 16\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"message_list\" transform=\"translate(-18.000000, -112.000000)\" fill=\"#000000\">\n            <g id=\"Group-10\">\n                <g id=\"Group-9\" transform=\"translate(0.000000, 90.000000)\">\n                    <g id=\"Group-6\">\n                        <path d=\"M21.7506117,22 L21.7506117,30.7881979 L18,30.7881979 L18,32.8841279 L18,35.8993255 C18,36.2180064 18.0612839,36.4876556 18.1838535,36.708281 C18.3064231,36.9289064 18.478018,37.112758 18.6986433,37.2598415 C18.8947546,37.406925 19.1092484,37.5111077 19.3421306,37.5723925 C19.5750129,37.6336773 19.8017632,37.6643192 20.0223886,37.6643192 L21.9160786,37.6643192 L25.3909112,37.6643192 L29.1599094,37.6643192 L31.7890134,37.6643192 C32.0341522,37.6643192 32.2670326,37.6152921 32.4876568,37.5172364 C32.708281,37.4191807 32.9043906,37.2720993 33.075988,37.075988 C33.2721,36.9043906 33.4191804,36.7082822 33.5172364,36.4876568 C33.6152924,36.2670314 33.6643192,36.0341527 33.6643192,35.7890134 L33.6643192,28.6371106 L33.6643192,22 L21.7506117,22 Z M20.0223886,37.0392173 C19.8262774,37.0392173 19.5443714,36.9656766 19.1766625,36.8185931 C18.8089536,36.6715096 18.6251019,36.3650902 18.6251019,35.8993255 L18.6251019,31.4132998 L21.7506117,31.4132998 L21.7506117,35.6419306 C21.7506117,35.7399864 21.719969,35.8686824 21.6586861,36.028023 C21.5974008,36.1873636 21.5054752,36.3405733 21.3829046,36.4876568 C21.260334,36.6347403 21.1071255,36.7634366 20.923272,36.8737491 C20.7394162,36.9840617 20.5494369,37.0392173 20.353325,37.0392173 L20.0223886,37.0392173 Z M33.0392173,35.7890134 C33.0392173,35.9360969 33.0024466,36.0893066 32.9289052,36.2486472 C32.8553638,36.4079878 32.7573102,36.5366838 32.6347396,36.6347396 C32.5366836,36.7573092 32.4079873,36.8553633 32.2486484,36.9289052 C32.0893071,37.0024471 31.9360962,37.0392173 31.7890134,37.0392173 L21.7138409,37.0392173 C21.8364115,36.9411616 21.9344652,36.8308506 22.0080066,36.708281 C22.081548,36.5857113 22.1550894,36.4631436 22.2286308,36.340574 C22.2776576,36.1934904 22.3144283,36.0647942 22.3389429,35.9544816 C22.3634575,35.844169 22.3757136,35.7399864 22.3757136,35.6419306 L22.3757136,22.6251019 L33.0392173,22.6251019 L33.0392173,35.7890134 Z M23.6259175,24.5004078 L31.7890134,24.5004078 L31.7890134,23.8753058 L23.6259175,23.8753058 L23.6259175,24.5004078 Z M23.6259175,32.9576693 L31.7890134,32.9576693 L31.7890134,32.3325674 L23.6259175,32.3325674 L23.6259175,32.9576693 Z M23.6259175,35.1639115 L31.7890134,35.1639115 L31.7890134,34.5388095 L23.6259175,34.5388095 L23.6259175,35.1639115 Z M31.7890134,26.081548 L23.6259175,26.081548 L23.6259175,30.7881979 L31.7890134,30.7881979 L31.7890134,26.081548 Z M31.1639115,30.1630959 L24.2510194,30.1630959 L24.2510194,26.7066499 L31.1639115,26.7066499 L31.1639115,30.1630959 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>";
 
 /***/ },
-/* 192 */
+/* 204 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"message-item-vip\"><div class=\"message-title\"> <svg-message-vip></svg-message-vip><span>{{title}}</span></div><div class=\"message-text\">{{text}}</div></div>";
 
 /***/ },
-/* 193 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(194)
-	__vue_script__ = __webpack_require__(196)
+	__webpack_require__(206)
+	__vue_script__ = __webpack_require__(208)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/Message.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(197)
+	__vue_template__ = __webpack_require__(209)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28566,13 +33344,13 @@
 	})()}
 
 /***/ },
-/* 194 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(195);
+	var content = __webpack_require__(207);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28592,7 +33370,7 @@
 	}
 
 /***/ },
-/* 195 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28606,7 +33384,7 @@
 
 
 /***/ },
-/* 196 */
+/* 208 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28621,29 +33399,29 @@
 	};
 
 /***/ },
-/* 197 */
+/* 209 */
 /***/ function(module, exports) {
 
 	module.exports = "<div :style=\"{opacity:new?'1':'0.3'}\" class=\"message-item\"><div :style=\"{color:color}\" class=\"message-title\"><div :style=\"{background:color}\" class=\"point\"></div><span>{{title}}</span></div><div class=\"message-text\">{{text}}</div></div>";
 
 /***/ },
-/* 198 */
+/* 210 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"message\"><navbar darker=\"darker\"><svg-chat></svg-chat><div class=\"chat-entrance\">{{chatStatus+' 》'}}</div></navbar><div class=\"message-list\"><a v-for=\"item in messagevip\" href=\"#\"><message-vip :title=\"item.title\" :text=\"item.text\"></message-vip></a><a v-for=\"item in message\" href=\"#\"><message :new=\"item.new\" :title=\"item.title\" :color=\"item.color\" :text=\"item.text\"></message></a></div></div>";
 
 /***/ },
-/* 199 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(200)
-	__vue_script__ = __webpack_require__(202)
+	__webpack_require__(212)
+	__vue_script__ = __webpack_require__(214)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/pages/Profile.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(225)
+	__vue_template__ = __webpack_require__(241)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28662,13 +33440,13 @@
 	})()}
 
 /***/ },
-/* 200 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(201);
+	var content = __webpack_require__(213);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28688,7 +33466,7 @@
 	}
 
 /***/ },
-/* 201 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28702,7 +33480,7 @@
 
 
 /***/ },
-/* 202 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28710,17 +33488,17 @@
 	module.exports = {
 	    components: {
 	        'navbar': __webpack_require__(33),
-	        'feature': __webpack_require__(203),
+	        'feature': __webpack_require__(215),
 	        'demand-card': __webpack_require__(45),
-	        'svg-setting': __webpack_require__(208),
-	        'svg-qimochengji': __webpack_require__(210),
-	        'svg-siliujichengji': __webpack_require__(212),
-	        'svg-fankajilu': __webpack_require__(214),
-	        'svg-shuifeichaxun': __webpack_require__(216),
-	        'svg-kuaidichaxun': __webpack_require__(218),
-	        'svg-wodehuida': __webpack_require__(253),
-	        'svg-wodemubiao': __webpack_require__(255),
-	        'timeline-item': __webpack_require__(220)
+	        'svg-setting': __webpack_require__(220),
+	        'svg-qimochengji': __webpack_require__(222),
+	        'svg-siliujichengji': __webpack_require__(224),
+	        'svg-fankajilu': __webpack_require__(226),
+	        'svg-shuifeichaxun': __webpack_require__(228),
+	        'svg-kuaidichaxun': __webpack_require__(230),
+	        'svg-wodehuida': __webpack_require__(232),
+	        'svg-wodemubiao': __webpack_require__(234),
+	        'timeline-item': __webpack_require__(236)
 	    },
 	    data: function data() {
 	        return {
@@ -28770,17 +33548,17 @@
 	};
 
 /***/ },
-/* 203 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(204)
-	__vue_script__ = __webpack_require__(206)
+	__webpack_require__(216)
+	__vue_script__ = __webpack_require__(218)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/Feature.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(207)
+	__vue_template__ = __webpack_require__(219)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28799,13 +33577,13 @@
 	})()}
 
 /***/ },
-/* 204 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(205);
+	var content = __webpack_require__(217);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -28825,7 +33603,7 @@
 	}
 
 /***/ },
-/* 205 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -28839,7 +33617,7 @@
 
 
 /***/ },
-/* 206 */
+/* 218 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28852,17 +33630,17 @@
 	};
 
 /***/ },
-/* 207 */
+/* 219 */
 /***/ function(module, exports) {
 
 	module.exports = "<div :style=\"{color:color}\" class=\"feature\"><div :style=\"{fill:color,transform:'translateY(-20%)'}\" class=\"icon\"><slot></slot></div><div class=\"name\">{{name}}</div></div>";
 
 /***/ },
-/* 208 */
+/* 220 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(209)
+	__vue_template__ = __webpack_require__(221)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28881,17 +33659,17 @@
 	})()}
 
 /***/ },
-/* 209 */
+/* 221 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"23px\" height=\"18px\" viewBox=\"0 0 23 18\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Group</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" stroke-linecap=\"round\">\n        <g id=\"me_list\" transform=\"translate(-329.000000, -49.000000)\" stroke=\"#979797\" stroke-width=\"2\">\n            <g id=\"Group\" transform=\"translate(330.000000, 49.000000)\">\n                <path d=\"M0.42,1 L20.5974925,1\" id=\"Line\"></path>\n                <path d=\"M0.42,9 L20.5974925,9\" id=\"Line-Copy-2\"></path>\n                <path d=\"M0.42,17 L20.5974925,17\" id=\"Line-Copy-3\"></path>\n            </g>\n        </g>\n    </g>\n</svg>\n";
 
 /***/ },
-/* 210 */
+/* 222 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(211)
+	__vue_template__ = __webpack_require__(223)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28910,17 +33688,17 @@
 	})()}
 
 /***/ },
-/* 211 */
+/* 223 */
 /***/ function(module, exports) {
 
 	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"37px\" height=\"44px\" viewBox=\"0 0 37 44\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-50.000000, -126.000000)\" fill=\"#4E8794\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6\">\n                        <path d=\"M74.3612656,31.3923829 L74.3612656,67.1833012 C74.3612656,67.76705 74.0676773,68.05892 73.4804866,68.05892 L39.1301065,68.05892 C38.5429176,68.05892 38.2493275,67.76705 38.2493275,67.1833012 L38.2493275,67.0738488 L38.2493275,59.9594461 L38.2493275,26.7953842 L38.2493275,26.6859319 C38.2493275,26.1021813 38.5429176,25.8103131 39.1301065,25.8103131 L55.9750044,25.8103131 L55.9750044,33.0341681 L55.9750044,42.2281655 L55.9750044,45.4022836 C55.9750044,45.6941589 56.1217986,45.840093 56.4153939,45.840093 C56.5621881,45.840093 56.6722854,45.8036113 56.745686,45.7306407 L59.9385098,42.4470702 L60.0486072,42.4470702 C60.1220078,42.3740996 60.1954013,42.3376178 60.2688019,42.3376178 C60.4155961,42.3376178 60.5256935,42.3740996 60.5990941,42.4470702 L63.7919179,45.6211883 C63.938712,45.7671225 64.0488094,45.840093 64.12221,45.840093 C64.4158053,45.840093 64.5625995,45.6941589 64.5625995,45.4022836 L64.5625995,42.2281655 L64.5625995,33.0341681 L64.5625995,25.8103131 L67.7554233,25.8103131 L67.8655206,25.8103131 C68.4527113,25.8103131 68.7462996,26.1021813 68.7462996,26.6859319 L68.7462996,61.6012314 C68.7462996,62.1849805 68.4527113,62.4768502 67.8655206,62.4768502 L67.7554233,62.4768502 L41.1118592,62.4768502 L41.1118592,64.5564448 C41.2586561,65.0672248 41.5522466,65.3226112 41.9926382,65.3226112 L70.7280523,65.3226112 C71.315243,65.3226112 71.6088313,64.9942577 71.6088313,64.3375401 L71.6088313,30.5167641 L73.4804866,30.5167641 C74.0676773,30.5167641 74.3612656,30.8086324 74.3612656,31.3923829 L74.3612656,31.3923829 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
 
 /***/ },
-/* 212 */
+/* 224 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(213)
+	__vue_template__ = __webpack_require__(225)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28939,17 +33717,17 @@
 	})()}
 
 /***/ },
-/* 213 */
+/* 225 */
 /***/ function(module, exports) {
 
 	module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"51px\" height=\"47px\" viewBox=\"0 0 51 47\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-163.000000, -124.000000)\" fill=\"#FFA600\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy\" transform=\"translate(119.685714, 0.000000)\">\n                        <path d=\"M58.005579,34.488303 L59.1415259,37.9411158 C59.6024996,37.5465086 60.1375396,37.1765691 60.7466775,36.8312847 C61.3558091,36.4860002 62.0390197,36.1982716 62.7963282,35.9680799 C63.5536304,35.7050063 64.261534,35.5077028 64.9200579,35.3761691 C65.5785818,35.2446355 66.2041754,35.1295428 66.796845,35.0308847 L65.710284,31.6767237 C65.1176144,31.7753818 64.4837898,31.898695 63.8088039,32.0466695 C63.1338117,32.1946504 62.4341391,32.3837272 61.7097609,32.6139189 C60.985389,32.8769925 60.3186405,33.1647211 59.7095025,33.4771237 C59.1003709,33.78952 58.5324006,34.1265776 58.005579,34.488303 L58.005579,34.488303 Z M60.3762574,41.6898839 L61.5122044,45.1920257 C61.9731781,44.7645304 62.4999871,44.37815 63.0926567,44.0328656 C63.6853326,43.6875812 64.3767742,43.3998525 65.1670067,43.1696608 C65.8913786,42.9394691 66.5828201,42.7503923 67.241344,42.6024114 C67.8998743,42.4544369 68.5419236,42.3311237 69.1675235,42.2324719 L68.0809625,38.9276337 C67.4553626,38.9934037 66.8133133,39.1002759 66.1547894,39.2482504 C65.4962592,39.3962313 64.8048176,39.5853081 64.0804394,39.8154998 C63.3231372,40.0785734 62.6399267,40.366302 62.030795,40.6787046 C61.4216571,40.9911009 60.8701488,41.3281586 60.3762574,41.6898839 L60.3762574,41.6898839 Z M62.6975436,48.9407939 L63.8334969,52.3936003 C64.2944643,51.9989932 64.8295106,51.6290537 65.4386422,51.2837693 C66.0477801,50.9384848 66.7309907,50.6343153 67.4882929,50.3712417 C68.2455951,50.14105 68.9534986,49.9519732 69.6120225,49.8039923 C70.2705528,49.6560178 70.89614,49.5327047 71.488816,49.4340465 L70.4022487,46.1292146 C69.8095791,46.1949846 69.1757608,46.3018568 68.5007686,46.4498314 C67.8257827,46.5978122 67.1261101,46.8033363 66.4017319,47.0664035 C65.6773537,47.2965952 65.0106051,47.5678829 64.4014735,47.8802855 C63.7923356,48.1926818 63.2243653,48.5461804 62.6975436,48.9407939 L62.6975436,48.9407939 Z M44.868069,54.4159653 L45.95463,57.7207972 C46.4814517,57.45773 47.057653,57.1864359 47.6832466,56.9069215 C48.3088465,56.627407 48.9838261,56.3725602 49.7082043,56.1423685 C50.4984367,55.8793013 51.2310333,55.7148795 51.9060192,55.6491158 C52.5810114,55.5833459 53.2312917,55.5833459 53.8568916,55.6491158 L52.7209447,52.146974 C52.0953447,52.146974 51.4450581,52.1962968 50.7700722,52.2949549 C50.09508,52.3936067 49.3789455,52.5580221 48.6216433,52.7882075 C47.8972651,53.0512811 47.2222855,53.3143546 46.5966919,53.5774219 C45.971092,53.8404954 45.3948907,54.1200099 44.868069,54.4159653 L44.868069,54.4159653 Z M40.176098,39.9634744 L41.2626653,43.3176354 C41.7894807,43.0545681 42.365682,42.7832741 42.9912819,42.5037596 C43.6168818,42.2242452 44.2918614,41.9693984 45.0162396,41.7392067 C45.8064658,41.4761394 46.5390623,41.3117177 47.2140545,41.245954 C47.8890404,41.180184 48.539327,41.1637431 49.1649269,41.1966249 L48.0289737,37.7438122 C47.4033737,37.7438122 46.7530935,37.7931349 46.0781013,37.891793 C45.4031154,37.9904448 44.6869808,38.1548603 43.9296723,38.3850457 C43.2053004,38.6152374 42.5303208,38.8700842 41.9047209,39.1495987 C41.279121,39.4291131 40.7029197,39.7004071 40.176098,39.9634744 L40.176098,39.9634744 Z M42.4973905,47.2143843 L43.5839515,50.5192226 C44.1107732,50.256149 44.6869745,49.984855 45.3125681,49.7053406 C45.938168,49.4258261 46.6296096,49.1709793 47.3869181,48.9407939 C48.1442203,48.6777203 48.8685858,48.5132986 49.56004,48.4475286 C50.2514879,48.381765 50.8935435,48.365324 51.4862131,48.3982059 L50.3996522,44.9453931 C49.7411282,44.9453931 49.0743797,44.9947158 48.3993938,45.0933676 C47.7244015,45.1920257 47.024729,45.3564412 46.3003508,45.5866329 C45.5759789,45.8497002 44.9009993,46.1127737 44.2753994,46.3758473 C43.6497995,46.6389145 43.0571362,46.918429 42.4973905,47.2143843 L42.4973905,47.2143843 Z M59.1909182,24.919079 C57.0177836,25.6425297 55.330341,26.6454759 54.1285334,27.9279556 C52.9267259,29.2104415 52.0459588,30.3613623 51.4862131,31.3807747 C50.4655001,30.8875094 49.082617,30.4764676 47.3375258,30.1476241 C45.5924346,29.8187806 43.6333501,29.9996432 41.4602219,30.6902058 C38.2663743,31.7425 35.7969397,33.115392 34.0518485,34.8089197 C32.3067572,36.5024538 31.4342243,37.349205 31.4342243,37.349205 L41.7565504,69.1150825 C41.9211829,69.6083439 42.2586727,69.8960754 42.7690324,69.9782857 C43.2793857,70.0604959 43.6827298,69.9042988 43.9790646,69.5096897 C44.6046645,68.5889348 45.5677416,67.5942058 46.8683274,66.5254732 C48.1689132,65.45674 49.9551405,64.5606616 52.227047,63.8372115 C54.4001816,63.113764 56.2687187,63.0068918 57.8327154,63.5165916 C59.3967121,64.0262966 60.606738,64.6099806 61.4628184,65.2676626 C61.7920835,65.5307355 62.1624973,65.5882818 62.5740724,65.4403035 C62.9856538,65.2923246 63.2572893,65.021035 63.3889978,64.6264259 C63.7182566,63.5741348 64.3603122,62.3903259 65.3151709,61.0749582 C66.2700297,59.7595967 67.8340073,58.7566505 70.0071356,58.0660816 C72.2790485,57.3097491 74.2463639,56.9891324 75.9091388,57.1042251 C77.5719138,57.2193241 78.9301039,57.45773 79.9837472,57.8194553 C80.4776386,57.9838707 80.9056756,57.8769985 81.2678584,57.4988322 C81.6300475,57.120666 81.7288258,56.7014037 81.5641995,56.2410266 L71.2418671,24.4258201 C71.2418671,24.4258201 70.0318476,24.2531842 67.6117641,23.9078997 C65.191687,23.5626153 62.3847658,23.899673 59.1909182,24.919079 L59.1909182,24.919079 Z M58.9439694,59.8911367 C57.8903324,59.5951813 56.6885438,59.4143249 55.3385657,59.3485549 C53.9885875,59.282785 52.5398564,59.5129704 50.9923218,60.0391175 C49.4118631,60.5323765 48.061904,61.0996195 46.9424127,61.7408594 C45.8229214,62.3820992 44.9009993,62.9822241 44.1766211,63.5412593 L35.9780247,38.3357229 C36.4060662,37.9082276 37.1633583,37.3163232 38.2499249,36.5599907 C39.3364922,35.8036581 40.8181536,35.1131019 42.6949471,34.488303 C44.4400383,33.9292741 46.020478,33.8141814 47.4363041,34.1430249 C48.8521301,34.4718621 50.0374631,34.915792 50.9923218,35.4748209 L58.9439694,59.8911367 L58.9439694,59.8911367 Z M76.3783372,53.133492 C75.4564025,53.067722 74.3533921,53.1088306 73.0692683,53.2568051 C71.7851382,53.404786 70.352869,53.7418436 68.7724104,54.2679907 C67.1919518,54.7612497 65.8749166,55.4271446 64.8212796,56.265688 C63.7676426,57.1042314 62.9115685,57.9509826 62.2530446,58.8059732 L54.301397,34.3896512 C54.729434,33.3702451 55.4208756,32.3179699 56.3757343,31.2327938 C57.3305994,30.1476178 58.6970205,29.3255279 60.4750357,28.766499 C62.3189052,28.1417001 63.8993449,27.8128629 65.2163927,27.779981 C66.5334405,27.7470992 67.5212169,27.779981 68.1797408,27.8786328 L76.3783372,53.133492 L76.3783372,53.133492 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>";
 
 /***/ },
-/* 214 */
+/* 226 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(215)
+	__vue_template__ = __webpack_require__(227)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28968,17 +33746,17 @@
 	})()}
 
 /***/ },
-/* 215 */
+/* 227 */
 /***/ function(module, exports) {
 
 	module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"51px\" height=\"36px\" viewBox=\"0 0 51 36\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-285.000000, -131.000000)\" fill=\"#FF3A3A\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-2\" transform=\"translate(241.400000, 0.000000)\">\n                        <path d=\"M79.0508929,30.3896104 C79.9384,30.3896104 80.6779715,30.6850602 81.2696429,31.275974 C81.8613143,31.8668878 82.1571429,32.6055124 82.1571429,33.4918831 L82.1571429,62.7418831 C82.1571429,63.628251 81.8613143,64.3668805 81.2696429,64.9577922 C80.6779715,65.5487043 79.9384,65.8441558 79.0508929,65.8441558 L35.5633929,65.8441558 C34.6758886,65.8441558 33.9363121,65.5487043 33.3446429,64.9577922 C32.7529732,64.3668805 32.4571429,63.628251 32.4571429,62.7418831 L32.4571429,33.4918831 C32.4571429,32.6055124 32.7529732,31.8668878 33.3446429,31.275974 C33.9363121,30.6850602 34.6758886,30.3896104 35.5633929,30.3896104 L79.0508929,30.3896104 Z M37.4493304,33.9350649 C36.6357847,33.9350649 36.15506,34.3782397 36.0071429,35.2646104 L36.0071429,37.4805195 L78.6071429,37.4805195 L78.6071429,35.2646104 C78.4592286,34.3782397 77.9785018,33.9350649 77.1649554,33.9350649 L37.4493304,33.9350649 Z M77.1649554,62.2987013 C77.9785018,62.2987013 78.4592286,61.8555237 78.6071429,60.9691558 L78.6071429,48.1168831 L36.0071429,48.1168831 L36.0071429,60.9691558 C36.15506,61.8555237 36.6357847,62.2987013 37.4493304,62.2987013 L77.1649554,62.2987013 Z M39.5571429,55.2077922 L39.5571429,53.4350649 L60.8571429,53.4350649 L60.8571429,55.2077922 L39.5571429,55.2077922 Z M39.5571429,58.7532468 L39.5571429,56.9805195 L50.2071429,56.9805195 L50.2071429,58.7532468 L39.5571429,58.7532468 Z M67.9571429,58.7532468 L67.9571429,53.4350649 L75.0571429,53.4350649 L75.0571429,58.7532468 L67.9571429,58.7532468 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>";
 
 /***/ },
-/* 216 */
+/* 228 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(217)
+	__vue_template__ = __webpack_require__(229)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -28997,17 +33775,17 @@
 	})()}
 
 /***/ },
-/* 217 */
+/* 229 */
 /***/ function(module, exports) {
 
 	module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"33px\" height=\"45px\" viewBox=\"0 0 33 45\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-53.000000, -248.000000)\" fill=\"#0098FF\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-3\" transform=\"translate(0.000000, 120.545455)\">\n                        <path d=\"M58.7810268,28.03125 C60.09115,29.3924575 61.4012607,30.8832825 62.7113839,32.5037686 C64.0215072,34.1242546 65.5445048,36.1984453 67.2804273,38.7264031 C69.0163434,41.2543608 70.4083312,44.0415534 71.4564286,47.0880682 C72.5045259,50.1345829 73.0285714,53.1162329 73.0285714,56.0331053 C73.0285714,60.181549 71.4891983,63.6979536 68.4104018,66.5824154 C65.3316053,69.4668802 61.6305546,70.9090909 57.3071429,70.9090909 C54.5558803,70.9090909 52.0175487,70.3095202 49.6920727,69.1103606 C47.3666031,67.9112011 45.5160783,66.274535 44.1404464,64.2003131 C43.6163965,63.3576626 43.1251063,62.4177896 42.6665625,61.3806818 C41.9459934,59.6305596 41.5857143,57.8480486 41.5857143,56.0331053 L41.5857143,55.6441906 C41.6512206,50.1993605 43.74739,44.268468 47.8742857,37.8513451 C49.184409,35.8419444 51.1168178,33.3464315 53.6715625,30.3647379 C54.8506759,29.0683516 55.571233,28.2905285 55.8332589,28.03125 L55.9315179,27.9340213 C56.4555697,27.5451067 56.9141071,27.3506494 57.3071429,27.3506494 C57.7001786,27.3506494 58.158716,27.5451067 58.6827679,27.9340213 L58.7810268,28.03125 Z M57.3071429,65.4642857 C59.9928974,65.4642857 62.3019602,64.5082153 64.2343942,62.596037 C66.1668344,60.683865 67.1330357,58.3990132 67.1330357,55.7414193 C67.1330357,54.3802118 66.8710161,53.0838441 66.3469643,51.8522727 C65.4953848,55.0284236 63.8577528,57.7670051 61.4340179,60.0680917 C59.0102829,62.3691846 56.1935563,63.8438059 52.98375,64.4919991 C54.4248893,65.1401935 55.8660035,65.4642857 57.3071429,65.4642857 L57.3071429,65.4642857 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>";
 
 /***/ },
-/* 218 */
+/* 230 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(219)
+	__vue_template__ = __webpack_require__(231)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -29026,23 +33804,81 @@
 	})()}
 
 /***/ },
-/* 219 */
+/* 231 */
 /***/ function(module, exports) {
 
 	module.exports = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"46px\" height=\"49px\" viewBox=\"0 0 46 49\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-165.000000, -244.000000)\" fill=\"#16A82E\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-4\" transform=\"translate(119.685714, 120.545455)\">\n                        <path d=\"M56.3547038,23.2987013 C57.179329,23.2987013 57.8802529,23.586947 58.4574913,24.1634463 C59.0347297,24.7399456 59.3233449,25.439972 59.3233449,26.2635413 L59.3233449,41.5818815 L79.1142857,53.9353817 L79.1142857,59.2473868 L59.3233449,52.5764967 L59.3233449,62.9534368 L63.3433837,66.9683244 L63.3433837,71.1067469 L56.3547038,68.7595819 L49.4278746,71.1067469 L49.4897252,66.7830219 L53.2623693,63.0769718 L53.2623693,52.5764967 L33.4714286,59.3709218 L33.5332753,53.9353817 L53.3242121,41.4583465 L53.3860627,26.2635413 C53.3860627,25.439972 53.674678,24.7399456 54.2519164,24.1634463 C54.8291548,23.586947 55.5300787,23.2987013 56.3547038,23.2987013 L56.3547038,23.2987013 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>";
 
 /***/ },
-/* 220 */
+/* 232 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(221)
-	__vue_script__ = __webpack_require__(223)
+	__vue_template__ = __webpack_require__(233)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/svg/features/Wodehuida.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 233 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"46px\" height=\"46px\" viewBox=\"0 0 46 46\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-48.000000, -373.000000)\" fill=\"#08CE88\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-6\" transform=\"translate(0.000000, 244.000000)\">\n                        <path d=\"M70.5539906,51 C70.5539906,51.6478873 70.3200325,52.1877934 69.8521161,52.6197183 C69.3841929,53.0516432 68.8262911,53.2676056 68.1784038,53.2676056 L45.1784038,53.2676056 L36,62.5539906 L36,30.2676056 C36,29.6197183 36.2159603,29.0798122 36.6478873,28.6478873 C37.0798143,28.2159624 37.6197149,28 38.2676056,28 L68.1784038,28 C68.8262911,28 69.3841929,28.2159624 69.8521161,28.6478873 C70.3200325,29.0798122 70.5539906,29.6197183 70.5539906,30.2676056 L70.5539906,51 L70.5539906,51 Z M79.7323944,37.1784038 C80.3802817,37.1784038 80.9201878,37.3943662 81.3521127,37.8262911 C81.7840376,38.258216 82,38.7981221 82,39.4460094 L82,74 L72.8215962,64.8215962 L47.4460094,64.8215962 C46.7981221,64.8215962 46.258216,64.6056338 45.8262911,64.1737089 C45.3943662,63.741784 45.1784038,63.2018779 45.1784038,62.5539906 L45.1784038,57.9107981 L75.0892019,57.9107981 L75.0892019,37.1784038 L79.7323944,37.1784038 L79.7323944,37.1784038 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
+
+/***/ },
+/* 234 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_template__ = __webpack_require__(235)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/svg/features/Wodemubiao.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 235 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"47px\" height=\"37px\" viewBox=\"0 0 47 37\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-286.000000, -256.000000)\" fill=\"#7300FF\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-5\" transform=\"translate(241.000000, 121.000000)\">\n                        <path d=\"M43.0714302,61.6964244 L43.0714302,63.375 C43.0714302,63.6023038 42.9883754,63.7990105 42.8222656,63.9651203 C42.6561559,64.13123 42.4594491,64.2142849 42.2321454,64.2142849 L40.5535697,64.2142849 C40.326266,64.2142849 40.1295592,64.13123 39.9634495,63.9651203 C39.7973397,63.7990105 39.7142849,63.6023038 39.7142849,63.375 L39.7142849,61.6964244 C39.7142849,61.4691206 39.7973397,61.2724139 39.9634495,61.1063041 C40.1295592,60.9401944 40.326266,60.8571395 40.5535697,60.8571395 L42.2321454,60.8571395 C42.4594491,60.8571395 42.6561559,60.9401944 42.8222656,61.1063041 C42.9883754,61.2724139 43.0714302,61.4691206 43.0714302,61.6964244 L43.0714302,61.6964244 Z M43.0714302,54.9821395 L43.0714302,56.6607151 C43.0714302,56.8880189 42.9883754,57.0847256 42.8222656,57.2508354 C42.6561559,57.4169451 42.4594491,57.5 42.2321454,57.5 L40.5535697,57.5 C40.326266,57.5 40.1295592,57.4169451 39.9634495,57.2508354 C39.7973397,57.0847256 39.7142849,56.8880189 39.7142849,56.6607151 L39.7142849,54.9821395 C39.7142849,54.7548357 39.7973397,54.558129 39.9634495,54.3920192 C40.1295592,54.2259095 40.326266,54.1428546 40.5535697,54.1428546 L42.2321454,54.1428546 C42.4594491,54.1428546 42.6561559,54.2259095 42.8222656,54.3920192 C42.9883754,54.558129 43.0714302,54.7548357 43.0714302,54.9821395 L43.0714302,54.9821395 Z M43.0714302,48.2678546 L43.0714302,49.9464244 C43.0714302,50.173734 42.9883754,50.3704408 42.8222656,50.5365505 C42.6561559,50.7026603 42.4594491,50.7857151 42.2321454,50.7857151 L40.5535697,50.7857151 C40.326266,50.7857151 40.1295592,50.7026603 39.9634495,50.5365505 C39.7973397,50.3704408 39.7142849,50.173734 39.7142849,49.9464244 L39.7142849,48.2678546 C39.7142849,48.040545 39.7973397,47.8438441 39.9634495,47.6777344 C40.1295592,47.5116246 40.326266,47.4285698 40.5535697,47.4285698 L42.2321454,47.4285698 C42.4594491,47.4285698 42.6561559,47.5116246 42.8222656,47.6777344 C42.9883754,47.8438441 43.0714302,48.040545 43.0714302,48.2678546 L43.0714302,48.2678546 Z M73.2857151,61.6964244 L73.2857151,63.375 C73.2857151,63.6023038 73.2026602,63.7990105 73.0365505,63.9651203 C72.8704407,64.13123 72.673734,64.2142849 72.4464302,64.2142849 L47.2678546,64.2142849 C47.0405509,64.2142849 46.8438441,64.13123 46.6777344,63.9651203 C46.5116246,63.7990105 46.4285697,63.6023038 46.4285697,63.375 L46.4285697,61.6964244 C46.4285697,61.4691206 46.5116246,61.2724139 46.6777344,61.1063041 C46.8438441,60.9401944 47.0405509,60.8571395 47.2678546,60.8571395 L72.4464302,60.8571395 C72.673734,60.8571395 72.8704407,60.9401944 73.0365505,61.1063041 C73.2026602,61.2724139 73.2857151,61.4691206 73.2857151,61.6964244 L73.2857151,61.6964244 Z M73.2857151,54.9821395 L73.2857151,56.6607151 C73.2857151,56.8880189 73.2026602,57.0847256 73.0365505,57.2508354 C72.8704407,57.4169451 72.673734,57.5 72.4464302,57.5 L47.2678546,57.5 C47.0405509,57.5 46.8438441,57.4169451 46.6777344,57.2508354 C46.5116246,57.0847256 46.4285697,56.8880189 46.4285697,56.6607151 L46.4285697,54.9821395 C46.4285697,54.7548357 46.5116246,54.558129 46.6777344,54.3920192 C46.8438441,54.2259095 47.0405509,54.1428546 47.2678546,54.1428546 L72.4464302,54.1428546 C72.673734,54.1428546 72.8704407,54.2259095 73.0365505,54.3920192 C73.2026602,54.558129 73.2857151,54.7548357 73.2857151,54.9821395 L73.2857151,54.9821395 Z M73.2857151,48.2678546 L73.2857151,49.9464244 C73.2857151,50.173734 73.2026602,50.3704408 73.0365505,50.5365505 C72.8704407,50.7026603 72.673734,50.7857151 72.4464302,50.7857151 L47.2678546,50.7857151 C47.0405509,50.7857151 46.8438441,50.7026603 46.6777344,50.5365505 C46.5116246,50.3704408 46.4285697,50.173734 46.4285697,49.9464244 L46.4285697,48.2678546 C46.4285697,48.040545 46.5116246,47.8438441 46.6777344,47.6777344 C46.8438441,47.5116246 47.0405509,47.4285698 47.2678546,47.4285698 L72.4464302,47.4285698 C72.673734,47.4285698 72.8704407,47.5116246 73.0365505,47.6777344 C73.2026602,47.8438441 73.2857151,48.040545 73.2857151,48.2678546 L73.2857151,48.2678546 Z M76.6428546,66.7321413 L76.6428546,44.9107151 C76.6428546,44.6834055 76.5598056,44.4866987 76.3936959,44.320589 C76.2275861,44.1544792 76.0308794,44.0714244 75.8035697,44.0714244 L37.1964285,44.0714244 C36.9691206,44.0714244 36.772415,44.1544792 36.6063059,44.320589 C36.4401961,44.4866987 36.357143,44.6834055 36.357143,44.9107151 L36.357143,66.7321413 C36.357143,66.9594491 36.4401961,67.1561547 36.6063059,67.3222639 C36.772415,67.4883736 36.9691206,67.5714267 37.1964285,67.5714267 L75.8035697,67.5714267 C76.0308794,67.5714267 76.2275861,67.4883736 76.3936959,67.3222639 C76.5598056,67.1561547 76.6428546,66.9594491 76.6428546,66.7321413 L76.6428546,66.7321413 Z M80,38.1964244 L80,66.7321413 C80,67.8861646 79.5891025,68.874064 78.7673016,69.695869 C77.9454949,70.5176735 76.957596,70.9285698 75.8035698,70.9285698 L37.1964285,70.9285698 C36.0424052,70.9285698 35.0545057,70.5176735 34.2327007,69.695869 C33.4108962,68.874064 33,67.8861646 33,66.7321413 L33,38.1964244 C33,37.042404 33.4108962,36.0545051 34.2327007,35.2326984 C35.0545057,34.4108916 36.0424052,34 37.1964285,34 L75.8035698,34 C76.957596,34 77.9454949,34.4108916 78.7673016,35.2326984 C79.5891025,36.0545051 80,37.042404 80,38.1964244 L80,38.1964244 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(237)
+	__vue_script__ = __webpack_require__(239)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] src/components/TimelineItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(224)
+	__vue_template__ = __webpack_require__(240)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -29061,13 +33897,13 @@
 	})()}
 
 /***/ },
-/* 221 */
+/* 237 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(222);
+	var content = __webpack_require__(238);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(8)(content, {});
@@ -29087,7 +33923,7 @@
 	}
 
 /***/ },
-/* 222 */
+/* 238 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(7)();
@@ -29101,7 +33937,7 @@
 
 
 /***/ },
-/* 223 */
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29119,156 +33955,27 @@
 	};
 
 /***/ },
-/* 224 */
+/* 240 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"timeline-item\"><div class=\"timeline-item-time\">{{timeStr(time)}}</div><div class=\"timeline-item-content\"><slot></slot></div></div>";
 
 /***/ },
-/* 225 */
+/* 241 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"profile\"><navbar><div class=\"title\">{{user.username+' / '+user.school}}</div><svg-setting class=\"setting\"></svg-setting></navbar><div class=\"profile-content\"><div class=\"features\"><feature name=\"我的目标\" color=\"#7300FF\"><svg-wodemubiao></svg-wodemubiao></feature><feature name=\"我的回答\" color=\"#09CE88\"><svg-wodehuida></svg-wodehuida></feature><feature name=\"期末成绩\" color=\"#4F8794\"><svg-qimochengji></svg-qimochengji></feature><feature name=\"四六级成绩\" color=\"#FFA600\"><svg-siliujichengji></svg-siliujichengji></feature><feature name=\"饭卡记录\" color=\"#FF3A3A\"><svg-fankajilu></svg-fankajilu></feature><feature name=\"水费查询\" color=\"#0098FF\"><svg-shuifeichaxun></svg-shuifeichaxun></feature><feature name=\"快递查询\" color=\"#16A82E\"><svg-kuaidichaxun></svg-kuaidichaxun></feature></div><div class=\"timeline\"><div class=\"timeline-title\">我的过去</div><div class=\"timeline-list\"><timeline-item v-for=\"item in timeline\" :time=\"item.time\"><demand-card :data=\"item.task\"></demand-card></timeline-item></div></div></div></div>";
 
 /***/ },
-/* 226 */
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(227)
-	__vue_script__ = __webpack_require__(229)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/pages/Demand/TaskDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(242)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/TaskDetail.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(228);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./TaskDetail.vue", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./TaskDetail.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".task-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.task-detail .navbar svg {\n  margin-right: 15px; }\n\n.task-detail .task-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .task-detail .task-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .task-detail .task-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/TaskDetail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"TaskDetail.vue","sourcesContent":[".task-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.task-detail .navbar svg {\n  margin-right: 15px; }\n\n.task-detail .task-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .task-detail .task-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .task-detail .task-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 229 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = {
-	    components: {
-	        navbar: __webpack_require__(33),
-	        svgFollow: __webpack_require__(230),
-	        demandCard: __webpack_require__(45),
-	        demandDetailItem: __webpack_require__(232),
-	        commentItem: __webpack_require__(237)
-	    },
-	    data: function data() {
-	        return {
-	            id: '',
-	            tags: [{
-	                name: '价格',
-	                value: '¥12'
-	            }, {
-	                name: '成色',
-	                value: '8成'
-	            }],
-	            data: {
-	                type: 'task',
-	                text: '多余的小泽软妹纸一枚，谁要？',
-	                color: '#ffc107',
-	                tag: '转让',
-	                time: 1472581345635,
-	                pay: 15
-	            },
-	            comments: [{
-	                time: 1472662320304,
-	                author: '玛利亚',
-	                text: '这个妹纸好漂亮，如果我有她一半漂亮就好了～～ 😍😍😍😍',
-	                floor: 3
-	            }, {
-	                time: 1472662300304,
-	                author: '玲玉',
-	                text: '我不要',
-	                floor: 2
-	            }, {
-	                time: 1472662020304,
-	                author: '',
-	                text: '不可以压价！！',
-	                floor: 1,
-	                isPoster: true
-	            }]
-	        };
-	    },
-	
-	    route: {
-	        data: function data(_route) {
-	            var id = _route.to.params.id;
-	        }
-	    },
-	    methods: {
-	        goBack: function goBack() {
-	            window.history.back();
-	        }
-	    }
-	};
-
-/***/ },
-/* 230 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(231)
+	__vue_template__ = __webpack_require__(247)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) {
@@ -29287,337 +33994,10 @@
 	})()}
 
 /***/ },
-/* 231 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"25px\" height=\"16px\" viewBox=\"0 0 25 16\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"iPhone-6\" transform=\"translate(-323.000000, -41.000000)\" fill=\"#000000\">\n            <path d=\"M345.499999,49.3214269 C344.180549,47.2728068 342.526921,45.7407051 340.539064,44.7250751 C341.068579,45.6278563 341.333333,46.6044089 341.333333,47.6547618 C341.333333,49.2606727 340.762591,50.6343556 339.621093,51.7758544 C338.479594,52.9173532 337.105911,53.4880953 335.5,53.4880953 C333.894089,53.4880953 332.520406,52.9173532 331.378907,51.7758544 C330.237409,50.6343556 329.666667,49.2606727 329.666667,47.6547618 C329.666667,46.6044089 329.931421,45.6278563 330.460936,44.7250751 C328.473079,45.7407051 326.819451,47.2728068 325.5,49.3214269 C326.654519,51.1009523 328.101989,52.5180382 329.842448,53.5727311 C331.582908,54.6274232 333.46874,55.1547615 335.5,55.1547615 C337.53126,55.1547615 339.417092,54.6274232 341.157552,53.5727311 C342.898011,52.5180382 344.34548,51.1009523 345.499999,49.3214269 L345.499999,49.3214269 Z M336.125001,44.3214288 C336.125001,44.1478171 336.064238,44.0002484 335.942709,43.8787196 C335.82118,43.7571909 335.673612,43.6964279 335.5,43.6964279 C334.414924,43.6964279 333.483945,44.0848784 332.707032,44.8617938 C331.930117,45.6387063 331.541666,46.5696859 331.541666,47.6547618 C331.541666,47.8283735 331.602429,47.9759422 331.723958,48.097471 C331.845487,48.2189968 331.993055,48.2797627 332.166667,48.2797627 C332.340279,48.2797627 332.487847,48.2189968 332.609376,48.097471 C332.730902,47.9759422 332.791668,47.8283735 332.791668,47.6547618 C332.791668,46.9082293 333.05642,46.2702143 333.585937,45.7406993 C334.115455,45.2111813 334.753467,44.9464267 335.5,44.9464267 C335.673612,44.9464267 335.82118,44.8856638 335.942709,44.7641351 C336.064238,44.6426092 336.125001,44.4950405 336.125001,44.3214288 L336.125001,44.3214288 Z M347.166667,49.3214269 C347.166667,49.6165673 347.079861,49.9160448 346.906249,50.2198652 C345.690968,52.2164024 344.056867,53.8157799 342.003907,55.0180428 C339.950944,56.2203059 337.782998,56.8214283 335.5,56.8214283 C333.217002,56.8214283 331.049056,56.2181356 328.996093,55.0115325 C326.943133,53.8049299 325.309034,52.2077224 324.09375,50.2198652 C323.920138,49.9160448 323.833333,49.6165673 323.833333,49.3214269 C323.833333,49.0262864 323.920138,48.7268118 324.09375,48.4229914 C325.309034,46.4351343 326.943133,44.8379267 328.996093,43.631325 C331.049056,42.4247204 333.217002,41.8214283 335.5,41.8214283 C337.782998,41.8214283 339.950944,42.4247204 342.003907,43.631325 C344.056867,44.8379267 345.690968,46.4351343 346.906249,48.4229914 C347.079861,48.7268118 347.166667,49.0262864 347.166667,49.3214269 L347.166667,49.3214269 Z\" id=\"Page-1\"></path>\n        </g>\n    </g>\n</svg>\n";
-
-/***/ },
-/* 232 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(233)
-	__vue_script__ = __webpack_require__(235)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/DemandDetailItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(236)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/components/DemandDetailItem.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 233 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(234);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DemandDetailItem.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DemandDetailItem.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 234 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".demand-detail-item {\n  line-height: 60px;\n  font-weight: bold;\n  margin: 0 15px;\n  border-bottom: solid 1px #d5d5d5; }\n  .demand-detail-item .name {\n    margin-left: 15px;\n    float: left; }\n  .demand-detail-item .value {\n    margin-right: 15px;\n    float: right; }\n", "", {"version":3,"sources":["/./src/components/DemandDetailItem.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iCAAiC,EAAE;EACnC;IACE,kBAAkB;IAClB,YAAY,EAAE;EAChB;IACE,mBAAmB;IACnB,aAAa,EAAE","file":"DemandDetailItem.vue","sourcesContent":[".demand-detail-item {\n  line-height: 60px;\n  font-weight: bold;\n  margin: 0 15px;\n  border-bottom: solid 1px #d5d5d5; }\n  .demand-detail-item .name {\n    margin-left: 15px;\n    float: left; }\n  .demand-detail-item .value {\n    margin-right: 15px;\n    float: right; }\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 235 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	module.exports = {
-	    props: {
-	        name: String,
-	        value: String,
-	        color: String
-	    }
-	};
-
-/***/ },
-/* 236 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"demand-detail-item clearfix\"><div class=\"name\">{{name}}</div><div :style=\"{color:color}\" class=\"value\">{{value}}</div></div>";
-
-/***/ },
-/* 237 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(238)
-	__vue_script__ = __webpack_require__(240)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/components/CommentItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(241)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/components/CommentItem.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(239);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./CommentItem.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./CommentItem.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".comment-item {\n  padding: 12px 15px 20px 0;\n  margin-left: 30px;\n  border-bottom: solid 1px #d5d5d5;\n  font-size: 0.8em; }\n  .comment-item .title {\n    margin-bottom: 5px; }\n    .comment-item .title .author {\n      float: left; }\n      .comment-item .title .author div {\n        display: inline-block; }\n      .comment-item .title .author .poster {\n        padding: 3px 6px;\n        border-radius: 4px;\n        color: white;\n        margin-bottom: 2px; }\n    .comment-item .title .floor {\n      float: right;\n      color: #CCCCCC; }\n      .comment-item .title .floor:before {\n        content: '#'; }\n  .comment-item .text {\n    margin-right: 10px; }\n", "", {"version":3,"sources":["/./src/components/CommentItem.vue"],"names":[],"mappings":"AAAA;EACE,0BAA0B;EAC1B,kBAAkB;EAClB,iCAAiC;EACjC,iBAAiB,EAAE;EACnB;IACE,mBAAmB,EAAE;IACrB;MACE,YAAY,EAAE;MACd;QACE,sBAAsB,EAAE;MAC1B;QACE,iBAAiB;QACjB,mBAAmB;QACnB,aAAa;QACb,mBAAmB,EAAE;IACzB;MACE,aAAa;MACb,eAAe,EAAE;MACjB;QACE,aAAa,EAAE;EACrB;IACE,mBAAmB,EAAE","file":"CommentItem.vue","sourcesContent":[".comment-item {\n  padding: 12px 15px 20px 0;\n  margin-left: 30px;\n  border-bottom: solid 1px #d5d5d5;\n  font-size: 0.8em; }\n  .comment-item .title {\n    margin-bottom: 5px; }\n    .comment-item .title .author {\n      float: left; }\n      .comment-item .title .author div {\n        display: inline-block; }\n      .comment-item .title .author .poster {\n        padding: 3px 6px;\n        border-radius: 4px;\n        color: white;\n        margin-bottom: 2px; }\n    .comment-item .title .floor {\n      float: right;\n      color: #CCCCCC; }\n      .comment-item .title .floor:before {\n        content: '#'; }\n  .comment-item .text {\n    margin-right: 10px; }\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var moment = __webpack_require__(49);
-	module.exports = {
-	    props: {
-	        data: Object,
-	
-	        color: String
-	    },
-	    methods: {
-	        timeStr: function timeStr(timestamp) {
-	            return moment(timestamp).format('h:mm A');
-	        }
-	    }
-	};
-
-/***/ },
-/* 241 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"comment-item\"><div class=\"title clearfix\"><div :style=\"{color:color}\" class=\"author\"> <div v-if=\"!data.isPoster\">{{data.author}}</div><div v-else=\"v-else\" :style=\"{background:color}\" class=\"poster\">楼主</div>{{' · '+timeStr(data.time)}}</div><div class=\"floor\">{{data.floor}}</div></div><div class=\"text\">{{data.text}}</div></div>";
-
-/***/ },
-/* 242 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"task-detail\"><navbar><div @click=\"goBack()\" class=\"nav-title\">《 任务</div><svg-follow :style=\"{opacity:data.following?'1':'0.15'}\"></svg-follow></navbar><div class=\"task-detail-content\"><demand-card :data.sync=\"data\" :is-detail=\"true\"></demand-card><div class=\"detail-list\"><demand-detail-item v-for=\"item in tags\" :name=\"item.name\" :value=\"item.value\" :color=\"data.color\"></demand-detail-item></div><div class=\"comments\"><div :style=\"{color:data.color}\" class=\"comments-title\">{{comments.length+'条评论'}}</div><comment-item v-for=\"item in comments\" :data.sync=\"item\" :color=\"data.color\"></comment-item></div></div></div>";
-
-/***/ },
-/* 243 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(244)
-	__vue_script__ = __webpack_require__(246)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/pages/Demand/LostDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(247)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/LostDetail.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 244 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(245);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./LostDetail.vue", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./LostDetail.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 245 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".lost-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.lost-detail .navbar svg {\n  margin-right: 15px; }\n\n.lost-detail .lost-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .lost-detail .lost-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .lost-detail .lost-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/LostDetail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"LostDetail.vue","sourcesContent":[".lost-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.lost-detail .navbar svg {\n  margin-right: 15px; }\n\n.lost-detail .lost-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .lost-detail .lost-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .lost-detail .lost-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 246 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = {
-	    components: {
-	        navbar: __webpack_require__(33),
-	        svgFollow: __webpack_require__(230),
-	        demandCard: __webpack_require__(45),
-	        demandDetailItem: __webpack_require__(232),
-	        commentItem: __webpack_require__(237)
-	    },
-	    data: function data() {
-	        return {
-	            id: '',
-	            tags: [{
-	                name: '时间',
-	                value: 'Thu Sep 01 2016 01:14:13'
-	            }, {
-	                name: '地点',
-	                value: '建行网点'
-	            }],
-	            data: {
-	                type: 'lost',
-	                thing: '银行卡',
-	                text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
-	                imgs: [{
-	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
-	                }],
-	                color: '#0CC998',
-	                isLost: false,
-	                time: 1472581345635
-	            },
-	            comments: [{
-	                time: 1472662020304,
-	                author: '',
-	                text: '你们快来啊',
-	                floor: 3,
-	                isPoster: true
-	            }, {
-	                time: 1472662300304,
-	                author: '玲玉',
-	                text: '我不要',
-	                floor: 1
-	            }]
-	        };
-	    },
-	
-	    route: {
-	        data: function data(_route) {
-	            var id = _route.to.params.id;
-	        }
-	    },
-	    methods: {
-	        goBack: function goBack() {
-	            window.history.back();
-	        }
-	    }
-	};
-
-/***/ },
 /* 247 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"lost-detail\"><navbar><div @click=\"goBack()\" class=\"nav-title\">《 失物</div><svg-follow :style=\"{opacity:data.following?'1':'0.15'}\"></svg-follow></navbar><div class=\"lost-detail-content\"><demand-card :data.sync=\"data\" :is-detail=\"true\"></demand-card><div class=\"detail-list\"><demand-detail-item v-for=\"item in tags\" :name=\"item.name\" :value=\"item.value\" :color=\"data.color\"></demand-detail-item></div><div v-if=\"false\" class=\"comments\"><div :style=\"{color:data.color}\" class=\"comments-title\">{{comments.length+'条评论'}}</div><comment-item v-for=\"item in comments\" :data.sync=\"item\" :color=\"data.color\"></comment-item></div></div></div>";
+	module.exports = "\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"25px\" height=\"16px\" viewBox=\"0 0 25 16\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"iPhone-6\" transform=\"translate(-323.000000, -41.000000)\" fill=\"#000000\">\n            <path d=\"M345.499999,49.3214269 C344.180549,47.2728068 342.526921,45.7407051 340.539064,44.7250751 C341.068579,45.6278563 341.333333,46.6044089 341.333333,47.6547618 C341.333333,49.2606727 340.762591,50.6343556 339.621093,51.7758544 C338.479594,52.9173532 337.105911,53.4880953 335.5,53.4880953 C333.894089,53.4880953 332.520406,52.9173532 331.378907,51.7758544 C330.237409,50.6343556 329.666667,49.2606727 329.666667,47.6547618 C329.666667,46.6044089 329.931421,45.6278563 330.460936,44.7250751 C328.473079,45.7407051 326.819451,47.2728068 325.5,49.3214269 C326.654519,51.1009523 328.101989,52.5180382 329.842448,53.5727311 C331.582908,54.6274232 333.46874,55.1547615 335.5,55.1547615 C337.53126,55.1547615 339.417092,54.6274232 341.157552,53.5727311 C342.898011,52.5180382 344.34548,51.1009523 345.499999,49.3214269 L345.499999,49.3214269 Z M336.125001,44.3214288 C336.125001,44.1478171 336.064238,44.0002484 335.942709,43.8787196 C335.82118,43.7571909 335.673612,43.6964279 335.5,43.6964279 C334.414924,43.6964279 333.483945,44.0848784 332.707032,44.8617938 C331.930117,45.6387063 331.541666,46.5696859 331.541666,47.6547618 C331.541666,47.8283735 331.602429,47.9759422 331.723958,48.097471 C331.845487,48.2189968 331.993055,48.2797627 332.166667,48.2797627 C332.340279,48.2797627 332.487847,48.2189968 332.609376,48.097471 C332.730902,47.9759422 332.791668,47.8283735 332.791668,47.6547618 C332.791668,46.9082293 333.05642,46.2702143 333.585937,45.7406993 C334.115455,45.2111813 334.753467,44.9464267 335.5,44.9464267 C335.673612,44.9464267 335.82118,44.8856638 335.942709,44.7641351 C336.064238,44.6426092 336.125001,44.4950405 336.125001,44.3214288 L336.125001,44.3214288 Z M347.166667,49.3214269 C347.166667,49.6165673 347.079861,49.9160448 346.906249,50.2198652 C345.690968,52.2164024 344.056867,53.8157799 342.003907,55.0180428 C339.950944,56.2203059 337.782998,56.8214283 335.5,56.8214283 C333.217002,56.8214283 331.049056,56.2181356 328.996093,55.0115325 C326.943133,53.8049299 325.309034,52.2077224 324.09375,50.2198652 C323.920138,49.9160448 323.833333,49.6165673 323.833333,49.3214269 C323.833333,49.0262864 323.920138,48.7268118 324.09375,48.4229914 C325.309034,46.4351343 326.943133,44.8379267 328.996093,43.631325 C331.049056,42.4247204 333.217002,41.8214283 335.5,41.8214283 C337.782998,41.8214283 339.950944,42.4247204 342.003907,43.631325 C344.056867,44.8379267 345.690968,46.4351343 346.906249,48.4229914 C347.079861,48.7268118 347.166667,49.0262864 347.166667,49.3214269 L347.166667,49.3214269 Z\" id=\"Page-1\"></path>\n        </g>\n    </g>\n</svg>\n";
 
 /***/ },
 /* 248 */
@@ -29629,7 +34009,7 @@
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/pages/Demand/DatingDetail.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] src/components/DemandDetailItem.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(252)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -29640,7 +34020,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/DatingDetail.vue"
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/components/DemandDetailItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -29664,8 +34044,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DatingDetail.vue", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DatingDetail.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DemandDetailItem.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./DemandDetailItem.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -29683,13 +34063,208 @@
 	
 	
 	// module
-	exports.push([module.id, ".dating-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.dating-detail .navbar svg {\n  margin-right: 15px; }\n\n.dating-detail .dating-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .dating-detail .dating-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .dating-detail .dating-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/DatingDetail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"DatingDetail.vue","sourcesContent":[".dating-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.dating-detail .navbar svg {\n  margin-right: 15px; }\n\n.dating-detail .dating-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .dating-detail .dating-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .dating-detail .dating-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
+	exports.push([module.id, ".demand-detail-item {\n  line-height: 60px;\n  font-weight: bold;\n  margin: 0 15px;\n  border-bottom: solid 1px #d5d5d5;\n  display: -webkit-box;\n  display: -webkit-flex;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n  -webkit-justify-content: space-between;\n      -ms-flex-pack: justify;\n          justify-content: space-between; }\n  .demand-detail-item .name {\n    margin-left: 15px; }\n  .demand-detail-item .value {\n    margin-right: 15px; }\n", "", {"version":3,"sources":["/./src/components/DemandDetailItem.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,kBAAkB;EAClB,eAAe;EACf,iCAAiC;EACjC,qBAAc;EAAd,sBAAc;EAAd,qBAAc;EAAd,cAAc;EACd,0BAA+B;EAA/B,uCAA+B;MAA/B,uBAA+B;UAA/B,+BAA+B,EAAE;EACjC;IACE,kBAAkB,EAAE;EACtB;IACE,mBAAmB,EAAE","file":"DemandDetailItem.vue","sourcesContent":[".demand-detail-item {\n  line-height: 60px;\n  font-weight: bold;\n  margin: 0 15px;\n  border-bottom: solid 1px #d5d5d5;\n  display: flex;\n  justify-content: space-between; }\n  .demand-detail-item .name {\n    margin-left: 15px; }\n  .demand-detail-item .value {\n    margin-right: 15px; }\n"],"sourceRoot":"webpack://"}]);
 	
 	// exports
 
 
 /***/ },
 /* 251 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	module.exports = {
+	    props: {
+	        name: String,
+	        value: String,
+	        color: String
+	    }
+	};
+
+/***/ },
+/* 252 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"demand-detail-item\"><div class=\"name\">{{name}}</div><div :style=\"{color:color}\" class=\"value\">{{value}}</div></div>";
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(254)
+	__vue_script__ = __webpack_require__(256)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/components/CommentItem.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(257)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/components/CommentItem.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(255);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./CommentItem.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap!./../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./CommentItem.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 255 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".comment-item {\n  padding: 12px 15px 20px 0;\n  margin-left: 30px;\n  border-bottom: solid 1px #d5d5d5;\n  font-size: 0.8em; }\n  .comment-item .title {\n    margin-bottom: 5px; }\n    .comment-item .title .author {\n      float: left; }\n      .comment-item .title .author div {\n        display: inline-block; }\n      .comment-item .title .author .poster {\n        padding: 3px 6px;\n        border-radius: 4px;\n        color: white;\n        margin-bottom: 2px; }\n    .comment-item .title .floor {\n      float: right;\n      color: #CCCCCC; }\n      .comment-item .title .floor:before {\n        content: '#'; }\n  .comment-item .text {\n    margin-right: 10px; }\n", "", {"version":3,"sources":["/./src/components/CommentItem.vue"],"names":[],"mappings":"AAAA;EACE,0BAA0B;EAC1B,kBAAkB;EAClB,iCAAiC;EACjC,iBAAiB,EAAE;EACnB;IACE,mBAAmB,EAAE;IACrB;MACE,YAAY,EAAE;MACd;QACE,sBAAsB,EAAE;MAC1B;QACE,iBAAiB;QACjB,mBAAmB;QACnB,aAAa;QACb,mBAAmB,EAAE;IACzB;MACE,aAAa;MACb,eAAe,EAAE;MACjB;QACE,aAAa,EAAE;EACrB;IACE,mBAAmB,EAAE","file":"CommentItem.vue","sourcesContent":[".comment-item {\n  padding: 12px 15px 20px 0;\n  margin-left: 30px;\n  border-bottom: solid 1px #d5d5d5;\n  font-size: 0.8em; }\n  .comment-item .title {\n    margin-bottom: 5px; }\n    .comment-item .title .author {\n      float: left; }\n      .comment-item .title .author div {\n        display: inline-block; }\n      .comment-item .title .author .poster {\n        padding: 3px 6px;\n        border-radius: 4px;\n        color: white;\n        margin-bottom: 2px; }\n    .comment-item .title .floor {\n      float: right;\n      color: #CCCCCC; }\n      .comment-item .title .floor:before {\n        content: '#'; }\n  .comment-item .text {\n    margin-right: 10px; }\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var moment = __webpack_require__(49);
+	module.exports = {
+	    props: {
+	        data: Object,
+	
+	        color: String
+	    },
+	    methods: {
+	        timeStr: function timeStr(timestamp) {
+	            return moment(timestamp).format('h:mm A');
+	        }
+	    }
+	};
+
+/***/ },
+/* 257 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"comment-item\"><div class=\"title clearfix\"><div :style=\"{color:color}\" class=\"author\"> <div v-if=\"!data.isPoster\">{{data.author}}</div><div v-else=\"v-else\" :style=\"{background:color}\" class=\"poster\">楼主</div>{{' · '+timeStr(data.time)}}</div><div class=\"floor\">{{data.floor}}</div></div><div class=\"text\">{{data.text}}</div></div>";
+
+/***/ },
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(270)
+	__vue_script__ = __webpack_require__(272)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/pages/Demand/Detail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(273)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/Detail.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(271);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/Detail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"Detail.vue","sourcesContent":[".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29697,45 +34272,20 @@
 	module.exports = {
 	    components: {
 	        navbar: __webpack_require__(33),
-	        svgFollow: __webpack_require__(230),
+	        svgFollow: __webpack_require__(246),
 	        demandCard: __webpack_require__(45),
-	        demandDetailItem: __webpack_require__(232),
-	        commentItem: __webpack_require__(237)
+	        demandDetailItem: __webpack_require__(248),
+	        commentItem: __webpack_require__(253)
 	    },
 	    data: function data() {
 	        return {
 	            id: '',
-	            tags: [{
-	                name: '人均消费',
-	                value: '¥120'
-	            }, {
-	                name: '求陪同',
-	                value: '求女生'
-	            }, {
-	                name: '地点',
-	                value: '北岭沙摩星岭'
-	            }, {
-	                name: '时间',
-	                value: 'Thu Sep 01 2016 01:14:13'
-	            }, {
-	                name: '集中地',
-	                value: '后山商业街'
-	            }],
-	            data: {
-	                type: 'dating',
-	                text: '有没有妹纸想一起去北岭山?',
-	                color: '#EC407A',
-	                sex: 2,
-	                likeNum: 8,
-	                joinNum: 0,
-	                liked: true,
-	                time: 1472581345635
-	            },
+	            data: {},
 	            comments: [{
 	                time: 1472662020304,
 	                author: '',
 	                text: '你们快来啊',
-	                floor: 2,
+	                floor: 3,
 	                isPoster: true
 	            }, {
 	                time: 1472662300304,
@@ -29748,7 +34298,68 @@
 	
 	    route: {
 	        data: function data(_route) {
-	            var id = _route.to.params.id;
+	            var type = _route.to.params.type;
+	            var _lost = {
+	                type: 'lost',
+	                thing: '银行卡',
+	                text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
+	                imgs: [{
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
+	                }],
+	                color: '#0CC998',
+	                isLost: false,
+	                time: 1472581345635,
+	                tags: [{
+	                    name: '发布时间',
+	                    value: 'Thu Sep 01 2016 01:14:13'
+	                }, {
+	                    name: '地点',
+	                    value: '建行网点'
+	                }]
+	            };
+	            var _dating = {
+	                type: 'dating',
+	                text: '有没有妹纸想一起去北岭山?',
+	                color: '#EC407A',
+	                sex: 2,
+	                likeNum: 8,
+	                joinNum: 0,
+	                liked: true,
+	                time: 1472581345635,
+	                tags: [{
+	                    name: '人均消费',
+	                    value: '¥120'
+	                }, {
+	                    name: '求陪同',
+	                    value: '求女生'
+	                }, {
+	                    name: '地点',
+	                    value: '北岭沙摩星岭'
+	                }, {
+	                    name: '时间',
+	                    value: 'Thu Sep 01 2016 01:14:13'
+	                }, {
+	                    name: '集中地',
+	                    value: '后山商业街'
+	                }]
+	            };
+	            var _task = {
+	                type: 'task',
+	                text: '多余的小泽软妹纸一枚，谁要？',
+	                color: '#ffc107',
+	                tag: '转让',
+	                time: 1472581345635,
+	                pay: 15,
+	                tags: [{
+	                    name: '价格',
+	                    value: '¥12'
+	                }, {
+	                    name: '成色',
+	                    value: '8成'
+	                }]
+	            };
+	            if (type == 'dating') this.data = _dating;else if (type == 'lost') this.data = _lost;else if (type == 'task') this.data = _task;
+	            this.data.type = type;
 	        }
 	    },
 	    methods: {
@@ -29759,68 +34370,10 @@
 	};
 
 /***/ },
-/* 252 */
+/* 273 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"dating-detail\"><navbar><div @click=\"goBack()\" class=\"nav-title\">《 走起</div><svg-follow :style=\"{opacity:data.following?'1':'0.15'}\"></svg-follow></navbar><div class=\"dating-detail-content\"><demand-card :data.sync=\"data\" :is-detail=\"true\"></demand-card><div class=\"detail-list\"><demand-detail-item v-for=\"item in tags\" :name=\"item.name\" :value=\"item.value\" :color=\"data.color\"></demand-detail-item></div><div class=\"comments\"><div :style=\"{color:data.color}\" class=\"comments-title\">{{comments.length+'条评论'}}</div><comment-item v-for=\"item in comments\" :data.sync=\"item\" :color=\"data.color\"></comment-item></div></div></div>";
-
-/***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(254)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/svg/features/Wodehuida.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 254 */
-/***/ function(module, exports) {
-
-	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"46px\" height=\"46px\" viewBox=\"0 0 46 46\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-48.000000, -373.000000)\" fill=\"#08CE88\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-6\" transform=\"translate(0.000000, 244.000000)\">\n                        <path d=\"M70.5539906,51 C70.5539906,51.6478873 70.3200325,52.1877934 69.8521161,52.6197183 C69.3841929,53.0516432 68.8262911,53.2676056 68.1784038,53.2676056 L45.1784038,53.2676056 L36,62.5539906 L36,30.2676056 C36,29.6197183 36.2159603,29.0798122 36.6478873,28.6478873 C37.0798143,28.2159624 37.6197149,28 38.2676056,28 L68.1784038,28 C68.8262911,28 69.3841929,28.2159624 69.8521161,28.6478873 C70.3200325,29.0798122 70.5539906,29.6197183 70.5539906,30.2676056 L70.5539906,51 L70.5539906,51 Z M79.7323944,37.1784038 C80.3802817,37.1784038 80.9201878,37.3943662 81.3521127,37.8262911 C81.7840376,38.258216 82,38.7981221 82,39.4460094 L82,74 L72.8215962,64.8215962 L47.4460094,64.8215962 C46.7981221,64.8215962 46.258216,64.6056338 45.8262911,64.1737089 C45.3943662,63.741784 45.1784038,63.2018779 45.1784038,62.5539906 L45.1784038,57.9107981 L75.0892019,57.9107981 L75.0892019,37.1784038 L79.7323944,37.1784038 L79.7323944,37.1784038 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
-
-/***/ },
-/* 255 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__vue_template__ = __webpack_require__(256)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/svg/features/Wodemubiao.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 256 */
-/***/ function(module, exports) {
-
-	module.exports = "\n    <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg width=\"47px\" height=\"37px\" viewBox=\"0 0 47 37\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->\n    <title>Page 1</title>\n    <desc>Created with Sketch.</desc>\n    <defs></defs>\n    <g id=\"Symbols\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\">\n        <g id=\"me_list\" transform=\"translate(-286.000000, -256.000000)\" fill=\"#7300FF\">\n            <g id=\"Group-8\">\n                <g id=\"Group-7\" transform=\"translate(12.000000, 101.000000)\">\n                    <g id=\"Group-6-Copy-5\" transform=\"translate(241.000000, 121.000000)\">\n                        <path d=\"M43.0714302,61.6964244 L43.0714302,63.375 C43.0714302,63.6023038 42.9883754,63.7990105 42.8222656,63.9651203 C42.6561559,64.13123 42.4594491,64.2142849 42.2321454,64.2142849 L40.5535697,64.2142849 C40.326266,64.2142849 40.1295592,64.13123 39.9634495,63.9651203 C39.7973397,63.7990105 39.7142849,63.6023038 39.7142849,63.375 L39.7142849,61.6964244 C39.7142849,61.4691206 39.7973397,61.2724139 39.9634495,61.1063041 C40.1295592,60.9401944 40.326266,60.8571395 40.5535697,60.8571395 L42.2321454,60.8571395 C42.4594491,60.8571395 42.6561559,60.9401944 42.8222656,61.1063041 C42.9883754,61.2724139 43.0714302,61.4691206 43.0714302,61.6964244 L43.0714302,61.6964244 Z M43.0714302,54.9821395 L43.0714302,56.6607151 C43.0714302,56.8880189 42.9883754,57.0847256 42.8222656,57.2508354 C42.6561559,57.4169451 42.4594491,57.5 42.2321454,57.5 L40.5535697,57.5 C40.326266,57.5 40.1295592,57.4169451 39.9634495,57.2508354 C39.7973397,57.0847256 39.7142849,56.8880189 39.7142849,56.6607151 L39.7142849,54.9821395 C39.7142849,54.7548357 39.7973397,54.558129 39.9634495,54.3920192 C40.1295592,54.2259095 40.326266,54.1428546 40.5535697,54.1428546 L42.2321454,54.1428546 C42.4594491,54.1428546 42.6561559,54.2259095 42.8222656,54.3920192 C42.9883754,54.558129 43.0714302,54.7548357 43.0714302,54.9821395 L43.0714302,54.9821395 Z M43.0714302,48.2678546 L43.0714302,49.9464244 C43.0714302,50.173734 42.9883754,50.3704408 42.8222656,50.5365505 C42.6561559,50.7026603 42.4594491,50.7857151 42.2321454,50.7857151 L40.5535697,50.7857151 C40.326266,50.7857151 40.1295592,50.7026603 39.9634495,50.5365505 C39.7973397,50.3704408 39.7142849,50.173734 39.7142849,49.9464244 L39.7142849,48.2678546 C39.7142849,48.040545 39.7973397,47.8438441 39.9634495,47.6777344 C40.1295592,47.5116246 40.326266,47.4285698 40.5535697,47.4285698 L42.2321454,47.4285698 C42.4594491,47.4285698 42.6561559,47.5116246 42.8222656,47.6777344 C42.9883754,47.8438441 43.0714302,48.040545 43.0714302,48.2678546 L43.0714302,48.2678546 Z M73.2857151,61.6964244 L73.2857151,63.375 C73.2857151,63.6023038 73.2026602,63.7990105 73.0365505,63.9651203 C72.8704407,64.13123 72.673734,64.2142849 72.4464302,64.2142849 L47.2678546,64.2142849 C47.0405509,64.2142849 46.8438441,64.13123 46.6777344,63.9651203 C46.5116246,63.7990105 46.4285697,63.6023038 46.4285697,63.375 L46.4285697,61.6964244 C46.4285697,61.4691206 46.5116246,61.2724139 46.6777344,61.1063041 C46.8438441,60.9401944 47.0405509,60.8571395 47.2678546,60.8571395 L72.4464302,60.8571395 C72.673734,60.8571395 72.8704407,60.9401944 73.0365505,61.1063041 C73.2026602,61.2724139 73.2857151,61.4691206 73.2857151,61.6964244 L73.2857151,61.6964244 Z M73.2857151,54.9821395 L73.2857151,56.6607151 C73.2857151,56.8880189 73.2026602,57.0847256 73.0365505,57.2508354 C72.8704407,57.4169451 72.673734,57.5 72.4464302,57.5 L47.2678546,57.5 C47.0405509,57.5 46.8438441,57.4169451 46.6777344,57.2508354 C46.5116246,57.0847256 46.4285697,56.8880189 46.4285697,56.6607151 L46.4285697,54.9821395 C46.4285697,54.7548357 46.5116246,54.558129 46.6777344,54.3920192 C46.8438441,54.2259095 47.0405509,54.1428546 47.2678546,54.1428546 L72.4464302,54.1428546 C72.673734,54.1428546 72.8704407,54.2259095 73.0365505,54.3920192 C73.2026602,54.558129 73.2857151,54.7548357 73.2857151,54.9821395 L73.2857151,54.9821395 Z M73.2857151,48.2678546 L73.2857151,49.9464244 C73.2857151,50.173734 73.2026602,50.3704408 73.0365505,50.5365505 C72.8704407,50.7026603 72.673734,50.7857151 72.4464302,50.7857151 L47.2678546,50.7857151 C47.0405509,50.7857151 46.8438441,50.7026603 46.6777344,50.5365505 C46.5116246,50.3704408 46.4285697,50.173734 46.4285697,49.9464244 L46.4285697,48.2678546 C46.4285697,48.040545 46.5116246,47.8438441 46.6777344,47.6777344 C46.8438441,47.5116246 47.0405509,47.4285698 47.2678546,47.4285698 L72.4464302,47.4285698 C72.673734,47.4285698 72.8704407,47.5116246 73.0365505,47.6777344 C73.2026602,47.8438441 73.2857151,48.040545 73.2857151,48.2678546 L73.2857151,48.2678546 Z M76.6428546,66.7321413 L76.6428546,44.9107151 C76.6428546,44.6834055 76.5598056,44.4866987 76.3936959,44.320589 C76.2275861,44.1544792 76.0308794,44.0714244 75.8035697,44.0714244 L37.1964285,44.0714244 C36.9691206,44.0714244 36.772415,44.1544792 36.6063059,44.320589 C36.4401961,44.4866987 36.357143,44.6834055 36.357143,44.9107151 L36.357143,66.7321413 C36.357143,66.9594491 36.4401961,67.1561547 36.6063059,67.3222639 C36.772415,67.4883736 36.9691206,67.5714267 37.1964285,67.5714267 L75.8035697,67.5714267 C76.0308794,67.5714267 76.2275861,67.4883736 76.3936959,67.3222639 C76.5598056,67.1561547 76.6428546,66.9594491 76.6428546,66.7321413 L76.6428546,66.7321413 Z M80,38.1964244 L80,66.7321413 C80,67.8861646 79.5891025,68.874064 78.7673016,69.695869 C77.9454949,70.5176735 76.957596,70.9285698 75.8035698,70.9285698 L37.1964285,70.9285698 C36.0424052,70.9285698 35.0545057,70.5176735 34.2327007,69.695869 C33.4108962,68.874064 33,67.8861646 33,66.7321413 L33,38.1964244 C33,37.042404 33.4108962,36.0545051 34.2327007,35.2326984 C35.0545057,34.4108916 36.0424052,34 37.1964285,34 L75.8035698,34 C76.957596,34 77.9454949,34.4108916 78.7673016,35.2326984 C79.5891025,36.0545051 80,37.042404 80,38.1964244 L80,38.1964244 Z\" id=\"Page-1\"></path>\n                    </g>\n                </g>\n            </g>\n        </g>\n    </g>\n</svg>\n";
+	module.exports = "<div class=\"demand-detail\"><navbar><div @click=\"goBack()\" class=\"nav-title\">《 详细</div><svg-follow :style=\"{opacity:data.following?'1':'0.15'}\"></svg-follow></navbar><div class=\"demand-detail-content\"><demand-card :data.sync=\"data\" :is-detail=\"true\"></demand-card><div class=\"detail-list\"><demand-detail-item v-for=\"item in data.tags\" :name=\"item.name\" :value=\"item.value\" :color=\"data.color\"></demand-detail-item></div><div v-if=\"data.type != 'lost'\" class=\"comments\"><div :style=\"{color:data.color}\" class=\"comments-title\">{{comments.length+'条评论'}}</div><comment-item v-for=\"item in comments\" :data.sync=\"item\" :color=\"data.color\"></comment-item></div></div></div>";
 
 /***/ }
 /******/ ]);
