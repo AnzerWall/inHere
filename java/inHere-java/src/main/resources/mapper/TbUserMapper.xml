@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.TbUserMapper">
+
+	<resultMap id="TbUserResultMap" type="TbUser">
+		<id property="userId" column="user_id" />
+		<result property="passwd" column="passwd" />
+		<result property="saltKey" column="salt_key" />
+		<result property="headImg" column="head_img" />
+		<result property="contactWay" column="contact_way" />
+		<result property="userSex" column="user_sex" />
+		<result property="userArea" column="user_area" />
+		<result property="userSchool" column="user_school" />
+	</resultMap>
+
+	<!-- 通过账号查询用户信息 -->
+	<select id="getUserByUserId" parameterType="String" resultMap="TbUserResultMap">
+		select * from tb_user where user_id = #{userId}
+	</select>
+
+	<!-- 插入账号 -->
+	<insert id="insertUser" parameterType="TbUser">
+		insert into tb_user
+		<trim prefix=" (" suffix=") " suffixOverrides=",">
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="passwd != null">
+				passwd,
+			</if>
+			<if test="saltKey != null">
+				salt_key,
+			</if>
+			<if test="headImg != null">
+				head_img,
+			</if>
+			<if test="contactWay != null">
+				contact_way,
+			</if>
+			<if test="userSex != null">
+				user_sex,
+			</if>
+			<if test="userArea != null">
+				user_area,
+			</if>
+			<if test="userSchool != null">
+				user_school,
+			</if>
+		</trim>
+		<trim prefix=" values (" suffix=") " suffixOverrides=",">
+			<if test="userId != null">
+				#{userId},
+			</if>
+			<if test="passwd != null">
+				#{passwd},
+			</if>
+			<if test="saltKey != null">
+				#{saltKey},
+			</if>
+			<if test="headImg != null">
+				#{headImg},
+			</if>
+			<if test="contactWay != null">
+				#{contactWay},
+			</if>
+			<if test="userSex != null">
+				#{userSex},
+			</if>
+			<if test="userArea != null">
+				#{userArea},
+			</if>
+			<if test="userSchool != null">
+				#{userSchool},
+			</if>
+		</trim>
+	</insert>
+
+</mapper>
