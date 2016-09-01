@@ -2,14 +2,16 @@ var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
-
+console.log(utils.assetsPath('fonts/[name].[hash:7].[ext]'));
 module.exports = {
   entry: {
     app: './src/main.js'
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+   // publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    publicPath: process.env.NODE_ENV === 'production' ? "" : config.dev.assetsPublicPath,
+
     filename: '[name].js'
   },
   resolve: {
@@ -74,4 +76,4 @@ module.exports = {
     loaders: utils.cssLoaders()
   }
 }
-console.log(path.resolve(projectRoot, '../common'));
+
