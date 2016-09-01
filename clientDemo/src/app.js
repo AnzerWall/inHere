@@ -9,39 +9,53 @@ var App = require('./App.vue');
 
 
 
-var mint = require('mint-ui');
-var Swipe = mint.Swipe;
-var SwipeItem = mint.SwipeItem;
+// var mint = require('mint-ui');
+// var Swipe = mint.Swipe;
+// var SwipeItem = mint.SwipeItem;
 
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
 
 var router = new VueRouter()
 
 router.map({
-    '/demand': {
-        component: require('./pages/Demand.vue'),
+    '/main':{
+        component:require('./pages/Main.vue'),
         subRoutes:{
-            '/task':{component:require('./pages/Demand/Task.vue')},
-            '/lost':{component:require('./pages/Demand/Lost.vue')},
-            '/dating':{component:require('./pages/Demand/Dating.vue')},
+            '/demand': {
+                component: require('./pages/Demand.vue'),
+                subRoutes:{
+                    '/task':{component:require('./pages/Demand/Task.vue')},
+                    '/lost':{component:require('./pages/Demand/Lost.vue')},
+                    '/dating':{component:require('./pages/Demand/Dating.vue')},
+                }
+            },
+            '/square': {
+                component: require('./pages/Square.vue'),
+            },
+            '/message': {
+                component: require('./pages/Message.vue'),
+            },
+            '/profile': {
+                component: require('./pages/Profile.vue'),
+            }
         }
     },
-    '/square': {
-        component: require('./pages/Square.vue'),
+    '/demand/task/:id':{
+        component: require('./pages/Demand/TaskDetail.vue')
     },
-    '/message': {
-        component: require('./pages/Message.vue'),
+    '/demand/lost/:id':{
+        component: require('./pages/Demand/LostDetail.vue')
     },
-    '/profile': {
-        component: require('./pages/Profile.vue'),
-    }
+    '/demand/dating/:id':{
+        component: require('./pages/Demand/DatingDetail.vue')
+    },
 })
 
 router.redirect({
-    '*': '/demand',
-    '/demand':'/demand/task',
-    '/demand/*':'/demand/task'
+    '*': '/main/demand',
+    '/main/demand':'/main/demand/task',
+    '/main/demand/*':'/main/demand/task'
 })
 
 router.beforeEach(function () {

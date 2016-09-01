@@ -1,14 +1,10 @@
 <template lang="jade">
     .app
         router-view
-        tabbar
 </template>
 
 <script>
 module.exports = {
-    components:{
-        tabbar:require('./components/Tabbar.vue'),
-    }
 }
 </script>
 
@@ -50,6 +46,15 @@ body::-webkit-scrollbar-thumb {
     width:0;
     border-width: 0;
     height:0;
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
 
 </style>

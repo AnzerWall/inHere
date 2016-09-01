@@ -1,11 +1,10 @@
 <template lang="jade">
-    .demand-card(v-if="data",:style="{background:data.color}")
-        
+    .demand-card(v-if="data",:style="{background:data.color,marginBottom:isDetail?'0':null}",v-link="'/demand/'+data.type+'/'+data.id")
         .demand-card-content
-            .demand-card-tags(v-if="data.type=='lost'",:style="{color:data.color}")
+            .demand-card-tags(v-if="!isDetail && data.type=='lost'",:style="{color:data.color}")
                 .tag {{data.isLost?'失物':'拾获'}}
                 .tag {{data.thing}}
-            .demand-card-tags(v-if="data.type=='dating'",:style="{color:data.color}")
+            .demand-card-tags(v-if="!isDetail && data.type=='dating'",:style="{color:data.color}")
                 .tag {{sexStr(data.sex)}}
                 .tag {{timeStr(data.time)}}
             .text {{data.text}}
@@ -32,6 +31,7 @@
 var moment = require('moment');
 module.exports = {
     props:{
+        isDetail:Boolean,
         data:Object
     },
     components:{

@@ -4,7 +4,7 @@
             .activity-swipe-item
                 .title
                     .h1 {{{swipe.title}}}
-                    .h2 {{author}}
+                    .h2 {{swipe.author}}
         square-item(:color="nuo.color",:title="nuo.title",:hot="nuo.hot",:more="nuo.more",:subtitle="nuo.subtitle")
             .nuo-item(v-for="item in nuo.list")
                 span.text {{item.name}}

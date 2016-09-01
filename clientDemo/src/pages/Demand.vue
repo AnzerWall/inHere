@@ -4,9 +4,9 @@
             router-view
         navbar
             .nav-tabs
-                .nav-tab(v-link="{path:'/demand/task',activeClass:'cur'}") 任务
-                .nav-tab(v-link="{path:'/demand/lost',activeClass:'cur'}") 失物
-                .nav-tab(v-link="{path:'/demand/dating',activeClass:'cur'}") 走起
+                .nav-tab(v-link="{path:'/main/demand/task',activeClass:'cur'}") 任务
+                .nav-tab(v-link="{path:'/main/demand/lost',activeClass:'cur'}") 失物
+                .nav-tab(v-link="{path:'/main/demand/dating',activeClass:'cur'}") 走起
             .nav-add-btn 
                 svg-add
 </template>
