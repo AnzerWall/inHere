@@ -80,7 +80,7 @@
     export default{
       methods:{
         show (index,list) {
-          console.log(index,list);
+         // console.log(index,list);
           let options = {
             history: false,
 

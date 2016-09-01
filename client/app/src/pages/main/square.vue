@@ -1,11 +1,17 @@
 <template>
   <div>
+    <!--图片浏览插件-->
     <photo-swipe v-ref:viewer></photo-swipe>
+    <!--
+      v-for一个列表
+      @view-image绑定点击图片时间 ，显示图片预览窗口
+    -->
    <demand-card
      v-for="item in list"
      :create_time="item.create_time"
      :data="item.data"
      :tag="item.tag"
+
       @view-image="viewImage">
    </demand-card>
 
@@ -24,12 +30,13 @@
     },
     methods:{
       viewImage(index,list){
-
+        //   this.$refs.viewer是图片浏览组件的应用，调用其中show方法
         this.$refs.viewer.show(index,list);
       }
     },
     computed:{
       debug_list(){
+        //调试用，过滤掉部分tag
         return this.list.filter((item)=>(item.tag==='sell'));
       }
     },
@@ -56,6 +63,7 @@
                   src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
                   w: 360,
                   h: 480
+
                 },
                 {
                   src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
