@@ -1,21 +1,26 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 public class TbQueAns {
+	
 	private Integer qAId;
-
 	private String qContent;
-
 	private String qTime;
-
 	private Integer labelId;
-
 	private String labelData;
-
 	private String userIdQue;
-
 	private String praiseNum;
-
 	private String lowNum;
+	private Date updateTime; // 更新时间
+	
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public String getPraiseNum() {
 		return praiseNum;

@@ -1,5 +1,7 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 /**
  * 用户实体类
  * 
@@ -16,6 +18,24 @@ public class TbUser {
 	private Boolean userSex;// 性别
 	private String userArea;// 用户所在地区
 	private String userSchool;// 所属学校
+	private Date createTime; // 创建时间
+	private Date updateTime; // 更新时间
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public TbUser() {
 	}

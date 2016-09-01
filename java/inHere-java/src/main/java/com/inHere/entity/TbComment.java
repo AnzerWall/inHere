@@ -1,19 +1,26 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 public class TbComment {
+	
     private Integer commentId;
-
     private String tabName;
-
     private Integer recordId;
-
     private String commentContent;
-
     private String commentTime;
-
     private String userIdPush;
+	private Date updateTime; // 更新时间
+	
+    public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public Integer getCommentId() {
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getCommentId() {
         return commentId;
     }
 

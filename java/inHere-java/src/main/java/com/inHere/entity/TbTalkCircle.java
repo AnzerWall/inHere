@@ -1,25 +1,28 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 public class TbTalkCircle {
+	
 	private Integer talkId;
-
 	private Boolean talkPlace;
-
 	private Integer labelId;
-
 	private String labelData;
-
 	private String talkContent;
-
 	private String talkPic;
-
 	private String talkTime;
-
 	private String userIdTalk;
-
 	private String praiseNum;
-
 	private String rowNum;
+	private Date updateTime; // 更新时间
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public String getPraiseNum() {
 		return praiseNum;

@@ -1,5 +1,7 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 /**
  * 关卡清单实体
  * 
@@ -19,6 +21,24 @@ public class TbBreakBarrier {
 	private String userIdCreate;// 关卡创建者
 	private String praiseNum;// 赞数目
 	private String lowNum;// 踩数目
+	private Date createTime; // 创建时间
+	private Date updateTime; // 更新时间
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public String getPraiseNum() {
 		return praiseNum;

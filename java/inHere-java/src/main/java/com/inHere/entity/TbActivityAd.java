@@ -1,31 +1,40 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 public class TbActivityAd {
+
 	private Integer acAdId;
-
 	private String acAdTitle;
-
 	private String acAdSubtitle;
-
 	private Integer labelId;
-
 	private String labelData;
-
 	private String startTime;
-
 	private String endTime;
-
 	private String coverImg;
-
 	private Boolean urlType;
-
 	private Boolean hasEnded;
-
 	private String userIdPush;
-
 	private String praiseNum;
-
 	private String urlContent;
+	private Date createTime; // 创建时间
+	private Date updateTime; // 更新时间
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
 	public String getPraiseNum() {
 		return praiseNum;

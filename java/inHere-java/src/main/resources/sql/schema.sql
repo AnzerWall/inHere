@@ -25,6 +25,8 @@ CREATE TABLE tb_activity_ad (
     url_content TEXT NOT NULL COMMENT '类别内容',
     has_ended TINYINT(1) NOT NULL COMMENT '是否已结束，0-未，1-已',
     user_id_push VARCHAR(100) NOT NULL COMMENT '发布的组织',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_activity_ad_pk PRIMARY KEY (ac_ad_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -40,6 +42,8 @@ CREATE TABLE tb_beg_help (
     praise_num TEXT NULL COMMENT '赞数目',
     has_resolved INT NOT NULL COMMENT '是否已解决',
     user_id_beg VARCHAR(100) NOT NULL COMMENT '请求人',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_beg_help_pk PRIMARY KEY (help_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -58,6 +62,8 @@ CREATE TABLE tb_break_barrier (
     end_time VARCHAR(50) NULL COMMENT '结束时间',
     has_pass TINYINT(1) NOT NULL COMMENT '关卡是否已通过，0-未，1-已',
     user_id_create VARCHAR(100) NOT NULL COMMENT '关卡创建者',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_break_barrier_pk PRIMARY KEY (bar_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -71,6 +77,7 @@ CREATE TABLE tb_comment (
     comment_content VARCHAR(200) NOT NULL COMMENT '评论内容',
     comment_time VARCHAR(50) NOT NULL COMMENT '评论时间',
     user_id_push VARCHAR(100) NOT NULL COMMENT '评论者',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_comment_pk PRIMARY KEY (comment_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -82,6 +89,8 @@ CREATE TABLE tb_dynamic (
     begin_time VARCHAR(100) NOT NULL COMMENT '开始时间',
     dy_point VARCHAR(50) NOT NULL COMMENT '指向: { "tab_id" : xxx, "record_id" : xxx, "comment_id" : xxx }',
     user_id_master VARCHAR(100) NOT NULL COMMENT '动态所属人',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_dynamic_pk PRIMARY KEY (dy_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -92,6 +101,8 @@ CREATE TABLE tb_label (
     label_id INT(10) NOT NULL AUTO_INCREMENT COMMENT '标签编号',
     label_name VARCHAR(50) NOT NULL COMMENT '标签名称',
     label_config TEXT NULL COMMENT '标签配置',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_label_pk PRIMARY KEY (label_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -108,6 +119,8 @@ CREATE TABLE tb_notification (
     notice_content VARCHAR(300) NOT NULL COMMENT '信息内容',
     notice_point VARCHAR(50) NOT NULL COMMENT '指向: { "tab_id" : xxx, "record_id" : xxx, "comment_id" : xxx }',
     is_over TINYINT(1) NOT NULL COMMENT '信息是否推送完毕，0-未，1-已',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_notification_pk PRIMARY KEY (notice_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -116,6 +129,8 @@ DROP TABLE IF EXISTS tb_permissions;
 
 CREATE TABLE tb_permissions (
     perm_id INT NOT NULL AUTO_INCREMENT,
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_permissions_pk PRIMARY KEY (perm_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -131,6 +146,7 @@ CREATE TABLE tb_que_ans (
     praise_num TEXT NULL COMMENT '赞数目',
     low_num TEXT NULL COMMENT '踩数目',
     user_id_que VARCHAR(100) NOT NULL COMMENT '提问人',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_que_ans_pk PRIMARY KEY (q_a_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -139,6 +155,8 @@ DROP TABLE IF EXISTS tb_role;
 
 CREATE TABLE tb_role (
     role_id INT NOT NULL AUTO_INCREMENT,
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_role_pk PRIMARY KEY (role_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -156,6 +174,7 @@ CREATE TABLE tb_talk_circle (
     praise_num TEXT NULL COMMENT '赞数目',
     row_num TEXT NULL COMMENT '踩数目',
     user_id_talk VARCHAR(100) NOT NULL COMMENT '吐槽者',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_talk_circle_pk PRIMARY KEY (talk_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -170,6 +189,8 @@ CREATE TABLE tb_target (
     label_data VARCHAR(100) NULL COMMENT '标签数据',
     has_finish TINYINT(1) NOT NULL COMMENT '是否完成, 0-未，1-已',
     bar_id INT(10) NOT NULL COMMENT '所属关卡编号',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_target_pk PRIMARY KEY (tar_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -181,6 +202,8 @@ CREATE TABLE tb_tools (
     tool_name VARCHAR(50) NOT NULL COMMENT '工具名称',
     tool_pic VARCHAR(100) NOT NULL COMMENT '工具图标',
     tool_url VARCHAR(100) NOT NULL COMMENT '工具链接',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_tools_pk PRIMARY KEY (tool_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
@@ -196,6 +219,8 @@ CREATE TABLE tb_user (
     user_sex TINYINT(1) NULL COMMENT '用户性别, 0-女，1-男',
     user_area VARCHAR(200) NULL COMMENT '所在地区',
     user_school VARCHAR(50) NULL COMMENT '所在学校',
+    create_time datetime DEFAULT NULL COMMENT '创建时间',
+    update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_user_pk PRIMARY KEY (user_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 

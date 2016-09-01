@@ -1,15 +1,33 @@
 package com.inHere.entity;
 
+import java.util.Date;
+
 public class TbDynamic {
+	
     private Integer dyId;
-
     private String beginTime;
-
     private String dyPoint;
-
     private String userIdMaster;
+	private Date createTime; // 创建时间
+	private Date updateTime; // 更新时间
+	
+    public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Integer getDyId() {
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Integer getDyId() {
         return dyId;
     }
 
