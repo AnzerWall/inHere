@@ -19,12 +19,7 @@ export default{
         component: Index
       },
       '/demand': {
-        component: Demand,
-        subRoutes: {
-          '/task': {
-            component: Home
-          }
-        }
+        component: Demand
       },
       '/square': {
         component: Square

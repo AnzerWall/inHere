@@ -33,7 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /*opacity: 0.15;*/
+    opacity: 0.15;
     background-color: white;
   }
 
