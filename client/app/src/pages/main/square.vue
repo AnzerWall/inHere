@@ -1,11 +1,12 @@
 <template>
   <div>
-
+    <photo-swipe v-ref:viewer></photo-swipe>
    <demand-card
      v-for="item in list"
      :create_time="item.create_time"
      :data="item.data"
-     :tag="item.tag">
+     :tag="item.tag"
+      @view-image="viewImage">
    </demand-card>
 
   </div>
@@ -15,13 +16,21 @@
 </style>
 <script  type="text/ecmascript-6">
   import DemandCard from 'components/demand-card/demand-card.vue'
+  import PhotoSwipe from 'components/photoswipe/photoswipe.vue'
   export default{
     components: {
-      'demand-card':DemandCard
+      'demand-card':DemandCard,
+      "photo-swipe":PhotoSwipe
+    },
+    methods:{
+      viewImage(index,list){
+
+        this.$refs.viewer.show(index,list);
+      }
     },
     computed:{
       debug_list(){
-        return this.list.filter((item)=>(item.tag==='lost'||item.tag==='express'||item.tag==='found'));
+        return this.list.filter((item)=>(item.tag==='sell'));
       }
     },
     data:function(){
@@ -43,9 +52,21 @@
               text: '出一条全新的牛仔a字裙，49元，适合平时穿SM码数的美眉，想买的评论',
               pay: 49,
               images: [
-                {src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg'},
-                {src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg'},
-                {src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg'}
+                {
+                  src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
+                  w: 360,
+                  h: 480
+                },
+                {
+                  src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
+                  w: 690,
+                  h: 920
+                },
+                {
+                  src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
+                  w: 360,
+                  h: 480
+                }
               ]
             }
           },
@@ -64,7 +85,9 @@
               thing:'银行卡',
               text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
               images:[{
-                src:'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
+                src:'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg',
+                w: 360,
+                h: 480
               }]
             }
           },
