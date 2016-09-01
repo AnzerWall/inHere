@@ -12,7 +12,7 @@
       <div class="demand-card-content">
         <div class="text">{{data.text}}</div>
         <div class="image-wrapper hide-scroll" v-if="data.images&& data.images.length!=0">
-          <img class="image" v-for="item in data.images" v-lazy="item.src" @click="onClickImage($index)">
+          <img class="image" v-for="item in data.images" v-lazy="item.src" @click.stop="onClickImage($index)">
         </div>
         <div class="image-space" v-if="data.images&&data.images.length!=0">
 
