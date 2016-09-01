@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" 
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -20,16 +18,27 @@
 	<!-- 激活组件扫描功能,扫描aop的相关组件组件, 用于Controller控制访问 -->
 	<context:component-scan base-package="com.inHere.aop" />
 
-	<!-- 扫描web相关的controller -->
+	<!-- 扫描异常处理器 -->
+	<context:component-scan base-package="com.inHere.exception" />
+
+	<!-- 扫描web控制层的controller -->
 	<context:component-scan base-package="com.inHere.web" />
 
-	<!-- 简化配置:（注解方式取代处理器映射器bean、处理器适配器bean） 
-		1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
-		2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持
-	-->
+	<!-- 简化配置:（注解方式取代处理器映射器bean、处理器适配器bean） 1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
+		2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持 -->
 	<mvc:annotation-driven />
 
 	<!-- 静态资源路径映射处理 1、加入对静态资源的处理:js,css,gif,png 2、允许使用"/"做整体映射 -->
 	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" />
+
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 上传文件的最大值，单位是byte，在Controller处理，默认没有限制100*1024*1024, 存在bug的tomcat会出项循环重定向：http://gold.xitu.io/entry/57b57db92e958a00562eb08f -->
+		<property name="maxUploadSize" value="104857600" />
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- resolveLazily属性启用是延迟文件解析，以便Controller中处理异常 -->
+		<property name="resolveLazily" value="true" />
+	</bean>
 
 </beans>
