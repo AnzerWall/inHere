@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="main-content">
-      <router-view></router-view>
+      <router-view ></router-view>
     </div>
 
     <div class="main-tabbar">
@@ -33,7 +33,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 0.15;
+    /*opacity: 0.15;*/
+    background-color: white;
   }
 
   .main-tabbar-item.current {
