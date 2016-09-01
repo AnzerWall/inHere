@@ -7,7 +7,7 @@
             a(v-for="item in messagevip",href="#")
                 message-vip(:title="item.title",:text="item.text")
             a(v-for="item in message",href="#")
-                message(:title="item.title",:color="item.color",:text="item.text")
+                message(:new="item.new",:title="item.title",:color="item.color",:text="item.text")
 </template>
 
 <script>
@@ -31,23 +31,29 @@ module.exports = {
             message:[{
                 title:'23条新评论',
                 color:'#FFC107',
-                text:'之前在树洞看到有转让小熊音乐会门票的微博，如果还有票请联系我，谢谢，好想去。655338'
+                text:'之前在树洞看到有转让小熊音乐会门票的微博，如果还有票请联系我，谢谢，好想去。655338',
+                new:true
             },{
                 title:'2人评论了你',
                 color:'#2196F3',
-                text:'有没有人可以帮忙拿个快递到F1？'
+                text:'有没有人可以帮忙拿个快递到F1？',
+                new:true
             },{
                 title:'1条新评论',
-                text:'谁能帮小泽妹纸我买个早餐？'
+                text:'谁能帮小泽妹纸我买个早餐？',
+                new:false
             },{
                 title:'23条新评论',
-                text:'之前在树洞看到有转让小熊音乐会门票的微博，如果还有票请联系我，谢谢，好想去。655338'
+                text:'之前在树洞看到有转让小熊音乐会门票的微博，如果还有票请联系我，谢谢，好想去。655338',
+                new:false
             },{
                 title:'2人评论了你',
-                text:'有没有人可以帮忙拿个快递到F1？'
+                text:'有没有人可以帮忙拿个快递到F1？',
+                new:false
             },{
                 title:'1条新评论',
-                text:'谁能帮小泽妹纸我买个早餐？'
+                text:'谁能帮小泽妹纸我买个早餐？',
+                new:false
             }]
         }
     }

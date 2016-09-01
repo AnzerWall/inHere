@@ -13,6 +13,8 @@ module.exports = {
 
 .app {
     position: relative;
+    height: 100%;
+    overflow: auto;
 }
 
 input,textarea,button {
@@ -26,6 +28,7 @@ html,body {
 	margin:0;
     background: $COLOR_BG;
     color:#232323;
+    font-size:15px;
 }
 
 a {
@@ -39,10 +42,7 @@ html,body,input {
 
 .hide-scroll::-webkit-scrollbar,
 .hide-scroll::-webkit-scrollbar-track,
-.hide-scroll::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar,
-body::-webkit-scrollbar-track,
-body::-webkit-scrollbar-thumb {
+.hide-scroll::-webkit-scrollbar-thumb {
     width:0;
     border-width: 0;
     height:0;
