@@ -1,6 +1,6 @@
 <template>
   <div class="demand-card-wrapper" :style="wrapper_style">
-    <div class="demand-card-head" :style="{color:main_color}" v-if="['found','lost','dating'].includes(tag)">
+    <div class="demand-card-head" :style="{color:main_color}" v-if="['found','lost','dating'].indexOf(tag)!=-1">
       <div v-if="tag==='found'" class="tag">{{chinese(tag)}}</div>
       <div v-if="tag==='lost'" class="tag">{{chinese(tag)}}</div>
       <div v-if="tag==='lost'||tag==='found'" class="tag">{{data.thing}}</div>
@@ -19,23 +19,23 @@
 
     </div>
     <div class="demand-card-tail">
-      <div class="normal" v-if="['express','sell','help','dating'].includes(tag)">
+      <div class="normal" v-if="['express','sell','help','dating'].indexOf(tag)!=-1">
         <div class="left">
-          <div class="time"v-if="['express','sell','help'].includes(tag)">{{humanized(create_time)}}</div>
-          <div class="tag"v-if="['express','sell','help'].includes(tag)">{{'# '+chinese(tag)}}</div>
+          <div class="time"v-if="['express','sell','help'].indexOf(tag)!=-1">{{humanized(create_time)}}</div>
+          <div class="tag"v-if="['express','sell','help'].indexOf(tag)!=-1">{{'# '+chinese(tag)}}</div>
           <div class="tag"v-if="tag==='dating'">参加人数: {{data.join_num}}人</div>
 
         </div>
         <div class="right">
-          <div class="pay" v-if="['express','sell'].includes(tag)">{{'¥'+data.pay}}</div>
+          <div class="pay" v-if="['express','sell'].indexOf(tag)!=-1">{{'¥'+data.pay}}</div>
           <div class="like-text" v-if="tag==='dating'">{{data.like_num}}</div>
-          <pay-icon v-if="['express','sell'].includes(tag)" class="icon"></pay-icon>
+          <pay-icon v-if="['express','sell'].indexOf(tag)!=-1" class="icon"></pay-icon>
           <like-icon v-if="tag==='dating'&&!data.liked" class=" like-icon"></like-icon>
           <liked-icon v-if="tag==='dating'&&data.liked" class="like-icon"></liked-icon>
         </div>
       </div>
 
-      <div class="btn" v-if="['lost','found'].includes(tag)">
+      <div class="btn" v-if="['lost','found'].indexOf(tag)!=-1">
           联系TA
       </div>
     </div>
