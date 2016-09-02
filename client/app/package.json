@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
     "test": "",
-    "update npm":"npm update"
+    "update npm": "npm update"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0",
@@ -17,6 +17,7 @@
     "normalize.css": "^4.2.0",
     "photoswipe": "^4.1.1",
     "superagent": "^2.2.0",
+    "superagent-mocker": "^0.4.0",
     "vue": "^1.0.21",
     "vue-lazyload": "^0.7.1",
     "vue-router": "^0.7.13",

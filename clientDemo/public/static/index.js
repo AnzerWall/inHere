@@ -88,7 +88,7 @@
 	        }
 	    },
 	    '/demand/detail/:type':{
-	        component: __webpack_require__(269)
+	        component: __webpack_require__(242)
 	    },
 	    // '/demand/lost/:id':{
 	    //     component: require('./pages/Demand/LostDetail.vue')
@@ -99,7 +99,7 @@
 	})
 	
 	router.redirect({
-	    '*': '/main/demand',
+	    '*': '/main/demand/task',
 	    '/main/*':'/main/demand/task'
 	})
 	
@@ -32514,7 +32514,7 @@
 /* 170 */
 /***/ function(module, exports) {
 
-	module.exports = "<div v-if=\"data\" :style=\"{background:data.color,marginBottom:isDetail?'0':null}\" @click=\"clickCard\" class=\"demand-card\"><div class=\"demand-card-content\"><div v-if=\"!isDetail &amp;&amp; data.type=='lost'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{data.isLost?'失物':'拾获'}}</div><div class=\"tag\">{{data.thing}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div v-if=\"!isDetail &amp;&amp; data.type=='dating'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{sexStr(data.sex)}}</div><div class=\"tag\">{{data.address}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div class=\"text\">{{data.text}}</div><div v-if=\"data.imgs\" class=\"imgs hide-scroll\"><img v-for=\"item in data.imgs\" :src=\"item.src\" @click.stop=\"clickImg($index,data.imgs)\"/></div><div v-if=\"data.imgs\" class=\"imgs-space\"><div @click.stop=\"\"><photo-swipe v-ref:viewer=\"v-ref:viewer\"></photo-swipe></div></div></div><div v-if=\"data.type=='task'\" class=\"demand-card-bottom\"><div class=\"left\"><div class=\"time\">{{timeStr(data.time)}}</div><div class=\"tag\">{{'#'+data.tag}}</div></div><div v-if=\"data.pay\" class=\"right\"> <span>{{'¥'+data.pay}}</span><svg-pay></svg-pay></div></div><div v-if=\"data.type=='lost'\" class=\"demand-card-bottom btn\">联&nbsp;系&nbsp;TA</div><div v-if=\"data.type=='dating'\" class=\"demand-card-bottom\"><div class=\"left\">参加人数：{{data.joinNum}}</div><div class=\"right\"><span>{{data.likeNum}}</span><svg-liked v-if=\"data.liked\" @click.stop=\"clickLike\" class=\"like\"></svg-liked><svg-like v-else=\"v-else\" @click.stop=\"clickLike\" class=\"like\"></svg-like></div></div></div>";
+	module.exports = "<div v-if=\"data\" :style=\"{background:data.color,marginBottom:isDetail?'0':null}\" @click=\"clickCard\" class=\"demand-card\"><div class=\"demand-card-content\"><div v-if=\"!isDetail &amp;&amp; data.type=='lost'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{data.isLost?'失物':'拾获'}}</div><div class=\"tag\">{{data.thing}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div v-if=\"!isDetail &amp;&amp; data.type=='dating'\" :style=\"{color:data.color}\" class=\"demand-card-tags\"><div class=\"tag\">{{sexStr(data.sex)}}</div><div class=\"tag\">{{data.address}}</div><div class=\"tag\">{{timeStr(data.time)}}</div></div><div class=\"text\">{{data.text}}</div><div v-if=\"data.imgs\" class=\"imgs hide-scroll\"><img v-for=\"item in data.imgs\" :src=\"item.src\" @click.stop=\"clickImg($index,data.imgs)\"/></div><div v-if=\"data.imgs\" class=\"imgs-space\"><div @click.stop=\"\"><photo-swipe v-ref:viewer=\"v-ref:viewer\"></photo-swipe></div></div></div><div v-if=\"data.type=='task'\" class=\"demand-card-bottom\"><div class=\"left\"><div class=\"time\">{{timeStr(data.time)}}</div><div class=\"tag\">{{'#'+data.tag}}</div></div><div v-if=\"data.pay &amp;&amp; !isDetail\" class=\"right\"> <span>{{'¥'+data.pay}}</span><svg-pay></svg-pay></div></div><div v-if=\"data.type=='lost'&amp;&amp; !isDetail\" class=\"demand-card-bottom btn\">联&nbsp;系&nbsp;TA</div><div v-if=\"data.type=='dating'\" class=\"demand-card-bottom\"><div class=\"left\">参加人数：{{data.joinNum}}</div><div class=\"right\"><span>{{data.likeNum}}</span><svg-liked v-if=\"data.liked\" @click.stop=\"clickLike\" class=\"like\"></svg-liked><svg-like v-else=\"v-else\" @click.stop=\"clickLike\" class=\"like\"></svg-like></div></div></div>";
 
 /***/ },
 /* 171 */
@@ -33967,10 +33967,188 @@
 	module.exports = "<div class=\"profile\"><navbar><div class=\"title\">{{user.username+' / '+user.school}}</div><svg-setting class=\"setting\"></svg-setting></navbar><div class=\"profile-content\"><div class=\"features\"><feature name=\"我的目标\" color=\"#7300FF\"><svg-wodemubiao></svg-wodemubiao></feature><feature name=\"我的回答\" color=\"#09CE88\"><svg-wodehuida></svg-wodehuida></feature><feature name=\"期末成绩\" color=\"#4F8794\"><svg-qimochengji></svg-qimochengji></feature><feature name=\"四六级成绩\" color=\"#FFA600\"><svg-siliujichengji></svg-siliujichengji></feature><feature name=\"饭卡记录\" color=\"#FF3A3A\"><svg-fankajilu></svg-fankajilu></feature><feature name=\"水费查询\" color=\"#0098FF\"><svg-shuifeichaxun></svg-shuifeichaxun></feature><feature name=\"快递查询\" color=\"#16A82E\"><svg-kuaidichaxun></svg-kuaidichaxun></feature></div><div class=\"timeline\"><div class=\"timeline-title\">我的过去</div><div class=\"timeline-list\"><timeline-item v-for=\"item in timeline\" :time=\"item.time\"><demand-card :data=\"item.task\"></demand-card></timeline-item></div></div></div></div>";
 
 /***/ },
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(243)
+	__vue_script__ = __webpack_require__(245)
+	if (__vue_script__ &&
+	    __vue_script__.__esModule &&
+	    Object.keys(__vue_script__).length > 1) {
+	  console.warn("[vue-loader] src/pages/Demand/Detail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(258)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) {
+	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	}
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/Detail.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(244);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(8)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue", function() {
+				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 244 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(7)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/Detail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"Detail.vue","sourcesContent":[".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
+	
+	// exports
+
+
+/***/ },
+/* 245 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = {
+	    components: {
+	        navbar: __webpack_require__(33),
+	        svgFollow: __webpack_require__(246),
+	        demandCard: __webpack_require__(45),
+	        demandDetailItem: __webpack_require__(248),
+	        commentItem: __webpack_require__(253)
+	    },
+	    data: function data() {
+	        return {
+	            id: '',
+	            data: {},
+	            comments: [{
+	                time: 1472662020304,
+	                author: '',
+	                text: '你们快来啊',
+	                floor: 3,
+	                isPoster: true
+	            }, {
+	                time: 1472662300304,
+	                author: '玲玉',
+	                text: '我不要',
+	                floor: 1
+	            }]
+	        };
+	    },
+	
+	    route: {
+	        data: function data(_route) {
+	            var type = _route.to.params.type;
+	            var _lost = {
+	                type: 'lost',
+	                thing: '银行卡',
+	                text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
+	                imgs: [{
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
+	                }],
+	                color: '#0CC998',
+	                isLost: false,
+	                time: 1472581345635,
+	                tags: [{
+	                    name: '发布时间',
+	                    value: 'Thu Sep 01 2016 01:14:13'
+	                }, {
+	                    name: '地点',
+	                    value: '建行网点'
+	                }]
+	            };
+	            var _dating = {
+	                type: 'dating',
+	                text: '有没有妹纸想一起去北岭山?',
+	                color: '#EC407A',
+	                sex: 2,
+	                likeNum: 8,
+	                joinNum: 0,
+	                liked: true,
+	                time: 1472581345635,
+	                tags: [{
+	                    name: '人均消费',
+	                    value: '¥120'
+	                }, {
+	                    name: '求陪同',
+	                    value: '求女生'
+	                }, {
+	                    name: '地点',
+	                    value: '北岭沙摩星岭'
+	                }, {
+	                    name: '时间',
+	                    value: 'Thu Sep 01 2016 01:14:13'
+	                }, {
+	                    name: '集中地',
+	                    value: '后山商业街'
+	                }]
+	            };
+	            var _task = {
+	                type: 'task',
+	                text: '多余的小泽软妹纸一枚，谁要？',
+	                imgs: [{
+	                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
+	                    w: 570, h: 760
+	                }, {
+	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
+	                    w: 570, h: 760
+	                }],
+	                color: '#ffc107',
+	                tag: '转让',
+	                time: 1472581345635,
+	                pay: 15,
+	                tags: [{
+	                    name: '价格',
+	                    value: '¥12'
+	                }, {
+	                    name: '成色',
+	                    value: '8成'
+	                }]
+	            };
+	            if (type == 'dating') this.data = _dating;else if (type == 'lost') this.data = _lost;else if (type == 'task') this.data = _task;
+	            this.data.type = type;
+	        }
+	    },
+	    methods: {
+	        goBack: function goBack() {
+	            window.history.back();
+	        }
+	    }
+	};
+
+/***/ },
 /* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -34184,193 +34362,7 @@
 	module.exports = "<div class=\"comment-item\"><div class=\"title clearfix\"><div :style=\"{color:color}\" class=\"author\"> <div v-if=\"!data.isPoster\">{{data.author}}</div><div v-else=\"v-else\" :style=\"{background:color}\" class=\"poster\">楼主</div>{{' · '+timeStr(data.time)}}</div><div class=\"floor\">{{data.floor}}</div></div><div class=\"text\">{{data.text}}</div></div>";
 
 /***/ },
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(270)
-	__vue_script__ = __webpack_require__(272)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] src/pages/Demand/Detail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(273)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/kenefe/Kenefe/Web/NODE/inHere/src/pages/Demand/Detail.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 270 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-	
-	// load the styles
-	var content = __webpack_require__(271);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(8)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/vue-loader/lib/style-rewriter.js!./../../../../node_modules/sass-loader/index.js!./../../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./Detail.vue");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(7)();
-	// imports
-	
-	
-	// module
-	exports.push([module.id, ".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      -webkit-transform: translateY(-50%);\n              transform: translateY(-50%); }\n", "", {"version":3,"sources":["/./src/pages/Demand/Detail.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB,EAAE;;AAEtB;EACE,mBAAmB,EAAE;;AAEvB;EACE,iBAAiB;EACjB,oBAAoB,EAAE;EACtB;IACE,mBAAmB;IACnB,wBAAwB,EAAE;IAC1B;MACE,aAAa;MACb,mBAAmB;MACnB,SAAS;MACT,YAAY;MACZ,kBAAkB;MAClB,oCAA4B;cAA5B,4BAA4B,EAAE","file":"Detail.vue","sourcesContent":[".demand-detail .navbar .nav-title {\n  margin-left: 10px; }\n\n.demand-detail .navbar svg {\n  margin-right: 15px; }\n\n.demand-detail .demand-detail-content {\n  margin-top: 90px;\n  margin-bottom: 50px; }\n  .demand-detail .demand-detail-content .comments .comments-title {\n    position: relative;\n    margin: 15px 0 5px 30px; }\n    .demand-detail .demand-detail-content .comments .comments-title:before {\n      content: '*';\n      position: absolute;\n      top: 50%;\n      right: 100%;\n      margin-right: 5px;\n      transform: translateY(-50%); }\n"],"sourceRoot":"webpack://"}]);
-	
-	// exports
-
-
-/***/ },
-/* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	module.exports = {
-	    components: {
-	        navbar: __webpack_require__(33),
-	        svgFollow: __webpack_require__(246),
-	        demandCard: __webpack_require__(45),
-	        demandDetailItem: __webpack_require__(248),
-	        commentItem: __webpack_require__(253)
-	    },
-	    data: function data() {
-	        return {
-	            id: '',
-	            data: {},
-	            comments: [{
-	                time: 1472662020304,
-	                author: '',
-	                text: '你们快来啊',
-	                floor: 3,
-	                isPoster: true
-	            }, {
-	                time: 1472662300304,
-	                author: '玲玉',
-	                text: '我不要',
-	                floor: 1
-	            }]
-	        };
-	    },
-	
-	    route: {
-	        data: function data(_route) {
-	            var type = _route.to.params.type;
-	            var _lost = {
-	                type: 'lost',
-	                thing: '银行卡',
-	                text: '寻失主。昨晚在建行网点捡到，一直找不到失主。麻烦失主看到联系我取回卡。下方留言我私聊你。',
-	                imgs: [{
-	                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg'
-	                }],
-	                color: '#0CC998',
-	                isLost: false,
-	                time: 1472581345635,
-	                tags: [{
-	                    name: '发布时间',
-	                    value: 'Thu Sep 01 2016 01:14:13'
-	                }, {
-	                    name: '地点',
-	                    value: '建行网点'
-	                }]
-	            };
-	            var _dating = {
-	                type: 'dating',
-	                text: '有没有妹纸想一起去北岭山?',
-	                color: '#EC407A',
-	                sex: 2,
-	                likeNum: 8,
-	                joinNum: 0,
-	                liked: true,
-	                time: 1472581345635,
-	                tags: [{
-	                    name: '人均消费',
-	                    value: '¥120'
-	                }, {
-	                    name: '求陪同',
-	                    value: '求女生'
-	                }, {
-	                    name: '地点',
-	                    value: '北岭沙摩星岭'
-	                }, {
-	                    name: '时间',
-	                    value: 'Thu Sep 01 2016 01:14:13'
-	                }, {
-	                    name: '集中地',
-	                    value: '后山商业街'
-	                }]
-	            };
-	            var _task = {
-	                type: 'task',
-	                text: '多余的小泽软妹纸一枚，谁要？',
-	                color: '#ffc107',
-	                tag: '转让',
-	                time: 1472581345635,
-	                pay: 15,
-	                tags: [{
-	                    name: '价格',
-	                    value: '¥12'
-	                }, {
-	                    name: '成色',
-	                    value: '8成'
-	                }]
-	            };
-	            if (type == 'dating') this.data = _dating;else if (type == 'lost') this.data = _lost;else if (type == 'task') this.data = _task;
-	            this.data.type = type;
-	        }
-	    },
-	    methods: {
-	        goBack: function goBack() {
-	            window.history.back();
-	        }
-	    }
-	};
-
-/***/ },
-/* 273 */
+/* 258 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"demand-detail\"><navbar><div @click=\"goBack()\" class=\"nav-title\">《 详细</div><svg-follow :style=\"{opacity:data.following?'1':'0.15'}\"></svg-follow></navbar><div class=\"demand-detail-content\"><demand-card :data.sync=\"data\" :is-detail=\"true\"></demand-card><div class=\"detail-list\"><demand-detail-item v-for=\"item in data.tags\" :name=\"item.name\" :value=\"item.value\" :color=\"data.color\"></demand-detail-item></div><div v-if=\"data.type != 'lost'\" class=\"comments\"><div :style=\"{color:data.color}\" class=\"comments-title\">{{comments.length+'条评论'}}</div><comment-item v-for=\"item in comments\" :data.sync=\"item\" :color=\"data.color\"></comment-item></div></div></div>";
