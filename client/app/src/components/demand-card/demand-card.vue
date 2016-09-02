@@ -1,7 +1,7 @@
 <template>
 
     <div class="demand-card-wrapper" :style="wrapper_style">
-      <div class="demand-card-head" :style="{color:main_color}" v-if="['found','lost','dating'].indexOf(tag)!=-1">
+      <div class="demand-card-head" :style="{color:main_color}" v-if="['found','lost','dating'].indexOf(tag)!=-1&&!is_detail">
         <div v-if="tag==='found'" class="tag">{{chinese(tag)}}</div>
         <div v-if="tag==='lost'" class="tag">{{chinese(tag)}}</div>
         <div v-if="tag==='lost'||tag==='found'" class="tag">{{data.thing}}</div>
@@ -28,15 +28,15 @@
 
           </div>
           <div class="right">
-            <div class="pay" v-if="['express','sell'].indexOf(tag)!=-1">{{'¥'+data.pay}}</div>
+            <div class="pay" v-if="['express','sell'].indexOf(tag)!=-1&&!is_detail">{{'¥'+data.pay}}</div>
             <div class="like-text" v-if="tag==='dating'">{{data.like_num}}</div>
-            <pay-icon v-if="['express','sell'].indexOf(tag)!=-1" class="icon"></pay-icon>
+            <pay-icon v-if="['express','sell'].indexOf(tag)!=-1&&!is_detail" class="icon"></pay-icon>
             <like-icon v-if="tag==='dating'&&!data.liked" class=" like-icon"></like-icon>
             <liked-icon v-if="tag==='dating'&&data.liked" class="like-icon"></liked-icon>
           </div>
         </div>
 
-        <div class="btn" v-if="['lost','found'].indexOf(tag)!=-1">
+        <div class="btn" v-if="['lost','found'].indexOf(tag)!=-1&&!is_detail">
           联系TA
         </div>
       </div>
@@ -72,6 +72,11 @@
       AddIcon
     },
     props: {
+      is_detail:{
+        type:Boolean,
+        required:true,
+        default:false
+      },
       tag: {
         type: String,
         required: true,
