@@ -1,4 +1,4 @@
-package com.inHere.util;
+package test.inHere.util;
 
 import java.io.ByteArrayOutputStream;
 import java.security.Key;

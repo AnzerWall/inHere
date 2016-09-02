@@ -15,8 +15,8 @@
 	<!-- 启动对@AspectJ注解的支持 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
-	<!-- 激活组件扫描功能,扫描aop的相关组件组件, 用于Controller控制访问 -->
-	<context:component-scan base-package="com.inHere.aop" />
+	<!-- 激活组件扫描功能,扫描aop的相关组件组件, 用于Controller控制访问,校验等 -->
+	<context:component-scan base-package="com.inHere.validator" />
 
 	<!-- 扫描异常处理器 -->
 	<context:component-scan base-package="com.inHere.exception" />
@@ -24,8 +24,10 @@
 	<!-- 扫描web控制层的controller -->
 	<context:component-scan base-package="com.inHere.web" />
 
-	<!-- 简化配置:（注解方式取代处理器映射器bean、处理器适配器bean） 1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
-		2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持 -->
+	<!-- 简化配置:（注解方式取代处理器映射器bean、处理器适配器bean） 
+		1、自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter 
+		2、提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持
+	-->
 	<mvc:annotation-driven />
 
 	<!-- 静态资源路径映射处理 1、加入对静态资源的处理:js,css,gif,png 2、允许使用"/"做整体映射 -->

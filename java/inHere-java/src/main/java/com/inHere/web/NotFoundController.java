@@ -1,4 +1,4 @@
-package com.inHere.exception;
+package com.inHere.web;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,16 +11,13 @@ import com.inHere.constant.Code;
 
 /**
  * <h1>请求异常处理</h1>
- * <p>
- * 使用@JsonView来分组渲染JSON数据，按需展示JSON数据。
- * </p>
  * 
  * @author lwh
  *
  */
 @RestController
 @RequestMapping("/")
-public class ErrorHandlerController {
+public class NotFoundController {
 
 	Logger log = Logger.getLogger(getClass());
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.inHere.util.JsonFormatUtil;
 
 /**
@@ -12,6 +14,7 @@ import com.inHere.util.JsonFormatUtil;
  * @author lwh
  *
  */
+@JsonInclude(Include.NON_NULL)
 public class BaseResultDto<T> {
 
 	private String code; // 响应码，0表示成功，其他表示生效，使用码段区分不同模块
