@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.inHere.entity.TbUser;
@@ -20,7 +20,7 @@ import com.inHere.service.RegisterService;
  */
 @RunWith(SpringJUnit4ClassRunner.class) // spring-test测试套件
 @ContextConfiguration("classpath:spring/spring-*.xml") // 配置文件
-public class RegisterServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class RegisterServiceTest extends AbstractJUnit4SpringContextTests {
 
 	Logger logger = Logger.getLogger(getClass());
 
@@ -29,7 +29,7 @@ public class RegisterServiceTest extends AbstractTransactionalJUnit4SpringContex
 
 	@Test
 	public void generalRegisterTest() {
-		TbUser user = registerService.generalRegister("ni_menhao10", "li0708");
+		TbUser user = registerService.generalRegister("LLB", "123456");
 		logger.info(user);
 	}
 

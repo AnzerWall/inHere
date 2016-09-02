@@ -37,7 +37,7 @@ public class RegisterServiceImpl implements RegisterService {
 	public TbUser generalRegister(String userId, String password) {
 		TbUser user = null;
 		// TODO: 检查userID是否存在以及是否符合要求
-		List<String> pwdAndSalt = securityService.getPasswordAndSalt(password);
+		List<String> pwdAndSalt = securityService.encrypt(password);
 		String newPwd = pwdAndSalt.get(0);
 		String saltKey = pwdAndSalt.get(1);
 		user = new TbUser(userId, newPwd, saltKey);
