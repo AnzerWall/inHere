@@ -89,6 +89,13 @@ module.exports = {
             var _task = {
                 type:'task',
                 text: '多余的小泽软妹纸一枚，谁要？',
+                imgs: [{
+                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
+                    w:570,h:760
+                }, {
+                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
+                    w:570,h:760
+                }],
                 color: '#ffc107',
                 tag: '转让',
                 time: 1472581345635,

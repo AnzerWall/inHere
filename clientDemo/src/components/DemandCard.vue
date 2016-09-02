@@ -10,19 +10,21 @@
                 .tag {{data.address}}
                 .tag {{timeStr(data.time)}}
             .text {{data.text}}
+
             .imgs.hide-scroll(v-if="data.imgs")
                 img(v-for="item in data.imgs",:src="item.src",@click.stop="clickImg($index,data.imgs)")
             .imgs-space(v-if="data.imgs")
                 div(@click.stop="")
                     photo-swipe(v-ref:viewer)
+        
         .demand-card-bottom(v-if="data.type=='task'")
             .left
                 .time {{timeStr(data.time)}}
                 .tag {{'#'+data.tag}}
-            .right(v-if="data.pay") 
+            .right(v-if="data.pay && !isDetail") 
                 span {{'¥'+data.pay}}
                 svg-pay
-        .demand-card-bottom.btn(v-if="data.type=='lost'") 联&nbsp;系&nbsp;TA
+        .demand-card-bottom.btn(v-if="data.type=='lost'&& !isDetail") 联&nbsp;系&nbsp;TA
         .demand-card-bottom(v-if="data.type=='dating'")
             .left 参加人数：{{data.joinNum}}
             .right

@@ -53,7 +53,7 @@ router.map({
 })
 
 router.redirect({
-    '*': '/main/demand',
+    '*': '/main/demand/task',
     '/main/*':'/main/demand/task'
 })
 
