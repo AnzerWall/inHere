@@ -21,7 +21,7 @@
     <!--我的评论-->
     <div class="mydiv" v-for="tran in trans">
       <div class="myh">
-        <div class="round mid" v-if="tran.color" style="background-color: {{tran.color}}"></div>
+        <div class="round mid" v-show="tran.color" style="background-color: {{tran.color}}"></div>
         <div class="mtittle mid" style="color: {{tran.color}}">{{tran.count}}</div>
       </div>
       <div class="mymessage">{{tran.text}}</div>
@@ -77,7 +77,13 @@
     font-weight: bold;
   }
 
-  .noticediv, .mydiv {
+  .noticediv{
+
+    padding: 20px 20px 20px 20px;
+    border-bottom: 1px solid #cccccc;
+  }
+
+  .mydiv{
 
     padding: 20px 20px 20px 20px;
     border-bottom: 1px solid #cccccc;
@@ -89,11 +95,19 @@
     border-radius: 12px;
   }
 
-  .noticemessage,.mymessage{
+  .noticemessage{
     overflow : hidden;
     text-overflow: ellipsis;
     line-height: 20px; ;
  height: 40px;
+  }
+
+  .mymessage{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    line-height: 20px; ;
+    height: 40px;
+    margin-left: 15px;
   }
 </style>
 <script>
