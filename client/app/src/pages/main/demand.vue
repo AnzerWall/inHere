@@ -8,6 +8,7 @@
       @view-image绑定点击图片时间 ，显示图片预览窗口
     -->
     <demand-card
+      :is_detail="true"
       v-for="item in list"
       :create_time="item.create_time"
       :data="item.data"
