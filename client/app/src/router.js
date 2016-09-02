@@ -4,17 +4,18 @@
 import Index from 'pages/index.vue'
 import Main from 'pages/Main.vue'
 import Other from 'pages/other.vue'
-import Demand from 'pages/main/demand.vue'
+
 import Square from 'pages/main/square.vue'
 import Message from 'pages/main/message.vue'
 import Profile from 'pages/main/profile.vue'
 import Home from 'pages/home.vue'
-import DemandDetail from  'pages/demand/detail.vue'
 
+import Demand from 'pages/main/demand.vue'
+import DemandDetail from  'pages/demand/detail.vue'
+import DemandTask from  'pages/demand/task.vue'
+import DemandLost from  'pages/demand/lost.vue'
+import DemandDating from  'pages/demand/dating.vue'
 export default{
-  '/demand/:id':{
-    component:DemandDetail
-  },
   '/': {
     component: Main,
     subRoutes: {
@@ -22,7 +23,18 @@ export default{
         component: Index
       },
       '/demand': {
-        component: Demand
+        component: Demand,
+        subRoutes: {
+          '/task':{
+            component: DemandTask
+          },
+          '/lost':{
+            component: DemandLost
+          },
+          '/dating':{
+            component: DemandDating
+          }
+        }
       },
       '/square': {
         component: Square
@@ -35,7 +47,7 @@ export default{
       }
     }
   },
-  '/other': {
-    component: Other
+  '/demand-detail/:id':{
+    component:DemandDetail
   }
 }

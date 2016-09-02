@@ -27,8 +27,10 @@
 <style scoped>
   .main-wrapper{
     height: 100vh;
+    background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
+
   }
   .main-content {
     overflow: auto;
@@ -42,19 +44,19 @@
     justify-content: center;
     align-items: center;
     opacity: 0.15;
-    background-color: white;
+
   }
 
   .main-tabbar-item.current {
     opacity: 0.9;
   }
   .main-tabbar-wrapper{
-    flex-shrink:1;
+    flex-shrink:0;
     position: relative;
     height: 52px;
   }
   .main-tabbar-wrapper .main-tabbar {
-    background-color: white;
+    background-color: #FAFAFA;
     position: fixed;
     bottom: 0;
     width: 100%;
