@@ -9,9 +9,12 @@ import Square from 'pages/main/square.vue'
 import Message from 'pages/main/message.vue'
 import Profile from 'pages/main/profile.vue'
 import Home from 'pages/home.vue'
-
+import DemandDetail from  'pages/demand/detail.vue'
 
 export default{
+  '/demand/:id':{
+    component:DemandDetail
+  },
   '/': {
     component: Main,
     subRoutes: {

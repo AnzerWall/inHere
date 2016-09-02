@@ -1,5 +1,5 @@
 <template lang="jade">
-    .demand-detail-item.clearfix
+    .demand-detail-item
         .name {{name}}
         .value(:style="{color:color}") {{value}}
 </template>
@@ -21,13 +21,15 @@ module.exports = {
     font-weight: bold;
     margin:0 15px;
     border-bottom: solid 1px $COLOR_LINE;
+    display: flex;
+    justify-content: space-between;
     .name {
         margin-left:15px;
-        float:left;
+        // float:left;
     }
     .value {
         margin-right:15px;
-        float:right;
+        // float:right;
     }
 }
 </style>

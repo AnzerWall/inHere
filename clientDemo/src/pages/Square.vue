@@ -6,9 +6,7 @@
                     .h1 {{{swipe.title}}}
                     .h2 {{swipe.author}}
         square-item(:color="nuo.color",:title="nuo.title",:hot="nuo.hot",:more="nuo.more",:subtitle="nuo.subtitle")
-            .nuo-item(v-for="item in nuo.list")
-                span.text {{item.name}}
-                input.checkbox(type="checkbox",v-model="item.value")
+            {{nuo.detail}}
         square-item(:color="ask.color",:title="ask.title",:hot="ask.hot",:more="ask.more",:subtitle="ask.subtitle")
             {{ask.detail}}
         square-item(:color="cao.color",:title="cao.title",:hot="cao.hot",:more="cao.more",:subtitle="cao.subtitle")
@@ -31,7 +29,8 @@ module.exports = {
             nuo:{
                 title:'有诺必行',
                 color:'#18B803',
-                subtitle:'我的目标',
+                subtitle:'最火的目标',
+                detail:'大家都在做 "吃尽肇庆学院一条街"',
                 hot:[{
                     text:'论如何成为IT达人',
                     url:'#'
