@@ -1,6 +1,6 @@
 <template lang="jade">
     .tabbar
-        .tabbar-tab(v-link="{path:'/main/demand',activeClass:'cur'}")
+        .tabbar-tab(v-link="{path:'/main/demand/task',activeClass:'cur'}")
             svg-demand
         .tabbar-tab(v-link="{path:'/main/square',activeClass:'cur'}")
             svg-square
