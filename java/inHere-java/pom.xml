@@ -12,6 +12,8 @@
 	<properties>
 		<!-- 统一项目字符集编码 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 跳过JUnit测试用例 -->
+		<skipTests>true</skipTests>
 		<spring.version>4.2.7.RELEASE</spring.version>
 	</properties>
 
@@ -282,9 +284,9 @@
 					<url>http://115.28.67.181:8080/manager/text</url>
 					<server>admin</server>
 					<!--settings.xml文件已配置，此处可以不配 -->
-					<username>username</username>
+					<username>nimenhao</username>
 					<!--settings.xml文件已配置，此处可以不配 -->
-					<password>password</password>
+					<password>li0708</password>
 					<!-- <path>/inHere</path> -->	<!-- 发布项目，带项目名localhost访问：http://127.0.0.1:8080/localhost -->
 					<path>/ROOT</path>      <!-- 发布到根目录, 访问：http://127.0.0.1:8080 -->
 					<ignorePackaging>true</ignorePackaging>

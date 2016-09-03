@@ -27,7 +27,7 @@ public class LoginControllerTest extends AbstractTransactionalJUnit4SpringContex
 
 	Logger logger = Logger.getLogger(getClass());
 
-	@Test
+//	@Test
 	public void loginTest() {
 		RestfulUtil http = RestfulUtil.init("http://localhost");
 		Map<String, Object> map = new HashMap<String, Object>();

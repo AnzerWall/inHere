@@ -28,6 +28,7 @@ public class LoginController {
 		BaseResultDto<Map<String, Object>> result = BaseResultDto.create();
 		result.setCode(Code.Success.getCode());
 //		result.setStatus(Code.Success.getStatus());
+//		result.put("code", code);
 		result.put("userId", user.getUserId());
 		result.put("passwd", user.getPasswd());
 		return result;

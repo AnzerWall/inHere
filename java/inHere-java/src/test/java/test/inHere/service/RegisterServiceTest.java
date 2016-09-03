@@ -27,7 +27,7 @@ public class RegisterServiceTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
 	private RegisterService registerService;
 
-	@Test
+//	@Test
 	public void generalRegisterTest() {
 		TbUser user = registerService.generalRegister("LLB", "123456");
 		logger.info(user);

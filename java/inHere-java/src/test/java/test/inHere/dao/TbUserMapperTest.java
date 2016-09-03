@@ -27,7 +27,7 @@ public class TbUserMapperTest extends AbstractTransactionalJUnit4SpringContextTe
 	@Autowired
 	private TbUserMapper userMapper;
 
-	@Test
+//	@Test
 	public void getUserByUserIdTest() {
 		TbUser user = userMapper.getUserByUserId("18318749825");
 		// userId不存在返回空
@@ -36,7 +36,7 @@ public class TbUserMapperTest extends AbstractTransactionalJUnit4SpringContextTe
 		logger.info("=========================================");
 	}
 
-	@Test
+//	@Test
 	public void insertUserTest() {
 		TbUser user = new TbUser();
 		user.setUserId("13202784103");

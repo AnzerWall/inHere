@@ -10,10 +10,10 @@ public enum Code {
 
 	Error("0", "未知错误"), 
 	NotFound("404", "资源不存在"), 
-	NoHandlerFound("404", "找不着路..."), 
-	ServerError("500", "服务器发生错误"), 
+	ServerError("500", "服务器错误"), 
 	NoLogin("1000", "未登录"), 
 	UploadEx("1001", "上传异常"), 
+	InputErr("1002", "输入异常"),
 	Success("200", "正常");
 
 	// 状态码
