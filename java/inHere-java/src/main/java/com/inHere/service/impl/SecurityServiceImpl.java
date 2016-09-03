@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 
-import com.inHere.entity.TbUser;
 import com.inHere.service.SecurityService;
-import com.inHere.util.MD5Util;
+import com.inHere.util.SHA256Util;
 
 /**
  * 安全加密解密业务
@@ -21,29 +19,19 @@ import com.inHere.util.MD5Util;
 public class SecurityServiceImpl implements SecurityService {
 
 	/**
-	 * 获取加盐加密密码和盐值
+	 * 加密
 	 * 
 	 * @param passwd
-	 * @return list.get(0) --> password <br>
-	 *         list.get(1) --> saltKey <br>
+	 * @return 返回加盐加密密码、盐值list.get(0) : password | list.get(1) : saltKey
+	 * 
 	 */
-	public List<String> getPasswordAndSalt(String password) {
+	public List<String> encrypt(String password) {
 		// 使用uuid做盐值
-		String uid = UUID.randomUUID().toString();
+		String saltKey = UUID.randomUUID().toString();
+		saltKey = saltKey.replace("-", "");
 
-		// 密码、盐值切割
-		int pwdLen = password.length();
-		String pwdPrefix = password.substring(0, pwdLen / 2);
-		String pwdSuffix = password.substring(pwdLen / 2);
-		int uidLen = password.length();
-		String uidPrefix = uid.substring(0, uidLen / 3);
-		String uidSuffix = uid.substring(uidLen / 3);
-
-		// MD5加密
-		byte[] pwdByte = MD5Util.encrypt(uidSuffix + pwdPrefix + uidPrefix + pwdSuffix);
-		// 转Base64编码存储
-		String safePwd = Base64.encodeBase64String(pwdByte);
-		String saltKey = Base64.encodeBase64String(uid.getBytes());
+		// 密码加密
+		String safePwd = encrypt(saltKey, password);
 
 		List<String> pwdAndSalt = new ArrayList<String>();
 		pwdAndSalt.add(safePwd);
@@ -52,15 +40,25 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	/**
-	 * 密码验证
+	 * 加密
 	 * 
 	 * @param password
-	 * @return
+	 * @return safePwd加密后的密码
 	 */
-	public boolean verify(TbUser user, String password) {
-		boolean flag = false;
+	public String encrypt(String saltKey, String password) {
+		// 密码、盐值切割
+		int pwdLen = password.length();
+		String pwdPrefix = password.substring(0, pwdLen / 2);
+		String pwdSuffix = password.substring(pwdLen / 2);
 
-		return flag;
+		int uidLen = saltKey.length();
+		String uidPrefix = saltKey.substring(0, uidLen / 3);
+		String uidSuffix = saltKey.substring(uidLen / 3);
+
+		// SHA-256加密
+		String firstEncrypt = SHA256Util.encrypt(uidSuffix + pwdPrefix) + SHA256Util.encrypt(uidPrefix + pwdSuffix);
+		String secondEncrypt = SHA256Util.encrypt(firstEncrypt);
+		return secondEncrypt;
 	}
 
 }

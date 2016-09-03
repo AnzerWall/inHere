@@ -2,25 +2,23 @@ package com.inHere.service;
 
 import java.util.List;
 
-import com.inHere.entity.TbUser;
-
 public interface SecurityService {
 
 	/**
-	 * 获取加盐加密密码和盐值
+	 * 加密
 	 * 
 	 * @param passwd
-	 * @return list.get(0) --> password <br>
-	 *         list.get(1) --> saltKey <br>
+	 * @return 加盐加密密码和盐值list.get(0) : password | list.get(1) : saltKey
+	 * 
 	 */
-	public List<String> getPasswordAndSalt(String password);
+	public List<String> encrypt(String password);
 
 	/**
-	 * 密码验证
+	 * 加密
 	 * 
 	 * @param password
-	 * @return
+	 * @return safePwd加密后的密码
 	 */
-	public boolean verify(TbUser user, String password);
+	public String encrypt(String saltKey, String password);
 
 }
