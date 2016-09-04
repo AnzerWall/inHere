@@ -28,10 +28,10 @@ public class NotFoundController {
 	 */
 	@RequestMapping("**")
 	public Map<String, Object> noHandlerFound() {
-		log.error(Code.NoHandlerFound.getStatus());
+		log.error(Code.NotFound.getStatus());
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("code", Code.NoHandlerFound.getCode());
-		result.put("status", Code.NoHandlerFound.getStatus());
+		result.put("code", Code.NotFound.getCode());
+		result.put("status", Code.NotFound.getStatus());
 		return result;
 	}
 

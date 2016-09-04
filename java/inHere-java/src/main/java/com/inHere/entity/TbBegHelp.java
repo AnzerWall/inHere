@@ -1,5 +1,6 @@
 package com.inHere.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TbBegHelp {
@@ -15,16 +16,18 @@ public class TbBegHelp {
 	private Date createTime; // 创建时间
 	private Date updateTime; // 更新时间
 
-	public Date getCreateTime() {
-		return createTime;
+	public String getCreateTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(createTime);
 	}
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public Date getUpdateTime() {
-		return updateTime;
+	public String getUpdateTime() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(updateTime);
 	}
 
 	public void setUpdateTime(Date updateTime) {
@@ -94,4 +97,12 @@ public class TbBegHelp {
 	public void setPraiseNum(String praiseNum) {
 		this.praiseNum = praiseNum == null ? null : praiseNum.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "TbBegHelp [helpId=" + helpId + ", lableId=" + lableId + ", labelData=" + labelData + ", wordDesc="
+				+ wordDesc + ", picDesc=" + picDesc + ", hasResolved=" + hasResolved + ", userIdBeg=" + userIdBeg
+				+ ", praiseNum=" + praiseNum + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+
 }

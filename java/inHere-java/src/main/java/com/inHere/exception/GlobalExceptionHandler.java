@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,12 +63,24 @@ public class GlobalExceptionHandler {
 		FastJsonJsonView view = new FastJsonJsonView();
 		// 返回信息实体
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("code", Code.Error.getCode());
-		result.put("status", Code.Error.getStatus());
-		// 填充返回数据
-		view.setAttributesMap(result);
-		mv.setView(view);
-		return mv;
+
+		// Required request body is missing
+		if (ex instanceof HttpMessageNotReadableException) {
+			result.put("code", Code.InputErr.getCode());
+			result.put("status", Code.InputErr.getStatus());
+			result.put("message", "缺少请求的Body");
+			// 填充返回数据
+			view.setAttributesMap(result);
+			mv.setView(view);
+			return mv;
+		} else {
+			result.put("code", Code.Error.getCode());
+			result.put("status", Code.Error.getStatus());
+			// 填充返回数据
+			view.setAttributesMap(result);
+			mv.setView(view);
+			return mv;
+		}
 	}
 
 }

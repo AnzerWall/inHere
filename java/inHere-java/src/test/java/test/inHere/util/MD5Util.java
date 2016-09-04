@@ -1,4 +1,4 @@
-package com.inHere.util;
+package test.inHere.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
