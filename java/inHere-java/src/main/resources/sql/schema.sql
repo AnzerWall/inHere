@@ -37,7 +37,7 @@ CREATE TABLE tb_beg_help (
     lable_id INT(10) NOT NULL COMMENT '标签类别',
     label_data VARCHAR(100) NULL COMMENT '标签数据',
     word_desc VARCHAR(300) NOT NULL COMMENT '文字描述',
-    pic_desc VARCHAR(300) NOT NULL COMMENT '图片描述',
+    pic_desc VARCHAR(300) NULL COMMENT '图片描述',
     praise_num TEXT NULL COMMENT '赞数目',
     has_resolved INT NOT NULL COMMENT '是否已解决',
     user_id_beg VARCHAR(100) NOT NULL COMMENT '请求人',
@@ -76,7 +76,7 @@ CREATE TABLE tb_comment (
     comment_content VARCHAR(200) NOT NULL COMMENT '评论内容',
     comment_time VARCHAR(50) NOT NULL COMMENT '评论时间',
     user_id_push VARCHAR(100) NOT NULL COMMENT '评论者',
-    at_user_id VARCHAR(100) NOT NULL COMMENT '@谁',
+    at_user_id VARCHAR(100) NULL COMMENT '@谁',
     praise_num TEXT NULL COMMENT '点赞数量',
     low_num TEXT NULL COMMENT '踩的人数',
     update_time datetime DEFAULT NULL COMMENT '更新时间',
@@ -233,6 +233,16 @@ CREATE TABLE tb_user (
     create_time datetime DEFAULT NULL COMMENT '创建时间',
     update_time datetime DEFAULT NULL COMMENT '更新时间',
     CONSTRAINT tb_user_pk PRIMARY KEY (user_id)
+)ENGINE=innodb DEFAULT CHARSET=utf8;
+
+-- Table: tb_cryptonym 匿名表
+DROP TABLE IF EXISTS tb_cryptonym;
+
+CREATE TABLE tb_cryptonym(
+	crypt_id INT NOT NULL AUTO_INCREMENT COMMENT '匿名编号',
+	crypt_name VARCHAR(50) NOT NULL COMMENT '匿名名称',
+	create_time datetime DEFAULT NULL COMMENT '创建时间',
+	CONSTRAINT tb_user_pk PRIMARY KEY (crypt_id)
 )ENGINE=innodb DEFAULT CHARSET=utf8;
 
 -- End of file.

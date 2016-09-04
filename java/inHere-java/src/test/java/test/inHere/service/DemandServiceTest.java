@@ -1,19 +1,17 @@
-package test.inHere.web;
+package test.inHere.service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.alibaba.fastjson.JSON;
-import com.inHere.util.RestfulUtil;
-
-import test.inHere.util.JsonFormatUtil;
+import com.inHere.constant.Label;
+import com.inHere.entity.TbBegHelp;
+import com.inHere.service.DemandService;
 
 /**
  * Spring Test 和 JUnit 4 整合测试（单元测试）<br>
@@ -24,18 +22,21 @@ import test.inHere.util.JsonFormatUtil;
  */
 @RunWith(SpringJUnit4ClassRunner.class) // spring-test测试套件
 @ContextConfiguration("classpath:spring/spring-*.xml") // 配置文件
-public class LoginControllerTest extends AbstractTransactionalJUnit4SpringContextTests {
+public class DemandServiceTest extends AbstractTransactionalJUnit4SpringContextTests {
 
-	Logger logger = Logger.getLogger(getClass());
+	@Autowired
+	private DemandService demandService;
 
-//	@Test
-	public void loginTest() {
-		RestfulUtil http = RestfulUtil.init("http://localhost");
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("other", "你们好");
-		map.put("other2", "你们好2");
-		String result = http.doPut("/user/log_in/ni_menhao/123456/haha", JSON.toJSONString(map));
-		JsonFormatUtil.printJson(result);
+	@Test
+	public void getListOfTasks() {
+		Integer offset = 0;
+		Integer limit = 3;
+		Integer[] filter_label = new Integer[] { Label.Expressage, Label.Help };
+
+		List<TbBegHelp> list = demandService.getTasks(offset, limit, null, 0, 0);
+		for (TbBegHelp obj : list) {
+			System.out.println(obj.toString());
+		}
 	}
 
 }

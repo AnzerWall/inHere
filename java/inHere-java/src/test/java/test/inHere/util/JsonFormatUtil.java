@@ -1,4 +1,4 @@
-package com.inHere.util;
+package test.inHere.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;

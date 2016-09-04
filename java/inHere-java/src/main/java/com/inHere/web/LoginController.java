@@ -1,7 +1,5 @@
 package com.inHere.web;
 
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,10 +20,10 @@ public class LoginController {
 
 	@Params(LoginValidator.class)
 	@RequestMapping(path = "/log_in", method = RequestMethod.POST)
-	public BaseResultDto<Map<String, Object>> login(@RequestBody TbUser user) {
+	public BaseResultDto login(@RequestBody TbUser user) {
 		log.info("进入login()中-----");
 
-		BaseResultDto<Map<String, Object>> result = BaseResultDto.create();
+		BaseResultDto result = BaseResultDto.create();
 		result.setCode(Code.Success.getCode());
 //		result.setStatus(Code.Success.getStatus());
 //		result.put("code", code);
@@ -35,9 +33,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(path = "/log_out", method = RequestMethod.POST)
-	public BaseResultDto<Map<String, Object>> logout(@RequestBody TbUser user) {
+	public BaseResultDto logout(@RequestBody TbUser user) {
 		log.info("进入login()中-----");
-		BaseResultDto<Map<String, Object>> result = BaseResultDto.create();
+		BaseResultDto result = BaseResultDto.create();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
 		result.put("userId", user.getUserId());

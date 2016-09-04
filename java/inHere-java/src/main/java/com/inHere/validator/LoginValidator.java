@@ -1,7 +1,5 @@
 package com.inHere.validator;
 
-import java.util.Map;
-
 import com.inHere.constant.Code;
 import com.inHere.dto.BaseResultDto;
 import com.inHere.entity.TbUser;
@@ -14,9 +12,9 @@ import com.inHere.entity.TbUser;
  */
 public class LoginValidator {
 
-	public BaseResultDto<Map<String, Object>> login(TbUser user) {
+	public BaseResultDto login(TbUser user) {
 		System.out.println("lllllllllll");
-		BaseResultDto<Map<String, Object>> result = BaseResultDto.create();
+		BaseResultDto result = BaseResultDto.create();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
 		result.put("----", "-------------");

@@ -6,7 +6,8 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.inHere.util.JsonFormatUtil;
+
+import test.inHere.util.JsonFormatUtil;
 
 /**
  * <h1>基础数据传输类</h1>
@@ -15,15 +16,15 @@ import com.inHere.util.JsonFormatUtil;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class BaseResultDto<T> {
+public class BaseResultDto {
 
 	private String code; // 响应码，0表示成功，其他表示生效，使用码段区分不同模块
 	private String status; // 响应信息，失败时描述失败信息
 	private String message; // 可选，指定错误更加详细的错误信息
-	private T data; // 具体响应数据
+	private Object data; // 具体响应数据
 
-	public static BaseResultDto<Map<String, Object>> create() {
-		BaseResultDto<Map<String, Object>> result = new BaseResultDto<Map<String, Object>>();
+	public static BaseResultDto create() {
+		BaseResultDto result = new BaseResultDto();
 		result.setData(new HashMap<String, Object>());
 		return result;
 	}
@@ -76,11 +77,11 @@ public class BaseResultDto<T> {
 		this.message = message;
 	}
 
-	public T getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(T data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 
