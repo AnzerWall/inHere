@@ -76,7 +76,7 @@
 
 </style>
 <script type="text/ecmascript-6">
-  import AddIcon from 'svg/main/demand/add.vue'
+  import AddIcon from 'svg/main/demand/Add.vue'
   export default{
     components: {
       AddIcon
