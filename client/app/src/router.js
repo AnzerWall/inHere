@@ -4,6 +4,7 @@
 import Index from 'pages/index.vue'
 import Main from 'pages/Main.vue'
 import Other from 'pages/other.vue'
+import Test from 'pages/test.vue'
 
 import Square from 'pages/main/square.vue'
 import Message from 'pages/main/message.vue'
@@ -49,5 +50,8 @@ export default{
   },
   '/demand-detail/:id':{
     component:DemandDetail
+  },
+  '/test':{
+    component:Test
   }
 }

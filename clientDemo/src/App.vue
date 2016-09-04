@@ -13,8 +13,8 @@ module.exports = {
 
 .app {
     position: relative;
-    height: 100%;
-    overflow: auto;
+    // height: 100%;
+    // overflow: auto;
 }
 
 input,textarea,button {
