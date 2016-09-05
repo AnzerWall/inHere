@@ -31,12 +31,15 @@
     display: flex;
     flex-direction: column;
     position: relative;
+
   }
   .main-content {
     overflow: auto;
     height: 100%;
     flex-shrink: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
   }
 
   .main-tabbar-item {
@@ -65,7 +68,7 @@
     height: 52px;
     border-top: #ccc solid 1px;
     display: flex;
-    z-index: 100;
+    z-index: 200;
   }
 </style>
 <script>
