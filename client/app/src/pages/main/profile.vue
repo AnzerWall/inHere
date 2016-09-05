@@ -14,7 +14,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
   .profile-wrapper{
     display: flex;
     height: 100%;
@@ -23,6 +23,7 @@
   }
   .profile-wrapper .profile-head-wrapper{
     flex-shrink: 0;
+    flex-grow: 0;
     height: 60px;
     width: 100%;
     position: relative;
@@ -37,6 +38,7 @@
     border-bottom: solid 1px #d5d5d5;
     align-items: center;
     justify-content: space-between;
+    background-color: #FAFAFA;
     display: flex;
   }
   .profile-wrapper .profile-head-wrapper .profile-head .text{
@@ -44,6 +46,11 @@
   }
   .profile-wrapper .profile-head-wrapper .profile-head .icon{
     margin-right: 15px;
+  }
+  .profile-wrapper .profile-content{
+    flex-shrink: 1;
+    flex-grow: 1;
+    height: 100%;
   }
 </style>
 <script>

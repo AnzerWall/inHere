@@ -23,6 +23,7 @@
   }
   .message-wrapper .message-head-wrapper{
       flex-shrink: 0;
+    flex-grow: 0;
       height: 60px;
       width: 100%;
       position: relative;
@@ -38,12 +39,17 @@
     justify-content: space-between;
     display: flex;
     position: fixed;
+    background-color: #FAFAFA;
   }
   .message-wrapper .message-head-wrapper .message-head .icon{
     margin-left: 15px;
   }
   .message-wrapper .message-head-wrapper .message-head .notes{
     margin-right: 15px;
+  }
+  .message-wrapper .message-content{
+    flex-shrink: 1;
+    height: 100%;
   }
 </style>
 <script>
