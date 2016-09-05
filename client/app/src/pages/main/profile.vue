@@ -23,6 +23,7 @@
   }
   .profile-wrapper .profile-head-wrapper{
     flex-shrink: 0;
+    flex-grow: 0;
     height: 60px;
     width: 100%;
     position: relative;
@@ -48,6 +49,8 @@
   }
   .profile-wrapper .profile-content{
     flex-shrink: 1;
+    flex-grow: 1;
+    height: 100%;
   }
 </style>
 <script>

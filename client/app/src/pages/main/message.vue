@@ -23,6 +23,7 @@
   }
   .message-wrapper .message-head-wrapper{
       flex-shrink: 0;
+    flex-grow: 0;
       height: 60px;
       width: 100%;
       position: relative;
@@ -48,6 +49,7 @@
   }
   .message-wrapper .message-content{
     flex-shrink: 1;
+    height: 100%;
   }
 </style>
 <script>
