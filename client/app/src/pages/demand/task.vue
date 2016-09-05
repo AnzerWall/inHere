@@ -2,7 +2,7 @@
     <div>
       <!--$loadingRouteData当路由数据加载中为true，否则为false-->
        <div  v-if="!$loadingRouteData">
-         <demand-card v-for="item in list" :data="item" is_detail="false"></demand-card>
+         <demand-card v-for="item in list" :data="item" :is_detail="false"></demand-card>
        </div>
       <div  v-if="$loadingRouteData" style="color: #888;text-align: center;margin: 100px">
         加载中...
