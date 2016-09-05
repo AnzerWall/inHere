@@ -20,6 +20,7 @@
     height: 100%;
     width: 100%;
     flex-direction: column;
+    position: relative;
   }
   .profile-wrapper .profile-head-wrapper{
     flex-shrink: 0;
@@ -51,6 +52,7 @@
     flex-shrink: 1;
     flex-grow: 1;
     height: 100%;
+    position: relative;
   }
 </style>
 <script>

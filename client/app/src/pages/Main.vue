@@ -30,12 +30,13 @@
     background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
-
+    position: relative;
   }
   .main-content {
     overflow: auto;
     height: 100%;
     flex-shrink: 1;
+    position: relative;
   }
 
   .main-tabbar-item {

@@ -20,6 +20,7 @@
     height: 100%;
     width: 100%;
     flex-direction: column;
+    position: relative;
   }
   .message-wrapper .message-head-wrapper{
       flex-shrink: 0;
@@ -50,6 +51,7 @@
   .message-wrapper .message-content{
     flex-shrink: 1;
     height: 100%;
+    position: relative;
   }
 </style>
 <script>
