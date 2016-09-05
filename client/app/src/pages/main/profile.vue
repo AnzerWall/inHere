@@ -33,6 +33,7 @@
     left: 0;
     height: 60px;
     width: 100%;
+    position: fixed;
     border-bottom: solid 1px #d5d5d5;
     align-items: center;
     justify-content: space-between;
