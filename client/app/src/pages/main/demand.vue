@@ -32,6 +32,8 @@
 
   .demand-wrapper .demand-content {
     flex-shrink: 1;
+
+    flex-grow: 1;
     width: 100%;
     overflow: auto;
     height: 100%;
@@ -39,6 +41,7 @@
 
   .demand-wrapper .demand-head-wrapper {
     flex-shrink: 0;
+    flex-grow: 0;
     height: 60px;
     width: 100%;
     position: relative;
