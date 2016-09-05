@@ -38,12 +38,16 @@
     justify-content: space-between;
     display: flex;
     position: fixed;
+    background-color: #FAFAFA;
   }
   .message-wrapper .message-head-wrapper .message-head .icon{
     margin-left: 15px;
   }
   .message-wrapper .message-head-wrapper .message-head .notes{
     margin-right: 15px;
+  }
+  .message-wrapper .message-content{
+    flex-shrink: 1;
   }
 </style>
 <script>

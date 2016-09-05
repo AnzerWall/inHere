@@ -37,6 +37,7 @@
     border-bottom: solid 1px #d5d5d5;
     align-items: center;
     justify-content: space-between;
+    background-color: #FAFAFA;
     display: flex;
   }
   .profile-wrapper .profile-head-wrapper .profile-head .text{
@@ -44,6 +45,9 @@
   }
   .profile-wrapper .profile-head-wrapper .profile-head .icon{
     margin-right: 15px;
+  }
+  .profile-wrapper .profile-content{
+    flex-shrink: 1;
   }
 </style>
 <script>
