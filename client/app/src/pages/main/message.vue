@@ -37,6 +37,7 @@
     align-items: center;
     justify-content: space-between;
     display: flex;
+    position: fixed;
   }
   .message-wrapper .message-head-wrapper .message-head .icon{
     margin-left: 15px;

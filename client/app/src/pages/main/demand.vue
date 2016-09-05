@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: space-between;
     display: flex;
-
+    position: fixed;
   }
   .demand-wrapper .demand-head-wrapper .demand-head  .demand-head-navbar .navbar-item:first-child{
     margin-left: 10px;

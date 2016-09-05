@@ -19,7 +19,9 @@ function generateGetFunction({url,id,query}){
         .query({ token:token })
         .query(_query);
       if(query!=undefined)ret=ret.query(query);
+
       return ret;
+
     }
 }
 function generatePostFunction({url,id,ext_query,ext_body}){
