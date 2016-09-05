@@ -1,42 +1,42 @@
 <template>
 
     <div class="demand-card-wrapper" :style="wrapper_style">
-      <div class="demand-card-head" :style="{color:main_color}" v-if="['found','lost','dating'].indexOf(tag)!=-1&&!is_detail">
-        <div v-if="tag==='found'" class="tag">{{chinese(tag)}}</div>
-        <div v-if="tag==='lost'" class="tag">{{chinese(tag)}}</div>
-        <div v-if="tag==='lost'||tag==='found'" class="tag">{{data.thing}}</div>
-        <div v-if="tag==='dating'" class="tag">{{want_sex}}</div>
-        <div v-if="tag==='dating'" class="tag">{{humanized(data.time)}}</div>
+      <div class="demand-card-head" :style="{color:main_color}" v-if="[TYPE_LOST,TYPE_FOUND,TYPE_DATING].indexOf(data.ext_type)!=-1&&!is_detail">
+        <div v-if="data.ext_type===TYPE_LOST||data.ext_type===TYPE_FOUND" class="tag">{{chinese(data.ext_type)}}</div>
+        <div v-if="data.ext_type===TYPE_LOST||tag===TYPE_FOUND" class="tag">{{data.ext_data.thing}}</div>
+        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{data.ext_data.want_sex}}</div>
+        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{humanized(data.create_time)}}</div>
 
       </div>
       <div class="demand-card-content">
         <div class="text">{{data.text}}</div>
-        <div class="image-wrapper hide-scroll" v-if="data.images&& data.images.length!=0">
-          <img class="image" v-for="item in data.images" v-lazy="item.src" @click.stop="onClickImage($index)">
+        <div class="image-wrapper hide-scroll" v-if="data.photos&& data.photos.length!=0">
+          <img class="image" v-for="item in data.photos" v-lazy="item.src" @click.stop="onClickImage($index)">
         </div>
-        <div class="image-space" v-if="data.images&&data.images.length!=0">
+        <div class="image-space" v-if="data.photos&&data.photos.length!=0">
 
         </div>
 
       </div>
       <div class="demand-card-tail">
-        <div class="normal" v-if="['express','sell','help','dating'].indexOf(tag)!=-1">
+        <div class="normal" v-if="[TYPE_EXPRESS,TYPE_SELL,TYPE_HELP,TYPE_DATING].indexOf(data.ext_type)!=-1">
           <div class="left">
-            <div class="time" v-if="['express','sell','help'].indexOf(tag)!=-1">{{humanized(create_time)}}</div>
-            <div class="tag" v-if="['express','sell','help'].indexOf(tag)!=-1">{{'# '+chinese(tag)}}</div>
-            <div class="tag" v-if="tag==='dating'">参加人数: {{data.join_num}}人</div>
+            <div class="time" v-if="[TYPE_EXPRESS,TYPE_SELL,TYPE_HELP].indexOf(data.ext_type)!=-1">{{data.create_time|humanized}}</div>
+            <div class="tag" v-if="[TYPE_EXPRESS,TYPE_SELL,TYPE_HELP].indexOf(data.ext_type)!=-1">{{'# '+chinese(data.ext_type)}}</div>
+            <!--<div class="tag" v-if="data.ext_type==='dating'">参加人数: {{data.join_num}}人</div>-->
 
           </div>
           <div class="right">
-            <div class="pay" v-if="['express','sell'].indexOf(tag)!=-1&&!is_detail">{{'¥'+data.pay}}</div>
-            <div class="like-text" v-if="tag==='dating'">{{data.like_num}}</div>
-            <pay-icon v-if="['express','sell'].indexOf(tag)!=-1&&!is_detail" class="icon"></pay-icon>
-            <like-icon v-if="tag==='dating'&&!data.liked" class=" like-icon"></like-icon>
-            <liked-icon v-if="tag==='dating'&&data.liked" class="like-icon"></liked-icon>
+            <div class="pay" v-if="TYPE_EXPRESS===data.ext_type&&!is_detail">{{'¥'+data.ext_data.pay}}</div>
+            <div class="pay" v-if="TYPE_SELL===data.ext_type&&!is_detail">{{'¥'+data.ext_data.price}}</div>
+            <div class="like-text" v-if="data.ext_type===TYPE_DATING">{{data.praise}}</div>
+            <pay-icon v-if="[TYPE_EXPRESS,TYPE_SELL].indexOf(data.ext_type)!=-1&&!is_detail" class="icon"></pay-icon>
+            <like-icon v-if="data.ext_type===TYPE_DATING&&!data.praised" class=" like-icon"></like-icon>
+            <liked-icon v-if="data.ext_type===TYPE_DATING&&data.praised" class="like-icon"></liked-icon>
           </div>
         </div>
 
-        <div class="btn" v-if="['lost','found'].indexOf(tag)!=-1&&!is_detail">
+        <div class="btn" v-if="[TYPE_LOST,TYPE_FOUND].indexOf(data.ext_type)!=-1&&!is_detail">
           联系TA
         </div>
       </div>
@@ -56,7 +56,7 @@
   import LikeIcon from 'svg/main/demand/Like.vue';
   import LikedIcon from 'svg/main/demand/Liked.vue';
   import AddIcon from 'svg/main/demand/Add.vue';
-
+  import {humanized,fromNow} from 'filter/time.js'
   //定义主题颜色
   const COLOR_DEMAND_BLUE = "#2397f3";
   const COLOR_DEMAND_PINK = "#EC407A";
@@ -65,6 +65,9 @@
   const COLOR_DEMAND_GREEN = "#04C830";
 
   export default{
+    filters:{
+      humanized
+    },
     components: {
       PayIcon,
       LikeIcon,
@@ -77,45 +80,52 @@
         required:true,
         default:false
       },
-      tag: {
-        type: String,
-        required: true,
-        default: "express"
-      },
       data: {
         type: Object,
         required: true,
-        default: ()=>({})
-      },
-      create_time: {
-        type: Number,
-        required: true,
-        default: Date.now
+        default: ()=>({
+          id: 1,
+          ext_type: 1,
+          ext_data: {		//私有属性
+            pay: 0//酬金
+          },
+          user_id:0,
+          praise: 0,
+          photos: [],
+          is_end: 0,
+          text: "内容",
+          create_time: Date.now(),
+          update_time: Date.now()
+        })
       }
     },
     data(){
-      return {}
+      return {
+        TYPE_EXPRESS:1,
+        TYPE_SELL:2,
+        TYPE_HELP:3,
+        TYPE_FOUND:4,
+        TYPE_LOST:5,
+        TYPE_DATING:6
+      }
     },
     methods: {
       onClickImage(index){
-        this.$emit("view-image",index,this.data.images);
+        this.$emit("view-image",index,this.data.photos);
       },
-      humanized(time){
-        return moment(time).format('h:mm A');
-      },
-      chinese(tag){
-        switch (tag) {
-          case 'express':
+      chinese(type){
+        switch (type) {
+          case this.TYPE_EXPRESS:
             return "快递";
-          case 'sell':
+          case this.TYPE_SELL:
             return "转让";
-          case 'help':
+          case this.TYPE_HELP:
             return "帮忙";
-          case 'found':
+          case this.TYPE_FOUND:
             return "捡到";
-          case 'lost':
+          case this.TYPE_LOST:
             return "丢失";
-          case 'dating':
+          case this.TYPE_DATING:
             return "约";
           default:
             return "其他"
@@ -124,21 +134,21 @@
     },
     computed: {
       main_color(){
-        let tag = this.tag;
-        let data = this.data;
-        if (tag === "express")return COLOR_DEMAND_BLUE;
-        else if (tag === "sell")return COLOR_DEMAND_ORANGE;
-        else if (tag === "help")return COLOR_DEMAND_PINK;
-        else if (tag === "lost")return COLOR_DEMAND_GREEN;
-        else if (tag === "found")return COLOR_DEMAND_BLUE;
-        else if (tag === "dating") {
+        let type = this.data.ext_type;
+        let data = this.data.ext_data;
+        if (type === this.TYPE_EXPRESS)return COLOR_DEMAND_BLUE;
+        else if (type === this.TYPE_SELL)return COLOR_DEMAND_ORANGE;
+        else if (type === this.TYPE_HELP)return COLOR_DEMAND_PINK;
+        else if (type ===this.TYPE_FOUND)return COLOR_DEMAND_GREEN;
+        else if (type === this.TYPE_LOST)return COLOR_DEMAND_BLUE;
+        else if (type === this.TYPE_DATING) {
           if (data.want_sex === 1)return COLOR_DEMAND_BLUE;
           else if (data.want_sex === 2)return COLOR_DEMAND_PINK;
           else return COLOR_DEMAND_ORANGE;
         }
       },
       want_sex(){
-        let sex = this.data.want_sex;
+        let sex = this.data.ext_data.want_sex;
         switch (sex) {
           case 1:
             return '求男生';
@@ -149,10 +159,11 @@
       },
       wrapper_style(){
         let ret = {
-          "background-color": this.main_color
+          "background-color": this.main_color,
+          'opacity':this.data.is_end?0.5:1
         };
 
-        let data = this.data;
+
 
         return ret;
       }
