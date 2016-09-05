@@ -14,7 +14,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
   .profile-wrapper{
     display: flex;
     height: 100%;
