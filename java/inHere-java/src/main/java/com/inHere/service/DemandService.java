@@ -1,5 +1,6 @@
 package com.inHere.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.inHere.dto.ListDto;
@@ -28,7 +29,7 @@ public interface DemandService {
 	 * @return
 	 */
 	public ListDto<TasksDto> getTasksToDto(Integer offset, Integer limit, Integer[] filter_label, Integer filter_end,
-			Integer sort_time);
+			Integer sort_time) throws IOException;
 
 	/**
 	 * 获取任务列表

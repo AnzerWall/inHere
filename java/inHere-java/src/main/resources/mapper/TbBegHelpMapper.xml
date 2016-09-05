@@ -81,4 +81,9 @@
 		limit #{offset}, #{limit}
 	</select>
 
+	<select id="selectCount" resultType="Integer">
+		SELECT COUNT(*) AS tbSum
+		FROM tb_beg_help
+	</select>
+
 </mapper>

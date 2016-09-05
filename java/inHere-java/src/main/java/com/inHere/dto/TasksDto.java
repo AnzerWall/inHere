@@ -1,7 +1,8 @@
 package com.inHere.dto;
 
 import java.util.List;
-import java.util.Map;
+
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * 任务传输对象
@@ -18,9 +19,8 @@ public class TasksDto {
 	private String word_desc; // 文字描述
 	private List<PhotoDto> photo_desc; // 图片描述
 	private String user_id; // 用户账号
-	private Map<String, Object> private_data; // 不同标签的任务私有属性
+	private JSONObject private_data; // 不同标签的任务私有属性
 	private Integer is_resolved; // 是否解决
-	
 
 	public TasksDto() {
 		super();
@@ -93,11 +93,11 @@ public class TasksDto {
 		this.user_id = user_id;
 	}
 
-	public Map<String, Object> getPrivate_data() {
+	public JSONObject getPrivate_data() {
 		return private_data;
 	}
 
-	public void setPrivate_data(Map<String, Object> private_data) {
+	public void setPrivate_data(JSONObject private_data) {
 		this.private_data = private_data;
 	}
 

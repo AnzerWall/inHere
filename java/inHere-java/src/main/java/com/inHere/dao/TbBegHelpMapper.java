@@ -28,4 +28,11 @@ public interface TbBegHelpMapper {
 	 */
 	public List<TbBegHelp> selectTasksList(Map<String, Object> params);
 
+	/**
+	 * 获取数据库总数
+	 * 
+	 * @return
+	 */
+	public Integer selectCount();
+
 }
