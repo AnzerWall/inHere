@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.TargetUserMapper" >
+  <resultMap id="BaseResultMap" type="com.inHere.entity.TargetUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="target_id" property="targetId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="ext_data" property="extData" jdbcType="VARCHAR" />
+    <result column="has_finish" property="hasFinish" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, target_id, user_id, ext_data, has_finish
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_target_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_target_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.inHere.entity.TargetUser" >
+    insert into tb_target_user (id, target_id, user_id, 
+      ext_data, has_finish)
+    values (#{id,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{extData,jdbcType=VARCHAR}, #{hasFinish,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.inHere.entity.TargetUser" >
+    insert into tb_target_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="extData != null" >
+        ext_data,
+      </if>
+      <if test="hasFinish != null" >
+        has_finish,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="extData != null" >
+        #{extData,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinish != null" >
+        #{hasFinish,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.TargetUser" >
+    update tb_target_user
+    <set >
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="extData != null" >
+        ext_data = #{extData,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinish != null" >
+        has_finish = #{hasFinish,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.TargetUser" >
+    update tb_target_user
+    set target_id = #{targetId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      ext_data = #{extData,jdbcType=VARCHAR},
+      has_finish = #{hasFinish,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -5,6 +5,17 @@
     http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<!-- Web 应用根目录以该属性名添加到系统参数中 -->
+		<param-value>inHere.root</param-value>
+	</context-param>
+
+	<!-- 负责将 Web 应用根目录以 webAppRootKey 上下文参数指定的属性名添加到系统参数中 -->
+	<listener>
+		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+	</listener>
+
 	<!--配置DispatcherServlet -->
 	<servlet>
 		<servlet-name>SpringDispatcher</servlet-name>

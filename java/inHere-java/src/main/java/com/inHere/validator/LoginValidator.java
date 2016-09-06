@@ -1,8 +1,9 @@
 package com.inHere.validator;
 
+import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Code;
-import com.inHere.dto.BaseResultDto;
-import com.inHere.entity.TbUser;
+import com.inHere.dto.ReturnBaseDto;
+import com.inHere.entity.User;
 
 /**
  * 要求校验方法名与@Params拦截的方法的名字要相同, 校验方法的参数有且只能有一个，参数类型和返回类型都要和拦截方法的一样
@@ -12,14 +13,14 @@ import com.inHere.entity.TbUser;
  */
 public class LoginValidator {
 
-	public BaseResultDto login(TbUser user) {
+	public ReturnBaseDto login(User user) {
 		System.out.println("lllllllllll");
-		BaseResultDto result = BaseResultDto.create();
+		ReturnBaseDto result = new ReturnBaseDto();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		result.put("----", "-------------");
-		result.put("userId", null);
-		result.put("passwd", user.getPasswd());
+		result.setData(new JSONObject());
+		result.getData().put("userId", null);
+		result.getData().put("passwd", user.getPasswd());
 		return null;
 	}
 

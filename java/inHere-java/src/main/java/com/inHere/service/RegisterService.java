@@ -1,6 +1,6 @@
 package com.inHere.service;
 
-import com.inHere.entity.TbUser;
+import com.inHere.entity.User;
 
 public interface RegisterService {
 
@@ -11,6 +11,6 @@ public interface RegisterService {
 	 * @param password
 	 * @return
 	 */
-	public TbUser generalRegister(String userId, String password);
+	public User generalRegister(String userId, String password);
 
 }

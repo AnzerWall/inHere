@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inHere.constant.Code;
-import com.inHere.dto.BaseResultDto;
-import com.inHere.entity.TbUser;
+import com.inHere.dto.ReturnBaseDto;
+import com.inHere.entity.User;
 import com.inHere.validator.LoginValidator;
 import com.inHere.validator.Params;
 
@@ -20,26 +20,26 @@ public class LoginController {
 
 	@Params(LoginValidator.class)
 	@RequestMapping(path = "/log_in", method = RequestMethod.POST)
-	public BaseResultDto login(@RequestBody TbUser user) {
+	public ReturnBaseDto login(@RequestBody User user) {
 		log.info("进入login()中-----");
 
-		BaseResultDto result = BaseResultDto.create();
+		ReturnBaseDto result = new ReturnBaseDto();
 		result.setCode(Code.Success.getCode());
-//		result.setStatus(Code.Success.getStatus());
-//		result.put("code", code);
-		result.put("userId", user.getUserId());
-		result.put("passwd", user.getPasswd());
+		// result.setStatus(Code.Success.getStatus());
+		// result.put("code", code);
+		result.getData().put("userId", user.getUserId());
+		result.getData().put("passwd", user.getPasswd());
 		return result;
 	}
 
 	@RequestMapping(path = "/log_out", method = RequestMethod.POST)
-	public BaseResultDto logout(@RequestBody TbUser user) {
+	public ReturnBaseDto logout(@RequestBody User user) {
 		log.info("进入login()中-----");
-		BaseResultDto result = BaseResultDto.create();
+		ReturnBaseDto result = new ReturnBaseDto();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		result.put("userId", user.getUserId());
-		result.put("passwd", user.getPasswd());
+		result.getData().put("userId", user.getUserId());
+		result.getData().put("passwd", user.getPasswd());
 		return result;
 	}
 

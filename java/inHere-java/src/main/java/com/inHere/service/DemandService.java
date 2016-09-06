@@ -1,10 +1,7 @@
 package com.inHere.service;
 
-import java.util.List;
-
-import com.inHere.dto.ListDto;
-import com.inHere.dto.TasksDto;
-import com.inHere.entity.TbBegHelp;
+import com.inHere.dto.ParamsListDto;
+import com.inHere.dto.ReturnListDto;
 
 /**
  * 有求必应业务逻辑
@@ -15,29 +12,11 @@ import com.inHere.entity.TbBegHelp;
 public interface DemandService {
 
 	/**
-	 * 查找任务列表
+	 * 获取列表
 	 * 
-	 * @param limit
-	 * @param offset
-	 * @param filter_label
-	 *            标签过滤
-	 * @param filter_end
-	 *            是否结束过滤
-	 * @param sort_time
-	 *            时间排序
+	 * @param params
 	 * @return
 	 */
-	public ListDto<TasksDto> getTasksToDto(Integer offset, Integer limit, Integer[] filter_label, Integer filter_end,
-			Integer sort_time);
-
-	/**
-	 * 获取任务列表
-	 * 
-	 * @param limit
-	 * @param offset
-	 * @return
-	 */
-	public List<TbBegHelp> getTasks(Integer offset, Integer limit, Integer[] filter_label, Integer filter_end,
-			Integer sort_time);
+	public ReturnListDto getList(ParamsListDto params);
 
 }

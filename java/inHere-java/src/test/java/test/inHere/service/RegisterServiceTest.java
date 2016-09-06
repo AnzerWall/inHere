@@ -7,7 +7,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.inHere.entity.TbUser;
 import com.inHere.service.RegisterService;
 
 /**
@@ -28,8 +27,8 @@ public class RegisterServiceTest extends AbstractJUnit4SpringContextTests {
 
 //	@Test
 	public void generalRegisterTest() {
-		TbUser user = registerService.generalRegister("LLB", "123456");
-		logger.info(user);
+		// TbUser user = registerService.generalRegister("LLB", "123456");
+		// logger.info(user);
 	}
 
 }

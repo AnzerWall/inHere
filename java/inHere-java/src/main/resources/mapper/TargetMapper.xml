@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.TargetMapper" >
+  <resultMap id="BaseResultMap" type="com.inHere.entity.Target" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="text" property="text" jdbcType="VARCHAR" />
+    <result column="ext_type" property="extType" jdbcType="INTEGER" />
+    <result column="ext_data" property="extData" jdbcType="VARCHAR" />
+    <result column="has_finish" property="hasFinish" jdbcType="TINYINT" />
+    <result column="target_list_id" property="targetListId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, text, ext_type, ext_data, has_finish, target_list_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_target
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_target
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.inHere.entity.Target" >
+    insert into tb_target (id, title, text, 
+      ext_type, ext_data, has_finish, 
+      target_list_id, create_time, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, 
+      #{extType,jdbcType=INTEGER}, #{extData,jdbcType=VARCHAR}, #{hasFinish,jdbcType=TINYINT}, 
+      #{targetListId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.inHere.entity.Target" >
+    insert into tb_target
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="text != null" >
+        text,
+      </if>
+      <if test="extType != null" >
+        ext_type,
+      </if>
+      <if test="extData != null" >
+        ext_data,
+      </if>
+      <if test="hasFinish != null" >
+        has_finish,
+      </if>
+      <if test="targetListId != null" >
+        target_list_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="extType != null" >
+        #{extType,jdbcType=INTEGER},
+      </if>
+      <if test="extData != null" >
+        #{extData,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinish != null" >
+        #{hasFinish,jdbcType=TINYINT},
+      </if>
+      <if test="targetListId != null" >
+        #{targetListId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.Target" >
+    update tb_target
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="text != null" >
+        text = #{text,jdbcType=VARCHAR},
+      </if>
+      <if test="extType != null" >
+        ext_type = #{extType,jdbcType=INTEGER},
+      </if>
+      <if test="extData != null" >
+        ext_data = #{extData,jdbcType=VARCHAR},
+      </if>
+      <if test="hasFinish != null" >
+        has_finish = #{hasFinish,jdbcType=TINYINT},
+      </if>
+      <if test="targetListId != null" >
+        target_list_id = #{targetListId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.Target" >
+    update tb_target
+    set title = #{title,jdbcType=VARCHAR},
+      text = #{text,jdbcType=VARCHAR},
+      ext_type = #{extType,jdbcType=INTEGER},
+      ext_data = #{extData,jdbcType=VARCHAR},
+      has_finish = #{hasFinish,jdbcType=TINYINT},
+      target_list_id = #{targetListId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
