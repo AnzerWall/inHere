@@ -97,6 +97,7 @@ public class UploadController {
 
 			// 将request变成多部分request
 			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+
 			// 获取multiRequest 中所有的文件名
 			Iterator iter = multiRequest.getFileNames();
 
@@ -109,6 +110,7 @@ public class UploadController {
 				}
 			}
 		}
+		
 		long endTime = System.currentTimeMillis();
 		System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
 		// throw new FileUploadException();

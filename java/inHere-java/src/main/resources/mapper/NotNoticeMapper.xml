@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.NotNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.inHere.entity.NotNotice" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="notification_id" property="notificationId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="has_accept" property="hasAccept" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, notification_id, user_id, has_accept
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_not_notice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_not_notice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.inHere.entity.NotNotice" >
+    insert into tb_not_notice (id, notification_id, user_id, 
+      has_accept)
+    values (#{id,jdbcType=INTEGER}, #{notificationId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
+      #{hasAccept,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.inHere.entity.NotNotice" >
+    insert into tb_not_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="notificationId != null" >
+        notification_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="hasAccept != null" >
+        has_accept,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="notificationId != null" >
+        #{notificationId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasAccept != null" >
+        #{hasAccept,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.NotNotice" >
+    update tb_not_notice
+    <set >
+      <if test="notificationId != null" >
+        notification_id = #{notificationId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="hasAccept != null" >
+        has_accept = #{hasAccept,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.NotNotice" >
+    update tb_not_notice
+    set notification_id = #{notificationId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=VARCHAR},
+      has_accept = #{hasAccept,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

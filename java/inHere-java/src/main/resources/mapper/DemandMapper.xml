@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.DemandMapper">
+
+	<resultMap id="BaseResultMap" type="Demand">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ext_type" property="extType" jdbcType="INTEGER" />
+		<result column="ext_data" property="extData" jdbcType="VARCHAR" />
+		<result column="text" property="text" jdbcType="VARCHAR" />
+		<result column="photos" property="photos" jdbcType="VARCHAR" />
+		<result column="is_end" property="isEnd" jdbcType="TINYINT" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="praise" property="praise" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, ext_type, ext_data, text, photos, is_end, user_id,
+		create_time, update_time, praise
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tb_demand
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="Integer">
+		delete from
+		tb_demand
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insertSelective" parameterType="Demand">
+		insert into tb_demand
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="extType != null">
+				ext_type,
+			</if>
+			<if test="extData != null">
+				ext_data,
+			</if>
+			<if test="text != null">
+				text,
+			</if>
+			<if test="photos != null">
+				photos,
+			</if>
+			<if test="isEnd != null">
+				is_end,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="praise != null">
+				praise,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="extType != null">
+				#{extType,jdbcType=INTEGER},
+			</if>
+			<if test="extData != null">
+				#{extData,jdbcType=VARCHAR},
+			</if>
+			<if test="text != null">
+				#{text,jdbcType=VARCHAR},
+			</if>
+			<if test="photos != null">
+				#{photos,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnd != null">
+				#{isEnd,jdbcType=TINYINT},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="praise != null">
+				#{praise,jdbcType=CHAR},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="Demand">
+		update tb_demand
+		<set>
+			<if test="extType != null">
+				ext_type = #{extType,jdbcType=INTEGER},
+			</if>
+			<if test="extData != null">
+				ext_data = #{extData,jdbcType=VARCHAR},
+			</if>
+			<if test="text != null">
+				text = #{text,jdbcType=VARCHAR},
+			</if>
+			<if test="photos != null">
+				photos = #{photos,jdbcType=VARCHAR},
+			</if>
+			<if test="isEnd != null">
+				is_end = #{isEnd,jdbcType=TINYINT},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="praise != null">
+				praise = #{praise,jdbcType=CHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByParams" parameterType="ParamsListDto"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_demand
+		<where>
+			<if test="ParamsListDto.ext_type.length > 0">
+				<foreach collection="ParamsListDto.ext_type" item="type"
+					open="AND ext_type in(" close=")" separator=",">
+					#{type}
+				</foreach>
+			</if>
+			<if test="is_end != null">
+				AND is_end = #{ParamsListDto.is_end}
+			</if>
+			<if test="user_id != null">
+				AND user_id = #{ParamsListDto.user_id}
+			</if>
+		</where>
+		<if test="order_by != null">
+			order by ${ParamsListDto.order_by} ${ParamsListDto.order}
+		</if>
+	</select>
+
+
+
+</mapper>

@@ -1,7 +1,5 @@
 package test.inHere.service;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.inHere.constant.Label;
-import com.inHere.entity.TbBegHelp;
+import com.inHere.dto.ParamsListDto;
+import com.inHere.dto.ReturnListDto;
 import com.inHere.service.DemandService;
 
 /**
@@ -29,14 +27,9 @@ public class DemandServiceTest extends AbstractTransactionalJUnit4SpringContextT
 
 	@Test
 	public void getListOfTasks() {
-		Integer offset = 0;
-		Integer limit = 3;
-		Integer[] filter_label = new Integer[] { Label.Expressage, Label.Help };
-
-		List<TbBegHelp> list = demandService.getTasks(offset, limit, null, 0, 0);
-		for (TbBegHelp obj : list) {
-			System.out.println(obj.toString());
-		}
+		ParamsListDto params = null;
+		ReturnListDto list = demandService.getList(params);
+		System.out.println( list.toString() );
 	}
 
 }

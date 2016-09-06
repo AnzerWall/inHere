@@ -1,21 +1,16 @@
 package test.inHere.dao;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.inHere.dao.TbCryptonymMapper;
-import com.inHere.entity.TbCryptonym;
 
 /**
  * Spring Test 和 JUnit 4 整合测试（单元测试）<br>
@@ -28,8 +23,8 @@ import com.inHere.entity.TbCryptonym;
 @ContextConfiguration("classpath:spring/spring-*.xml") // 配置文件
 public class TbCryptonymMapperTest extends AbstractJUnit4SpringContextTests {
 
-	@Autowired
-	private TbCryptonymMapper cryptonymMapper;
+//	@Autowired
+//	private TbCryptonymMapper cryptonymMapper;
 
 	@Test
 	public void insertCryptonymsTest() throws XPatherException, IOException {
@@ -40,18 +35,18 @@ public class TbCryptonymMapperTest extends AbstractJUnit4SpringContextTests {
 		// TagNode htmlNode = htmlCleaner.clean(content);
 		TagNode htmlNode = htmlCleaner.clean(this.getClass().getResourceAsStream("Cryptonyms.html"));
 		Object[] nodes = htmlNode.evaluateXPath("//*[@class='name_show']/li");
-		if (nodes.length > 0) {
-			TagNode nodeTmp = null;
-			List<TbCryptonym> list = new ArrayList<TbCryptonym>();
-			for (int i = 0; i < nodes.length; i++) {
-				if (nodes[i] instanceof TagNode) {
-					nodeTmp = (TagNode) nodes[i];
-					String name = nodeTmp.getText().toString();
-					list.add(new TbCryptonym(name));
-				}
-			}
-			cryptonymMapper.insertCryptonyms(list);
-		}
+		// if (nodes.length > 0) {
+		// TagNode nodeTmp = null;
+		// List<TbCryptonym> list = new ArrayList<TbCryptonym>();
+		// for (int i = 0; i < nodes.length; i++) {
+		// if (nodes[i] instanceof TagNode) {
+		// nodeTmp = (TagNode) nodes[i];
+		// String name = nodeTmp.getText().toString();
+		// list.add(new TbCryptonym(name));
+		// }
+		// }
+		// cryptonymMapper.insertCryptonyms(list);
+		// }
 	}
 
 }

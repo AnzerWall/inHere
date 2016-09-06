@@ -32,8 +32,7 @@
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 		<!--生成SQLMAP文件 -->
-		<sqlMapGenerator targetPackage="mapper"
-			targetProject="src\main\resources">
+		<sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 		<!--生成Dao文件 可以配置 type="XMLMAPPER"生成xml的dao实现 context id="DB2Tables" 修改targetRuntime="MyBatis3" -->
@@ -43,72 +42,97 @@
 		</javaClientGenerator>
 
 		<!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等 -->
-		<table tableName="tb_activity_ad" domainObjectName="TbActivityAd"
+		<table tableName="tb_activity" domainObjectName="Activity"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_beg_help" domainObjectName="TbBegHelp"
+		<table tableName="tb_ask_reply" domainObjectName="AskReply"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_break_barrier" domainObjectName="TbBreakBarrier"
+		<table tableName="tb_comment" domainObjectName="Comment"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_comment" domainObjectName="TbComment"
+		<table tableName="tb_cryptonym" domainObjectName="Cryptonym"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_dynamic" domainObjectName="TbDynamic"
+		<table tableName="tb_cryptonym_used" domainObjectName="CryptonymUsed"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_label" domainObjectName="TbLabel"
+		<table tableName="tb_demand" domainObjectName="Demand"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_notification" domainObjectName="TbNotification"
+		<table tableName="tb_dynamic" domainObjectName="Dynamic"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_permissions" domainObjectName="TbPermissions"
+		<table tableName="tb_label" domainObjectName="Label"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_que_ans" domainObjectName="TbQueAns"
+		<table tableName="tb_not_notice" domainObjectName="NotNotice"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_role" domainObjectName="TbRole"
+		<table tableName="tb_notification" domainObjectName="Notification"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_talk_circle" domainObjectName="TbTalkCircle"
+		<table tableName="tb_permissions" domainObjectName="Permissions"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_target" domainObjectName="TbTarget"
+		<table tableName="tb_role" domainObjectName="Role"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_tools" domainObjectName="TbTools"
+		<table tableName="tb_target" domainObjectName="Target"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-		<table tableName="tb_user" domainObjectName="TbUser"
+		<table tableName="tb_target_user" domainObjectName="TargetUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_target_list" domainObjectName="TargetList"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_target_list_user" domainObjectName="TargetListUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_tools" domainObjectName="Tools"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_type" domainObjectName="Type"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_user" domainObjectName="User"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
