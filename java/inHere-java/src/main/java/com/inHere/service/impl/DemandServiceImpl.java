@@ -3,7 +3,6 @@ package com.inHere.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
@@ -17,6 +16,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dao.DemandMapper;
 import com.inHere.dto.ParamsListDto;
+import com.inHere.dto.ReturnDemandDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.dto.ReturnPhotoDto;
 import com.inHere.entity.Demand;
@@ -42,15 +42,55 @@ public class DemandServiceImpl implements DemandService {
 	 * 
 	 * @param params
 	 * @return
+	 * @throws IOException
 	 */
-	public ReturnListDto getList(ParamsListDto params) {
+	public ReturnListDto getList(ParamsListDto params) throws IOException {
 		log.info("调用getList()业务");
 		ReturnListDto listDto = new ReturnListDto();
-		List<Demand> demandList = demandMapper.getList(params);
-		JSONArray JsonArray = new JSONArray();
-		JsonArray.addAll(demandList);
-		listDto.setItems(JsonArray);
+		List<Demand> demandList = demandMapper.selectByParams(params);
+		Integer page = (params.getOffset() / params.getLimit()) + 1;
+		Integer page_size = params.getLimit();
+
+		// 获取总条数
+		Integer total = demandMapper.getCount(params);
+		Integer total_page = total / params.getLimit();
+		listDto.setPage(page);
+		listDto.setPage_size(page_size);
+		listDto.setLimit(params.getLimit());
+		listDto.setOffset(params.getOffset());
+		listDto.setTotal(total);
+		listDto.setTotal_page(total_page);
+
+		JSONArray items = this.setItems(demandList);
+		listDto.setItems(items);
 		return listDto;
+	}
+
+	/**
+	 * 设置各类型Items
+	 * 
+	 * @param listDto
+	 * @param demandList
+	 * @return
+	 * @throws IOException
+	 */
+	public JSONArray setItems(List<Demand> demandList) throws IOException {
+		JSONArray array = new JSONArray();
+		for (Demand tmp : demandList) {
+			ReturnDemandDto demandDto = new ReturnDemandDto();
+			demandDto.setId(tmp.getId());
+			demandDto.setExt_type(tmp.getExtType());
+			demandDto.setText(tmp.getText());
+			// 解析图片
+			demandDto.setPhotos(this.photoResolution(tmp.getPhotos()));
+			demandDto.setCreate_time(tmp.getCreateTime().getTime());
+			demandDto.setUpdate_time(tmp.getUpdateTime().getTime());
+			demandDto.setUser_id(tmp.getUserId());
+			demandDto.setExt_data(JSONObject.parseObject(tmp.getExtData()));
+			demandDto.setIs_end(tmp.getIsEnd());
+			array.add(demandDto);
+		}
+		return array;
 	}
 
 	/**
@@ -59,25 +99,23 @@ public class DemandServiceImpl implements DemandService {
 	 * @return
 	 * @throws IOException
 	 */
-	public List<ReturnPhotoDto> pictureResolution(String photos) throws IOException {
+	public JSONArray photoResolution(String photos) throws IOException {
+		JSONArray array = new JSONArray();
 		// 判断是否有图片
 		if (photos != null && !photos.trim().equals("")) {
-			List<ReturnPhotoDto> list = new ArrayList<ReturnPhotoDto>();
-
 			// 解析图片信息
-			JSONArray photoArray = JSON.parseArray(photos);
+			JSONArray tmpArray = JSON.parseArray(photos);
 
-			int len = photoArray.size();
+			int len = tmpArray.size();
 			for (int i = 0; i < len; i++) {
 				ReturnPhotoDto photo = new ReturnPhotoDto();
 
-				JSONObject obj = photoArray.getJSONObject(i);
+				JSONObject obj = tmpArray.getJSONObject(i);
 				String src = obj.getString("src");
 
 				// 获取项目根路径和图片路径
 				String root = System.getProperty("inHere.root");
-				String minSrc = root + File.separator + "WEB-INF" + File.separator
-						+ src.replace("max", "min").replace("/", File.separator);
+				String minSrc = root + File.separator + src.replace("max", "min").replace("/", File.separator);
 
 				// 小图转Base64传输
 				File file = new File(minSrc);
@@ -94,100 +132,11 @@ public class DemandServiceImpl implements DemandService {
 				photo.setSrc(src);
 				photo.setW(w);
 				photo.setH(h);
-				list.add(photo);
+				array.add(photo);
 			}
-			return list;
+			return array;
 		}
-		return null;
+		return array;
 	}
-
-	// public ListDto<TasksDto> getTasksToDto(Integer offset, Integer limit,
-	// Integer[] filter_label, Integer filter_end,
-	// Integer sort_time) throws IOException {
-	// ListDto<TasksDto> listDto = new ListDto<TasksDto>();
-	//
-	// // list里的Items属性解析
-	// List<TbBegHelp> list = this.getTasks(offset, limit, filter_label,
-	// filter_end, sort_time);
-	// List<TasksDto> items = new ArrayList<TasksDto>();
-	//
-	// for (TbBegHelp tmp : list) {
-	// // 任务的基本属性赋值
-	// TasksDto task = new TasksDto(tmp.getHelpId(), tmp.getLableId(),
-	// tmp.getCreateTime(), tmp.getWordDesc(),
-	// tmp.getUserIdBeg(), tmp.getHasResolved());
-	//
-	// // TODO 优化标签名字查询，标签名字赋值
-	// TbLabel label = labelMapper.selectLabelById(tmp.getLableId());
-	// task.setLabel_name(label.getLabelName());
-	//
-	// // 解析图片
-	// List<PhotoDto> photos = this.pictureResolution(tmp.getPicDesc());
-	// task.setPhoto_desc(photos);
-	//
-	// // 解析不同任务的私有属性
-	// task.setPrivate_data(JSON.parseObject(tmp.getLabelData()));
-	//
-	// items.add(task);
-	// }
-	// listDto.setItems(items);
-	//
-	// // 设置分页属性
-	// Integer total = begHelpMapper.selectCount();
-	// Integer total_size = total / limit;
-	// listDto.setTotal(total);
-	// listDto.setPage_size(total_size);
-	// listDto.setPage(offset / limit + 1);
-	// listDto.setPage_size(limit);
-	// listDto.setOffset(offset);
-	// listDto.setLimit(limit);
-	// return listDto;
-	// }
-
-	/**
-	 * 获取任务列表
-	 * 
-	 * @param limit
-	 * @param offset
-	 * @return
-	 */
-	// public List<TbBegHelp> getTasks(Integer offset, Integer limit, Integer[]
-	// filter_label, Integer filter_end,
-	// Integer sort_time) {
-	// if (filter_label == null) {
-	// filter_label = new Integer[] { Label.Expressage, Label.Transfer,
-	// Label.Help };
-	// }
-	// List<TbBegHelp> list = this.getBegHelpList(offset, limit, filter_label,
-	// filter_end, sort_time);
-	// return list;
-	// }
-
-	/**
-	 * 获取有求必应列表
-	 * 
-	 * @param offset
-	 * @param limit
-	 * @param filter_label
-	 * @param filter_end
-	 * @param sort_time
-	 * @return
-	 */
-	// public List<TbBegHelp> getBegHelpList(Integer offset, Integer limit,
-	// Integer[] filter_label, Integer filter_end,
-	// Integer sort_time) {
-	// Map<String, Object> params = new HashMap<String, Object>();
-	// params.put("limit", limit);
-	// params.put("offset", offset);
-	// params.put("lable_ids", filter_label);
-	// if (filter_end != null) {
-	// params.put("params", filter_end);
-	// }
-	// if (sort_time != null) {
-	// params.put("sort_time", sort_time);
-	// }
-	// List<TbBegHelp> list = begHelpMapper.selectTasksList(params);
-	// return list;
-	// }
 
 }

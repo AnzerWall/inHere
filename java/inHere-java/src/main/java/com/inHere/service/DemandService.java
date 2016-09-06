@@ -1,5 +1,7 @@
 package com.inHere.service;
 
+import java.io.IOException;
+
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnListDto;
 
@@ -16,7 +18,8 @@ public interface DemandService {
 	 * 
 	 * @param params
 	 * @return
+	 * @throws IOException
 	 */
-	public ReturnListDto getList(ParamsListDto params);
+	public ReturnListDto getList(ParamsListDto params) throws IOException;
 
 }

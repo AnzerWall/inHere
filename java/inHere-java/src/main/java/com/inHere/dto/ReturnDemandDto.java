@@ -1,8 +1,9 @@
 package com.inHere.dto;
 
-import java.util.List;
-
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 /**
  * 有求必应传输对象
@@ -10,17 +11,19 @@ import com.alibaba.fastjson.JSONObject;
  * @author lwh
  *
  */
+@JsonInclude(Include.NON_NULL)
 public class ReturnDemandDto {
 
 	private Integer id; // 记录编号
 	private Integer ext_type; // 标签ID
 	// private String type_name; // 标签名称
 	private String text; // 文字描述
-	private List<ReturnPhotoDto> photos; // 图片描述
+	private JSONArray photos; // 图片描述
 	private Long create_time; // 创建时间
 	private Long update_time; // 更新时间
 	private String user_id; // 用户账号
 	private JSONObject ext_data; // 类别数据
+	private ReturnListDto comment; // 评论列表数据
 	private Integer is_end; // 是否解决
 
 	public ReturnDemandDto() {
@@ -51,11 +54,11 @@ public class ReturnDemandDto {
 		this.text = text;
 	}
 
-	public List<ReturnPhotoDto> getPhotos() {
+	public JSONArray getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(List<ReturnPhotoDto> photos) {
+	public void setPhotos(JSONArray photos) {
 		this.photos = photos;
 	}
 
@@ -97,6 +100,14 @@ public class ReturnDemandDto {
 
 	public void setIs_end(Integer is_end) {
 		this.is_end = is_end;
+	}
+
+	public ReturnListDto getComment() {
+		return comment;
+	}
+
+	public void setComment(ReturnListDto comment) {
+		this.comment = comment;
 	}
 
 	@Override

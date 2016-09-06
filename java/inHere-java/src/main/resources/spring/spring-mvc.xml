@@ -29,7 +29,8 @@
 	<mvc:annotation-driven />
 
 	<!-- 静态资源路径映射处理 1、加入对静态资源的处理:js,css,gif,png 2、允许使用"/"做整体映射 -->
-	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" />
+	<!--<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"/> -->
+	<mvc:default-servlet-handler />
 
 	<mvc:interceptors>
 		<!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求 -->

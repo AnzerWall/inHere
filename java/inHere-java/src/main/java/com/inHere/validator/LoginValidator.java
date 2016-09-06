@@ -13,9 +13,9 @@ import com.inHere.entity.User;
  */
 public class LoginValidator {
 
-	public ReturnBaseDto login(User user) {
+	public ReturnBaseDto<JSONObject> login(User user) {
 		System.out.println("lllllllllll");
-		ReturnBaseDto result = new ReturnBaseDto();
+		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
 		result.setData(new JSONObject());

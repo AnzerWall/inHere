@@ -21,6 +21,7 @@ public class TokenCheckInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		log.info("进入拦截器");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		return true;
 	}
 
