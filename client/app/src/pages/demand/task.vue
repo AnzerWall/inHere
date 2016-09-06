@@ -25,11 +25,14 @@
         data(){
         return this.$request
           .get("/demand")//GET方法 url为/demand
-          .query({ext_type:[1,2,3]})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
+          .query({ext_type:[4,5,6]})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
           .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
           .then(function(data){
             //处理数据，具体见vue-router文档data钩子页说明
-            return {data:data,list:data.items}
+            return {
+              data:data,
+              list:data.items
+            }
           })
         }
       },
