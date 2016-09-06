@@ -1,5 +1,6 @@
 'use strict';
 /**
+ * 拦截请求的插件
  * Created by anzer on 2016/9/4.
  * Modify form superagent-mocker
  * 修改支持query，瞎改的，可能会有bug

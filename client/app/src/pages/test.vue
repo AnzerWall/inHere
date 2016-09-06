@@ -1,7 +1,11 @@
 <template>
   <div>
-    该页面为练习用测试用页面，路由为/test
-    <!--<button >test</button>-->
+    <div v-if="$loadingRouteData ">
+        加载中...
+    </div>
+    <div v-if="!$loadingRouteData ">
+      {{detail}}
+    </div>
   </div>
 
 </template>
@@ -9,16 +13,25 @@
 
 </style>
 <script type="text/ecmascript-6">
-
+  import fakeComment from '../api/fake/comment.js'
   export default{
     route: {
       data(){
+//        //访问路由对象，获取路由id
+//        var id=this.$route.params.id;
+//
+//        return this.$api
+//          .get("/demand/"+id)
+//          .then(function (res) {
+//              return Promise.resolve({ detail: res.body.data })
+//           })
 
-        return this.$api.demand.listTask("5", {
-          test: "t"
-        }).then(function (...data) {
-          console.log("ok",data);
-        })
+
+      }
+    },
+    data(){
+      return{
+        detail:{}
       }
     }
   }

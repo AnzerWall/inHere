@@ -28,6 +28,7 @@
     width: 100%;
     background-color: #FAFAFA;
     flex-direction: column;
+    position: relative;
   }
 
   .demand-wrapper .demand-content {
