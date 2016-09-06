@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inHere.constant.Code;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
-import com.inHere.exception.SystemException;
+import com.inHere.dto.ReturnListDto;
 import com.inHere.service.DemandService;
 import com.inHere.validator.DemandValidator;
 import com.inHere.validator.Params;
@@ -30,16 +30,11 @@ public class DemandController {
 
 	@Params(DemandValidator.class)
 	@RequestMapping(path = "/demand", method = RequestMethod.POST)
-	public ReturnBaseDto getDemandTaskList(@RequestBody ParamsListDto params) {
-		ReturnBaseDto result = new ReturnBaseDto();
-		String message = null;
-		// ReturnListDto<ReturnDemandDto> list =
-		// demandService.getTasksToDto(params);
-
+	public ReturnBaseDto<ReturnListDto> getDemandList(@RequestBody ParamsListDto params) throws IOException {
+		ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<ReturnListDto>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		// result.setData(list);
-
+		result.setData(demandService.getList(params));
 		return result;
 	}
 

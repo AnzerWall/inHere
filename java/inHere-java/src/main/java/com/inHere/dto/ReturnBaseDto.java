@@ -3,7 +3,6 @@ package com.inHere.dto;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -16,12 +15,12 @@ import test.inHere.util.JsonFormatUtil;
  *
  */
 @JsonInclude(Include.NON_NULL)
-public class ReturnBaseDto {
+public class ReturnBaseDto<T> {
 
 	private String code; // 响应码，0表示成功，其他表示生效，使用码段区分不同模块
 	private String status; // 响应信息，失败时描述失败信息
 	private String message; // 可选，指定错误更加详细的错误信息
-	private JSONObject data; // 具体响应数据
+	private T data; // 具体响应数据
 
 	public String getCode() {
 		return code;
@@ -47,11 +46,11 @@ public class ReturnBaseDto {
 		this.message = message;
 	}
 
-	public JSONObject getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData(JSONObject data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 

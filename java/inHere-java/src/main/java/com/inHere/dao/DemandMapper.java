@@ -31,5 +31,12 @@ public interface DemandMapper {
 	 * @param params
 	 * @return
 	 */
-	public List<Demand> getList(ParamsListDto params);
+	public List<Demand> selectByParams(ParamsListDto params);
+
+	/**
+	 * 获取表总条数
+	 * 
+	 * @return
+	 */
+	public Integer getCount(ParamsListDto params);
 }

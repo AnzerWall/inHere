@@ -1,5 +1,7 @@
 package test.inHere.service;
 
+import java.io.IOException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +28,12 @@ public class DemandServiceTest extends AbstractTransactionalJUnit4SpringContextT
 	private DemandService demandService;
 
 	@Test
-	public void getListOfTasks() {
-		ParamsListDto params = null;
+	public void getList() throws IOException {
+		ParamsListDto params = new ParamsListDto();
+		params.setOffset(0);
+		params.setLimit(2);
 		ReturnListDto list = demandService.getList(params);
-		System.out.println( list.toString() );
+		System.out.println(list.toString());
 	}
 
 }

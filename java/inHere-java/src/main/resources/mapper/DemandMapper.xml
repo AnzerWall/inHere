@@ -136,30 +136,48 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
+	<!-- 获取列表 -->
 	<select id="selectByParams" parameterType="ParamsListDto"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from tb_demand
 		<where>
-			<if test="ParamsListDto.ext_type.length > 0">
-				<foreach collection="ParamsListDto.ext_type" item="type"
-					open="AND ext_type in(" close=")" separator=",">
-					#{type}
+			<if test="ext_type != null">
+				<foreach collection="ext_type" item="item" open="AND ext_type in("
+					close=")" separator=",">
+					#{item}
 				</foreach>
 			</if>
 			<if test="is_end != null">
-				AND is_end = #{ParamsListDto.is_end}
+				AND is_end = #{is_end}
 			</if>
-			<if test="user_id != null">
-				AND user_id = #{ParamsListDto.user_id}
+			<if test="creator != null">
+				AND user_id = #{creator}
 			</if>
 		</where>
-		<if test="order_by != null">
-			order by ${ParamsListDto.order_by} ${ParamsListDto.order}
+		<if test="order_by != null and order != null">
+			order by ${order_by} ${order}
 		</if>
 	</select>
 
-
+	<!-- 获取总条数 -->
+	<select id="getCount" parameterType="ParamsListDto" resultType="Integer">
+		SELECT COUNT(id) FROM tb_demand
+		<where>
+			<if test="ext_type != null">
+				<foreach collection="ext_type" item="item" open="AND ext_type in("
+					close=")" separator=",">
+					#{item}
+				</foreach>
+			</if>
+			<if test="is_end != null">
+				AND is_end = #{is_end}
+			</if>
+			<if test="creator != null">
+				AND user_id = #{creator}
+			</if>
+		</where>
+	</select>
 
 </mapper>
