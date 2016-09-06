@@ -63,7 +63,7 @@
   const COLOR_DEMAND_ORANGE = "#FFC107";
   const COLOR_DEMAND_AOI = "#0CC998";
   const COLOR_DEMAND_GREEN = "#04C830";
-
+  const COLOR_DEMAND_DISABLED="#cccccc";
   export default{
     filters:{
       humanized
@@ -134,6 +134,7 @@
     },
     computed: {
       main_color(){
+        if(this.data.is_end)return COLOR_DEMAND_DISABLED;
         let type = this.data.ext_type;
         let data = this.data.ext_data;
         if (type === this.TYPE_EXPRESS)return COLOR_DEMAND_BLUE;
@@ -159,8 +160,7 @@
       },
       wrapper_style(){
         let ret = {
-          "background-color": this.main_color,
-          'opacity':this.data.is_end?0.5:1
+          "background-color": this.main_color
         };
 
 
