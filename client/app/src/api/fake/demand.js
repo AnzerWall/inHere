@@ -71,7 +71,7 @@ export default{
             limit: 5,
             total: comment_data.length,
             total_page: 0,
-            items:comment_data.slice(comment_data.length-5,5)
+            items:comment_data.slice(Math.max(0,comment_data.length-5),5)
           };
           return {
             ok: true,
