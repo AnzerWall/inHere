@@ -8,7 +8,7 @@ import Comment from './comment.js'
 import _ from 'lodash'
 let comments = {};
 for (let item of items) {
-  let num = Math.floor(Math.random() * 20)+1;
+  let num =Random.integer(2,8);
   comments[item.id] = Comment.genFakeComment(num);
 }
 
