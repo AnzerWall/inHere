@@ -2,7 +2,8 @@
     <div>
       <!--$loadingRouteData当路由数据加载中为true，否则为false-->
        <div  v-if="!$loadingRouteData">
-         <demand-card v-for="item in list" :data="item" :is_detail="false"></demand-card>
+         <photos-wipe v-ref:viewer></photos-wipe>
+         <demand-card v-for="item in list" :data="item" :is_detail="false" @view-image="viewImage"></demand-card>
        </div>
       <div  v-if="$loadingRouteData" style="color: #888;text-align: center;margin: 100px">
         加载中...
@@ -14,11 +15,17 @@
 </style>
 <script>
   import DemandCard from 'components/demand-card/demand-card.vue';
-
-    export default{
-      components:{
-        DemandCard
-      },
+  import PhotosWipe from 'components/photoswipe/photoswipe.vue';
+  export default{
+    components:{
+      DemandCard,
+      PhotosWipe
+    },
+    methods:{
+      viewImage(index,photos){
+        this.$refs.viewer.show(index,photos);
+      }
+    },
       //配置路由钩子
       route: {
         //页面加载数据钩子(或者叫事件)
@@ -29,7 +36,10 @@
           .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
           .then(function(data){
             //处理数据，具体见vue-router文档data钩子页说明
-            return {data:data,list:data.items}
+            return {
+              data:data,
+              list:data.items
+            }
           })
         }
       },

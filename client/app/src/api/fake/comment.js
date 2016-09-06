@@ -15,7 +15,7 @@ export default{
         id:i+1,
         content:Random.cparagraph(1,3),
         user_id:user_id,
-        cryptonym:UserCryptonym[user_id-1].cryptonym,
+        name:UserCryptonym[user_id-1].cryptonym,
         floor:i+1,
         create_time:Date.now()-ranTime
 

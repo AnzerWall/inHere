@@ -3,9 +3,9 @@
     <div class="demand-card-wrapper" :style="wrapper_style">
       <div class="demand-card-head" :style="{color:main_color}" v-if="[TYPE_LOST,TYPE_FOUND,TYPE_DATING].indexOf(data.ext_type)!=-1&&!is_detail">
         <div v-if="data.ext_type===TYPE_LOST||data.ext_type===TYPE_FOUND" class="tag">{{chinese(data.ext_type)}}</div>
-        <div v-if="data.ext_type===TYPE_LOST||tag===TYPE_FOUND" class="tag">{{data.ext_data.thing}}</div>
-        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{data.ext_data.want_sex}}</div>
-        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{humanized(data.create_time)}}</div>
+        <div v-if="data.ext_type===TYPE_LOST||data.ext_type===TYPE_FOUND" class="tag">{{data.ext_data.thing}}</div>
+        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{want_sex}}</div>
+        <div v-if="data.ext_type===TYPE_DATING" class="tag">{{data.create_time|humanized}}</div>
 
       </div>
       <div class="demand-card-content">
@@ -27,8 +27,8 @@
 
           </div>
           <div class="right">
-            <div class="pay" v-if="TYPE_EXPRESS===data.ext_type&&!is_detail">{{'¥'+data.ext_data.pay}}</div>
-            <div class="pay" v-if="TYPE_SELL===data.ext_type&&!is_detail">{{'¥'+data.ext_data.price}}</div>
+            <div class="pay" v-if="TYPE_EXPRESS===data.ext_type&&!is_detail">{{'¥ '+data.ext_data.pay}}</div>
+            <div class="pay" v-if="TYPE_SELL===data.ext_type&&!is_detail">{{'¥ '+data.ext_data.price}}</div>
             <div class="like-text" v-if="data.ext_type===TYPE_DATING">{{data.praise}}</div>
             <pay-icon v-if="[TYPE_EXPRESS,TYPE_SELL].indexOf(data.ext_type)!=-1&&!is_detail" class="icon"></pay-icon>
             <like-icon v-if="data.ext_type===TYPE_DATING&&!data.praised" class=" like-icon"></like-icon>
