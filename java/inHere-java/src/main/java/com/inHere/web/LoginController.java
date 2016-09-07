@@ -21,15 +21,15 @@ public class LoginController {
 
 	@Params(LoginValidator.class)
 	@RequestMapping(path = "/log_in", method = RequestMethod.POST)
-	public ReturnBaseDto<JSONObject> login(@RequestBody User user) {
+	public ReturnBaseDto<JSONObject> login(int num) {
 		log.info("进入login()中-----");
 
 		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
 		result.setCode(Code.Success.getCode());
 		// result.setStatus(Code.Success.getStatus());
 		// result.put("code", code);
-		result.getData().put("userId", user.getUserId());
-		result.getData().put("passwd", user.getPasswd());
+//		result.getData().put("userId", user.getUserId());
+//		result.getData().put("passwd", user.getPasswd());
 		return result;
 	}
 

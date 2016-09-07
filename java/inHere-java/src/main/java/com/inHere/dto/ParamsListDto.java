@@ -2,6 +2,8 @@ package com.inHere.dto;
 
 import java.util.Arrays;
 
+import com.inHere.entity.User;
+
 /**
  * 列表参数传输对象
  * 
@@ -17,6 +19,9 @@ public class ParamsListDto {
 	private String creator;// 创建者过滤
 	private String order_by;// 排序类别: time 、 praise
 	private String orcer;// 倒序正序：desc 、asc
+
+	// 传参用户
+	private User user;
 
 	public Integer getLimit() {
 		return limit;
@@ -72,6 +77,14 @@ public class ParamsListDto {
 
 	public void setOrcer(String orcer) {
 		this.orcer = orcer;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

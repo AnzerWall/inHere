@@ -141,28 +141,30 @@
 	<!-- 获取列表 -->
 	<select id="selectByParams" parameterType="ParamsListDto"
 		resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from tb_demand
+		select d.*
+		from tb_demand d, tb_user u
 		<where>
+			<if test="user != null">
+				d.`user_id` = u.`user_id` and u.`school_id` = #{user.schoolId}
+			</if>
 			<if test="ext_type != null">
-				<foreach collection="ext_type" item="item" open="AND ext_type in("
+				<foreach collection="ext_type" item="item" open="AND d.`ext_type` in("
 					close=")" separator=",">
 					#{item}
 				</foreach>
 			</if>
 			<if test="is_end != null">
-				AND is_end = #{is_end}
+				AND d.`is_end` = #{is_end}
 			</if>
 			<if test="creator != null">
-				AND user_id = #{creator}
+				AND d.`user_id` = #{creator}
 			</if>
 		</where>
 		<if test="order_by != null and order != null">
-			order by ${order_by} ${order}
+			order by d.`${order_by}` ${order}
 		</if>
 		<if test="order_by == null">
-			order by create_time desc
+			order by d.`create_time` desc
 		</if>
 	</select>
 
