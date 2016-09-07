@@ -1,12 +1,12 @@
 <template>
     <?xml version="1.0" encoding="UTF-8"?>
-<svg width="28px" height="27px" viewBox="0 0 28 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="28px" height="27px" viewBox="0 0 28 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill:white">
     <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="task-copy-2" transform="translate(-319.000000, -291.000000)" fill="#FFFFFF">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="task-copy-2" transform="translate(-319.000000, -291.000000)">
             <g id="Group-6">
                 <g id="Group-9" transform="translate(11.000000, 94.000000)">
                     <g id="task_card">

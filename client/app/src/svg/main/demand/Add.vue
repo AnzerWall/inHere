@@ -5,8 +5,8 @@
     <title>Page 1</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="task" transform="translate(-333.000000, -43.000000)" fill="#000000">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="task" transform="translate(-333.000000, -43.000000)">
             <g id="Group-6">
                 <g id="search" transform="translate(24.000000, 37.000000)">
                     <g id="Group">

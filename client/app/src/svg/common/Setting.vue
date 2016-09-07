@@ -5,8 +5,8 @@
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g id="me_list" transform="translate(-329.000000, -49.000000)" stroke="#979797" stroke-width="2">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd" stroke-linecap="round">
+        <g id="me_list" transform="translate(-329.000000, -49.000000)" stroke-width="2">
             <g id="Group" transform="translate(330.000000, 49.000000)">
                 <path d="M0.42,1 L20.5974925,1" id="Line"></path>
                 <path d="M0.42,9 L20.5974925,9" id="Line-Copy-2"></path>

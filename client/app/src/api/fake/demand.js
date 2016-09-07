@@ -8,7 +8,7 @@ import Comment from './comment.js'
 import _ from 'lodash'
 let comments = {};
 for (let item of items) {
-  let num = Math.floor(Math.random() * 20);
+  let num =MockJs.Random.integer(2,8);
   comments[item.id] = Comment.genFakeComment(num);
 }
 
@@ -71,7 +71,7 @@ export default{
             limit: 5,
             total: comment_data.length,
             total_page: 0,
-            items:comment_data.slice(comment_data.length-5,5)
+            items:comment_data.slice(Math.max(0,comment_data.length-5),comment_data.length)
           };
           return {
             ok: true,

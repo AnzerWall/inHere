@@ -4,8 +4,8 @@
     <title>Page 1</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="message_list" transform="translate(-18.000000, -112.000000)" fill="#000000">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="message_list" transform="translate(-18.000000, -112.000000)" >
             <g id="Group-10">
                 <g id="Group-9" transform="translate(0.000000, 90.000000)">
                     <g id="Group-6">

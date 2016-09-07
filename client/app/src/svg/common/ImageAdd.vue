@@ -5,8 +5,8 @@
     <title>Page 1</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.1">
-        <g id="有求必应发布" transform="translate(-305.000000, -273.000000)" fill="#000000">
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd" fill-opacity="0.1">
+        <g id="有求必应发布" transform="translate(-305.000000, -273.000000)">
             <g id="Task_detail" transform="translate(0.000000, 80.000000)">
                 <g id="task_detail_item">
                     <g id="Group-10" transform="translate(22.000000, 169.000000)">
