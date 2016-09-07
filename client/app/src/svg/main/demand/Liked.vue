@@ -5,8 +5,8 @@
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="task-copy-2" transform="translate(-319.000000, -538.000000)" fill="#FFFFFF">
+    <g id="Symbols" stroke="none" stroke-width="1"  fill-rule="evenodd">
+        <g id="task-copy-2" transform="translate(-319.000000, -538.000000)" >
             <g id="Group-6">
                 <g id="Group-9-Copy" transform="translate(11.000000, 341.000000)">
                     <g id="task_card">
