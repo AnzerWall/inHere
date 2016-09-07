@@ -40,7 +40,7 @@ public class RegisterServiceImpl implements RegisterService {
 		List<String> pwdAndSalt = securityService.encrypt(password);
 		String newPwd = pwdAndSalt.get(0);
 		String saltKey = pwdAndSalt.get(1);
-		user = new User(userId, newPwd, saltKey);
+		// user = new User(userId, newPwd, saltKey);
 		// userMapper.insertUser(user);
 		return user;
 	}

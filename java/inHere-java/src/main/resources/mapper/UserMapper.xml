@@ -1,161 +1,356 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.inHere.dao.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.inHere.entity.User" >
-    <id column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
-    <result column="salt_key" property="saltKey" jdbcType="VARCHAR" />
-    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
-    <result column="contact_way" property="contactWay" jdbcType="VARCHAR" />
-    <result column="user_sex" property="userSex" jdbcType="BIT" />
-    <result column="user_area" property="userArea" jdbcType="VARCHAR" />
-    <result column="user_school" property="userSchool" jdbcType="VARCHAR" />
-    <result column="role_id" property="roleId" jdbcType="INTEGER" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.inHere.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.inHere.entity.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="salt_key" jdbcType="VARCHAR" property="saltKey" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="contact_way" jdbcType="CHAR" property="contactWay" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    user_id, passwd, salt_key, head_img, contact_way, user_sex, user_area, user_school, 
+  <sql id="Base_Column_List">
+    user_id, passwd, salt_key, user_name, head_img, contact_way, sex, area, school_id, 
     role_id, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_user
     where user_id = #{userId,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from tb_user
     where user_id = #{userId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.inHere.entity.User" >
+  <insert id="insert" parameterType="com.inHere.entity.User">
     insert into tb_user (user_id, passwd, salt_key, 
-      head_img, contact_way, user_sex, 
-      user_area, user_school, role_id, 
+      user_name, head_img, contact_way, 
+      sex, area, school_id, role_id, 
       create_time, update_time)
     values (#{userId,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{saltKey,jdbcType=VARCHAR}, 
-      #{headImg,jdbcType=VARCHAR}, #{contactWay,jdbcType=VARCHAR}, #{userSex,jdbcType=BIT}, 
-      #{userArea,jdbcType=VARCHAR}, #{userSchool,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, 
+      #{userName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{contactWay,jdbcType=CHAR}, 
+      #{sex,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{schoolId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.inHere.entity.User" >
+  <insert id="insertSelective" parameterType="com.inHere.entity.User">
     insert into tb_user
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
         user_id,
       </if>
-      <if test="passwd != null" >
+      <if test="passwd != null">
         passwd,
       </if>
-      <if test="saltKey != null" >
+      <if test="saltKey != null">
         salt_key,
       </if>
-      <if test="headImg != null" >
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="headImg != null">
         head_img,
       </if>
-      <if test="contactWay != null" >
+      <if test="contactWay != null">
         contact_way,
       </if>
-      <if test="userSex != null" >
-        user_sex,
+      <if test="sex != null">
+        sex,
       </if>
-      <if test="userArea != null" >
-        user_area,
+      <if test="area != null">
+        area,
       </if>
-      <if test="userSchool != null" >
-        user_school,
+      <if test="schoolId != null">
+        school_id,
       </if>
-      <if test="roleId != null" >
+      <if test="roleId != null">
         role_id,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
         #{userId,jdbcType=VARCHAR},
       </if>
-      <if test="passwd != null" >
+      <if test="passwd != null">
         #{passwd,jdbcType=VARCHAR},
       </if>
-      <if test="saltKey != null" >
+      <if test="saltKey != null">
         #{saltKey,jdbcType=VARCHAR},
       </if>
-      <if test="headImg != null" >
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
         #{headImg,jdbcType=VARCHAR},
       </if>
-      <if test="contactWay != null" >
-        #{contactWay,jdbcType=VARCHAR},
+      <if test="contactWay != null">
+        #{contactWay,jdbcType=CHAR},
       </if>
-      <if test="userSex != null" >
-        #{userSex,jdbcType=BIT},
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
       </if>
-      <if test="userArea != null" >
-        #{userArea,jdbcType=VARCHAR},
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
       </if>
-      <if test="userSchool != null" >
-        #{userSchool,jdbcType=VARCHAR},
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null" >
+      <if test="roleId != null">
         #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User">
     update tb_user
-    <set >
-      <if test="passwd != null" >
+    <set>
+      <if test="passwd != null">
         passwd = #{passwd,jdbcType=VARCHAR},
       </if>
-      <if test="saltKey != null" >
+      <if test="saltKey != null">
         salt_key = #{saltKey,jdbcType=VARCHAR},
       </if>
-      <if test="headImg != null" >
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
         head_img = #{headImg,jdbcType=VARCHAR},
       </if>
-      <if test="contactWay != null" >
-        contact_way = #{contactWay,jdbcType=VARCHAR},
+      <if test="contactWay != null">
+        contact_way = #{contactWay,jdbcType=CHAR},
       </if>
-      <if test="userSex != null" >
-        user_sex = #{userSex,jdbcType=BIT},
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
       </if>
-      <if test="userArea != null" >
-        user_area = #{userArea,jdbcType=VARCHAR},
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
       </if>
-      <if test="userSchool != null" >
-        user_school = #{userSchool,jdbcType=VARCHAR},
+      <if test="schoolId != null">
+        school_id = #{schoolId,jdbcType=INTEGER},
       </if>
-      <if test="roleId != null" >
+      <if test="roleId != null">
         role_id = #{roleId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.User" >
+  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.User">
     update tb_user
     set passwd = #{passwd,jdbcType=VARCHAR},
       salt_key = #{saltKey,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
       head_img = #{headImg,jdbcType=VARCHAR},
-      contact_way = #{contactWay,jdbcType=VARCHAR},
-      user_sex = #{userSex,jdbcType=BIT},
-      user_area = #{userArea,jdbcType=VARCHAR},
-      user_school = #{userSchool,jdbcType=VARCHAR},
+      contact_way = #{contactWay,jdbcType=CHAR},
+      sex = #{sex,jdbcType=BIT},
+      area = #{area,jdbcType=VARCHAR},
+      school_id = #{schoolId,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.inHere.entity.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="salt_key" jdbcType="VARCHAR" property="saltKey" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="contact_way" jdbcType="CHAR" property="contactWay" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="school_id" jdbcType="INTEGER" property="schoolId" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, passwd, salt_key, user_name, head_img, contact_way, sex, area, school_id, 
+    school, role_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.inHere.entity.User">
+    insert into tb_user (user_id, passwd, salt_key, 
+      user_name, head_img, contact_way, 
+      sex, area, school_id, school, 
+      role_id, create_time, update_time
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{passwd,jdbcType=VARCHAR}, #{saltKey,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, #{contactWay,jdbcType=CHAR}, 
+      #{sex,jdbcType=BIT}, #{area,jdbcType=VARCHAR}, #{schoolId,jdbcType=INTEGER}, #{school,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.inHere.entity.User">
+    insert into tb_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="passwd != null">
+        passwd,
+      </if>
+      <if test="saltKey != null">
+        salt_key,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
+      <if test="contactWay != null">
+        contact_way,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="schoolId != null">
+        school_id,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="saltKey != null">
+        #{saltKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null">
+        #{contactWay,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User">
+    update tb_user
+    <set>
+      <if test="passwd != null">
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="saltKey != null">
+        salt_key = #{saltKey,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="contactWay != null">
+        contact_way = #{contactWay,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolId != null">
+        school_id = #{schoolId,jdbcType=INTEGER},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.inHere.entity.User">
+    update tb_user
+    set passwd = #{passwd,jdbcType=VARCHAR},
+      salt_key = #{saltKey,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      contact_way = #{contactWay,jdbcType=CHAR},
+      sex = #{sex,jdbcType=BIT},
+      area = #{area,jdbcType=VARCHAR},
+      school_id = #{schoolId,jdbcType=INTEGER},
+      school = #{school,jdbcType=VARCHAR},
       role_id = #{roleId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

@@ -9,15 +9,17 @@ public class User {
 
     private String saltKey;
 
+    private String userName;
+
     private String headImg;
 
     private String contactWay;
 
-    private Boolean userSex;
+    private Boolean sex;
 
-    private String userArea;
+    private String area;
 
-    private String userSchool;
+    private Integer schoolId;
 
     private Integer roleId;
 
@@ -25,19 +27,7 @@ public class User {
 
     private Date updateTime;
 
-    
-    public User() {
-		super();
-	}
-
-	public User(String userId, String passwd, String saltKey) {
-		super();
-		this.userId = userId;
-		this.passwd = passwd;
-		this.saltKey = saltKey;
-	}
-
-	public String getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -61,6 +51,14 @@ public class User {
         this.saltKey = saltKey == null ? null : saltKey.trim();
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
+
     public String getHeadImg() {
         return headImg;
     }
@@ -77,28 +75,28 @@ public class User {
         this.contactWay = contactWay == null ? null : contactWay.trim();
     }
 
-    public Boolean getUserSex() {
-        return userSex;
+    public Boolean getSex() {
+        return sex;
     }
 
-    public void setUserSex(Boolean userSex) {
-        this.userSex = userSex;
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 
-    public String getUserArea() {
-        return userArea;
+    public String getArea() {
+        return area;
     }
 
-    public void setUserArea(String userArea) {
-        this.userArea = userArea == null ? null : userArea.trim();
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
-    public String getUserSchool() {
-        return userSchool;
+    public Integer getSchoolId() {
+        return schoolId;
     }
 
-    public void setUserSchool(String userSchool) {
-        this.userSchool = userSchool == null ? null : userSchool.trim();
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
     }
 
     public Integer getRoleId() {

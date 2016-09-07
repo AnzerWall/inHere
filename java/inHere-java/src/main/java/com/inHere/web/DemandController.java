@@ -29,7 +29,7 @@ public class DemandController {
 	private DemandService demandService;
 
 	@Params(DemandValidator.class)
-	@RequestMapping(path = "/demand", method = RequestMethod.POST)
+	@RequestMapping(path = "/demand", method = { RequestMethod.GET, RequestMethod.POST })
 	public ReturnBaseDto<ReturnListDto> getDemandList(@RequestBody ParamsListDto params) throws IOException {
 		ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<ReturnListDto>();
 		result.setCode(Code.Success.getCode());
