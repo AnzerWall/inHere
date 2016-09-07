@@ -5,8 +5,8 @@
     <title>Group</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g id="有问必答详细页" transform="translate(-329.000000, -44.000000)" stroke="#FFFFFF" stroke-width="2">
+    <g id="Page-1" stroke="none" stroke-width="1" fill-rule="evenodd" stroke-linecap="round">
+        <g id="有问必答详细页" transform="translate(-329.000000, -44.000000)"  stroke-width="2">
             <g id="Group-7">
                 <g id="Group" transform="translate(330.000000, 44.000000)">
                     <path d="M0.42,1 L20.5974925,1" id="Line"></path>
