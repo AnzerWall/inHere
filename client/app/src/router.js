@@ -16,6 +16,9 @@ import DemandDetail from  'pages/demand/detail.vue'
 import DemandTask from  'pages/demand/task.vue'
 import DemandLost from  'pages/demand/lost.vue'
 import DemandDating from  'pages/demand/dating.vue'
+
+
+import ChatList from 'pages/message/chat-list.vue'
 export default{
   '/': {
     component: Main,
@@ -53,5 +56,8 @@ export default{
   },
   '/test':{
     component:Test
+  },
+  '/chat':{
+    component: ChatList
   }
 }
