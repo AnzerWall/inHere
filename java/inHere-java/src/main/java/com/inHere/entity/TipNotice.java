@@ -11,7 +11,7 @@ public class TipNotice {
 
     private String acceptUser;
 
-    private Byte action;
+    private Integer action;
 
     private String title;
 
@@ -21,7 +21,7 @@ public class TipNotice {
 
     private Date updateTime;
 
-    private Byte hasRead;
+    private Integer hasRead;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class TipNotice {
         this.acceptUser = acceptUser == null ? null : acceptUser.trim();
     }
 
-    public Byte getAction() {
+    public Integer getAction() {
         return action;
     }
 
-    public void setAction(Byte action) {
+    public void setAction(Integer action) {
         this.action = action;
     }
 
@@ -95,11 +95,11 @@ public class TipNotice {
         this.updateTime = updateTime;
     }
 
-    public Byte getHasRead() {
+    public Integer getHasRead() {
         return hasRead;
     }
 
-    public void setHasRead(Byte hasRead) {
+    public void setHasRead(Integer hasRead) {
         this.hasRead = hasRead;
     }
 }

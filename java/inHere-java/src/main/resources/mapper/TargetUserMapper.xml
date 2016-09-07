@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="target_id" property="targetId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
-    <result column="ext_data" property="extData" jdbcType="VARCHAR" />
+    <result column="ext_data" property="extData" jdbcType="CHAR" />
     <result column="has_finish" property="hasFinish" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -25,7 +25,7 @@
     insert into tb_target_user (id, target_id, user_id, 
       ext_data, has_finish)
     values (#{id,jdbcType=INTEGER}, #{targetId,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, 
-      #{extData,jdbcType=VARCHAR}, #{hasFinish,jdbcType=TINYINT})
+      #{extData,jdbcType=CHAR}, #{hasFinish,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.inHere.entity.TargetUser" >
     insert into tb_target_user
@@ -57,7 +57,7 @@
         #{userId,jdbcType=VARCHAR},
       </if>
       <if test="extData != null" >
-        #{extData,jdbcType=VARCHAR},
+        #{extData,jdbcType=CHAR},
       </if>
       <if test="hasFinish != null" >
         #{hasFinish,jdbcType=TINYINT},
@@ -74,7 +74,7 @@
         user_id = #{userId,jdbcType=VARCHAR},
       </if>
       <if test="extData != null" >
-        ext_data = #{extData,jdbcType=VARCHAR},
+        ext_data = #{extData,jdbcType=CHAR},
       </if>
       <if test="hasFinish != null" >
         has_finish = #{hasFinish,jdbcType=TINYINT},
@@ -86,7 +86,7 @@
     update tb_target_user
     set target_id = #{targetId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=VARCHAR},
-      ext_data = #{extData,jdbcType=VARCHAR},
+      ext_data = #{extData,jdbcType=CHAR},
       has_finish = #{hasFinish,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>

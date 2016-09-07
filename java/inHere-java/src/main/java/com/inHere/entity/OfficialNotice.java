@@ -17,7 +17,7 @@ public class OfficialNotice {
 
     private Date updateTime;
 
-    private Byte isHide;
+    private Integer isHide;
 
     private String content;
 
@@ -77,11 +77,11 @@ public class OfficialNotice {
         this.updateTime = updateTime;
     }
 
-    public Byte getIsHide() {
+    public Integer getIsHide() {
         return isHide;
     }
 
-    public void setIsHide(Byte isHide) {
+    public void setIsHide(Integer isHide) {
         this.isHide = isHide;
     }
 

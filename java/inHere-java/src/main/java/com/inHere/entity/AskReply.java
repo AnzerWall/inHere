@@ -5,13 +5,15 @@ import java.util.Date;
 public class AskReply {
     private Integer id;
 
-    private String title;
-
     private Integer extType;
 
     private String extData;
 
     private Integer labelId;
+
+    private String title;
+
+    private String photos;
 
     private Integer commentNum;
 
@@ -31,14 +33,6 @@ public class AskReply {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
     }
 
     public Integer getExtType() {
@@ -63,6 +57,22 @@ public class AskReply {
 
     public void setLabelId(Integer labelId) {
         this.labelId = labelId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
+    }
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos == null ? null : photos.trim();
     }
 
     public Integer getCommentNum() {

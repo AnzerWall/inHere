@@ -5,13 +5,11 @@ import java.util.Date;
 public class Dynamic {
     private Integer id;
 
-    private Date startTime;
-
     private Integer extType;
 
     private String extData;
 
-    private String recordId;
+    private Integer recordId;
 
     private String userId;
 
@@ -25,14 +23,6 @@ public class Dynamic {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
     }
 
     public Integer getExtType() {
@@ -51,12 +41,12 @@ public class Dynamic {
         this.extData = extData == null ? null : extData.trim();
     }
 
-    public String getRecordId() {
+    public Integer getRecordId() {
         return recordId;
     }
 
-    public void setRecordId(String recordId) {
-        this.recordId = recordId == null ? null : recordId.trim();
+    public void setRecordId(Integer recordId) {
+        this.recordId = recordId;
     }
 
     public String getUserId() {

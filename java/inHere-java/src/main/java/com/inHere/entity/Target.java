@@ -13,7 +13,7 @@ public class Target {
 
     private String extData;
 
-    private Byte hasFinish;
+    private Integer hasFinish;
 
     private Integer targetListId;
 
@@ -61,11 +61,11 @@ public class Target {
         this.extData = extData == null ? null : extData.trim();
     }
 
-    public Byte getHasFinish() {
+    public Integer getHasFinish() {
         return hasFinish;
     }
 
-    public void setHasFinish(Byte hasFinish) {
+    public void setHasFinish(Integer hasFinish) {
         this.hasFinish = hasFinish;
     }
 

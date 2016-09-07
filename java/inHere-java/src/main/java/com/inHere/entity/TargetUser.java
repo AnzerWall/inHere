@@ -9,7 +9,7 @@ public class TargetUser {
 
     private String extData;
 
-    private Byte hasFinish;
+    private Integer hasFinish;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class TargetUser {
         this.extData = extData == null ? null : extData.trim();
     }
 
-    public Byte getHasFinish() {
+    public Integer getHasFinish() {
         return hasFinish;
     }
 
-    public void setHasFinish(Byte hasFinish) {
+    public void setHasFinish(Integer hasFinish) {
         this.hasFinish = hasFinish;
     }
 }
