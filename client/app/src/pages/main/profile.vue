@@ -36,7 +36,7 @@
     height: 60px;
     width: 100%;
     position: fixed;
-    border-bottom: solid 1px #d5d5d5;
+    border-bottom: solid 1px rgba(213,213,213,.5);
     align-items: center;
     justify-content: space-between;
     background-color: #FAFAFA;

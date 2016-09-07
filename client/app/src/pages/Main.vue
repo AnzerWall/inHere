@@ -66,7 +66,7 @@
     width: 100%;
     left: 0;
     height: 52px;
-    border-top: #ccc solid 1px;
+    border-top: rgba(213,213,213,.5) solid 1px;
     display: flex;
     z-index: 200;
   }
