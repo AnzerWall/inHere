@@ -7,11 +7,11 @@ public class TargetList {
 
     private String title;
 
+    private String text;
+
     private Integer extType;
 
     private String extData;
-
-    private String process;
 
     private String userId;
 
@@ -39,6 +39,14 @@ public class TargetList {
         this.title = title == null ? null : title.trim();
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text == null ? null : text.trim();
+    }
+
     public Integer getExtType() {
         return extType;
     }
@@ -53,14 +61,6 @@ public class TargetList {
 
     public void setExtData(String extData) {
         this.extData = extData == null ? null : extData.trim();
-    }
-
-    public String getProcess() {
-        return process;
-    }
-
-    public void setProcess(String process) {
-        this.process = process == null ? null : process.trim();
     }
 
     public String getUserId() {
