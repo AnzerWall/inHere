@@ -42,6 +42,7 @@
 		</javaClientGenerator>
 
 		<!--对应数据库表 mysql可以加入主键自增 字段命名 忽略某字段等 -->
+		<!--
 		<table tableName="tb_activity" domainObjectName="Activity"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
@@ -137,6 +138,32 @@
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">
 		</table>
-
+		<table tableName="tb_note_notice" domainObjectName="NoteNotice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_official_notice" domainObjectName="OfficialNotice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_tip_notice" domainObjectName="TipNotice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		-->
+		<table tableName="tb_ask_reply_user" domainObjectName="AskReplyUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="tb_school" domainObjectName="School"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+	
 	</context>
 </generatorConfiguration>

@@ -7,6 +7,10 @@ public class TargetListUser {
 
     private String userId;
 
+    private Double process;
+
+    private Byte hasGiveUp;
+
     private Byte isPass;
 
     public Integer getId() {
@@ -31,6 +35,22 @@ public class TargetListUser {
 
     public void setUserId(String userId) {
         this.userId = userId == null ? null : userId.trim();
+    }
+
+    public Double getProcess() {
+        return process;
+    }
+
+    public void setProcess(Double process) {
+        this.process = process;
+    }
+
+    public Byte getHasGiveUp() {
+        return hasGiveUp;
+    }
+
+    public void setHasGiveUp(Byte hasGiveUp) {
+        this.hasGiveUp = hasGiveUp;
     }
 
     public Byte getIsPass() {

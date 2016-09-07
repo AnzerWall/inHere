@@ -3,7 +3,7 @@
     <!--$loadingRouteData当路由数据加载中为true，否则为false-->
     <photos-wipe v-ref:viewer></photos-wipe>
     <div v-if="!$loadingRouteData">
-      <demand-card v-for="item in list" :data="item" :is_detail="true" @view-image="viewImage"></demand-card>
+      <demand-card v-for="item in list" :data="item" :is_detail="false" @view-image="viewImage"></demand-card>
       <infinite-loading :on-infinite="onLoadMore">
         <span slot="no-more">
           没有更多了...
