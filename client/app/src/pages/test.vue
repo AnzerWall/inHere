@@ -26,6 +26,15 @@
                 console.log(data);
               })
 
+          })
+          .then(()=>{
+            return  this.$request
+              .get("/official_notice")
+              .then(this.$api.checkResult)
+              .then((data)=>{
+                console.log(data);
+              })
+
           });
 
       }

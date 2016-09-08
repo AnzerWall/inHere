@@ -12,7 +12,7 @@
 
 
 </template>
-<style>
+<style scoped>
 .chat-head{
   width: 100%;
   height: 60px;
