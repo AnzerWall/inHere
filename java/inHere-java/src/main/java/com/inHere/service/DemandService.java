@@ -29,6 +29,6 @@ public interface DemandService {
 	 * @param id
 	 * @return
 	 */
-	public ReturnDemandDto selectOneById(Integer id) throws IOException;
+	public ReturnDemandDto selectOneById(ParamsListDto params) throws IOException;
 
 }

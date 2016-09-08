@@ -26,5 +26,5 @@ public interface DemandMapper {
 	public Integer getCount(ParamsListDto params);
 
 	// 通过ID获取一条需求
-	public Demand selectOneById(Integer id);
+	public Demand selectOneById(ParamsListDto params);
 }

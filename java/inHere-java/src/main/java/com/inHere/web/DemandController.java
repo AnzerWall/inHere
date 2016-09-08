@@ -69,9 +69,20 @@ public class DemandController {
 	public ReturnBaseDto<ReturnDemandDto> getDemandItem(@PathVariable Integer item_id) throws IOException {
 		log.info("参数" + item_id);
 		ReturnBaseDto<ReturnDemandDto> result = new ReturnBaseDto<ReturnDemandDto>();
+		ParamsListDto params = new ParamsListDto();
+
+		// 初始化分页页
+		User user = new User();
+		user.setUserId("ni_menhao");
+		user.setSchoolId(1);
+		params.setItem_id(item_id);
+		params.setLimit(10);
+		params.setOffset(0);
+		params.setUser(user);
+
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		ReturnDemandDto data = demandService.selectOneById(item_id);
+		ReturnDemandDto data = demandService.selectOneById(params);
 		result.setData(data == null ? new ReturnDemandDto() : data);
 		return result;
 	}
