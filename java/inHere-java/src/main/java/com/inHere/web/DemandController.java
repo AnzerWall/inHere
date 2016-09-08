@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inHere.authorization.Authorization;
 import com.inHere.constant.Code;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
@@ -41,6 +42,7 @@ public class DemandController {
 	 * @return
 	 * @throws IOException
 	 */
+	@Authorization
 	@Params(DemandValidator.class)
 	@RequestMapping(path = "/demand", method = { RequestMethod.GET, RequestMethod.POST })
 	public ReturnBaseDto<ReturnListDto> getDemandList(@RequestBody ParamsListDto params) throws IOException {
