@@ -1,5 +1,5 @@
 <template>
-  <div class="response">
+  <div class="response"v-if="!$loadingRouteData">
     <!--头部-->
     <div class="response-header">
       <div class="head" >
@@ -14,10 +14,9 @@
         </div>
       </div>
     </div>
- <div style="margin-left: auto;margin-right: auto;margin-top: 100px" v-if="$loadingRouteData" >loading...</div>
 
     <!--下部内容-->
-    <div class="content" v-if="!$loadingRouteData">
+    <div class="content" >
       <!--卡片-->
       <photos-wipe v-ref:viewer></photos-wipe>
       <header-card  :data="data" :is_detail="true" @view-image="View"></header-card>
@@ -98,8 +97,13 @@
       <comment class="message-content" :comments="comment" :user_id="user_id" :main_color="main_color">
       </comment>
 
+
     </div>
 
+  </div>
+  <!--加载动画组件：小圆点-->
+  <div v-if="$loadingRouteData" class="loading-area">
+    <pulse-loader color="rgb(38, 162, 255)" size="12px"></pulse-loader>
   </div>
 </template>
 <style scoped>
@@ -175,6 +179,11 @@
   .comment-number .number{
     margin-left: 20px;
   }
+  .loading-area {
+    display: flex;
+    justify-content: center;;
+    margin-top: 200px;
+  }
 
 </style>
 <script type="text/ecmascript-6">
@@ -186,13 +195,15 @@
   import MenuIcon from 'svg/common/Menu.vue';
   import helper from '../../util/demand_helper.js';
   import {now} from 'filter/time.js';
+  import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   export default{
     components: {
       Comment,
       HeaderCard,
       PhotosWipe,
       SendChatIcon,
-      MenuIcon
+      MenuIcon,
+      PulseLoader
     },
 
 
