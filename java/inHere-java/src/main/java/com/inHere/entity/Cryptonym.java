@@ -4,8 +4,13 @@ public class Cryptonym {
     private Integer id;
 
     private String name;
+    
+    public Cryptonym(String name) {
+		super();
+		this.name = name;
+	}
 
-    public Integer getId() {
+	public Integer getId() {
         return id;
     }
 

@@ -3,6 +3,7 @@ package com.inHere.service;
 import java.io.IOException;
 
 import com.inHere.dto.ParamsListDto;
+import com.inHere.dto.ReturnDemandDto;
 import com.inHere.dto.ReturnListDto;
 
 /**
@@ -21,5 +22,13 @@ public interface DemandService {
 	 * @throws IOException
 	 */
 	public ReturnListDto getList(ParamsListDto params) throws IOException;
+
+	/**
+	 * 获取一条有求必应
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public ReturnDemandDto selectOneById(Integer id) throws IOException;
 
 }

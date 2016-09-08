@@ -3,25 +3,18 @@ package com.inHere.entity;
 import java.util.Date;
 
 public class Comment {
-    private Integer id;
-
-    private Integer extType;
-
-    private Integer recordId;
-
-    private String content;
-
-    private String userId;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private String low;
-
-    private String praise;
-
-    private Integer floor;
+	
+    private Integer id;// 实体编号
+    private Integer extType;//栏目类别
+    private Integer recordId;//记录编号
+    private String content;//评论内容
+    private String userId;//用户编号
+    private String name;//匿名
+    private Date createTime;//创建时间
+    private Date updateTime;//更新时间
+    private String low;//踩用户列表
+    private String praise;//赞用户列表
+    private Integer floor;//楼层
 
     public Integer getId() {
         return id;
@@ -55,7 +48,15 @@ public class Comment {
         this.content = content == null ? null : content.trim();
     }
 
-    public String getUserId() {
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUserId() {
         return userId;
     }
 
@@ -102,4 +103,12 @@ public class Comment {
     public void setFloor(Integer floor) {
         this.floor = floor;
     }
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", extType=" + extType + ", recordId=" + recordId + ", content=" + content
+				+ ", userId=" + userId + ", name=" + name + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", low=" + low + ", praise=" + praise + ", floor=" + floor + "]";
+	}
+    
 }
