@@ -4,7 +4,8 @@
 import MockJs from 'mockjs';
 import UserCryptonym from './user_cryptonym.js'
 let Random=MockJs.Random;
-import {selectOneRandomUser } from './user.js'
+import {selectOneRandomUser,UserIdList } from './user.js'
+
 export default{
   //生成num条虚假评论
   genFakeComment(num){

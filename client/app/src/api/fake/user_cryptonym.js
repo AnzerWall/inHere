@@ -5,7 +5,7 @@ import MockJs from 'mockjs';
 let Random=MockJs.Random;
 import {UserList,UserIdList } from './user.js'
 
-let cryptonymList=[];
+let cryptonymList={};
 for(var id of UserIdList){
   cryptonymList[id]={
     id:id,
