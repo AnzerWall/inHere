@@ -2,105 +2,125 @@ package com.inHere.entity;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 有求必应实体
+ * 
+ * @author Administrator
+ *
+ */
 public class Demand {
-    private Integer id;
 
-    private Integer extType;
+	private Integer id;
+	private Integer extType;
+	private String extData;
+	private String text;
+	private String photos;
+	private Integer isEnd;
+	private String userId;
+	private Date createTime;
+	private Date updateTime;
+	private String praise;
 
-    private String extData;
+	// 评论列表
+	private List<Comment> comments;
 
-    private String text;
+	public List<Comment> getComments() {
+		return comments;
+	}
 
-    private String photos;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
 
-    private Integer isEnd;
+	public Integer getId() {
+		return id;
+	}
 
-    private String userId;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private Date createTime;
+	public Integer getExtType() {
+		return extType;
+	}
 
-    private Date updateTime;
+	public void setExtType(Integer extType) {
+		this.extType = extType;
+	}
 
-    private String praise;
+	public String getExtData() throws IOException {
+		return new String(extData.getBytes("ISO-8859-1"), "UTF-8");
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setExtData(String extData) {
+		this.extData = extData == null ? null : extData.trim();
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public Integer getExtType() {
-        return extType;
-    }
+	public void setText(String text) {
+		this.text = text == null ? null : text.trim();
+	}
 
-    public void setExtType(Integer extType) {
-        this.extType = extType;
-    }
+	public String getPhotos() throws IOException {
+		photos = photos == null ? null : new String(photos.getBytes("ISO-8859-1"), "UTF-8");
+		return photos;
+	}
 
-    public String getExtData() throws IOException {
-        return new String(extData.getBytes("ISO-8859-1"), "UTF-8");
-    }
+	public void setPhotos(String photos) {
+		this.photos = photos == null ? null : photos.trim();
+	}
 
-    public void setExtData(String extData) {
-        this.extData = extData == null ? null : extData.trim();
-    }
+	public Integer getIsEnd() {
+		return isEnd;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public void setIsEnd(Integer isEnd) {
+		this.isEnd = isEnd;
+	}
 
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    public String getPhotos() {
-        return photos;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
 
-    public void setPhotos(String photos) {
-        this.photos = photos == null ? null : photos.trim();
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Integer getIsEnd() {
-        return isEnd;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setIsEnd(Integer isEnd) {
-        this.isEnd = isEnd;
-    }
+	public Date getUpdateTime() {
+		return updateTime == null ? createTime : updateTime;
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
+	public String getPraise() throws IOException {
+		praise = praise == null ? null : new String(praise.getBytes("ISO-8859-1"), "UTF-8");
+		return praise;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setPraise(String praise) {
+		this.praise = praise == null ? null : praise.trim();
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	@Override
+	public String toString() {
+		return "Demand [id=" + id + ", extType=" + extType + ", extData=" + extData + ", text=" + text + ", photos="
+				+ photos + ", isEnd=" + isEnd + ", userId=" + userId + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + ", praise=" + praise + ", comments=" + comments + "]";
+	}
 
-    public Date getUpdateTime() {
-        return updateTime == null ? createTime : updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getPraise() {
-        return praise;
-    }
-
-    public void setPraise(String praise) {
-        this.praise = praise == null ? null : praise.trim();
-    }
 }

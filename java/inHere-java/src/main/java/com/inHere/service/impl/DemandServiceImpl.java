@@ -67,6 +67,23 @@ public class DemandServiceImpl implements DemandService {
 	}
 
 	/**
+	 * 获取一条有求必应
+	 * 
+	 * @param id
+	 * @return
+	 * @throws IOException 
+	 */
+	public ReturnDemandDto selectOneById(Integer id) throws IOException {
+		Demand demand = demandMapper.selectOneById(id);
+		if (demand == null) {
+			return null;
+		} else {
+			log.info(demand.getComments());
+			return null;
+		}
+	}
+
+	/**
 	 * 设置各类型Items
 	 * 
 	 * @param listDto
