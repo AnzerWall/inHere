@@ -22,9 +22,30 @@
         ></div>
         {{item.count}}人评论了你
       </div>
-
       <div class="m-message padding2">{{item.message}}</div>
     </div>
+    <!--我的小纸条-->
+    <div class="my-div" v-if="item.messType==='chat'">
+      <!--更多小纸条-->
+      <div class="m-title bold " v-if="item.mess==='more'">
+        <div class="photo round  chat-color"
+        ></div>
+        ({{item.count}}){{item.mainMessage}}
+      </div>
+      <!--新的小纸条-->
+      <div class="m-title bold " v-if="item.mess==='n-ew'">
+        <div class="photo round  chat-color"
+        ></div>
+       {{item.mainMessage}}
+      </div>
+
+      <!--阅读过的小纸条（默认）-->
+      <div class="m-title bold chat-gray" v-if="item.mess==='general'">
+        {{item.mainMessage}}
+      </div>
+      <div class="m-message padding2 chat-gray">{{item.message}}</div>
+    </div>
+
   </div>
 </template>
 <style src="./message-card.css" scoped>

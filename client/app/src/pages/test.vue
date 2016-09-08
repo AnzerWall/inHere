@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div v-if="$loadingRouteData ">
-        加载中...
-    </div>
-    <div v-if="!$loadingRouteData ">
-      {{detail}}
-    </div>
+
   </div>
 
 </template>
@@ -17,22 +12,24 @@
   export default{
     route: {
       data(){
-//        //访问路由对象，获取路由id
-//        var id=this.$route.params.id;
-//
-//        return this.$api
-//          .get("/demand/"+id)
-//          .then(function (res) {
-//              return Promise.resolve({ detail: res.body.data })
-//           })
+        return this.$request
+          .get("/demand")
+          .then(this.$api.checkResult)
+          .then((data)=>{
+            console.log(data);
+          })
+          .then(()=>{
+            return  this.$request
+              .get("/demand/1")
+              .then(this.$api.checkResult)
+              .then((data)=>{
+                console.log(data);
+              })
 
+          });
 
-      }
-    },
-    data(){
-      return{
-        detail:{}
       }
     }
+
   }
 </script>

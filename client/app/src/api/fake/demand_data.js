@@ -5,6 +5,7 @@ import  moment from 'moment'
 
 import MockJs from 'mockjs';
 let Random=MockJs.Random;
+import {selectOneRandomUser } from './user.js'
 //1 express
 // 2 sell
 //3 help
@@ -19,9 +20,8 @@ export default [
     ext_data: {		//私有属性
       pay: 3//酬金
     },
-    user_id:Random.integer(1,10),
-    praise: 1,
-    praised:true,
+    user_id:selectOneRandomUser(),
+
     photos: [],
     is_end: 0,
     text: "求帮拿个快递。。。f1  3块有人愿意吗",
@@ -34,9 +34,8 @@ export default [
     ext_data: {		//私有属性
       pay: 5//酬金
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
     photos: [],
     is_end: 1,
     text: "谁帮我那个快递到厚德书院啊，5块钱，直接悄悄话我",
@@ -52,27 +51,29 @@ export default [
       buy_time: moment("2016-8-1 0:00", "YYYY-MM-DD HH:mm").valueOf(),
       original_price: 89
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
 
     photos: [
       {
 
         src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
         w: 360,
-        h: 480
+        h: 480,
+        min:''
 
       },
       {
         src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
         w: 690,
-        h: 920
+        h: 920,
+        min:''
       },
       {
         src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
         w: 360,
-        h: 480
+        h: 480,
+        min:''
       }
     ],
     is_end: 0,
@@ -84,12 +85,12 @@ export default [
     id: 4,
     ext_type: 3,
     ext_data: {		//私有属性
-
+      pay: 5
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
+    user_id:selectOneRandomUser(),
+
     photos: [],
-    praised:false,
+
 
     is_end: 0,
     text: "谁能帮嘉彦妹纸我打个饭",
@@ -100,11 +101,11 @@ export default [
     id: 5,
     ext_type: 4,
     ext_data: {
-      thing: "银行卡"
+      thing: "银行卡",
+      lose_time:moment("2016-8-23 10:25", "YYYY-MM-DD HH:mm").valueOf()
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
     photos: [{
       src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f5exrm7glwj20qo0zkq55.jpg',
       w: 360,
@@ -119,11 +120,11 @@ export default [
     id: 6,
     ext_type: 5,
     ext_data: {		//私有属性
-      thing: "苹果"//酬金
+      thing: "苹果",//酬金
+      pick_time: "捡到时间"
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
 
     photos: [],
     is_end: 1,
@@ -135,16 +136,15 @@ export default [
     id: 7,
     ext_type: 6,
     ext_data: {		//私有属性
-      money: 55,//预计消费
       want_sex: 2,
-      address: "北岭山",
       start_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf(),
-      wait_location: "后山商业街",
-      end_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf()
+      gathering_place: "后山商业街",
+      place: "北岭山",
+      praise: 0,
+      praised:false,
+      per_cost: 55//预计消费
     },
-    user_id:Random.integer(1,10),
-    praise: 0,
-    praised:false,
+    user_id:selectOneRandomUser(),
 
     photos: [],
     is_end: 0,
@@ -156,17 +156,21 @@ export default [
     id: 8,
     ext_type: 6,
     ext_data: {		//私有属性
-      money: 0,//预计消费
       want_sex: 1,
-      address: "玩具厂",
       start_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf(),
-      wait_location: "校门口",
-      end_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf()
+      gathering_place: "校门口",
+      place: "玩具厂",
+      praise: 0,
+      praised:false,
+      per_cost: 0//预计消费
+
+
+
+
 
     },
-    user_id:Random.integer(1,10),
-    praise: 23,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
 
     photos: [],
     is_end: 0,
@@ -178,17 +182,17 @@ export default [
     id: 9,
     ext_type: 6,
     ext_data: {		//私有属性
-      money: 55,//预计消费
       want_sex: 2,
-      address: "下午F栋篮球场",
+      start_time: moment("2016-8-23 15:25", "YYYY-MM-DD HH:mm").valueOf(),
+      gathering_place: "F栋篮球场",
+      place: "F栋篮球场",
+      praise: 0,
+      praised:false,
+      per_cost: 0//预计消费
 
-      start_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf(),
-      wait_location: "F栋门口",
-      end_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf()
     },
-    user_id:Random.integer(1,10),
-    praise: 15,
-    praised:false,
+    user_id:selectOneRandomUser(),
+
     photos: [],
     is_end: 1,
     text: "打波？",
