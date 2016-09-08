@@ -15,11 +15,57 @@
 		<result column="praise" property="praise" jdbcType="CHAR" />
 	</resultMap>
 
+	<resultMap type="Demand" id="IncludeCommentsResultMap">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ext_type" property="extType" jdbcType="INTEGER" />
+		<result column="ext_data" property="extData" jdbcType="CHAR" />
+		<result column="text" property="text" jdbcType="VARCHAR" />
+		<result column="photos" property="photos" jdbcType="CHAR" />
+		<result column="is_end" property="isEnd" jdbcType="TINYINT" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="praise" property="praise" jdbcType="CHAR" />
+		<!-- 评论列表 -->
+		<collection property="comments" ofType="Comment">
+			<id column="id" property="id" jdbcType="INTEGER" />
+			<result column="ext_type" property="extType" jdbcType="INTEGER" />
+			<result column="record_id" property="recordId" jdbcType="INTEGER" />
+			<result column="content" property="content" jdbcType="VARCHAR" />
+			<result column="user_id" property="userId" jdbcType="VARCHAR" />
+			<result column="name" property="name" jdbcType="VARCHAR" />
+			<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+			<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+			<result column="low" property="low" jdbcType="CHAR" />
+			<result column="praise" property="praise" jdbcType="CHAR" />
+			<result column="floor" property="floor" jdbcType="INTEGER" />
+		</collection>
+	</resultMap>
+
 	<sql id="Base_Column_List">
-		id, ext_type, ext_data, text, photos, is_end, user_id,
+		id ,
+		ext_type,
+		ext_data,
+		text,
+		photos,
+		is_end,
+		user_id,
 		create_time,
 		update_time,
 		praise
+	</sql>
+
+	<sql id="Demand_Column_alias">
+		id demand_id,
+		ext_type demand_ext_type,
+		ext_data demand_ext_data,
+		text demand_text,
+		photos demand_photos,
+		is_end demand_,
+		user_id demand_,
+		create_time demand_,
+		update_time demand_,
+		praise demand_
 	</sql>
 
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -142,10 +188,14 @@
 	<select id="selectByParams" parameterType="ParamsListDto"
 		resultMap="BaseResultMap">
 		select d.*
-		from tb_demand d, tb_user u
+		from tb_demand d
+		<if test="user != null">
+			, tb_user u
+		</if>
 		<where>
 			<if test="user != null">
-				d.`user_id` = u.`user_id` and u.`school_id` = #{user.schoolId}
+				d.`user_id` = u.`user_id` and u.`school_id` =
+				#{user.schoolId}
 			</if>
 			<if test="ext_type != null">
 				<foreach collection="ext_type" item="item" open="AND d.`ext_type` in("
@@ -160,6 +210,8 @@
 				AND d.`user_id` = #{creator}
 			</if>
 		</where>
+
+		<!-- ${}需要做参数转换，有sql注入危险 -->
 		<if test="order_by != null and order != null">
 			order by d.`${order_by}` ${order}
 		</if>
@@ -170,21 +222,38 @@
 
 	<!-- 获取总条数 -->
 	<select id="getCount" parameterType="ParamsListDto" resultType="Integer">
-		SELECT COUNT(id) FROM tb_demand
+		SELECT COUNT(d.`id`) FROM tb_demand d
+		<if test="user != null">
+			, tb_user u
+		</if>
 		<where>
+			<if test="user != null">
+				d.`user_id` = u.`user_id` and u.`school_id` =
+				#{user.schoolId}
+			</if>
 			<if test="ext_type != null">
-				<foreach collection="ext_type" item="item" open="AND ext_type in("
+				<foreach collection="ext_type" item="item" open="AND d.`ext_type` in("
 					close=")" separator=",">
 					#{item}
 				</foreach>
 			</if>
 			<if test="is_end != null">
-				AND is_end = #{is_end}
+				AND d.`is_end` = #{is_end}
 			</if>
 			<if test="creator != null">
-				AND user_id = #{creator}
+				AND d.`user_id` = #{creator}
 			</if>
 		</where>
+	</select>
+
+	<!-- 通过ID获取一条需求 -->
+	<select id="selectOneById" resultMap="IncludeCommentsResultMap">
+		SELECT
+		d.*, c.*
+		FROM
+		tb_demand d, tb_comment c
+		WHERE d.`id` = #{id} AND d.`ext_type` =
+		c.`ext_type`
 	</select>
 
 </mapper>

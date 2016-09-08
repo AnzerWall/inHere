@@ -1,33 +1,34 @@
 package com.inHere.entity;
 
 public class AskReplyUser {
-    private Integer id;
 
-    private String userId;
+	private Integer id;
 
-    private Integer askReplyId;
+	private String userId;
 
-    public Integer getId() {
-        return id;
-    }
+	private Integer askReplyId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    public Integer getAskReplyId() {
-        return askReplyId;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
 
-    public void setAskReplyId(Integer askReplyId) {
-        this.askReplyId = askReplyId;
-    }
+	public Integer getAskReplyId() {
+		return askReplyId;
+	}
+
+	public void setAskReplyId(Integer askReplyId) {
+		this.askReplyId = askReplyId;
+	}
 }
