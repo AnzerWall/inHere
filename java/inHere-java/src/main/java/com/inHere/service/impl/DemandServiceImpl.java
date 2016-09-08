@@ -53,7 +53,7 @@ public class DemandServiceImpl implements DemandService {
 
 		// 获取总条数
 		Integer total = demandMapper.getCount(params);
-		Integer total_page = total / params.getLimit();
+		Integer total_page = (total / params.getLimit()) + 1;
 		listDto.setPage(page);
 		listDto.setPage_size(page_size);
 		listDto.setLimit(params.getLimit());

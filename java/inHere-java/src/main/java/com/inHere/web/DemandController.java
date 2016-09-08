@@ -12,6 +12,7 @@ import com.inHere.constant.Code;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnListDto;
+import com.inHere.entity.User;
 import com.inHere.service.DemandService;
 import com.inHere.validator.DemandValidator;
 import com.inHere.validator.Params;
@@ -34,6 +35,13 @@ public class DemandController {
 		ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<ReturnListDto>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
+		
+		// TODO 去掉测试模块，完成业务
+		User user = new User();
+		user.setUserId("ni_menhao");
+		user.setSchoolId(1);
+		params.setUser(user);
+		
 		result.setData(demandService.getList(params));
 		return result;
 	}

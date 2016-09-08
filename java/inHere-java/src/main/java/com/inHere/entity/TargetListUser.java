@@ -9,9 +9,9 @@ public class TargetListUser {
 
     private Double process;
 
-    private Byte hasGiveUp;
+    private Integer hasGiveUp;
 
-    private Byte isPass;
+    private Integer isPass;
 
     public Integer getId() {
         return id;
@@ -45,19 +45,19 @@ public class TargetListUser {
         this.process = process;
     }
 
-    public Byte getHasGiveUp() {
+    public Integer getHasGiveUp() {
         return hasGiveUp;
     }
 
-    public void setHasGiveUp(Byte hasGiveUp) {
+    public void setHasGiveUp(Integer hasGiveUp) {
         this.hasGiveUp = hasGiveUp;
     }
 
-    public Byte getIsPass() {
+    public Integer getIsPass() {
         return isPass;
     }
 
-    public void setIsPass(Byte isPass) {
+    public void setIsPass(Integer isPass) {
         this.isPass = isPass;
     }
 }

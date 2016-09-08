@@ -1,11 +1,13 @@
-insert  into tb_user(user_id, passwd, salt_key, head_img, contact_way, user_sex, user_area, user_school, role_id, create_time, update_time) 
+insert  into `tb_user`
+(`user_id`,`passwd`,`salt_key`,`user_name`,`head_img`,`contact_way`,`sex`,`area`,`school_id`,`role_id`,`create_time`,`update_time`) 
 values 
-('anzcrwall','a1395cd7c963fad9647491b0f6116e44bba247c6acfb33d90fd070840a4f8986','506892fe4ec04169925795d24b7db05c',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL),
-('kenefe','40634bbadd4a06331835b64adf936c99a6dd69f458b9c1c0fab5db3113d654e0','49d16e1b403940b58d53faf20b074d92',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL),
-('LisaChan','fbef8dea6b8e41612eac6e76e56fe74e6eda1c5754e24a59c88f7c79910b1a56','3c7e03863203476695e759478a0f339d',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL),
-('LLB','baa669b97f1e2f8572e0ba9c6af6293d346efb1f320744fdabbf0488353c7196','91b48aa7fc564c5c8bcd4f4b717b7115',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL),
-('ni_menhao','62ec7c0cde5d74b3de38522781a66e7433ea7662551d610b007b0682aa81c99b','00a2146e966d4035b8148ff348525dac',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL),
-('yibiao','95855389d40bd320bb24bbf35d4fccad3b3ebe1f1df0aeeac1b90ce32e155c34','ee254f4d96ee48bea244ee101808ffa6',NULL,NULL,NULL,NULL,NULL, 1,NULL,NULL);
+('anzcrwall','a1395cd7c963fad9647491b0f6116e44bba247c6acfb33d90fd070840a4f8986','506892fe4ec04169925795d24b7db05c',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+('kenefe','40634bbadd4a06331835b64adf936c99a6dd69f458b9c1c0fab5db3113d654e0','49d16e1b403940b58d53faf20b074d92',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+('LisaChan','fbef8dea6b8e41612eac6e76e56fe74e6eda1c5754e24a59c88f7c79910b1a56','3c7e03863203476695e759478a0f339d',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+('LLB','baa669b97f1e2f8572e0ba9c6af6293d346efb1f320744fdabbf0488353c7196','91b48aa7fc564c5c8bcd4f4b717b7115',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+('ni_menhao','62ec7c0cde5d74b3de38522781a66e7433ea7662551d610b007b0682aa81c99b','00a2146e966d4035b8148ff348525dac',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL),
+('yibiao','95855389d40bd320bb24bbf35d4fccad3b3ebe1f1df0aeeac1b90ce32e155c34','ee254f4d96ee48bea244ee101808ffa6',NULL,NULL,NULL,NULL,NULL,NULL,1,NULL,NULL);
+
 
 
 INSERT  INTO tb_comment 
@@ -20,6 +22,7 @@ VALUES
 (8, 6, 6,'残汁剩骨筹新宴， 落月西风送旧辰。', 'yibiao', NOW(),NULL,NULL,NULL,NULL),
 (9, 6, 6,'残汁剩骨筹新宴， 落月西风送旧辰。', 'yibiao', NOW(),NULL,NULL,NULL,NULL),
 (10, 6, 6,'残汁剩骨筹新宴， 落月西风送旧辰。', 'yibiao', NOW(),NULL,NULL,NULL,NULL);
+
 
 
 --  初始化标签库

@@ -17,7 +17,7 @@ public class Activity {
 
     private String coverImg;
 
-    private Byte urlType;
+    private Integer urlType;
 
     private String userId;
 
@@ -85,11 +85,11 @@ public class Activity {
         this.coverImg = coverImg == null ? null : coverImg.trim();
     }
 
-    public Byte getUrlType() {
+    public Integer getUrlType() {
         return urlType;
     }
 
-    public void setUrlType(Byte urlType) {
+    public void setUrlType(Integer urlType) {
         this.urlType = urlType;
     }
 

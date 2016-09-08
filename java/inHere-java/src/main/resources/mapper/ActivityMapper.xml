@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="ext_type" property="extType" jdbcType="INTEGER" />
-    <result column="ext_data" property="extData" jdbcType="VARCHAR" />
+    <result column="ext_data" property="extData" jdbcType="CHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
     <result column="cover_img" property="coverImg" jdbcType="VARCHAR" />
@@ -44,7 +44,7 @@
       create_time, update_time, praise, 
       url_content)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{extType,jdbcType=INTEGER}, 
-      #{extData,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{extData,jdbcType=CHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{coverImg,jdbcType=VARCHAR}, #{urlType,jdbcType=TINYINT}, #{userId,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{praise,jdbcType=CHAR}, 
       #{urlContent,jdbcType=LONGVARCHAR})
@@ -103,7 +103,7 @@
         #{extType,jdbcType=INTEGER},
       </if>
       <if test="extData != null" >
-        #{extData,jdbcType=VARCHAR},
+        #{extData,jdbcType=CHAR},
       </if>
       <if test="startTime != null" >
         #{startTime,jdbcType=TIMESTAMP},
@@ -144,7 +144,7 @@
         ext_type = #{extType,jdbcType=INTEGER},
       </if>
       <if test="extData != null" >
-        ext_data = #{extData,jdbcType=VARCHAR},
+        ext_data = #{extData,jdbcType=CHAR},
       </if>
       <if test="startTime != null" >
         start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -180,7 +180,7 @@
     update tb_activity
     set title = #{title,jdbcType=VARCHAR},
       ext_type = #{extType,jdbcType=INTEGER},
-      ext_data = #{extData,jdbcType=VARCHAR},
+      ext_data = #{extData,jdbcType=CHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       cover_img = #{coverImg,jdbcType=VARCHAR},
@@ -196,7 +196,7 @@
     update tb_activity
     set title = #{title,jdbcType=VARCHAR},
       ext_type = #{extType,jdbcType=INTEGER},
-      ext_data = #{extData,jdbcType=VARCHAR},
+      ext_data = #{extData,jdbcType=CHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       cover_img = #{coverImg,jdbcType=VARCHAR},

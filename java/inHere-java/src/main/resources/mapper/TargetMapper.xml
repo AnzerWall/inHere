@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.TargetMapper" >
-
   <resultMap id="BaseResultMap" type="com.inHere.entity.Target" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="text" property="text" jdbcType="VARCHAR" />
     <result column="ext_type" property="extType" jdbcType="INTEGER" />
-    <result column="ext_data" property="extData" jdbcType="VARCHAR" />
+    <result column="ext_data" property="extData" jdbcType="CHAR" />
     <result column="has_finish" property="hasFinish" jdbcType="TINYINT" />
     <result column="target_list_id" property="targetListId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -32,7 +31,7 @@
       target_list_id, create_time, update_time
       )
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{text,jdbcType=VARCHAR}, 
-      #{extType,jdbcType=INTEGER}, #{extData,jdbcType=VARCHAR}, #{hasFinish,jdbcType=TINYINT}, 
+      #{extType,jdbcType=INTEGER}, #{extData,jdbcType=CHAR}, #{hasFinish,jdbcType=TINYINT}, 
       #{targetListId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -81,7 +80,7 @@
         #{extType,jdbcType=INTEGER},
       </if>
       <if test="extData != null" >
-        #{extData,jdbcType=VARCHAR},
+        #{extData,jdbcType=CHAR},
       </if>
       <if test="hasFinish != null" >
         #{hasFinish,jdbcType=TINYINT},
@@ -110,7 +109,7 @@
         ext_type = #{extType,jdbcType=INTEGER},
       </if>
       <if test="extData != null" >
-        ext_data = #{extData,jdbcType=VARCHAR},
+        ext_data = #{extData,jdbcType=CHAR},
       </if>
       <if test="hasFinish != null" >
         has_finish = #{hasFinish,jdbcType=TINYINT},
@@ -132,7 +131,7 @@
     set title = #{title,jdbcType=VARCHAR},
       text = #{text,jdbcType=VARCHAR},
       ext_type = #{extType,jdbcType=INTEGER},
-      ext_data = #{extData,jdbcType=VARCHAR},
+      ext_data = #{extData,jdbcType=CHAR},
       has_finish = #{hasFinish,jdbcType=TINYINT},
       target_list_id = #{targetListId,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},

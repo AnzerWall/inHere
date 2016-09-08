@@ -1,6 +1,6 @@
 <template>
     <div>
-小纸条列表页面
+<div class="chat-head"></div>
     </div>
 </template>
 <style>

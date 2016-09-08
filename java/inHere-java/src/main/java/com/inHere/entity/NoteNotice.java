@@ -19,7 +19,7 @@ public class NoteNotice {
 
     private String title;
 
-    private Byte contentType;
+    private Integer contentType;
 
     private String content;
 
@@ -27,7 +27,7 @@ public class NoteNotice {
 
     private Date updateTime;
 
-    private Byte hasRead;
+    private Integer hasRead;
 
     public Integer getId() {
         return id;
@@ -93,11 +93,11 @@ public class NoteNotice {
         this.title = title == null ? null : title.trim();
     }
 
-    public Byte getContentType() {
+    public Integer getContentType() {
         return contentType;
     }
 
-    public void setContentType(Byte contentType) {
+    public void setContentType(Integer contentType) {
         this.contentType = contentType;
     }
 
@@ -125,11 +125,11 @@ public class NoteNotice {
         this.updateTime = updateTime;
     }
 
-    public Byte getHasRead() {
+    public Integer getHasRead() {
         return hasRead;
     }
 
-    public void setHasRead(Byte hasRead) {
+    public void setHasRead(Integer hasRead) {
         this.hasRead = hasRead;
     }
 }

@@ -1,9 +1,10 @@
-div{
-  background-color:#FAFAFA;
+div {
+  background-color: #FAFAFA;
 }
+
 .notice-div, .my-div {
   padding: 20px 20px 20px 20px;
-  border-bottom: 1px solid rgba(213,213,213,.5);
+  border-bottom: 1px solid rgba(213, 213, 213, .5);
   z-index: 2;
 }
 
@@ -19,21 +20,24 @@ div{
   font-weight: bold;
 }
 
-.n-title{
+.n-title {
   position: relative;
   margin: 24px;
 }
 
- .m-title{
-   position: relative;
-   margin-left:20px ;
- }
-  .photo {
+.m-title {
+  position: relative;
+  margin-left: 20px;
+}
+
+.photo {
   padding: 0;
   margin: 0;
   position: absolute;
   right: 100%;
   margin-right: 8px;
+  top: 50%;
+  transform: translateY(-50%)
 
 }
 
@@ -43,8 +47,7 @@ div{
   border-radius: 12px;
 }
 
-
-.n-message{
+.n-message {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -53,7 +56,8 @@ div{
   vertical-align: middle;
 
 }
-.m-message{
+
+.m-message {
   margin-left: 20px;
   overflow: hidden;
   text-overflow: ellipsis;
