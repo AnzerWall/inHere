@@ -3,7 +3,7 @@
     <!--头部-->
     <div class="response-header">
       <div class="head" >
-        <div class="head-left">
+        <div class="head-left" @click="back">
           <div class="head-message" >《 &nbsp;{{chinese(data.ext_type)}}</div>
         </div>
         <div class="head-right" >
@@ -211,6 +211,9 @@
       View(index, photos){
         this.$refs.viewer.show(index, photos);
       },
+      back(){
+        window.history.back();
+      },
       chinese(type){
         switch (type) {
           case this.TYPE_EXPRESS:
@@ -266,30 +269,7 @@
         TYPE_HELP:3,
         TYPE_FOUND:5,
         TYPE_LOST:4,
-        TYPE_DATING:6,
-
-
-
-
-
-
-//        list: [{
-//          tag: '1',
-//          create_time: moment("2016-8-23 9:25", "YYYY-MM-DD HH:mm").valueOf(),
-//          floor: '1',
-//          text: '这个妹子好漂亮!',
-//          color: "#FFC107"
-//        },
-//          {
-//            tag: '2',
-//            name: '小泽',
-//            create_time: moment("2016,9,6 16:50", "YYYY,MM,DD HH:mm").valueOf(),
-//            floor: '2',
-//            text: '这个妹子好漂亮!',
-//            color: "#FFC107"
-//          }
-
-//        ]
+        TYPE_DATING:6
       }
     },
     computed: {
