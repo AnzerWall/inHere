@@ -1,18 +1,165 @@
 <template>
-  <div>
+  <div class="square-wrapper">
+    <div class="square-container">
+      <!--社团活动入口-->
+      <div class="square-activity" :style="{'background-image': 'url('+activity.imgUrl+')'}">
+        <div class="activity-content-bg"></div>
+        <div class="activity-content">
+          <div class="square-activity-tittle">{{activity.tittle}}</div>
+          <span>@{{activity.organization}}&nbsp;&nbsp;&nbsp;&nbsp;{{activity.start_time}} ~ {{activity.end_time}}</span>
+        </div>
+      </div>
 
-    <div>我的页面</div>
+      <!--有。必。栏目-->
+      <div>
+        <div class="square-item" >
+          <!--:style="color:itemColor.color1"-->
+          <span class="square-item-tittle">* 有诺必行</span>
+          <span>进入</span>
+        </div>
+        <square-slider :topics ="items[0].topic"></square-slider>
+      </div>
 
+
+      <div>
+        <div class="square-item">
+          <span class="square-item-tittle">* 有问必答</span>
+          <span>进入</span>
+        </div>
+        <square-slider :topics="items[1].topic"></square-slider>
+        <div>
+          <p>{{items[1].question}}</p>
+          <p>{{items[1].answer}}</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="square-item">
+          <span class="square-item-tittle">* 有嘈必吐</span>
+          <span>进入</span>
+        </div>
+        <square-slider :topics="items[2].topic"></square-slider>
+        <div>
+          <p>{{items[2].question}}</p>
+          <p>{{items[2].answer}}</p>
+        </div>
+      </div>
+
+      <div>深 夜 食 堂</div>
+
+    </div>
   </div>
 </template>
 <style scoped>
 
-</style>
-<script>
-
-  export default{
-
+  .square-wrapper{
+    font-size: 15px;
   }
+  .square-container{
+    width:100%;
+  }
+  .square-activity{
+    position: relative;
+    width: 100%;
+    height: 238px;
+    /*background-image: url("http://ww1.sinaimg.cn/mw690/6f924588gw1f32g8p67w6j20qo123wjv.jpg");*/
+    background-size: cover;
+    background-position: center;
+  }
+  .activity-content, .activity-content-bg{
+    height: 47px;
+    position: absolute;
+    bottom: 0px;
+    padding: 30px 0 15px 0;
+    color: white;
+  }
+  .activity-content{
+    padding-left: 15px;
+  }
+  .activity-content-bg{
+    width: 100%;
+    opacity: 0.75;
+    background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  }
+  .square-activity-tittle{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .square-item{
+    /*width:100%;*/
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: 15px;
+  }
+</style>
+<script type="text/ecmascript-6">
+  import squareSlider from '../../components/square-slider/slider.vue'
+export default{
+  data:function (){
+    return{
+//      itemColor:{
+//        color1:"green",
+//        color2:"blue",
+//        color3:"purple"
+//      },
+      activity:{
+        imgUrl:'http://ww1.sinaimg.cn/mw690/6f924588gw1f32g8p67w6j20qo123wjv.jpg',
+        tittle:"小清新电影《一半》正在上映",
+        organization:"影视文化协会",
+        start_time:"2016-7-12",
+        end_time:"2016-8-31"
+      },
+      items:[
+        {
+          topic:[
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"}
+          ]
+        },
+        {
+          topic:[
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"}
+          ],
+          question:"你们的饭堂有什么奇葩的菜式?",
+          answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑 ..."
+        },
+        {
+          topic:[
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"},
+            {message:"说说那些年做过的最尴尬的事情"},
+            {message:"你们饭堂有什么奇葩的菜式"}
+          ],
+          question:"你的坑爹室友做过哪些让你意想不到的事情？",
+          answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑 ..."
+        }
+      ]
+    }
+  },
+  components:{
+    squareSlider
+  }
+}
 </script>
 
 
