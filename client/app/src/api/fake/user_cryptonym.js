@@ -3,11 +3,15 @@
  */
 import MockJs from 'mockjs';
 let Random=MockJs.Random;
-let users=[];
-for(let i=1;i<=10;i++){
-  users.push({
-    id:i,
+import {UserList,UserIdList } from './user.js'
+
+let cryptonymList=[];
+for(var id of UserIdList){
+  cryptonymList[id]={
+    id:id,
     cryptonym:Random.cword(3)
-  })
+  };
+
+
 }
-export default users;
+export default cryptonymList;
