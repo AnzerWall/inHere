@@ -3,123 +3,113 @@ package com.inHere.entity;
 import java.util.Date;
 
 public class User {
-    private String userId;
 
-    private String passwd;
+	private String userId;
+	private String passwd;
+	private String saltKey;
+	private String userName;
+	private String headImg;
+	private String contactWay;
+	private Boolean sex;
+	private String area;
+	private Integer schoolId;
+	private Integer roleId;
+	private Date createTime;
+	private Date updateTime;
 
-    private String saltKey;
+	public String getUserId() {
+		return userId;
+	}
 
-    private String userName;
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
 
-    private String headImg;
+	public String getPasswd() {
+		return passwd;
+	}
 
-    private String contactWay;
+	public void setPasswd(String passwd) {
+		this.passwd = passwd == null ? null : passwd.trim();
+	}
 
-    private Boolean sex;
+	public String getSaltKey() {
+		return saltKey;
+	}
 
-    private String area;
+	public void setSaltKey(String saltKey) {
+		this.saltKey = saltKey == null ? null : saltKey.trim();
+	}
 
-    private Integer schoolId;
+	public String getUserName() {
+		return userName;
+	}
 
-    private Integer roleId;
+	public void setUserName(String userName) {
+		this.userName = userName == null ? null : userName.trim();
+	}
 
-    private Date createTime;
+	public String getHeadImg() {
+		return headImg;
+	}
 
-    private Date updateTime;
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg == null ? null : headImg.trim();
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public String getContactWay() {
+		return contactWay;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
+	public void setContactWay(String contactWay) {
+		this.contactWay = contactWay == null ? null : contactWay.trim();
+	}
 
-    public String getPasswd() {
-        return passwd;
-    }
+	public Boolean getSex() {
+		return sex;
+	}
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd == null ? null : passwd.trim();
-    }
+	public void setSex(Boolean sex) {
+		this.sex = sex;
+	}
 
-    public String getSaltKey() {
-        return saltKey;
-    }
+	public String getArea() {
+		return area;
+	}
 
-    public void setSaltKey(String saltKey) {
-        this.saltKey = saltKey == null ? null : saltKey.trim();
-    }
+	public void setArea(String area) {
+		this.area = area == null ? null : area.trim();
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public Integer getSchoolId() {
+		return schoolId;
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
+	}
 
-    public String getHeadImg() {
-        return headImg;
-    }
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg == null ? null : headImg.trim();
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public String getContactWay() {
-        return contactWay;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setContactWay(String contactWay) {
-        this.contactWay = contactWay == null ? null : contactWay.trim();
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public Boolean getSex() {
-        return sex;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
-
-    public String getArea() {
-        return area;
-    }
-
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
-    }
-
-    public Integer getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(Integer schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 }

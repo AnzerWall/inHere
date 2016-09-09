@@ -4,6 +4,7 @@ CREATE DATABASE `inHere`;
 
 USE `inHere`;
 
+
 /*Table structure for table `tb_activity` */
 
 DROP TABLE IF EXISTS `tb_activity`;
@@ -35,6 +36,7 @@ CREATE TABLE `tb_ask_reply` (
   `ext_data` json DEFAULT NULL COMMENT '类别数据',
   `label_id` int(11) NOT NULL COMMENT '标签id',
   `title` varchar(100) NOT NULL COMMENT '标题',
+  `content` varchar(512) DEFAULT NULL COMMENT '内容',
   `photos` varchar(300) DEFAULT NULL COMMENT '图片',
   `comment_num` int(11) DEFAULT NULL COMMENT '评论人数',
   `user_id` varchar(100) NOT NULL COMMENT '用户id',
@@ -66,6 +68,7 @@ CREATE TABLE `tb_comment` (
   `record_id` int(11) NOT NULL COMMENT '对应表记录编号',
   `content` varchar(500) DEFAULT NULL COMMENT '评论内容',
   `user_id` varchar(100) NOT NULL COMMENT '评论者',
+  `name` varchar(128) NOT NULL COMMENT '匿名',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `low` json DEFAULT NULL COMMENT '踩用户列表',
@@ -82,7 +85,7 @@ CREATE TABLE `tb_cryptonym` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '匿名编号',
   `name` varchar(50) NOT NULL COMMENT '匿名名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8894 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tb_cryptonym_used` */
 
@@ -210,7 +213,7 @@ CREATE TABLE `tb_school` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '学校编号',
   `school` varchar(256) NOT NULL COMMENT '学校名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tb_target` */
 
@@ -338,4 +341,3 @@ CREATE TABLE `tb_user` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-

@@ -42,10 +42,10 @@ public class DemandController {
 	 * @return
 	 * @throws IOException
 	 */
-	@Authorization
+	// @Authorization
 	@Params(DemandValidator.class)
-	@RequestMapping(path = "/demand", method = { RequestMethod.GET, RequestMethod.POST })
-	public ReturnBaseDto<ReturnListDto> getDemandList(@RequestBody ParamsListDto params) throws IOException {
+	@RequestMapping(path = "/demand", method = RequestMethod.GET)
+	public ReturnBaseDto<ReturnListDto> getDemandList(ParamsListDto params) throws IOException {
 		ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<ReturnListDto>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
@@ -67,7 +67,7 @@ public class DemandController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(path = "/demand/{item_id}", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(path = "/demand/{item_id}", method = RequestMethod.GET)
 	public ReturnBaseDto<ReturnDemandDto> getDemandItem(@PathVariable Integer item_id) throws IOException {
 		log.info("参数" + item_id);
 		ReturnBaseDto<ReturnDemandDto> result = new ReturnBaseDto<ReturnDemandDto>();

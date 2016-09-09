@@ -1,6 +1,7 @@
 package com.inHere.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +20,7 @@ import com.inHere.util.SHA256Util;
 public class SecurityServiceImpl implements SecurityService {
 
 	/**
-	 * 加密
+	 * 加盐加密，返回加密密码和盐值
 	 * 
 	 * @param passwd
 	 * @return 返回加盐加密密码、盐值list.get(0) : password | list.get(1) : saltKey
@@ -40,10 +41,10 @@ public class SecurityServiceImpl implements SecurityService {
 	}
 
 	/**
-	 * 加密
+	 * 加盐加密, 返回加密后的密码
 	 * 
 	 * @param password
-	 * @return safePwd加密后的密码
+	 * @return 加密后的密码
 	 */
 	public String encrypt(String saltKey, String password) {
 		// 密码、盐值切割
@@ -59,6 +60,21 @@ public class SecurityServiceImpl implements SecurityService {
 		String firstEncrypt = SHA256Util.encrypt(uidSuffix + pwdPrefix) + SHA256Util.encrypt(uidPrefix + pwdSuffix);
 		String secondEncrypt = SHA256Util.encrypt(firstEncrypt);
 		return secondEncrypt;
+	}
+
+	/**
+	 * token创建
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public String createToken(String userId) {
+		String str = "niswlejo_34kl9sk?sds@lds";
+		String uid = UUID.randomUUID().toString();
+		Long time = new Date().getTime();
+		String first = SHA256Util.encrypt(str + userId + uid + time);
+		String second = SHA256Util.encrypt(first);
+		return second;
 	}
 
 }

@@ -21,4 +21,12 @@ public interface SecurityService {
 	 */
 	public String encrypt(String saltKey, String password);
 
+	/**
+	 * token创建
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public String createToken(String userId);
+
 }
