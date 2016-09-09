@@ -4,30 +4,28 @@ import java.util.Date;
 
 public class AskReply {
     private Integer id;
-
     private Integer extType;
-
     private String extData;
-
     private Integer labelId;
-
     private String title;
-
+    private String content;
     private String photos;
-
     private Integer commentNum;
-
     private String userId;
-
     private Date createTime;
-
     private Date updateTime;
-
     private String praise;
-
     private String low;
+    
+    public String getContent() {
+		return content;
+	}
 
-    public Integer getId() {
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -24,6 +24,9 @@
 	<!-- 注解方式的时间调度 -->
 	<task:annotation-driven />
 
+	<!-- 扫描token操作类，注解的类型 -->
+	<context:component-scan base-package="com.inHere.redis" />
+
 	<!-- 扫描时间调度quartz使用注解的类型 -->
 	<context:component-scan base-package="com.inHere.quartz" />
 
