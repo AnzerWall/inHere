@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.inHere.entity.User;
 
 /**
- * 列表参数传输对象
+ * 参数传输对象
  * 
  * @author lwh
  *
@@ -15,13 +15,33 @@ public class ParamsListDto {
 	private Integer limit; // 返回条数
 	private Integer offset;// 偏移量
 	private Integer[] ext_type;// 标签过滤：1-快递，2-转让，3-帮忙, 4-丢失, 5-捡到, 6-走起
+	private Integer item_id; // 记录编号
+
 	private Integer is_end;// 结束过滤: 0-未结束，1-已结束
 	private String creator;// 创建者过滤
+
+	private String table_name;// 表名
 	private String order_by;// 排序类别: time 、 praise
-	private String orcer;// 倒序正序：desc 、asc
+	private String order;// 倒序正序：desc 、asc
 
 	// 传参用户
 	private User user;
+
+	public Integer getItem_id() {
+		return item_id;
+	}
+
+	public void setItem_id(Integer item_id) {
+		this.item_id = item_id;
+	}
+
+	public String getTable_name() {
+		return table_name;
+	}
+
+	public void setTable_name(String table_name) {
+		this.table_name = table_name;
+	}
 
 	public Integer getLimit() {
 		return limit;
@@ -71,12 +91,12 @@ public class ParamsListDto {
 		this.order_by = order_by;
 	}
 
-	public String getOrcer() {
-		return orcer;
+	public String getOrder() {
+		return order;
 	}
 
-	public void setOrcer(String orcer) {
-		this.orcer = orcer;
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 	public User getUser() {
@@ -90,7 +110,7 @@ public class ParamsListDto {
 	@Override
 	public String toString() {
 		return "ParamsListDto [limit=" + limit + ", offset=" + offset + ", ext_type=" + Arrays.toString(ext_type)
-				+ ", is_end=" + is_end + ", creator=" + creator + ", order_by=" + order_by + ", orcer=" + orcer + "]";
+				+ ", is_end=" + is_end + ", creator=" + creator + ", order_by=" + order_by + ", orcer=" + order + "]";
 	}
 
 }

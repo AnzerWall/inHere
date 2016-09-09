@@ -6,7 +6,9 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.inHere.constant.Code;
@@ -19,11 +21,16 @@ import com.inHere.exception.SystemException;
  */
 @Component
 @Aspect
+@Order(2)
 public class ValidateAspectHandel {
 
 	Logger log = Logger.getLogger(getClass());
 
-	@Around("@annotation(com.inHere.validator.Params)")
+	@Pointcut("@annotation(com.inHere.validator.Params)")
+	public void pointCut() {
+	}
+
+	@Around("pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		log.info("进入ValidateAspectHandel进行参数校验");
 		// 获取方法签名

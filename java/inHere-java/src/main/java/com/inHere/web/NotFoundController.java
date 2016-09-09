@@ -36,6 +36,20 @@ public class NotFoundController {
 	}
 
 	/**
+	 * 用户未授权，不予操作
+	 * 
+	 * @return
+	 */
+	@RequestMapping("error/401")
+	public Map<String, Object> unauthorized() {
+		log.error(Code.NotFound.getStatus());
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("code", Code.NoLogin.getCode());
+		result.put("status", Code.NoLogin.getStatus());
+		return result;
+	}
+
+	/**
 	 * 配了上面的noHandlerFound，当前这个404方法可以去掉
 	 * 
 	 * @return
