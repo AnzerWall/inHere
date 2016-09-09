@@ -2,17 +2,14 @@ package com.inHere.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,8 +21,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.inHere.constant.Code;
-import com.inHere.dao.CryptonymMapper;
-import com.inHere.entity.Cryptonym;
 import com.inHere.exception.SystemException;
 
 /**
@@ -57,7 +52,7 @@ public class UploadController {
 
 		log.info("文件大小：" + file.getSize());
 		if (file.getSize() > Long.parseLong(maxSize)) {
-			throw new SystemException(Code.UploadEx.getCode(), Code.UploadEx.getStatus(), "文件太大啦，小点吧！");
+			throw new SystemException(Code.InputErr.getCode(), Code.InputErr.getStatus(), "文件太大啦，小点吧！");
 		}
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -72,7 +67,7 @@ public class UploadController {
 			file.transferTo(newFile);
 		} catch (IOException e) {
 			String msg = "文件保存失败";
-			throw new SystemException(Code.ServerError.getCode(), Code.ServerError.getStatus(), msg);
+			throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), msg);
 		}
 		long endTime = System.currentTimeMillis();
 		System.out.println("方法二的运行时间：" + String.valueOf(endTime - startTime) + "ms");
@@ -115,12 +110,11 @@ public class UploadController {
 				}
 			}
 		}
-		
+
 		long endTime = System.currentTimeMillis();
 		System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
 		// throw new FileUploadException();
 		return map;
 	}
-	
 
 }

@@ -1,5 +1,6 @@
 package com.inHere.entity;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class User {
@@ -10,12 +11,23 @@ public class User {
 	private String userName;
 	private String headImg;
 	private String contactWay;
-	private Boolean sex;
+	private Integer sex;
 	private String area;
 	private Integer schoolId;
 	private Integer roleId;
 	private Date createTime;
 	private Date updateTime;
+	
+	// school对象
+	private School school;
+	
+	public School getSchool() {
+		return school;
+	}
+
+	public void setSchool(School school) {
+		this.school = school;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -49,27 +61,27 @@ public class User {
 		this.userName = userName == null ? null : userName.trim();
 	}
 
-	public String getHeadImg() {
-		return headImg;
+	public String getHeadImg() throws IOException {
+		return contactWay == null ? null :new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
 	}
 
 	public void setHeadImg(String headImg) {
 		this.headImg = headImg == null ? null : headImg.trim();
 	}
 
-	public String getContactWay() {
-		return contactWay;
+	public String getContactWay() throws IOException {
+		return contactWay == null ? null :new String(contactWay.getBytes("ISO-8859-1"), "UTF-8");
 	}
 
 	public void setContactWay(String contactWay) {
 		this.contactWay = contactWay == null ? null : contactWay.trim();
 	}
 
-	public Boolean getSex() {
+	public Integer getSex() {
 		return sex;
 	}
 
-	public void setSex(Boolean sex) {
+	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
 
@@ -112,4 +124,14 @@ public class User {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", passwd=" + passwd + ", saltKey=" + saltKey + ", userName=" + userName
+				+ ", headImg=" + headImg + ", contactWay=" + contactWay + ", sex=" + sex + ", area=" + area
+				+ ", schoolId=" + schoolId + ", roleId=" + roleId + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + ", school=" + school + "]";
+	}
+	
+	
 }

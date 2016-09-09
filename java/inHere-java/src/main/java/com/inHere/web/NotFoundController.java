@@ -65,10 +65,10 @@ public class NotFoundController {
 
 	@RequestMapping("error/500")
 	public Map<String, Object> serverError() {
-		log.error(Code.ServerError.getStatus());
+		log.error(Code.Error.getStatus());
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("code", Code.ServerError.getCode());
-		result.put("status", Code.ServerError.getStatus());
+		result.put("code", Code.Error.getCode());
+		result.put("status", Code.Error.getStatus());
 		return result;
 	}
 

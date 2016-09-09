@@ -63,7 +63,7 @@ public class ValidateAspectHandel {
 				return view;
 			}
 		}
-		throw new SystemException(Code.ServerError.getCode(), Code.ServerError.getStatus(), "使用@Params参数校验时，方法参数不能为空");
+		throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), "使用@Params参数校验时，方法参数不能为空");
 	}
 
 }

@@ -1,9 +1,13 @@
 package com.inHere.validator;
 
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Code;
 import com.inHere.dto.ReturnBaseDto;
-import com.inHere.entity.User;
 
 /**
  * 要求校验方法名与@Params拦截的方法的名字要相同, 校验方法的参数有且只能有一个，参数类型和返回类型都要和拦截方法的一样
@@ -13,15 +17,27 @@ import com.inHere.entity.User;
  */
 public class LoginValidator {
 
-	public ReturnBaseDto<JSONObject> login(User user) {
-		System.out.println("lllllllllll");
+	Logger log = Logger.getLogger(getClass());
+
+	/**
+	 * 用户登陆校验
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public ReturnBaseDto<JSONObject> login(@RequestBody Map<String, Object> params) {
+		log.info("login参数校验");
+		String user_id = (String) params.get("account");
+		String password = (String) params.get("password");
+		// return null通过校验
+		if (user_id != null && password != null) {
+			return null;
+		}
 		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
-		result.setCode(Code.Success.getCode());
-		result.setStatus(Code.Success.getStatus());
-		result.setData(new JSONObject());
-		result.getData().put("userId", null);
-		result.getData().put("passwd", user.getPasswd());
-		return null;
+		result.setCode(Code.Error.getCode());
+		result.setStatus(Code.Error.getStatus());
+		result.setMessage("用户名或密码有错");
+		return result;
 	}
 
 }
