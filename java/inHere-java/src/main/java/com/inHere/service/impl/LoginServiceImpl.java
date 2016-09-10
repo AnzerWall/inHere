@@ -24,7 +24,7 @@ import com.inHere.service.SecurityService;
  */
 @Service
 public class LoginServiceImpl implements LoginService {
-	
+
 	Logger log = Logger.getLogger(getClass());
 
 	@Autowired
@@ -46,7 +46,8 @@ public class LoginServiceImpl implements LoginService {
 	 */
 	public UserDto login(String user_id, String password) throws IOException {
 		User user = userMapper.selectByPrimaryKey(user_id);
-		if( user == null ) return null;
+		if (user == null)
+			return null;
 		log.info(user.toString());
 		String saltKey = user.getSaltKey();
 		// 获取加盐加密密码
@@ -67,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
 			userDto.setSex(user.getSex());
 			// 创建Token
 			Token token = tokenManage.createToken(user);
-			userDto.setToken(token.getKey().replace("token:", ""));
+			userDto.setToken(token.getKey());
 			return userDto;
 		}
 		return null;

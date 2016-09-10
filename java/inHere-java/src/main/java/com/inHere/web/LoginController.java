@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.authorization.Authorization;
 import com.inHere.constant.Code;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.UserDto;
@@ -59,17 +60,16 @@ public class LoginController {
 		}
 		return result;
 	}
-	
-	
 
-	@RequestMapping(path = "/log_out", method = RequestMethod.POST)
-	public ReturnBaseDto<JSONObject> logout(@RequestBody User user) {
+	@Authorization
+	@RequestMapping(path = "/logout", method = RequestMethod.POST)
+	public ReturnBaseDto<JSONObject> logout(UserDto userDto) {
 		log.info("进入login()中-----");
 		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		result.getData().put("userId", user.getUserId());
-		result.getData().put("passwd", user.getPasswd());
+//		result.getData().put("userId", user.getUserId());
+//		result.getData().put("passwd", user.getPasswd());
 		return result;
 	}
 

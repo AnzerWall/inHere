@@ -1,18 +1,37 @@
 package com.inHere.Interceptor;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.alibaba.fastjson.JSON;
+import com.inHere.authorization.Authorization;
+import com.inHere.constant.Code;
+import com.inHere.entity.Token;
+import com.inHere.redis.TokenManage;
 
 /**
  * token较验拦截器
  * 
+ * @see com.inHere.authorization.Authorization
  * @author lwh
  *
  */
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+
+	@Autowired
+	private TokenManage tokenManage;
 
 	Logger log = Logger.getLogger(getClass());
 
@@ -22,7 +41,40 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 		log.info("进入拦截器");
 		// 开启跨域允许
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		
+
+		// 如果不是映射到方法直接通过
+		if (!(handler instanceof HandlerMethod)) {
+			return true;
+		}
+		HandlerMethod handlerMethod = (HandlerMethod) handler;
+		Method method = handlerMethod.getMethod();
+		Authorization authorization = method.getAnnotation(Authorization.class);
+
+		// 检验方法是否需要token检验
+		if (authorization != null) {
+			String tokenStr = request.getParameter("token");
+			Token token = tokenManage.getToken(tokenStr);
+			// token存在，允许操作
+			if (token != null) {
+				return true;
+			}
+			/* 使用response返回 */
+			response.setStatus(HttpStatus.OK.value()); // 设置状态码
+			response.setContentType(MediaType.APPLICATION_JSON_VALUE); // 设置ContentType
+			response.setCharacterEncoding("UTF-8"); // 避免乱码
+			response.setHeader("Cache-Control", "no-cache, must-revalidate");
+			try {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("code", Code.NoLogin.getCode());
+				map.put("status", Code.NoLogin.getStatus());
+				map.put("message", "用户未登录");
+				response.getWriter().write(JSON.toJSONString(map));
+				return false;
+			} catch (IOException e) {
+				log.error("用户未登录");
+				return false;
+			}
+		}
 		return super.preHandle(request, response, handler);
 	}
 

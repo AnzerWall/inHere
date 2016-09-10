@@ -22,10 +22,16 @@ public class Token {
 
 	public Token(String key, String user_id, Integer school_id, Integer role_id) {
 		super();
-		this.key = "token:" + key;
+		this.key =  key;
 		this.user_id = user_id;
 		this.school_id = school_id;
 		this.role_id = role_id;
+	}
+
+	public Token(Map<String, String> userMap) {
+		this.user_id = userMap.get("user_id");
+		this.school_id = Integer.parseInt(userMap.get("school_id"));
+		this.role_id = Integer.parseInt(userMap.get("role_id"));
 	}
 
 	public String getKey() {
@@ -33,7 +39,7 @@ public class Token {
 	}
 
 	public void setKey(String key) {
-		this.key = "token:" + key;
+		this.key =  key;
 	}
 
 	public String getUser_id() {

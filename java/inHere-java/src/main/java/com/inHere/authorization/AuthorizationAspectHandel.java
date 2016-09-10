@@ -6,39 +6,34 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import com.inHere.constant.Code;
 import com.inHere.exception.SystemException;
-import com.inHere.redis.TokenManage;
 
 /**
- * 使用AOP进行Token验证拦截，@Authorization校验注解处理类
+ * 使用AOP进行Token验证拦截，@Authorization校验注解处理类 <br>
+ * 弃用，侵入太强
  * 
  * @see com.inHere.authorization.Authorization
  * @author lwh
  */
-@Component
-@Aspect
-@Order(1)
+@Deprecated
+//@Component
+//@Aspect
+//@Order(1)
 public class AuthorizationAspectHandel {
 
 	Logger log = Logger.getLogger(getClass());
-	
-	@Autowired
-	private TokenManage tokenManage;
 
-	@Pointcut("execution(* com.inHere.web..*.*(..))")
+//	@Autowired
+//	private TokenManage tokenManage;
+
+	// @Pointcut("execution(* com.inHere.web..*.*(..))")
 	public void pointCut() {
 	}
 
-	@Around("pointCut()")
+	// @Around("pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		log.info("进入Token权限校验");
 		Object target = joinPoint.getTarget();
@@ -55,11 +50,11 @@ public class AuthorizationAspectHandel {
 		}
 		// do something token check , true proceed, false throw Exception
 		Object[] args = joinPoint.getArgs();
-		for( Object arg : args ){
-			if( arg instanceof HttpServletRequest ){
-				HttpServletRequest req = (HttpServletRequest)arg;
-				String token = req.getParameter("token");
-//				tokenManage.get
+		for (Object arg : args) {
+			if (arg instanceof HttpServletRequest) {
+//				HttpServletRequest req = (HttpServletRequest) arg;
+//				String token = req.getParameter("token");
+				// tokenManage.get
 			}
 		}
 		throw new SystemException(Code.NoLogin.getCode(), Code.NoLogin.getStatus(), "请登录");
