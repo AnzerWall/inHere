@@ -49,7 +49,7 @@ public class TokenManage {
 	 *            token
 	 * @return 是否有效
 	 */
-	public boolean checkToken(Token model) {
+	public boolean checkToken(Token token) {
 		return true;
 	}
 
@@ -63,6 +63,8 @@ public class TokenManage {
 	public Token getToken(String tokenStr) {
 		ShardedJedis jedis = shardedJedisPool.getResource();
 		Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
+		// 过期时间5个小时
+		jedis.expire("token:" + tokenStr, 5 * 60 * 60);
 		if (userMap.size() > 1) {
 			Token token = new Token(userMap);
 			token.setKey(tokenStr);
@@ -77,8 +79,9 @@ public class TokenManage {
 	 * @param userId
 	 *            登录用户的id
 	 */
-	public void deleteToken(long userId) {
-
+	public void deleteToken(Token token) {
+		ShardedJedis jedis = shardedJedisPool.getResource();
+		jedis.hdel("token:" + token.getKey(), "user_id", "school_id", "role_id");
 	}
 
 }

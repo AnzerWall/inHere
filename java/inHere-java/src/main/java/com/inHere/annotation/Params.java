@@ -1,4 +1,4 @@
-package com.inHere.validator;
+package com.inHere.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

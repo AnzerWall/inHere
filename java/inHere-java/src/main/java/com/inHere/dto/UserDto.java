@@ -12,7 +12,7 @@ public class UserDto {
 	
 	private String user_id;
 	private String user_name;
-	private String head_img;
+	private JSONObject head_img;
 	private JSONObject contact_way;
 	private Integer sex;
 	private String area;
@@ -40,10 +40,10 @@ public class UserDto {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-	public String getHead_img() {
+	public JSONObject getHead_img() {
 		return head_img;
 	}
-	public void setHead_img(String head_img) {
+	public void setHead_img(JSONObject head_img) {
 		this.head_img = head_img;
 	}
 	public JSONObject getContact_way() {

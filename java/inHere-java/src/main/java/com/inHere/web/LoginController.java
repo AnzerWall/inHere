@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.inHere.authorization.Authorization;
+import com.inHere.annotation.Authorization;
+import com.inHere.annotation.CurrentToken;
+import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.UserDto;
-import com.inHere.entity.User;
+import com.inHere.entity.Token;
 import com.inHere.service.LoginService;
 import com.inHere.validator.LoginValidator;
-import com.inHere.validator.Params;
 
 /**
  * 登陆模块
@@ -61,16 +62,30 @@ public class LoginController {
 		return result;
 	}
 
+	/**
+	 * 退出删除一个一个Token资源
+	 * @param token
+	 * @return
+	 */
 	@Authorization
-	@RequestMapping(path = "/logout", method = RequestMethod.POST)
-	public ReturnBaseDto<JSONObject> logout(UserDto userDto) {
-		log.info("进入login()中-----");
+	@RequestMapping(path = "/logout", method = RequestMethod.DELETE)
+	public ReturnBaseDto<JSONObject> logout(@CurrentToken Token token) {
+		log.info("进入logout()中-----");
+		// 退出登陆
+		loginService.logout(token);
 		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-//		result.getData().put("userId", user.getUserId());
-//		result.getData().put("passwd", user.getPasswd());
 		return result;
 	}
-
+	
+	/**
+	 * 注册一个Token资源
+	 * @return
+	 */
+	@RequestMapping(path = "/logup", method = RequestMethod.POST)
+	public ReturnBaseDto<JSONObject> logup(){
+		
+		return null;
+	}
 }

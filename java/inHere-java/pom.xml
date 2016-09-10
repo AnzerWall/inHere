@@ -294,8 +294,8 @@
 					<username>nimenhao</username>
 					<!--settings.xml文件已配置，此处可以不配 -->
 					<password>li0708</password>
-					<!-- <path>/inHere</path> -->	<!-- 发布项目，带项目名localhost访问：http://127.0.0.1:8080/localhost -->
-					<path>/ROOT</path>      <!-- 发布到根目录, 访问：http://127.0.0.1:8080 -->
+					<path>/inHere</path>	<!-- 发布项目，带项目名localhost访问：http://127.0.0.1:8080/localhost -->
+					<!-- <path>/ROOT</path> -->      <!-- 发布到根目录, 访问：http://127.0.0.1:8080 -->
 					<ignorePackaging>true</ignorePackaging>
 				</configuration>
 			</plugin>

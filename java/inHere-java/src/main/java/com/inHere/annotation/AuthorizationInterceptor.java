@@ -1,4 +1,4 @@
-package com.inHere.Interceptor;
+package com.inHere.annotation;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -16,7 +16,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.alibaba.fastjson.JSON;
-import com.inHere.authorization.Authorization;
 import com.inHere.constant.Code;
 import com.inHere.entity.Token;
 import com.inHere.redis.TokenManage;
@@ -24,7 +23,7 @@ import com.inHere.redis.TokenManage;
 /**
  * token较验拦截器
  * 
- * @see com.inHere.authorization.Authorization
+ * @see com.inHere.annotation.Authorization
  * @author lwh
  *
  */
@@ -38,7 +37,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		log.info("进入拦截器");
+		log.info("进入token拦截器");
 		// 开启跨域允许
 		response.setHeader("Access-Control-Allow-Origin", "*");
 
@@ -46,6 +45,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 		if (!(handler instanceof HandlerMethod)) {
 			return true;
 		}
+		log.info("进入token拦截器,拦截HandlerMethod");
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 		Method method = handlerMethod.getMethod();
 		Authorization authorization = method.getAnnotation(Authorization.class);
@@ -56,6 +56,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 			Token token = tokenManage.getToken(tokenStr);
 			// token存在，允许操作
 			if (token != null) {
+				request.setAttribute("token", token);
 				return true;
 			}
 			/* 使用response返回 */
@@ -73,9 +74,11 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 			} catch (IOException e) {
 				log.error("用户未登录");
 				return false;
+			} finally {
+				response.flushBuffer();
 			}
 		}
-		return super.preHandle(request, response, handler);
+		return true;
 	}
 
 }

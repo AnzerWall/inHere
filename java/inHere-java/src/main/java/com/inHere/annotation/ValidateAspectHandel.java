@@ -1,4 +1,4 @@
-package com.inHere.validator;
+package com.inHere.annotation;
 
 import java.lang.reflect.Method;
 
@@ -17,6 +17,7 @@ import com.inHere.exception.SystemException;
 /**
  * 使用AOP进行验证拦截，@Params校验注解处理类
  * 
+ * @see com.inHere.annotation.Authorization
  * @author lwh
  */
 @Component
@@ -26,7 +27,7 @@ public class ValidateAspectHandel {
 
 	Logger log = Logger.getLogger(getClass());
 
-	@Pointcut("@annotation(com.inHere.validator.Params)")
+	@Pointcut("@annotation(com.inHere.annotation.Params)")
 	public void pointCut() {
 	}
 

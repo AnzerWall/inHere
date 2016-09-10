@@ -58,7 +58,7 @@ public class LoginServiceImpl implements LoginService {
 			UserDto userDto = new UserDto();
 			userDto.setUser_id(user.getUserId());
 			userDto.setUser_name(user.getUserName());
-			userDto.setHead_img(user.getHeadImg());
+			userDto.setHead_img(JSON.parseObject(user.getHeadImg()));
 			JSONObject temp = JSON.parseObject(user.getContactWay());
 			userDto.setContact_way(temp);
 			userDto.setArea(user.getArea());
@@ -72,6 +72,16 @@ public class LoginServiceImpl implements LoginService {
 			return userDto;
 		}
 		return null;
+	}
+
+	/**
+	 * 退出登陆
+	 * 
+	 * @param token
+	 * @return
+	 */
+	public void logout(Token token) {
+		tokenManage.deleteToken(token);
 	}
 
 }
