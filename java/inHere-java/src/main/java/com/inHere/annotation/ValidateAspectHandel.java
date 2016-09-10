@@ -8,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.inHere.constant.Code;
@@ -22,7 +21,6 @@ import com.inHere.exception.SystemException;
  */
 @Component
 @Aspect
-@Order(2)
 public class ValidateAspectHandel {
 
 	Logger log = Logger.getLogger(getClass());
