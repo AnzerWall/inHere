@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
 	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
-	 http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/task
     http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- 启动对@AspectJ注解的支持 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<!-- 1、引入系统配置，类中用@value获取值，ignore-unresolvable允许多次引入properties文件 -->
 	<context:property-placeholder location="classpath:config.properties"
@@ -23,6 +30,12 @@
 
 	<!-- 注解方式的时间调度 -->
 	<task:annotation-driven />
+
+	<!-- 自定义annotation处理器 -->
+	<context:component-scan base-package="com.inHere.annotation" />
+
+	<!-- 扫描token操作类，注解的类型 -->
+	<context:component-scan base-package="com.inHere.redis" />
 
 	<!-- 扫描时间调度quartz使用注解的类型 -->
 	<context:component-scan base-package="com.inHere.quartz" />

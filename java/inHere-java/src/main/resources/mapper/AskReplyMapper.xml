@@ -7,6 +7,7 @@
     <result column="ext_data" property="extData" jdbcType="CHAR" />
     <result column="label_id" property="labelId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="photos" property="photos" jdbcType="VARCHAR" />
     <result column="comment_num" property="commentNum" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
@@ -16,7 +17,7 @@
     <result column="low" property="low" jdbcType="CHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, ext_type, ext_data, label_id, title, photos, comment_num, user_id, create_time, 
+    id, ext_type, ext_data, label_id, title, content, photos, comment_num, user_id, create_time, 
     update_time, praise, low
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

@@ -1,17 +1,28 @@
 package com.inHere.dao;
 
+import java.util.List;
+
 import com.inHere.entity.Cryptonym;
 
 public interface CryptonymMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Cryptonym record);
+	int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(Cryptonym record);
+	int insert(Cryptonym record);
 
-    Cryptonym selectByPrimaryKey(Integer id);
+	int insertSelective(Cryptonym record);
 
-    int updateByPrimaryKeySelective(Cryptonym record);
+	Cryptonym selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKey(Cryptonym record);
+	int updateByPrimaryKeySelective(Cryptonym record);
+
+	int updateByPrimaryKey(Cryptonym record);
+
+	/**
+	 * 插入匿名库
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public Integer insertCryptonyms(List<Cryptonym> list);
 }

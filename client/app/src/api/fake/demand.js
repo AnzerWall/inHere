@@ -6,6 +6,7 @@ import items from './demand_data'
 import MockJs from 'mockjs'
 import Comment from './comment.js'
 import _ from 'lodash'
+import {UserList,UserIdList,selectOneRandomUser } from './user.js'
 let comments = {};
 for (let item of items) {
   let num =MockJs.Random.integer(2,8);
@@ -64,7 +65,7 @@ export default{
         if(items[i].id===id){
           let ret=_.cloneDeep(items[i]);
           let comment_data=_.cloneDeep(comments[items[i].id]);
-          ret.comments={
+          ret.comment={
             page: 0,
             page_size: 0,
             offset: 0,

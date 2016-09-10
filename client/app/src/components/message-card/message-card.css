@@ -66,3 +66,11 @@ div {
   -webkit-box-orient: vertical;
   vertical-align: middle;
 }
+
+.chat-color{
+  background-color:#FFC107 ;
+}
+
+.chat-gray{
+  color: #797979;
+}

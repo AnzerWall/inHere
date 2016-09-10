@@ -1,4 +1,4 @@
-package com.inHere.validator;
+package com.inHere.annotation;
 
 import java.lang.reflect.Method;
 
@@ -6,7 +6,9 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.inHere.constant.Code;
@@ -15,15 +17,21 @@ import com.inHere.exception.SystemException;
 /**
  * 使用AOP进行验证拦截，@Params校验注解处理类
  * 
+ * @see com.inHere.annotation.Authorization
  * @author lwh
  */
 @Component
 @Aspect
+@Order(2)
 public class ValidateAspectHandel {
 
 	Logger log = Logger.getLogger(getClass());
 
-	@Around("@annotation(com.inHere.validator.Params)")
+	@Pointcut("@annotation(com.inHere.annotation.Params)")
+	public void pointCut() {
+	}
+
+	@Around("pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 		log.info("进入ValidateAspectHandel进行参数校验");
 		// 获取方法签名
@@ -56,7 +64,7 @@ public class ValidateAspectHandel {
 				return view;
 			}
 		}
-		throw new SystemException(Code.ServerError.getCode(), Code.ServerError.getStatus(), "使用@Params参数校验时，方法参数不能为空");
+		throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), "使用@Params参数校验时，方法参数不能为空");
 	}
 
 }

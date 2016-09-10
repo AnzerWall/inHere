@@ -1,25 +1,24 @@
 package com.inHere.service.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.dao.CommentMapper;
 import com.inHere.dao.DemandMapper;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnDemandDto;
 import com.inHere.dto.ReturnListDto;
-import com.inHere.dto.ReturnPhotoDto;
+import com.inHere.entity.Comment;
 import com.inHere.entity.Demand;
+import com.inHere.service.CommentService;
+import com.inHere.service.CommonService;
 import com.inHere.service.DemandService;
 
 /**
@@ -37,6 +36,15 @@ public class DemandServiceImpl implements DemandService {
 	@Autowired
 	private DemandMapper demandMapper;
 
+	@Autowired
+	private CommentMapper commentMapper;
+
+	@Autowired
+	private CommonService commonService;
+
+	@Autowired
+	private CommentService commentService;
+
 	/**
 	 * 获取列表
 	 * 
@@ -48,14 +56,10 @@ public class DemandServiceImpl implements DemandService {
 		log.info("调用getList()业务");
 		ReturnListDto listDto = new ReturnListDto();
 		List<Demand> demandList = demandMapper.selectByParams(params);
-		Integer page = (params.getOffset() / params.getLimit()) + 1;
-		Integer page_size = params.getLimit();
 
 		// 获取总条数
 		Integer total = demandMapper.getCount(params);
 		Integer total_page = (total / params.getLimit()) + 1;
-		listDto.setPage(page);
-		listDto.setPage_size(page_size);
 		listDto.setLimit(params.getLimit());
 		listDto.setOffset(params.getOffset());
 		listDto.setTotal(total);
@@ -64,6 +68,45 @@ public class DemandServiceImpl implements DemandService {
 		JSONArray items = this.setItems(demandList);
 		listDto.setItems(items);
 		return listDto;
+	}
+
+	/**
+	 * 获取一条有求必应
+	 * 
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	public ReturnDemandDto selectOneById(ParamsListDto params) throws IOException {
+		Demand demand = demandMapper.selectOneById(params);
+		if (demand == null) {
+			return new ReturnDemandDto();
+		} else {
+			// 当前实体拥有的评论列表
+			List<Comment> comments = demand.getComments();
+
+			// 获取“有求必应实体”DemandDto传输对象
+			ReturnDemandDto demandDto = this.setDemandDto(demand);
+
+			// 设置当前需求实体的“评论列表”
+			ReturnListDto listDto = new ReturnListDto();
+
+			// 获取评论总条数
+			Integer total = commentMapper.getCount(demand.getExtType(), demand.getId());
+			Integer total_page = (total / params.getLimit()) + 1;
+			listDto.setLimit(params.getLimit());
+			listDto.setOffset(params.getOffset());
+			listDto.setTotal(total);
+			listDto.setTotal_page(total_page);
+
+			// 设置评论列表
+			JSONArray commentArray = commentService.setItems(comments, params.getUser());
+			listDto.setItems(commentArray);
+
+			// 有求必应实体添加对应评论列表返回。。。。
+			demandDto.setComment(listDto);
+			return demandDto;
+		}
 	}
 
 	/**
@@ -77,66 +120,32 @@ public class DemandServiceImpl implements DemandService {
 	public JSONArray setItems(List<Demand> demandList) throws IOException {
 		JSONArray array = new JSONArray();
 		for (Demand tmp : demandList) {
-			ReturnDemandDto demandDto = new ReturnDemandDto();
-			demandDto.setId(tmp.getId());
-			demandDto.setExt_type(tmp.getExtType());
-			demandDto.setText(tmp.getText());
-			// 解析图片
-			demandDto.setPhotos(this.photoResolution(tmp.getPhotos()));
-			demandDto.setCreate_time(tmp.getCreateTime().getTime());
-			demandDto.setUpdate_time(tmp.getUpdateTime().getTime());
-			demandDto.setUser_id(tmp.getUserId());
-			demandDto.setExt_data(JSONObject.parseObject(tmp.getExtData()));
-			demandDto.setIs_end(tmp.getIsEnd());
+			ReturnDemandDto demandDto = this.setDemandDto(tmp);
 			array.add(demandDto);
 		}
 		return array;
 	}
 
 	/**
-	 * 图片解析成List&lt;PhotoDto&gt;传输对象
+	 * 给ReturnDemandDto对象赋值
 	 * 
+	 * @param tmp
 	 * @return
 	 * @throws IOException
 	 */
-	public JSONArray photoResolution(String photos) throws IOException {
-		JSONArray array = new JSONArray();
-		// 判断是否有图片
-		if (photos != null && !photos.trim().equals("")) {
-			// 解析图片信息
-			JSONArray tmpArray = JSON.parseArray(photos);
-
-			int len = tmpArray.size();
-			for (int i = 0; i < len; i++) {
-				ReturnPhotoDto photo = new ReturnPhotoDto();
-
-				JSONObject obj = tmpArray.getJSONObject(i);
-				String src = obj.getString("src");
-
-				// 获取项目根路径和图片路径
-				String root = System.getProperty("inHere.root");
-				String minSrc = root + File.separator + src.replace("max", "min").replace("/", File.separator);
-
-				// 小图转Base64传输
-				File file = new File(minSrc);
-				FileInputStream inputFile = new FileInputStream(file);
-				byte[] buffer = new byte[(int) file.length()];
-				inputFile.read(buffer);
-				inputFile.close();
-				String min = Base64.encodeBase64String(buffer);
-
-				Integer w = obj.getInteger("w");
-				Integer h = obj.getInteger("h");
-
-				photo.setMin(min);
-				photo.setSrc(src);
-				photo.setW(w);
-				photo.setH(h);
-				array.add(photo);
-			}
-			return array;
-		}
-		return array;
+	public ReturnDemandDto setDemandDto(Demand tmp) throws IOException {
+		ReturnDemandDto demandDto = new ReturnDemandDto();
+		demandDto.setId(tmp.getId());
+		demandDto.setExt_type(tmp.getExtType());
+		demandDto.setText(tmp.getText());
+		// 解析图片
+		demandDto.setPhotos(commonService.photoResolution(tmp.getPhotos()));
+		demandDto.setCreate_time(tmp.getCreateTime().getTime());
+		demandDto.setUpdate_time(tmp.getUpdateTime().getTime());
+		demandDto.setUser_id(tmp.getUserId());
+		demandDto.setExt_data(JSONObject.parseObject(tmp.getExtData()));
+		demandDto.setIs_end(tmp.getIsEnd());
+		return demandDto;
 	}
 
 }

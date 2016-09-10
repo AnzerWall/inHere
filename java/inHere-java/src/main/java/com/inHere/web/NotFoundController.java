@@ -22,16 +22,34 @@ public class NotFoundController {
 	Logger log = Logger.getLogger(getClass());
 
 	/**
-	 * 注意，使用通配符时"*"代表一个占位如：/404，使用"**"时，代表多个占位如：/error/404/page....
+	 * (坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑)
+	 * (注意，使用通配符时"*"代表一个占位如：/404，使用"**"时，代表多个占位如：/error/404/page.... )
+	 * (注意：除非做全服务(没有图片等等文件)，否者不要用/**把所有请求给拦截，会报如下异常 )
+	 * (坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑坑)
+	 * 
+	 * @see org.springframework.web.HttpMediaTypeNotAcceptableException
+	 * @return
+	 */
+	// @RequestMapping("**")
+	// public Map<String, Object> noHandlerFound() {
+	// log.error(Code.NotFound.getStatus());
+	// Map<String, Object> result = new HashMap<String, Object>();
+	// result.put("code", Code.NotFound.getCode());
+	// result.put("status", Code.NotFound.getStatus());
+	// return result;
+	// }
+
+	/**
+	 * 用户未授权，不予操作
 	 * 
 	 * @return
 	 */
-	@RequestMapping("**")
-	public Map<String, Object> noHandlerFound() {
+	@RequestMapping("error/401")
+	public Map<String, Object> unauthorized() {
 		log.error(Code.NotFound.getStatus());
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("code", Code.NotFound.getCode());
-		result.put("status", Code.NotFound.getStatus());
+		result.put("code", Code.NoLogin.getCode());
+		result.put("status", Code.NoLogin.getStatus());
 		return result;
 	}
 
@@ -51,10 +69,10 @@ public class NotFoundController {
 
 	@RequestMapping("error/500")
 	public Map<String, Object> serverError() {
-		log.error(Code.ServerError.getStatus());
+		log.error(Code.Error.getStatus());
 		Map<String, Object> result = new HashMap<String, Object>();
-		result.put("code", Code.ServerError.getCode());
-		result.put("status", Code.ServerError.getStatus());
+		result.put("code", Code.Error.getCode());
+		result.put("status", Code.Error.getStatus());
 		return result;
 	}
 

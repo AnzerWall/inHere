@@ -1,125 +1,137 @@
 package com.inHere.entity;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class User {
-    private String userId;
 
-    private String passwd;
+	private String userId;
+	private String passwd;
+	private String saltKey;
+	private String userName;
+	private String headImg;
+	private String contactWay;
+	private Integer sex;
+	private String area;
+	private Integer schoolId;
+	private Integer roleId;
+	private Date createTime;
+	private Date updateTime;
+	
+	// school对象
+	private School school;
+	
+	public School getSchool() {
+		return school;
+	}
 
-    private String saltKey;
+	public void setSchool(School school) {
+		this.school = school;
+	}
 
-    private String userName;
+	public String getUserId() {
+		return userId;
+	}
 
-    private String headImg;
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
 
-    private String contactWay;
+	public String getPasswd() {
+		return passwd;
+	}
 
-    private Boolean sex;
+	public void setPasswd(String passwd) {
+		this.passwd = passwd == null ? null : passwd.trim();
+	}
 
-    private String area;
+	public String getSaltKey() {
+		return saltKey;
+	}
 
-    private Integer schoolId;
+	public void setSaltKey(String saltKey) {
+		this.saltKey = saltKey == null ? null : saltKey.trim();
+	}
 
-    private Integer roleId;
+	public String getUserName() {
+		return userName;
+	}
 
-    private Date createTime;
+	public void setUserName(String userName) {
+		this.userName = userName == null ? null : userName.trim();
+	}
 
-    private Date updateTime;
+	public String getHeadImg() throws IOException {
+		return contactWay == null ? null :new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public void setHeadImg(String headImg) {
+		this.headImg = headImg == null ? null : headImg.trim();
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
+	public String getContactWay() throws IOException {
+		return contactWay == null ? null :new String(contactWay.getBytes("ISO-8859-1"), "UTF-8");
+	}
 
-    public String getPasswd() {
-        return passwd;
-    }
+	public void setContactWay(String contactWay) {
+		this.contactWay = contactWay == null ? null : contactWay.trim();
+	}
 
-    public void setPasswd(String passwd) {
-        this.passwd = passwd == null ? null : passwd.trim();
-    }
+	public Integer getSex() {
+		return sex;
+	}
 
-    public String getSaltKey() {
-        return saltKey;
-    }
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
-    public void setSaltKey(String saltKey) {
-        this.saltKey = saltKey == null ? null : saltKey.trim();
-    }
+	public String getArea() {
+		return area;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public void setArea(String area) {
+		this.area = area == null ? null : area.trim();
+	}
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
+	public Integer getSchoolId() {
+		return schoolId;
+	}
 
-    public String getHeadImg() {
-        return headImg;
-    }
+	public void setSchoolId(Integer schoolId) {
+		this.schoolId = schoolId;
+	}
 
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg == null ? null : headImg.trim();
-    }
+	public Integer getRoleId() {
+		return roleId;
+	}
 
-    public String getContactWay() {
-        return contactWay;
-    }
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
-    public void setContactWay(String contactWay) {
-        this.contactWay = contactWay == null ? null : contactWay.trim();
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public Boolean getSex() {
-        return sex;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public void setSex(Boolean sex) {
-        this.sex = sex;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public String getArea() {
-        return area;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public void setArea(String area) {
-        this.area = area == null ? null : area.trim();
-    }
-
-    public Integer getSchoolId() {
-        return schoolId;
-    }
-
-    public void setSchoolId(Integer schoolId) {
-        this.schoolId = schoolId;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", passwd=" + passwd + ", saltKey=" + saltKey + ", userName=" + userName
+				+ ", headImg=" + headImg + ", contactWay=" + contactWay + ", sex=" + sex + ", area=" + area
+				+ ", schoolId=" + schoolId + ", roleId=" + roleId + ", createTime=" + createTime + ", updateTime="
+				+ updateTime + ", school=" + school + "]";
+	}
+	
+	
 }
