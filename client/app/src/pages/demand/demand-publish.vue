@@ -25,18 +25,18 @@
       </div>
     </div>
 </template>
-<style>
+<style scoped>
   .publish-header{
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
     width: 100%;
     height: 60px;
-    background-color: white;
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid rgba(213,213,213,.5);
     position: fixed;
     z-index: 2000;
     align-items: center;
+    background-color: #FAFAFA;
   }
   .publish-nav-wrapper{
     display: flex;
@@ -49,7 +49,7 @@
     padding: 0 10px;
   }
   .publish-nav-back{
-    padding-left: 20px;
+    /*padding-left: 20px;*/
   }
   .confirm-icon{
     padding-right: 20px;
