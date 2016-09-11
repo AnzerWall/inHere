@@ -72,12 +72,13 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 				response.getWriter().write(JSON.toJSONString(map));
 				return false;
 			} catch (IOException e) {
-				log.error("用户未登录");
+				log.error("response.getWriter().write()出错");
 				return false;
 			} finally {
 				response.flushBuffer();
 			}
 		}
+		// 无需token校验，直接通过
 		return true;
 	}
 

@@ -62,7 +62,7 @@ public class User {
 	}
 
 	public String getHeadImg() throws IOException {
-		return contactWay == null ? null :new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
+		return headImg == null ? null :new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
 	}
 
 	public void setHeadImg(String headImg) {

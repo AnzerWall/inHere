@@ -39,6 +39,8 @@ public class TokenManage {
 		String tokenStr = securityService.createToken(user.getUserId());
 		Token token = new Token(tokenStr, user.getUserId(), user.getSchoolId(), user.getRoleId());
 		jedis.hmset("token:" + token.getKey(), token.toMap());
+		// 过期时间5个小时
+		jedis.expire("token:" + token.getKey(), 5 * 60 * 60);
 		return token;
 	}
 
@@ -63,8 +65,6 @@ public class TokenManage {
 	public Token getToken(String tokenStr) {
 		ShardedJedis jedis = shardedJedisPool.getResource();
 		Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
-		// 过期时间5个小时
-		jedis.expire("token:" + tokenStr, 5 * 60 * 60);
 		if (userMap.size() > 1) {
 			Token token = new Token(userMap);
 			token.setKey(tokenStr);

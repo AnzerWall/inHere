@@ -2,7 +2,7 @@ package com.inHere.dto;
 
 import java.util.Arrays;
 
-import com.inHere.entity.User;
+import com.inHere.entity.Token;
 
 /**
  * 参数传输对象
@@ -16,6 +16,7 @@ public class ParamsListDto {
 	private Integer offset;// 偏移量
 	private Integer[] ext_type;// 标签过滤：1-快递，2-转让，3-帮忙, 4-丢失, 5-捡到, 6-走起
 	private Integer item_id; // 记录编号
+	private Integer label_id;// 问答+吐槽的标签编号
 
 	private Integer is_end;// 结束过滤: 0-未结束，1-已结束
 	private String creator;// 创建者过滤
@@ -24,8 +25,8 @@ public class ParamsListDto {
 	private String order_by;// 排序类别: time 、 praise
 	private String order;// 倒序正序：desc 、asc
 
-	// 传参用户
-	private User user;
+	// 传参token
+	private Token tokenEntity;
 
 	public Integer getItem_id() {
 		return item_id;
@@ -33,6 +34,14 @@ public class ParamsListDto {
 
 	public void setItem_id(Integer item_id) {
 		this.item_id = item_id;
+	}
+
+	public Integer getLabel_id() {
+		return label_id;
+	}
+
+	public void setLabel_id(Integer label_id) {
+		this.label_id = label_id;
 	}
 
 	public String getTable_name() {
@@ -99,12 +108,12 @@ public class ParamsListDto {
 		this.order = order;
 	}
 
-	public User getUser() {
-		return user;
+	public Token getTokenEntity() {
+		return tokenEntity;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setTokenEntity(Token tokenEntity) {
+		this.tokenEntity = tokenEntity;
 	}
 
 	@Override

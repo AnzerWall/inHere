@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Comment;
-import com.inHere.entity.User;
+import com.inHere.entity.Token;
 
 public interface CommentService {
 
@@ -26,6 +26,6 @@ public interface CommentService {
 	 * @param comments
 	 * @return
 	 */
-	public JSONArray setItems(List<Comment> comments, User user);
+	public JSONArray setItems(List<Comment> comments, Token token);
 
 }

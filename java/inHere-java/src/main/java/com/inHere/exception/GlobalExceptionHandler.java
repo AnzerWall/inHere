@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -68,7 +69,17 @@ public class GlobalExceptionHandler {
 		if (ex instanceof HttpMessageNotReadableException) {
 			result.put("code", Code.InputErr.getCode());
 			result.put("status", Code.InputErr.getStatus());
-			result.put("message", "缺少请求的Body");
+			result.put("message", "缺少输入参数");
+			// 填充返回数据
+			view.setAttributesMap(result);
+			mv.setView(view);
+			return mv;
+		}
+		// Request method 'POST' not supported
+		if (ex instanceof HttpRequestMethodNotSupportedException) {
+			result.put("code", Code.NotFound.getCode());
+			result.put("status", Code.NotFound.getStatus());
+			result.put("message", ex.getMessage());
 			// 填充返回数据
 			view.setAttributesMap(result);
 			mv.setView(view);
@@ -76,7 +87,6 @@ public class GlobalExceptionHandler {
 		} else {
 			result.put("code", Code.Error.getCode());
 			result.put("status", Code.Error.getStatus());
-			result.put("message", ex.getMessage());
 			// 填充返回数据
 			view.setAttributesMap(result);
 			mv.setView(view);

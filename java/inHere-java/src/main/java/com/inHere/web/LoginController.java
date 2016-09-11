@@ -37,7 +37,7 @@ public class LoginController {
 
 	/**
 	 * 登陆，创建一个Token资源
-	 * 
+	 * TODO 同一账号，多设备登陆，待解决
 	 * @return
 	 * @throws IOException
 	 */

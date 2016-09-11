@@ -1,5 +1,7 @@
 package com.inHere.validator;
 
+import org.apache.log4j.Logger;
+
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnListDto;
@@ -12,6 +14,8 @@ import com.inHere.dto.ReturnListDto;
  */
 public class DemandValidator {
 
+	Logger log = Logger.getLogger(getClass());
+
 	/**
 	 * DemandController.getDemandList()方法的校验
 	 * 
@@ -19,7 +23,7 @@ public class DemandValidator {
 	 * @return
 	 */
 	public ReturnBaseDto<ReturnListDto> getDemandList(ParamsListDto params) {
-
+		log.info("进入到DemandController.getDemandList()方法的校验");
 		return null;
 	}
 

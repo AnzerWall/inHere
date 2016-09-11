@@ -12,6 +12,12 @@ import com.inHere.constant.Code;
 import com.inHere.entity.Token;
 import com.inHere.exception.SystemException;
 
+/**
+ * 自定义参数Token处理器
+ * 
+ * @author lwh
+ *
+ */
 public class CurrentTokenMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
 	Logger log = Logger.getLogger(getClass());
@@ -28,13 +34,13 @@ public class CurrentTokenMethodArgumentResolver implements HandlerMethodArgument
 	@Override
 	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
 			NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		log.info("进入自定义参数的HandlerMethodArgumentResolver中...");
+		log.info("进入自定义参数的@CurrentToken处理器中...");
 		// 从request领域取值
-		Token token = (Token) webRequest.getAttribute("token", RequestAttributes.SCOPE_REQUEST);
-		if (token != null) {
+		Object token = webRequest.getAttribute("token", RequestAttributes.SCOPE_REQUEST);
+		if (token != null && token instanceof Token) {
 			return token;
 		}
-		throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), "方法头部没有添加@Authorization权限注解控制");
+		throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), "使用@CurrentToken自定义参数，方法头部没有添加@Authorization权限注解控制");
 	}
 
 }
