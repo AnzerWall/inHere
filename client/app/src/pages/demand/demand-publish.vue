@@ -7,9 +7,10 @@
         <div class="publish-nav publish-nav-back" @click="back">《 发布</div>
 
         <div class="publish-nav-wrapper">
-          <div class="publish-nav" v-link="{path:'/demand-publish/task',activeClass:'hight'}">任务</div>
-          <div class="publish-nav" v-link="{path:'/demand-publish/lost',activeClass:'hight'}">失物</div>
-          <div class="publish-nav" v-link="{path:'/demand-publish/dating',activeClass:'hight'}">走起</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/task',activeClass:'high'}">任务</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/lost',activeClass:'high'}">失物</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/dating',activeClass:'high'}">走起</div>
+          <!--<span class="navbar-item" v-link="{path:'/demand/dating',activeClass:'current'}">走起</span>-->
         </div>
 
         <div class="publish-nav confirm-icon">
@@ -41,12 +42,15 @@
   .publish-nav-wrapper{
     display: flex;
     flex-wrap: nowrap;
-    opacity: 0.15;
+
     justify-content: space-between;
   }
   .publish-nav{
     font-weight: bold;
     padding: 0 10px;
+  }
+  .navbar_item{
+    opacity: 0.15;
   }
   .publish-nav-back{
     /*padding-left: 20px;*/
@@ -54,7 +58,7 @@
   .confirm-icon{
     padding-right: 20px;
   }
-  .hight{
+  .high{
     opacity: 1;
   }
   .publish-content-header{

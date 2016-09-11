@@ -27,6 +27,9 @@
     .hot-item:first-child div{
       margin-left: 30px;
     }
+    .hot-item:last-child div{
+      margin-right: 15px;
+    }
     .slider-topic {
       height: 73px;
       width: 120px;
