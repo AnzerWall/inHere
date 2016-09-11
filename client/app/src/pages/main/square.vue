@@ -11,37 +11,36 @@
       </div>
 
       <!--有。必。栏目-->
-      <div>
+      <div class="item">
         <div class="square-item" :style="{'color': color(1)}">
-          <!--:style="color:itemColor.color1"-->
           <span class="square-item-tittle">* 有诺必行</span>
-          <span>进入</span>
+          <span @click="enter(1)">进入</span>
         </div>
         <square-slider :topics ="items[0].topic" :square_type="1"></square-slider>
       </div>
 
 
-      <div>
+      <div class="item">
         <div class="square-item" :style="{'color': color(2)}">
           <span class="square-item-tittle">* 有问必答</span>
-          <span>进入</span>
+          <span @click="enter(2)">进入</span>
         </div>
         <square-slider :topics="items[1].topic" :square_type="2"></square-slider>
         <div class="sub">
-          <p :style="{'color': color(2)}">#{{items[1].question}}</p>
-          <p>{{items[1].answer}}</p>
+          <p :style="{'color': color(2)}">#{{items[1].title}}</p>
+          <p>{{items[1].best_answer}}</p>
         </div>
       </div>
 
-      <div>
+      <div class="item">
         <div class="square-item" :style="{'color': color(3)}">
           <span class="square-item-tittle">* 有嘈必吐</span>
-          <span>进入</span>
+          <span @click="enter(3)">进入</span>
         </div>
         <square-slider :topics="items[2].topic" :square_type="3"></square-slider>
         <div class="sub">
-          <p :style="{'color': color(3)}">#{{items[2].question}}</p>
-          <p>{{items[2].answer}}</p>
+          <p :style="{'color': color(3)}">#{{items[2].title}}</p>
+          <p>{{items[2].best_answer}}</p>
         </div>
       </div>
 
@@ -62,7 +61,6 @@
     position: relative;
     width: 100%;
     height: 238px;
-    /*background-image: url("http://ww1.sinaimg.cn/mw690/6f924588gw1f32g8p67w6j20qo123wjv.jpg");*/
     background-size: cover;
     background-position: center;
   }
@@ -86,9 +84,11 @@
     font-weight: bold;
     margin-bottom: 5px;
   }
-
+  .item{
+    border-bottom: 1px solid #D5D5D5;
+    padding-bottom: 15px;
+  }
   .square-item{
-    /*width:100%;*/
     display: flex;
     justify-content: space-between;
     font-weight: bold;
@@ -96,7 +96,7 @@
   }
   p{
     font-size: 0.9em;
-    margin: 15px 0 7px;
+    margin: 15px 0 0;
     /* 保持三行  */
     overflow : hidden;
     text-overflow: ellipsis;
@@ -124,7 +124,7 @@
 export default{
   data:function (){
     return{
-      activity:{
+    activity:{
         cover_img:'http://ww1.sinaimg.cn/mw690/6f924588gw1f32g8p67w6j20qo123wjv.jpg',
         tittle:"小清新电影《一半》正在上映",
         user_name:"影视文化协会",
@@ -134,37 +134,41 @@ export default{
       items:[
         {
           topic:[
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"其他"}
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"其他"}
           ]
         },
         {
           topic:[
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"其他"}
+            {id: 11,title:"说说那些年做过的最尴尬的事情说说那些年做过的最尴尬的事情说说那些年做过的最尴尬的事情说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"其他"}
           ],
-          question:"你们的饭堂有什么奇葩的菜式?",
-          answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑 ..."
+          id: 12,
+          title:"你们的饭堂有什么奇葩的菜式?",
+          reply_id: 14,
+          best_answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑"
         },
         {
           topic:[
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"你们饭堂有什么奇葩的菜式"},
-            {title:"说说那些年做过的最尴尬的事情"},
-            {title:"其他"}
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"你们饭堂有什么奇葩的菜式"},
+            {id: 11,title:"说说那些年做过的最尴尬的事情"},
+            {id: 11,title:"其他"}
           ],
-          question:"你的坑爹室友做过哪些让你意想不到的事情？",
-          answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑 ..."
+          id: 12,
+          title:"你的坑爹室友做过哪些让你意想不到的事情？",
+          reply_id: 14,
+          best_answer:"本学期起我校全体学生用户的带宽统一为4M且无任何捆绑业务。上学期已完成了对大部分电信8m或20m捆绑手机用户的解绑。"
         }
       ]
     }
@@ -191,6 +195,9 @@ export default{
       }else {
         alert("深夜餐厅只在深夜12点到凌晨6点开放喔~");
       }
+    },
+    enter(index){
+      alert("进入的栏目为"+index);
     }
   },
   components:{
