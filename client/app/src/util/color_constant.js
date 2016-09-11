@@ -7,6 +7,15 @@ export default {
     COLOR_DEMAND_ORANGE: "#FFC107",
     COLOR_DEMAND_AOI: "#0CC998",
     COLOR_DEMAND_GREEN: "#04C830",
-    COLOR_DEMAND_DISABLED: "#cccccc"
+    COLOR_DEMAND_DISABLED: "#cccccc",
 
+  // 广场
+  COLOR_SQUARE_NUO : "#18B803",
+  COLOR_SQUARE_WEN : "#0073FF",
+  COLOR_SQUARE_CAO : "#BD00E7",
+
+  // 有嘈必吐
+  COLOR_CAO_PINK : "#EC407A",
+
+  COLOR_WHITE : "white"
 }
