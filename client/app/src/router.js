@@ -17,6 +17,11 @@ import DemandTask from  'pages/demand/task.vue'
 import DemandLost from  'pages/demand/lost.vue'
 import DemandDating from  'pages/demand/dating.vue'
 
+import DemandPublish from 'pages/demand/demand-publish.vue'
+import TaskPublish from 'pages/demand/task-publish.vue'
+import LostPublish from 'pages/demand/lost-publish.vue'
+import DatingPublish from 'pages/demand/dating-publish.vue'
+
 
 import ChatList from 'pages/message/chat-list.vue'
 export default{
@@ -59,5 +64,22 @@ export default{
   },
   '/chat':{
     component: ChatList
+  },
+  '/demand-publish':{
+    component: DemandPublish,
+    subRoutes:{
+      '/': {
+        component: TaskPublish
+      },
+      '/task':{
+        component: TaskPublish
+      },
+      '/lost': {
+        component: LostPublish
+      },
+      '/dating': {
+        component: DatingPublish
+      }
+    }
   }
 }

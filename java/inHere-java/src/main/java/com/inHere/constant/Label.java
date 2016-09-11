@@ -6,13 +6,34 @@ package com.inHere.constant;
  * @author lwh
  *
  */
-public class Label {
+public enum Label {
 
-	public final static int Expressage = 1; // 快递
-	public final static int Transfer = 2; // 转让
-	public final static int Help = 3; // 帮忙
-	public final static int Lose = 4; // 丢失
-	public final static int PickeUp = 5; // 捡到
-	public final static int Dating = 6; // 走起
+	// 校内吐槽模块
+	Hearsay(1, "小道消息");
+
+	private Integer id;
+
+	private String name;
+
+	private Label(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

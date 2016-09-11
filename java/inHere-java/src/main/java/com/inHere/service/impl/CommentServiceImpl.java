@@ -15,7 +15,7 @@ import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnCommentDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Comment;
-import com.inHere.entity.User;
+import com.inHere.entity.Token;
 import com.inHere.service.CommentService;
 
 @Service
@@ -43,10 +43,10 @@ public class CommentServiceImpl implements CommentService {
 	 * @param comments
 	 * @return
 	 */
-	public JSONArray setItems(List<Comment> comments, User user) {
+	public JSONArray setItems(List<Comment> comments, Token token) {
 		JSONArray array = new JSONArray();
 		for (Comment tmp : comments) {
-			ReturnCommentDto commentDto = this.setCommentDto(tmp, user);
+			ReturnCommentDto commentDto = this.setCommentDto(tmp, token);
 			array.add(commentDto);
 		}
 		return array;
@@ -58,7 +58,7 @@ public class CommentServiceImpl implements CommentService {
 	 * @param tmp
 	 * @return
 	 */
-	public ReturnCommentDto setCommentDto(Comment tmp, User user) {
+	public ReturnCommentDto setCommentDto(Comment tmp, Token token) {
 		ReturnCommentDto commentDto = new ReturnCommentDto();
 		commentDto.setId(tmp.getId());
 		commentDto.setUser_id(tmp.getUserId());
@@ -70,7 +70,7 @@ public class CommentServiceImpl implements CommentService {
 		if (praiseArray != null) {
 			// 点赞数目
 			commentDto.setPraise(praiseArray.size());
-			boolean flag = praiseArray.contains(user.getUserId());
+			boolean flag = praiseArray.contains(token.getUser_id());
 			// 是否点赞
 			commentDto.setPraised(flag ? Field.Praised_YES : Field.Praised_NO);
 		} else {

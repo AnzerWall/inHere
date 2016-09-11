@@ -8,7 +8,7 @@
           <span class="navbar-item" v-link="{path:'/demand/lost',activeClass:'current'}">失物</span>
           <span class="navbar-item" v-link="{path:'/demand/dating',activeClass:'current'}">走起</span>
         </div>
-        <div class="demand-head-icon">
+        <div class="demand-head-icon" v-link="{path:'/demand-publish/task'}">
           <add-icon></add-icon>
         </div>
 

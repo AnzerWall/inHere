@@ -192,13 +192,13 @@
 		resultMap="BaseResultMap">
 		select d.*
 		from tb_demand d
-		<if test="user != null">
+		<if test="tokenEntity.school_id != null">
 			, tb_user u
 		</if>
 		<where>
-			<if test="user != null">
+			<if test="tokenEntity.school_id != null">
 				d.`user_id` = u.`user_id` and u.`school_id` =
-				#{user.schoolId}
+				#{tokenEntity.school_id}
 			</if>
 			<if test="ext_type != null">
 				<foreach collection="ext_type" item="item" open="AND d.`ext_type` in("
@@ -226,13 +226,13 @@
 	<!-- 获取总条数 -->
 	<select id="getCount" parameterType="ParamsListDto" resultType="Integer">
 		SELECT COUNT(d.`id`) FROM tb_demand d
-		<if test="user != null">
+		<if test="tokenEntity.school_id != null">
 			, tb_user u
 		</if>
 		<where>
-			<if test="user != null">
+			<if test="tokenEntity.school_id != null">
 				d.`user_id` = u.`user_id` and u.`school_id` =
-				#{user.schoolId}
+				#{tokenEntity.school_id}
 			</if>
 			<if test="ext_type != null">
 				<foreach collection="ext_type" item="item" open="AND d.`ext_type` in("
@@ -257,7 +257,8 @@
 		FROM
 		tb_demand d, tb_comment c
 		WHERE d.`id` = #{item_id}
-		AND d.`id` = c.`record_id`
+		AND d.`id` =
+		c.`record_id`
 		AND d.`ext_type` = c.`ext_type`
 		limit #{offset}, #{limit}
 	</select>

@@ -35,7 +35,7 @@ CREATE TABLE `tb_ask_reply` (
   `ext_type` int(11) NOT NULL COMMENT '类别',
   `ext_data` json DEFAULT NULL COMMENT '类别数据',
   `label_id` int(11) NOT NULL COMMENT '标签id',
-  `title` varchar(100) NOT NULL COMMENT '标题',
+  `title` varchar(100) NULL COMMENT '标题',
   `content` varchar(512) DEFAULT NULL COMMENT '内容',
   `photos` varchar(300) DEFAULT NULL COMMENT '图片',
   `comment_num` int(11) DEFAULT NULL COMMENT '评论人数',
@@ -139,6 +139,7 @@ DROP TABLE IF EXISTS `tb_label`;
 
 CREATE TABLE `tb_label` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '标签编号',
+  `ext_type` int(11) NOT NULL COMMENT '类别',
   `name` varchar(100) NOT NULL COMMENT '标签名称',
   `num` int(11) DEFAULT NULL COMMENT '标签数量',
   PRIMARY KEY (`id`)

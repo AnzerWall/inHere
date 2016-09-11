@@ -3,15 +3,16 @@ package com.inHere.dao;
 import com.inHere.entity.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(String userId);
 
-    int insert(User record);
+	// 删除一个账号
+	public int deleteByPrimaryKey(String userId);
 
-    int insertSelective(User record);
+	// 值选择插入
+	public int insertSelective(User record);
 
-    User selectByPrimaryKey(String userId);
+	// 获取一个账号
+	public User selectByPrimaryKey(String userId);
 
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+	// 值选择更新
+	public int updateByPrimaryKeySelective(User record);
 }
