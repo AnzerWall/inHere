@@ -76,6 +76,7 @@ public class GlobalExceptionHandler {
 		} else {
 			result.put("code", Code.Error.getCode());
 			result.put("status", Code.Error.getStatus());
+			result.put("message", ex.getMessage());
 			// 填充返回数据
 			view.setAttributesMap(result);
 			mv.setView(view);

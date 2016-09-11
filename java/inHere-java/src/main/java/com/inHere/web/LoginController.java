@@ -46,10 +46,10 @@ public class LoginController {
 	public ReturnBaseDto<UserDto> login(@RequestBody Map<String, Object> params) throws IOException {
 		ReturnBaseDto<UserDto> result = new ReturnBaseDto<UserDto>();
 		log.info("进入login()中-----");
-		String user_id = (String) params.get("account");
-		String password = (String) params.get("password");
+		String user_id = (String) params.get("user_id");
+		String passwd = (String) params.get("passwd");
 
-		UserDto userDto = loginService.login(user_id, password);
+		UserDto userDto = loginService.login(user_id, passwd);
 		if (userDto == null) {
 			result.setCode(Code.InputErr.getCode());
 			result.setStatus(Code.InputErr.getStatus());
@@ -64,6 +64,7 @@ public class LoginController {
 
 	/**
 	 * 退出删除一个一个Token资源
+	 * 
 	 * @param token
 	 * @return
 	 */
@@ -78,14 +79,16 @@ public class LoginController {
 		result.setStatus(Code.Success.getStatus());
 		return result;
 	}
-	
+
 	/**
-	 * 注册一个Token资源
+	 * TODO 注册一个Token资源
+	 * 
 	 * @return
 	 */
 	@RequestMapping(path = "/logup", method = RequestMethod.POST)
-	public ReturnBaseDto<JSONObject> logup(){
-		
+	public ReturnBaseDto<JSONObject> logup(@RequestBody Map<String, Object> params) {
+		String user_id = (String) params.get("user_id");
+		String passwd = (String) params.get("passwd");
 		return null;
 	}
 }

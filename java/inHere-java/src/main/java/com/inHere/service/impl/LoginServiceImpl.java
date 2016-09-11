@@ -44,14 +44,14 @@ public class LoginServiceImpl implements LoginService {
 	 * @return
 	 * @throws IOException
 	 */
-	public UserDto login(String user_id, String password) throws IOException {
+	public UserDto login(String user_id, String passwd) throws IOException {
 		User user = userMapper.selectByPrimaryKey(user_id);
 		if (user == null)
 			return null;
 		log.info(user.toString());
 		String saltKey = user.getSaltKey();
 		// 获取加盐加密密码
-		String safePwd = securityService.encrypt(saltKey, password);
+		String safePwd = securityService.encrypt(saltKey, passwd);
 		// 校验密码正确性
 		if (user.getPasswd().equals(safePwd)) {
 			// 创建返回user传输对象

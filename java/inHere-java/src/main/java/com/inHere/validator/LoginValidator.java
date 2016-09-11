@@ -27,10 +27,10 @@ public class LoginValidator {
 	 */
 	public ReturnBaseDto<JSONObject> login(@RequestBody Map<String, Object> params) {
 		log.info("login参数校验");
-		String user_id = (String) params.get("account");
-		String password = (String) params.get("password");
+		String user_id = (String) params.get("user_id");
+		String passwd = (String) params.get("passwd");
 		// return null通过校验
-		if (user_id != null && password != null) {
+		if (user_id != null && passwd != null) {
 			return null;
 		}
 		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
