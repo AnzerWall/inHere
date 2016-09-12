@@ -1,7 +1,15 @@
 package com.inHere.entity;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+/**
+ * 吐槽+问答
+ * 
+ * @author lwh
+ *
+ */
 public class AskReply {
 
 	private Integer id;
@@ -19,6 +27,16 @@ public class AskReply {
 	private String low;
 
 	private Label label; // 关联标签
+
+	private Comment bestReply; // 最火的评论或答案
+
+	public Comment getBestReply() {
+		return bestReply;
+	}
+
+	public void setBestReply(Comment bestReply) {
+		this.bestReply = bestReply;
+	}
 
 	public Label getLabel() {
 		return label;
@@ -131,4 +149,19 @@ public class AskReply {
 	public void setLow(String low) {
 		this.low = low == null ? null : low.trim();
 	}
+
+	@Override
+	public String toString() {
+		return "AskReply [id=" + id + ", extType=" + extType + ", extData=" + extData + ", labelId=" + labelId
+				+ ", title=" + title + ", content=" + content + ", photos=" + photos + ", commentNum=" + commentNum
+				+ ", userId=" + userId + ", createTime=" + createTime + ", updateTime=" + updateTime + ", praise="
+				+ praise + ", low=" + low + ", label=" + label + ", bestReply=" + bestReply + "]";
+	}
+
+	public Map<String, Object> toMap() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("", "");
+		return map;
+	}
+
 }
