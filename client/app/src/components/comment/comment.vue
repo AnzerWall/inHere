@@ -38,21 +38,12 @@
       fromNow
     },
 
-    props: {
-      user_id:{
-        type:String,
+    props:
 
-      },
-      comments: {
-        type: Array,
-        default: function () {
-          return [];
-        }
-      },
-      main_color:{
-        type:String,
-      }
-    },
+      ['comments','main_color','user_id'],
+
+
+
     data(){
 
       return {}

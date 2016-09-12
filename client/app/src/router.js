@@ -24,6 +24,7 @@ import DatingPublish from 'pages/demand/dating-publish.vue'
 
 
 import ChatList from 'pages/message/chat-list.vue'
+import Cao from 'pages/square/cao.vue'
 export default{
   '/': {
     component: Main,
@@ -64,6 +65,9 @@ export default{
   },
   '/chat':{
     component: ChatList
+  },
+  '/cao':{
+    component:Cao
   },
   '/demand-publish':{
     component: DemandPublish,
