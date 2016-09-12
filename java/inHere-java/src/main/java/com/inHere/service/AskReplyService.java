@@ -1,5 +1,7 @@
 package com.inHere.service;
 
+import java.io.IOException;
+
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.ParamsListDto;
 
@@ -11,6 +13,6 @@ public interface AskReplyService {
 	 * @param params
 	 * @return
 	 */
-	public JSONObject getList(ParamsListDto params);
+	public JSONObject getList(ParamsListDto params)  throws IOException ;
 
 }

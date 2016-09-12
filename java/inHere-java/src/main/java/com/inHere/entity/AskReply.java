@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 吐槽+问答
  * 
@@ -158,9 +160,21 @@ public class AskReply {
 				+ praise + ", low=" + low + ", label=" + label + ", bestReply=" + bestReply + "]";
 	}
 
+	/**
+	 * 返回实体
+	 * 
+	 * @return
+	 */
 	public Map<String, Object> toMap() {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("", "");
+		map.put("id", this.id);
+		map.put("ext_type", this.extType);
+		map.put("user_id", this.userId);
+		map.put("label_id", this.labelId);
+		map.put("label_name", this.label.getName());
+		map.put("create_time", this.getCreateTime());
+		map.put("comment_num", this.commentNum);
+		map.put("praise", JSON.parseObject(praise) == null ? 0 : JSON.parseObject(praise).size());
 		return map;
 	}
 

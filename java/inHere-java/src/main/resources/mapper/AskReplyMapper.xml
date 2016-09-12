@@ -246,26 +246,36 @@
 		<include refid="AskReply_Column_List"></include>
 		,
 		<include refid="Label_Column_List"></include>
-		,
-		<include refid="Comment_Column_List"></include>
+		<if test="type == 12"><!-- 12:问答栏目 -->
+			,
+			<include refid="Comment_Column_List"></include>
+		</if>
 		FROM tb_ask_reply a
-		LEFT JOIN tb_label lab
-		ON( a.`label_id` = lab.`id` )
-		LEFT JOIN tb_comment c ON( c.`ext_type` = a.`ext_type` AND
-		c.`record_id` = a.`id` )
-		WHERE a.`ext_type` = 12
-		AND
-		JSON_LENGTH(c.`praise`) =
-		(
-		SELECT MAX(JSON_LENGTH(c.`praise`)) FROM
-		tb_comment c
-		WHERE c.`ext_type` = a.`ext_type` AND c.`record_id` =
-		a.`id`
-		)
-		ORDER BY
-		a.`create_time`
-		DESC
-		limit 0, 10
+		LEFT JOIN tb_label lab ON( a.`label_id` = lab.`id` )
+		<if test="type == 12"><!-- 12:问答栏目 -->
+			LEFT JOIN tb_comment c ON( c.`ext_type` = a.`ext_type` AND c.`record_id` = a.`id` )
+		</if>
+		WHERE a.`ext_type` = #{type}
+		<if test="label_id != null">
+			AND lab.`id` = #{label_id}
+		</if>
+		<if test="type == 12">
+			AND c.`praise` IS NULL
+			OR
+			JSON_LENGTH(c.`praise`) =
+			(
+			  SELECT MAX(JSON_LENGTH(c.`praise`)) FROM tb_comment c
+			  WHERE c.`ext_type` = a.`ext_type` AND c.`record_id` = a.`id`
+			)
+			GROUP BY a.`id`
+		</if>
+		ORDER BY a.`create_time` DESC
+		limit #{offset}, #{limit}
+	</select>
+	
+	<select id="getCount" resultType="Integer">
+		SELECT COUNT(*) FROM tb_ask_reply a 
+		WHERE a.`ext_type` = 12 
 	</select>
 
 </mapper>

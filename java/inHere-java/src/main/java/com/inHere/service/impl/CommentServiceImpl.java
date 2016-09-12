@@ -27,6 +27,17 @@ public class CommentServiceImpl implements CommentService {
 	private CommentMapper commentMapper;
 
 	/**
+	 * 获取点赞数目
+	 * 
+	 * @param praise
+	 * @return
+	 */
+	public Integer getPraiseSize(String praise) {
+		JSONArray array = JSON.parseArray(praise);
+		return array.size();
+	}
+
+	/**
 	 * 获取列表
 	 * 
 	 * @param comments

@@ -28,4 +28,11 @@ public interface AskReplyMapper {
 	 * @return
 	 */
 	public List<AskReply> selectByParams(ParamsListDto params);
+
+	/**
+	 * 获取总条数
+	 * 
+	 * @return
+	 */
+	public Integer getCount();
 }
