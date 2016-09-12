@@ -1,5 +1,5 @@
 <template>
-    <div class="slider-wrapper" :style="{'background-color':wrapper_color(square_type)}">
+    <div class="slider-wrapper" >
       <div class="slider-header">
         <a class="hot-item" v-for="topic in topics" @click="goToTheTopic(topic.id, square_type)">
           <div class="slider-topic" :style="{opacity: countOpacity($index), 'background-color':color(square_type), 'color':wrapper_color(square_type) }">
@@ -82,7 +82,7 @@ export default{
         case 3:
           return 'white';
         case 4:
-          return ColorValue.COLOR_CAO_PINK;
+          return ColorValue.COLOR_SQUARE_CAO;
         default:
           return 'white';
 
