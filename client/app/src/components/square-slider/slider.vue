@@ -82,7 +82,7 @@ export default{
         case 3:
           return 'white';
         case 4:
-          return ColorValue.COLOR_CAO_PINK;
+          return ColorValue.COLOR_SQUARE_CAO;
         default:
           return 'white';
 
