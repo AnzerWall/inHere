@@ -44,7 +44,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 	public JSONObject getList(ParamsListDto params) throws IOException {
 		JSONObject data = new JSONObject();
 		log.info("进入AskReplyServiceImpl.getList()");
-		List<AskReply> askReplyList = askReplyMapper.selectByParams(params);
+		List<AskReply> askReplyList = askReplyMapper.selectAskReplyByParams(params);
 		ReturnListDto list = new ReturnListDto();
 
 		// 获取总条数
@@ -108,6 +108,18 @@ public class AskReplyServiceImpl implements AskReplyService {
 		map.put("best_reply",
 				tmp.getBestReply() == null ? new HashMap<String, Object>() : tmp.getBestReply().toBestReply());
 		return map;
+	}
+
+	/**
+	 * 获取一条吐槽+问答的详细信息
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public JSONObject getOneAskReply(ParamsListDto params) {
+		JSONObject obj = new JSONObject();
+		
+		return obj;
 	}
 
 }

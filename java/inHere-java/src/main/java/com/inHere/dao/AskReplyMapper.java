@@ -27,7 +27,7 @@ public interface AskReplyMapper {
 	 * @param params
 	 * @return
 	 */
-	public List<AskReply> selectByParams(ParamsListDto params);
+	public List<AskReply> selectAskReplyByParams(ParamsListDto params);
 
 	/**
 	 * 获取总条数
