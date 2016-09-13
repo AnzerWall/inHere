@@ -282,9 +282,5 @@
 		LEFT JOIN tb_label lab ON( a.`label_id` = lab.`id` )
 		WHERE a.`id` = #{item_id}
 	</select>
-	
-	<select id="selectOneAskReply">
-	
-	</select>
 
 </mapper>

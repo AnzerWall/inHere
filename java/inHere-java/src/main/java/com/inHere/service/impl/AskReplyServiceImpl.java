@@ -66,11 +66,11 @@ public class AskReplyServiceImpl implements AskReplyService {
 		log.info("进入AskReplyServiceImpl.getList()");
 
 		// 为空时，查找全部标签数据
-		if( params.getLabel_id() == null ){
+		if (params.getLabel_id() == null) {
 			// 返回最火五条标签数据
 			data.put("labels", this.getHotLabel(params.getType()));
 		}
-		
+
 		// 创建返回列表对象
 		ReturnListDto listDto = new ReturnListDto();
 		// 获取总条数
@@ -268,18 +268,6 @@ public class AskReplyServiceImpl implements AskReplyService {
 			data.put("best_reply", bestReply);
 		}
 		return data;
-	}
-
-	/**
-	 * 获取一条吐槽+问答的详细信息
-	 * 
-	 * @param params
-	 * @return
-	 */
-	public JSONObject getOneAskReply(ParamsListDto params) {
-		JSONObject obj = new JSONObject();
-		
-		return obj;
 	}
 
 }
