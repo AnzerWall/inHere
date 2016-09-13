@@ -2,9 +2,18 @@ package com.inHere.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.inHere.entity.Label;
 
+/**
+ * 标签数据库操作接口
+ * 
+ * @author lwh
+ *
+ */
 public interface LabelMapper {
+
 	int deleteByPrimaryKey(Integer id);
 
 	int insert(Label record);
@@ -18,9 +27,9 @@ public interface LabelMapper {
 	int updateByPrimaryKey(Label record);
 
 	/**
-	 * 获取最火的标签列表
+	 * 获取最火的5条标签列表
 	 * 
 	 * @return
 	 */
-	public List<Label> selectHotLabel();
+	public List<Label> selectHotLabel(@Param("type") Integer type);
 }

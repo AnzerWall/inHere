@@ -69,10 +69,10 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<!-- 获取最火的标签 -->
+	<!-- 获取最火的5条标签 -->
 	<select id="selectHotLabel" resultMap="BaseResultMap">
 		SELECT * FROM tb_label lab
-		WHERE lab.`ext_type` = 10 AND lab.`id` != 1
+		WHERE lab.`ext_type` = #{type} AND lab.`id` != 1
 		ORDER BY lab.`num` DESC
 		LIMIT 0, 5;
 	</select>

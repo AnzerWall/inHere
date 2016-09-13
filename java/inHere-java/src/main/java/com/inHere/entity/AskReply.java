@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSON;
-
 /**
  * 吐槽+问答
  * 
@@ -172,9 +170,7 @@ public class AskReply {
 		map.put("user_id", this.userId);
 		map.put("label_id", this.labelId);
 		map.put("label_name", this.label.getName());
-		map.put("create_time", this.getCreateTime());
-		map.put("comment_num", this.commentNum);
-		map.put("praise", JSON.parseObject(praise) == null ? 0 : JSON.parseObject(praise).size());
+		map.put("create_time", this.getCreateTime().getTime());
 		return map;
 	}
 

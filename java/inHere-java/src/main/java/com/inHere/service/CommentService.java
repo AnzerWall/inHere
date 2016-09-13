@@ -28,4 +28,13 @@ public interface CommentService {
 	 */
 	public JSONArray setItems(List<Comment> comments, Token token);
 
+	/**
+	 * 获取评论总数
+	 * 
+	 * @param ext_type
+	 * @param record_id
+	 * @return
+	 */
+	public Integer getCount(Integer ext_type, Integer record_id);
+
 }

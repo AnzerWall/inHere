@@ -16,7 +16,7 @@ import com.inHere.service.CommonService;
 /**
  * 公共业务模块
  * 
- * @author Administrator
+ * @author lwh
  *
  */
 @Service

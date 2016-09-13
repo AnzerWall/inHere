@@ -16,10 +16,11 @@ public interface AskReplyService {
 	public JSONObject getList(ParamsListDto params) throws IOException;
 
 	/**
-	 * 获取一条吐槽+问答的详细信息
+
+	 * 获取一条详细吐槽或问答信息
 	 * 
 	 * @param params
 	 * @return
 	 */
-	public JSONObject getOneAskReply(ParamsListDto params);
+	public JSONObject getOneAskReply(ParamsListDto params)  throws IOException ;
 }

@@ -42,6 +42,7 @@ public class AskReplyController {
 		Integer limit = params.getLimit() == null ? 10 : params.getLimit();
 		params.setOffset(offset);
 		params.setLimit(limit);
+		params.setType(params.getExt_type()[0]);
 		params.setTokenEntity(token);
 
 		JSONObject data = askReplyService.getList(params);
@@ -55,20 +56,21 @@ public class AskReplyController {
 
 	@Authorization
 	@RequestMapping(path = "/ask_reply/{item_id}", method = RequestMethod.GET)
-	public ReturnBaseDto<JSONObject> getOneAskReply(@PathVariable Integer item_id, @CurrentToken Token token) {
-		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+	public ReturnBaseDto<JSONObject> getAskReply(@PathVariable Integer item_id, @CurrentToken Token token)
+			throws IOException {
 		ParamsListDto params = new ParamsListDto();
-
 		// 实体关联的评论列表分页初始化
 		params.setItem_id(item_id);
 		params.setLimit(10);
 		params.setOffset(0);
 		params.setTokenEntity(token);
 
+		JSONObject data = askReplyService.getOneAskReply(params);
+
+		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
 		result.setCode(Code.Success.getCode());
 		result.setStatus(Code.Success.getStatus());
-		JSONObject data = askReplyService.getOneAskReply(params);
-		result.setData(data == null ? new JSONObject() : data);
+		result.setData(data);
 		return result;
 	}
 

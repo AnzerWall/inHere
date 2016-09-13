@@ -1,7 +1,10 @@
 package com.inHere.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.Comment;
 
 public interface CommentMapper {
@@ -26,4 +29,19 @@ public interface CommentMapper {
 	 * @return
 	 */
 	public Integer getCount(@Param("ext_type") Integer ext_type, @Param("record_id") Integer record_id);
+
+	/**
+	 * 获取评论列表
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public List<Comment> selectList(ParamsListDto params);
+
+	/**
+	 * 获取最火的评论
+	 * 
+	 * @return
+	 */
+	public Comment selectBestComment(@Param("type") Integer type, @Param("record_id") Integer record_id);
 }
