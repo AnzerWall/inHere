@@ -1,15 +1,22 @@
 package com.inHere.web;
 
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
+import com.inHere.annotation.Params;
+import com.inHere.constant.Code;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.entity.Token;
+import com.inHere.service.AskReplyService;
+import com.inHere.validator.AskReplyValidator;
 
 /**
  * 问答+吐槽Controller <br>
@@ -21,18 +28,27 @@ import com.inHere.entity.Token;
 @RestController
 public class AskReplyController {
 
+	@Autowired
+	private AskReplyService askReplyService;
+
 	@Authorization
-	// @Params(AskReplyValidator.class)
+	@Params(AskReplyValidator.class)
 	@RequestMapping(path = "/ask_reply", method = RequestMethod.GET)
-	public ReturnBaseDto<JSONArray> getAskReplyList(ParamsListDto params, @CurrentToken Token token) {
+	public ReturnBaseDto<JSONObject> getAskReplyList(ParamsListDto params, @CurrentToken Token token) throws IOException {
 		// 初始化参数
 		Integer offset = params.getOffset() == null ? 0 : params.getOffset();
 		Integer limit = params.getLimit() == null ? 10 : params.getLimit();
 		params.setOffset(offset);
 		params.setLimit(limit);
 		params.setTokenEntity(token);
-		
-		return null;
+
+		JSONObject data = askReplyService.getList(params);
+
+		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+		result.setCode(Code.Success.getCode());
+		result.setStatus(Code.Success.getStatus());
+		result.setData(data);
+		return result;
 	}
 
 }

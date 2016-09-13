@@ -10,7 +10,6 @@
           <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/task',activeClass:'high'}">任务</div>
           <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/lost',activeClass:'high'}">失物</div>
           <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/dating',activeClass:'high'}">走起</div>
-          <!--<span class="navbar-item" v-link="{path:'/demand/dating',activeClass:'current'}">走起</span>-->
         </div>
 
         <div class="publish-nav confirm-icon">

@@ -1,10 +1,16 @@
 <template>
 <!--图文-->
-  <publish-picture :imagePublish></publish-picture>
+  <div>
+    <publish-picture :imagePublish></publish-picture>
+  </div>
 
 <!--详情-->
-  <publish-text :key="items[0].datingKey"></publish-text>
+  <!--人均消费-->
+  <div>
+    <publish-text :key="items[0].datingKey" :msg.sync="per_cost"></publish-text>
+  </div>
 
+  <!--陪同对象-->
   <div class="dating-detail">
     <div class="dating-key">{{items[1].datingKey}}</div>
     <div class="dating-value">
@@ -12,14 +18,21 @@
     </div>
   </div>
 
-  <publish-text :key="items[2].datingKey"></publish-text>
-
-  <div class="dating-detail">
-    <div class="dating-key">{{items[3].datingKey}}</div>
-    <div class="dating-value"><input type="text" v-model="msg"></div>
+  <!--地点-->
+  <div>
+    <publish-text :key="items[2].datingKey" :msg.sync="place"></publish-text>
   </div>
 
-  <publish-text :key="items[4].datingKey"></publish-text>
+  <!-时间-->
+  <div class="dating-detail">
+    <div class="dating-key">{{items[3].datingKey}}</div>
+    <div class="dating-value"><input type="text" v-model="msg" :value="start_time"></div>
+  </div>
+
+  <!--集中地-->
+  <div>
+    <publish-text :key="items[4].datingKey" :msg.sync="gathering_place"></publish-text>
+  </div>
 
 </template>
 
@@ -86,7 +99,12 @@
           {sex:"无所谓"},
           {sex:"求女生"},
           {sex:"求男生"}
-        ]
+        ],
+        per_cost:"¥",
+        want_sex:"",
+        place:"",
+        start_time:"",
+        gathering_place:""
       }
     },
     methods:{
@@ -107,7 +125,8 @@
       PublishPicture,
       PublishText
     },
-    computed:{
+    routed:{
+
     }
   }
 </script>

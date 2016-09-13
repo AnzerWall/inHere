@@ -84,7 +84,7 @@
         list: [],
         data: {}
       }
-    },
+    }
 
   }
 </script>

@@ -4,119 +4,125 @@ $BORDER_RADIUS_SMALL: 4px;
 $TEST:#0CC998;
 
 /////////////////////////////////
-
-.demand-card-wrapper {
-  border-radius: $BORDER_RADIUS;
+.demand-card-wrapper{
   position: relative;
-  color: white;
-  margin: 10px;
-  background-color: white;
-  padding-top: 10px;
-  .demand-card-head {
-    padding-left: 15px;
-    height: 24px;
-    line-height: 24px;
+  width: 100%;
+  .demand-card {
+    border-radius: $BORDER_RADIUS;
+    //position: relative;
+    color: white;
+    margin: 10px;
+    background-color: white;
+    padding-top: 10px;
+    .demand-card-head {
+      padding-left: 15px;
+      height: 24px;
+      line-height: 24px;
 
-    .tag {
-      display: inline-block;
-      margin-right: 5px;
-      background: white;
-      padding: 5px 8px;
-      line-height: 1rem;
-      font-size: 0.9rem;
-      height: 1em;
-      border-radius: $BORDER_RADIUS_SMALL;
+      .tag {
+        display: inline-block;
+        margin-right: 5px;
+        background: white;
+        padding: 5px 8px;
+        line-height: 1rem;
+        font-size: 0.9rem;
+        height: 1em;
+        border-radius: $BORDER_RADIUS_SMALL;
+      }
     }
-  }
-  .demand-card-content {
-    padding: 10px 15px 30px 15px;
-    font-size: 1rem;
-    .text {
+    .demand-card-content {
+      padding: 10px 15px 30px 15px;
+      font-size: 1rem;
 
-    }
-    .image-space {
-      height: 12.5rem;
-      width: 100%;
-      padding-bottom: 15px;
-    }
-    .image-wrapper {
-      padding-top: 15px;
-      position: absolute;
-      width: 100%;
-      left: 0;
-      white-space: nowrap;
-      overflow-x: auto;
-      .image[lazy=error], .image[lazy=loading] {
-        width: 9rem;
+      .text {
+
       }
-      .image {
-        border: solid 3px white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
-        margin-right: 10px;
-        height: 12rem;
-        &:first-child {
-          margin-left: 25px;
+      .image-space {
+        height: 12.5rem;
+        width: 100%;
+        padding-bottom: 15px;
+      }
+      .image-wrapper {
+        padding-top: 15px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        white-space: nowrap;
+        overflow-x: auto;
+        .image[lazy=error], .image[lazy=loading] {
+          width: 9rem;
         }
-        &:last-child {
-          margin-right: 25px;
+        .image {
+          border: solid 3px white;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, .2);
+          margin-right: 10px;
+          height: 12rem;
+          &:first-child {
+            margin-left: 25px;
+          }
+          &:last-child {
+            margin-right: 25px;
+          }
+        }
+        &.hide-scroll::-webkit-scrollbar,
+        &.hide-scroll::-webkit-scrollbar-track,
+        &.hide-scroll::-webkit-scrollbar-thumb {
+          width: 0;
+          border-width: 0;
+          height: 0;
         }
       }
-      &.hide-scroll::-webkit-scrollbar,
-      &.hide-scroll::-webkit-scrollbar-track,
-      &.hide-scroll::-webkit-scrollbar-thumb {
-        width: 0;
-        border-width: 0;
-        height: 0;
-      }
     }
-  }
-  .demand-card-tail {
-    background: rgba(0, 0, 0, .1);
-    padding: 0 15px;
-    font-size: 0.8rem;
-    .normal {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 35px;
-      line-height: 35px;
-      width: 100%;
-      .left {
+    .demand-card-tail {
+      background: rgba(0, 0, 0, .1);
+      padding: 0 15px;
+      font-size: 0.8rem;
+      .normal {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        .time {
-          display: inline-block;
-          margin-right: 15px;
+        height: 35px;
+        line-height: 35px;
+        width: 100%;
+        .left {
+          display: flex;
+          align-items: center;
+          .time {
+            display: inline-block;
+            margin-right: 15px;
+          }
+          .tag {
+            display: inline-block;
+            font-weight: bold;
+          }
         }
-        .tag {
-          display: inline-block;
-          font-weight: bold;
+        .right {
+          display: flex;
+          align-items: center;
+          .pay , .like-text {
+            display: inline-block;
+          }
+          .icon {
+            display: inline-block;
+            margin-left: 5px;
+          }
+          .like-icon{
+            display: inline-block;
+            margin-left: 5px;
+            transform: translateY(-9px);
+          }
         }
       }
-      .right {
-        display: flex;
-        align-items: center;
-        .pay , .like-text {
-          display: inline-block;
-        }
-        .icon {
-          display: inline-block;
-          margin-left: 5px;
-        }
-        .like-icon{
-          display: inline-block;
-          margin-left: 5px;
-          transform: translateY(-9px);
-        }
+      .btn {
+        width: 100%;
+        height: 55px;
+        line-height: 55px;
+        text-align: center;
+        font-weight: bold;
       }
     }
-    .btn {
-      width: 100%;
-      height: 55px;
-      line-height: 55px;
-      text-align: center;
-      font-weight: bold;
-    }
-  }
 
+  }
 }
+
+
