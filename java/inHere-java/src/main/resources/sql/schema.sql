@@ -52,7 +52,7 @@ CREATE TABLE `tb_ask_reply` (
 DROP TABLE IF EXISTS `tb_ask_reply_user`;
 
 CREATE TABLE `tb_ask_reply_user` (
-  `id` int(11) NOT NULL COMMENT 'follow关注编号',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'follow关注编号',
   `user_id` varchar(100) NOT NULL COMMENT '用户账号',
   `ask_reply_id` int(11) NOT NULL COMMENT '问答id',
   PRIMARY KEY (`id`)

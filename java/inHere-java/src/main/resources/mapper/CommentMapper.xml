@@ -158,30 +158,28 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<update id="updateByPrimaryKey" parameterType="com.inHere.entity.Comment">
-		update tb_comment
-		set ext_type = #{extType,jdbcType=INTEGER},
-		record_id =
-		#{recordId,jdbcType=INTEGER},
-		content = #{content,jdbcType=VARCHAR},
-		user_id = #{userId,jdbcType=VARCHAR},
-		create_time =
-		#{createTime,jdbcType=TIMESTAMP},
-		update_time =
-		#{updateTime,jdbcType=TIMESTAMP},
-		low = #{low,jdbcType=CHAR},
-		praise =
-		#{praise,jdbcType=CHAR},
-		floor = #{floor,jdbcType=INTEGER}
-		where id =
-		#{id,jdbcType=INTEGER}
-	</update>
-
 	<!-- 获取总条数 -->
 	<select id="getCount" resultType="Integer">
 		SELECT COUNT(*) FROM tb_comment c
 		WHERE c.`record_id` = #{record_id}
 		AND c.`ext_type` = #{ext_type}
+	</select>
+
+	<!-- 获取评论列表 -->
+	<select id="selectList" resultMap="BaseResultMap">
+		SELECT * FROM tb_comment c
+		WHERE ext_type = #{type} AND record_id = #{item_id}
+		ORDER BY c.`create_time` DESC
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	<!-- 获取最火的评论 -->
+	<select id="selectBestComment" resultMap="BaseResultMap">
+		SELECT * FROM tb_comment c
+		WHERE c.`ext_type` = #{type} AND c.`record_id` = #{record_id}
+		AND JSON_LENGTH(c.`praise`) = 
+		(SELECT MAX(JSON_LENGTH(co.`praise`)) FROM tb_comment co WHERE co.`ext_type` = #{type} AND co.`record_id` = #{record_id} )
+		LIMIT 0, 1
 	</select>
 
 </mapper>

@@ -14,11 +14,12 @@ public class ParamsListDto {
 
 	private Integer limit; // 返回条数
 	private Integer offset;// 偏移量
-	private Integer[] ext_type;// 标签过滤：1-快递，2-转让，3-帮忙, 4-丢失, 5-捡到, 6-走起
+	private Integer[] ext_type;// 标签过滤：1-快递，2-转让，3-帮忙, 4-丢失, 5-捡到, 6-走起,
+								// 10-校内吐槽，11-校外吐槽，12-问答
 	private Integer item_id; // 记录编号
 	private Integer label_id;// 问答+吐槽的标签编号
-	
-	private Integer type; // 标签过滤：10-校内吐槽，11-校外吐槽，12-问答
+
+	private Integer type;// 和ext_type作用相同，在这只是一个类型，非数组
 
 	private Integer is_end;// 结束过滤: 0-未结束，1-已结束
 	private String creator;// 创建者过滤
@@ -29,6 +30,14 @@ public class ParamsListDto {
 
 	// 传参token
 	private Token tokenEntity;
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
 
 	public Integer getItem_id() {
 		return item_id;
@@ -44,14 +53,6 @@ public class ParamsListDto {
 
 	public void setLabel_id(Integer label_id) {
 		this.label_id = label_id;
-	}
-
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
 	}
 
 	public String getTable_name() {
