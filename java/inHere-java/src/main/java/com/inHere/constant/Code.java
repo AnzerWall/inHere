@@ -8,27 +8,27 @@ package com.inHere.constant;
  */
 public enum Code {
 
-	Error("0", "服务器错误"),
-	NotFound("404", "资源不存在"),
-	NoLogin("1000", "用户未登录"),
-	InputErr("1001", "输入异常"),
-	Success("200", "正常");
+	Error(0, "服务器错误"),
+	NotFound(404, "资源不存在"),
+	NoLogin(1000, "用户未登录"),
+	InputErr(1001, "输入异常"),
+	Success(200, "正常");
 
 	// 状态码
-	private String code;
+	private Integer code;
 	// 状态描述
 	private String status;
 
-	private Code(String code, String status) {
+	private Code(Integer code, String status) {
 		this.code = code;
 		this.status = status;
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 
@@ -38,11 +38,6 @@ public enum Code {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return this.getCode();
 	}
 
 }

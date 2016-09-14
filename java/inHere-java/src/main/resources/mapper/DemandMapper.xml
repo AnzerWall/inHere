@@ -254,12 +254,10 @@
 		SELECT
 		d.*,
 		<include refid="Comment_Column_List"></include>
-		FROM
-		tb_demand d, tb_comment c
+		FROM tb_demand d
+		left join tb_comment c on( d.`id` = c.`record_id` and d.`ext_type` = c.`ext_type` )
 		WHERE d.`id` = #{item_id}
-		AND d.`id` =
-		c.`record_id`
-		AND d.`ext_type` = c.`ext_type`
+		order by c.`create_time` desc
 		limit #{offset}, #{limit}
 	</select>
 

@@ -51,6 +51,7 @@ public class DemandController {
 		params.setOffset(offset);
 		params.setLimit(limit);
 		params.setTokenEntity(token);
+		
 		ReturnListDto listDto = demandService.getList(params);
 
 		ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<ReturnListDto>();
@@ -77,7 +78,7 @@ public class DemandController {
 
 		// 实体关联的评论列表分页初始化
 		params.setItem_id(item_id);
-		params.setLimit(10);
+		params.setLimit(5);
 		params.setOffset(0);
 		params.setTokenEntity(token);
 

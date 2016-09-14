@@ -33,7 +33,13 @@ public class CommonServiceImpl implements CommonService {
 		// 判断是否有图片
 		if (photos != null && !photos.trim().equals("")) {
 			// 解析图片信息
-			JSONArray tmpArray = JSON.parseArray(photos);
+			JSONArray tmpArray = null;
+			try {
+				tmpArray = JSON.parseArray(photos);
+			} catch (Exception e) {
+				tmpArray = new JSONArray();
+				tmpArray.add(JSON.parseObject(photos));
+			}
 
 			int len = tmpArray.size();
 			for (int i = 0; i < len; i++) {

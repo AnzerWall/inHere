@@ -39,8 +39,8 @@ public class TokenManage {
 		String tokenStr = securityService.createToken(user.getUserId());
 		Token token = new Token(tokenStr, user.getUserId(), user.getSchoolId(), user.getRoleId());
 		jedis.hmset("token:" + token.getKey(), token.toMap());
-		// 过期时间5个小时
-		jedis.expire("token:" + token.getKey(), 5 * 60 * 60);
+		// 过期时间12个小时
+//		jedis.expire("token:" + token.getKey(), 12 * 60 * 60);
 		return token;
 	}
 

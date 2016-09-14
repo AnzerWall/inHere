@@ -248,9 +248,13 @@
 		<include refid="Label_Column_List"></include>
 		FROM tb_ask_reply a
 		LEFT JOIN tb_label lab ON( a.`label_id` = lab.`id` )
+		LEFT JOIN tb_user u ON( a.`user_id` = u.`user_id` )
 		WHERE a.`ext_type` = #{type}
 		<if test="label_id != null">
 		AND a.`label_id` = #{label_id}
+		</if>
+		<if test="tokenEntity.school_id != null and type == 10">
+		AND u.`school_id` = #{tokenEntity.school_id}
 		</if>
 		<if test="creator != null">
 		AND a.`user_id` = #{creator}

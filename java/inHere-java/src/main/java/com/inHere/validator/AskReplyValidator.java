@@ -15,7 +15,7 @@ import com.inHere.dto.ReturnBaseDto;
  *
  */
 public class AskReplyValidator {
-	
+
 	Logger log = Logger.getLogger(getClass());
 
 	public ReturnBaseDto<JSONObject> getAskReplyList(ParamsListDto params) {
@@ -25,16 +25,16 @@ public class AskReplyValidator {
 			// 正确类型的判断
 			boolean flag = type == Field.ExtType_InTeasing || type == Field.ExtType_OutTeasing
 					|| type == Field.ExtType_AskAnwser;
-			if (!flag) {
-				ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
-				result.setCode(Code.InputErr.getCode());
-				result.setStatus(Code.InputErr.getStatus());
-				result.setMessage("参数有错");
-				return result;
+			if (flag) {
+				return null;
 			}
 		}
 		log.info(params);
-		return null;
+		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+		result.setCode(Code.InputErr.getCode());
+		result.setStatus(Code.InputErr.getStatus());
+		result.setMessage("参数有错");
+		return result;
 	}
 
 }

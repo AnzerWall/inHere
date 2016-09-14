@@ -4,26 +4,26 @@ public class SystemException extends RuntimeException {
 
 	private static final long serialVersionUID = -8516641829524002012L;
 
-	private String code; // 错误编码
+	private Integer code; // 错误编码
 	private String status; // 错误状态描述
 	private String message; // 错误信息
 
-	public SystemException(String code, String status) {
+	public SystemException(Integer code, String status) {
 		this.code = code;
 		this.status = status;
 	}
 
-	public SystemException(String code, String status, String message) {
+	public SystemException(Integer code, String status, String message) {
 		this.code = code;
 		this.status = status;
 		this.message = message;
 	}
 
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 
