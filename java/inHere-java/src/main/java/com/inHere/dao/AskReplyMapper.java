@@ -22,17 +22,25 @@ public interface AskReplyMapper {
 	int updateByPrimaryKeySelective(AskReply record);
 
 	/**
-	 * 获取吐槽+问答列表
+	 * 获取吐槽列表
 	 * 
 	 * @param params
 	 * @return
 	 */
-	public List<AskReply> selectByParams(ParamsListDto params);
+	public List<AskReply> selectList(ParamsListDto params);
 
 	/**
 	 * 获取总条数
 	 * 
 	 * @return
 	 */
-	public Integer getCount();
+	public Integer getCount(ParamsListDto params);
+
+	/**
+	 * 获取一条评论数
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public AskReply selectOne(ParamsListDto params);
 }
