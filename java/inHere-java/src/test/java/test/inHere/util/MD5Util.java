@@ -1,5 +1,7 @@
 package test.inHere.util;
 
+import org.junit.Test;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -56,7 +58,9 @@ public final class MD5Util {
 		}
 	}
 
-	public static void main(String[] args) throws Exception {
+	@Test
+	public void test(){
 		System.out.println("MD5加密后转为字符串：" + encryptToString("123456"));
 	}
+
 }

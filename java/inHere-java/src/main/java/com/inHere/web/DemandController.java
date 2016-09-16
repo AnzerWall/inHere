@@ -62,8 +62,7 @@ public class DemandController {
 	}
 
 	/**
-	 * TODO 去掉 RequestMethod.POST 请求方式
-	 * 
+	 *
 	 * @param item_id
 	 * @return
 	 * @throws IOException
@@ -88,5 +87,7 @@ public class DemandController {
 		result.setData(data == null ? new ReturnDemandDto() : data);
 		return result;
 	}
+
+
 
 }
