@@ -87,8 +87,8 @@ public class LoginController {
 	 */
 	@RequestMapping(path = "/logup", method = RequestMethod.POST)
 	public ReturnBaseDto<JSONObject> logup(@RequestBody Map<String, Object> params) {
-		String user_id = (String) params.get("user_id");
-		String passwd = (String) params.get("passwd");
+//		String user_id = (String) params.get("user_id");
+//		String passwd = (String) params.get("passwd");
 		return null;
 	}
 }

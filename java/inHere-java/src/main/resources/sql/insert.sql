@@ -66,7 +66,7 @@ insert  into `tb_cryptonym`(`id`,`name`) values (1,'追箫梦'),(2,'你们好'),
 
 
 
-/*--------------------------------------*/
+-- --------------------------------------
 
 insert  into `tb_ask_reply`(`id`,`ext_type`,`ext_data`,`label_id`,`title`,`content`,`photos`,`comment_num`,`user_id`,`create_time`,`update_time`,`praise`,`low`) values (1,10,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(2,10,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(3,10,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(4,11,NULL,7,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(5,11,NULL,8,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(6,11,NULL,8,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(7,10,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(8,10,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(9,12,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(10,12,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL),(11,12,NULL,1,NULL,'新生来了，哈哈哈，师妹在哪',NULL,0,'LisaChan','2016-09-11 21:44:15',NULL,NULL,NULL);
 
@@ -84,3 +84,5 @@ insert  into `tb_type`(`id`,`name`,`config`,`create_time`,`update_time`) values 
 
 insert  into `tb_user`(`user_id`,`passwd`,`salt_key`,`user_name`,`head_img`,`contact_way`,`sex`,`area`,`school_id`,`role_id`,`create_time`,`update_time`) values ('anzcrwall','a1395cd7c963fad9647491b0f6116e44bba247c6acfb33d90fd070840a4f8986','506892fe4ec04169925795d24b7db05c',NULL,NULL,NULL,NULL,NULL,1,1,NULL,NULL),('kenefe','40634bbadd4a06331835b64adf936c99a6dd69f458b9c1c0fab5db3113d654e0','49d16e1b403940b58d53faf20b074d92',NULL,NULL,NULL,NULL,NULL,1,1,NULL,NULL),('LisaChan','fbef8dea6b8e41612eac6e76e56fe74e6eda1c5754e24a59c88f7c79910b1a56','3c7e03863203476695e759478a0f339d',NULL,NULL,NULL,NULL,NULL,3,1,NULL,NULL),('LLB','baa669b97f1e2f8572e0ba9c6af6293d346efb1f320744fdabbf0488353c7196','91b48aa7fc564c5c8bcd4f4b717b7115',NULL,NULL,NULL,NULL,NULL,2,1,NULL,NULL),('ni_menhao','62ec7c0cde5d74b3de38522781a66e7433ea7662551d610b007b0682aa81c99b','00a2146e966d4035b8148ff348525dac',NULL,NULL,'{\"qq\": \"123123123\", \"phone\": \"12312312312\", \"wechat\": \"12312351231\"}',NULL,NULL,1,1,NULL,NULL),('yibiao','95855389d40bd320bb24bbf35d4fccad3b3ebe1f1df0aeeac1b90ce32e155c34','ee254f4d96ee48bea244ee101808ffa6','biao','{\"h\": 100, \"w\": 100, \"src\": \"resources/demand/2-max.jpg\"}','{\"qq\": \"123123123\", \"phone\": \"12312312312\", \"wechat\": \"12312351231\"}',0,'肇庆',3,1,'2016-09-09 18:01:43',NULL);
 
+
+-- ---------------------------------------------------------

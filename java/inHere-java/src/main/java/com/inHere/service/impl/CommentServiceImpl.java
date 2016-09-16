@@ -14,7 +14,6 @@ import com.inHere.constant.Field;
 import com.inHere.dao.CommentMapper;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnCommentDto;
-import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Comment;
 import com.inHere.entity.Token;
 import com.inHere.service.CommentService;
@@ -28,14 +27,28 @@ public class CommentServiceImpl implements CommentService {
 	private CommentMapper commentMapper;
 
 	/**
-	 * 获取列表
+	 * 获取评论列表
 	 * 
 	 * @param comments
 	 * @return
 	 * @throws IOException
 	 */
-	public ReturnListDto getList(ParamsListDto params) {
-		return null;
+	public JSONObject getList(ParamsListDto params) {
+		JSONObject data = new JSONObject();
+
+		// 设置总页数
+		Integer total = this.getCount(params.getType(), params.getItem_id());
+		Integer total_page = total / params.getLimit() + 1;
+
+		// 获取评论列表
+		List<Comment> comments = commentMapper.selectList(params);
+
+		data.put("offset", params.getOffset());
+		data.put("limit", params.getLimit());
+		data.put("total", total);
+		data.put("total_page", total_page);
+		data.put("items", this.setItems(comments, params.getTokenEntity()));
+		return data;
 	}
 
 	/**

@@ -17,10 +17,10 @@ public class User {
 	private Integer roleId;
 	private Date createTime;
 	private Date updateTime;
-	
+
 	// school对象
 	private School school;
-	
+
 	public School getSchool() {
 		return school;
 	}
@@ -54,7 +54,7 @@ public class User {
 	}
 
 	public String getUserName() {
-		return userName;
+		return userName != null ? userName : "";
 	}
 
 	public void setUserName(String userName) {
@@ -62,7 +62,7 @@ public class User {
 	}
 
 	public String getHeadImg() throws IOException {
-		return headImg == null ? null :new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
+		return headImg == null ? null : new String(headImg.getBytes("ISO-8859-1"), "UTF-8");
 	}
 
 	public void setHeadImg(String headImg) {
@@ -70,7 +70,7 @@ public class User {
 	}
 
 	public String getContactWay() throws IOException {
-		return contactWay == null ? null :new String(contactWay.getBytes("ISO-8859-1"), "UTF-8");
+		return contactWay == null ? null : new String(contactWay.getBytes("ISO-8859-1"), "UTF-8");
 	}
 
 	public void setContactWay(String contactWay) {
@@ -132,6 +132,5 @@ public class User {
 				+ ", schoolId=" + schoolId + ", roleId=" + roleId + ", createTime=" + createTime + ", updateTime="
 				+ updateTime + ", school=" + school + "]";
 	}
-	
-	
+
 }

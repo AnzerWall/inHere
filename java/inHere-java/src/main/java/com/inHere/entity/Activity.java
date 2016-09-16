@@ -1,135 +1,144 @@
 package com.inHere.entity;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class Activity {
-    private Integer id;
 
-    private String title;
+	private Integer id;
+	private String title;
+	private Integer extType;
+	private String extData;
+	private Date startTime;
+	private Date endTime;
+	private String coverImg;
+	private Integer urlType;
+	private String userId;
+	private Date createTime;
+	private Date updateTime;
+	private String praise;
+	private String urlContent;
 
-    private Integer extType;
+	private User user; // 发布者
 
-    private String extData;
+	public User getUser() {
+		return user;
+	}
 
-    private Date startTime;
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    private Date endTime;
+	public Integer getId() {
+		return id;
+	}
 
-    private String coverImg;
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    private Integer urlType;
+	public String getTitle() {
+		return title;
+	}
 
-    private String userId;
+	public void setTitle(String title) {
+		this.title = title == null ? null : title.trim();
+	}
 
-    private Date createTime;
+	public Integer getExtType() {
+		return extType;
+	}
 
-    private Date updateTime;
+	public void setExtType(Integer extType) {
+		this.extType = extType;
+	}
 
-    private String praise;
+	public String getExtData() throws IOException {
+		return extData != null ? new String(extData.getBytes("ISO-8859-1"), "UTF-8") : "{}";
+	}
 
-    private String urlContent;
+	public void setExtData(String extData) {
+		this.extData = extData == null ? null : extData.trim();
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Date getStartTime() {
+		return startTime;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public Date getEndTime() {
+		return endTime;
+	}
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
-    public Integer getExtType() {
-        return extType;
-    }
+	public String getCoverImg() {
+		return coverImg;
+	}
 
-    public void setExtType(Integer extType) {
-        this.extType = extType;
-    }
+	public void setCoverImg(String coverImg) {
+		this.coverImg = coverImg == null ? null : coverImg.trim();
+	}
 
-    public String getExtData() {
-        return extData;
-    }
+	public Integer getUrlType() {
+		return urlType;
+	}
 
-    public void setExtData(String extData) {
-        this.extData = extData == null ? null : extData.trim();
-    }
+	public void setUrlType(Integer urlType) {
+		this.urlType = urlType;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public String getUserId() {
+		return userId;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
 
-    public Date getEndTime() {
-        return endTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public String getCoverImg() {
-        return coverImg;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setCoverImg(String coverImg) {
-        this.coverImg = coverImg == null ? null : coverImg.trim();
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
-    public Integer getUrlType() {
-        return urlType;
-    }
+	public String getPraise() throws IOException {
+		return praise != null ? new String(praise.getBytes("ISO-8859-1"), "UTF-8") : "{}";
+	}
 
-    public void setUrlType(Integer urlType) {
-        this.urlType = urlType;
-    }
+	public void setPraise(String praise) {
+		this.praise = praise == null ? null : praise.trim();
+	}
 
-    public String getUserId() {
-        return userId;
-    }
+	public String getUrlContent() {
+		return urlContent;
+	}
 
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
+	public void setUrlContent(String urlContent) {
+		this.urlContent = urlContent == null ? null : urlContent.trim();
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	@Override
+	public String toString() {
+		return "Activity [id=" + id + ", title=" + title + ", extType=" + extType + ", extData=" + extData
+				+ ", startTime=" + startTime + ", endTime=" + endTime + ", coverImg=" + coverImg + ", urlType="
+				+ urlType + ", userId=" + userId + ", createTime=" + createTime + ", updateTime=" + updateTime
+				+ ", praise=" + praise + ", urlContent=" + urlContent + ", user=" + user + "]";
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getPraise() {
-        return praise;
-    }
-
-    public void setPraise(String praise) {
-        this.praise = praise == null ? null : praise.trim();
-    }
-
-    public String getUrlContent() {
-        return urlContent;
-    }
-
-    public void setUrlContent(String urlContent) {
-        this.urlContent = urlContent == null ? null : urlContent.trim();
-    }
 }
