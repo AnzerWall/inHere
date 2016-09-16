@@ -13,6 +13,14 @@ public interface ActivityService {
 	 * @param params
 	 * @return
 	 */
-	public JSONObject getList(ParamsListDto params)  throws IOException ;
+	public JSONObject getList(ParamsListDto params) throws IOException;
+
+	/**
+	 * 获取一条活动详情
+	 * 
+	 * @param params
+	 * @return
+	 */
+	public JSONObject getOneActivity(ParamsListDto params) throws IOException;
 
 }

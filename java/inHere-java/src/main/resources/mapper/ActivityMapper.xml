@@ -17,7 +17,7 @@
 		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 		<result column="praise" property="praise" jdbcType="CHAR" />
 	</resultMap>
-	
+
 	<resultMap id="IncludeUserResultMap" type="com.inHere.entity.Activity">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="title" property="title" jdbcType="VARCHAR" />
@@ -44,24 +44,12 @@
 
 	<sql id="Base_Column_List">
 		id, title, ext_type, ext_data, start_time, end_time,
-		cover_img, url_type,
+		cover_img, url_type, url_content
 		user_id,
-		create_time, update_time, praise
+		create_time, update_time,
+		praise
 	</sql>
 
-	<sql id="Blob_Column_List">
-		url_content
-	</sql>
-
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		,
-		<include refid="Blob_Column_List" />
-		from tb_activity
-		where id = #{id,jdbcType=INTEGER}
-	</select>
 
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
@@ -198,23 +186,34 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
+	<!-- 获取一条活动详细 -->
+	<select id="selectByPrimaryKey" resultMap="IncludeUserResultMap"
+		parameterType="java.lang.Integer">
+		select *
+		from tb_activity ac
+		LEFT JOIN tb_user u ON(ac.`user_id` = u.`user_id`)
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
 	<!-- 活动列表 -->
 	<select id="selectActivityList" resultMap="IncludeUserResultMap">
-		SELECT  * 
+		SELECT *
 		FROM tb_activity ac
 		LEFT JOIN tb_user u ON(ac.`user_id` = u.`user_id`)
 		WHERE u.`school_id` = #{tokenEntity.school_id}
-		AND ac.`end_time` > NOW()
+		AND ac.`end_time` >
+		NOW()
 		ORDER BY ac.`start_time` ASC
 		LIMIT #{offset}, #{limit}
 	</select>
-	
+
 	<!-- 获取活动及广告的总条数 -->
 	<select id="getCount" resultType="Integer">
-		SELECT	COUNT(*) FROM tb_activity ac
+		SELECT COUNT(*) FROM
+		tb_activity ac
 		LEFT JOIN tb_user u ON(ac.`user_id` = u.`user_id`)
-		WHERE 
-		u.`school_id` = #{school_id} 
+		WHERE
+		u.`school_id` = #{school_id}
 		AND ac.`end_time` > NOW()
 	</select>
 

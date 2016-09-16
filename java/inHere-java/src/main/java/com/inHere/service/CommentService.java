@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.ParamsListDto;
-import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Comment;
 import com.inHere.entity.Token;
 
@@ -18,7 +18,7 @@ public interface CommentService {
 	 * @return
 	 * @throws IOException
 	 */
-	public ReturnListDto getList(ParamsListDto params);
+	public JSONObject getList(ParamsListDto params);
 
 	/**
 	 * 设置评论列表

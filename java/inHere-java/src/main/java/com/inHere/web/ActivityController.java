@@ -67,7 +67,8 @@ public class ActivityController {
 
 	@Authorization
 	@RequestMapping(path = "/activity/{item_id}", method = RequestMethod.GET)
-	public ReturnBaseDto<JSONObject> getOneActivity(@PathVariable Integer item_id, @CurrentToken Token token) {
+	public ReturnBaseDto<JSONObject> getOneActivity(@PathVariable Integer item_id, @CurrentToken Token token)
+			throws IOException {
 		ParamsListDto params = new ParamsListDto();
 		// 实体关联的评论列表分页初始化
 		params.setItem_id(item_id);

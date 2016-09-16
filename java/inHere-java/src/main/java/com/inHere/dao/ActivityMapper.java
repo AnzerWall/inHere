@@ -14,7 +14,13 @@ public interface ActivityMapper {
 
 	int insertSelective(Activity record);
 
-	Activity selectByPrimaryKey(Integer id);
+	/**
+	 * 获取一条活动
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Activity selectByPrimaryKey(Integer id);
 
 	int updateByPrimaryKeySelective(Activity record);
 
