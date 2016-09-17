@@ -2,192 +2,192 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.UserMapper">
 
-	<resultMap id="BaseResultMap" type="com.inHere.entity.User">
-		<id column="user_id" property="userId" jdbcType="VARCHAR" />
-		<result column="passwd" property="passwd" jdbcType="VARCHAR" />
-		<result column="salt_key" property="saltKey" jdbcType="VARCHAR" />
-		<result column="user_name" property="userName" jdbcType="VARCHAR" />
-		<result column="head_img" property="headImg" jdbcType="VARCHAR" />
-		<result column="contact_way" property="contactWay" jdbcType="CHAR" />
-		<result column="sex" property="sex" jdbcType="BIT" />
-		<result column="area" property="area" jdbcType="VARCHAR" />
-		<result column="school_id" property="schoolId" jdbcType="INTEGER" />
-		<result column="role_id" property="roleId" jdbcType="INTEGER" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-		<association property="school" javaType="School">
-			<!-- id:关联查询用户的唯一标识 column:指定唯一标识用户信息的列 property:映射到School的那个属性 -->
-			<id column="s_school_id" property="id" />
-			<result column="s_school" property="school" />
-		</association>
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.inHere.entity.User">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
+        <result column="salt_key" property="saltKey" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
+        <result column="contact_way" property="contactWay" jdbcType="CHAR"/>
+        <result column="sex" property="sex" jdbcType="BIT"/>
+        <result column="area" property="area" jdbcType="VARCHAR"/>
+        <result column="school_id" property="schoolId" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <association property="school" javaType="School">
+            <!-- id:关联查询用户的唯一标识 column:指定唯一标识用户信息的列 property:映射到School的那个属性 -->
+            <id column="s_school_id" property="id"/>
+            <result column="s_school" property="school"/>
+        </association>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		user_id,
-		passwd,
-		salt_key,
-		user_name,
-		head_img,
-		contact_way,
-		sex,
-		area,
-		school_id,
-		role_id,
-		create_time,
-		update_time
-	</sql>
-	
-	<sql id="Alias_Column_List">
-		u.user_id,
-		u.passwd,
-		u.salt_key,
-		u.user_name,
-		u.head_img,
-		u.contact_way,
-		u.sex,
-		u.area,
-		u.school_id,
-		u.role_id,
-		u.create_time,
-		u.update_time
-	</sql>
+    <sql id="Base_Column_List">
+        user_id,
+        passwd,
+        salt_key,
+        user_name,
+        head_img,
+        contact_way,
+        sex,
+        area,
+        school_id,
+        role_id,
+        create_time,
+        update_time
+    </sql>
 
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select 
-		s.id s_school_id,
-		s.school s_school,
-		<include refid="Alias_Column_List" />
-		from tb_user u
-		left join tb_school s on u.school_id = s.id
-		where u.user_id = #{userId,jdbcType=VARCHAR}
-	</select>
+    <sql id="Alias_Column_List">
+        u.user_id,
+        u.passwd,
+        u.salt_key,
+        u.user_name,
+        u.head_img,
+        u.contact_way,
+        u.sex,
+        u.area,
+        u.school_id,
+        u.role_id,
+        u.create_time,
+        u.update_time
+    </sql>
 
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from
-		tb_user
-		where user_id = #{userId,jdbcType=VARCHAR}
-	</delete>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        s.id s_school_id,
+        s.school s_school,
+        <include refid="Alias_Column_List"/>
+        from tb_user u
+        left join tb_school s on u.school_id = s.id
+        where u.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
 
-	<insert id="insertSelective" parameterType="com.inHere.entity.User">
-		insert into tb_user
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="passwd != null">
-				passwd,
-			</if>
-			<if test="saltKey != null">
-				salt_key,
-			</if>
-			<if test="userName != null">
-				user_name,
-			</if>
-			<if test="headImg != null">
-				head_img,
-			</if>
-			<if test="contactWay != null">
-				contact_way,
-			</if>
-			<if test="sex != null">
-				sex,
-			</if>
-			<if test="area != null">
-				area,
-			</if>
-			<if test="schoolId != null">
-				school_id,
-			</if>
-			<if test="roleId != null">
-				role_id,
-			</if>
-			<if test="createTime != null">
-				create_time,
-			</if>
-			<if test="updateTime != null">
-				update_time,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="userId != null">
-				#{userId,jdbcType=VARCHAR},
-			</if>
-			<if test="passwd != null">
-				#{passwd,jdbcType=VARCHAR},
-			</if>
-			<if test="saltKey != null">
-				#{saltKey,jdbcType=VARCHAR},
-			</if>
-			<if test="userName != null">
-				#{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="headImg != null">
-				#{headImg,jdbcType=VARCHAR},
-			</if>
-			<if test="contactWay != null">
-				#{contactWay,jdbcType=CHAR},
-			</if>
-			<if test="sex != null">
-				#{sex,jdbcType=BIT},
-			</if>
-			<if test="area != null">
-				#{area,jdbcType=VARCHAR},
-			</if>
-			<if test="schoolId != null">
-				#{schoolId,jdbcType=INTEGER},
-			</if>
-			<if test="roleId != null">
-				#{roleId,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
-		</trim>
-	</insert>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from
+        tb_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
 
-	<update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User">
-		update tb_user
-		<set>
-			<if test="passwd != null">
-				passwd = #{passwd,jdbcType=VARCHAR},
-			</if>
-			<if test="saltKey != null">
-				salt_key = #{saltKey,jdbcType=VARCHAR},
-			</if>
-			<if test="userName != null">
-				user_name = #{userName,jdbcType=VARCHAR},
-			</if>
-			<if test="headImg != null">
-				head_img = #{headImg,jdbcType=VARCHAR},
-			</if>
-			<if test="contactWay != null">
-				contact_way = #{contactWay,jdbcType=CHAR},
-			</if>
-			<if test="sex != null">
-				sex = #{sex,jdbcType=BIT},
-			</if>
-			<if test="area != null">
-				area = #{area,jdbcType=VARCHAR},
-			</if>
-			<if test="schoolId != null">
-				school_id = #{schoolId,jdbcType=INTEGER},
-			</if>
-			<if test="roleId != null">
-				role_id = #{roleId,jdbcType=INTEGER},
-			</if>
-			<if test="createTime != null">
-				create_time = #{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				update_time = #{updateTime,jdbcType=TIMESTAMP},
-			</if>
-		</set>
-		where user_id = #{userId,jdbcType=VARCHAR}
-	</update>
+    <insert id="insertSelective" parameterType="com.inHere.entity.User">
+        insert into tb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="passwd != null">
+                passwd,
+            </if>
+            <if test="saltKey != null">
+                salt_key,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="headImg != null">
+                head_img,
+            </if>
+            <if test="contactWay != null">
+                contact_way,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="schoolId != null">
+                school_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="saltKey != null">
+                #{saltKey,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="contactWay != null">
+                #{contactWay,jdbcType=CHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=BIT},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User">
+        update tb_user
+        <set>
+            <if test="passwd != null">
+                passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+            <if test="saltKey != null">
+                salt_key = #{saltKey,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headImg != null">
+                head_img = #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="contactWay != null">
+                contact_way = #{contactWay,jdbcType=CHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=BIT},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="schoolId != null">
+                school_id = #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="roleId != null">
+                role_id = #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </update>
 
 
 </mapper>

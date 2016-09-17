@@ -4,3 +4,5 @@
 .project
 debug.log
 error.log
+/.idea
+/inHere-java.iml

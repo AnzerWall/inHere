@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.inHere.dao.CommentMapper">
+
+	<resultMap id="BaseResultMap" type="com.inHere.entity.Comment">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="ext_type" property="extType" jdbcType="INTEGER" />
+		<result column="record_id" property="recordId" jdbcType="INTEGER" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="user_id" property="userId" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="low" property="low" jdbcType="CHAR" />
+		<result column="praise" property="praise" jdbcType="CHAR" />
+		<result column="floor" property="floor" jdbcType="INTEGER" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, ext_type, record_id, content, user_id, name,
+		create_time,
+		update_time, low,
+		praise,
+		floor
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from tb_comment
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		tb_comment
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<insert id="insert" parameterType="com.inHere.entity.Comment">
+		insert into tb_comment (id,
+		ext_type, record_id,
+		content, user_id, create_time,
+		update_time, low,
+		praise,
+		floor)
+		values (#{id,jdbcType=INTEGER},
+		#{extType,jdbcType=INTEGER},
+		#{recordId,jdbcType=INTEGER},
+		#{content,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP},
+		#{low,jdbcType=CHAR},
+		#{praise,jdbcType=CHAR},
+		#{floor,jdbcType=INTEGER})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.inHere.entity.Comment">
+		insert into tb_comment
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="extType != null">
+				ext_type,
+			</if>
+			<if test="recordId != null">
+				record_id,
+			</if>
+			<if test="content != null">
+				content,
+			</if>
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+			<if test="low != null">
+				low,
+			</if>
+			<if test="praise != null">
+				praise,
+			</if>
+			<if test="floor != null">
+				floor,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="extType != null">
+				#{extType,jdbcType=INTEGER},
+			</if>
+			<if test="recordId != null">
+				#{recordId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				#{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="low != null">
+				#{low,jdbcType=CHAR},
+			</if>
+			<if test="praise != null">
+				#{praise,jdbcType=CHAR},
+			</if>
+			<if test="floor != null">
+				#{floor,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.Comment">
+		update tb_comment
+		<set>
+			<if test="extType != null">
+				ext_type = #{extType,jdbcType=INTEGER},
+			</if>
+			<if test="recordId != null">
+				record_id = #{recordId,jdbcType=INTEGER},
+			</if>
+			<if test="content != null">
+				content = #{content,jdbcType=VARCHAR},
+			</if>
+			<if test="userId != null">
+				user_id = #{userId,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="low != null">
+				low = #{low,jdbcType=CHAR},
+			</if>
+			<if test="praise != null">
+				praise = #{praise,jdbcType=CHAR},
+			</if>
+			<if test="floor != null">
+				floor = #{floor,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<!-- 获取总条数 -->
+	<select id="getCount" resultType="Integer">
+		SELECT COUNT(*) FROM tb_comment c
+		WHERE c.`record_id` = #{record_id}
+		AND c.`ext_type` = #{ext_type}
+	</select>
+
+	<!-- 获取评论列表 -->
+	<select id="selectList" resultMap="BaseResultMap">
+		SELECT * FROM tb_comment c
+		WHERE ext_type = #{type} AND record_id = #{item_id}
+		ORDER BY c.`create_time` DESC
+		LIMIT #{offset}, #{limit}
+	</select>
+
+	<!-- 获取最火的评论 -->
+	<select id="selectBestComment" resultMap="BaseResultMap">
+		SELECT * FROM tb_comment c
+		WHERE c.`ext_type` = #{type} AND c.`record_id` = #{record_id}
+		AND JSON_LENGTH(c.`praise`) = 
+		(SELECT MAX(JSON_LENGTH(co.`praise`)) FROM tb_comment co WHERE co.`ext_type` = #{type} AND co.`record_id` = #{record_id} )
+		LIMIT 0, 1
+	</select>
+
+</mapper>

@@ -13,7 +13,13 @@ public class Field {
 	// 未点赞
 	public final static Integer Praised_NO = 0;
 
-	// -------------------栏目模块常量
+	// 活动内容：URL类型
+	public final static Integer URLType_URL = 0;
+	
+	// 活动内容：模版类型
+	public final static Integer URLType_Model = 1;
+	
+// -------------------栏目模块常量
 	// 快递
 	public final static Integer ExtType_Express = 1;
 	// 转让
