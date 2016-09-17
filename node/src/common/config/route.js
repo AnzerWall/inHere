@@ -5,8 +5,18 @@ export default [
     ["nuo/:id/praise",{
         post:"nuo/praise"
     }],
+    ["nuo/:id/low",{
+        post:"nuo/low"
+    }],
+    ["nuo/:id/participator",{
+        post:"nuo/join_it"
+    }],
+    ["nuo/:id/abnegator",{
+        post:"nuo/give_up"
+    }],
     ["nuo/:id",{
-        post:"nuo/update"
+        post:"nuo/update",
+        get:"nuo/get"
     }],
     ["nuo",{
         post:"nuo/create",

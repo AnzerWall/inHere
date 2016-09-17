@@ -1,0 +1,32 @@
+.nuo-list-wrapper {
+  .nuo-list-head {
+    color: white;
+    height: 60px;
+    background-color: #35ca6e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .nuo-list-head-left {
+       font-size: 1.05rem;
+      padding-left: 15px;
+    }
+    .nuo-list-head-right{
+      padding-right: 15px;
+      .icon{
+        margin-left: 15px;
+      }
+    }
+  }
+  .nuo-list-content{
+      .nuo-card-wrapper{
+        padding: 10px;
+
+      }
+  }
+
+}
+.loading-area {
+  display: flex;
+  justify-content: center;;
+  margin-top: 120px;
+}

@@ -10,6 +10,7 @@ export default class extends think.controller.base {
     this.Token=new TokenService();
   }
   async __before(){
+    this.data=this.http.data;
     let token=this.get("token");
     if(think.isEmpty(token)){
       let Operator=this.service("operator");

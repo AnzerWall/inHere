@@ -24,6 +24,10 @@ import DatingPublish from 'pages/demand/dating-publish.vue'
 
 
 import ChatList from 'pages/message/chat-list.vue'
+
+import  NuoListPage from 'pages/nuo/list.vue'
+import  NuoDetailPage from 'pages/nuo/detail.vue'
+import  CreateNuoPage from 'pages/nuo/create.vue'
 export default{
   '/': {
     component: Main,
@@ -64,6 +68,16 @@ export default{
   },
   '/chat':{
     component: ChatList
+  },
+  '/nuo/:id':{
+    component:NuoDetailPage,
+   // waitForData:true
+  },
+  '/nuo':{
+    component:NuoListPage
+  },
+  '/create-nuo':{
+    component:CreateNuoPage
   },
   '/demand-publish':{
     component: DemandPublish,
