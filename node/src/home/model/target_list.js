@@ -16,18 +16,19 @@ import _ from 'lodash'
  low          json          (NULL)           YES             (NULL)                   select,insert,update,references  踩用户列表
  */
 export default class extends Base {
-    async create(data) {
+    async create(data,operator_id) {
         let now = new Date().toMysqlFormat();
         let doc = {
             title: data.title,
             text: data.text,
-            ext_type: 0,
-            ext_data: '{}',
-            user_id: 'anzerwall',
+            type: 0,
+            type_data: '{}',
+            user_id: operator_id,
             create_time: now,
             update_time: now,
             praise: '{}',
-            low: '{}'
+            low: '{}',
+            target_total:data.target_total
         };
         return this.add(doc);
     }
@@ -42,25 +43,55 @@ export default class extends Base {
         });
     }
 
-    async praise(id) {
-        let user_id = this.parseValue('anzerwall');
-        return await this.execute(`update ${this.getTableName()} set praise=JSON_SET(praise,'$.${user_id}',1),low=JSON_SET(praise,'$.${user_id}',0) where id=${id}`);
+    async praise(id,operator_id) {
+        return await this.execute(`update ${this.getTableName()} set praise=JSON_SET(praise,'$.${operator_id}',1),low=JSON_SET(praise,'$.${operator_id}',0) where id=${id}`);
     }
 
-    async low(id) {
-        let user_id = this.parseValue('anzerwall');
-        return await this.execute(`update ${this.getTableName()} set praise=JSON_SET(praise,'$.${user_id}',0),low=JSON_SET(praise,'$.${user_id}',1) where id=${id}`);
-    }
+    async low(id,operator_id) {
 
+        return await this.execute(`update ${this.getTableName()} set praise=JSON_SET(praise,'$.${operator_id}',0),low=JSON_SET(praise,'$.${operator_id}',1) where id=${id}`);
+    }
+    async get(id, operator_id) {
+
+        let ret = await this.where({id:id})
+            .join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id`)
+            .find();
+        if(!think.isEmpty(ret)){
+            ret.praise = JSON.parse(ret.praise);
+            ret.low = JSON.parse(ret.low);
+            ret.praised = ret.praise[operator_id] == 1;
+            ret.is_low = ret.low[operator_id] == 1;
+            ret.praise_count=_.reduce(ret.praise, (sum, n)=>(sum += (n == 1 ? 1 : 0)), 0);
+            ret.low_count=_.reduce(ret.praise, (sum, n)=>(sum += (n == 0 ? 1 : 0)), 0);
+            ret.has_give_up=(ret.has_give_up===1);
+            ret.status=ret.status||0;
+            ret.process= ret.process||0;
+            ret.process_total= ret.process||0;
+            ret.target_list_id= ret.target_list_id===null?0:ret.target_list_id;
+            ret.create_time=new Date(ret.create_time).getTime();
+            ret.update_time=new Date(ret.update_time).getTime();
+            delete ret.user_id;
+            delete ret.type_data;
+            delete ret.type;
+            delete ret.praise;
+            delete ret.low;
+            delete ret.relation_id;
+            delete ret.target_list_id;
+        }
+
+        return ret;
+
+    }
     async getList(param, operator_id) {
 
-        let ret=await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id and data.is_pass!=1`)
+        let ret=await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id and data.status!=2`)
             .limit(param.offset, param.limit)
             .countSelect();
+
         let items = ret.data;
         if (think.isArray(items)) {
             items.map((item)=> {
-                item.ext_data = JSON.parse(item.ext_data);
+               // item.type_data = JSON.parse(item.type_data);
                 item.praise = JSON.parse(item.praise);
                 item.low = JSON.parse(item.low);
                 item.praised = item.praise[operator_id] == 1;
@@ -68,20 +99,29 @@ export default class extends Base {
                 item.praise_count=_.reduce(item.praise, (sum, n)=>(sum += (n == 1 ? 1 : 0)), 0);
                 item.low_count=_.reduce(item.praise, (sum, n)=>(sum += (n == 0 ? 1 : 0)), 0);
                 item.has_give_up=(item.has_give_up===1);
-                item.is_pass=(item.is_pass===1);
-                item.process= item.process===null?0:item.process;
+                item.status=item.status||0;
+                item.process= item.process||0;
+                item.process_total= item.process||0;
                 item.target_list_id= item.target_list_id===null?0:item.target_list_id;
+                item.create_time=new Date(item.create_time).getTime();
+                item.update_time=new Date(item.update_time).getTime();
+                delete item.user_id;;
+                delete item.type_data;
+                delete item.type;
                 delete item.praise;
                 delete item.low;
-                delete item.id;
+                delete item.relation_id;
+                delete item.target_list_id;
             });
         }
         return {
             count: ret.count,
             items: items,
+            has_next:items.length+param.offset<ret.count,
             limit: param.limit,
             offset: param.offset
         };
     }
+
 
 }
