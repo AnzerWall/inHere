@@ -1,0 +1,153 @@
+$MAIN_COLOR: #25d367;
+.nuo-timeline-wrapper {
+  padding: 0 15px;
+  .nuo-timeline-content {
+
+    padding-left: 40px;
+    position: relative;
+    //overflow: hidden;
+
+    .nuo-timeline-timeline-wrapper {
+      position: absolute;
+      width: 40px;
+      left: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      .nuo-timeline-timeline-circle {
+        flex-shrink: 0;
+        flex-grow: 0;
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        color: white;
+        font-size: 1rem;
+        line-height: 40px;
+        background-color: $MAIN_COLOR;
+        border-radius: 30px;
+      }
+      .nuo-timeline-timeline-line {
+        flex-shrink: 1;
+        flex-grow: 1;
+        width: 40px;
+        border-left: solid 3px $MAIN_COLOR;
+        height: 100%;
+        position: relative;
+        right: -20px;
+      }
+    }
+    .title {
+      color: $MAIN_COLOR;
+      font-weight: bold;
+      font-size: 1.05rem;
+      padding-top: 15px;
+    }
+    .text {
+
+      padding-top: 10px;
+      font-size: 0.80rem;
+      color: #555;
+    }
+    .nuo-timeline-type1 {
+      padding-left: 15px;
+      padding-right: 9px;
+      //width: 100%;
+      display: flex;
+      flex-direction: column;
+      .text {
+        align-self: flex-end;
+      }
+      .process {
+        color: $MAIN_COLOR;
+        font-size: 0.9rem;
+        font-weight: bold;
+        align-self: flex-end;
+        padding-top: 10px;
+        padding-bottom: 5px;
+      }
+    }
+    .nuo-timeline-type2 {
+      padding-left: 15px;
+      padding-right: 9px;
+      //width: 100%;
+      display: flex;
+      flex-direction: column;
+      .nuo-checkbox-list {
+        padding-bottom: 40px;
+      }
+    }
+    .nuo-timeline-type3 {
+      padding-left: 15px;
+      padding-right: 9px;
+      display: flex;
+      flex-direction: column;
+      .time {
+        color: $MAIN_COLOR;
+        align-self: flex-end;
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-bottom: 5px;
+      }
+    }
+    .nuo-timeline-type4 {
+      padding-left: 15px;
+      padding-right: 9px;
+      display: flex;
+      flex-direction: column;
+      .status {
+        color: $MAIN_COLOR;
+        align-self: flex-end;
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-bottom: 5px;
+      }
+    }
+    .nuo-timeline-type5 {
+      padding-left: 15px;
+      padding-right: 9px;
+      display: flex;
+      flex-direction: column;
+      .question {
+        color: $MAIN_COLOR;
+        align-self: flex-end;
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding-top: 15px;
+        padding-bottom: 5px;
+      }
+      //.input-field{
+        input {
+          &:focus { outline: none; }
+
+          border-radius: 7px;
+          border: solid 1px $MAIN_COLOR;
+          padding:12px 8px;
+          font-variant: normal;
+          font-weight: normal;
+          height:47-8*2px;
+
+          outline: hidden;
+        }
+      //}
+
+    }
+
+  }
+  .btn {
+    width: 100%;
+    height: 47px;
+    background-color: $MAIN_COLOR;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 47px;
+    color: white;
+    font-size: 1.1rem;
+
+  }
+  .btn.disable {
+    background-color: #cccccc;
+  }
+
+}

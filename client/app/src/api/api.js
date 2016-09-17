@@ -79,7 +79,9 @@ export default{
         }
 
 
-      }
+      },
+      node_api_base:"http://127.0.0.1:8360",
+      java_api_base:""
     }
 
   }
