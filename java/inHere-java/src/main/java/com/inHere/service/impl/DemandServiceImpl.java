@@ -158,8 +158,7 @@ public class DemandServiceImpl implements DemandService {
     @Transactional
     @Override
     public boolean createDemand(Demand demand) throws IOException {
-        Map<String, Object> ext_data = JSON.parseObject(demand.getExtData());
-        int line = demandMapper.insertSelective(demand, ext_data);
+        int line = demandMapper.insertSelective(demand, demand.getExtDataJSON());
         if (line > 0) {
             return true;
         } else {

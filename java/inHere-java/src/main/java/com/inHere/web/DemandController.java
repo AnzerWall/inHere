@@ -178,7 +178,7 @@ public class DemandController {
         if (Field.ExtType_Express == ext_type) {
             Double pay = Double.parseDouble(multiRequest.getParameter("pay"));
             ext_data.put("pay", pay);
-            demand.setExtData(ext_data.toJSONString());
+            demand.setExtDataJSON(ext_data);
             return demand;
         }
 
@@ -186,6 +186,7 @@ public class DemandController {
         if (Field.ExtType_Sell == ext_type) {
             Double price = Double.parseDouble(multiRequest.getParameter("price"));
             Double original_price = Double.parseDouble(multiRequest.getParameter("original_price"));
+            log.info("--->" + multiRequest.getParameter("quality") );
             String quality = multiRequest.getParameter("quality");
             String buy_time = multiRequest.getParameter("buy_time");
             ext_data.put("price", price);
