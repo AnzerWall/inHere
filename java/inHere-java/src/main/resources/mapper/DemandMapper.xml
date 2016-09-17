@@ -85,70 +85,58 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
-	<insert id="insertSelective" parameterType="com.inHere.entity.Demand">
+	<insert id="insertSelective">
 		insert into tb_demand
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="extType != null">
+			<if test="demand.extType != null">
 				ext_type,
 			</if>
-			<if test="extData != null">
+			<if test="ext_data != null">
 				ext_data,
 			</if>
-			<if test="text != null">
+			<if test="demand.text != null">
 				text,
 			</if>
-			<if test="photos != null">
+			<if test="demand.photos != null">
 				photos,
 			</if>
-			<if test="isEnd != null">
+			<if test="demand.isEnd != null">
 				is_end,
 			</if>
-			<if test="userId != null">
+			<if test="demand.userId != null">
 				user_id,
 			</if>
-			<if test="createTime != null">
+			<if test="true">
 				create_time,
 			</if>
-			<if test="updateTime != null">
-				update_time,
-			</if>
-			<if test="praise != null">
+			<if test="demand.praise != null">
 				praise,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
+			<if test="demand.extType != null">
+				#{demand.extType,jdbcType=INTEGER},
 			</if>
-			<if test="extType != null">
-				#{extType,jdbcType=INTEGER},
+			<if test="ext_data != null">
+				json_object( "price", #{ext_data.price}, "original_price", #{ext_data.original_price}, "quality", #{ext_data.quality}, "buy_time", #{ext_data.buy_time} ),
 			</if>
-			<if test="extData != null">
-				#{extData,jdbcType=CHAR},
+			<if test="demand.text != null">
+				#{demand.text,jdbcType=VARCHAR},
 			</if>
-			<if test="text != null">
-				#{text,jdbcType=VARCHAR},
+			<if test="demand.photos != null">
+				#{demand.photos,jdbcType=CHAR},
 			</if>
-			<if test="photos != null">
-				#{photos,jdbcType=CHAR},
+			<if test="demand.isEnd != null">
+				#{demand.isEnd,jdbcType=TINYINT},
 			</if>
-			<if test="isEnd != null">
-				#{isEnd,jdbcType=TINYINT},
+			<if test="demand.userId != null">
+				#{demand.userId,jdbcType=VARCHAR},
 			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=VARCHAR},
+			<if test="true">
+				now(),
 			</if>
-			<if test="createTime != null">
-				#{createTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="updateTime != null">
-				#{updateTime,jdbcType=TIMESTAMP},
-			</if>
-			<if test="praise != null">
-				#{praise,jdbcType=CHAR},
+			<if test="demand.praise != null">
+				#{demand.praise,jdbcType=CHAR},
 			</if>
 		</trim>
 	</insert>
@@ -260,5 +248,7 @@
 		order by c.`create_time` desc
 		limit #{offset}, #{limit}
 	</select>
+
+
 
 </mapper>

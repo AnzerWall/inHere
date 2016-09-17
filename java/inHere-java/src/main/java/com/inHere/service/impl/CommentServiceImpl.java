@@ -79,7 +79,7 @@ public class CommentServiceImpl implements CommentService {
 		commentDto.setName(tmp.getName());
 		commentDto.setCreate_time(tmp.getCreateTime().getTime());
 		commentDto.setContent(tmp.getContent());
-		// TODO
+
 		JSONObject praiseObj = JSON.parseObject(tmp.getPraise());
 		if (praiseObj != null) {
 			// 点赞数目
