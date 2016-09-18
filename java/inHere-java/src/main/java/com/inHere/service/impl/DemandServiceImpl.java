@@ -1,6 +1,5 @@
 package com.inHere.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Code;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 有求必应业务逻辑
@@ -144,6 +142,8 @@ public class DemandServiceImpl implements DemandService {
         demandDto.setCreate_time(tmp.getCreateTime().getTime());
         demandDto.setUpdate_time(tmp.getUpdateTime().getTime());
         demandDto.setUser_id(tmp.getUserId());
+
+
         demandDto.setExt_data(JSONObject.parseObject(tmp.getExtData()));
         demandDto.setIs_end(tmp.getIsEnd());
         return demandDto;
