@@ -11,7 +11,7 @@ import Square from './square.js'
 //拦截api请求
 export default function (request){
   let mock =mocker(request);
-  mock.timeout = 800;
+  mock.timeout = 300;
   //拦截demand相关请求
   mock.get('/demand',Demand.getList);
   mock.get('/demand/:id', Demand.getDetail);
