@@ -90,7 +90,8 @@ export default{
     },
     goToTheTopic(id, square_type){
       // 根据 square_type类型  和 id 拼接url ，点击跳转到相应的话题详情页面
-
+      this.$emit('goToTheTopic',id,square_type);
+      alert("goToTheTopic");
     }
   },
   props:{

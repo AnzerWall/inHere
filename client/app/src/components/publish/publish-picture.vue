@@ -2,12 +2,13 @@
   <div class="publish">
 
     <div class="dating-content">
-      <textarea class="content-text" placeholder="主人，你有什么需要呢？" :publishText = ""></textarea>
+      <textarea class="content-text" placeholder="主人，你有什么需要呢？" v-model="publish_text"></textarea>
     </div>
 
-    <div class="add-img-wrapper" :style="imgWrapperHeight" :imagePublish>
+    <div class="add-img-wrapper" :style="imgWrapperHeight">
       <!--  multiple="multiple" -->
       <input id="fileUpload"  type="file"  accept="image/jpeg, image/png, image/jpg, image/gif" style="display: none;">
+
       <div id="upload"></div>
 
       <!--图片-->
@@ -15,7 +16,7 @@
         <img class="image"/>
       </div>
       <!--添加按钮-->
-      <div class="add-img order20" v-if="hasAddImage">
+      <div class="add-img order20" v-if="has_add_image">
         <div class="dating-img">
           <image-add  @click="addImage($index)"></image-add>
         </div>
@@ -86,35 +87,26 @@
 
     data(){
       return{
-        items:[
-          {datingKey:"人均消费"},
-          {datingKey:"求陪同"},
-          {datingKey:"地点"},
-          {datingKey:"时间"},
-          {datingKey:"集中地"}
-        ],
         images:[
           {hasImage:false},
           {hasImage:false},
           {hasImage:false},
           {hasImage:false}
         ],
-        hasAddImage:true
+        has_add_image:true
       }
     },
     props:{
-      publishText:{
+      publish_text:{
         type:String,
         default:""
       },
-      imagePublish:{
+      image_publish:{
         type: Array,
         default:""
       }
     },
     methods:{
-
-
       /**
        *    图片上传并预览 这个方法还有问题，，，小泽后期再改 2016.9.9 11：08
         * @param index

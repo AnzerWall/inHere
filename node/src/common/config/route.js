@@ -2,6 +2,9 @@
  * Created by anzer on 2016/9/12.
  */
 export default [
+    ["test",{
+        get:"index/test"
+    }],
     ["nuo/:id/praise",{
         post:"nuo/praise"
     }],
