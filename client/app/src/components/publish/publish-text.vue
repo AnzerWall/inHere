@@ -1,8 +1,8 @@
 <template>
 
-  <div class="dating-detail">
-    <div class="dating-key">{{key}}</div>
-    <div class="dating-value"><input type="text" v-model="msg"></div>
+  <div class="publish-detail">
+    <div class="publish-key">{{key}}</div>
+    <div class="publish-value"><input type="text" v-model="publish_value"></div>
   </div>
 
 </template>
@@ -14,7 +14,7 @@
     text-align:right;
     padding-right: 20px;
   }
-  .dating-detail{
+  .publish-detail {
     width:100%;
     padding: 28px 0;
     font-weight: bold;
@@ -24,7 +24,7 @@
     justify-content: space-between;
     align-content: center;
   }
-  .dating-key{
+  .publish-key {
     padding: 0 18px;
     color: gray;
     opacity: 0.85;
@@ -44,7 +44,7 @@
         required:true,
         default:"备注"
       },
-      msg:{
+      publish_value:{
         type:String,
         required:true,
         default:""
