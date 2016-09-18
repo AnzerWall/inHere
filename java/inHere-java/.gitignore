@@ -6,3 +6,9 @@ debug.log
 error.log
 /.idea
 /inHere-java.iml
+**.log
+**.class
+**.jar
+/src/main/webapp/WEB-INF/classes
+/src/main/webapp/WEB-INF/lib
+

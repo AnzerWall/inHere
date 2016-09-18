@@ -1,17 +1,17 @@
 package com.inHere.service.impl;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
-import org.apache.commons.codec.binary.Base64;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.ReturnPhotoDto;
 import com.inHere.service.CommonService;
+import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 /**
  * 公共业务模块
@@ -21,6 +21,9 @@ import com.inHere.service.CommonService;
  */
 @Service
 public class CommonServiceImpl implements CommonService {
+
+	@Value("${ip.root}")
+	private String ip;
 
 	/**
 	 * 图片解析成List&lt;PhotoDto&gt;传输对象
@@ -64,7 +67,7 @@ public class CommonServiceImpl implements CommonService {
 				Integer h = obj.getInteger("h");
 
 				photo.setMin(min);
-				photo.setSrc(src);
+				photo.setSrc(ip + src);
 				photo.setW(w);
 				photo.setH(h);
 				array.add(photo);

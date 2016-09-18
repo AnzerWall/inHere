@@ -3,7 +3,7 @@ package com.inHere.constant;
 /**
  * 数据库字段常量
  *
- * @author Administrator
+ * @author lwh
  */
 public class Field {
 
@@ -21,6 +21,13 @@ public class Field {
     public final static Integer IsEnd_YES = 1;
     // 未结束
     public final static Integer IsEnd_NO = 0;
+
+    // 性别：女
+    public final static Integer Sex_Woman = 0;
+    // 性别：男
+    public final static Integer Sex_Man = 1;
+    // 性别：不知道
+    public final static Integer Sex_NotKnow = 2;
 
 
 

@@ -6,6 +6,7 @@ import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnListDto;
 import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,15 +38,25 @@ public class DemandValidator extends BaseValidator {
      * @return
      */
     public ReturnBaseDto<JSONObject> createDemandItem(HttpServletRequest request) {
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+
         log.info("进入到--->创建一个需求的参数校验");
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
         // 检查form中是否有enctype="multipart/form-data"
-        if (!multipartResolver.isMultipart(request)) {
-            ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        boolean flag = multipartResolver.isMultipart(request);
+
+        // 将request变成多部分request
+        MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+        String ext_type_str = multiRequest.getParameter("ext_type");
+        flag = ext_type_str != null;
+
+        if (!flag) {
             result.setCode(Code.InputErr.getCode());
             result.setStatus(Code.InputErr.getStatus());
-            result.setMessage("参数有错");
+            result.setMessage("请填写完整信息");
+            return result;
         }
+
         return null;
     }
 

@@ -157,7 +157,7 @@ public class DemandController {
             File minFile = new File(Path.DemandDir + fineName.replace("max", "min"));
             // 保存原图
             file.transferTo(maxFile);
-            // 缩略图创建
+            // 缩略图创建, 按比例缩放
             Thumbnails.of(maxFile).size(50, 50).toFile(minFile);
 
             String uri = Path.DemandUri + fineName;
@@ -174,9 +174,10 @@ public class DemandController {
         }
         demand.setPhotos(photos.toJSONString());
 
-        // 处理快递私有属性
-        if (Field.ExtType_Express == ext_type) {
-            Double pay = Double.parseDouble(multiRequest.getParameter("pay"));
+        // 处理快递私有属性、帮忙私有属性
+        if (Field.ExtType_Express == ext_type || Field.ExtType_Help == ext_type) {
+            String payStr = multiRequest.getParameter("pay"); // 酬金
+            Double pay = payStr != null ? Double.parseDouble(payStr) : null;
             ext_data.put("pay", pay);
             demand.setExtDataJSON(ext_data);
             return demand;
@@ -184,42 +185,56 @@ public class DemandController {
 
         // 处理转让私有属性
         if (Field.ExtType_Sell == ext_type) {
-            Double price = Double.parseDouble(multiRequest.getParameter("price"));
-            Double original_price = Double.parseDouble(multiRequest.getParameter("original_price"));
-            log.info("--->" + multiRequest.getParameter("quality") );
-            String quality = multiRequest.getParameter("quality");
-            String buy_time = multiRequest.getParameter("buy_time");
+            String priceStr = multiRequest.getParameter("price"); // 售价
+            Double price = priceStr != null ? Double.parseDouble(priceStr) : null;
+            String original_priceStr = multiRequest.getParameter("original_price"); // 原价
+            Double original_price = original_priceStr != null ? Double.parseDouble(original_priceStr) : null;
+            String quality = multiRequest.getParameter("quality"); // 成色
+            String buy_time = multiRequest.getParameter("buy_time"); // 购买时间
             ext_data.put("price", price);
             ext_data.put("original_price", original_price);
             ext_data.put("quality", quality);
             ext_data.put("buy_time", buy_time);
-            demand.setExtData(ext_data.toJSONString());
+            demand.setExtDataJSON(ext_data);
             return demand;
         }
 
-        // 处理帮忙私有属性
-        if (Field.ExtType_Help == ext_type) {
-            Double pay = Double.parseDouble(multiRequest.getParameter("pay"));
-            ext_data.put("pay", pay);
-            demand.setExtData(ext_data.toJSONString());
-            return demand;
-        }
-
-        // 处理丢失私有属性
-        if (Field.ExtType_Lost == ext_type) {
-
-            return demand;
-        }
-
-        // 处理找到私有属性
-        if (Field.ExtType_Found == ext_type) {
-
+        // 处理丢失私有属性、找到私有属性
+        if (Field.ExtType_Lost == ext_type || Field.ExtType_Found == ext_type) {
+            String thing = multiRequest.getParameter("thing"); // 物品
+            ext_data.put("thing", thing);
+            log.info("--->" + thing);
+            if (Field.ExtType_Lost == ext_type) {
+                String lose_time = multiRequest.getParameter("lose_time"); // 丢失时间
+                ext_data.put("lose_time", lose_time);
+            }
+            if (Field.ExtType_Found == ext_type) {
+                String pickeup_time = multiRequest.getParameter("pickeup_time"); // 捡到时间
+                ext_data.put("pickeup_time", pickeup_time);
+            }
+            demand.setExtDataJSON(ext_data);
             return demand;
         }
 
         // 处理走起私有属性
         if (Field.ExtType_Dating == ext_type) {
+            String place = multiRequest.getParameter("place"); // 活动地点
 
+            String want_sexStr = multiRequest.getParameter("want_sex"); // 希望性别
+            Integer want_sex = want_sexStr != null ? Integer.parseInt(want_sexStr) : Field.Sex_NotKnow;
+
+            String start_time = multiRequest.getParameter("start_time"); // 开始时间
+            String end_time = multiRequest.getParameter("end_time"); // 结束时间
+            String gathering_time = multiRequest.getParameter("gathering_time"); // 集中时间
+            String gathering_place = multiRequest.getParameter("gathering_place"); // 集中地点
+
+            ext_data.put("place", place);
+            ext_data.put("want_sex", want_sex);
+            ext_data.put("start_time", start_time);
+            ext_data.put("end_time", end_time);
+            ext_data.put("gathering_time", gathering_time);
+            ext_data.put("gathering_place", gathering_place);
+            demand.setExtDataJSON(ext_data);
             return demand;
         }
         return null;
