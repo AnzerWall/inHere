@@ -5,7 +5,7 @@
 
     <!--小纸条主体-->
     <div class="chat-content">
-      <message-card v-for="chat in chats" :item="chat">
+      <message-card v-for="chat in chats" :item="chat" type="chat">
       </message-card>
     </div>
   </div>

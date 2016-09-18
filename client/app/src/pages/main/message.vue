@@ -10,15 +10,15 @@
       </div>
     </div>
     <div class="message-content">
-      <message-card v-for="notice in notices |limitBy num" :item="notice">
+      <message-card v-for="notice in notices |limitBy num" :item="notice" >
       </message-card>
       <!--更多官方提示-->
       <div class="notice-more"  @click="allShow()" v-if="num<notices.length">
         <span class="notice-span">还有{{notices.length-2}}条官方通知</span>
       </div>
 
-      <message-card v-for="item in items" :item="item">
-      </message-card>
+      <!--<message-card v-for="item in items" :item="item">-->
+      <!--</message-card>-->
     </div>
   </div>
 </template>
