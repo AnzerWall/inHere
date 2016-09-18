@@ -1,14 +1,7 @@
 package com.inHere.web;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.inHere.constant.Code;
+import com.inHere.exception.SystemException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,101 +13,113 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import com.inHere.constant.Code;
-import com.inHere.exception.SystemException;
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 文件上传处理
- * 
- * @author lwh
  *
+ * @author lwh
  */
 @RestController
 @RequestMapping("/upload")
 public class UploadController {
 
-	Logger log = Logger.getLogger(getClass());
+    Logger log = Logger.getLogger(getClass());
 
-	@Value("${file.maxSize}")
-	private String maxSize;
+    @Value("${file.maxSize}")
+    private String maxSize;
 
-	/**
-	 * 单文件上传
-	 * 
-	 * @param file
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(path = "/one", method = RequestMethod.POST)
-	public Map<String, Object> upload(@RequestParam CommonsMultipartFile file, HttpServletRequest request) {
-		String root = request.getSession().getServletContext().getRealPath("/");
-		log.info("根路径：" + root);
+    @Value("${file.root}")
+    private String root;
 
-		log.info("文件大小：" + file.getSize());
-		if (file.getSize() > Long.parseLong(maxSize)) {
-			throw new SystemException(Code.InputErr.getCode(), Code.InputErr.getStatus(), "文件太大啦，小点吧！");
-		}
+    /**
+     * 单文件上传
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(path = "/one", method = RequestMethod.POST)
+    public Map<String, Object> upload(@RequestParam CommonsMultipartFile file, HttpServletRequest request) {
+        String root = request.getSession().getServletContext().getRealPath("/");
+        log.info("根路径：" + root);
 
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("upload", file.getOriginalFilename());
-		long startTime = System.currentTimeMillis();
-		System.out.println("fileName：" + file.getOriginalFilename());
-		String path = "E:/" + new Date().getTime() + file.getOriginalFilename();
+        log.info("文件大小：" + file.getSize());
+        if (file.getSize() > Long.parseLong(maxSize)) {
+            throw new SystemException(Code.InputErr.getCode(), Code.InputErr.getStatus(), "文件太大啦，小点吧！");
+        }
 
-		File newFile = new File(path);
-		// 通过CommonsMultipartFile的方法直接写文件（注意这个时候）
-		try {
-			file.transferTo(newFile);
-		} catch (IOException e) {
-			String msg = "文件保存失败";
-			throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), msg);
-		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("方法二的运行时间：" + String.valueOf(endTime - startTime) + "ms");
-		return map;
-	}
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("upload", file.getOriginalFilename());
+        long startTime = System.currentTimeMillis();
+        System.out.println("fileName：" + file.getOriginalFilename());
+        String path = "E:/" + new Date().getTime() + file.getOriginalFilename();
 
-	/**
-	 * 多文件上传
-	 * 
-	 * @param request
-	 * @return
-	 * @throws IOException
-	 */
-	@RequestMapping(path = "/more", method = RequestMethod.POST)
-	public Map<String, Object> upload2(HttpServletRequest request) throws IOException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("upload2", "上传");
+        File newFile = new File(path);
+        // 通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+        try {
+            file.transferTo(newFile);
+        } catch (IOException e) {
+            String msg = "文件保存失败";
+            throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), msg);
+        }
+        long endTime = System.currentTimeMillis();
+        System.out.println("方法二的运行时间：" + String.valueOf(endTime - startTime) + "ms");
+        return map;
+    }
 
-		long startTime = System.currentTimeMillis();
+    /**
+     * 多文件上传
+     *
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(path = "/more", method = RequestMethod.POST)
+    public Map<String, Object> upload2(HttpServletRequest request) throws IOException {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("upload2", "上传");
 
-		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
+        long startTime = System.currentTimeMillis();
 
-		// 检查form中是否有enctype="multipart/form-data"
-		if (multipartResolver.isMultipart(request)) {
+        // 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
+                request.getSession().getServletContext());
 
-			// 将request变成多部分request
-			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+        // 检查form中是否有enctype="multipart/form-data"
+        if (multipartResolver.isMultipart(request)) {
 
-			// 获取multiRequest 中所有的文件名
-			Iterator<String> iter = multiRequest.getFileNames();
+            // 将request变成多部分request
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 
-			while (iter.hasNext()) { // 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next());
-				if (file != null) {
-					String path = "E:/" + file.getOriginalFilename(); // 上传
-					map.put(file.getName(), file.getOriginalFilename());
-					file.transferTo(new File(path));
-				}
-			}
-		}
+            String name = multiRequest.getParameter("name");
 
-		long endTime = System.currentTimeMillis();
-		System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
-		// throw new FileUploadException();
-		return map;
-	}
+            log.info("--->" + name);
+
+            List<MultipartFile> fileList = multiRequest.getFiles("file");
+/*
+            for (MultipartFile file : fileList) {
+                FileType fileType = FileUtil.getTypeByByte(file.getBytes());
+                String fineName = UUID.randomUUID().toString() + "-max." + fileType.getSuffix();
+                File maxFile = new File(root + File.separator + "resources" + File.separator + "test" + File.separator + fineName);
+                File minFile = new File(root + File.separator + "resources" + File.separator + "test" + File.separator + fineName.replace("max", "min"));
+                file.transferTo(maxFile);
+                Thumbnails.of(maxFile).scale(1f).rotate(90).toFile(minFile);
+            }
+*/
+
+        }
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("方法三的运行时间：" + String.valueOf(endTime - startTime) + "ms");
+        // throw new FileUploadException();
+        return map;
+    }
 
 }

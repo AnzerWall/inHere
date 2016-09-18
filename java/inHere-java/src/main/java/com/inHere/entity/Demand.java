@@ -1,5 +1,7 @@
 package com.inHere.entity;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,8 @@ public class Demand {
 	private Date createTime;
 	private Date updateTime;
 	private String praise;
+
+	private JSONObject extDataJSON;
 
 	// 评论列表
 	private List<Comment> comments;
@@ -114,6 +118,14 @@ public class Demand {
 
 	public void setPraise(String praise) {
 		this.praise = praise == null ? null : praise.trim();
+	}
+
+	public JSONObject getExtDataJSON() {
+		return extDataJSON;
+	}
+
+	public void setExtDataJSON(JSONObject extDataJSON) {
+		this.extDataJSON = extDataJSON;
 	}
 
 	@Override

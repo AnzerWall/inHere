@@ -1,0 +1,111 @@
+@import "../common.scss";
+
+$PROCESS_BAR_RADIUS: 8px;
+//.nuo-card-wrapper {
+//  padding: 15px;
+.nuo-card {
+  // height: 160px;
+  background-color: #02cd4f;
+  width: 100%;
+  .nuo-card-detail {
+    .nuo-card-title {
+      color: white;
+      font-size: 1.05rem;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-top: 20px;
+    }
+    .nuo-card-desc {
+      color: white;
+      padding-right: 15px;
+      padding-left: 15px;
+      padding-top: 6px;
+      font-size: 0.85rem;
+      font-weight: 300;
+    }
+    .nuo-card-process {
+      padding: 20px 15px 25px 15px;
+    }
+    .nuo-card-process-like-hate-count {
+      padding: 15px 15px 15px 15px;
+      color: white;
+      font-size: 0.9rem;
+
+      .like-count {
+        display: inline-block;
+      }
+      .hike-count {
+        padding-left: 20px;
+        display: inline-block;
+      }
+      .has-give-up {
+        display: inline-block;
+        float: right;
+        font-size: 1rem;
+        color: rgba(0, 0, 0, .7);
+
+      }
+    }
+  }
+  .nuo-car-tail-like-hate {
+    height: 55px;
+    width: 100%;
+    background: rgba(0, 0, 0, .1);
+    display: flex;
+    justify-content: space-between;
+
+    .btn-like {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 0.90rem;
+    }
+    .btn-hate {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+
+      font-size: 0.90rem;
+    }
+  }
+
+  .nuo-car-tail-join {
+    height: 55px;
+    width: 100%;
+    background-color: #FFD702;
+
+    color: black;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+}
+
+//}
+
+.process-bar-wrapper {
+  background-color: rgb(2, 165, 63);
+  width: 100%;
+  height: 10px;
+  border-radius: $PROCESS_BAR_RADIUS;
+  .process-bar-content {
+    border-radius: $PROCESS_BAR_RADIUS;
+    height: 100%;
+    background-color: white;
+  }
+
+}
+
+.nuo-card-radius-all {
+  border-radius: $BORDER_RADIUS;
+}
+
+.nuo-card-radius-bottom {
+  border-radius: 0 0 $BORDER_RADIUS $BORDER_RADIUS;
+}
