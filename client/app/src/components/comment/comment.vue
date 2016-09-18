@@ -1,4 +1,5 @@
 <template>
+
   <div class="body">
     <div v-for="list in comments" class="content-comment">
       <div class="comment-title" v-if="list.user_id!=user_id">
