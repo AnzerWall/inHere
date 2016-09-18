@@ -10,6 +10,9 @@ export function fromNow(time){
 export function humanized(time){
   return moment(time).format('h:mm A');
 }
+export function date(timestamp){
+  return moment(timestamp).format('YYYY-MM-DD');
+}
 export function now(timestamp){
   return moment(timestamp).format('YYYY-MM-DD HH:mm');
 }

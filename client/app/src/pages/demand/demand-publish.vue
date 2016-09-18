@@ -7,9 +7,9 @@
         <div class="publish-nav publish-nav-back" @click="back">《 发布</div>
 
         <div class="publish-nav-wrapper">
-          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/task',activeClass:'high'}">任务</div>
-          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/lost',activeClass:'high'}">失物</div>
-          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/dating',activeClass:'high'}">走起</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/task',activeClass:'high', replace: true}">任务</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/lost',activeClass:'high', replace: true}">失物</div>
+          <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/dating',activeClass:'high', replace: true}">走起</div>
         </div>
 
         <div class="publish-nav confirm-icon">

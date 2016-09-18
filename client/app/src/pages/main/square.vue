@@ -10,8 +10,9 @@
       <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}">
         <div class="activity-content-bg"></div>
         <div class="activity-content">
-          <div class="square-activity-tittle">{{activity.title}}</div>
-          <span>@{{activity.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;{{activity.start_time | now}} ~ {{activity.end_time | now}}</span>
+          <div class="square-activity-tittle"><span>{{activity.title}}</span></div>
+          <span>@{{activity.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>{{activity.start_time |date}} ~ {{activity.end_time |date}}</span>
         </div>
       </div>
 
@@ -98,6 +99,13 @@
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 5px;
+
+    /* 保持一行  */
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 
   .item {
@@ -141,7 +149,7 @@
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
   import SquareSlider from '../../components/square-slider/slider.vue'
   import ColorValue from '../../util/color_constant.js'
-  import {now} from '../../filter/time'
+  import {date} from '../../filter/time.js'
 
   export default{
     //配置路由钩子
@@ -149,16 +157,26 @@
       //页面加载数据钩子(或者叫事件)
       data(){
         return this.$request
-          .get("/square")//GET方法 url为/demand
-          .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
-          .then(function (data) {
-            //处理数据，具体见vue-router文档data钩子页说明
-            return {
-              activity: data.activity,
-              target: data.target_list,
-              ask_reply: data.ask_reply,
-              teasing: data.teasing
-            }
+          .get("/square")
+          .then(this.$api.checkResult)//处理code等信息，返回data
+          .then((data)=> {
+            //处理数据
+            this.activity=data.activity;
+            this.target=data.target_list;
+            this.ask_reply=data.ask_reply;
+            this.teasing=data.teasing;
+            this.target.items.push({
+              id: 1,
+              title: "更多"
+            });
+            this.ask_reply.items.push({
+              id: 1,
+              title: "更多"
+            });
+            this.teasing.items.push({
+              id: 1,
+              title: "更多"
+            });
           })
       }
     },
@@ -196,6 +214,20 @@
       },
       enter(index){
         alert("进入的栏目为" + index);
+      },
+      goToTheTopic(id, topic_type){
+        // 跳转到对应的栏目
+        // topic_type：1 有诺必行  2 有问必答  3 有嘈必吐
+        // id : 对应栏目下的话题id
+        switch (topic_type){
+          case 1:
+
+          case 2:
+
+          case 3:
+
+        }
+        alert("栏目"+topic_type +"id"+id);
       }
     },
     components: {
@@ -203,7 +235,7 @@
       SquareSlider
     },
     filters: {
-      now
-    },
+      date
+    }
   }
 </script>
