@@ -28,6 +28,9 @@ import ChatList from 'pages/message/chat-list.vue'
 import  NuoListPage from 'pages/nuo/list.vue'
 import  NuoDetailPage from 'pages/nuo/detail.vue'
 import  CreateNuoPage from 'pages/nuo/create.vue'
+
+
+import LoginPage from 'pages/login/login.vue'
 export default{
   '/': {
     component: Main,
@@ -65,6 +68,9 @@ export default{
   },
   '/test':{
     component:Test
+  },
+  '/login':{
+    component:LoginPage
   },
   '/chat':{
     component: ChatList
