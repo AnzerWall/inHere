@@ -8,10 +8,10 @@ package com.inHere.constant;
  */
 public enum Code {
 
-	Error(0, "服务器错误"),
+	Error(500, "服务器错误"),
 	NotFound(404, "资源不存在"),
-	NoLogin(1000, "用户未登录"),
-	InputErr(1001, "输入异常"),
+	NoLogin(401, "未登录"),
+	InputErr(412, "输入异常"),
 	Success(200, "正常");
 
 	// 状态码
