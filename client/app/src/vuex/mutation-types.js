@@ -1,6 +1,4 @@
 /**
  * Created by anzer on 2016/8/31.
  */
-export default{
-
-}
+export  const CHANGE_LOGIN_STATE="CHANGE_LOGIN_STATE";
