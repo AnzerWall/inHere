@@ -15,13 +15,16 @@ let  url_base="http://115.28.67.181:8080";
 let node_api_base="http://127.0.0.1:8360";
  function checkResult(res){
   if(res.ok){
-    if(res.body===undefined){
-      return Promise.reject(new Error("api通讯失败，res.body未定义"))
+    if(typeof res.body!=="object"){
+      return Promise.reject(new Error("api通讯失败，res.body为空"))
     }else{
       if(res.body.code===200){
         return Promise.resolve(res.body.data)
       }else{
-        return Promise.reject(new Error(res.body.status,res.body.code));
+        if(res.body.message)
+          return Promise.reject(new Error(res.body.status+" : "+res.body.message,res.body.code));
+        else
+          return Promise.reject(new Error(res.body.status,res.body.code));
       }
     }
   }else{
