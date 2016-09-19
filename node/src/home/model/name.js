@@ -5,7 +5,7 @@
 import Base from  './base.js'
 
 export default class extends Base {
-    async getNameId(module_type,module_id,user_id){
+    async getName(module_type,module_id,user_id){
         let ret= await this.query(`SELECT tb_name.id,tb_name.name FROM tb_name,tb_name_used WHERE tb_name.id=tb_name_used.name_id AND  module_type=${module_type} AND module_id=${module_id} AND user_id=${this.parseValue(user_id)} limit 1`);
         if(think.isEmpty(ret))return {};
         return ret[0];
@@ -18,5 +18,15 @@ export default class extends Base {
  order by diff
  limit 1) as tb)`
         return await this.execute(sql);
+    }
+    async getNameAndCreateWhenNotExist(module_type,module_id,user_id){
+        let name=await this.getName(module_type,module_id,user_id);
+        if(think.isEmpty(name)){
+            await this.create(module_type,module_id,user_id);
+            name=await this.getName(module_type,module_id,user_id);
+        }
+        if(think.isEmpty(name))return {};
+        return name;
+
     }
 }

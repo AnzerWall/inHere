@@ -5,9 +5,9 @@ import request from '../../api/base.js'
 import {java_api_base as url_base,checkResult} from '../../api/base.js'
 
 
-function login ({dispatch},username,password) {
+export  function login ({dispatch},username,password) {
   console.log(username,password);
-  return request.get(`${url_base}/login`)
+  return request.post(`${url_base}/login`)
     .send({
       user_id:username,
       passwd:password

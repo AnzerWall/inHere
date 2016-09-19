@@ -5,7 +5,7 @@ import  request from  'superagent'
 import  bluebird from 'bluebird'
 import fakeApi from './fake/api.js'
 
-
+window.request=request;
 global.Promise=bluebird;
 
 
