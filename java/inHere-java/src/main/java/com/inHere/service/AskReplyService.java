@@ -1,9 +1,10 @@
 package com.inHere.service;
 
-import java.io.IOException;
-
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.ParamsListDto;
+import com.inHere.entity.AskReply;
+
+import java.io.IOException;
 
 public interface AskReplyService {
 
@@ -23,4 +24,11 @@ public interface AskReplyService {
 	 * @return
 	 */
 	public JSONObject getOneAskReply(ParamsListDto params)  throws IOException ;
+
+	/**
+	 * 创建一个吐槽或问答资源
+	 *
+	 * @return
+	 */
+	public boolean createAskReply(AskReply askReply);
 }

@@ -7,18 +7,15 @@ import com.inHere.annotation.CurrentToken;
 import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
 import com.inHere.constant.Field;
-import com.inHere.constant.FileType;
-import com.inHere.constant.Path;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnDemandDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Demand;
 import com.inHere.entity.Token;
+import com.inHere.service.CommonService;
 import com.inHere.service.DemandService;
-import com.inHere.util.FileUtil;
 import com.inHere.validator.DemandValidator;
-import net.coobird.thumbnailator.Thumbnails;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,13 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 有求必应Controller
@@ -48,6 +41,9 @@ public class DemandController {
 
     @Autowired
     private DemandService demandService;
+
+    @Autowired
+    private CommonService commonService;
 
     /**
      * @param params
@@ -137,43 +133,19 @@ public class DemandController {
         demand.setExtType(ext_type);
         String text = multiRequest.getParameter("text");
         demand.setText(text);
+        // 初始化数据
         demand.setIsEnd(Field.IsEnd_NO);
         demand.setUserId(token.getUser_id());
         demand.setPraise(new JSONObject().toJSONString());
 
-        JSONObject ext_data = new JSONObject();
-        JSONArray photos = new JSONArray();
-
         // 获取上传图片集合
         List<MultipartFile> fileList = multiRequest.getFiles("file");
-
-        // 原图保存及缩略图创建
-        for (MultipartFile file : fileList) {
-            FileType fileType = FileUtil.getTypeByByte(file.getBytes());
-
-            // 生成随机唯一的文件名
-            String fineName = UUID.randomUUID().toString() + "-max." + fileType.getSuffix();
-            File maxFile = new File(Path.DemandDir + fineName);
-            File minFile = new File(Path.DemandDir + fineName.replace("max", "min"));
-            // 保存原图
-            file.transferTo(maxFile);
-            // 缩略图创建, 按比例缩放
-            Thumbnails.of(maxFile).size(50, 50).toFile(minFile);
-
-            String uri = Path.DemandUri + fineName;
-            // 获取图片宽高
-            BufferedImage buff = ImageIO.read(maxFile);
-            Integer w = buff.getWidth();
-            Integer h = buff.getHeight();
-            JSONObject img = new JSONObject();
-            img.put("src", uri);
-            img.put("w", w);
-            img.put("h", h);
-
-            photos.add(img);
-        }
+        // 解析图片
+        JSONArray photos = commonService.resolverPhotos(fileList);
         demand.setPhotos(photos.toJSONString());
 
+        // 私有属性
+        JSONObject ext_data = new JSONObject();
         // 处理快递私有属性、帮忙私有属性
         if (Field.ExtType_Express == ext_type || Field.ExtType_Help == ext_type) {
             String payStr = multiRequest.getParameter("pay"); // 酬金
@@ -225,6 +197,10 @@ public class DemandController {
 
             String start_time = multiRequest.getParameter("start_time"); // 开始时间
             String end_time = multiRequest.getParameter("end_time"); // 结束时间
+
+            String per_cost_Str = multiRequest.getParameter("per_cost"); // 人均消费
+            Double per_cost = per_cost_Str != null ? Double.parseDouble(per_cost_Str) : null;
+
             String gathering_time = multiRequest.getParameter("gathering_time"); // 集中时间
             String gathering_place = multiRequest.getParameter("gathering_place"); // 集中地点
 
@@ -232,8 +208,10 @@ public class DemandController {
             ext_data.put("want_sex", want_sex);
             ext_data.put("start_time", start_time);
             ext_data.put("end_time", end_time);
+            ext_data.put("per_cost", per_cost);
             ext_data.put("gathering_time", gathering_time);
             ext_data.put("gathering_place", gathering_place);
+            ext_data.put("join_list", new JSONObject().toJSONString()); // 参与的人的列表 用hash存储
             demand.setExtDataJSON(ext_data);
             return demand;
         }

@@ -1,32 +1,25 @@
 package com.inHere.service.impl;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Field;
-import com.inHere.constant.LabelEnum;
 import com.inHere.dao.AskReplyMapper;
 import com.inHere.dao.AskReplyUserMapper;
 import com.inHere.dao.CommentMapper;
-import com.inHere.dao.LabelMapper;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.AskReply;
 import com.inHere.entity.AskReplyUser;
 import com.inHere.entity.Comment;
-import com.inHere.entity.Label;
 import com.inHere.entity.Token;
-import com.inHere.service.AskReplyService;
-import com.inHere.service.CommentService;
-import com.inHere.service.CommonService;
-import com.inHere.service.PraiseService;
+import com.inHere.service.*;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AskReplyServiceImpl implements AskReplyService {
@@ -40,9 +33,6 @@ public class AskReplyServiceImpl implements AskReplyService {
 	private CommentMapper commentMapper;
 
 	@Autowired
-	private LabelMapper labelMapper;
-
-	@Autowired
 	private AskReplyUserMapper askReplyUserMapper;
 
 	@Autowired
@@ -54,11 +44,15 @@ public class AskReplyServiceImpl implements AskReplyService {
 	@Autowired
 	private PraiseService praiseService;
 
+	@Autowired
+	private LabelService labelService;
+
 	/**
 	 * 获取吐槽+问答的列表
 	 * 
 	 * @param params
-	 * @return
+	 * 前台传输的参数
+	 * @return JSONObject
 	 * @throws IOException
 	 */
 	public JSONObject getList(ParamsListDto params) throws IOException {
@@ -68,7 +62,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 		// 为空时，查找全部标签数据
 		if (params.getLabel_id() == null) {
 			// 返回最火五条标签数据
-			data.put("labels", this.getHotLabel(params.getType()));
+			data.put("labels", labelService.getHotLabel(params.getType()));
 		}
 
 		// 创建返回列表对象
@@ -96,7 +90,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 	 * @return
 	 * @throws IOException
 	 */
-	public JSONArray getItems(ParamsListDto params) throws IOException {
+	private JSONArray getItems(ParamsListDto params) throws IOException {
 		JSONArray items = new JSONArray();
 		List<AskReply> list = askReplyMapper.selectList(params);
 
@@ -121,41 +115,6 @@ public class AskReplyServiceImpl implements AskReplyService {
 			items.add(item);
 		}
 		return items;
-	}
-
-	/**
-	 * 获取最火的5条标签
-	 * 
-	 * @param type
-	 * @return
-	 */
-	public JSONArray getHotLabel(Integer type) {
-		List<Label> labels = labelMapper.selectHotLabel(type);
-		JSONArray list = new JSONArray();
-
-		if (type == Field.ExtType_InTeasing) {
-			// 校内吐槽，第一条标签为小道消息
-			JSONObject hearsay = new JSONObject();
-			hearsay.put("id", LabelEnum.Hearsay.getId());
-			hearsay.put("name", LabelEnum.Hearsay.getName());
-			list.add(0, hearsay);
-
-			for (int i = 1; i < labels.size() && i < 5; i++) {
-				JSONObject obj = new JSONObject();
-				obj.put("id", labels.get(i).getId());
-				obj.put("name", labels.get(i).getName());
-				list.add(i, obj);
-			}
-
-		} else {
-			for (int i = 0; i < labels.size(); i++) {
-				JSONObject obj = new JSONObject();
-				obj.put("id", labels.get(i).getId());
-				obj.put("name", labels.get(i).getName());
-				list.add(i, obj);
-			}
-		}
-		return list;
 	}
 
 	/**
@@ -268,6 +227,16 @@ public class AskReplyServiceImpl implements AskReplyService {
 			data.put("best_reply", bestReply);
 		}
 		return data;
+	}
+
+	/**
+	 * 创建一个吐槽或问答资源
+	 *
+	 * @return
+	 */
+	public boolean createAskReply(AskReply askReply){
+
+		return true;
 	}
 
 }
