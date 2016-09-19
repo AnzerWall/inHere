@@ -29,18 +29,24 @@
   import {token,login_state,is_login} from '../../vuex/getters.js'
   export default{
     data(){
+
       return {
         username:"",
         password:""
       }
     },
+//    route:{
+//      data(){
+//        console.log(this.$route.query.__ref);
+//      }
+//    },
     methods:{
       onLogin(){
-        console.dir(this);
-//        if(this.username&&this.password){
-//          console.log(this.username,this.password);
-//          this.login(this.username,this.password);
-//        }
+//        console.dir(this);
+        if(this.username&&this.password){
+          console.log(this.username,this.password);
+          this.login(this.username,this.password);
+        }
       }
     },
     vuex: {

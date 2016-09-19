@@ -70,7 +70,8 @@ export default{
     component:Test
   },
   '/login':{
-    component:LoginPage
+    component:LoginPage,
+    name:"login"
   },
   '/chat':{
     component: ChatList

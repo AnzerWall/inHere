@@ -12,15 +12,11 @@ export default class extends Base {
     return this.display();
   }
   async testAction(){
-    let model=this.model('name');
-    //let total=100000;
-    //let list=await model.select();
-    //list.map((item)=>{
-    //  delete item.id;
-    //
-    //  item.random=Math.floor(Math.random()*total);
-    //});
-    //this.model('name').addMany(list);
-    return  this.success(await model.create(0,1,'test3'));
+    console.log(this.operator);
+    let module_type=0;
+    let module_id=10;
+    let NameModel=this.model('name');
+    let operator_fake_name=await NameModel.getNameAndCreateWhenNotExist(module_type,module_id,this.operator.user_id);
+    return  this.success(operator_fake_name);
   }
 }

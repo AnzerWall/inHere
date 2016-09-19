@@ -23,5 +23,21 @@ Vue.use(VueRouter);
 const router = new VueRouter();
 router.map(RouteConfig);
 router.redirect(RedirectConfig);
+//router.beforeEach(function (transition) {
+//  let store=router.app.$store;
+//  if(transition.to.name!="login"&&store.state.user.is_login===false){
+//    transition.redirect({
+//      name: 'login',
+//      // params 和 query 可选
+//      query: {
+//        __ref:transition.to.path
+//      }
+//    })
+//
+//  }else{
+//    transition.next()
+//  }
+//
+//});
 //启动
 router.start(App, '#app');

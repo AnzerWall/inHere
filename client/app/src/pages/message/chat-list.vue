@@ -5,7 +5,7 @@
 
     <!--小纸条主体-->
     <div class="chat-content">
-      <message-card v-for="chat in chats" :item="chat" type="chat">
+      <message-card v-for="chat in chat_list" :item="chat" type="chat">
       </message-card>
     </div>
   </div>
@@ -43,7 +43,7 @@
     data(){
       return {
         newChat: '3',
-        chats: [
+        chat_list: [
           {
             messType:'chat',
             mess: 'more',
