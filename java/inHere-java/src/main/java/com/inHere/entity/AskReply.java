@@ -19,12 +19,13 @@ public class AskReply {
 	private String title;
 	private String content;
 	private String photos;
-	private Integer commentNum;
 	private String userId;
 	private Date createTime;
 	private Date updateTime;
 	private String praise;
 	private String low;
+
+	private Integer commentNum; // 评论数，非字段
 
 	private Label label; // 关联标签
 

@@ -62,7 +62,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 		// 为空时，查找全部标签数据
 		if (params.getLabel_id() == null) {
 			// 返回最火五条标签数据
-			data.put("labels", labelService.getHotLabel(params.getType()));
+			data.put("labels", labelService.getHotLabel(params.getType(), 0, 5));
 		}
 
 		// 创建返回列表对象
@@ -225,18 +225,20 @@ public class AskReplyServiceImpl implements AskReplyService {
 			bestReply.put("id", comment.getId());
 			bestReply.put("best_answer", comment.getContent());
 			data.put("best_reply", bestReply);
+		}else{
+			// 还没评论
+			data.put("praise", 0);
+			data.put("praised", Field.Praised_NO);
+			data.put("best_reply", null);
 		}
 		return data;
 	}
 
 	/**
 	 * 创建一个吐槽或问答资源
-	 *
-	 * @return
 	 */
-	public boolean createAskReply(AskReply askReply){
-
-		return true;
+	public void createAskReply(AskReply askReply){
+		askReplyMapper.insertSelective(askReply);
 	}
 
 }

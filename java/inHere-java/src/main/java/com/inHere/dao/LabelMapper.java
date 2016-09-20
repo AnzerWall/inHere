@@ -12,23 +12,27 @@ import java.util.List;
  */
 public interface LabelMapper {
 
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Label record);
-
-    int insertSelective(Label record);
-
-    Label selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(Label record);
-
-    int updateByPrimaryKey(Label record);
 
     /**
      * 获取最火的5条标签列表
      *
+     * @return Label的list集合
+     */
+    List<Label> selectHotLabel(@Param("type") Integer type, @Param("offset") Integer offset, @Param("limit") Integer limit);
+
+    /**
+     * 插入一条标签
+     *
+     * @param label 新创建的标签
+     * @return 受影响行数
+     */
+    int insertOneLabel(@Param("label") Label label);
+
+    /**
+     * 查找相同名称的标签
+     *
+     * @param name
      * @return
      */
-    public List<Label> selectHotLabel(@Param("type") Integer type, @Param("offset") Integer offset,
-                                      @Param("limit") Integer limit);
+    Label selectSameNameLabel(String name);
 }

@@ -7,8 +7,10 @@ import com.inHere.constant.LabelEnum;
 import com.inHere.dao.LabelMapper;
 import com.inHere.entity.Label;
 import com.inHere.service.LabelService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,15 +22,28 @@ import java.util.List;
 @Service
 public class LabelServiceImpl implements LabelService {
 
+    Logger log = Logger.getLogger(getClass());
 
     @Autowired
     private LabelMapper labelMapper;
 
-    public Label searchLabel(Integer id, String name){
-        Label label = null;
-
-
-
+    /**
+     * 创建一个标签
+     *
+     * @param id 标签编号
+     * @param name 标签名称
+     * @return Label
+     */
+    @Transactional
+    public Label createLabel(Integer id, String name) {
+        // 查找相同的标签
+        Label label = labelMapper.selectSameNameLabel(name);
+        if( label == null ){
+            label = new Label();
+            label.setName(name);
+            labelMapper.insertOneLabel(label);
+            log.info("自动生成主键--->" + label.getId());
+        }
         return label;
     }
 
@@ -38,8 +53,8 @@ public class LabelServiceImpl implements LabelService {
      * @param type
      * @return
      */
-    public JSONArray getHotLabel(Integer type) {
-        List<Label> labels = labelMapper.selectHotLabel(type, 0, 5);
+    public JSONArray getHotLabel(Integer type, Integer offset, Integer limit) {
+        List<Label> labels = labelMapper.selectHotLabel(type, offset, limit);
         JSONArray list = new JSONArray();
 
         if (type == Field.ExtType_InTeasing) {

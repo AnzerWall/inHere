@@ -39,7 +39,7 @@ public class AskReplyValidator {
 	}
 
 	/**
-	 *
+	 * TODO 使用spring的util工具加载spring容器进来，对 label_id 是否存在进行校验
 	 * @param request
 	 * @return
 	 */

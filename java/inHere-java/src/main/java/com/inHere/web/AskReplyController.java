@@ -14,6 +14,7 @@ import com.inHere.entity.Label;
 import com.inHere.entity.Token;
 import com.inHere.service.AskReplyService;
 import com.inHere.service.CommonService;
+import com.inHere.service.LabelService;
 import com.inHere.validator.AskReplyValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,6 +43,9 @@ public class AskReplyController {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private LabelService labelService;
+
     @Authorization
     @Params(AskReplyValidator.class)
     @RequestMapping(path = "/ask_reply", method = RequestMethod.GET)
@@ -57,7 +61,7 @@ public class AskReplyController {
 
         JSONObject data = askReplyService.getList(params);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
@@ -77,7 +81,7 @@ public class AskReplyController {
 
         JSONObject data = askReplyService.getOneAskReply(params);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
@@ -119,15 +123,16 @@ public class AskReplyController {
         AskReply askReply = new AskReply();
 
         Integer ext_type = Integer.parseInt(multiRequest.getParameter("ext_type"));
-        askReply.setExtType(ext_type);
+        askReply.setExtType(ext_type); // 类别
+        askReply.setExtData(new JSONObject().toJSONString()); // 类别私有数据
 
         // 问答有标题
         if (Field.ExtType_AskAnwser == ext_type) {
             String title = multiRequest.getParameter("title");
-            askReply.setTitle(title);
+            askReply.setTitle(title); // 标题
         }
         String content = multiRequest.getParameter("content");
-        askReply.setContent(content);
+        askReply.setContent(content); // 内容
 
         // 标签检测，自定义或选择
         Integer lab_id = Integer.parseInt(multiRequest.getParameter("lab_id"));
@@ -135,19 +140,24 @@ public class AskReplyController {
         // 自定义标签
         if (lab_id == Field.Label_Custom) {
             String lab_name = multiRequest.getParameter("lab_name");
-            Label label = null;
-            askReply.setLabelId(label.getId());
+            Label label = labelService.createLabel(lab_id, lab_name);
+            askReply.setLabelId(label.getId()); // 标签id
         } else { // 选择标签
-            Label label = null;
-            askReply.setLabelId(label.getId());
+            askReply.setLabelId(lab_id); // 标签id
         }
 
         // 获取上传图片集合
         List<MultipartFile> fileList = multiRequest.getFiles("file");
         JSONArray photos = commonService.resolverPhotos(fileList);
+        askReply.setPhotos(photos.toJSONString()); // 图片
 
+        askReply.setUserId(token.getUser_id()); // 用户编号
+        askReply.setPraise( new JSONObject().toJSONString() ); // 点赞用户列表
+        askReply.setLow( new JSONObject().toJSONString() ); // 踩的用户列表
 
-        return null;
+        return askReply;
     }
+
+    //public
 
 }

@@ -103,14 +103,20 @@ public class CommonServiceImpl implements CommonService {
 
             // 生成随机唯一的文件名
             String fineName = UUID.randomUUID().toString() + "-max." + fileType.getSuffix();
-            File maxFile = new File(Path.DemandDir + fineName);
-            File minFile = new File(Path.DemandDir + fineName.replace("max", "min"));
+
+            // 检测文件夹是否存在
+            File photoDir =new File(Path.PhotoDir);
+            if( !(photoDir.exists()) ){
+                photoDir.mkdir();
+            }
+            File maxFile = new File(Path.PhotoDir + fineName);
+            File minFile = new File(Path.PhotoDir + fineName.replace("max", "min"));
             // 保存原图
             file.transferTo(maxFile);
             // 缩略图创建, 按比例缩放
             Thumbnails.of(maxFile).size(30, 30).toFile(minFile);
 
-            String uri = Path.DemandUri + fineName;
+            String uri = Path.PhotoUri + fineName;
             // 获取图片宽高
             BufferedImage buff = ImageIO.read(maxFile);
             Integer w = buff.getWidth();

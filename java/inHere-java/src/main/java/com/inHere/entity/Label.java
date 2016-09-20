@@ -10,6 +10,8 @@ public class Label {
 
 	private Integer id;// 标签编号
 	private String name;// 标签名称
+
+	// 非字段
 	private Integer comment_num;// 该标签评论数
 
 	public Integer getId() {
