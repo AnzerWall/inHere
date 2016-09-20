@@ -2,26 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.LabelMapper">
 
-	<resultMap id="BaseResultMap" type="com.inHere.entity.Label">
+	<resultMap id="BaseResultMap" type="Label">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="comment_num" property="comment_num" jdbcType="INTEGER" />
 	</resultMap>
 
-	<sql id="Base_Column_List">
-		id,
-		name
-	</sql>
-
-	<!-- 获取最火的标签 -->
+	<!-- 获取最火的标签, 排除小道消息 lab.`id` != 1（程序控制默认首位） -->
 	<select id="selectHotLabel" resultMap="BaseResultMap">
-		SELECT lab.`id` AS id, lab.`name` AS NAME, COUNT(ar.`label_id`) AS num
-		FROM tb_ask_reply ar
-		LEFT JOIN tb_label lab ON( lab.`id` = ar.`label_id` )
-		WHERE ar.`ext_type` = #{type}
+		SELECT ar.`label_id` AS id, lab.`name` AS name , COUNT(c.`id`)  AS comment_num
+		FROM tb_ask_reply AS ar
+		LEFT JOIN tb_label lab ON ( lab.`id` = ar.`label_id` )
+		LEFT JOIN tb_comment c ON( c.`ext_type` = ar.`ext_type` AND c.`record_id` = ar.`id` )
+		WHERE ar.`ext_type` = #{type} AND lab.`id` != 1
 		GROUP BY ar.`label_id`
-		ORDER BY num DESC
+		ORDER BY comment_num DESC
 		LIMIT #{offset}, #{limit}
 	</select>
-
 
 </mapper>

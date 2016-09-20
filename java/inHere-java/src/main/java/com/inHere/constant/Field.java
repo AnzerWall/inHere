@@ -29,6 +29,9 @@ public class Field {
     // 性别：不知道
     public final static Integer Sex_NotKnow = 2;
 
+    // 标签：自定义
+    public final static Integer Label_Custom = 0;
+
 
 
     /*-------------------栏目模块常量---------------------*/

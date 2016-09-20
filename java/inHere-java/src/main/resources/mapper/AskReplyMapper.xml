@@ -34,9 +34,7 @@
         <result column="a_low" property="low" jdbcType="CHAR"/>
         <association property="label" javaType="Label">
             <id column="lab_id" property="id"/>
-            <result column="lab_ext_type" property="ext_type"/>
             <result column="lab_name" property="name"/>
-            <result column="lab_num" property="num"/>
         </association>
         <association property="bestReply" javaType="Comment">
             <id column="c_id" property="id" jdbcType="INTEGER"/>
@@ -87,9 +85,7 @@
 	</sql>
     <sql id="Label_Column_List">
 		lab.id lab_id,
-		lab.ext_type lab_ext_type,
-		lab.name lab_name,
-		lab.num lab_num
+		lab.name lab_name
 	</sql>
     <sql id="Comment_Column_List">
 		c.id c_id,

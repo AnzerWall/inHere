@@ -1,12 +1,5 @@
 package com.inHere.service.impl;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -18,6 +11,12 @@ import com.inHere.service.ActivityService;
 import com.inHere.service.CommentService;
 import com.inHere.service.CommonService;
 import com.inHere.service.PraiseService;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class ActivityServiceImpl implements ActivityService {
@@ -66,6 +65,7 @@ public class ActivityServiceImpl implements ActivityService {
 		for (Activity tmp : list) {
 			JSONObject obj = new JSONObject();
 			obj.put("id", tmp.getId());
+			obj.put("ext_type", tmp.getExtType());
 
 			// 解析图片
 			JSONArray photos = commonService.photoResolution(tmp.getCoverImg());

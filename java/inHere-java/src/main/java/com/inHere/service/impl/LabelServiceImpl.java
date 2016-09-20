@@ -32,15 +32,14 @@ public class LabelServiceImpl implements LabelService {
         return label;
     }
 
-
     /**
-     * 获取最火的5条标签
+     * 获取最火的标签
      *
      * @param type
      * @return
      */
     public JSONArray getHotLabel(Integer type) {
-        List<Label> labels = labelMapper.selectHotLabel(type);
+        List<Label> labels = labelMapper.selectHotLabel(type, 0, 5);
         JSONArray list = new JSONArray();
 
         if (type == Field.ExtType_InTeasing) {
@@ -49,21 +48,12 @@ public class LabelServiceImpl implements LabelService {
             hearsay.put("id", LabelEnum.Hearsay.getId());
             hearsay.put("name", LabelEnum.Hearsay.getName());
             list.add(0, hearsay);
-
-            for (int i = 1; i < labels.size() && i < 5; i++) {
-                JSONObject obj = new JSONObject();
-                obj.put("id", labels.get(i).getId());
-                obj.put("name", labels.get(i).getName());
-                list.add(i, obj);
-            }
-
-        } else {
-            for (int i = 0; i < labels.size(); i++) {
-                JSONObject obj = new JSONObject();
-                obj.put("id", labels.get(i).getId());
-                obj.put("name", labels.get(i).getName());
-                list.add(i, obj);
-            }
+        }
+        for (int i = 0; i < labels.size() && list.size() <= 5; i++) {
+            JSONObject obj = new JSONObject();
+            obj.put("id", labels.get(i).getId());
+            obj.put("name", labels.get(i).getName());
+            list.add(obj);
         }
         return list;
     }

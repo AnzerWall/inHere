@@ -6,9 +6,11 @@ import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
 import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
+import com.inHere.constant.Field;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.entity.AskReply;
+import com.inHere.entity.Label;
 import com.inHere.entity.Token;
 import com.inHere.service.AskReplyService;
 import com.inHere.service.CommonService;
@@ -119,8 +121,26 @@ public class AskReplyController {
         Integer ext_type = Integer.parseInt(multiRequest.getParameter("ext_type"));
         askReply.setExtType(ext_type);
 
+        // 问答有标题
+        if (Field.ExtType_AskAnwser == ext_type) {
+            String title = multiRequest.getParameter("title");
+            askReply.setTitle(title);
+        }
+        String content = multiRequest.getParameter("content");
+        askReply.setContent(content);
 
-        JSONObject ext_data = new JSONObject();
+        // 标签检测，自定义或选择
+        Integer lab_id = Integer.parseInt(multiRequest.getParameter("lab_id"));
+
+        // 自定义标签
+        if (lab_id == Field.Label_Custom) {
+            String lab_name = multiRequest.getParameter("lab_name");
+            Label label = null;
+            askReply.setLabelId(label.getId());
+        } else { // 选择标签
+            Label label = null;
+            askReply.setLabelId(label.getId());
+        }
 
         // 获取上传图片集合
         List<MultipartFile> fileList = multiRequest.getFiles("file");

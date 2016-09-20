@@ -1,12 +1,13 @@
 package com.inHere.validator;
 
-import org.apache.log4j.Logger;
-
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Code;
 import com.inHere.constant.Field;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
+import org.apache.log4j.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 吐槽+问答的校验类
@@ -35,6 +36,16 @@ public class AskReplyValidator {
 		result.setStatus(Code.InputErr.getStatus());
 		result.setMessage("参数有错");
 		return result;
+	}
+
+	/**
+	 *
+	 * @param request
+	 * @return
+	 */
+	public ReturnBaseDto<JSONObject> createAskReply(HttpServletRequest request) {
+		ReturnBaseDto obj = null;
+		return obj;
 	}
 
 }

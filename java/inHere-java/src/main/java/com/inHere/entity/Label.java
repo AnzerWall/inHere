@@ -10,6 +10,7 @@ public class Label {
 
 	private Integer id;// 标签编号
 	private String name;// 标签名称
+	private Integer comment_num;// 该标签评论数
 
 	public Integer getId() {
 		return id;
@@ -25,6 +26,14 @@ public class Label {
 
 	public void setName(String name) {
 		this.name = name == null ? null : name.trim();
+	}
+
+	public Integer getComment_num() {
+		return comment_num;
+	}
+
+	public void setComment_num(Integer comment_num) {
+		this.comment_num = comment_num;
 	}
 
 	@Override
