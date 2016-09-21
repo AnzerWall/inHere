@@ -71,10 +71,11 @@
     border-radius: 4px;
     cursor: pointer;
     height: 1em;
-    width: 3em;
+    /*width: 3em;*/
     padding: 8px;
     margin: 0 1px;
     color: gray;
+
     opacity: 0.65;
   }
   .checked{
@@ -98,7 +99,7 @@
       publish_value:{
         type:Number,
         required:true,
-        default:""
+        default:0
       },
       labels:{
         type:Array,
@@ -137,8 +138,8 @@
         }
         console.log("changeBg,emit给父组件通信");
 //        this.$emit('change-type',index);
-        this.$dispatch("child-msg",index);
-        this.$dispatch('change-type',index);
+//        this.$dispatch('change-type',index);
+          this.$emit('change-type',index);
       }
     }
   }

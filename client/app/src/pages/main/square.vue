@@ -22,7 +22,7 @@
           <span class="square-item-tittle">* 有诺必行</span>
           <span @click="enter(1)">进入</span>
         </div>
-        <square-slider :topics="target.items" :square_type="1"></square-slider>
+        <square-slider :topics="target.items" :square_type="1" v-on:go-to-the-topic="goTopic"></square-slider>
       </div>
 
       <div class="item">
@@ -30,7 +30,7 @@
           <span class="square-item-tittle">* 有问必答</span>
           <span @click="enter(2)">进入</span>
         </div>
-        <square-slider :topics="ask_reply.items" :square_type="2"></square-slider>
+        <square-slider :topics="ask_reply.items" :square_type="2" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
           <p :style="{'color': color(2)}">#{{ask_reply.best_reply.title}}</p>
           <p>{{ask_reply.best_reply.best_answer}}</p>
@@ -42,7 +42,7 @@
           <span class="square-item-tittle">* 有嘈必吐</span>
           <span @click="enter(3)">进入</span>
         </div>
-        <square-slider :topics="teasing.items" :square_type="3"></square-slider>
+        <square-slider :topics="teasing.items" :square_type="3" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
           <p :style="{'color': color(3)}">#{{teasing.best_reply.title}}</p>
           <p>{{teasing.best_reply.best_answer}}</p>
@@ -215,7 +215,7 @@
       enter(index){
         alert("进入的栏目为" + index);
       },
-      goToTheTopic(id, topic_type){
+      goTopic(id, topic_type){
         // 跳转到对应的栏目
         // topic_type：1 有诺必行  2 有问必答  3 有嘈必吐
         // id : 对应栏目下的话题id
@@ -227,7 +227,7 @@
           case 3:
 
         }
-        alert("栏目"+topic_type +"id"+id);
+        alert("接收子组件的通信goTopic"+"栏目"+topic_type +"  id"+id);
       }
     },
     components: {

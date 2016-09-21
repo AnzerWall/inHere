@@ -1,12 +1,14 @@
 <template>
   <!--任务图文-->
   <div>
-    <publish-picture :key.sync="content.text" :image_publish.sync="content.photos"></publish-picture>
+    <publish-picture :key.sync="content.text" :image_publish.sync="content.file"></publish-picture>
   </div>
 
   <!--任务类型-->
   <div>
-    <publish-choose :key="publish_key.ext_type" :publish_value.sync="content.ext_type" :labels="type_labels"></publish-choose>
+    <publish-choose :key="publish_key.ext_type" :publish_value.sync="content.ext_type" :labels="type_labels"
+                    v-on:change-type="changeTaskType">
+    </publish-choose>
   </div>
 
 
@@ -14,7 +16,8 @@
   <div v-if="publish_type == 0">
     <!--酬劳-->
     <div>
-      <publish-text :key="publish_key.pay" :publish_value.sync="content.pay"></publish-text>
+      <publish-number :key="publish_key.pay" :publish_value.sync="content.pay"></publish-number>
+      <!--<publish-text :key="publish_key.pay" :publish_value.sync="content.pay"></publish-text>-->
     </div>
   </div>
 
@@ -27,7 +30,7 @@
     </div>
     <!--购买时间-->
     <div>
-      <publish-time :key="publish_key.buy_time" :publish_value.sync="content.buy_time"></publish-time>
+      <publish-time :key="publish_key.buy_time1" :publish_value.sync="content.buy_time"></publish-time>
     </div>
     <!--原价-->
     <div>
@@ -71,6 +74,8 @@
   import PublishText from '../../components/publish/publish-text.vue'
   import PublishChoose from '../../components/publish/publish-choose.vue'
   import PublishTime from '../../components/publish/publish-time.vue'
+  import PublishNumber from '../../components/publish/publish-number.vue'
+  import {token,login_state,is_login} from '../../vuex/getters.js'
 
   export default{
 
@@ -80,7 +85,7 @@
           id: "",                   //28,// 记录编号
           ext_type: 1,
           text: "",                  //"文字描述",
-          photos: [],                 //null,
+          file: [],                 //null,
           create_time: "",           // "创建时间",
           update_time: "",          //"更新时间",
           user_id: "",              //"创建者",
@@ -104,7 +109,7 @@
           pay:"酬金",
 
           quality:"成色",
-          buy_time:"购买时间",
+          buy_time1:"购买时间",
           original_price:"原价",
           price:"售价"
         },
@@ -144,8 +149,8 @@
         ],
       }
     },
-    events:{
-      'change-type':function (type) {
+    methods:{
+      changeTaskType:function (type) {
         console.log("父组件接收子组件的通信");
           this.publish_type = type;
       }
@@ -154,22 +159,37 @@
       PublishPicture,
       PublishText,
       PublishChoose,
-      PublishTime
+      PublishTime,
+      PublishNumber
+    },
+    vuex: {
+      actions: {
+      },
+      getters: {
+        login_state,
+        token,
+        is_login
+      }
     },
 
-//    post提交，发表失物
-//      //页面加载数据钩子(或者叫事件)
-//        return this.$request
-//          .post("/lost-publish")//GET方法 url为/dating-publish
-//          .set('Content-Type','application/json')
-//          .send(data.content)
-//          .end(function (res) {
-//            console.log("lost-publish回调函数");
-//            if (res.ok){
-//              console.log("返回正确"+JSON.stringify(res.body));
-//            }else {
-//              console.log("返回错误"+res.text);
-//            }
-//          })
+//    post提交，发表任务
+//     route: {
+//       data(){
+//         let token = this.token;
+//        //页面加载数据钩子(或者叫事件)
+//          return this.$request
+//            .post('/demand?token=${token}')
+//            .set('Content-Type','application/json')
+//            .send(data.content)
+//            .end(function (res) {
+//              console.log("lost-publish回调函数");
+//              if (res.ok){
+//                console.log("返回正确"+JSON.stringify(res.body));
+//              }else {
+//                console.log("返回错误"+res.text);
+//              }
+//            })
+//       }
+//     }
   }
 </script>
