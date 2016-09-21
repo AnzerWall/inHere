@@ -42,12 +42,15 @@ export default{
         component: Demand,
         subRoutes: {
           '/task':{
+            name:'task',
             component: DemandTask
           },
           '/lost':{
+            name:'lost',
             component: DemandLost
           },
           '/dating':{
+            name:'dating',
             component: DemandDating
           }
         }
@@ -89,9 +92,9 @@ export default{
   '/demand-publish':{
     component: DemandPublish,
     subRoutes:{
-      '/': {
-        component: TaskPublish
-      },
+      // '/': {
+      //   component: TaskPublish
+      // },
       '/task':{
         component: TaskPublish
       },
