@@ -152,12 +152,20 @@ public class AskReplyController {
         askReply.setPhotos(photos.toJSONString()); // 图片
 
         askReply.setUserId(token.getUser_id()); // 用户编号
-        askReply.setPraise( new JSONObject().toJSONString() ); // 点赞用户列表
-        askReply.setLow( new JSONObject().toJSONString() ); // 踩的用户列表
+        askReply.setPraise(new JSONObject().toJSONString()); // 点赞用户列表
+        askReply.setLow(new JSONObject().toJSONString()); // 踩的用户列表
 
         return askReply;
     }
 
-    //public
+    /**
+     * 获取热门标签
+     */
+    @Authorization
+    @RequestMapping(path = "/ask_reply", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getHotLabel() {
+
+        return null;
+    }
 
 }
