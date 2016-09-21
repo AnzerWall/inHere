@@ -59,7 +59,7 @@ public class DemandServiceImpl implements DemandService {
 
         // 获取总条数
         Integer total = demandMapper.getCount(params);
-        Integer total_page = (total / params.getLimit()) + 1;
+        Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
         listDto.setLimit(params.getLimit());
         listDto.setOffset(params.getOffset());
         listDto.setTotal(total);
@@ -93,7 +93,7 @@ public class DemandServiceImpl implements DemandService {
 
             // 获取评论总条数
             Integer total = commentMapper.getCount(demand.getExtType(), demand.getId());
-            Integer total_page = (total / params.getLimit()) + 1;
+            Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
             listDto.setLimit(params.getLimit());
             listDto.setOffset(params.getOffset());
             listDto.setTotal(total);

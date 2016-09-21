@@ -1,7 +1,7 @@
 package com.inHere.entity;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -165,7 +165,7 @@ public class AskReply {
 	 * @return
 	 */
 	public Map<String, Object> toMap() {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new LinkedHashMap<>();
 		map.put("id", this.id);
 		map.put("ext_type", this.extType);
 		map.put("user_id", this.userId);

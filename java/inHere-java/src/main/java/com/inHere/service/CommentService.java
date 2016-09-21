@@ -1,13 +1,14 @@
 package com.inHere.service;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.dto.CommentDto;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.Comment;
 import com.inHere.entity.Token;
+
+import java.io.IOException;
+import java.util.List;
 
 public interface CommentService {
 
@@ -18,7 +19,7 @@ public interface CommentService {
 	 * @return
 	 * @throws IOException
 	 */
-	public JSONObject getList(ParamsListDto params);
+	JSONObject getList(ParamsListDto params);
 
 	/**
 	 * 设置评论列表
@@ -26,7 +27,7 @@ public interface CommentService {
 	 * @param comments
 	 * @return
 	 */
-	public JSONArray setItems(List<Comment> comments, Token token);
+	JSONArray setItems(List<Comment> comments, Token token);
 
 	/**
 	 * 获取评论总数
@@ -35,6 +36,14 @@ public interface CommentService {
 	 * @param record_id
 	 * @return
 	 */
-	public Integer getCount(Integer ext_type, Integer record_id);
+	Integer getCount(Integer ext_type, Integer record_id);
+
+	/**
+	 * 创建一条评论
+	 *
+	 * @param commentDto
+	 * @param token
+	 */
+	void createComment(CommentDto commentDto, Token token);
 
 }

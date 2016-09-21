@@ -12,13 +12,21 @@ import java.util.List;
  */
 public interface LabelMapper {
 
-
     /**
-     * 获取最火的5条标签列表
+     * 获取最火的标签列表
      *
-     * @return Label的list集合
+     * @param type      类型
+     * @param offset    偏移量
+     * @param limit     条数
+     * @param excLabID  排除标签
+     * @param onlyLabID 只搜标签
+     * @return
      */
-    List<Label> selectHotLabel(@Param("type") Integer type, @Param("offset") Integer offset, @Param("limit") Integer limit);
+    List<Label> selectHotLabel(@Param("type") Integer type,
+                               @Param("offset") Integer offset,
+                               @Param("limit") Integer limit,
+                               @Param("excLabID") Integer excLabID,
+                               @Param("onlyLabID") Integer onlyLabID);
 
     /**
      * 插入一条标签
@@ -35,4 +43,12 @@ public interface LabelMapper {
      * @return
      */
     Label selectSameNameLabel(String name);
+
+    /**
+     * 获取吐槽或问答某模块标签总数
+     *
+     * @param type
+     * @return
+     */
+    Integer getCount(@Param("type") Integer type);
 }

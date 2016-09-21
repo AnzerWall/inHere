@@ -90,7 +90,7 @@ public class AskReplyController {
 
     /**
      * 创建一个吐槽或问答资源
-     *
+     * TODO 数据库有更新，应放置事务安全中
      * @return
      */
     @Authorization
@@ -159,13 +159,27 @@ public class AskReplyController {
     }
 
     /**
-     * 获取热门标签
+     * 获取问答、吐槽的热门标签
      */
     @Authorization
-    @RequestMapping(path = "/ask_reply", method = RequestMethod.GET)
-    public ReturnBaseDto<JSONObject> getHotLabel() {
+    @Params(AskReplyValidator.class)
+    @RequestMapping(path = "/ask_reply/labels", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getHotLabel(ParamsListDto params) {
+        // 初始化参数
+        Integer offset = params.getOffset() == null ? 0 : params.getOffset();
+        Integer limit = params.getLimit() == null ? 10 : params.getLimit();
+        params.setOffset(offset);
+        params.setLimit(limit);
+        params.setType(params.getExt_type()[0]);
 
-        return null;
+        // 获取热门的标签列表
+        JSONObject data = labelService.getHotList(params);
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
     }
 
 }

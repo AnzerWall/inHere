@@ -1,21 +1,15 @@
 package dao;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.htmlcleaner.HtmlCleaner;
 import org.htmlcleaner.TagNode;
 import org.htmlcleaner.XPatherException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.inHere.dao.CryptonymMapper;
-import com.inHere.entity.Cryptonym;
+import java.io.IOException;
 
 /**
  * Spring Test 和 JUnit 4 整合测试（单元测试）<br>
@@ -28,8 +22,8 @@ import com.inHere.entity.Cryptonym;
 @ContextConfiguration("classpath:spring/spring-*.xml") // 配置文件
 public class TbCryptonymMapperTest extends AbstractJUnit4SpringContextTests {
 
-	@Autowired
-	private CryptonymMapper cryptonymMapper;
+	//@Autowired
+	//private CryptonymMapper cryptonymMapper;
 
 	@Test
 	public void insertCryptonymsTest() throws XPatherException, IOException {
@@ -38,15 +32,15 @@ public class TbCryptonymMapperTest extends AbstractJUnit4SpringContextTests {
 		Object[] nodes = htmlNode.evaluateXPath("//*[@class='name_show']/li");
 		if (nodes.length > 0) {
 			TagNode nodeTmp = null;
-			List<Cryptonym> list = new ArrayList<Cryptonym>();
+			//List<Cryptonym> list = new ArrayList<Cryptonym>();
 			for (int i = 0; i < nodes.length; i++) {
 				if (nodes[i] instanceof TagNode) {
 					nodeTmp = (TagNode) nodes[i];
 					String name = nodeTmp.getText().toString();
-					list.add(new Cryptonym(name));
+					//list.add(new Cryptonym(name));
 				}
 			}
-			cryptonymMapper.insertCryptonyms(list);
+			//cryptonymMapper.insertCryptonyms(list);
 		}
 	}
 

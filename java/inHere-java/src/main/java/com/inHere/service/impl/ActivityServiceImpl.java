@@ -47,7 +47,7 @@ public class ActivityServiceImpl implements ActivityService {
 
 		// 设置总页数
 		Integer total = activityMapper.getCount(params.getTokenEntity().getSchool_id());
-		Integer total_page = total / params.getLimit() + 1;
+		Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
 
 		data.put("offset", params.getOffset());
 		data.put("limit", params.getLimit());

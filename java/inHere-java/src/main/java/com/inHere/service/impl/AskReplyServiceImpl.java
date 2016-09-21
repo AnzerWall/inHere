@@ -69,7 +69,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 		ReturnListDto listDto = new ReturnListDto();
 		// 获取总条数
 		Integer total = askReplyMapper.getCount(params);
-		Integer total_page = (total / params.getLimit()) + 1;
+		Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
 		listDto.setLimit(params.getLimit());
 		listDto.setOffset(params.getOffset());
 		listDto.setTotal(total);
@@ -150,7 +150,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 
 			// 获取评论总条数
 			Integer total = commentMapper.getCount(obj.getExtType(), obj.getId());
-			Integer total_page = (total / params.getLimit()) + 1;
+			Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
 			listDto.setLimit(params.getLimit());
 			listDto.setOffset(params.getOffset());
 			listDto.setTotal(total);
@@ -191,10 +191,11 @@ public class AskReplyServiceImpl implements AskReplyService {
 	 * @param token
 	 * @return
 	 */
-	private JSONObject getAskAnwserExtData(AskReply obj, Token token) {
+	private JSONObject getAskAnwserExtData(AskReply obj, Token token) throws IOException {
 		JSONObject data = new JSONObject();
 		data.put("title", obj.getTitle());
 		data.put("content", obj.getContent());
+		data.put("photos", commonService.photoResolution(obj.getPhotos()));
 		AskReplyUser followUser = askReplyUserMapper.selectFollowUser(token.getUser_id(), obj.getId());
 		// 判断用户是否关注该问答
 		Integer follow = followUser == null ? 0 : 1;

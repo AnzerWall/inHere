@@ -1,16 +1,14 @@
 package com.inHere.entity;
 
-public class Cryptonym {
+public class Name {
+
     private Integer id;
 
     private String name;
-    
-    public Cryptonym(String name) {
-		super();
-		this.name = name;
-	}
 
-	public Integer getId() {
+    private Integer random;
+
+    public Integer getId() {
         return id;
     }
 
@@ -24,5 +22,13 @@ public class Cryptonym {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public Integer getRandom() {
+        return random;
+    }
+
+    public void setRandom(Integer random) {
+        this.random = random;
     }
 }

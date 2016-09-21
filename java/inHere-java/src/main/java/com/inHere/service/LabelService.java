@@ -1,6 +1,8 @@
 package com.inHere.service;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.Label;
 
 /**
@@ -27,5 +29,13 @@ public interface LabelService {
      * @return Label
      */
     Label createLabel(Integer id, String name);
+
+    /**
+     * 获取标签列表
+     *
+     * @param params
+     * @return
+     */
+    JSONObject getHotList(ParamsListDto params);
 
 }

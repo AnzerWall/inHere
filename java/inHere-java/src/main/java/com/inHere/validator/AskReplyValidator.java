@@ -19,6 +19,11 @@ public class AskReplyValidator {
 
 	Logger log = Logger.getLogger(getClass());
 
+	/**
+	 * TODO 获取问答、吐槽列表参数校验
+	 * @param params
+	 * @return
+	 */
 	public ReturnBaseDto<JSONObject> getAskReplyList(ParamsListDto params) {
 		// 参数中ext_type类型校验
 		if (params.getExt_type() != null && params.getExt_type().length > 0) {
@@ -46,6 +51,16 @@ public class AskReplyValidator {
 	public ReturnBaseDto<JSONObject> createAskReply(HttpServletRequest request) {
 		ReturnBaseDto obj = null;
 		return obj;
+	}
+
+	/**
+	 * TODO 获取最火标签列表校验
+	 * @param params
+	 * @return
+	 */
+	public ReturnBaseDto<JSONObject> getHotLabel(ParamsListDto params){
+
+		return null;
 	}
 
 }
