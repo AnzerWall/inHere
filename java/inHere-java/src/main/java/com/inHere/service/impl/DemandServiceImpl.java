@@ -1,6 +1,5 @@
 package com.inHere.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Code;
@@ -22,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 有求必应业务逻辑
@@ -61,7 +59,7 @@ public class DemandServiceImpl implements DemandService {
 
         // 获取总条数
         Integer total = demandMapper.getCount(params);
-        Integer total_page = (total / params.getLimit()) + 1;
+        Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
         listDto.setLimit(params.getLimit());
         listDto.setOffset(params.getOffset());
         listDto.setTotal(total);
@@ -95,7 +93,7 @@ public class DemandServiceImpl implements DemandService {
 
             // 获取评论总条数
             Integer total = commentMapper.getCount(demand.getExtType(), demand.getId());
-            Integer total_page = (total / params.getLimit()) + 1;
+            Integer total_page = (total == 0 ? total : total / params.getLimit() + 1);
             listDto.setLimit(params.getLimit());
             listDto.setOffset(params.getOffset());
             listDto.setTotal(total);
@@ -144,6 +142,8 @@ public class DemandServiceImpl implements DemandService {
         demandDto.setCreate_time(tmp.getCreateTime().getTime());
         demandDto.setUpdate_time(tmp.getUpdateTime().getTime());
         demandDto.setUser_id(tmp.getUserId());
+
+
         demandDto.setExt_data(JSONObject.parseObject(tmp.getExtData()));
         demandDto.setIs_end(tmp.getIsEnd());
         return demandDto;

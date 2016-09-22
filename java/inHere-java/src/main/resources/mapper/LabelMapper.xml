@@ -2,80 +2,45 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.LabelMapper">
 
-	<resultMap id="BaseResultMap" type="com.inHere.entity.Label">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="ext_type" property="ext_type" jdbcType="INTEGER" />
-		<result column="name" property="name" jdbcType="VARCHAR" />
-		<result column="num" property="num" jdbcType="INTEGER" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="Label">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="comment_num" property="comment_num" jdbcType="INTEGER"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id,
-		ext_type,
-		name,
-		num
-	</sql>
+    <!-- 获取最火的标签, excLabID排除标签, onlyLabID只搜标签 -->
+    <select id="selectHotLabel" resultMap="BaseResultMap">
+        SELECT ar.`label_id` AS id, lab.`name` AS name , COUNT(c.`id`) AS comment_num
+        FROM tb_ask_reply AS ar
+        LEFT JOIN tb_label lab ON ( lab.`id` = ar.`label_id` )
+        LEFT JOIN tb_comment c ON( c.`ext_type` = ar.`ext_type` AND c.`record_id` = ar.`id` )
+        WHERE ar.`ext_type` = #{type}
+        <if test="excLabID != null">
+            AND lab.`id` != #{excLabID}
+        </if>
+        <if test="onlyLabID != null">
+            AND lab.`id` = #{onlyLabID}
+        </if>
+        GROUP BY ar.`label_id`
+        ORDER BY comment_num DESC
+        LIMIT #{offset}, #{limit}
+    </select>
 
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from tb_label
-		where id = #{id,jdbcType=INTEGER}
-	</select>
+    <!-- 创建一条标签，使用主键自动生成策略，创建后返回创建实例的主键 -->
+    <insert id="insertOneLabel" parameterType="Label" useGeneratedKeys="true" keyProperty="label.id" keyColumn="id">
+        insert into tb_label ( name ) values ( #{label.name} )
+    </insert>
 
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		tb_label
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
+    <!-- 查找相同名称的标签 -->
+    <select id="selectSameNameLabel" resultType="Label">
+        SELECT * FROM tb_label WHERE name = #{name} limit 1
+    </select>
 
-	<insert id="insertSelective" parameterType="com.inHere.entity.Label">
-		insert into tb_label
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="name != null">
-				name,
-			</if>
-			<if test="num != null">
-				num,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="name != null">
-				#{name,jdbcType=VARCHAR},
-			</if>
-			<if test="num != null">
-				#{num,jdbcType=INTEGER},
-			</if>
-		</trim>
-	</insert>
-
-	<update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.Label">
-		update tb_label
-		<set>
-			<if test="name != null">
-				name = #{name,jdbcType=VARCHAR},
-			</if>
-			<if test="num != null">
-				num = #{num,jdbcType=INTEGER},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
-
-	<!-- 获取最火的5条标签 -->
-	<select id="selectHotLabel" resultMap="BaseResultMap">
-		SELECT * FROM tb_label lab
-		WHERE lab.`ext_type` = #{type} AND lab.`id` != 1
-		ORDER BY lab.`num` DESC
-		LIMIT 0, 5;
-	</select>
-
+    <!-- 获取吐槽或问答某模块标签总数 -->
+    <select id="getCount" resultType="Integer">
+        SELECT COUNT(*) FROM (SELECT * FROM tb_ask_reply
+        WHERE ext_type = #{type}
+        GROUP BY label_id) AS lab
+    </select>
 
 </mapper>

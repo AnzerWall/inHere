@@ -1,7 +1,7 @@
 package com.inHere.entity;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -19,12 +19,13 @@ public class AskReply {
 	private String title;
 	private String content;
 	private String photos;
-	private Integer commentNum;
 	private String userId;
 	private Date createTime;
 	private Date updateTime;
 	private String praise;
 	private String low;
+
+	private Integer commentNum; // 评论数，非字段
 
 	private Label label; // 关联标签
 
@@ -164,7 +165,7 @@ public class AskReply {
 	 * @return
 	 */
 	public Map<String, Object> toMap() {
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new LinkedHashMap<>();
 		map.put("id", this.id);
 		map.put("ext_type", this.extType);
 		map.put("user_id", this.userId);

@@ -8,7 +8,7 @@
           <span class="navbar-item" v-link="{path:'/demand/lost',activeClass:'current'}">失物</span>
           <span class="navbar-item" v-link="{path:'/demand/dating',activeClass:'current'}">走起</span>
         </div>
-        <div class="demand-head-icon" v-link="{path:'/demand-publish/task'}">
+        <div class="demand-head-icon" @click="goToPublish">
           <add-icon></add-icon>
         </div>
 
@@ -84,6 +84,18 @@
   export default{
     components: {
       AddIcon
+    },
+    methods:{
+      goToPublish(){
+        console.log(this.$route.name);
+        if(this.$route.name == 'task'){
+          this.$router.go('/demand-publish/task');
+        }else if(this.$route.name == 'lost'){
+          this.$router.go('/demand-publish/lost');
+        }else {
+          this.$router.go('/demand-publish/dating');
+        }
+      }
     }
   }
   //  import DemandCard from 'components/demand-card/demand-card.vue'

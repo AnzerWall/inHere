@@ -1,7 +1,7 @@
 <template>
 <!--图文-->
   <div>
-    <publish-picture :key.sync="content.text" :image_publish.sync="content.photos"></publish-picture>
+    <publish-picture :key.sync="content.text" :image_publish.sync="content.file"></publish-picture>
   </div>
 
 <!--详情-->
@@ -52,7 +52,7 @@
         id: "",                   //28,// 记录编号
         ext_type: 6,
         text: "",                  //"文字描述",
-        photos: [],                 //null,
+        file: [],                 //null,
         create_time: "",           // "创建时间",
         update_time: "",          //"更新时间",
         user_id: "",              //"创建者",

@@ -75,10 +75,36 @@ CREATE TABLE `tb_comment` (
   `praise` json DEFAULT NULL COMMENT '点赞用户列表',
   `floor` int(11) DEFAULT NULL COMMENT '评论楼层',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `tb_name` */
+
+DROP TABLE IF EXISTS `tb_name`;
+
+CREATE TABLE `tb_name` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(20) CHARACTER SET utf8 NOT NULL,
+  `random` INT(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Table structure for table `tb_name_used` */
+
+DROP TABLE IF EXISTS `tb_name_used`;
+
+CREATE TABLE `tb_name_used` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `module_type` INT(11) NOT NULL COMMENT '类别',
+  `module_id` INT(11) NOT NULL COMMENT '对应表的记录编号',
+  `user_id` VARCHAR(50) NOT NULL COMMENT '用户id',
+  `name_id` INT(11) NOT NULL COMMENT '匿名id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `NewIndex1` (`module_type`,`module_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Table structure for table `tb_cryptonym` */
-
+/*
+-- 弃用
 DROP TABLE IF EXISTS `tb_cryptonym`;
 
 CREATE TABLE `tb_cryptonym` (
@@ -87,7 +113,8 @@ CREATE TABLE `tb_cryptonym` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8894 DEFAULT CHARSET=utf8;
 
-/*Table structure for table `tb_cryptonym_used` */
+*/
+/*Table structure for table `tb_cryptonym_used` *//*
 
 DROP TABLE IF EXISTS `tb_cryptonym_used`;
 
@@ -99,6 +126,7 @@ CREATE TABLE `tb_cryptonym_used` (
   `cryptonym_id` int(11) NOT NULL COMMENT '匿名id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+*/
 
 /*Table structure for table `tb_demand` */
 

@@ -2,204 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.AskReplyMapper">
 
-    <resultMap id="BaseResultMap" type="com.inHere.entity.AskReply">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="ext_type" property="extType" jdbcType="INTEGER"/>
-        <result column="ext_data" property="extData" jdbcType="CHAR"/>
-        <result column="label_id" property="labelId" jdbcType="INTEGER"/>
-        <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="photos" property="photos" jdbcType="VARCHAR"/>
-        <result column="comment_num" property="commentNum" jdbcType="INTEGER"/>
-        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="praise" property="praise" jdbcType="CHAR"/>
-        <result column="low" property="low" jdbcType="CHAR"/>
-    </resultMap>
-
-    <resultMap id="AssociatedResultMap" type="com.inHere.entity.AskReply">
-        <id column="a_id" property="id" jdbcType="INTEGER"/>
-        <result column="a_ext_type" property="extType" jdbcType="INTEGER"/>
-        <result column="a_ext_data" property="extData" jdbcType="CHAR"/>
-        <result column="a_label_id" property="labelId" jdbcType="INTEGER"/>
-        <result column="a_title" property="title" jdbcType="VARCHAR"/>
-        <result column="a_content" property="content" jdbcType="VARCHAR"/>
-        <result column="a_photos" property="photos" jdbcType="VARCHAR"/>
-        <result column="a_comment_num" property="commentNum" jdbcType="INTEGER"/>
-        <result column="a_user_id" property="userId" jdbcType="VARCHAR"/>
-        <result column="a_create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="a_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="a_praise" property="praise" jdbcType="CHAR"/>
-        <result column="a_low" property="low" jdbcType="CHAR"/>
-        <association property="label" javaType="Label">
-            <id column="lab_id" property="id"/>
-            <result column="lab_ext_type" property="ext_type"/>
-            <result column="lab_name" property="name"/>
-            <result column="lab_num" property="num"/>
-        </association>
-        <association property="bestReply" javaType="Comment">
-            <id column="c_id" property="id" jdbcType="INTEGER"/>
-            <result column="c_ext_type" property="extType" jdbcType="INTEGER"/>
-            <result column="c_record_id" property="recordId" jdbcType="INTEGER"/>
-            <result column="c_content" property="content" jdbcType="VARCHAR"/>
-            <result column="c_user_id" property="userId" jdbcType="VARCHAR"/>
-            <result column="c_name" property="name" jdbcType="VARCHAR"/>
-            <result column="c_create_time" property="createTime" jdbcType="TIMESTAMP"/>
-            <result column="c_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-            <result column="c_low" property="low" jdbcType="CHAR"/>
-            <result column="c_praise" property="praise" jdbcType="CHAR"/>
-            <result column="c_floor" property="floor" jdbcType="INTEGER"/>
-        </association>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-		id,
-		ext_type,
-		ext_data,
-		label_id,
-		title,
-		content,
-		photos,
-		comment_num,
-		user_id,
-		create_time,
-		update_time,
-		praise,
-		low
-	</sql>
-    <sql id="AskReply_Column_List">
-		a.id a_id,
-		a.ext_type a_ext_type,
-		a.ext_data a_ext_data,
-		a.label_id a_label_id,
-		a.title a_title,
-		a.content a_content,
-		a.photos
-		a_photos,
-		a.comment_num a_comment_num,
-		a.user_id a_user_id,
-		a.create_time a_create_time,
-		a.update_time a_update_time,
-		a.praise
-		a_praise,
-		a.low a_low
-	</sql>
-    <sql id="Label_Column_List">
-		lab.id lab_id,
-		lab.ext_type lab_ext_type,
-		lab.name lab_name,
-		lab.num lab_num
-	</sql>
-    <sql id="Comment_Column_List">
-		c.id c_id,
-		c.ext_type c_ext_type,
-		c.record_id c_record_id,
-		c.content c_content,
-		c.user_id c_user_id,
-		c.name c_name,
-		c.create_time
-		c_create_time,
-		c.update_time c_update_time,
-		c.low c_low,
-		c.praise
-		c_praise,
-		c.floor c_floor
-	</sql>
-
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
-            parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from tb_ask_reply
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		tb_ask_reply
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
-
-    <insert id="insertSelective" parameterType="com.inHere.entity.AskReply">
-        insert into tb_ask_reply
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="extType != null">
-                ext_type,
-            </if>
-            <if test="extData != null">
-                ext_data,
-            </if>
-            <if test="labelId != null">
-                label_id,
-            </if>
-            <if test="title != null">
-                title,
-            </if>
-            <if test="photos != null">
-                photos,
-            </if>
-            <if test="commentNum != null">
-                comment_num,
-            </if>
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
-            <if test="praise != null">
-                praise,
-            </if>
-            <if test="low != null">
-                low,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="extType != null">
-                #{extType,jdbcType=INTEGER},
-            </if>
-            <if test="extData != null">
-                #{extData,jdbcType=CHAR},
-            </if>
-            <if test="labelId != null">
-                #{labelId,jdbcType=INTEGER},
-            </if>
-            <if test="title != null">
-                #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="photos != null">
-                #{photos,jdbcType=VARCHAR},
-            </if>
-            <if test="commentNum != null">
-                #{commentNum,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                #{userId,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="praise != null">
-                #{praise,jdbcType=CHAR},
-            </if>
-            <if test="low != null">
-                #{low,jdbcType=CHAR},
-            </if>
-        </trim>
-    </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.AskReply">
         update tb_ask_reply
@@ -240,6 +47,116 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
+    <!-- 关联Label的AskReply对象 -->
+    <resultMap id="AssociatedResultMap" type="com.inHere.entity.AskReply">
+        <id column="a_id" property="id" jdbcType="INTEGER"/>
+        <result column="a_ext_type" property="extType" jdbcType="INTEGER"/>
+        <result column="a_ext_data" property="extData" jdbcType="CHAR"/>
+        <result column="a_label_id" property="labelId" jdbcType="INTEGER"/>
+        <result column="a_title" property="title" jdbcType="VARCHAR"/>
+        <result column="a_content" property="content" jdbcType="VARCHAR"/>
+        <result column="a_photos" property="photos" jdbcType="VARCHAR"/>
+        <result column="a_user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="a_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="a_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="a_praise" property="praise" jdbcType="CHAR"/>
+        <result column="a_low" property="low" jdbcType="CHAR"/>
+        <association property="label" javaType="Label">
+            <id column="lab_id" property="id"/>
+            <result column="lab_name" property="name"/>
+        </association>
+    </resultMap>
+
+    <sql id="AskReply_Column_List">
+        a.id a_id,
+        a.ext_type a_ext_type,
+        a.ext_data a_ext_data,
+        a.label_id a_label_id,
+        a.title a_title,
+        a.content a_content,
+        a.photos a_photos,
+        a.user_id a_user_id,
+        a.create_time a_create_time,
+        a.update_time a_update_time,
+        a.praise a_praise,
+        a.low a_low
+    </sql>
+    <sql id="Label_Column_List">
+        lab.id lab_id,
+        lab.name lab_name
+    </sql>
+
+
+    <!-- 插入一条吐槽或问答 -->
+    <insert id="insertSelective" parameterType="com.inHere.entity.AskReply">
+        insert into tb_ask_reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="extType != null">
+                ext_type,
+            </if>
+            <if test="extData != null">
+                ext_data,
+            </if>
+            <if test="labelId != null">
+                label_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="photos != null">
+                photos,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="true">
+                create_time,
+            </if>
+            <if test="praise != null">
+                praise,
+            </if>
+            <if test="low != null">
+                low,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="extType != null">
+                #{extType},
+            </if>
+            <if test="extData != null">
+                #{extData},
+            </if>
+            <if test="labelId != null">
+                #{labelId},
+            </if>
+            <if test="title != null">
+                #{title},
+            </if>
+            <if test="content != null">
+                #{content},
+            </if>
+            <if test="photos != null">
+                #{photos},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="true">
+                now(),
+            </if>
+            <if test="praise != null">
+                #{praise},
+            </if>
+            <if test="low != null">
+                #{low},
+            </if>
+        </trim>
+    </insert>
 
     <!-- 查找列表 -->
     <select id="selectList" resultMap="AssociatedResultMap">
@@ -286,5 +203,7 @@
         LEFT JOIN tb_label lab ON( a.`label_id` = lab.`id` )
         WHERE a.`id` = #{item_id}
     </select>
+
+
 
 </mapper>

@@ -22,7 +22,7 @@ module.exports = {
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
       'pages': path.resolve(__dirname, '../src/pages'),
-      'vuex': path.resolve(__dirname, '../src/vuex'),
+      //'vuex': path.resolve(__dirname, '../src/vuex'),
       'svg': path.resolve(__dirname, '../src/svg'),
       'filter':path.resolve(__dirname, '../src/filter'),
       'util':path.resolve(__dirname, '../src/util')

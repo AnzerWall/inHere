@@ -1,7 +1,7 @@
 <template>
   <!--图文-->
   <div>
-    <publish-picture :key.sync="content.text" :image_publish.sync="content.photos"></publish-picture>
+    <publish-picture :key.sync="content.text" :image_publish.sync="content.file"></publish-picture>
   </div>
 
   <!--丢失类型-->
@@ -19,6 +19,11 @@
     <publish-time :key="publish_key.lost_time" :publish_value.sync="content.start_time"></publish-time>
   </div>
 
+  <!--test  后期删除  标签选择-->
+  <!--<div>-->
+    <!--<publish-tag-selector :key="标签" :publish_value.sync="content.tag"></publish-tag-selector>-->
+  <!--</div>-->
+
 </template>
 
 <style scoped>
@@ -32,6 +37,7 @@
   import PublishText from '../../components/publish/publish-text.vue'
   import PublishChoose from '../../components/publish/publish-choose.vue'
   import PublishTime from '../../components/publish/publish-time.vue'
+  import PublishTagSelector from '../../components/publish/publish-tag-selector.vue'
 
   export default{
 
@@ -41,13 +47,15 @@
           id: "",                   //28,// 记录编号
           ext_type: 6,
           text: "",                  //"文字描述",
-          photos: [],                 //null,
+          file: [],                 //null,
           create_time: "",           // "创建时间",
           update_time: "",          //"更新时间",
           user_id: "",              //"创建者",
           thing: "",               //"东西名称",
           lose_time: "",               //"丢失时间",
           is_end: 0,                  // 是否已结束，0未结束，1结束
+
+          tag:"",
         },
         publish_key:{
           ext_type:"类型",

@@ -118,7 +118,20 @@
 				#{demand.extType},
 			</if>
 			<if test="ext_data != null">
-				json_object( "price", #{ext_data.price}, "original_price", #{ext_data.original_price}, "quality", #{ext_data.quality}, "buy_time", #{ext_data.buy_time} ),
+				<foreach collection="ext_data.keySet()" item="key" open="json_object(" close=")," separator=",">
+					"${key}",
+					<if test="ext_data.get(key) != null">
+						<if test="ext_data.get(key) instanceof java.lang.String">
+							"${ext_data.get(key)}"
+						</if>
+						<if test="!(ext_data.get(key) instanceof java.lang.String)">
+							${ext_data.get(key)}
+						</if>
+					</if>
+					<if test="ext_data.get(key) == null">
+						null
+					</if>
+				</foreach>
 			</if>
 			<if test="demand.text != null">
 				#{demand.text},

@@ -28,6 +28,9 @@ import ChatList from 'pages/message/chat-list.vue'
 import  NuoListPage from 'pages/nuo/list.vue'
 import  NuoDetailPage from 'pages/nuo/detail.vue'
 import  CreateNuoPage from 'pages/nuo/create.vue'
+
+
+import LoginPage from 'pages/login/login.vue'
 export default{
   '/': {
     component: Main,
@@ -39,12 +42,15 @@ export default{
         component: Demand,
         subRoutes: {
           '/task':{
+            name:'task',
             component: DemandTask
           },
           '/lost':{
+            name:'lost',
             component: DemandLost
           },
           '/dating':{
+            name:'dating',
             component: DemandDating
           }
         }
@@ -66,6 +72,10 @@ export default{
   '/test':{
     component:Test
   },
+  '/login':{
+    component:LoginPage,
+    name:"login"
+  },
   '/chat':{
     component: ChatList
   },
@@ -82,9 +92,9 @@ export default{
   '/demand-publish':{
     component: DemandPublish,
     subRoutes:{
-      '/': {
-        component: TaskPublish
-      },
+      // '/': {
+      //   component: TaskPublish
+      // },
       '/task':{
         component: TaskPublish
       },

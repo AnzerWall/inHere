@@ -1,14 +1,13 @@
 package com.inHere.service.impl;
 
+import com.inHere.service.SecurityService;
+import com.inHere.util.SHA256Util;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-import org.springframework.stereotype.Service;
-
-import com.inHere.service.SecurityService;
-import com.inHere.util.SHA256Util;
 
 /**
  * 安全加密解密业务
@@ -22,7 +21,7 @@ public class SecurityServiceImpl implements SecurityService {
 	/**
 	 * 加盐加密，返回加密密码和盐值
 	 * 
-	 * @param passwd
+	 * @param password
 	 * @return 返回加盐加密密码、盐值list.get(0) : password | list.get(1) : saltKey
 	 * 
 	 */

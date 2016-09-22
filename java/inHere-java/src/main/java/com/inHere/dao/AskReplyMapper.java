@@ -1,47 +1,47 @@
 package com.inHere.dao;
 
-import java.util.List;
-
 import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.AskReply;
 
+import java.util.List;
+
 /**
  * 吐槽+问答数据库操作接口
- * 
- * @author lwh
  *
+ * @author lwh
  */
 public interface AskReplyMapper {
 
-	int deleteByPrimaryKey(Integer id);
+    /**
+     * 插入一条吐槽或问答
+     *
+     * @param askReply
+     * @return
+     */
+    int insertSelective(AskReply askReply);
 
-	int insertSelective(AskReply record);
-
-	AskReply selectByPrimaryKey(Integer id);
-
-	int updateByPrimaryKeySelective(AskReply record);
-
-	/**
-	 * 获取吐槽列表
-	 * 
-	 * @param params
-	 * @return
-	 */
-	public List<AskReply> selectList(ParamsListDto params);
+    /**
+     * 获取吐槽列表
+     *
+     * @param params
+     * @return
+     */
+    List<AskReply> selectList(ParamsListDto params);
 
 
-	/**
-	 * 获取总条数
-	 * 
-	 * @return
-	 */
-	public Integer getCount(ParamsListDto params);
+    /**
+     * 获取总条数
+     *
+     * @return
+     */
+    Integer getCount(ParamsListDto params);
 
-	/**
-	 * 获取一条评论数
-	 * 
-	 * @param params
-	 * @return
-	 */
-	public AskReply selectOne(ParamsListDto params);
+    /**
+     * 获取一条评论数
+     *
+     * @param params
+     * @return
+     */
+    AskReply selectOne(ParamsListDto params);
+
 }

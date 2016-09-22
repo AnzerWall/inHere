@@ -3,6 +3,7 @@
  * Created by anzer on 2016/9/2.
  */
 import request from './base.js'
+import {node_api_base,url_base,java_api_base,checkResult} from './base.js'
 //import  moment from 'moment'
 //let urlBase = "";
 //let $api = {};
@@ -63,25 +64,10 @@ export default{
    // Vue.prototype.$api = $api
     Vue.prototype.$request = request;
     Vue.prototype.$api={
-      checkResult(res){
-        if(res.ok){
-          if(res.body===undefined){
-            return Promise.reject(new Error("api通讯失败，res.body未定义"))
-          }else{
-            if(res.body.code===200){
-              return Promise.resolve(res.body.data)
-            }else{
-              return Promise.reject(new Error(res.body.status,res.body.code));
-            }
-          }
-        }else{
-          return Promise.reject(new Error("api通讯失败，res.ok不等于true"))
-        }
-
-
-      },
-      node_api_base:"http://127.0.0.1:8360",
-      java_api_base:"http://115.28.67.181:8080"
+      checkResult,
+      node_api_base,
+      java_api_base,
+      url_base
     }
 
   }

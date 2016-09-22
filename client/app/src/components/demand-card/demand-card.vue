@@ -94,7 +94,7 @@
           },
           user_id:0,
           praise: 0,
-          photos: [],
+          file: [],
           is_end: 0,
           text: "内容",
           create_time: Date.now(),
@@ -109,7 +109,7 @@
     },
     methods: {
       onClickImage(index){
-        this.$emit("view-image",index,this.data.photos);
+        this.$emit("view-image",index,this.data.file);
       },
       chinese(type){
         switch (type) {

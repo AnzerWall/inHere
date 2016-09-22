@@ -38,8 +38,12 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		log.info("进入token拦截器");
-		// 开启跨域允许
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		// 开启跨域允许, 用过滤器统一处理
+		// CORS "pre-flight" request
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+		response.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Origin, Content-Type, Accept");
+		response.addHeader("Access-Control-Max-Age", "1296000");//15 days
 
 		// 如果不是映射到方法直接通过
 		if (!(handler instanceof HandlerMethod)) {
