@@ -5,8 +5,10 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
+import org.springframework.stereotype.Component;
 
-public class ActivityValidator {
+@Component
+public class ActivityValidator extends BaseValidator {
 
 	Logger log = Logger.getLogger(getClass());
 

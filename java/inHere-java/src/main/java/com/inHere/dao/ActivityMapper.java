@@ -34,7 +34,7 @@ public interface ActivityMapper {
 	 * @param params
 	 * @return
 	 */
-	public List<Activity> selectActivityList(ParamsListDto params);
+	List<Activity> selectActivityList(ParamsListDto params);
 
 	/**
 	 * 获取总条数
@@ -42,5 +42,14 @@ public interface ActivityMapper {
 	 * @param school_id
 	 * @return
 	 */
-	public Integer getCount(@Param("school_id") Integer school_id);
+	Integer getCount(@Param("school_id") Integer school_id);
+
+
+	/**
+	 * 用户点赞销赞
+	 * @param user_id
+	 * @param id
+	 * @return
+	 */
+	Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
 }

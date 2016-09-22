@@ -32,10 +32,13 @@ public class PraiseController {
     @RequestMapping(path = "/praise", method = RequestMethod.POST)
     public ReturnBaseDto<JSONObject> praise(@RequestBody Map<String, Object> params, @CurrentToken Token token){
         Integer item_id = Integer.parseInt( params.get("item_id").toString() );
-        log.info("--->" + item_id);
-        log.info("--->" + token.getUser_id());
+        Integer ext_type = Integer.parseInt( params.get("ext_type").toString() );
+        log.info("ext_type--->" + ext_type);
+        log.info("item_id--->" + item_id);
+        log.info("user_id--->" + token.getUser_id());
+
         // 点赞业务
-        praiseService.praise(null , item_id, token);
+        praiseService.praise(ext_type , item_id, token);
 
         ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());

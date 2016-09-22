@@ -6,6 +6,7 @@ import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnListDto;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author lwh
  */
+@Component
 public class DemandValidator extends BaseValidator {
 
     Logger log = Logger.getLogger(getClass());

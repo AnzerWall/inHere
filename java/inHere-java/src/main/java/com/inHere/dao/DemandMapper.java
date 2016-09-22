@@ -18,11 +18,19 @@ public interface DemandMapper {
     int updateByPrimaryKeySelective(Demand record);
 
     // 获取列表
-    public List<Demand> selectByParams(ParamsListDto params);
+    List<Demand> selectByParams(ParamsListDto params);
 
     // 获取总条数
-    public Integer getCount(ParamsListDto params);
+    Integer getCount(ParamsListDto params);
 
     // 通过ID获取一条需求
-    public Demand selectOneById(ParamsListDto params);
+    Demand selectOneById(ParamsListDto params);
+
+    /**
+     * 用户点赞销赞
+     * @param user_id
+     * @param id
+     * @return
+     */
+    Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
 }

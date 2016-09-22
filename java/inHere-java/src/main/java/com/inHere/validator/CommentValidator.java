@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.inHere.dto.CommentDto;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * Created by Administrator on 2016/9/21.
  */
+@Component
 public class CommentValidator {
 
     /**
