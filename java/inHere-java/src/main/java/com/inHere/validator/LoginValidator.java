@@ -3,6 +3,7 @@ package com.inHere.validator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.alibaba.fastjson.JSONObject;
@@ -15,6 +16,7 @@ import com.inHere.dto.ReturnBaseDto;
  * @author lwh
  *
  */
+@Component
 public class LoginValidator {
 
 	Logger log = Logger.getLogger(getClass());

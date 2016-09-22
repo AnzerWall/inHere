@@ -204,6 +204,17 @@
         WHERE a.`id` = #{item_id}
     </select>
 
+    <!-- 点赞销赞 -->
+    <update id="praise">
+        UPDATE tb_ask_reply a SET a.`praise` =
+        (
+        SELECT CASE
+        WHEN json_contains_path(praise, 'one', '$.${user_id}') = 1 THEN json_remove(praise, '$.${user_id}')
+        ELSE json_set(praise, '$.${user_id}', 1) END
+        FROM (SELECT praise FROM tb_ask_reply WHERE id = #{id}) AS tb
+        )
+        WHERE a.`id` = #{id}
+    </update>
 
 
 </mapper>

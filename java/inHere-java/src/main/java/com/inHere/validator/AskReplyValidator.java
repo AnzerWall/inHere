@@ -6,6 +6,7 @@ import com.inHere.constant.Field;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author lwh
  *
  */
+@Component
 public class AskReplyValidator {
 
 	Logger log = Logger.getLogger(getClass());

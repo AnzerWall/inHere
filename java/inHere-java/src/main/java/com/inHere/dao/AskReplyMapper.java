@@ -2,6 +2,7 @@ package com.inHere.dao;
 
 import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.AskReply;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -43,5 +44,14 @@ public interface AskReplyMapper {
      * @return
      */
     AskReply selectOne(ParamsListDto params);
+
+
+    /**
+     * 用户点赞销赞
+     * @param user_id
+     * @param id
+     * @return
+     */
+    Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
 
 }
