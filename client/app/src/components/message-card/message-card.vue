@@ -24,24 +24,29 @@
     <!--</div>-->
     <!--<div class="m-message padding2">{{item.message}}</div>-->
     <!--</div>-->
+
+
+
     <!--我的小纸条-->
     <div class="my-div" v-if="type==='chat'">
       <!--更多小纸条-->
-      <div class="m-title bold " v-if="item.mess==='more'">
-        <div class="photo round  chat-color"></div>
-        ({{item.count}}){{item.mainMessage}}
-      </div>
+      <!--<div class="m-title bold " v-if="item.mess==='more'">-->
+        <!--<div class="photo round  chat-color"></div>-->
+        <!--({{item.count}}){{item.mainMessage}}-->
+      <!--</div>-->
       <!--新的小纸条-->
-      <div class="m-title bold " v-if="item.mess==='n-ew'">
-        <div class="photo round  chat-color"></div>
-        {{item.mainMessage}}
-      </div>
+      <!--<div class="m-title bold " v-if="item.mess==='n-ew'">-->
+        <!--<div class="photo round  chat-color"></div>-->
+        <!--{{item.mainMessage}}-->
+      <!--</div>-->
 
       <!--阅读过的小纸条（默认）-->
-      <div class="m-title bold chat-gray" v-if="item.mess==='general'">
-        {{item.mainMessage}}
+      <div class="m-title bold " :class="{'chat-gray':item.unread===0}" >
+        <div class="photo round  chat-color" v-if="item.unread!=0"></div>
+        {{item.title}}
       </div>
-      <div class="m-message padding2 chat-gray">{{item.message}}</div>
+
+      <div class="m-message padding2 chat-gray">{{item.content}}</div>
     </div>
 
   </div>

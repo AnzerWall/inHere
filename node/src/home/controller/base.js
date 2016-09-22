@@ -10,7 +10,7 @@ export default class extends think.controller.base {
     this.Token=new TokenService();
   }
   async __before(){
-    this.data=this.http.data;
+    this.data=this.http._data;
     let token=this.get("token");
     if(think.isEmpty(token)){
       let Operator=this.service("operator");
@@ -21,6 +21,9 @@ export default class extends think.controller.base {
       this.operator=new Operator(user_info);
 
     }
+    this.header("Access-Control-Allow-Origin", "*");
+    this.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTION,HEAD,PATCH");
+    this.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
   }
   success(data){

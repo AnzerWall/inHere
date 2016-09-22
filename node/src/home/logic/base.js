@@ -38,6 +38,6 @@ export default class extends think.logic.base {
             this._data=result.value;
 
         }
-        this.http.data=this._data;
+        this.http._data=this._data;
     }
 }

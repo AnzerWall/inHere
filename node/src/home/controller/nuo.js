@@ -70,7 +70,7 @@ export default class extends Base {
         let operator_id = this.operator.user_id;
         let ret=await this.Model.get(id,operator_id);
         if(think.isEmpty(ret))
-            return this.fail("NUO NOT FOUND");
+            return this.fail(10002,"NUO NOT FOUND");
 
         ret.target_list=await this.TargetModel.getList(id,operator_id);
         return this.success(ret);

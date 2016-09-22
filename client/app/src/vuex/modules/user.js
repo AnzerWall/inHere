@@ -15,7 +15,7 @@
  }
  }
  */
-import { CHANGE_LOGIN_STATE } from '../mutation-types.js'
+import { CHANGE_LOGIN_STATE,LOAD_LOGIN_STATE } from '../mutation-types.js'
 import Storage from '../../storage/storage'
 // 该模块的初始状态
 let state = {
@@ -31,17 +31,6 @@ let state = {
   is_login:false
 
 };
-let login_state_data=Storage.get("login_state");
-if(login_state_data){
-  try{
-    state.login_state=JSON.parse(login_state_data);
-  }catch (e){
-
-  }
-
-  state.token=  state.login_state.token;
-  state.is_login=(typeof state.token==="string")&&state.token!="";
-}
 
 // 相关的 mutations
 let mutations = {
@@ -50,6 +39,23 @@ let mutations = {
     state.token=  login_state.token;
     state.is_login=(typeof state.token==="string")&&state.token!="";
     Storage.set("login_state",JSON.stringify(login_state))
+  },
+  [LOAD_LOGIN_STATE](state){
+
+    let login_state_data=Storage.get("login_state");
+
+    if(login_state_data){
+      try{
+        let login_state=JSON.parse(login_state_data);
+        state.login_state=login_state;
+        state.token=  login_state.token;
+        state.is_login=(typeof state.token==="string")&&state.token!="";
+        console.log("[LocalStorage] load login data");
+       // console.log(login_state);
+      }catch (e){
+        console.error(e);
+      }
+    }
   }
 };
 

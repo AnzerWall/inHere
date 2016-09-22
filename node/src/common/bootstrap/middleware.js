@@ -11,5 +11,8 @@
  * })
  * 
  */
-let cors = require("think-cors");
-think.middleware("cors", cors);
+//let cors = require("think-cors");
+//think.middleware("cors", cors);
+//think.middleware("cors", function(){
+//
+//});

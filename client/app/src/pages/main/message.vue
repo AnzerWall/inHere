@@ -6,7 +6,7 @@
         <div class="icon">
           <chat-icon></chat-icon>
         </div>
-        <div class="notes">你又又又有{{newMessageCount}}条悄悄话 》</div>
+        <div class="notes" v-link="'/chat-list'">你有{{total_chat_unread}}条悄悄话 》</div>
       </div>
     </div>
     <div class="message-content">
@@ -95,8 +95,36 @@
 <script type="text/ecmascript-6">
   import MessageCard from 'components/message-card/message-card.vue'
   import ChatIcon from'svg/main/message/Chat.vue'
+  import {total_chat_unread ,user_id,is_login,token} from '../../vuex/getters.js'
+  import {pushUnreadChatList} from '../../vuex/actions/chat-action.js'
+  import Websocket from '../../util/websocket_helper.js'
 
   export default{
+    vuex:{
+      getters:{
+        total_chat_unread,
+        user_id,
+        is_login,
+        token
+      },
+      actions:{
+        pushUnreadChatList
+      }
+    },
+    route:{
+      data(t){
+        if(this.is_login){
+          console.log(`[Websocket] fetch unread chat list`);
+          let p=Websocket.startRequest(this.$socket,"get_unread_chat",{token:this.token})
+            .then((data)=>{
+              console.log(`[Websocket] fetched unread chat list,length=${ data instanceof Array?data.length:0}`);
+              this.pushUnreadChatList(data,this.user_id);
+            });
+
+
+        }
+      }
+    },
     methods:{
       allShow(){
         this.num=this.notices.length;

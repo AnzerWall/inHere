@@ -13,10 +13,12 @@ export default class extends think.service.base {
         this.user_id = data.user_id||"";
         this.school_id =data.school_id||"";
         this.role_id=data.role_id||"";
-
-        think.log(`${this.user_id}`,"OPERATOR");
+        this.socket_id=data.socket_id||"";
+       // think.log(`${this.user_id}`,"OPERATOR");
     }
-
+    isOnline(){
+        return data.socket_id!="";
+    }
     isMe(user_id) {
         return this.user_id+"" === user_id+"";
 
@@ -26,5 +28,8 @@ export default class extends think.service.base {
     }
     isLogin(){
         return (this.user_id+"") !=="";
+    }
+    isThisSocket(socket_id){
+        return this.socket_id==this.socket_id
     }
 }

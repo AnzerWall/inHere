@@ -23,7 +23,8 @@ import LostPublish from 'pages/demand/lost-publish.vue'
 import DatingPublish from 'pages/demand/dating-publish.vue'
 
 
-import ChatList from 'pages/message/chat-list.vue'
+import ChatListPage from 'pages/chat/chat-list.vue'
+import ChatPage from 'pages/chat/chat.vue'
 
 import  NuoListPage from 'pages/nuo/list.vue'
 import  NuoDetailPage from 'pages/nuo/detail.vue'
@@ -76,8 +77,11 @@ export default{
     component:LoginPage,
     name:"login"
   },
+  '/chat-list':{
+    component: ChatListPage
+  },
   '/chat':{
-    component: ChatList
+    component: ChatPage
   },
   '/nuo/:id':{
     component:NuoDetailPage,

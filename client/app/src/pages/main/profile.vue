@@ -4,7 +4,7 @@
     <div class="profile-head-wrapper">
       <div class="profile-head">
         <div class="text">
-          {{username}} / {{school}}
+          {{user_id}} / {{school}}
         </div>
         <div class="icon"><menu-icon style="fill:#ccc"></menu-icon></div>
       </div>
@@ -116,18 +116,31 @@
 
 </style>
 <script type="text/ecmascript-6">
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js'
   import MenuIcon from 'svg/common/Menu.vue'
   export default{
     components:{
       MenuIcon
+    },
+    vuex: {
+      actions: {
+
+      },
+      getters: {
+        login_state,
+        token,
+        is_login,
+        school,
+        user_id
+      }
     },
 
     data(){
      return {
        grid_field_width:this.getGridFieldWidth(),
        grid_width:this.getGridWidth(),
-       username:"小泽",
-       school:"肇庆学院",
+//       username:"小泽",
+//       school:"肇庆学院",
        tools:[{
          url:"",
          icon:"/static/image/profile/Fankajilu.svg",

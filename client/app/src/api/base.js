@@ -12,7 +12,8 @@ global.Promise=bluebird;
 fakeApi(request);
 let java_api_base="http://115.28.67.181:8080";
 let  url_base="http://115.28.67.181:8080";
-let node_api_base="http://127.0.0.1:8360";
+let node_api_base="http://15.28.67.181:8360";
+//let node_api_base="http://127.0.0.1:8360";
  function checkResult(res){
   if(res.ok){
     if(typeof res.body!=="object"){

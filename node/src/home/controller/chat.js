@@ -8,4 +8,8 @@ export default class extends Base {
    * @return {Promise} []
    */
 
+
+  async sendAction(){
+
+  }
 }

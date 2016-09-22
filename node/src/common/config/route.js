@@ -5,6 +5,9 @@ export default [
     ["test",{
         get:"index/test"
     }],
+    ["chat",{
+        post:'chat/send'
+    }],
     ["nuo/:id/praise",{
         post:"nuo/praise"
     }],

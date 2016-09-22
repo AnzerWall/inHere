@@ -37,7 +37,7 @@
   import PublishText from '../../components/publish/publish-text.vue'
   import PublishChoose from '../../components/publish/publish-choose.vue'
   import PublishTime from '../../components/publish/publish-time.vue'
-  import PublishTagSelector from '../../components/publish/publish-tag-selector.vue'
+//  import PublishTagSelector from '../../components/publish/publish-tag-selector.vue'
 
   export default{
 
