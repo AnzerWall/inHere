@@ -1,5 +1,7 @@
 package com.inHere.service;
 
+import com.inHere.entity.Token;
+
 public interface PraiseService {
 
 	/**
@@ -7,7 +9,7 @@ public interface PraiseService {
 	 * 
 	 * @return
 	 */
-	public Integer getPraiseSize(String praise);
+	Integer getPraiseSize(String praise);
 
 	/**
 	 * 用户是否点赞了
@@ -16,6 +18,12 @@ public interface PraiseService {
 	 * @param user_id
 	 * @return
 	 */
-	public Integer praised(String praise, String user_id);
+	Integer praised(String praise, String user_id);
+
+	/**
+	 * 点赞销赞
+	 * @return
+	 */
+	boolean praise(Integer ext_type, Integer item_id, Token token);
 
 }

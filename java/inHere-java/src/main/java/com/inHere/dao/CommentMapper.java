@@ -43,4 +43,12 @@ public interface CommentMapper {
      */
     Integer insertComment(@Param("comment") CommentDto comment,
                           @Param("user_id") String use_id, @Param("name") String name);
+
+    /**
+     * 用户点赞销赞
+     * @param user_id
+     * @param id
+     * @return
+     */
+    Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
 }
