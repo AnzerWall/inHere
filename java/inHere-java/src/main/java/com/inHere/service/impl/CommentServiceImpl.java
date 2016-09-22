@@ -54,7 +54,7 @@ public class CommentServiceImpl implements CommentService {
         data.put("limit", params.getLimit());
         data.put("total", total);
         data.put("total_page", total_page);
-        data.put("items", this.setItems(comments, params.getTokenEntity()));
+        data.put("items", this.setItems(comments, params.getTokenEntity(), total - params.getOffset()));
         return data;
     }
 
@@ -64,11 +64,14 @@ public class CommentServiceImpl implements CommentService {
      * @param comments
      * @return
      */
-    public JSONArray setItems(List<Comment> comments, Token token) {
+    public JSONArray setItems(List<Comment> comments, Token token, Integer maxFloor) {
         JSONArray array = new JSONArray();
+        // 楼层计算
+        Integer floor = maxFloor;
         for (Comment tmp : comments) {
-            ReturnCommentDto commentDto = this.setCommentDto(tmp, token);
+            ReturnCommentDto commentDto = this.setCommentDto(tmp, token, floor);
             array.add(commentDto);
+            -- floor;
         }
         return array;
     }
@@ -79,7 +82,7 @@ public class CommentServiceImpl implements CommentService {
      * @param tmp
      * @return
      */
-    public ReturnCommentDto setCommentDto(Comment tmp, Token token) {
+    public ReturnCommentDto setCommentDto(Comment tmp, Token token, Integer floor) {
         ReturnCommentDto commentDto = new ReturnCommentDto();
         commentDto.setId(tmp.getId());
         commentDto.setUser_id(tmp.getUserId());
@@ -98,7 +101,7 @@ public class CommentServiceImpl implements CommentService {
             commentDto.setPraise(0);
             commentDto.setPraised(Field.Praised_NO);
         }
-        commentDto.setFloor(tmp.getFloor());
+        commentDto.setFloor(floor);
         return commentDto;
     }
 
@@ -127,9 +130,9 @@ public class CommentServiceImpl implements CommentService {
             nameUsed = new NameUsed(commentDto.getExt_type(), commentDto.getItem_id(), token.getUser_id());
             // 随机插入匿名
             nameUsedMapper.insertRandomName(nameUsed);
-            Name nameObj = nameUsedMapper.selectNameByUsedID(nameUsed.getId());
-            log.info("name--->" + nameObj.getName());
         }
+        Name nameObj = nameUsedMapper.selectNameByUsedID(nameUsed.getId());
+        commentMapper.insertComment(commentDto, token.getUser_id(), nameObj.getName());
     }
 
 }

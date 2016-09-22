@@ -157,7 +157,7 @@ public class AskReplyServiceImpl implements AskReplyService {
 			listDto.setTotal_page(total_page);
 
 			// 设置评论列表
-			JSONArray commentArray = commentService.setItems(comments, params.getTokenEntity());
+			JSONArray commentArray = commentService.setItems(comments, params.getTokenEntity(), total - params.getOffset());
 			listDto.setItems(commentArray);
 
 			map.put("reply_list", listDto);

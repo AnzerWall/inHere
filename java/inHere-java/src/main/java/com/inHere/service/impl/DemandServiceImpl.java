@@ -100,7 +100,7 @@ public class DemandServiceImpl implements DemandService {
             listDto.setTotal_page(total_page);
 
             // 设置评论列表
-            JSONArray commentArray = commentService.setItems(comments, params.getTokenEntity());
+            JSONArray commentArray = commentService.setItems(comments, params.getTokenEntity(), total - params.getOffset());
             listDto.setItems(commentArray);
 
             // 有求必应实体添加对应评论列表返回。。。。

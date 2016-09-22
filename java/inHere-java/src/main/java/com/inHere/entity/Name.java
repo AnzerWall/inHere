@@ -1,7 +1,6 @@
 package com.inHere.entity;
 
 public class Name {
-
     private Integer id;
 
     private String name;

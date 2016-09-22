@@ -162,11 +162,11 @@ public class DemandController {
             Double price = priceStr != null ? Double.parseDouble(priceStr) : null;
             String original_priceStr = multiRequest.getParameter("original_price"); // 原价
             Double original_price = original_priceStr != null ? Double.parseDouble(original_priceStr) : null;
-            String quality = multiRequest.getParameter("quality"); // 成色
+            Integer quality = Integer.parseInt(multiRequest.getParameter("quality")); // 成色
             String buy_time = multiRequest.getParameter("buy_time"); // 购买时间
             ext_data.put("price", price);
             ext_data.put("original_price", original_price);
-            ext_data.put("quality", quality);
+            ext_data.put("quality", Field.Quality.get(quality));
             ext_data.put("buy_time", buy_time);
             demand.setExtDataJSON(ext_data);
             return demand;

@@ -1,7 +1,6 @@
 package com.inHere.entity;
 
 public class NameUsed {
-
     private Integer id;
 
     private Integer moduleType;
@@ -14,7 +13,6 @@ public class NameUsed {
 
     public NameUsed() {
     }
-
     public NameUsed(Integer moduleType, Integer moduleId, String userId) {
         this.moduleType = moduleType;
         this.moduleId = moduleId;

@@ -1,5 +1,8 @@
 package com.inHere.constant;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * 数据库字段常量
  *
@@ -32,6 +35,8 @@ public class Field {
     // 标签：自定义
     public final static Integer Label_Custom = 0;
 
+    // 成色
+    public final static Map<Integer, String> Quality = new LinkedHashMap<>();
 
 
     /*-------------------栏目模块常量---------------------*/
@@ -60,5 +65,19 @@ public class Field {
     public final static Integer ExtType_OutTeasing = 11;
     // 问答
     public final static Integer ExtType_AskAnwser = 12;
+
+    static {
+        // 成色
+        Quality.put(1, "一成");
+        Quality.put(2, "二成");
+        Quality.put(3, "三成");
+        Quality.put(4, "四成");
+        Quality.put(5, "五成");
+        Quality.put(6, "六成");
+        Quality.put(7, "七成");
+        Quality.put(8, "八成");
+        Quality.put(9, "九成");
+        Quality.put(10, "十成");
+    }
 
 }

@@ -6,8 +6,8 @@
   <insert id="insertRandomName" parameterType="NameUsed" useGeneratedKeys="true" keyProperty="nameUsed.id" keyColumn="id">
     INSERT INTO tb_name_used SET module_type=#{nameUsed.moduleType}, module_id=#{nameUsed.moduleId}, user_id=#{nameUsed.userId}, name_id=
     (SELECT id FROM ( SELECT id, ABS( tb_name.random-FLOOR(RAND()*(100000)) ) AS diff FROM tb_name
-      WHERE id NOT IN
-	  (SELECT tb_name.id FROM tb_name,tb_name_used WHERE tb_name.id=tb_name_used.name_id AND module_type=#{nameUsed.moduleType} AND module_id=#{nameUsed.moduleId} )
+    WHERE id NOT IN
+    (SELECT tb_name.id FROM tb_name,tb_name_used WHERE tb_name.id=tb_name_used.name_id AND module_type=#{nameUsed.moduleType} AND module_id=#{nameUsed.moduleId} )
     ORDER BY diff
     LIMIT 1) AS tb)
   </insert>

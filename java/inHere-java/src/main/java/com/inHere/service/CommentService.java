@@ -15,7 +15,7 @@ public interface CommentService {
 	/**
 	 * 获取列表
 	 * 
-	 * @param comments
+	 * @param params
 	 * @return
 	 * @throws IOException
 	 */
@@ -27,7 +27,7 @@ public interface CommentService {
 	 * @param comments
 	 * @return
 	 */
-	JSONArray setItems(List<Comment> comments, Token token);
+	JSONArray setItems(List<Comment> comments, Token token, Integer maxFloor);
 
 	/**
 	 * 获取评论总数

@@ -38,7 +38,7 @@
 
     <!-- 获取吐槽或问答某模块标签总数 -->
     <select id="getCount" resultType="Integer">
-        SELECT COUNT(*) FROM (SELECT * FROM tb_ask_reply
+        SELECT COUNT(*) FROM (SELECT label_id FROM tb_ask_reply
         WHERE ext_type = #{type}
         GROUP BY label_id) AS lab
     </select>
