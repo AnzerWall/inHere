@@ -1,5 +1,5 @@
 <template>
-
+  <div v-if="!$loadingRouteData">
   <div class="body">
     <div v-for="list in comments" class="content-comment">
       <div class="comment-title" v-if="list.user_id!=user_id">
@@ -20,7 +20,11 @@
         <div class="title-right">#{{list.floor}}</div>
       </div>
       <div class="comment-message">{{list.content}}</div>
+      <div class="like" v-if="number===1">
+        {{list.praise}}<icon-like-icon class="like-icon"></icon-like-icon>
+      </div>
     </div>
+</div>
 
   </div>
 </template>
@@ -29,25 +33,26 @@
 
 </style>
 <script>
-  import {humanized,fromNow} from 'filter/time.js';
-  import helper from '../../util/demand_helper.js';
-  import detail from '../../pages/demand/detail.vue'
+  import {humanized,fromNow} from '../../filter/time.js';
+  import IconLikeIcon from '../../svg/common/comment/IconLike.vue';
 
   export default{
     filters:{
       humanized,
       fromNow
     },
+    components:{
+      IconLikeIcon
+
+    },
 
     props:
 
-      ['comments','main_color','user_id'],
-
-
-
+      ['comments','main_color','user_id','number'],
     data(){
 
-      return {}
+      return {
+      }
     },
 
 
