@@ -15,6 +15,7 @@ import com.inHere.entity.Demand;
 import com.inHere.entity.Token;
 import com.inHere.service.CommonService;
 import com.inHere.service.DemandService;
+import com.inHere.util.DateUtil;
 import com.inHere.validator.DemandValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,7 +168,7 @@ public class DemandController {
             ext_data.put("price", price);
             ext_data.put("original_price", original_price);
             ext_data.put("quality", Field.Quality.get(quality));
-            ext_data.put("buy_time", buy_time);
+            ext_data.put("buy_time", DateUtil.longToDate(buy_time));
             demand.setExtDataJSON(ext_data);
             return demand;
         }
@@ -179,11 +180,11 @@ public class DemandController {
             log.info("--->" + thing);
             if (Field.ExtType_Lost == ext_type) {
                 String lose_time = multiRequest.getParameter("lose_time"); // 丢失时间
-                ext_data.put("lose_time", lose_time);
+                ext_data.put("lose_time", DateUtil.longToDate(lose_time));
             }
             if (Field.ExtType_Found == ext_type) {
                 String pickeup_time = multiRequest.getParameter("pickeup_time"); // 捡到时间
-                ext_data.put("pickeup_time", pickeup_time);
+                ext_data.put("pickeup_time", DateUtil.longToDate(pickeup_time));
             }
             demand.setExtDataJSON(ext_data);
             return demand;
@@ -207,10 +208,10 @@ public class DemandController {
 
             ext_data.put("place", place);
             ext_data.put("want_sex", want_sex);
-            ext_data.put("start_time", start_time);
-            ext_data.put("end_time", end_time);
+            ext_data.put("start_time", DateUtil.longToDate(start_time));
+            ext_data.put("end_time", DateUtil.longToDate(end_time));
             ext_data.put("per_cost", per_cost);
-            ext_data.put("gathering_time", gathering_time);
+            ext_data.put("gathering_time", DateUtil.longToDate(gathering_time));
             ext_data.put("gathering_place", gathering_place);
             ext_data.put("join_list", new JSONObject().toJSONString()); // 参与的人的列表 用hash存储
             demand.setExtDataJSON(ext_data);

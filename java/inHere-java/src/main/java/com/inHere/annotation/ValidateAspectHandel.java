@@ -1,7 +1,7 @@
 package com.inHere.annotation;
 
-import java.lang.reflect.Method;
-
+import com.inHere.constant.Code;
+import com.inHere.exception.SystemException;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,8 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import com.inHere.constant.Code;
-import com.inHere.exception.SystemException;
+import java.lang.reflect.Method;
 
 /**
  * 使用AOP进行验证拦截，@Params校验注解处理类
@@ -76,6 +75,7 @@ public class ValidateAspectHandel implements ApplicationContextAware {
 		}
 		throw new SystemException(Code.Error.getCode(), Code.Error.getStatus(), "使用@Params参数校验时，方法参数不能为空");
 	}
+
 
 
 }

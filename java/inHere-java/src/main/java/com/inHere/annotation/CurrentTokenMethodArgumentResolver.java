@@ -16,7 +16,6 @@ import com.inHere.exception.SystemException;
  * 自定义参数Token处理器
  * 
  * @author lwh
- *
  */
 public class CurrentTokenMethodArgumentResolver implements HandlerMethodArgumentResolver {
 
