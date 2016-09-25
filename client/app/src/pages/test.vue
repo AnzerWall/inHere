@@ -1,94 +1,71 @@
 <template>
-  <div >
-    {{data}}
-    <button @click="auth" >auth</button>
-    <button @click="chat" >chat</button>
-    <button @click="leave" >leave</button>
-    <button @click="get" >get</button>
-    <div v-for="item in chat_list">{{$index}}  {{item.items.length}}</div>
+<div class="test">
+  <div class="div1">
+    <div class="tag">10000000000000000000333333333333333</div>
+    <div class="time">time</div>
+  </div>
+  <div class="div2">
+    <div class="tt">SSSSSSSSS</div>
+    <div class="tt">bbbb</div>
+  </div>
   </div>
 
 </template>
 <style scoped>
+.test{
+  display: flex;
+  justify-content: space-between;
+}
+.tt{
+  padding-left: 5px;
+
+}
+.div1{
+  flex-shrink: 1;
+  flex-grow: 1;
+  display: flex;
+  overflow: hidden;
+  justify-content: flex-start;
+}
+  .tag{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 1;
+    flex-grow:0;
+    padding-left: 5px;
+
+  }
+  .time{
+    flex-shrink: 0;
+    flex-grow:1;
+    padding-left: 5px;
+  }
+  .div2{
+
+    flex-shrink: 0;
+    flex-grow: 0;
+    display: flex;
+    /*padding-left: 120px;*/
+  }
 
 
 </style>
 <script type="text/ecmascript-6">
   //import fakeComment from '../api/fake/comment.js'
-  import {token,login_state,is_login,chat_list,user_id} from '../vuex/getters.js'
-  import websocket from '../util/websocket_helper.js'
-  import {pushUnreadChatList} from '../vuex/actions/chat-action.js'
   export default{
-    sockets: {
-//      chat(data){
-//        console.log(data)
-//      },
-      unread_chat_list(data){
-
-      },
-      test(data){
-        console.log( data);
-      },
-      chat(data){
-        console.log(data)
-        this.pushUnreadChatList(data, this.user_id);
-      }
-    },
-    vuex: {
-      getters: {
-        login_state,
-        token,
-        chat_list,
-        is_login,
-        user_id
-      },
-      actions:{
-        pushUnreadChatList
-      }
-    },
     data(){
       return {
-        data:"233"
+        labels:[{
+          name:1,
+          checked:false
+        },{
+          name:2,
+          checked:false
+        },{
+          name:3,
+          checked:false
+        }]
       }
-    },
-    methods:{
-      auth(){
-        console.log(this.token);
-        this.$socket.emit("auth",{token:this.token})
-      },
-      leave(){
-       // this.$socket.emit("leave")
-        console.log(this.chat_list);
-      },
-      chat(){
-        this.$socket.emit("chat",{
-          token:this.token,
-          request_key:"123",
-          module_type:1,
-          module_id:1,
-          rev_user:"LLB",
-          content_type:0,
-          content:"测试消息"
-
-        })
-      },
-      test(){
-//        console.log(this.$refs);
-        this.$socket.emit("test",{token:this.token})
-      },
-      get(){
-        websocket.startRequest(this.$socket,"get_unread_chat",{token:this.token})
-          .then((data)=>{
-            this.pushUnreadChatList(data,this.user_id);
-           // console.log('success');
-            console.log(data);
-        });
-
-
-      }
-    },
-    ready(){
-
     }
   }
 </script>

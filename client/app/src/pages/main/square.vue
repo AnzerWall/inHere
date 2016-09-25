@@ -1,4 +1,4 @@
-<template>
+s<template>
   <div class="square-wrapper">
     <!--动画-->
       <!--加载动画组件：小圆点-->
