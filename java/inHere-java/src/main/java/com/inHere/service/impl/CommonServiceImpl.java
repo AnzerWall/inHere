@@ -99,6 +99,8 @@ public class CommonServiceImpl implements CommonService {
         JSONArray photos = new JSONArray();
         // 原图保存及缩略图创建
         for (MultipartFile file : fileList) {
+            // 空文件不处理
+            if (file.getSize() == 0) continue;
             FileType fileType = FileUtil.getTypeByByte(file.getBytes());
 
             // 生成随机唯一的文件名

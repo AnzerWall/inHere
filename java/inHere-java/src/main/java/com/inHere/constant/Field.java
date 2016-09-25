@@ -41,7 +41,7 @@ public class Field {
 
     /*-------------------栏目模块常量---------------------*/
 
-    // 快递
+    // 兼职
     public final static Integer ExtType_Express = 1;
     // 转让
     public final static Integer ExtType_Sell = 2;

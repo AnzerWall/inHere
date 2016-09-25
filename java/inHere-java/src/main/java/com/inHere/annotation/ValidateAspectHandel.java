@@ -40,7 +40,7 @@ public class ValidateAspectHandel implements ApplicationContextAware {
 
 	@Around("pointCut()")
 	public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-		log.info("进入ValidateAspectHandel进行参数校验");
+		log.info("进入ValidateAspectHandel进行参数校验AOP切面");
 		// 获取方法签名
 		MethodSignature msig = (MethodSignature) joinPoint.getSignature();
 		// 截取目标所在的类字节对象
