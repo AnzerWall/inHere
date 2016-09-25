@@ -30,6 +30,14 @@ import  NuoListPage from 'pages/nuo/list.vue'
 import  NuoDetailPage from 'pages/nuo/detail.vue'
 import  CreateNuoPage from 'pages/nuo/create.vue'
 
+import Cao from 'pages/square/cao.vue'
+import Answer from 'pages/square/answer.vue'
+import CaoTopic from 'pages/square/cao-topic.vue'
+import AnswerTopic from 'pages/square/answer-topic.vue'
+import CaoDetail from 'pages/square/cao-detail.vue'
+import Label from 'pages/square/label.vue'
+import AnswerDetail from 'pages/square/answer-detail.vue'
+
 
 import LoginPage from 'pages/login/login.vue'
 export default{
@@ -109,5 +117,26 @@ export default{
         component: DatingPublish
       }
     }
+  },
+  '/cao':{
+    component:Cao,
+  },
+  '/answer':{
+    component:Answer
+  },
+  '/cao-topic':{
+    component:CaoTopic
+  },
+  '/answer-topic':{
+    component:AnswerTopic
+  },
+  '/cao-detail/:id':{
+    component:CaoDetail
+  },
+  '/label':{
+    component:Label
+  },
+  '/answer-detail/:id':{
+    component:AnswerDetail
   }
 }
