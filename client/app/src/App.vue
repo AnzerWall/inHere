@@ -20,6 +20,11 @@
     height: 0;
   }
 
+  input {
+    outline:0;
+    border: none;
+  }
+
   /*html,body,#app{*/
   /*height: 100%;*/
   /*}*/
