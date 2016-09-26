@@ -3,7 +3,7 @@
         .tag-editor
             input.line(placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
             .lines
-                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.name)") 
+                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)") 
                     span {{item.name}}
             .line.cancel(@click="toggleShow()") 取消
 </template>
@@ -30,7 +30,7 @@ module.exports = {
     watch:{
         show(val){
             if(val){
-                var tmp = this.tags.findIndex(item=>item.name==this.tag);
+                var tmp = this.tags.findIndex(item=>item.value==this.tag);
                 if(tmp<0)this.tmptag = this.tag;
                 else this.tmptag = '';
             }
@@ -38,7 +38,7 @@ module.exports = {
     },
     methods:{
         clickTag(str){
-            this.tag = str
+            this.tag = `${str}` 
             this.toggleShow();
         },
         toggleShow(){
@@ -70,7 +70,8 @@ module.exports = {
     left:0;
     bottom: 0;
     right:0;
-    background: rgba(0,0,0,0.15);
+    background: rgba(0,0,0,0.2);
+    z-index:9000;
     .tag-editor {
         display: flex;
         flex-direction: column;
@@ -78,7 +79,7 @@ module.exports = {
         left:0;
         bottom: 0;
         right:0;
-        top:10%;
+        top:20%;
         background: #FAFAFA;
         color:black;
         input.line {

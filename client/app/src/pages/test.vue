@@ -16,52 +16,68 @@ module.exports = {
             tag:'',
             tags:[
               {
-                "name": "饭堂"
+                "name": "饭堂",
+                "value":123
               },
               {
-                "name": "阿姨"
+                "name": "阿姨",
+                "value":321
               },
               {
-                "name": "老师"
+                "name": "老师",
+                "value":333
               },
               {
-                "name": "实训"
+                "name": "实训",
+                "value":111
               },
               {
-                "name": "饭堂2"
+                "name": "饭堂2",
+                "value":222
               },
               {
-                "name": "阿2姨"
+                "name": "阿2姨",
+                "value":1221213
               },
               {
-                "name": "老师2"
+                "name": "老师2",
+                "value":123
               },
               {
-                "name": "实训2"
+                "name": "实训2",
+                "value":123
               },
               {
-                "name": "饭堂3"
+                "name": "饭堂3",
+                "value":123
               },
               {
-                "name": "阿姨3"
+                "name": "阿姨3",
+                "value":123
               },
               {
-                "name": "老师3"
+                "name": "老师3",
+                "value":123
               },
               {
-                "name": "实训3"
+                "name": "实训3",
+                "value":123
               },
               {
-                "name": "饭堂4"
+                "name": "饭堂4",
+                "value":123
               },
               {
-                "name": "阿姨4"
+                "name": "阿姨4",
+                "value":123
               },
               {
-                "name": "老师4"
+                "name": "老师4",
+                "value":123
               },
               {
-                "name": "实训4"
+                "name": "实训4",
+                "value":123
               }
             ],
             tagShow:false
