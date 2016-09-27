@@ -42,12 +42,14 @@
         this.$refs.viewer.show(index, photos);
       },
       onLoadMore(){
-        return this.$request
-          .get("/demand")
+        var token = "19e7aae2d81da63d62cfa36eb69706069e7a97bb61c8901782d8c1d98765ea94"
+        this.$request
+          .get("http://115.28.67.181:8080/demand")//GET方法 url为/demand
+          .query({token: token})
           .query({ext_type: [1, 2, 3]})
           .query({offset: this.data.offset + 5, limit: this.data.limit})
           .then(this.$api.checkResult)
-          .then((data)=> {
+          .then((data=> {
             //通知组件加载完毕
             this.$broadcast('$InfiniteLoading:loaded');
             //更新数据数组
@@ -58,15 +60,17 @@
             if(this.data.offset>=this.data.total){
               this.$broadcast('$InfiniteLoading:complete');
             }
-          })
+          }))
       }
     },
     //配置路由钩子
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+        var token="19e7aae2d81da63d62cfa36eb69706069e7a97bb61c8901782d8c1d98765ea94";
         return this.$request
-          .get("/demand")//GET方法 url为/demand
+          .get("http://115.28.67.181:8080/demand")//GET方法 url为/demand
+          .query({token:token})
           .query({ext_type: [1, 2, 3]})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
           .query({offset: 0, limit: 5})
           .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
