@@ -11,7 +11,7 @@
     </div>
     <div class="profile-content">
       <div class="profile-tools-inner" :style="{'width': grid_field_width}">
-        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.icon+')',width:grid_width,height:grid_width}">
+        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.icon+')',width:grid_width,height:grid_width}" v-link="'/test'">
             <div class="title" :style="{color:item.color}">{{item.title}}</div>
         </div>
 

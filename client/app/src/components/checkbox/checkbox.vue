@@ -11,7 +11,7 @@
       flex-direction: row;
       align-items: center;
     /*justify-content: center;*/
-    padding-top: 10px;;
+    padding: 10px;;
     position: relative;
   }
 
@@ -27,7 +27,7 @@
     border-left: solid 3px #25d367;
     transform:rotate(-45deg);
     position: absolute;
-    left:4px;
+    left:14px;
     top: 16px;
     width: 12px;
     height: 6px;

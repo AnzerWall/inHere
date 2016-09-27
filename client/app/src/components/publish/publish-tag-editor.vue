@@ -3,23 +3,23 @@
         .tag-editor
             input.line(placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
             .lines
-                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)") 
+                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)")
                     span {{item.name}}
             .line.cancel(@click="toggleShow()") 取消
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 module.exports = {
     props:{
         show:Boolean,
-        tag:String,
+        tag:{},
         editable:{
             type:Boolean,
             default:false
         },
         tags:{
             type:Array,
-            default:[]
+            default:()=>([])
         }
     },
     data(){
@@ -38,8 +38,9 @@ module.exports = {
     },
     methods:{
         clickTag(str){
-            this.tag = `${str}` 
+            this.tag = str;
             this.toggleShow();
+            this.$emit('select',str);
         },
         toggleShow(){
             this.show=!this.show

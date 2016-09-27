@@ -5,6 +5,9 @@
 </template>
 
 <style>
+  /*html{*/
+    /*-webkit-text-size-ajust:none*/
+  /*}*/
   body {
     user-select: none;
     font-size: 15px;
@@ -41,7 +44,7 @@
     store,
     sockets: {
       chat(data){
-        console.log(data)
+        console.log(data);
         this.pushUnreadChatList(data,this.user_id);
       },
       connect () {

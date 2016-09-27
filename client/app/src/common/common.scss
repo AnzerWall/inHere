@@ -1,5 +1,7 @@
 $baseFontSize:16px;
 $BORDER_RADIUS_SMALL:4px;
+$COLOR_LINE:rgba(213,213,213,.5);
+$TEXT_DISABLE:(0,0,0,0.2);
 @function pxToRem($px) {
   @return $px / $baseFontSize * 1rem;
 }
