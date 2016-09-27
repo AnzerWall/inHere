@@ -117,6 +117,7 @@
     position: relative;
     display: flex;
     overflow: auto;
+    overflow-y:hidden ;
     width: 100%;
   }
   .head-image .image-wrapper{
