@@ -17,9 +17,10 @@
         </div>
       </div>
     </div>
+    <!--正文内容-->
     <div class="d-content">
       <iframe v-el:myiframe scrolling="no" frameborder="0" @load="changeFrameHeight()" width="100%"
-              src="{{data.content}}"></iframe>
+              v-bind:src="data.content"></iframe>
     </div>
     <!--评论组件-->
     <div class="a-r-length">
