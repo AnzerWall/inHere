@@ -58,6 +58,10 @@
       maxRow: {//最大行数
         type: Number,
         default: 2
+      },
+      height:{
+        type:Number,
+        default:0
       }
     },
     data(){
@@ -71,6 +75,7 @@
 
         let height=hiddenTextarea.offsetHeight*lineNum;
         textarea.style.height=height+'px';
+        this.heigit=height;
        // console.log(lineNum,height);
       //  console.log(hiddenTextarea.scrollHeight,hiddenTextarea.clientHeight);
 //        let text = this.value;
