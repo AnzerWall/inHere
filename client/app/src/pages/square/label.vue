@@ -34,7 +34,7 @@
     </div>
 </template>
 <style >
-  
+
   .label{
 
   }

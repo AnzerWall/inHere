@@ -31,12 +31,12 @@
         </div>
 
       </div>
-      <div  class="cao-detail-center">
+      <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
         <comment :comments="comments" :number="number" :user_id="user_id" :main_color="main_color"></comment>
       </div>
-      <div class="cao-detail-foot"></div>
-      <div class="detail-foot">
-        <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">
+      <div class="cao-detail-foot">
+        <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+        <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
       </div>
     </div>
 
@@ -151,22 +151,8 @@
     height: 0;
   }
   .cao-detail-center{
-    margin-bottom: 50px;
-  }
-  .detail-foot{
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
-    border-top:solid 1px #cccccc ;
-  }
-  .text{
-    width: 100%;
-    height: 50px;
-    outline: none;
-    padding-left: 15px;
 
   }
-
   input::-webkit-input-placeholder {
 
     color:#cccccc;
@@ -179,6 +165,15 @@
     justify-content: center;;
     margin-top: 200px;
   }
+  .cao-detail-foot{
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 100%;
+    /*padding: 10px 0px 10px 20px;*/
+    border-top: solid 1px #cccccc;
+  }
 
 </style>
 <script type="text/ecmascript-6">
@@ -187,6 +182,8 @@
   import Comment from '../../components/comment/comment.vue';
   import PhotosWipe from '../../components/photoswipe/photoswipe.vue';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+  import post from '../../util/comment_post.js';
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
 
     export default{
         data(){
@@ -196,7 +193,11 @@
             user_id:"",
             ext_data:{},
             comments:[],
-            images:[]
+            images:[],
+            placeholder:'说点什么?',
+            content:"",
+            bottomHeight:0,
+            ext_type:0,
 
           }
 
@@ -216,6 +217,7 @@
               this.images=data.ext_data.photos;
               this.comments=data.reply_list.items;
               this.user_id=data.user_id;
+              this.ext_type=data.ext_type;
               }))
         }
       },
@@ -223,7 +225,8 @@
           MenuIcon,
           Comment,
           PhotosWipe,
-          PulseLoader
+          PulseLoader,
+          AutoTextarea
         },
       filters:{
         fromNow
@@ -239,6 +242,10 @@
         },
         back(){
           window.history.back()
+        },
+        submit(request,content,id,ext_type){
+          console.log(content);
+          return post.post(request,content,id,ext_type,this);
         }
       }
     }

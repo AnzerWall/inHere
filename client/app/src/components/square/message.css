@@ -7,6 +7,9 @@
 .message .top{
   margin: 20px 20px 0px 20px;
 }
+.message-text{
+  word-wrap: break-word;
+}
 
 .message .center{
   display: flex;

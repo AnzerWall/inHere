@@ -1,10 +1,10 @@
 <template>
-  <div class="auto-textarea-wrapper">
-    <textarea  rows="1" cols=""  v-model="value"  v-el:hidden-textarea class="auto-textarea-hidden"></textarea>
+  <div class="auto-textarea-wrapper" v-el:autotextarea>
+    <textarea  rows="1" cols=""  v-model="value"  v-el:hidden-textarea class="auto-textarea-hidden" ></textarea>
     <textarea rows="1" cols=""  v-el:textarea @input="resize" @focus="resize" @click="resize" @keyup="resize"
-              class="auto-textarea" v-model="value" ></textarea>
+              class="auto-textarea" v-model="value" placeholder="{{placeholder}}" @keyup.enter="clickEnter"></textarea>
   </div>
-</template>
+</template>up
 <style scoped>
 
   .auto-textarea-wrapper {
@@ -15,6 +15,7 @@
     bottom: 0;
     box-sizing: border-box;
     width: 100%;
+
     /*border: solid 1px #ccc;*/
     /*position: relative;*/
   }
@@ -29,8 +30,8 @@
     resize: none;
     overflow: hidden;
     padding: 0;
-    width: 100%;
-    margin: 0;
+    width: 85%;
+    margin: 15px 20px;
     background-color: transparent;
     border: none;
     outline: none;
@@ -62,20 +63,31 @@
       height:{
         type:Number,
         default:0
+      },
+      placeholder:{
+        type:String,
+        default:""
       }
     },
-    data(){
-
+    watch:{
+      value(){
+        this.resize();
+      }
+    },
+    ready(){
+      this.resize();
     },
     methods: {
       resize(){
         let hiddenTextarea =this.$els.hiddenTextarea;
         let textarea =this.$els.textarea;
+        let autotextarea = this.$els.autotextarea;
         let lineNum=Math.min(3,Math.floor(hiddenTextarea.scrollHeight/hiddenTextarea.offsetHeight));
 
         let height=hiddenTextarea.offsetHeight*lineNum;
         textarea.style.height=height+'px';
-        this.heigit=height;
+
+        this.height=autotextarea.offsetHeight;
        // console.log(lineNum,height);
       //  console.log(hiddenTextarea.scrollHeight,hiddenTextarea.clientHeight);
 //        let text = this.value;
@@ -85,6 +97,10 @@
 //        finaleLineNum += lineNum.length;
 //        this.$els.textarea.rows = Math.min(finaleLineNum, maxRow);
 
+      },
+      clickEnter(){
+        console.log("enter",this.value);
+        this.$emit('enter',this.value);
       }
     },
     data(){

@@ -30,12 +30,13 @@
       </div>
     </div>
     <!--评论组件-->
-    <div class="ard-reply">
-      <comment :comments="lists" :main_color="main_color" :user_id="user_id" :number="number"></comment>
+    <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}">
+      <comment :comments="comments" :main_color="main_color" :user_id="user_id" :number="number"></comment>
     </div>
     <!--评论输入-->
-    <div class="ard-end">
-    <input  class="ard-input" type="text" placeholder="我要回答！">
+    <div class="answer-detail-foot">
+      <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+      <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
     </div>
   </div>
   <div v-if="$loadingRouteData" class="answer-detail-loading-area">
@@ -167,22 +168,12 @@
     background: #ffffff;
 
   }
-  .ard-input{
-    width: 100%;
-    outline: none;
-    height: 50px;
-  }
+
   .ard-spot{
     margin-left: 8px;
     margin-right: 8px;
   }
-  input::-webkit-input-placeholder {
 
-    color:#cccccc;
-  }
-  input::-moz-placeholder {
-    color:#cccccc;
-  }
   .answer-detail-loading-area {
     display: flex;
     justify-content: center;;
@@ -224,6 +215,15 @@
     border-width: 0;
     height: 0;
   }
+  .answer-detail-foot{
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 100%;
+    /*padding: 10px 0px 10px 20px;*/
+    border-top: solid 1px #cccccc;
+  }
 </style>
 <script>
   import Menu from 'svg/common/Menu.vue'
@@ -231,6 +231,8 @@
   import {fromNow} from 'filter/time.js';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import PhotosWipe from '../../components/photoswipe/photoswipe.vue';
+  import post from '../../util/comment_post.js';
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
   export default{
     filters: {
       fromNow
@@ -248,9 +250,10 @@
             return {
               data: data,
               ext_data:data.ext_data,
-              lists: data.reply_list.items,
+              comments: data.reply_list.items,
               user_id: data.user_id,
               photos:data.ext_data.photos,
+              ext_type:data.ext_type,
 
             }
           })
@@ -258,19 +261,24 @@
     },
     data(){
       return {
-        lists: [],
+        comments: [],
         user_id:'',
         data:{},
         number:1,
         ext_data:[],
-        photos:[]
+        photos:[],
+        ext_type:0,
+        placeholder:'说点什么?',
+        content:"",
+        bottomHeight:0,
       }
     },
     components: {
       Menu,
       Comment,
       PulseLoader,
-      PhotosWipe
+      PhotosWipe,
+      AutoTextarea
     },
     computed: {
       main_color: function () {
@@ -283,6 +291,10 @@
       },
       onClickImage(index){
         this.$refs.viewer.show(index,this.photos);
+      },
+      submit(request,content,id,ext_type){
+        console.log(content);
+        return post.post(request,content,id,ext_type,this);
       }
     }
   }

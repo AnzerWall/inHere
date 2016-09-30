@@ -10,6 +10,7 @@ let post=function(request,content,id,ext_type,self){
   self.content=content;
   self.id=id;
   self.ext_type=ext_type;
+  console.log(content);
   self.$request
     .post("http://115.28.67.181:8080/comments")
     .query({token: token})
@@ -17,7 +18,6 @@ let post=function(request,content,id,ext_type,self){
     .then(checkResult)
     .then(function (res) {
       self.content = "";
-//            console.log(res);
       self.$request//注意this问题。。。这里的this不等于外部的this,上次说过了
         .get("http://115.28.67.181:8080/comments")
         .query({token: token})
@@ -25,12 +25,15 @@ let post=function(request,content,id,ext_type,self){
         .query({item_id: self.id})
         .then(checkResult)
         .then(function (data) {
-          console.log(data);
+          //console.log(data);
+          //console.log(self.ext_type);
           self.comments = data.items;
+
+
         })
     })
     .catch(function (e) {
-      //console.error(e);
+      console.error(e);
     });
 }
 export default{
