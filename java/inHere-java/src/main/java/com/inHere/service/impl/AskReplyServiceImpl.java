@@ -8,14 +8,14 @@ import com.inHere.dao.AskReplyUserMapper;
 import com.inHere.dao.CommentMapper;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnListDto;
-import com.inHere.entity.AskReply;
-import com.inHere.entity.AskReplyUser;
-import com.inHere.entity.Comment;
-import com.inHere.entity.Token;
+import com.inHere.entity.*;
 import com.inHere.service.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
 import java.util.List;
@@ -238,7 +238,47 @@ public class AskReplyServiceImpl implements AskReplyService {
 	/**
 	 * 创建一个吐槽或问答资源
 	 */
-	public void createAskReply(AskReply askReply){
+	@Transactional
+	public void createAskReply(MultipartHttpServletRequest multiRequest, Token token) throws IOException {
+		AskReply askReply = new AskReply();
+
+		Integer ext_type = Integer.parseInt(multiRequest.getParameter("ext_type"));
+		askReply.setExtType(ext_type); // 类别
+		askReply.setExtData(new JSONObject().toJSONString()); // 类别私有数据
+
+		// 问答有标题
+		if (Field.ExtType_AskAnwser == ext_type) {
+			String title = multiRequest.getParameter("title");
+			askReply.setTitle(title); // 标题
+		}
+		String content = multiRequest.getParameter("content");
+		askReply.setContent(content); // 内容
+
+		String lab_name = multiRequest.getParameter("lab_name");
+		Label label = labelService.createLabel(lab_name);
+		askReply.setLabelId(label.getId()); // 标签id
+
+		// 标签检测，自定义或选择
+		//Integer lab_id = Integer.parseInt(multiRequest.getParameter("lab_id"));
+
+		// 自定义标签
+		//if (lab_id == Field.Label_Custom) {
+		//	String lab_name = multiRequest.getParameter("lab_name");
+		//	Label label = labelService.createLabel(lab_id, lab_name);
+		//	askReply.setLabelId(label.getId()); // 标签id
+		//} else { // 选择标签
+		//	askReply.setLabelId(lab_id); // 标签id
+		//}
+
+		// 获取上传图片集合
+		List<MultipartFile> fileList = multiRequest.getFiles("file");
+		JSONArray photos = commonService.resolverPhotos(fileList);
+		askReply.setPhotos(photos.toJSONString()); // 图片
+
+		askReply.setUserId(token.getUser_id()); // 用户编号
+		askReply.setPraise(new JSONObject().toJSONString()); // 点赞用户列表
+		askReply.setLow(new JSONObject().toJSONString()); // 踩的用户列表
+
 		askReplyMapper.insertSelective(askReply);
 	}
 

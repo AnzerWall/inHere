@@ -51,4 +51,13 @@ public interface LabelMapper {
      * @return
      */
     Integer getCount(@Param("type") Integer type);
+
+    /**
+     * 获取某标签的总吐槽数或总问答数
+     *
+     * @param type
+     * @param lab_id
+     * @return
+     */
+    Integer getCountForLab(@Param("type") Integer type, @Param("lab_id") Integer lab_id);
 }

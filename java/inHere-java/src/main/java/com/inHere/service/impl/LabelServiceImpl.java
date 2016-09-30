@@ -31,12 +31,11 @@ public class LabelServiceImpl implements LabelService {
     /**
      * 创建一个标签
      *
-     * @param id   标签编号
      * @param name 标签名称
      * @return Label
      */
     @Transactional
-    public Label createLabel(Integer id, String name) {
+    public Label createLabel(String name) {
         // 查找相同的标签
         Label label = labelMapper.selectSameNameLabel(name);
         if (label == null) {
@@ -70,14 +69,14 @@ public class LabelServiceImpl implements LabelService {
             JSONObject hearsay = new JSONObject();
             hearsay.put("id", LabelEnum.Hearsay.getId());
             hearsay.put("name", LabelEnum.Hearsay.getName());
-            hearsay.put("comment_num", labHearsay.getComment_num());
+            hearsay.put("size", labelMapper.getCountForLab(type, LabelEnum.Hearsay.getId()));
             list.add(0, hearsay);
         }
         for (int i = 0; i < labels.size() && i < limit; i++) {
             JSONObject obj = new JSONObject();
             obj.put("id", labels.get(i).getId());
             obj.put("name", labels.get(i).getName());
-            obj.put("comment_num", labels.get(i).getComment_num());
+            obj.put("size", labelMapper.getCountForLab(type, labels.get(i).getId()));
             list.add(obj);
         }
         return list;

@@ -2,6 +2,7 @@ package com.inHere.validator;
 
 import com.inHere.constant.Code;
 import com.inHere.constant.FileType;
+import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.util.FileUtil;
 import org.apache.log4j.Logger;
@@ -96,6 +97,30 @@ public abstract class BaseValidator {
             if (file.getSize() > oneLen) return true; // 单图片大小超出
         }
         return false;
+    }
+
+    /**
+     * 列表参数校验
+     *
+     * @param params
+     * @return
+     */
+    public <T> ReturnBaseDto<T> listValidator(ParamsListDto params){
+        Integer offset = params.getOffset();
+        Integer limit = params.getLimit();
+        String order_by = params.getOrder_by();
+        String order = params.getOrder();
+
+        if ((offset != null && offset < 0) || (limit != null && limit < 0)) {
+            return result("分页不能为负数");
+        }
+
+        boolean flag1 = (order_by != null && !Pattern.matches("^create_time|praise$", order_by));
+        boolean flag2 = (order != null && !Pattern.matches("^desc|asc$", order));
+        if (flag1 || flag2 ) {
+            return result("排序参数有错~");
+        }
+        return null;
     }
 
     /**

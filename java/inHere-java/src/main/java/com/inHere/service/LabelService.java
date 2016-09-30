@@ -28,7 +28,7 @@ public interface LabelService {
      * @param name 标签名称
      * @return Label
      */
-    Label createLabel(Integer id, String name);
+    Label createLabel(String name);
 
     /**
      * 获取标签列表

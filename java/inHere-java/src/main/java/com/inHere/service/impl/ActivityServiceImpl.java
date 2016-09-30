@@ -109,6 +109,9 @@ public class ActivityServiceImpl implements ActivityService {
 		if (activity != null) {
 			data.put("id", activity.getId());
 			data.put("ext_type", activity.getExtType());
+			// 解析图片
+			JSONArray photos = commonService.photoResolution(activity.getCoverImg());
+			data.put("cover_img", photos.size() > 0 ? photos.get(0) : "");
 			data.put("title", activity.getTitle());
 			data.put("user_name", activity.getUser().getUserName());
 

@@ -43,4 +43,9 @@
         GROUP BY label_id) AS lab
     </select>
 
+    <!-- 获取某标签的总吐槽数或总问答数 -->
+    <select id="getCountForLab" resultType="Integer">
+        SELECT COUNT(*) AS size FROM tb_ask_reply ar WHERE ar.`ext_type` = #{type} AND ar.`label_id` = #{lab_id}
+    </select>
+
 </mapper>

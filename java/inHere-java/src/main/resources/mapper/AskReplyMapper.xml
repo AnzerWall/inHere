@@ -88,6 +88,10 @@
         lab.name lab_name
     </sql>
 
+    <select id="selectByPrimaryKey" resultType="AskReply">
+        select * from tb_ask_reply where id = #{id}
+    </select>
+
 
     <!-- 插入一条吐槽或问答 -->
     <insert id="insertSelective" parameterType="com.inHere.entity.AskReply">
@@ -176,7 +180,13 @@
         <if test="creator != null">
             AND a.`user_id` = #{creator}
         </if>
-        ORDER BY a.`create_time` DESC
+        <!-- ${}需要做参数转换，有sql注入危险 -->
+        <if test="order_by != null and order != null">
+            order by a.`${order_by}` ${order}
+        </if>
+        <if test="order_by == null or order == null">
+            ORDER BY a.`create_time` DESC
+        </if>
         limit #{offset}, #{limit}
     </select>
 

@@ -14,6 +14,13 @@ import java.util.List;
 public interface AskReplyMapper {
 
     /**
+     * 获取一条吐槽或问答
+     * @param id
+     * @return
+     */
+    AskReply selectByPrimaryKey(Integer id);
+
+    /**
      * 插入一条吐槽或问答
      *
      * @param askReply
@@ -38,7 +45,7 @@ public interface AskReplyMapper {
     Integer getCount(ParamsListDto params);
 
     /**
-     * 获取一条评论数
+     * 获取一条吐槽或问答
      *
      * @param params
      * @return

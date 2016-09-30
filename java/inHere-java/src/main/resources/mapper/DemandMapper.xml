@@ -85,6 +85,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
+	<!-- 插入一条数据 -->
 	<insert id="insertSelective">
 		insert into tb_demand
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -118,19 +119,8 @@
 				#{demand.extType},
 			</if>
 			<if test="ext_data != null">
-				<foreach collection="ext_data.keySet()" item="key" open="json_object(" close=")," separator=",">
-					"${key}",
-					<if test="ext_data.get(key) != null">
-						<if test="ext_data.get(key) instanceof java.lang.String">
-							"${ext_data.get(key)}"
-						</if>
-						<if test="!(ext_data.get(key) instanceof java.lang.String)">
-							${ext_data.get(key)}
-						</if>
-					</if>
-					<if test="ext_data.get(key) == null">
-						null
-					</if>
+				<foreach collection="ext_data.values().toArray()" item="val" index="index" open="json_object(" close=")," separator=",">
+					"${ext_data.keySet().toArray()[index]}", #{val}
 				</foreach>
 			</if>
 			<if test="demand.text != null">
@@ -218,7 +208,7 @@
 		<if test="order_by != null and order != null">
 			order by d.`${order_by}` ${order}
 		</if>
-		<if test="order_by == null">
+		<if test="order_by == null or order == null">
 			order by d.`create_time` desc
 		</if>
 		limit #{offset}, #{limit}

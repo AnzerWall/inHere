@@ -17,7 +17,6 @@ import com.inHere.service.CommentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.List;
@@ -123,7 +122,7 @@ public class CommentServiceImpl implements CommentService {
      * @param commentDto
      * @param token
      */
-    @Transactional
+    //@Transactional
     public void createComment(CommentDto commentDto, Token token) {
         NameUsed nameUsed = nameUsedMapper.searchName(commentDto.getExt_type(), commentDto.getItem_id(), token.getUser_id());
         if( nameUsed == null ){

@@ -33,23 +33,7 @@ public class DemandValidator extends BaseValidator {
      * @return
      */
     public ReturnBaseDto<ReturnListDto> getDemandList(ParamsListDto params) {
-        log.info("进入到--->获取需求列表的校验");
-        Integer offset = params.getOffset();
-        Integer limit = params.getLimit();
-        String order_by = params.getOrder_by();
-        String order = params.getOrder();
-
-        if ((offset != null && offset < 0) || (limit != null && limit < 0)) {
-            return this.result("分页不能为负数");
-        }
-
-        boolean flag1 = (order_by != null) && (order != null);
-        boolean flag2 = Pattern.matches("^(create_time)|(praise)$", order_by) && Pattern.matches("^(desc)|(asc)$", order);
-        if (!(flag1 && flag2)) {
-            return this.result("排序参数有错~");
-        }
-
-        return null;
+        return super.listValidator(params);
     }
 
     /**
@@ -152,12 +136,12 @@ public class DemandValidator extends BaseValidator {
                 return this.result("价格格式错误~");
             }
 
-            flag = !Pattern.matches("^[1-9]|10$", quality);
+            flag = quality != null && !Pattern.matches("^[1-9]|10$", quality);
             if (flag) {
                 return this.result("成色输入错误~");
             }
 
-            flag = !Pattern.matches("^[0-9]{1,17}$", buy_time);
+            flag = buy_time != null && !Pattern.matches("^[0-9]{1,17}$", buy_time);
             if (flag) {
                 return this.result("时间格式有错~");
             }
