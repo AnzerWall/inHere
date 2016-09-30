@@ -81,7 +81,7 @@ public class DemandValidator extends BaseValidator {
 
         // 文字描述校验
         flag = this.isEmpty(text);// 非空
-        flag = flag || this.isTooLong(text, 200);// 限200字
+        flag = flag || this.isTooLong(text, 500);// 限500字
         if (flag) return this.result("文字描述有问题哦~看下填了没或超字数");
 
         flag = this.errPhoto(files, 4, 1024 * 1024);

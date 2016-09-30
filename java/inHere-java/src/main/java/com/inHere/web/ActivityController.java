@@ -84,4 +84,10 @@ public class ActivityController {
 		return result;
 	}
 
+	@Authorization
+	@RequestMapping(path = "/square",method = RequestMethod.GET)
+	public void square(){
+
+	}
+
 }

@@ -262,8 +262,34 @@
 	<!-- tomcat-maven-plugin远程部署插件配置 -->
 	<build>
 		<finalName>inHere-java</finalName>
-		<plugins>
 
+		<!-- 过滤文件 -->
+		<resources>
+			<resource>
+				<directory>src/main/Java</directory>
+				<!-- 包含 -->
+				<includes>
+					<include>**/*.vm</include>
+					<include>**/*.properties</include>
+				</includes>
+				<!-- 排除  -->
+				<excludes>
+					<exclude>**/*.log</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.log</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
+		<plugins>
 			<!-- 修改maven默认的JRE编译版本 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
