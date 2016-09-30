@@ -1,8 +1,8 @@
 <template>
-  <div class="publish">
 
+  <div class="publish">
     <div class="dating-content">
-      <textarea class="content-text" placeholder="主人，你有什么需要呢？" v-model="publish_text"></textarea>
+      <textarea class="content-text" maxlength=250 placeholder="主人，你想说些什么呢？" v-model="publish_text"></textarea>
     </div>
 
     <div class="add-img-wrapper" :style="imgWrapperHeight">
@@ -14,7 +14,7 @@
              style="display: none;">
 
       <!--图片-->
-      <div class="add-img order2" v-for="image in images" v-show="image.hasImage" :style="{'background-image': 'url('+image.src+')'}">
+      <div class="add-img order2" v-for="image in images" v-show="image.hasImage" @click.stop="deletePhotos($index)" :style="{'background-image': 'url('+image.src+')'}">
       </div>
       <!--添加按钮-->
       <div class="add-img order20" v-if="has_add_image">
@@ -34,7 +34,7 @@
     font-size: 15px;
   }
   .dating-content{
-    padding: 18px;
+    padding: 18px 18px 0 18px;
   }
   textarea{
     width: 100%;
@@ -86,10 +86,6 @@
 </style>
 
 <script type="text/ecmascript-6">
-  var formData = new FormData();
-  // 引用组件时先清空formData，防止上个组件引用的内容影响
-//  formData.delete('file');
-//  console.log("enter:formData.has('file')?"+formData.has('file'));
   import ImageAdd from 'svg/common/ImageAdd.vue'
 
   export default{
@@ -118,7 +114,37 @@
     },
     methods:{
       /**
-       *    图片上传并预览 这个方法还有问题，，，小泽后期再改 2016.9.9 11：08
+       * 照片删除
+       */
+      deletePhotos(index){
+        var self = this;
+
+        Simpop({
+          title: '提示',
+          content: '确定删除图片吗？',
+          ok: function(){
+            // this.items.splice(index, 1)
+            self.image_publish.splice(index,1);
+            // 向子组件传播事件，删除图片列表数组中的images[index]与并添加一个默认的item元素，，实现将当前图像删除，并将后面的图片向前移动一个位置
+            self.images.splice(index,1);
+            self.index--;
+            if (self.index<4){
+              self.has_add_image = true;
+            }
+            self.images.push({
+              hasImage:false,
+              src:""
+            })
+          },
+          cancel: function(){
+
+          }
+        }).show();
+
+      },
+
+      /**
+       *    图片上传并预览
         * @param index
        */
       openFile(){
@@ -139,19 +165,13 @@
           console.log("index="+self.index);
           var ofileUpload = document.getElementById("fileUpload");   // 上传按钮对象
 
-          // 1、添加图片到formData
           var pic_count = ofileUpload.files.length+self.index>3 ? (3-self.index) : ofileUpload.files.length;
           // 保证最多添加4张图片（index从-1开始，故和最大不超过3）
-
-//            console.log("start:formData.has('file')?"+formData.has('file'));
 
           for(var i = 0; i < pic_count; i++){
             self.image_publish.push(ofileUpload.files[i]);
             console.log("子组件self.image_publish"+self.image_publish[i]);
-//            formData.append("file", ofileUpload.files[i]);
-//            console.log(formData.getAll('file'));
           }
-//          console.log("after:formData.has('file')?"+formData.has('file'));
 
           // 2、图片预览（单图）
           var oFReader = new FileReader();
@@ -168,8 +188,10 @@
             var oFile = ofileUpload.files[0];
             oFReader.readAsDataURL(oFile);
 
-
-          // 2、图片预览（考虑多图情况）(oimagePreview的下标从 index+1  到  index+pic_count )
+          /**
+           *  多图片上传预览 这个方法还有问题，，，小泽后期再改 2016.9.9 11：08   勿删
+           */
+          // 2、图片预览（考虑多图情况,有bug）(oimagePreview的下标从 index+1  到  index+pic_count )
 //          function loadImageFile(start_index, end_index) {
 //            if (ofileUpload.files.length === 0) {
 //              return;
@@ -197,28 +219,12 @@
           return;
         }
       }
-//      sendData(){
-//        // 检查是否支持FormData
-//        if(window.FormData) {
-//          var formData = new FormData();
-//          // 建立一个upload表单项，值为上传的文件
-//          formData.append('upload', document.getElementById('upload').files[0]);
-//          var xhr = new XMLHttpRequest();
-//          xhr.open('POST', $(this).attr('action'));
-//          // 定义上传完成后的回调函数
-//          xhr.onload = function () {
-//            if (xhr.status === 200) {
-//              console.log('上传成功');
-//            } else {
-//              console.log('出错了');
-//            }
-//          };
-//          xhr.send(formData);
-//        }
-//      }
     },
     components:{
       ImageAdd
+    },
+    events:{
+
     },
     computed:{
     }

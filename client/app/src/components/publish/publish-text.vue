@@ -2,17 +2,17 @@
 
   <div class="publish-detail">
     <div class="publish-key">{{key}}</div>
-    <div class="publish-value"><input type="text" v-model="publish_value"></div>
+    <div class="publish-value"><input type="text" v-model="publish_value" maxlength=30></div>
   </div>
 
 </template>
 
 <style scoped>
   input{
+    width: 100%;
     border-style: none;
     outline: none;
     text-align:right;
-    padding-right: 20px;
   }
   .publish-detail {
     width:100%;
@@ -25,9 +25,14 @@
     align-content: center;
   }
   .publish-key {
-    padding: 0 18px;
+    width: 4em;
+    padding: 0 0 0 18px;
     color: gray;
     opacity: 0.85;
+  }
+  .publish-value{
+    width:68vw;
+    padding-right: 18px;
   }
 </style>
 <script>

@@ -12,7 +12,7 @@
           <div class="publish-nav navbar_item" v-link="{path:'/demand-publish/dating',activeClass:'high', replace: true}">走起</div>
         </div>
 
-        <div class="publish-nav confirm-icon">
+        <div class="publish-nav confirm-icon" @click="publish">
           <confirm-icon></confirm-icon>
         </div>
 
@@ -64,7 +64,7 @@
     height: 60px;
   }
 </style>
-<script>
+<script type="text/ecmascript-6">
   import ConfirmIcon from 'svg/common/Confirm.vue'
 
   export default{
@@ -75,6 +75,9 @@
       methods:{
         back(){
           window.history.back()
+        },
+        publish(){
+          this.$broadcast("publish-demand",this.$route.name);
         }
       },
       components:{

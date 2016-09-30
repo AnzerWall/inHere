@@ -6,7 +6,7 @@
       <div class="choices-flex-end">
         <div class="choices-wrapper">
           <div class="publish-value" v-for="label in labels">
-            <input type="radio"  :id="label.id" :value="value" v-model="publish_value" :checked="label.isChecked">
+            <!--<input type="radio"  :id="label.id" :value="label.value" v-model="publish_value" :checked="label.isChecked">-->
             <div class="tag" :for="label.id" @click="changeBg($index)"
                  :class="{'checked':label.isChecked}">
               {{label.tag}}
@@ -128,18 +128,17 @@
     },
     methods:{
       changeBg:function(index){
-
-        for (var i=0; i < this.labels.length; i++){
+        var self = this;
+        for (var i=0; i < self.labels.length; i++){
           if (i==index){
-            this.labels[i].isChecked=true;
+            self.labels[i].isChecked=true;
           }else {
-            this.labels[i].isChecked=false;
+            self.labels[i].isChecked=false;
           }
         }
+        self.publish_value = self.labels[index].value;
         console.log("changeBg,emit给父组件通信");
-//        this.$emit('change-type',index);
-//        this.$dispatch('change-type',index);
-          this.$emit('change-type',index);
+        self.$emit('change-type',index);
       }
     }
   }

@@ -14,11 +14,13 @@
             <div class="right">
 
               <prfile-icon class="prfile"></prfile-icon>
-              <add-icon class="add"></add-icon>
+              <add-icon class="add" v-link="{path:'/ask-publish'}"></add-icon>
             </div>
           </div>
+
           <classify :lists="labels" class="classify" :color="color" @filter-label="filterLabel">
           </classify>
+
         </div>
         <!--中部-->
         <div class="answer-center">
@@ -189,82 +191,6 @@
     export default{
       data(){
         return {
-//              lists:[{
-//                topic:[
-//                  {id: 11,title:"小道消息"},
-//                  {id: 11,title:"老师"},
-//                  {id: 11,title:"宿舍"},
-//                  {id: 11,title:"官方消息"},
-//                  {id: 11,title:"说说那些情"},
-//                  {id: 11,title:"更多"}
-//                ],
-//              }
-//              ],
-//              items:[{
-//                title:'大学宿舍没空调是一种怎样的感受吧?',
-//                main:'这里真是热啊积分撒娇了房间爱啥感觉欧萨积分撒娇估计了价格拉我家领导说几个垃圾是',
-//                identity:'宿舍',
-//                time:'1分钟前',
-//                comment:'233',
-//                like:'344',
-//                images: [
-//                  {
-//
-//                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                    w: 360,
-//                    h: 480
-//
-//                  },
-//                  {
-//                    src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
-//                    w: 690,
-//                    h: 920
-//                  },
-//                  {
-//                    src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
-//                    w: 360,
-//                    h: 480
-//                  },
-//                  {
-//                    src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                    w: 360,
-//                    h: 480
-//
-//                  },
-//
-//                ]
-//              },
-//                {
-//                  title:'大学宿舍没空调是一种怎样的感受吧?',
-//                  main:'这里真是热啊积分撒娇了房间爱啥感觉欧萨积分撒娇估计了价格拉我家领导说几个垃圾是',
-//                  identity:'宿舍',
-//                  time:'1分钟前',
-//                  comment:'233',
-//                  like:'344'
-//
-//
-//                },
-//                {
-//                  title:'大学宿舍没空调是一种怎样的感受吧?',
-//                  main:'这里真是热啊积分撒娇了房间爱啥感觉欧萨积分撒娇估计了价格拉我家领导说几个垃圾是',
-//                  identity:'宿舍',
-//                  time:'1分钟前',
-//                  comment:'233',
-//                  like:'344'
-//
-//
-//                },
-//                {
-//                  title:'大学宿舍没空调是一种怎样的感受吧?',
-//                  main:'这里真是热啊积分撒娇了房间爱啥感觉欧萨积分撒娇估计了价格拉我家领导说几个垃圾是',
-//                  identity:'宿舍',
-//                  time:'1分钟前',
-//                  comment:'233',
-//                  like:'344'
-//
-//
-//                }
-//              ]
           labels: [
 
             {

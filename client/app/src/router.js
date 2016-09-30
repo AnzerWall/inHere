@@ -38,11 +38,15 @@ import CaoDetail from 'pages/square/cao-detail.vue'
 import Label from 'pages/square/label.vue'
 import AnswerDetail from 'pages/square/answer-detail.vue'
 
+import CaoPublish from 'pages/cao/cao-publish.vue'
+import CaoInPublish from 'pages/cao/in-publish.vue'
+import CaoOutPublish from 'pages/cao/out-publish.vue'
+import AskPublish from 'pages/cao/ask-publish.vue'
 
 import LoginPage from 'pages/login/login.vue'
 
 //import ChatTalk from 'pages/message/chat-talk.vue'
-import NoticeMessage from 'pages/message/notice-message.vue'
+// import NoticeMessage from 'pages/message/notice-message.vue'
 import ActivityList from 'pages/square/activity-list.vue'
 import ActivityDetails from 'pages/square/activity-details.vue'
 export default{
@@ -113,12 +117,15 @@ export default{
       //   component: TaskPublish
       // },
       '/task':{
+        name:'publish_task',
         component: TaskPublish
       },
       '/lost': {
+        name:'publish_lost',
         component: LostPublish
       },
       '/dating': {
+        name:'publish_dating',
         component: DatingPublish
       }
     }
@@ -132,9 +139,9 @@ export default{
   '/activity/:id':{
     component: ActivityDetails
   },
-  '/notice-message/:id':{
-    component: NoticeMessage
-  },
+  // '/notice-message/:id':{
+  //   component: NoticeMessage
+  // },
   '/cao':{
     component:Cao,
   },
@@ -155,5 +162,25 @@ export default{
   },
   '/answer-detail/:id':{
     component:AnswerDetail
+  },
+  '/cao-publish':{
+    component: CaoPublish,
+    subRoutes:{
+      '/':{
+        component:CaoInPublish
+      },
+      '/in':{
+        name: 'cao_in_publish',
+        component: CaoInPublish
+      },
+      '/out':{
+        name: 'cao_out_publish',
+        component: CaoOutPublish
+      }
+    }
+  },
+  '/ask-publish':{
+    component: AskPublish
   }
+
 }

@@ -166,15 +166,15 @@ s<template>
             this.ask_reply=data.ask_reply;
             this.teasing=data.teasing;
             this.target.items.push({
-              id: 1,
+              id: -1,
               title: "更多"
             });
             this.ask_reply.items.push({
-              id: 1,
+              id: -1,
               title: "更多"
             });
             this.teasing.items.push({
-              id: 1,
+              id: -1,
               title: "更多"
             });
           })
@@ -210,27 +210,54 @@ s<template>
         var hour = date.getHours();
         if (hour >= 0 && hour < 7) {
           //    跳转到深夜餐厅 待完成
-
+          alert("其实，这个功能我们还没做，嘻嘻~");
         } else {
           alert("深夜餐厅只在深夜12点到凌晨6点开放喔~");
         }
       },
       enter(index){
-        alert("进入的栏目为" + index);
+        switch (index){
+          case 1:{
+            alert("进入的栏目为" + index);
+            return;
+          }
+          case 2:{
+            this.$router.go('/answer');
+            return;
+          }
+          case 3:{
+            this.$router.go('/cao?ext_type=10');
+            return;
+          }
+
+        }
       },
       goTopic(id, topic_type){
         // 跳转到对应的栏目
         // topic_type：1 有诺必行  2 有问必答  3 有嘈必吐
         // id : 对应栏目下的话题id
         switch (topic_type){
-          case 1:
-
-          case 2:
-
-          case 3:
-
+          case 1:{
+            alert("接收子组件的通信goTopic"+"栏目"+topic_type +"  id"+id);
+            return;
+          }
+          case 2:{
+            if (id>0){
+              this.$router.go(`/answer-detail/${id}`);
+            }else { // 跳转到其他
+              this.$router.go('/answer');
+            }
+            return;
+          }
+          case 3:{
+            if (id>0){
+              this.$router.go(`/cao-detail/${id}`);
+            } else {
+              this.$router.go('/cao?ext_type=10');
+            }
+            return;
+          }
         }
-        alert("接收子组件的通信goTopic"+"栏目"+topic_type +"  id"+id);
       }
     },
     components: {

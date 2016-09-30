@@ -2,7 +2,7 @@
   <div class="response"v-if="!$loadingRouteData">
     <!--头部-->
     <div class="response-header">
-      <div class="head-detail" >
+      <div class="head" >
         <div class="head-left" @click="back">
           <div class="head-message" >《 &nbsp;{{chinese(data.ext_type)}}</div>
         </div>
@@ -24,7 +24,7 @@
       <div class="task">
         <div class="content-center" >
           <!--快递   帮忙-->
-          <div  v-if="ext_type===1||ext_type===3">
+          <div  v-if="data.ext_type===1||data.ext_type===3">
             <div class="center-all"  >
               <div class="center-left" >酬金</div>
               <div class="center-right" :style="{color:main_color}">¥{{data.ext_data.pay}}</div>
@@ -119,7 +119,7 @@
     flex-shrink: 0;
     z-index: 50;
   }
-  .head-detail{
+  .head{
     height: 60px;
     width: 100%;
     display: flex;
@@ -130,14 +130,14 @@
     position: fixed;
     background-color: white;
   }
-  .head-detail .head-left{
+  .head .head-left{
     font-weight: bold;
     padding-left: 10px;
   }
-  .head-detail .head-right{
+  .head .head-right{
     padding-right: 20px ;
   }
-  .head-detail .head-right .sendchat{
+  .head .head-right .sendchat{
     padding-right: 20px;
   }
   .content{

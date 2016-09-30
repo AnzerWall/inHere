@@ -1,11 +1,12 @@
 <template lang="jade">
     .tag-editor-bg(v-show="show",@click.self="toggleShow()",transition="fade-up")
         .tag-editor
-            input.line(placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
+            input.line(@keypress="chkLength",placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
             .lines
                 .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)")
                     span {{item.name}}
             .line.cancel(@click="toggleShow()") 取消
+        .warning-popup(v-show="warningInfo",transition="fade-down") {{warningInfo}}
 </template>
 
 <script type="text/ecmascript-6">
@@ -20,11 +21,16 @@ module.exports = {
         tags:{
             type:Array,
             default:()=>([])
+        },
+        maxlength:{
+            type:Number,
+            default:6
         }
     },
     data(){
         return {
-            tmptag:''
+            tmptag:'',
+            warningInfo:''
         }
     },
     watch:{
@@ -34,16 +40,30 @@ module.exports = {
                 if(tmp<0)this.tmptag = this.tag;
                 else this.tmptag = '';
             }
+        },
+        tmptag(val,oldVal){
+          this.chkLength();
         }
     },
     methods:{
         clickTag(str){
+            if(!this.chkLength())return;
             this.tag = str;
             this.toggleShow();
             this.$emit('select',str);
         },
         toggleShow(){
             this.show=!this.show
+        },
+        chkLength(){
+          if(this.maxlength && this.tmptag.length>this.maxlength){
+            this.warningInfo = `标签长度不得超过${this.maxlength}字`;
+//            this.tmptag = this.tmptag.substr(0,this.maxlength);
+            return false;
+          } else {
+            this.warningInfo = '';
+            return true;
+          }
         }
     }
 }
@@ -64,6 +84,13 @@ module.exports = {
     }
 }
 
+.fade-down-transition {
+  transition: all 0.3s;
+}
+.fade-down-enter,.fade-down-leave {
+  transform: translateY(-100%);
+}
+
 
 .tag-editor-bg {
     position: fixed;
@@ -73,6 +100,17 @@ module.exports = {
     right:0;
     background: rgba(0,0,0,0.2);
     z-index:9000;
+    .warning-popup {
+      position: absolute;;
+      left:0;
+      top:0;
+      right:0;
+      text-align: center;
+      line-height:60px;
+      background: #ff0051;
+      color:white;
+      height:60px;
+    }
     .tag-editor {
         display: flex;
         flex-direction: column;

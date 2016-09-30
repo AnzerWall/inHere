@@ -19,6 +19,7 @@
   }
 </style>
 <script type="text/ecmascript-6">
+  import VueFlatpickrCss from  './flatpickr/dist/flatpickr.min.css'
   import Flatpickr from './flatpickr/src/flatpickr.js'
   export default{
     props: {
@@ -53,3 +54,34 @@
     components: {}
   }
 </script>
+
+
+<!--<template>-->
+  <!--<input type="text">-->
+<!--</template>-->
+
+<!--<script>-->
+  <!--import VueFlatpickrCss from  './flatpickr/dist/flatpickr.min.css'-->
+  <!--import Flatpickr from './flatpickr/src/flatpickr.js'-->
+  <!--export default {-->
+    <!--props: {-->
+      <!--options: {-->
+        <!--type: Object-->
+      <!--}-->
+    <!--},-->
+    <!--watch: {-->
+      <!--options: {-->
+        <!--handler() {-->
+          <!--this.newFlatpickr()-->
+        <!--},-->
+        <!--deep: true-->
+      <!--}-->
+    <!--},-->
+    <!--ready() {-->
+      <!--new Flatpickr(this.$el, this.options)-->
+    <!--},-->
+    <!--mounted() {-->
+      <!--new Flatpickr(this.$el, this.options)-->
+    <!--}-->
+  <!--}-->
+<!--</script>-->

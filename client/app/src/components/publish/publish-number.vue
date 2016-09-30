@@ -1,5 +1,3 @@
-
-
 <template>
 
   <div class="publish-detail">
@@ -11,10 +9,10 @@
 
 <style scoped>
   input{
+    width: 100%;
     border-style: none;
     outline: none;
     text-align:right;
-    padding-right: 20px;
   }
   .publish-detail {
     width:100%;
@@ -27,9 +25,13 @@
     align-content: center;
   }
   .publish-key {
-    padding: 0 18px;
+    padding: 0 0 0 18px;
     color: gray;
     opacity: 0.85;
+  }
+  .publish-value{
+    width:68vw;
+    padding-right: 18px;
   }
 </style>
 <script type="text/ecmascript-6">

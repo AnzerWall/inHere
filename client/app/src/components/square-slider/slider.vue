@@ -3,7 +3,7 @@
       <div class="slider-header">
         <a class="hot-item" v-for="topic in topics" @click="goToTheTopic(topic.id, square_type)">
           <div class="slider-topic" :style="{opacity: countOpacity($index), 'background-color':color(square_type), 'color':wrapper_color(square_type) }">
-            <span># {{topic.title}}</span>
+            <span># {{topic.title}}{{topic.name}}</span>
           </div>
         </a>
       </div>
@@ -40,7 +40,7 @@
       text-align: start;
     }
     span{
-      /* 保持三行  */
+      /* 保持四行  */
       overflow : hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
