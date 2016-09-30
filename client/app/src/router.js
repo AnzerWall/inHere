@@ -40,6 +40,11 @@ import AnswerDetail from 'pages/square/answer-detail.vue'
 
 
 import LoginPage from 'pages/login/login.vue'
+
+//import ChatTalk from 'pages/message/chat-talk.vue'
+import NoticeMessage from 'pages/message/notice-message.vue'
+import ActivityList from 'pages/square/activity-list.vue'
+import ActivityDetails from 'pages/square/activity-details.vue'
 export default{
   '/': {
     component: Main,
@@ -117,6 +122,18 @@ export default{
         component: DatingPublish
       }
     }
+  },
+  //'/chat-talk/:id':{
+  //  component: ChatTalk
+  //},
+  '/activity':{
+    component: ActivityList
+  },
+  '/activity/:id':{
+    component: ActivityDetails
+  },
+  '/notice-message/:id':{
+    component: NoticeMessage
   },
   '/cao':{
     component:Cao,

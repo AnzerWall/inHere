@@ -61,7 +61,7 @@
     background: linear-gradient(to bottom, #F91C88 ,#FF5FAD );
   }
   .header-bottom{
-    margin-top: 60px;
+    margin-top: 59px;
     width: 100%;
     height: 50px;
     margin-left: 20px;

@@ -25,6 +25,11 @@
       </div>
     </div>
 </div>
+    <!--<infinite-loading :on-infinite="onLoadMore">-->
+        <!--<span slot="no-more">-->
+          <!--没有更多了...-->
+        <!--</span>-->
+    <!--</infinite-loading>-->
 
   </div>
 </template>
@@ -32,9 +37,10 @@
 
 
 </style>
-<script>
+<script type="text/ecmascript-6">
   import {humanized,fromNow} from '../../filter/time.js';
   import IconLikeIcon from '../../svg/common/comment/IconLike.vue';
+  import InfiniteLoading from 'vue-infinite-loading';
 
   export default{
     filters:{
@@ -42,18 +48,45 @@
       fromNow
     },
     components:{
-      IconLikeIcon
+      IconLikeIcon,
+      InfiniteLoading
 
     },
 
     props:
-
-      ['comments','main_color','user_id','number'],
+      ['comments','main_color','user_id','number','data','ext_type'],
     data(){
 
       return {
       }
     },
+    methods:{
+//      onLoadMore(){
+//        var token = "4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
+//        this.$request
+//            .get("http://115.28.67.181:8080/comments")
+//            .query({token:token})
+//            .query({offset: this.data.offset + 5, limit: this.data.limit})
+//            .query({ext_type: this.ext_type})
+//            .query({item_id: this.data.id})
+//            .then(this.$api.checkResult)
+//            .then((data)=> {
+//            //通知组件加载完毕
+//            this.$broadcast('$InfiniteLoading:loaded');
+//        //更新数据数组
+//        this.list = this.list.concat(data.items);
+//        this.data.offset = data.offset;
+//        this.data.total=data.total;
+//        //判断是否已经不能加载到更多的数据
+//        if(this.data.offset>=this.data.total){
+//          this.$broadcast('$InfiniteLoading:complete');
+//        }
+//      })
+//      .catch (function(e){
+//          console.log(e);
+//        })
+//      },
+    }
 
 
 

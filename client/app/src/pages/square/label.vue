@@ -24,7 +24,7 @@
               <div class="list-name">#{{list.name}}</div>
               <div class="list-dian">·</div>
               <!--评论数-->
-              <div class="list-comment_num">{{list.comment_num}}</div>
+              <div class="list-comment_num">{{list.size}}</div>
             </div>
           </div>
         </div>
@@ -34,6 +34,7 @@
     </div>
 </template>
 <style >
+
   .label{
 
   }
@@ -188,7 +189,7 @@
             this.$router.go('/cao-topic?ext_type=11&label_id='+id)
           }
           else if(ext_type==12)
-            this.$router.go('/answer-topic')
+            this.$router.go('/answer-topic?label_id='+id)
 
         }
 

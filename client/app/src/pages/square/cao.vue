@@ -24,9 +24,7 @@
           <message v-for="item in items" :item="item"  :main_color="main_color" @on-click="onClick">
           </message>
         </div>
-        <div class="foot">
-          <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">
-        </div>
+
         <!--&lt;!&ndash;<div @click="$router.go('/cao?type=school&tag=1')"> 小道消息</div>&ndash;&gt;-->
         <!--&lt;!&ndash;<div v-if="$route.query.tag==='1'">到付件案件了解到该了解爱死了几个垃圾管理</div>&ndash;&gt;-->
 
@@ -125,30 +123,6 @@
     width: 100%;
     height: 60px;
   }
-  .foot{
-    width: 100%;
-    position: fixed;
-    bottom: 0px;
-    border-top:solid 1px #cccccc ;
-
-
-
-  }
-  .text{
-    width: 100%;
-    height: 50px;
-    outline: none;
-    padding-left: 15px;
-
-  }
-
-  input::-webkit-input-placeholder {
-
-    color:#cccccc;
-  }
-  input::-moz-placeholder {
-    color:#cccccc;
-  }
   .cao-top .right .out1{
     padding: 0px 5px;
   }
@@ -161,7 +135,6 @@
     width: 100%;
   }
   .message{
-    margin-bottom: 55px;
     width: 100%;
   }
   .cao-loading-area {

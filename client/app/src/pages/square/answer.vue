@@ -105,12 +105,14 @@
     margin: 20px 20px 10px;
     font-size: 16px;
     font-weight: bold;
+    word-wrap: break-word;
 
   }
 .message-main {
   margin: 0 20px 10px;
   font-size: 14px;
   line-height: 20px;
+  word-wrap: break-word;
 }
   .message-bottom{
     width: 100%;

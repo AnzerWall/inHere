@@ -16,7 +16,7 @@
     </div>
 
     <!--下部内容-->
-    <div class="content" >
+    <div class="content" :style="{marginBottom:bottomHeight+'px'}">
       <!--卡片-->
       <photos-wipe v-ref:viewer></photos-wipe>
       <header-card  :data="data" :is_detail="true" @view-image="View"></header-card>
@@ -38,7 +38,7 @@
             </div>
             <div class="center-all" >
               <div class="center-left">成色</div>
-              <div class="center-right" :style="{color:main_color}">{{data.ext_data.quality}} 成</div>
+              <div class="center-right" :style="{color:main_color}">{{data.ext_data.quality}}</div>
             </div>
           </div>
           <!--丢失东西-->
@@ -93,12 +93,16 @@
           </div>
           </div>
       </div>
-      <!--评论组件-->
-      <comment class="message-content" :comments="comment" :user_id="user_id" :main_color="main_color">
-      </comment>
-
-
+        <!--评论组件-->
+        <comment   :comments="comments" :user_id="user_id" :main_color="main_color" :data.sync="data" :ext_type="ext_type" >
+        </comment>
     </div>
+    <div class="detail-foot" >
+      <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+
+      <!--<textarea class="detail-textarea" placeholder="世界不如人意,人生如此艰难" v-model="content" @keyup.enter="submit(this.$request,this.content,this.data.id,this.ext_type)"></textarea>-->
+    </div>
+
 
   </div>
   <!--加载动画组件：小圆点-->
@@ -139,6 +143,7 @@
   .content{
     flex-shrink: 1;
     margin-top: 60px ;
+    /*margin-bottom: 48px;*/
 
   }
   .content .task{
@@ -184,6 +189,19 @@
     justify-content: center;;
     margin-top: 200px;
   }
+  .detail-foot{
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 100%;
+    border-top: solid 1px #cccccc;
+    /*padding: 10px 0px 10px 20px;*/
+  }
+  /*.detail-comment{*/
+    /*margin-bottom: 50px;*/
+  /*}*/
+
 
 </style>
 <script type="text/ecmascript-6">
@@ -196,6 +214,9 @@
   import helper from '../../util/demand_helper.js';
   import {now} from 'filter/time.js';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+  import post from '../../util/comment_post.js';
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
+
   export default{
     components: {
       Comment,
@@ -203,11 +224,14 @@
       PhotosWipe,
       SendChatIcon,
       MenuIcon,
-      PulseLoader
+      PulseLoader,
+      AutoTextarea,
+
     },
 
 
     methods: {
+
       View(index, photos){
         this.$refs.viewer.show(index, photos);
       },
@@ -231,27 +255,36 @@
           default:
             return "其他"
         }
+      },
+      submit(request,content,id,ext_type){
+        console.log(content);
+        return post.post(request,content,id,ext_type,this);
+
       }
     },
+
     route:{
       data(){
         var id=this.$route.params.id;
+        var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
         var self=this;
         return this.$request
-        .get("/demand/"+id)
+        .get("http://115.28.67.181:8080/demand/"+id)
+          .query({token:token})
           .then(this.$api.checkResult)
           .then(function(data){
           //  console.log(data);
 
             self.data=data;
-            self.comment=data.comment.items;
+            self.comments=data.comment.items;
             self.user_id=data.user_id;
             self.ext_type=data.ext_type;
 
 
 
           })
-      }
+      },
+
     },
 
 
@@ -261,7 +294,7 @@
       return {
 
         data:{},
-        comment:[],
+        comments:[],
         user_id:"",
         ext_type:1,
         TYPE_EXPRESS:1,
@@ -269,7 +302,13 @@
         TYPE_HELP:3,
         TYPE_FOUND:5,
         TYPE_LOST:4,
-        TYPE_DATING:6
+        TYPE_DATING:6,
+        content: "",
+        placeholder:"世界不如人意,人生如此艰难",
+        bottomHeight:0
+
+
+
       }
     },
     computed: {

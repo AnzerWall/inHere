@@ -29,6 +29,10 @@ router.map(RouteConfig);
 router.redirect(RedirectConfig);
 router.beforeEach(function (transition) {
   let store=router.app.$store;
+  if(transition.to.path=='/test'){
+    transition.next();
+    return;
+  }
   if(transition.to.name!="login"&&store.state.user.is_login===false){
     transition.redirect({
       name: 'login',

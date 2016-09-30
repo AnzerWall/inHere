@@ -7,7 +7,7 @@ s<template>
       </div>
     <div class="square-container" v-if="!$loadingRouteData">
       <!--社团活动入口-->
-      <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}">
+      <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}" @click="activityShow()">
         <div class="activity-content-bg"></div>
         <div class="activity-content">
           <div class="square-activity-tittle"><span>{{activity.title}}</span></div>
@@ -28,7 +28,7 @@ s<template>
       <div class="item">
         <div class="square-item" :style="{'color': color(2)}">
           <span class="square-item-tittle">* 有问必答</span>
-          <span @click="enter(2)">进入</span>
+          <span>进入</span>
         </div>
         <square-slider :topics="ask_reply.items" :square_type="2" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
@@ -190,6 +190,9 @@ s<template>
       }
     },
     methods: {
+      activityShow(){
+        this.$router.go('/activity');
+      },
       color(square_type){
         switch (square_type) {
           case 1:
