@@ -21,73 +21,85 @@ import java.io.IOException;
 
 /**
  * 活动
- * 
- * @author lwh
  *
+ * @author lwh
  */
 @RestController
 public class ActivityController {
 
-	@Autowired
-	private ActivityService activityService;
+    @Autowired
+    private ActivityService activityService;
 
-	/**
-	 * 获取活动列表
-	 * 
-	 * @param params
-	 * @param token
-	 * @return
-	 * @throws IOException
-	 */
-	@Authorization
-	@Params(ActivityValidator.class)
-	@RequestMapping(path = "/activity", method = RequestMethod.GET)
-	public ReturnBaseDto<JSONObject> getActivityList(ParamsListDto params, @CurrentToken Token token)
-			throws IOException {
+    /**
+     * 获取活动列表
+     *
+     * @param params
+     * @param token
+     * @return
+     * @throws IOException
+     */
+    @Authorization
+    @Params(ActivityValidator.class)
+    @RequestMapping(path = "/activity", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getActivityList(ParamsListDto params, @CurrentToken Token token)
+            throws IOException {
 
-		// 初始化参数
-		Integer offset = params.getOffset() == null ? 0 : params.getOffset();
-		Integer limit = params.getLimit() == null ? 10 : params.getLimit();
-		params.setOffset(offset);
-		params.setLimit(limit);
-		// 默认类型为活动和广告
-		Integer[] ext_type = new Integer[] { Field.ExtType_Activity, Field.ExtType_AD };
-		params.setExt_type(ext_type);
-		params.setTokenEntity(token);
+        // 初始化参数
+        Integer offset = params.getOffset() == null ? 0 : params.getOffset();
+        Integer limit = params.getLimit() == null ? 10 : params.getLimit();
+        params.setOffset(offset);
+        params.setLimit(limit);
+        // 默认类型为活动和广告
+        Integer[] ext_type = new Integer[]{Field.ExtType_Activity, Field.ExtType_AD};
+        params.setExt_type(ext_type);
+        params.setTokenEntity(token);
 
-		JSONObject data = activityService.getList(params);
+        JSONObject data = activityService.getList(params);
 
-		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
-		result.setCode(Code.Success.getCode());
-		result.setStatus(Code.Success.getStatus());
-		result.setData(data);
-		return result;
-	}
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
-	@Authorization
-	@RequestMapping(path = "/activity/{item_id}", method = RequestMethod.GET)
-	public ReturnBaseDto<JSONObject> getOneActivity(@PathVariable Integer item_id, @CurrentToken Token token)
-			throws IOException {
-		ParamsListDto params = new ParamsListDto();
-		// 实体关联的评论列表分页初始化
-		params.setItem_id(item_id);
-		params.setLimit(10);
-		params.setOffset(0);
-		params.setTokenEntity(token);
+    @Authorization
+    @RequestMapping(path = "/activity/{item_id}", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getOneActivity(@PathVariable Integer item_id, @CurrentToken Token token)
+            throws IOException {
+        ParamsListDto params = new ParamsListDto();
+        // 实体关联的评论列表分页初始化
+        params.setItem_id(item_id);
+        params.setLimit(10);
+        params.setOffset(0);
+        params.setTokenEntity(token);
 
-		JSONObject data = activityService.getOneActivity(params);
+        JSONObject data = activityService.getOneActivity(params);
 
-		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
-		result.setCode(Code.Success.getCode());
-		result.setStatus(Code.Success.getStatus());
-		result.setData(data);
-		return result;
-	}
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
-	@Authorization
-	@RequestMapping(path = "/square",method = RequestMethod.GET)
-	public void square(){
+    /**
+     * 广场页接口
+     * @param token
+     * @return
+     * @throws IOException
+     */
+    @Authorization
+    @RequestMapping(path = "/square", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> square(@CurrentToken Token token) throws IOException {
 
-	}
+        JSONObject data = activityService.square(token.getUser_id());
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
 }

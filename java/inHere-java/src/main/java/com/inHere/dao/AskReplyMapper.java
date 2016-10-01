@@ -36,7 +36,6 @@ public interface AskReplyMapper {
      */
     List<AskReply> selectList(ParamsListDto params);
 
-
     /**
      * 获取总条数
      *
@@ -52,7 +51,6 @@ public interface AskReplyMapper {
      */
     AskReply selectOne(ParamsListDto params);
 
-
     /**
      * 用户点赞销赞
      * @param user_id
@@ -60,5 +58,15 @@ public interface AskReplyMapper {
      * @return
      */
     Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
+
+    /**
+     * 获取热门回答列表
+     * @param type
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<AskReply> selectHotQuestionOrTeasing(@Param("type") Integer type,
+                                   @Param("offset") Integer offset, @Param("limit") Integer limit);
 
 }

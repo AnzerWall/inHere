@@ -8,6 +8,7 @@ import com.inHere.dto.ParamsListDto;
 import com.inHere.entity.Activity;
 
 public interface ActivityMapper {
+
 	int deleteByPrimaryKey(Integer id);
 
 	int insert(Activity record);
@@ -20,11 +21,9 @@ public interface ActivityMapper {
 	 * @param id
 	 * @return
 	 */
-	public Activity selectByPrimaryKey(Integer id);
+	Activity selectByPrimaryKey(Integer id);
 
 	int updateByPrimaryKeySelective(Activity record);
-
-	int updateByPrimaryKeyWithBLOBs(Activity record);
 
 	int updateByPrimaryKey(Activity record);
 
@@ -52,4 +51,9 @@ public interface ActivityMapper {
 	 * @return
 	 */
 	Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
+
+	/**
+	 * Get last item
+	 */
+	Activity selectLastItem();
 }

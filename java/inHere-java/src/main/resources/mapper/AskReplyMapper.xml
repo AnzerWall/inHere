@@ -49,6 +49,18 @@
     </update>
 
 
+    <!-- BriefResultMap -->
+    <resultMap id="BriefResultMap" type="com.inHere.entity.AskReply">
+        <id column="a_id" property="id" jdbcType="INTEGER"/>
+        <result column="a_ext_type" property="extType" jdbcType="INTEGER"/>
+        <result column="a_title" property="title" jdbcType="VARCHAR"/>
+        <result column="a_content" property="content" jdbcType="VARCHAR"/>
+        <association property="label" javaType="Label">
+            <id column="lab_id" property="id"/>
+            <result column="lab_name" property="name"/>
+        </association>
+    </resultMap>
+
     <!-- 关联Label的AskReply对象 -->
     <resultMap id="AssociatedResultMap" type="com.inHere.entity.AskReply">
         <id column="a_id" property="id" jdbcType="INTEGER"/>
@@ -86,6 +98,12 @@
     <sql id="Label_Column_List">
         lab.id lab_id,
         lab.name lab_name
+    </sql>
+    <sql id="Brief_AskReply">
+        ar.id a_id,
+        ar.ext_type a_ext_type,
+        ar.title a_title,
+        ar.content a_content
     </sql>
 
     <select id="selectByPrimaryKey" resultType="AskReply">
@@ -225,6 +243,20 @@
         )
         WHERE a.`id` = #{id}
     </update>
+
+    <!-- 获取热门的问题、吐槽列表 -->
+    <select id="selectHotQuestionOrTeasing" resultMap="AssociatedResultMap">
+        SELECT
+        <include refid="Brief_AskReply"></include>,
+        <include refid="Label_Column_List"></include>,
+        COUNT(c.`id`) AS comment_num
+        FROM tb_ask_reply ar
+        LEFT JOIN tb_label lab on lab.`id` = ar.`label_id`
+        INNER JOIN tb_comment c ON (ar.`ext_type` = c.`ext_type` AND ar.`id` = c.`record_id` AND ar.`ext_type` = #{type})
+        GROUP BY ar.`id`
+        ORDER BY comment_num DESC
+        limit #{offset}, #{limit}
+    </select>
 
 
 </mapper>

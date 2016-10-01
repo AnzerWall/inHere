@@ -23,4 +23,11 @@ public interface ActivityService {
 	 */
 	public JSONObject getOneActivity(ParamsListDto params) throws IOException;
 
+	/**
+	 * Get square data
+	 * @param user_id
+	 * @return
+	 */
+	public JSONObject square(String user_id) throws IOException;
+
 }

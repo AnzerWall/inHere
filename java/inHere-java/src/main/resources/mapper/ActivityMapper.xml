@@ -228,4 +228,11 @@
 		WHERE a.`id` = #{id}
 	</update>
 
+	<!--Get last item-->
+	<select id="selectLastItem" resultMap="IncludeUserResultMap">
+		SELECT * FROM `tb_activity` ac
+		LEFT JOIN `tb_user` u ON ac.`user_id` = u.`user_id`
+		ORDER BY ac.`create_time` DESC LIMIT 1
+	</select>
+
 </mapper>
