@@ -2,7 +2,7 @@
   <div class="nuo-detail-wrapper">
     <div class="nuo-detail-head">
       <!--:style="{ 'background-color': 'rgba(0,0,0,0)'}"-->
-      <div class="nuo-detail-head-left">《 有诺必行</div>
+      <div class="nuo-detail-head-left" @click="back">《 有诺必行</div>
       <div class="nuo-detail-head-right">
         <menu-icon style="fill:white;"></menu-icon>
       </div>
@@ -67,6 +67,9 @@
       }
     },
     methods: {
+      back(){
+        window.history.back();
+      },
       join(item){
         let token = "607f90267bd7f8dcedbf2709c60ab42471d5acbe1aff80f6751a2536487c4d74";
         let url_base = this.$api.node_api_base;

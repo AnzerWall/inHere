@@ -9,41 +9,57 @@
 
         </div>
       </div>
-      <div class="nuo-timeline-type1" v-if="false">
-        <div class="title">读四本书</div>
-        <div class="text">来到了大学怎么能不读书呢</div>
-        <div class="process">目标数量:10 已完成:2</div>
-        <div class="btn">+1</div>
-      </div>
-      <div class="nuo-timeline-type2"  v-if="false">
-        <div class="title">去吃遍学校里的所有美食</div>
-        <div class="text">来到了大学怎么能不读书呢</div>
-        <div class="nuo-checkbox-list">
-          <nuo-checkbox label="第一饭堂" ></nuo-checkbox>
-          <nuo-checkbox label="第二饭堂" ></nuo-checkbox>
-          <nuo-checkbox label="第三饭堂" ></nuo-checkbox>
-          <nuo-checkbox label="第四饭堂" ></nuo-checkbox>
+      <div class="nuo-timeline-type1" v-if="data.type===1">
+        <div class="title">{{data.text}}</div>
+        <div v-if="data.status!=0">
+          <div class="text">{{data.title}}</div>
+          <div class="process">目标数量:{{data.type_data.total_count}} 已完成:{{data.user_data.total_count||0}}</div>
+          <div class="btn">+1</div>
         </div>
-
+        <div v-else class="placehoder-area">
+          </div>
       </div>
-      <div class="nuo-timeline-type3"   v-if="false" >
-        <div class="title">早上六点去一次行知湖</div>
-        <div class="text">我同你讲，早上6点的行知湖。。。。。。。。。好吧，我也不知道会怎么样</div>
-        <div class="time">签到时间:3232</div>
-        <div class="btn disable">完成</div>
+      <div class="nuo-timeline-type2" v-if="data.type===2">
+        <div class="title">{{data.text}}</div>
+        <div v-if="data.status!=0">
+          <div class="text">{{data.title}}</div>
+          <div class="nuo-checkbox-list" v-for="item in data.type_data.todo_list">
+            <nuo-checkbox :label="item" :checked="item.completed"></nuo-checkbox>
+          </div>
         </div>
-      <div class="nuo-timeline-type4"    v-if="false" >
-        <div class="title">坚持跑步，坚持30无间断</div>
-        <div class="text">跑跑步总是对身体是好的</div>
-        <div class="status">今天未签到</div>
-        <div class="btn ">签到</div>
+        <div v-else class="placehoder-area">
+        </div>
       </div>
-      <div class="nuo-timeline-type5"    >
-        <div class="title">了解校史</div>
-        <div class="text">你知道吗</div>
-        <div class="question">白宫的原名是什么?</div>
-        <input type="text">
+      <div class="nuo-timeline-type3" v-if="data.type===3">
+        <div class="title">{{data.text}}</div>
+        <div v-if="data.status!=0">
+          <div class="text">{{data.title}}</div>
+          <div class="time">签到时间:3232</div>
+          <div class="btn disable">完成</div>
         </div>
+        <div v-else class="placehoder-area">
+        </div>
+      </div>
+      <div class="nuo-timeline-type4" v-if="data.type===4">
+        <div class="title">{{data.text}}</div>
+        <div v-if="data.status!=0">
+          <div class="text">{{data.title}}</div>
+          <div class="status">今天未签到</div>
+          <div class="btn ">签到</div>
+        </div>
+        <div v-else class="placehoder-area">
+        </div>
+      </div>
+      <div class="nuo-timeline-type5" v-if="data.type===5">
+        <div class="title">{{data.text}}</div>
+        <div v-if="data.status!=0">
+          <div class="text">{{data.title}}</div>
+          <div class="question">{{data.type_data.question}}</div>
+          <input type="text">
+        </div>
+        <div v-else class="placehoder-area">
+        </div>
+      </div>
     </div>
 
   </div>

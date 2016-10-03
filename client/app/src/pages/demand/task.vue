@@ -39,6 +39,7 @@
     },
     methods: {
       viewImage(index, photos){
+        console.log(index,photos);
         this.$refs.viewer.show(index, photos);
       },
       onLoadMore(){

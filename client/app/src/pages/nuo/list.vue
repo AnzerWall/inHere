@@ -4,13 +4,13 @@
         <div class="nuo-list-head-left">《 有诺必行</div>
         <div class="nuo-list-head-right">
           <profile-icon class="icon" style="fill: white;"></profile-icon>
-          <add-icon  class="icon"  style="fill: white;"></add-icon>
+          <add-icon  class="icon"  style="fill: white;" @click="createNuo"></add-icon>
         </div>
 
       </div>
       <div class="nuo-list-content"  v-if="!$loadingRouteData">
         <div class="nuo-card-wrapper" v-for="item in items">
-          <nuo-card :data="item" @join="join(item)" @like="like(item)" @hate="hate(item)"></nuo-card>
+          <nuo-card :data="item"  @detail="detail(item)" @join="join(item)" @like="like(item)" @hate="hate(item)"></nuo-card>
         </div>
         <infinite-loading :on-infinite="onLoadMore" v-if="has_more">
         <span slot="no-more">
@@ -89,6 +89,12 @@
                 has_more:data.has_more
               }
             })
+        },
+        detail(item){
+          this.$router.go(`/nuo/${item.id}`)
+        },
+        createNuo(){
+          this.$router.go(`/create-nuo`)
         },
         join(item){
           let token="607f90267bd7f8dcedbf2709c60ab42471d5acbe1aff80f6751a2536487c4d74";

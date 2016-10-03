@@ -2,8 +2,8 @@
   <div>
     <!--$loadingRouteData当路由数据加载中为true，否则为false-->
     <div v-if="!$loadingRouteData">
-      <photos-wipe ref:viewer></photos-wipe>
-      <demand-card v-for="item in list" :data="item" :is_detail="false" @view-image="View"
+      <photos-wipe v-ref:viewer></photos-wipe>
+      <demand-card v-for="item in list" :data="item" :is_detail="false"  @view-image="viewImage"
                    @click="$router.go('/demand-detail/'+item.id)"></demand-card>
       <!--加载更多组件-->
       <infinite-loading :on-infinite="onLoadMore">
@@ -42,7 +42,7 @@
       InfiniteLoading
     },
     methods: {
-      View(index, photos){
+      viewImage(index, photos){
         this.$refs.viewer.show(index, photos);
       },
       onLoadMore(){

@@ -6,9 +6,9 @@ import RedirectConfig from './redirect.js'
 import VueLazyload from 'vue-lazyload'
 import  Api from './api/api.js'
 import VueSocketio from 'vue-socket.io'; // for ES6
-Vue.use(VueSocketio, '115.28.67.181:8360');
+//Vue.use(VueSocketio, '115.28.67.181:8360');
 //Vue.use(VueSocketio, 'http://172.18.2.32:8360');
-//Vue.use(VueSocketio, 'http://127.0.0.1:8360');
+Vue.use(VueSocketio, 'http://127.0.0.1:8360');
 
 //配置懒加载插件
 Vue.use(VueLazyload);

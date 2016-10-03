@@ -2,6 +2,7 @@
 
 import Base from './base.js';
 import _ from 'lodash'
+import moment from 'moment'
 export default class extends Base {
     constructor(...arg) {
         super(...arg);
@@ -23,7 +24,67 @@ export default class extends Base {
             list:list
         });
     }
-
+    async targetCountAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        if(!think.isEmpty(target)){
+            if(target.type===1){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.todo_list_completed.${data.todo}',1) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
+    async targetDoTodoAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        if(!think.isEmpty(target)){
+            if(target.type===2){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.todo_list_completed.${data.todo}',1) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
+    async targetUndoTodoAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        if(!think.isEmpty(target)){
+            if(target.type===2){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.todo_list_completed.${data.todo}',0) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
+    async targetDayCompleteAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        if(!think.isEmpty(target)){
+            if(target.type===3){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.day_complete',1) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
+    async targetSignInAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        let now=moment().format('YY:MM:DD');
+        if(!think.isEmpty(target)){
+            if(target.type===4){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.sign_in.${now}',1) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
+    async targetAnswerAction(){
+        let id=this.get('id');
+        let target=await this.TargetModel.where({id:id}).find();
+        let data=this.data;
+        if(!think.isEmpty(target)){
+            if(target.type===5){
+                return await this.execute(`update tb_target_user set user_data=JSON_SET(user_data,'$.answer',${this.parseValue(data.answer)}) where relation_target_id=${id} and user_id=${this.operator.id}`);
+            }
+        }
+    }
     async updateAction() {
         return this.success({
             affect_row: await this.Model.updateInfo(this.get("id"), this.data)

@@ -106,7 +106,7 @@ export default class extends Base {
                 item.has_give_up=(item.has_give_up===1);
                 item.status=item.status||0;
                 item.process= item.process||0;
-                item.process_total= item.process||0;
+            //    item.process_total= item.process||0;
                 item.target_list_id= item.target_list_id===null?0:item.target_list_id;
                 item.create_time=new Date(item.create_time).getTime();
                 item.update_time=new Date(item.update_time).getTime();

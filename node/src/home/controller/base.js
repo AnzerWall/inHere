@@ -21,9 +21,9 @@ export default class extends think.controller.base {
       this.operator=new Operator(user_info);
 
     }
-    this.header("Access-Control-Allow-Origin", "*");
-    this.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTION,HEAD,PATCH");
-    this.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+    //this.header("Access-Control-Allow-Origin", "*");
+    //this.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTION,HEAD,PATCH");
+    //this.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
   }
   success(data){

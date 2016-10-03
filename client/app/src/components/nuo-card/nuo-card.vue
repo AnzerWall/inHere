@@ -1,7 +1,7 @@
 <template>
   <!--<div class="nuo-card-wrapper">-->
   <div class="nuo-card" :class=" {'nuo-card-radius-all': hide_radius!==true}">
-    <div @click="detail" class="nuo-card-detail">
+    <div @click="detail" class="nuo-card-detail" @click="detail">
       <div class="nuo-card-title"># {{data.title}}</div>
       <div class="nuo-card-desc">{{data.text}}</div>
       <div class="nuo-card-process" v-if="data.status===1">
@@ -83,8 +83,8 @@
     },
     computed: {
       process(){
-        if (this.data.process_total == 0)return 0;
-        else return Math.floor((this.data.process / this.data.process_total) * 100)
+        if (this.data.target_total == 0)return 0;
+        else return Math.floor((this.data.process / this.data.target_total) * 100)
       }
     }
 

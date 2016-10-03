@@ -109,7 +109,8 @@
     },
     methods: {
       onClickImage(index){
-        this.$emit("view-image",index,this.data.file);
+        if(this.data.photos&&this.data.photos.length)
+        this.$emit("view-image",index,this.data.photos);
       },
       chinese(type){
         switch (type) {
