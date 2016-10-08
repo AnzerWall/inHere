@@ -18,8 +18,7 @@ public class UserDto {
 	private String area;
 	private Integer school_id;
 	private String school;
-	private Integer role_id;
-	
+
 	private String token;
 	
 	public String getToken() {
@@ -76,11 +75,5 @@ public class UserDto {
 	public void setSchool(String school) {
 		this.school = school;
 	}
-	public Integer getRole_id() {
-		return role_id;
-	}
-	public void setRole_id(Integer role_id) {
-		this.role_id = role_id;
-	}
-	
+
 }

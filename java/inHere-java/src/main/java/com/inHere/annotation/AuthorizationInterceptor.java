@@ -67,7 +67,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 			response.setCharacterEncoding("UTF-8"); // 避免乱码
 			response.setHeader("Cache-Control", "no-cache, must-revalidate");
 			try {
-				Map<String, Object> map = new HashMap<String, Object>();
+				Map<String, Object> map = new HashMap<>();
 				map.put("code", Code.NoLogin.getCode());
 				map.put("status", Code.NoLogin.getStatus());
 				map.put("message", "用户未登录");

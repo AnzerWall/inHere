@@ -1,14 +1,13 @@
 package com.inHere.validator;
 
-import java.util.Map;
-
+import com.alibaba.fastjson.JSONObject;
+import com.inHere.constant.Code;
+import com.inHere.dto.ReturnBaseDto;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.alibaba.fastjson.JSONObject;
-import com.inHere.constant.Code;
-import com.inHere.dto.ReturnBaseDto;
+import java.util.Map;
 
 /**
  * 要求校验方法名与@Params拦截的方法的名字要相同, 校验方法的参数有且只能有一个，参数类型和返回类型都要和拦截方法的一样
@@ -35,10 +34,10 @@ public class LoginValidator {
 		if (user_id != null && passwd != null) {
 			return null;
 		}
-		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
 		result.setCode(Code.Error.getCode());
 		result.setStatus(Code.Error.getStatus());
-		result.setMessage("用户名或密码有错");
+		result.setMessage("用户名或密码不能为空");
 		return result;
 	}
 

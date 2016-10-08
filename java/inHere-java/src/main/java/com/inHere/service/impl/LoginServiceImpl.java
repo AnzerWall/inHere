@@ -1,11 +1,5 @@
 package com.inHere.service.impl;
 
-import java.io.IOException;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dao.UserMapper;
@@ -15,6 +9,11 @@ import com.inHere.entity.User;
 import com.inHere.redis.TokenManage;
 import com.inHere.service.LoginService;
 import com.inHere.service.SecurityService;
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 /**
  * 登陆业务
@@ -39,8 +38,8 @@ public class LoginServiceImpl implements LoginService {
 	/**
 	 * 登陆登陆校验
 	 * 
-	 * @param account
-	 * @param password
+	 * @param user_id
+	 * @param passwd
 	 * @return
 	 * @throws IOException
 	 */
@@ -62,7 +61,6 @@ public class LoginServiceImpl implements LoginService {
 			JSONObject temp = JSON.parseObject(user.getContactWay());
 			userDto.setContact_way(temp);
 			userDto.setArea(user.getArea());
-			userDto.setRole_id(user.getRoleId());
 			userDto.setSchool_id(user.getSchoolId());
 			userDto.setSchool(user.getSchool().getSchool());
 			userDto.setSex(user.getSex());

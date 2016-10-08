@@ -64,16 +64,25 @@ public class SecurityServiceImpl implements SecurityService {
 	/**
 	 * token创建
 	 * 
-	 * @param userId
+	 * @param identify
 	 * @return
 	 */
-	public String createToken(String userId) {
+	public String createToken(String identify) {
 		String str = "niswlejo_34kl9sk?sds@lds";
 		String uid = UUID.randomUUID().toString();
 		Long time = new Date().getTime();
-		String first = SHA256Util.encrypt(str + userId + uid + time);
+		String first = SHA256Util.encrypt(str + identify + uid + time);
 		String second = SHA256Util.encrypt(first);
 		return second;
+	}
+
+	/**
+	 * token创建
+	 *
+	 * @return
+	 */
+	public String createToken() {
+		return createToken("");
 	}
 
 }

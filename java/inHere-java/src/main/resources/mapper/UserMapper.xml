@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.UserMapper">
 
+    <!-- 用户映射，包含学校 -->
     <resultMap id="BaseResultMap" type="com.inHere.entity.User">
         <id column="user_id" property="userId" jdbcType="VARCHAR"/>
         <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
@@ -12,7 +13,6 @@
         <result column="sex" property="sex" jdbcType="BIT"/>
         <result column="area" property="area" jdbcType="VARCHAR"/>
         <result column="school_id" property="schoolId" jdbcType="INTEGER"/>
-        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <association property="school" javaType="School">
@@ -32,7 +32,6 @@
         sex,
         area,
         school_id,
-        role_id,
         create_time,
         update_time
     </sql>
@@ -47,11 +46,11 @@
         u.sex,
         u.area,
         u.school_id,
-        u.role_id,
         u.create_time,
         u.update_time
     </sql>
 
+    <!-- 获取用户信息 -->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
             parameterType="java.lang.String">
         select
@@ -63,6 +62,16 @@
         where u.user_id = #{userId,jdbcType=VARCHAR}
     </select>
 
+    <!-- 查找用户角色集合 -->
+    <select id="selectUserRoles" resultType="Roles">
+      SELECT ro.* FROM tb_users_roles uro
+      INNER JOIN tb_roles ro ON uro.`role_id` = ro.`id` AND uro.`user_id` = #{user_id}
+    </select>
+    
+    
+
+
+    <!--      以下是自动生成，暂没用到        -->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from
         tb_user
@@ -99,9 +108,6 @@
             <if test="schoolId != null">
                 school_id,
             </if>
-            <if test="roleId != null">
-                role_id,
-            </if>
             <if test="createTime != null">
                 create_time,
             </if>
@@ -136,9 +142,6 @@
             </if>
             <if test="schoolId != null">
                 #{schoolId,jdbcType=INTEGER},
-            </if>
-            <if test="roleId != null">
-                #{roleId,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -175,9 +178,6 @@
             </if>
             <if test="schoolId != null">
                 school_id = #{schoolId,jdbcType=INTEGER},
-            </if>
-            <if test="roleId != null">
-                role_id = #{roleId,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
