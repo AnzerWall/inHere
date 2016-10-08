@@ -1,6 +1,8 @@
 package com.inHere.entity;
 
-import java.util.HashMap;
+import com.alibaba.fastjson.JSONArray;
+
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -11,30 +13,40 @@ import java.util.Map;
  */
 public class Token {
 
-	private String key;
-	private String user_id;
-	private Integer school_id;
-	private Integer role_id;
+	private String key; // token
+	private String user_id; // 用户帐号
+	private Integer school_id; // 所在学校
+    private JSONArray roles; // 角色集合
+	private JSONArray permissions; // 权限集合
 
 	public Token() {
-		super();
 	}
 
-	public Token(String key, String user_id, Integer school_id, Integer role_id) {
-		super();
+	public Token(String key, String user_id, Integer school_id, JSONArray roles, JSONArray permissions) {
 		this.key =  key;
 		this.user_id = user_id;
 		this.school_id = school_id;
-		this.role_id = role_id;
+		this.roles = roles;
+		this.permissions = permissions;
 	}
 
-	public Token(Map<String, String> userMap) {
-		this.user_id = userMap.get("user_id");
-		this.school_id = Integer.parseInt(userMap.get("school_id"));
-		this.role_id = Integer.parseInt(userMap.get("role_id"));
-	}
+    public JSONArray getRoles() {
+        return roles;
+    }
 
-	public String getKey() {
+    public void setRoles(JSONArray roles) {
+        this.roles = roles;
+    }
+
+    public JSONArray getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(JSONArray permissions) {
+        this.permissions = permissions;
+    }
+
+    public String getKey() {
 		return key;
 	}
 
@@ -58,43 +70,24 @@ public class Token {
 		this.school_id = school_id;
 	}
 
-	public Integer getRole_id() {
-		return role_id;
-	}
+    @Override
+    public String toString() {
+        return "Token{" +
+                "key='" + key + '\'' +
+                ", user_id='" + user_id + '\'' +
+                ", school_id=" + school_id +
+                ", roles=" + roles +
+                ", permissions=" + permissions +
+                '}';
+    }
 
-	public void setRole_id(Integer role_id) {
-		this.role_id = role_id;
-	}
-
-	@Override
-	public String toString() {
-		return "Token [key=" + key + ", user_id=" + user_id + ", school_id=" + school_id + ", role_id=" + role_id
-				+ ", getKey()=" + getKey() + ", getUser_id()=" + getUser_id() + ", getSchool_id()=" + getSchool_id()
-				+ ", getRole_id()=" + getRole_id() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
-	}
-
-	public Map<String, String> toMap() {
-		Map<String, String> map = new HashMap<String, String>();
+    public Map<String, String> toMap() {
+		Map<String, String> map = new LinkedHashMap<>();
 		map.put("user_id", user_id);
 		map.put("school_id", String.valueOf(school_id));
-		map.put("role_id", String.valueOf(role_id));
+        map.put("roles", roles.toString());
+        map.put("permissions", permissions.toString());
 		return map;
-	}
-
-	public User toUser(Map<String, String> map) {
-		User user = null;
-		if (map != null) {
-			try {
-				user = new User();
-				user.setUserId(map.get("user_id"));
-				user.setSchoolId(Integer.parseInt(map.get("school_id")));
-				user.setRoleId(Integer.parseInt(map.get("role_id")));
-			} catch (Exception ex) {
-				return user;
-			}
-		}
-		return user;
 	}
 
 }

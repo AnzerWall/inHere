@@ -1,15 +1,6 @@
 package com.inHere.web;
 
-import java.io.IOException;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
@@ -18,77 +9,145 @@ import com.inHere.constant.Code;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.UserDto;
 import com.inHere.entity.Token;
+import com.inHere.entity.User;
 import com.inHere.service.LoginService;
+import com.inHere.shiro.model.SessionKeyImpl;
 import com.inHere.validator.LoginValidator;
+import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.mgt.SessionKey;
+import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 /**
  * 登陆模块
- * 
- * @author lwh
  *
+ * @author lwh
  */
 @RestController
 public class LoginController {
 
-	Logger log = Logger.getLogger(getClass());
+    Logger log = Logger.getLogger(getClass());
 
-	@Autowired
-	private LoginService loginService;
+    @Autowired
+    private LoginService loginService;
 
-	/**
-	 * 登陆，创建一个Token资源
-	 * TODO 同一账号，多设备登陆，待解决
-	 * @return
-	 * @throws IOException
-	 */
-	@Params(LoginValidator.class)
-	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public ReturnBaseDto<UserDto> login(@RequestBody Map<String, Object> params) throws IOException {
-		ReturnBaseDto<UserDto> result = new ReturnBaseDto<UserDto>();
-		log.info("进入login()中-----");
-		String user_id = (String) params.get("user_id");
-		String passwd = (String) params.get("passwd");
+    /**
+     * 登陆，创建一个Token资源
+     *
+     * @return
+     * @throws IOException
+     */
+    @Params(LoginValidator.class)
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public ReturnBaseDto<UserDto> login(@RequestBody Map<String, Object> params) throws IOException {
+        ReturnBaseDto<UserDto> result = new ReturnBaseDto<UserDto>();
+        log.info("进入login()中-----");
+        String user_id = (String) params.get("user_id");
+        String passwd = (String) params.get("passwd");
 
-		UserDto userDto = loginService.login(user_id, passwd);
-		if (userDto == null) {
-			result.setCode(Code.InputErr.getCode());
-			result.setStatus(Code.InputErr.getStatus());
-			result.setMessage("用户账号或密码错误");
-		} else {
-			result.setCode(Code.Success.getCode());
-			result.setStatus(Code.Success.getStatus());
-			result.setData(userDto);
-		}
-		return result;
-	}
+        UserDto userDto = loginService.login(user_id, passwd);
+        if (userDto == null) {
+            result.setCode(Code.InputErr.getCode());
+            result.setStatus(Code.InputErr.getStatus());
+            result.setMessage("用户账号或密码错误");
+        } else {
+            result.setCode(Code.Success.getCode());
+            result.setStatus(Code.Success.getStatus());
+            result.setData(userDto);
+        }
+        return result;
+    }
 
-	/**
-	 * 退出删除一个一个Token资源
-	 * 
-	 * @param token
-	 * @return
-	 */
-	@Authorization
-	@RequestMapping(path = "/logout", method = RequestMethod.DELETE)
-	public ReturnBaseDto<JSONObject> logout(@CurrentToken Token token) {
-		log.info("进入logout()中-----");
-		// 退出登陆
-		loginService.logout(token);
-		ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
-		result.setCode(Code.Success.getCode());
-		result.setStatus(Code.Success.getStatus());
-		return result;
-	}
+    /**
+     * TODO 退出删除一个一个Token资源
+     *
+     * @param token
+     * @return
+     */
+    @Authorization
+    @RequestMapping(path = "/logout", method = RequestMethod.DELETE)
+    public ReturnBaseDto<JSONObject> logout(@CurrentToken Token token) {
+        log.info("进入logout()中-----");
+        // 退出登陆
+        loginService.logout(token);
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        return result;
+    }
 
-	/**
-	 * TODO 注册一个Token资源
-	 * 
-	 * @return
-	 */
-	@RequestMapping(path = "/logup", method = RequestMethod.POST)
-	public ReturnBaseDto<JSONObject> logup(@RequestBody Map<String, Object> params) {
-//		String user_id = (String) params.get("user_id");
-//		String passwd = (String) params.get("passwd");
-		return null;
-	}
+    /**
+     * TODO 注册一个Token资源
+     *
+     * @return
+     */
+    @RequestMapping(path = "/logup", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> logup(HttpServletRequest request) {
+        String token = request.getParameter("token");
+        Subject subject = SecurityUtils.getSubject();
+//        subject.checkRole("admin");
+//        String a = subject.getSession().getAttribute("a").toString();
+//        log.info( a );
+
+        SessionKey key = new SessionKeyImpl().setSessionId(token);
+
+//        log.info( SecurityUtils.getSecurityManager().getSession(key).getAttribute("a") );
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        return result;
+    }
+
+    /**
+     * 后台登录
+     */
+    @RequestMapping(path = "/admin/login", method = RequestMethod.POST)
+    public ReturnBaseDto<UserDto> adminLogin(@RequestBody Map<String, Object> params) throws IOException {
+        ReturnBaseDto<UserDto> result = new ReturnBaseDto<>();
+        String user_id = (String) params.get("user_id");
+        String passwd = (String) params.get("passwd");
+
+        if (user_id == null || passwd == null) {
+            result.setCode(Code.InputErr.getCode());
+            result.setStatus(Code.InputErr.getStatus());
+            result.setMessage("请填写完整帐号和密码");
+            return result;
+        }
+
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(user_id, passwd);
+        subject.login(token);
+
+        User user = (User) subject.getPrincipal();
+
+        // 返回用户信息
+        UserDto userDto = new UserDto();
+        userDto.setUser_id(user.getUserId());
+        userDto.setUser_name(user.getUserName());
+        userDto.setHead_img(JSON.parseObject(user.getHeadImg()));
+        JSONObject temp = JSON.parseObject(user.getContactWay());
+        userDto.setContact_way(temp);
+        userDto.setArea(user.getArea());
+        userDto.setSchool_id(user.getSchoolId());
+        userDto.setSchool(user.getSchool().getSchool());
+        userDto.setSex(user.getSex());
+        userDto.setToken(subject.getSession().getId().toString());
+
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(userDto);
+        return result;
+    }
+
+
 }

@@ -103,7 +103,7 @@ public class DemandController {
         // 提交数据库创建一条需求
         demandService.createDemand(multiRequest, token);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         return result;

@@ -1,14 +1,19 @@
 package com.inHere.entity;
 
+import java.util.List;
+
 /**
- * 权限实体
+ * 角色实体
  */
-public class Permissions {
+public class Roles {
 
     private Integer id;
-    private String permission;
+    private String role;
     private String description;
     private Integer available;
+
+    // 角色的权限集合
+    private List<Permissions> permissions;
 
     public Integer getId() {
         return id;
@@ -18,12 +23,12 @@ public class Permissions {
         this.id = id;
     }
 
-    public String getPermission() {
-        return permission;
+    public String getRole() {
+        return role;
     }
 
-    public void setPermission(String permission) {
-        this.permission = permission;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getDescription() {
@@ -42,13 +47,22 @@ public class Permissions {
         this.available = available;
     }
 
+    public List<Permissions> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permissions> permissions) {
+        this.permissions = permissions;
+    }
+
     @Override
     public String toString() {
-        return "Permissions{" +
+        return "Roles{" +
                 "id=" + id +
-                ", permission='" + permission + '\'' +
+                ", role='" + role + '\'' +
                 ", description='" + description + '\'' +
                 ", available=" + available +
+                ", permissions=" + permissions +
                 '}';
     }
 }

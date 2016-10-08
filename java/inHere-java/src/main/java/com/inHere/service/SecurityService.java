@@ -27,6 +27,7 @@ public interface SecurityService {
 	 * @param userId
 	 * @return
 	 */
-	public String createToken(String userId);
+	String createToken(String userId);
+	String createToken();
 
 }

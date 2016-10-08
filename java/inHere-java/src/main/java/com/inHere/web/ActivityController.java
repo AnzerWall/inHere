@@ -76,7 +76,7 @@ public class ActivityController {
 
         JSONObject data = activityService.getOneActivity(params);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
@@ -85,6 +85,7 @@ public class ActivityController {
 
     /**
      * 广场页接口
+     *
      * @param token
      * @return
      * @throws IOException
@@ -100,6 +101,12 @@ public class ActivityController {
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
         return result;
+    }
+
+    @RequestMapping(path = "/activity", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> publish() {
+
+        return null;
     }
 
 }

@@ -2,7 +2,11 @@ package com.inHere.entity;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * 用户实体
+ */
 public class User {
 
 	private String userId;
@@ -20,6 +24,9 @@ public class User {
 
 	// school对象
 	private School school;
+
+	// 角色集合
+	private List<Roles> roles;
 
 	public School getSchool() {
 		return school;
@@ -125,12 +132,31 @@ public class User {
 		this.updateTime = updateTime;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userId=" + userId + ", passwd=" + passwd + ", saltKey=" + saltKey + ", userName=" + userName
-				+ ", headImg=" + headImg + ", contactWay=" + contactWay + ", sex=" + sex + ", area=" + area
-				+ ", schoolId=" + schoolId + ", roleId=" + roleId + ", createTime=" + createTime + ", updateTime="
-				+ updateTime + ", school=" + school + "]";
+	public List<Roles> getRoles() {
+		return roles;
 	}
 
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"userId='" + userId + '\'' +
+				", passwd='" + passwd + '\'' +
+				", saltKey='" + saltKey + '\'' +
+				", userName='" + userName + '\'' +
+				", headImg='" + headImg + '\'' +
+				", contactWay='" + contactWay + '\'' +
+				", sex=" + sex +
+				", area='" + area + '\'' +
+				", schoolId=" + schoolId +
+				", roleId=" + roleId +
+				", createTime=" + createTime +
+				", updateTime=" + updateTime +
+				", school=" + school +
+				", roles=" + roles +
+				'}';
+	}
 }

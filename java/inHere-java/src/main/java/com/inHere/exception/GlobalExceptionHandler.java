@@ -3,6 +3,10 @@ package com.inHere.exception;
 import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 import com.inHere.constant.Code;
 import org.apache.log4j.Logger;
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.CredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -51,6 +55,34 @@ public class GlobalExceptionHandler {
         return mv;
     }
 
+    @ExceptionHandler(ShiroException.class)
+    public ModelAndView handlerShiroEx(Exception ex) {
+        log.error("Shiro Exception --> " + ex.getMessage(), ex);
+
+        // 创建返回视图
+        ModelAndView mv = new ModelAndView();
+        FastJsonJsonView view = new FastJsonJsonView();
+        Map<String, Object> result = new HashMap<>();
+        result.put("code", Code.InputErr.getCode());
+        result.put("status", Code.InputErr.getStatus());
+
+        // 帐号异常
+        if (ex instanceof UnknownAccountException) {
+            result.put("message", "用户帐号不存在");
+        } else if (ex instanceof AuthenticationException) {
+            result.put("message", "用户帐号不存在");
+        } else if (ex instanceof CredentialsException) {
+            result.put("message", "用户帐号或密码错误");
+        } else {
+            result.put("message", "登录失败");
+        }
+
+        // 填充返回数据
+        view.setAttributesMap(result);
+        mv.setView(view);
+        return mv;
+    }
+
     /**
      * 未知异常处理
      *
@@ -73,6 +105,7 @@ public class GlobalExceptionHandler {
             result.put("message", ex.getMessage());
             // 填充返回数据
             view.setAttributesMap(result);
+
             mv.setView(view);
             return mv;
         }
@@ -97,10 +130,10 @@ public class GlobalExceptionHandler {
             ex.printStackTrace();
             Throwable InvoEx = ((UndeclaredThrowableException) ex).getUndeclaredThrowable();
             // 反射调用异常
-            if( InvoEx instanceof InvocationTargetException ){
+            if (InvoEx instanceof InvocationTargetException) {
                 Throwable SysEx = ((InvocationTargetException) InvoEx).getTargetException();
                 // 用户自定义异常
-                if (SysEx instanceof SystemException){
+                if (SysEx instanceof SystemException) {
                     result.put("code", Code.InputErr.getCode());
                     result.put("status", Code.InputErr.getStatus());
                     result.put("message", SysEx.getMessage());
