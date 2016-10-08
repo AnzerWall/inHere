@@ -68,31 +68,33 @@ module.exports = {
                 this.wshow = false;
                 return;
             }
-            this.warningInfo = text;
-            if(options.bgColor!=undefined)
-                this.bgColor = options.bgColor;
-            else this.bgColor = '';
-            if(options.needBg!=undefined)
-                this.needBg = options.needBg;
-            else this.needBg = true;
-            if(options.timeout!=undefined)
-                this.timeout = options.timeout;
-            else this.timeout = 0;
-            if(options.type!=undefined)
-                this.type=options.type;
-            else this.type = '';
-            if(options.callback!=undefined)
-                this.callback=options.callback;
-            else this.callback = function(){};
-            if(options.topMost!=undefined)
-                this.topMost = options.topMost;
-            else this.topMost = true;
-            this.wshow = true;
-            if(this.timeout){
-                timer = setTimeout(_=>{
-                    this.wshow=false;
-                },this.timeout);
-            }
+            setTimeout(_=>{
+                this.warningInfo = text;
+                if(options.bgColor!=undefined)
+                    this.bgColor = options.bgColor;
+                else this.bgColor = '';
+                if(options.needBg!=undefined)
+                    this.needBg = options.needBg;
+                else this.needBg = true;
+                if(options.timeout!=undefined)
+                    this.timeout = options.timeout;
+                else this.timeout = 0;
+                if(options.type!=undefined)
+                    this.type=options.type;
+                else this.type = '';
+                if(options.callback!=undefined)
+                    this.callback=options.callback;
+                else this.callback = function(){};
+                if(options.topMost!=undefined)
+                    this.topMost = options.topMost;
+                else this.topMost = true;
+                this.wshow = true;
+                if(this.timeout){
+                    timer = setTimeout(_=>{
+                        this.wshow=false;
+                    },this.timeout);
+                }
+            },300);
         },
         noti(text,options){//no btn
             options = options || {};
