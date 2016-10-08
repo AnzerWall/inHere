@@ -49,7 +49,7 @@ module.exports = {
           });
           break;
           case 'noti':
-          this.$refs.noti.noti('NOTI!!!!');
+          this.$refs.noti.noti('NOTI!!!!23333333333333sdagasdgasddsagasdgsagssadgsadgasdgasdgs时代嘎上的嘎说');
           break;
         }
       },

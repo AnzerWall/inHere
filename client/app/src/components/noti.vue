@@ -152,12 +152,15 @@ module.exports = {
       top:0;
       right:0;
       text-align: center;
-      line-height:60px;
       background: white;
       color:black;
       .warning-text {
+        padding: 22px;
+        word-break: break-all;
       }
       .warning-btn {
+
+        line-height:60px;
         margin: 4px 4px;
         border-radius: 4px;
         line-height: 50px;
