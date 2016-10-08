@@ -63,6 +63,7 @@ module.exports = {
         },
         show(text,options){
             options = options || {};
+            if(timer)clearTimeout(timer);
             if(!text){
                 this.wshow = false;
                 return;
@@ -87,7 +88,6 @@ module.exports = {
                 this.topMost = options.topMost;
             else this.topMost = true;
             this.wshow = true;
-            if(timer)clearTimeout(timer);
             if(this.timeout){
                 timer = setTimeout(_=>{
                     this.wshow=false;
