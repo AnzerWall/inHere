@@ -111,8 +111,8 @@ module.exports = {
             this.show(text,options);
         },
         clickBack(t){
-            this.callback(t,this);
             this.hide();
+            this.callback(t,this);
         }
     }
 }

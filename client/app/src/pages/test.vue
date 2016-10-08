@@ -20,6 +20,7 @@ module.exports = {
     },
     methods:{
       showNoti(type){
+        var that = this;
         switch(type){
           case 'alert':
           this.$refs.noti.alert('不行啊',{
@@ -32,7 +33,10 @@ module.exports = {
           case 'confirm':
            this.$refs.noti.confirm('CONFIRM！你确认要打小泽？',{
             callback(result,vm){
-              console.log('confirm',result,vm);
+              console.log('confirm',result);
+              console.log(that.$refs.noti);
+              if(result)that.$refs.noti.alert('打死他!');
+              else that.$refs.noti.warning('不打不行!');
             }
           });
           break;
