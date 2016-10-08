@@ -60,7 +60,9 @@
         </property>
         <!-- Shiro访问约束配置,即过滤链的定义 -->
         <property name="filterChainDefinitions">
-            <value></value>
+            <value>
+                /admin/activity = login
+            </value>
         </property>
     </bean>
 

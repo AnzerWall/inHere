@@ -56,7 +56,7 @@ public class ActivityController {
 
         JSONObject data = activityService.getList(params);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
@@ -103,7 +103,11 @@ public class ActivityController {
         return result;
     }
 
-    @RequestMapping(path = "/activity", method = RequestMethod.POST)
+    /**
+     * 活动发布
+     * @return
+     */
+    @RequestMapping(path = "/admin/activity", method = RequestMethod.POST)
     public ReturnBaseDto<JSONObject> publish() {
 
         return null;

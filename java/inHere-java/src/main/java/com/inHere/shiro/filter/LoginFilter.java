@@ -10,6 +10,7 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -24,6 +25,9 @@ public class LoginFilter extends AccessControlFilter {
 
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+        HttpServletRequest req = (HttpServletRequest) request;
+        log.info("--->"+mappedValue);
+
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return Boolean.TRUE;
         }
