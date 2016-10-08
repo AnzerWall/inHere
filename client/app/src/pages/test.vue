@@ -6,12 +6,12 @@
   <button @click="showNoti('warning')">warning</button>
   <button @click="showNoti('noti')">noti</button>
   <tag-editor v-ref:tag-editor :tags.sync="tags" :tag.sync="tag" :editable="true" :show.sync="tagShow"></tag-editor>
-  <!-- <button @click="clickBtn()">按钮</button> -->
   <noti v-ref:noti></noti>
 </div>
 </template>
 
 <script>
+
 import tagEditor from '../components/publish/publish-tag-editor.vue'
 import noti from '../components/noti.vue'
 module.exports = {
@@ -23,6 +23,7 @@ module.exports = {
         switch(type){
           case 'alert':
           this.$refs.noti.alert('不行啊',{
+            bgColor:'green',
             callback(result,vm){
               console.log('alert',result,vm);
             }

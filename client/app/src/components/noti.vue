@@ -7,26 +7,45 @@
 </template>
 
 <script>
+/*
+
+配置：
+options:{
+    needBg: 是否需要背景, (默认为:true)
+    bgColor: 通知背景色 ('red','blue','green')(默认白色),
+    timeout: 自动消失事件 (默认为:0,0则不自动消失),
+    callback: 按钮会掉函数 (返回:true/false,通知的vm)
+}
+
+事件：
+noti(内容,配置) //白底+黑字+无按钮
+confirm(内容,配置) //白底+黑字+确认+取消
+alert(内容,配置) //白底+黑字+确认
+warning(内容,配置) //红底+白字+确认
+
+例子：
+<noti v-ref:noti></noti>
+
+this.$refs.noti.confirm('你确定?',{
+    needBg:false,
+    bgColor:'green',
+    callback:function(result,vm){
+        console.log('结果为'+result);
+    }
+})
+
+*/
+
 var timer;
 module.exports = {
-    props:{
-        needBg:{
-            type:Boolean,
-            default:true
-        },
-        bgColor:{
-            type:String
-        },
-        timeout:{
-            type:Number,
-            default:0
-        }
-    },
     data(){
         return {
             warningInfo:'',
             wshow:false,
             type:'',
+            bgColor:'',
+            timeout:0,
+            needBg:0,
             callback:function(){}
         }
     },
