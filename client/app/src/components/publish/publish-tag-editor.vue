@@ -1,73 +1,92 @@
 <template lang="jade">
     .tag-editor-bg(v-show="show",@click.self="toggleShow()",transition="fade-up")
+        noti(v-ref:noti)
         .tag-editor
             input.line(@keypress="chkLength",placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
             .lines
                 .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)")
                     span {{item.name}}
             .line.cancel(@click="toggleShow()") 取消
-        .warning-popup(v-show="warningInfo",transition="fade-down") {{warningInfo}}
+        //- .warning-popup(v-show="warningInfo",transition="fade-down") {{warningInfo}}
 </template>
 
-<script type="text/ecmascript-6">
+<script>
+import noti from '../noti.vue'
 module.exports = {
-    props:{
-        show:Boolean,
-        tag:{},
-        editable:{
+    components: {
+        noti
+    },
+    props: {
+        show: {
             type:Boolean,
             default:false
         },
-        tags:{
-            type:Array,
-            default:()=>([])
+        tag: {},
+        editable: {
+            type: Boolean,
+            default: false
         },
-        maxlength:{
-            type:Number,
-            default:6
+        tags: {
+            type: Array,
+            default: () => ([])
+        },
+        maxlength: {
+            type: Number,
+            default: 6
         }
     },
-    data(){
+    data() {
         return {
-            tmptag:'',
-            warningInfo:''
+            tmptag: '',
+            warningInfo: ''
         }
     },
-    watch:{
-        show(val){
-            if(val){
-                var tmp = this.tags.findIndex(item=>item.value==this.tag);
-                if(tmp<0)this.tmptag = this.tag;
+    watch: {
+        show(val) {
+            if (val) {
+                var tmp = this.tags.findIndex(item => item.value == this.tag);
+                if (tmp < 0) this.tmptag = this.tag;
                 else this.tmptag = '';
             }
         },
-        tmptag(val,oldVal){
-          this.chkLength();
+        tmptag(val, oldVal) {
+            this.chkLength();
         }
     },
-    methods:{
-        clickTag(str){
-            if(!this.chkLength())return;
+    methods: {
+        hideMe(){
+            this.toggleShow();
+        },
+        showMe(){
+            this.toggleShow(true);
+        },
+        clickTag(str) {
+            if (!this.chkLength()) return;
             this.tag = str;
             this.toggleShow();
-            this.$emit('select',str);
+            this.$emit('select', str);
         },
-        toggleShow(){
-            this.show=!this.show
+        toggleShow(t) {
+            this.show = t!=undefined?t:!this.show
         },
-        chkLength(){
-          if(this.maxlength && this.tmptag.length>this.maxlength){
-            this.warningInfo = `标签长度不得超过${this.maxlength}字`;
-//            this.tmptag = this.tmptag.substr(0,this.maxlength);
-            return false;
-          } else {
-            this.warningInfo = '';
-            return true;
-          }
+        chkLength() {
+            if (!this.editable) return true;
+            if (this.maxlength && this.tmptag.length > this.maxlength) {
+                this.$refs.noti.warning(`标签长度不得超过${this.maxlength}字`, {
+                        needBg:false
+                    })
+                    // this.warningInfo = `标签长度不得超过${this.maxlength}字`;
+                return false;
+            } else {
+                this.$refs.noti.hide();
+                // this.warningInfo = '';
+                return true;
+            }
         }
     }
 }
 </script>
+
 
 <style lang="scss" scoped>
 

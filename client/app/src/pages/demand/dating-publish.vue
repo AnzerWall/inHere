@@ -53,7 +53,6 @@
 </style>
 
 <script type="text/ecmascript-6">
-  require('flatpickr');
   import {token, is_login, login_state} from '../../vuex/getters.js'
   import PublishPicture from '../../components/publish/publish-picture.vue'
   import PublishText from '../../components/publish/publish-text.vue'

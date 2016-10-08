@@ -23,22 +23,22 @@ module.exports = {
         switch(type){
           case 'alert':
           this.$refs.noti.alert('不行啊',{
-            callback(result,vm){
-              console.log('alert',result,vm);
+            callback(result,noti){
+              console.log('alert',result,noti);
             }
           });
           break;
           case 'confirm':
            this.$refs.noti.confirm('CONFIRM！你确认要打小泽？',{
-            callback(result,vm){
-              console.log('confirm',result,vm);
+            callback(result,noti){
+              console.log('confirm',result,noti);
             }
           });
           break;
           case 'warning':
           this.$refs.noti.warning('WARNING!不可以这样的！',{
-            callback(result,vm){
-              console.log('warning',result,vm);
+            callback(result,noti){
+              console.log('warning',result,noti);
             }
           });
           break;
