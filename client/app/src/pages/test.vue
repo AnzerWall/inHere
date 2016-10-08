@@ -6,12 +6,12 @@
   <button @click="showNoti('warning')">warning</button>
   <button @click="showNoti('noti')">noti</button>
   <tag-editor v-ref:tag-editor :tags.sync="tags" :tag.sync="tag" :editable="true" :show.sync="tagShow"></tag-editor>
-  <!-- <button @click="clickBtn()">按钮</button> -->
   <noti v-ref:noti></noti>
 </div>
 </template>
 
 <script>
+
 import tagEditor from '../components/publish/publish-tag-editor.vue'
 import noti from '../components/noti.vue'
 module.exports = {
@@ -20,9 +20,11 @@ module.exports = {
     },
     methods:{
       showNoti(type){
+        var that = this;
         switch(type){
           case 'alert':
           this.$refs.noti.alert('不行啊',{
+            bgColor:'green',
             callback(result,vm){
               console.log('alert',result,vm);
             }
@@ -31,7 +33,11 @@ module.exports = {
           case 'confirm':
            this.$refs.noti.confirm('CONFIRM！你确认要打小泽？',{
             callback(result,vm){
-              console.log('confirm',result,vm);
+              console.log('confirm',result);
+              if(result)vm.alert('打死他!');
+              else vm.warning('不打不行!',{
+                timeout:2000
+              });
             }
           });
           break;
@@ -43,7 +49,7 @@ module.exports = {
           });
           break;
           case 'noti':
-          this.$refs.noti.noti('NOTI!!!!');
+          this.$refs.noti.noti('NOTI!!!!23333333333333sdagasdgasddsagasdgsagssadgsadgasdgasdgs时代嘎上的嘎说');
           break;
         }
       },
