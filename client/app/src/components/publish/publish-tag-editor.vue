@@ -73,7 +73,8 @@ module.exports = {
             if (!this.editable) return true;
             if (this.maxlength && this.tmptag.length > this.maxlength) {
                 this.$refs.noti.warning(`标签长度不得超过${this.maxlength}字`, {
-                        needBg:false
+                        needBg:false,
+                        topMost:false
                     })
                     // this.warningInfo = `标签长度不得超过${this.maxlength}字`;
                 return false;

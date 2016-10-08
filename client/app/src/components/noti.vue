@@ -1,5 +1,5 @@
 <template lang="jade">
-    .warning-bg(v-show="wshow",transition="fade",:class="{darkbg:needBg}",@click.self="clickBg")
+    .warning-bg(v-show="wshow",transition="fade",:class="{darkbg:needBg,topmost:topMost}",@click.self="clickBg")
         .warning-popup(v-show="wshow",transition="fade-down",:class="bgColor") 
             .warning-text {{warningInfo}}
             .warning-btn(v-if="['noti','warning'].indexOf(type)<0",@click="clickBack(true)") 确认
@@ -12,8 +12,9 @@
 配置：
 options:{
     needBg: 是否需要背景, (默认为:true)
-    bgColor: 通知背景色 ('red','blue','green')(默认白色),
+    bgColor: 通知背景色 ('red'/'blue'/'green'/'yellow')(默认白色),
     timeout: 自动消失事件 (默认为:0,0则不自动消失),
+    topMost: 是否置顶 (true/false)
     callback: 按钮会掉函数 (返回:true/false,通知的vm)
 }
 
@@ -40,6 +41,7 @@ var timer;
 module.exports = {
     data(){
         return {
+            topMost:true,
             warningInfo:'',
             wshow:false,
             type:'',
@@ -81,6 +83,9 @@ module.exports = {
             if(options.callback!=undefined)
                 this.callback=options.callback;
             else this.callback = function(){};
+            if(options.topMost!=undefined)
+                this.topMost = options.topMost;
+            else this.topMost = true;
             this.wshow = true;
             if(timer)clearTimeout(timer);
             if(this.timeout){
@@ -145,6 +150,9 @@ module.exports = {
     &.darkbg {
         background: rgba(0,0,0,0.2);
     }
+    &.topmost {
+        z-index:9000;
+    }
     
     .warning-popup {
       position: absolute;;
@@ -171,6 +179,11 @@ module.exports = {
         background: #D50101;
         color:white;
       }
+      &.yellow {
+        background: #FFC107;
+        color:white;
+      }
+
 
       &.green {
         background: #05BC1D;
