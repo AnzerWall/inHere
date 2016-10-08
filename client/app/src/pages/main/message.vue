@@ -10,10 +10,10 @@
       </div>
     </div>
     <div class="message-content">
-      <message-card v-for="notice in notices |limitBy num" :item="notice" >
+      <message-card v-for="notice in notices |limitBy num" :item="notice">
       </message-card>
       <!--更多官方提示-->
-      <div class="notice-more"  @click="allShow()" v-if="num<notices.length">
+      <div class="notice-more" @click="allShow()" v-if="num<notices.length">
         <span class="notice-span">还有{{notices.length-2}}条官方通知</span>
       </div>
 
@@ -29,7 +29,7 @@
     width: 100%;
     flex-direction: column;
     position: relative;
-    background-color:#FAFAFA;
+    background-color: #FAFAFA;
 
   }
 
@@ -48,12 +48,12 @@
     left: 0;
     height: 60px;
     width: 100%;
-    border-bottom: solid 1px rgba(213,213,213,.5);
+    border-bottom: solid 1px rgba(213, 213, 213, .5);
     align-items: center;
     justify-content: space-between;
     display: flex;
     position: fixed;
-    background-color:#FAFAFA;
+    background-color: #FAFAFA;
   }
 
   .message-wrapper .message-head-wrapper .message-head .icon {
@@ -78,16 +78,17 @@
     color: white;
   }
 
-  .notice-more{
+  .notice-more {
     display: flex;
     height: 40px;
-    align-items:center;
-    justify-content:center;
-  border-bottom: solid 1px rgba(213,213,213,.5);
-    background-color:#FAFAFA;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 1px rgba(213, 213, 213, .5);
+    background-color: #FAFAFA;
   }
-  .notice-span{
-    background-color:#FAFAFA;
+
+  .notice-span {
+    background-color: #FAFAFA;
     font-weight: bold;
     font-size: smaller;
   }
@@ -100,34 +101,44 @@
   import Websocket from '../../util/websocket_helper.js'
 
   export default{
-    vuex:{
-      getters:{
+    vuex: {
+      getters: {
         total_chat_unread,
         user_id,
         is_login,
         token
       },
-      actions:{
+      actions: {
         pushUnreadChatList
       }
     },
-    route:{
+    route: {
       data(t){
-        if(this.is_login){
+        if (this.is_login) {
           console.log(`[Websocket] fetch unread chat list`);
-          let p=Websocket.startRequest(this.$socket,"get_unread_chat",{token:this.token})
-            .then((data)=>{
-              console.log(`[Websocket] fetched unread chat list,length=${ data instanceof Array?data.length:0}`);
-              this.pushUnreadChatList(data,this.user_id);
+          let p = Websocket.startRequest(this.$socket, "get_unread_chat", {token: this.token})
+            .then((data)=> {
+              console.log(`[Websocket] fetched unread chat list,length=${ data instanceof Array ? data.length : 0}`);
+              this.pushUnreadChatList(data, this.user_id);
             });
-
-
         }
+        let url = `${this.$api.node_api_base}/notice`;
+        return this.$request
+          .get(url)
+          .query({token: this.token})
+          .then(this.$api.checkResult)
+          .then((data)=> {
+            console.log(data);
+            this.notices=data.items.map((item)=>{
+              item.tag='notice';
+              return item;
+            });
+          });
       }
     },
-    methods:{
+    methods: {
       allShow(){
-        this.num=this.notices.length;
+        this.num = this.notices.length;
       }
 
     },
@@ -137,28 +148,28 @@
     },
     data(){
       return {
-        num:2,
-        switch:true,
+        num: 2,
+        switch: true,
         newMessageCount: '66',
         notices: [
-          {
-            tag: 'notice',
-            title: '肇庆学院',
-            message: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
-          },
-          {
-            tag: 'notice',
-            title: '天翼校园一卡通',
-            message: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-          },
-          {
-            tag: 'notice',
-            title: '计算机学院',
-            message: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-          }
+//          {
+//            tag: 'notice',
+//            title: '肇庆学院',
+//            message: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
+//          },
+//          {
+//            tag: 'notice',
+//            title: '天翼校园一卡通',
+//            message: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+//          },
+//          {
+//            tag: 'notice',
+//            title: '计算机学院',
+//            message: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+//          }
         ],
-          items: [
-        {
+        items: [
+          {
             tag: 'my',
             mess: 'n-ew',
             count: '23',

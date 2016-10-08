@@ -196,28 +196,28 @@
           if (self.content.gathering_place) {
             formData.append("gathering_place", self.content.gathering_place);
           }
-
+//          function (res) {
+//            if (res.body.code === 200){
+//              Simpop({
+//                mask: false,
+//                content: '发布成功~',
+//                time: 1000
+//              }).show(function () {
+//                window.history.back();
+//              });
+//            }else {
+//              Simpop({
+//                content: '出了点小问题~',
+//                time: 1500
+//              }).show();
+//            }
+//            console.log("res"+res.body.code);
+//
+//          })
           return this.$request
             .post(`${this.$api.url_base}/demand?token=${token}`)
             .send(formData)
-            .then(function (res) {
-              if (res.body.code === 200){
-                Simpop({
-                  mask: false,
-                  content: '发布成功~',
-                  time: 1000
-                }).show(function () {
-                  window.history.back();
-                });
-              }else {
-                Simpop({
-                  content: '出了点小问题~',
-                  time: 1500
-                }).show();
-              }
-              console.log("res"+res.body.code);
-
-            })
+            .then(this.$api.checkResult)
             .catch(function (err) {
               console.log(err);
               Simpop({

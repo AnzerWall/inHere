@@ -17,22 +17,22 @@ s<template>
       </div>
 
       <!--有。必。栏目-->
-      <div class="item">
-        <div class="square-item" :style="{'color': color(1)}">
-          <span class="square-item-tittle">* 有诺必行</span>
-          <span @click="enter(1)">进入</span>
-        </div>
-        <square-slider :topics="target.items" :square_type="1" v-on:go-to-the-topic="goTopic"></square-slider>
-      </div>
+      <!--<div class="item">-->
+        <!--<div class="square-item" :style="{'color': color(1)}">-->
+          <!--<span class="square-item-tittle">* 有诺必行</span>-->
+          <!--<span @click="enter(1)">进入</span>-->
+        <!--</div>-->
+        <!--<square-slider :topics="target.items" :square_type="1" v-on:go-to-the-topic="goTopic"></square-slider>-->
+      <!--</div>-->
 
       <div class="item">
         <div class="square-item" :style="{'color': color(2)}">
           <span class="square-item-tittle">* 有问必答</span>
           <span>进入</span>
         </div>
-        <square-slider :topics="ask_reply.items" :square_type="2" v-on:go-to-the-topic="goTopic"></square-slider>
+        <square-slider :topics="ask_reply_items" :square_type="2" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
-          <p :style="{'color': color(2)}">#{{ask_reply.best_reply.title}}</p>
+          <p :style="{'color': color(2)}">#{{ask_reply.best_reply.que_title}}</p>
           <p>{{ask_reply.best_reply.best_answer}}</p>
         </div>
       </div>
@@ -42,14 +42,14 @@ s<template>
           <span class="square-item-tittle">* 有嘈必吐</span>
           <span @click="enter(3)">进入</span>
         </div>
-        <square-slider :topics="teasing.items" :square_type="3" v-on:go-to-the-topic="goTopic"></square-slider>
+        <square-slider :topics="teasing_items" :square_type="3" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
-          <p :style="{'color': color(3)}">#{{teasing.best_reply.title}}</p>
-          <p>{{teasing.best_reply.best_answer}}</p>
+          <p :style="{'color': color(3)}">#{{teasing.best_teasing.lab_name}}</p>
+          <p>{{teasing.best_teasing.content}}</p>
         </div>
       </div>
 
-      <div class="canteen-btn" @click="enterCanteen">深&nbsp;夜&nbsp;食&nbsp;堂</div>
+      <!--<div class="canteen-btn" @click="enterCanteen">深&nbsp;夜&nbsp;食&nbsp;堂</div>-->
 
     </div>
   </div>
@@ -150,33 +150,50 @@ s<template>
   import SquareSlider from '../../components/square-slider/slider.vue'
   import ColorValue from '../../util/color_constant.js'
   import {date} from '../../filter/time.js'
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js'
 
   export default{
+    vuex: {
+      actions: {
+
+      },
+      getters: {
+        login_state,
+        token,
+        is_login,
+        school,
+        user_id
+      }
+    },
     //配置路由钩子
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+        let url=`${this.$api.url_base}/square`;
         return this.$request
-          .get("/square")
+          .get(url)
+          .query({token:this.token})
           .then(this.$api.checkResult)//处理code等信息，返回data
           .then((data)=> {
+            console.log(data);
             //处理数据
             this.activity=data.activity;
-            this.target=data.target_list;
+//            this.target=data.target_list;
             this.ask_reply=data.ask_reply;
             this.teasing=data.teasing;
-            this.target.items.push({
-              id: -1,
-              title: "更多"
-            });
-            this.ask_reply.items.push({
-              id: -1,
-              title: "更多"
-            });
-            this.teasing.items.push({
-              id: -1,
-              title: "更多"
-            });
+
+//            this.target.items.push({
+//              id: -1,
+//              title: "更多"
+//            });
+//            this.ask_reply.items.push({
+//              id: -1,
+//              title: "更多"
+//            });
+//            this.teasing.items.push({
+//              id: -1,
+//              title: "更多"
+//            });
           })
       }
     },
@@ -189,6 +206,41 @@ s<template>
         activity: {}
       }
     },
+    computed:{
+      ask_reply_items(){
+        let ret=[];
+        if(this.ask_reply.items&&this.ask_reply.items.length){
+           ret= this.ask_reply.items.map((item)=>{
+            return {
+              title:item.que_title,
+              id:item.que_id
+            }
+          });
+        ret.push({
+            id: -1,
+            title: "更多"
+          })
+        }
+        return ret;
+      },
+      teasing_items(){
+        let ret=[];
+        if(this.teasing.items&&this.teasing.items.length){
+           ret= this.teasing.items.map((item)=>{
+            return {
+              title:item.lab_name,
+              id:item.lab_id
+            }
+          });
+          ret.push({
+            id: -1,
+            title: "更多"
+          })
+        }
+        return ret;
+      }
+    },
+
     methods: {
       activityShow(){
         this.$router.go('/activity');
