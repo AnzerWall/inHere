@@ -34,9 +34,10 @@ module.exports = {
            this.$refs.noti.confirm('CONFIRM！你确认要打小泽？',{
             callback(result,vm){
               console.log('confirm',result);
-              console.log(that.$refs.noti);
-              if(result)that.$refs.noti.alert('打死他!');
-              else that.$refs.noti.warning('不打不行!');
+              if(result)vm.alert('打死他!');
+              else vm.warning('不打不行!',{
+                timeout:2000
+              });
             }
           });
           break;

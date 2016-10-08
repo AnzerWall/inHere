@@ -129,7 +129,7 @@ module.exports = {
 
 
 .fade-down-transition {
-  transition: all 0.3s;
+  transition: transform 0.3s;
 }
 .fade-down-enter,.fade-down-leave {
   transform: translateY(-100%);
