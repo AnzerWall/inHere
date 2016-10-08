@@ -7,7 +7,7 @@
         <!--加上span制造空隙-->
         <span>{{item.title}}</span>
         </span>
-      <div class="n-message padding1">{{item.message}}</div>
+      <div class="n-message padding1">{{item.content}}</div>
     </div>
     <!--&lt;!&ndash;我的评论&ndash;&gt;-->
     <!--<div class="my-div" v-if="item.tag==='my'">-->

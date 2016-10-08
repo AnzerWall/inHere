@@ -16,3 +16,6 @@
 //think.middleware("cors", function(){
 //
 //});
+
+import cors from '../../home/util/cors.js'
+think.middleware("cors", cors);

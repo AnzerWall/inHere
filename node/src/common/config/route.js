@@ -28,5 +28,8 @@ export default [
         post:"nuo/create",
         get:"nuo/get_list"
     }],
+    ["notice",{
+        get:"notice/get_list"
+    }],
 
 ];

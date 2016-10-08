@@ -1,7 +1,6 @@
 <template>
 <div class="test">
-    <h3 @click="tagShow = !tagShow">{{tag || '选择标签'}}</h3>
-    <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="!!1"></tag-editor>
+
 </div>
 </template>
 

@@ -230,13 +230,29 @@
         case 2:
           this.type_data.todo_list = this.todos;
           break;
+        case 3:
+          this.type_data.specific_month=0;
+          this.type_data.specific_day=0;
+
+          this.type_data.specific_week_day=0;
+
+          this.type_data.hour_min=0;
+          this.type_data.hour_max=0;
+
+
+
+          break;
         case 4:
           this.type_data.sign_in_total = this.sign_in_total;
           this.type_data.sign_in_continuously = this.sign_in_continuously;
+          this.type_data.hour_min=0;
+          this.type_data.hour_max=0;
+
           break;
         case 5:
           this.type_data.question = this.question;
           this.type_data.answer = this.answer;
+
           break;
       }
     },
@@ -296,7 +312,7 @@
         hour_max: 1,
         hour_max_menu_show: false,
 
-        count: 1,
+        count: 3,
         todos: ["吃饭睡觉打豆豆"],
 
         sign_in_total: 3,
@@ -310,7 +326,7 @@
         this.type_data.sign_in_continuously = this.sign_in_continuously;
       },
       sign_in_total(){
-        this.type_data.sign_in_total = this.sign_in_total;
+        this.type_data.sign_in_total = _.toNumber(this.sign_in_total);
       },
       question(){
         this.type_data.question = this.question;
@@ -320,7 +336,7 @@
 
       },
       count(){
-        this.type_data.total_count = this.count;
+        this.type_data.total_count = _.toNumber(this.count);
       },
       todos(){
         this.type_data.todo_list = this.todos;
@@ -329,7 +345,7 @@
         if (this.specific_month_enable) {
           this.type_data.specific_month = this.specific_month;
         } else {
-          delete this.type_data.specific_month;
+          this.type_data.specific_month=0;
         }
       },
       specific_month(){
@@ -339,7 +355,7 @@
         if (this.specific_day_enable) {
           this.type_data.specific_day = this.specific_day;
         } else {
-          delete this.type_data.specific_day;
+           this.type_data.specific_day=0;
         }
       },
       specific_day(){
@@ -350,7 +366,7 @@
         if (this.specific_week_day_enable) {
           this.type_data.specific_week_day = this.specific_week_day;
         } else {
-          delete this.type_data.specific_week_day;
+           this.type_data.specific_week_day=0;
         }
       },
       specific_week_day(){
@@ -360,7 +376,7 @@
         if (this.hour_min_enable) {
           this.type_data.hour_min = this.hour_min;
         } else {
-          delete this.type_data.hour_min;
+           this.type_data.hour_min=0;
         }
       },
       hour_min(){
@@ -371,7 +387,7 @@
         if (this.hour_max_enable) {
           this.type_data.hour_max = this.hour_max;
         } else {
-          delete this.type_data.hour_max;
+           this.type_data.hour_max=0;
         }
       },
       hour_max(){

@@ -4,9 +4,13 @@ $MAIN_COLOR: #25d367;
   .nuo-timeline-content {
 
     padding-left: 40px;
+  //  padding-top: 30px;
     position: relative;
     //overflow: hidden;
-
+    .placehoder-area{
+      height: 40px;
+      width: 100%;
+    }
     .nuo-timeline-timeline-wrapper {
       position: absolute;
       width: 40px;

@@ -46,7 +46,7 @@ import AskPublish from 'pages/cao/ask-publish.vue'
 import LoginPage from 'pages/login/login.vue'
 
 //import ChatTalk from 'pages/message/chat-talk.vue'
-// import NoticeMessage from 'pages/message/notice-message.vue'
+//import NoticeMessage from 'pages/message/notice-message.vue'
 import ActivityList from 'pages/square/activity-list.vue'
 import ActivityDetails from 'pages/square/activity-details.vue'
 export default{
@@ -182,5 +182,4 @@ export default{
   '/ask-publish':{
     component: AskPublish
   }
-
 }

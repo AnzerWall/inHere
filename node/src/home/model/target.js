@@ -71,8 +71,8 @@ export default class extends Base {
                 delete item.relation_id;
                 delete item.relation_target_id;
                 item.user_id=operator_id;
-                item.ext_data= item.ext_data||{};
                 item.has_finish= item.has_finish===true;
+                item.user_data=item.user_data?JSON.parse(item.user_data)||{}:{};
 
             });
         }
