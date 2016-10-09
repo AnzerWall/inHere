@@ -6,8 +6,9 @@ import RedirectConfig from './redirect.js'
 import VueLazyload from 'vue-lazyload'
 import  Api from './api/api.js'
 import VueSocketio from 'vue-socket.io'; // for ES6
-Vue.use(VueSocketio, '115.28.67.181:8360');
-//Vue.use(VueSocketio, 'http://172.18.2.32:8360');
+import Rem from './common/remu.js'
+//Vue.use(VueSocketio, '115.28.67.181:8360');
+Vue.use(VueSocketio, 'http://172.18.2.32:8360');
 //Vue.use(VueSocketio, 'http://127.0.0.1:8360');
 
 //配置懒加载插件
@@ -18,7 +19,11 @@ Vue.use(Api);
 const FastClick = require('fastclick');
 FastClick.attach(document.body);
 
-
+//let bak=window.getComputedStyle;
+//window.getComputedStyle=function (...arg){
+//  console.log(...arg);
+//  return bak(...arg);
+//}
 
 
 
@@ -48,3 +53,5 @@ router.beforeEach(function (transition) {
 });
 //启动
 router.start(App, '#app');
+//Rem.init();
+

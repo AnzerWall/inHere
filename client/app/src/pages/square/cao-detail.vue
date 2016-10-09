@@ -32,7 +32,7 @@
 
       </div>
       <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
-        <comment :comments="comments" :number="number" :user_id="user_id" :main_color="main_color"></comment>
+        <comment v-for="comment in comments" :list="comment" :number="number" :user_id="user_id" :main_color="main_color" @onclickpraise="onclickpraise"></comment>
       </div>
       <div class="cao-detail-foot">
         <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
@@ -112,6 +112,7 @@
   }
   .head-label-bottom{
     margin: 10px 20px 0px;
+    word-wrap: break-word;
   }
   .head-image{
     position: relative;
@@ -183,7 +184,9 @@
   import PhotosWipe from '../../components/photoswipe/photoswipe.vue';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import post from '../../util/comment_post.js';
-  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
+  import praise from '../../util/praise.js';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
 
     export default{
         data(){
@@ -202,13 +205,22 @@
           }
 
         },
+      vuex: {
+        getters: {
+          login_state,
+          token,
+          is_login,
+          school,
+          user_id
+        }
+      },
       route:{
         data(){
           var id=this.$route.params.id;
-          var token='4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f'
+          let url=`${this.$api.url_base}/ask_reply/`+id;
           return this.$request
-            .get('http://115.28.67.181:8080/ask_reply/'+id)
-            .query({token:token})
+            .get(url)
+            .query({token:this.token})
             .then(this.$api.checkResult)
             .then((data=>{
               console.log(data);
@@ -246,6 +258,9 @@
         submit(request,content,id,ext_type){
           console.log(content);
           return post.post(request,content,id,ext_type,this);
+        },
+        onclickpraise(ext_data,id,ext_type){
+          return praise.praise(ext_data,id,ext_type,this);
         }
       }
     }

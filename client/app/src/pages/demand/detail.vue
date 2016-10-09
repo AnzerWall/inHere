@@ -32,6 +32,14 @@
           </div>
           <!--转让-->
           <div v-if="data.ext_type===2">
+            <div class="center-all" v-if="data.ext_data.buy_time!==null">
+              <div class="center-left">购买时间</div>
+              <div class="center-right" :style="{color:main_color}">{{data.ext_data.buy_time|date}}</div>
+            </div>
+            <div class="center-all" v-if="data.ext_data.original_price!==null">
+              <div class="center-left">原价</div>
+              <div class="center-right" :style="{color:main_color}">¥{{data.ext_data.original_price}}</div>
+            </div>
             <div class="center-all">
               <div class="center-left">价格</div>
               <div class="center-right" :style="{color:main_color}">¥{{data.ext_data.price}}</div>
@@ -94,8 +102,14 @@
           </div>
       </div>
         <!--评论组件-->
-        <comment   :comments="comments" :user_id="user_id" :main_color="main_color" :data.sync="data" :ext_type="ext_type" >
+        <comment   v-for="comment in comments" :list="comment" :user_id="user_id" :main_color="main_color" :data.sync="data" :ext_type="ext_type" >
         </comment>
+      <!--加载更多组件-->
+      <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+      </infinite-loading>
     </div>
     <div class="detail-foot" >
       <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
@@ -212,10 +226,13 @@
   import SendChatIcon from 'svg/common/SendChat.vue';
   import MenuIcon from 'svg/common/Menu.vue';
   import helper from '../../util/demand_helper.js';
-  import {now} from 'filter/time.js';
+  import {now,date}from 'filter/time.js';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import post from '../../util/comment_post.js';
-  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import InfiniteLoading from 'vue-infinite-loading';
+
 
   export default{
     components: {
@@ -226,12 +243,39 @@
       MenuIcon,
       PulseLoader,
       AutoTextarea,
-
+      InfiniteLoading
     },
 
 
     methods: {
-
+      onLoadMore(){
+        console.log('more');
+        var token = this.token;
+        var id=this.$route.params.id;
+        this.$request
+          .get(`${this.$api.url_base}/comments`)
+          .query({token: token})
+          .query({offset:( this.data.offset||0) + 5, limit: 5})
+          .query({ext_type: this.ext_type})
+          .query({item_id: id})
+          .then(this.$api.checkResult)
+          .then((data)=> {
+            //通知组件加载完毕
+            console.log(data);
+            this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+            this.comments = this.comments.concat(data.items);
+           this.data.offset = data.offset;
+            this.data.total = data.total;
+//            //判断是否已经不能加载到更多的数据
+            if (this.data.offset >= this.data.total) {
+              this.$broadcast('$InfiniteLoading:complete');
+            }
+          })
+          .catch(function (e) {
+            console.log(e);
+          })
+      },
       View(index, photos){
         this.$refs.viewer.show(index, photos);
       },
@@ -262,15 +306,24 @@
 
       }
     },
+    vuex: {
+      getters: {
+        login_state,
+        token,
+        is_login,
+        school,
+        user_id
+      }
+    },
 
     route:{
       data(){
         var id=this.$route.params.id;
-        var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
+        let url=`${this.$api.url_base}/demand/`+id;
         var self=this;
         return this.$request
-        .get("http://115.28.67.181:8080/demand/"+id)
-          .query({token:token})
+        .get(url)
+          .query({token:this.token})
           .then(this.$api.checkResult)
           .then(function(data){
           //  console.log(data);
@@ -329,7 +382,8 @@
 
     },
     filters:{
-      now
+      now,
+      date
     },
 
   }
