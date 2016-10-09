@@ -21,7 +21,7 @@
         </div>
 
         <div class="message">
-          <message v-for="item in items" :item="item"  :main_color="main_color" @on-click="onClick">
+          <message v-for="item in items" :item.sync="item"  :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise" >
           </message>
         </div>
 
@@ -52,13 +52,13 @@
         </div>
 
         <div class="message">
-          <message v-for="item in items" :item="item" :main_color="main_color"  @on-click="onClick">
+          <message v-for="item in items" :item.sync="item" :main_color="main_color"  @on-click="onClick" @onclickpraise="onclickpraise">
           </message>
       </div>
+        </div>
       <div class="foot">
         <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">
       </div>
-        </div>
 
     </div>
   </div>
@@ -145,6 +145,18 @@
   .classify{
     background: linear-gradient(to bottom, #F91C88 ,#FF5FAD );
   }
+  .foot{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    border-top: solid 1px #cccccc;
+    z-index: 1;
+  }
+  .text{
+    margin: 15px 20px;
+    width: 100%;
+  }
 
 
 </style>
@@ -153,7 +165,8 @@
   import Classify from '../../components/square/classify.vue';
   import Slider from '../../components/square-slider/slider.vue';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
-
+  import praise from '../../util/praise.js';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
 
 
     export default{
@@ -284,6 +297,16 @@
 
 
       },
+      vuex: {
+
+        getters: {
+          login_state,
+          token,
+          is_login,
+          school,
+          user_id
+        }
+      },
       methods:{
           filterLabel(id)
           {
@@ -311,11 +334,10 @@
         },
         onClick(id){
           this.$router.go('/cao-detail/'+id);
-        }
-
-
-
-
+        },
+        onclickpraise(ext_data,id,ext_type){
+          return praise.praise(ext_data, id, ext_type, this);
+        },
       },
       computed:{
         main_color(){
@@ -323,18 +345,23 @@
         },
         color(){
           return "#F91D89"
-        }
+        },
       },
       route:{
         data(){
 
           var self=this;
+
+          let url=`${this.$api.url_base}/ask_reply/`
           return this.$request
-            .get("http://115.28.67.181:8080/ask_reply?ext_type="+self.$route.query.ext_type+"&token=4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f")
+            .get(url)
+            .query({ext_type:this.$route.query.ext_type})
+            .query({token:this.token})
             .then(this.$api.checkResult)
             .then(function(data){
               self.labels=data.labels;
               self.items=data.list.items;
+              self.code=data.code;
               self.labels.push({
                 id:0,
                 name:"更多"

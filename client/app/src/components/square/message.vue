@@ -24,7 +24,7 @@
           </div>
           <div class="right">
             <div class="comment">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment"></icon-comment-icon>
-            <div class="like">{{item.ext_data.praise}}</div><icon-like-icon></icon-like-icon>
+            <div class="like" :style="{color:message_color}">{{item.ext_data.praise}}</div><icon-like-icon @click="onclickpraise(item.ext_data,item.id,item.ext_type)" :style="{fill:message_color}"></icon-like-icon>
           </div>
         </div>
 
@@ -38,6 +38,7 @@
   import IconLikeIcon from '../../svg/common/comment/IconLike.vue';
   import PhotosWipe from '../photoswipe/photoswipe.vue';
   import {fromNow} from '../../filter/time.js';
+  import color from '../../util/praise_color.js';
 
 
 
@@ -50,7 +51,7 @@
       IconLikeIcon,
       PhotosWipe
     },
-    props:['item','main_color',],
+    props:['item','main_color'],
     methods:{
       onClickImage(index){
         this.$refs.viewer.show(index,this.item.ext_data.photos);
@@ -58,9 +59,18 @@
       onClick(id){
         console.log("click");
         this.$emit('on-click',id);
+      },
+      onclickpraise(ext_data,id,ext_type){
+        console.log(ext_data,id,ext_type);
+        this.$emit('onclickpraise',ext_data,id,ext_type);
+      },
+
+    },
+    computed:{
+      message_color(){
+        return color.messageColor(this.item);
+//
       }
-
-
     },
     filters:{
       fromNow

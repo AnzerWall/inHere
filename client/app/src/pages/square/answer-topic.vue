@@ -17,32 +17,10 @@
       </div>
       <!--中部-->
       <div class="answer-topic-center">
-        <div class="message" v-for="item in items">
-          <!--问题标题-->
-          <div class="message-title" @click="$router.go('/answer-detail/'+item.id)">
-            {{item.ext_data.title}}
-          </div>
-          <!--最火回答-->
-          <div class="message-main" v-if="item.ext_data.best_reply!=undefined" @click="$router.go('/answer-detail/'+item.id)">
-            {{item.ext_data.best_reply.best_answer}}
-          </div>
-          <div class="message-bottom">
-            <div class="bottom-left">
-              <!--标签名-->
-              <div class="identity" :style="{backgroundColor:color}">#{{item.label_name}}</div>
-              <div class="dian">·</div>
-              <!--发布时间-->
-              <div class="time" :style="{color:color}">{{item.create_time|fromNow}}</div>
-            </div>
-            <div class="bottom-right">
-              <!--评论数-->
-              <div class="comment">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment"></icon-comment-icon>
-              <!--点赞数-->
-              <div class="like">{{item.ext_data.praise}}</div><icon-like-icon></icon-like-icon>
-
-            </div>
-          </div>
-        </div>
+        <answer-message v-for="item in items" :item="item" :color="color" @onclickpraise="onclickpraise"></answer-message>
+      </div>
+      <div class="answer-foot">
+        <input class="answer-foot-message" placeholder="#{{items[0].label_name}}">
       </div>
 
 
@@ -93,125 +71,29 @@
   }
   .answer-topic-center{
     width: 100%;
-  }
-  .message-title{
-    margin: 20px 20px 10px;
-    font-size: 16px;
-    font-weight: bold;
-    word-wrap: break-word;
-
-  }
-  .message-main{
-    margin: 0 20px 10px;
-    font-size: 14px;
-    line-height: 20px;
-    word-wrap: break-word;
-  }
-  .message-photo {
-    display: flex;
-    /*padding: 0 10px ;*/
-    overflow: auto;
-    width: 100%;
-    position: relative;
-
-
+    margin-bottom: 50px;
   }
 
-  .message-photo .image-wrapper{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    position: absolute;
-    left: 0;
-    padding: 0 25px 0 15px;
-
-
-  }
-
-
-  .message-photo .image-space {
-    height: 130px;
-    width:100%;
-    padding-bottom: 15px;
-
-  }
-  .message-photo .image {
-    border: solid 3px white;
-    box-shadow: 0px 2px 16px rgba(0, 0, 0, .2);
-    margin-left: 10px;
-    margin-bottom: 5px;
-    margin-top: 5px;
-    height: 130px;
-
-  }
-  .hide-scroll::-webkit-scrollbar,
-  .hide-scroll::-webkit-scrollbar-track,
-  .hide-scroll::-webkit-scrollbar-thumb {
-    width: 0;
-    border-width: 0;
-    height: 0;
-  }
-
-
-  .message-bottom{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    padding-bottom: 20px;
-    border-bottom:solid 1px #cccccc ;
-  }
-  .message-bottom .bottom-left{
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-    overflow:hidden;
-    flex-shrink: 1;
-    flex-grow: 1;
-    justify-content: flex-start;
-    margin-right: 15px;
-  }
-  .message-bottom .bottom-left .identity{
-    color: #ffffff;
-    padding: 3px 7px;
-    border-radius: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-shrink: 1;
-    flex-grow:0;
-  }
-  .message-bottom .bottom-left .dian{
-    padding: 3px 5px;
-    flex-shrink: 0;
-    flex-grow:0;
-  }
-  .message-bottom .bottom-left .time{
-    flex-shrink: 0;
-    flex-grow:1;
-  }
-  .message-bottom .bottom-right{
-    flex: none;
-    color: #cccccc;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-  }
-  .message-bottom .bottom-right .comment{
-    margin-top: 6px;
-  }
-  .message-bottom .bottom-right .like{
-    margin-top: 6px;
-  }
-  .message-bottom .bottom-right .icon-comment{
-    margin-right: 15px;
-  }
   .answer-topic-loading-area {
     display: flex;
     justify-content: center;;
     margin-top: 200px;
+  }
+  .answer-foot{
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    border-top: solid 1px #cccccc;
+    background-color: #ffffff;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+  }
+  .answer-foot-message{
+    width: 70%;
+    margin-left:20px;
+    outline: none;
   }
 
 </style>
@@ -221,19 +103,24 @@
   import PhotosWipe from '../../components/photoswipe/photoswipe.vue'
   import {fromNow} from '../../filter/time.js';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+  import praise from '../../util/praise.js';
+  import AnswerMessage from '../../components/square/answer-message.vue';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
 
     export default{
         data(){
             return{
+              items:[]
 
             }
         },
       route:{
         data(){
-          var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
+          let url=`${this.$api.url_base}/ask_reply`;
           return this.$request
-            .get("http://115.28.67.181:8080/ask_reply/?ext_type=12")
-            .query({token:token})
+            .get(url)
+            .query({token:this.token})
+            .query({ext_type:12})
             .query({
               label_id:this.$route.query.label_id
             })
@@ -250,13 +137,17 @@
           IconCommentIcon,
           IconLikeIcon,
           PhotosWipe,
-          PulseLoader
+          PulseLoader,
+          AnswerMessage
 
         },
       methods:{
         back(){
           window.history.back()
-        }
+        },
+        onclickpraise(ext_data,id){
+          return praise.praise(ext_data,id,null,this);
+        },
       },
       filters:{
         fromNow
@@ -264,6 +155,15 @@
       computed: {
         color(){
           return "#246BFE"
+        }
+      },
+      vuex: {
+        getters: {
+          login_state,
+          token,
+          is_login,
+          school,
+          user_id
         }
       },
     }

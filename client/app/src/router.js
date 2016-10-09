@@ -139,6 +139,9 @@ export default{
   '/activity/:id':{
     component: ActivityDetails
   },
+  //'/notice-message/:id':{
+  //  component: NoticeMessage
+  //},
   // '/notice-message/:id':{
   //   component: NoticeMessage
   // },

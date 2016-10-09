@@ -108,6 +108,7 @@
 
 </style>
 <script type="text/ecmascript-6">
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
 
     export default{
         data(){
@@ -119,12 +120,21 @@
         components:{
 
         },
+      vuex: {
+        getters: {
+          login_state,
+          token,
+          is_login,
+          school,
+          user_id
+        }
+      },
       route:{
         data(){
-          var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
+          let url=`${this.$api.url_base}/ask_reply/labels`;
           return this.$request
-            .get('http://115.28.67.181:8080/ask_reply/labels')
-            .query({token:token})
+            .get(url)
+            .query({token:this.token})
             .query({
               ext_type:this.$route.query.ext_type
             })

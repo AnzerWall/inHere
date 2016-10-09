@@ -31,11 +31,11 @@
     </div>
     <!--评论组件-->
     <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}">
-      <comment :comments="comments" :main_color="main_color" :user_id="user_id" :number="number"></comment>
+      <comment v-for="comment in comments" :list="comment" :main_color="main_color" :user_id="user_id" :number="number" @onclickpraise="onclickpraise"></comment>
     </div>
     <!--评论输入-->
     <div class="answer-detail-foot">
-      <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+      <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.data.ext_type)" ></auto-textarea>
       <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
     </div>
   </div>
@@ -119,6 +119,7 @@
     font-weight: bold;
     color: white;
     margin: 0 20px;
+    word-wrap: break-word;
   }
 
   .hide {
@@ -127,6 +128,7 @@
     height: 20px;
     line-height: 20px;
     max-height: 20px;
+    word-wrap: break-word;
 
   }
 
@@ -232,18 +234,30 @@
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import PhotosWipe from '../../components/photoswipe/photoswipe.vue';
   import post from '../../util/comment_post.js';
-  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue'
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
+  import praise from '../../util/praise.js';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
   export default{
     filters: {
       fromNow
     },
+    vuex: {
+
+      getters: {
+        login_state,
+        token,
+        is_login,
+        school,
+        user_id
+      }
+    },
     route: {
       data(){
         var id = this.$route.params.id;
-        var token = "4cc763b9496fda23941fbaa4af298fc3b32ed8f3f44f19f2585bc4f0ac51e103";
+        let url=`${this.$api.url_base}/ask_reply/`+id;
         return this.$request
-          .get('http://115.28.67.181:8080/ask_reply/' + id)
-          .query({token: token})
+          .get(url)
+          .query({token:this.token})
           .query({ext_type: 12})
           .then(this.$api.checkResult)
           .then(function (data) {
@@ -295,6 +309,9 @@
       submit(request,content,id,ext_type){
         console.log(content);
         return post.post(request,content,id,ext_type,this);
+      },
+      onclickpraise(ext_data,id){
+        return praise.praise(ext_data,id,null,this);
       }
     }
   }
