@@ -5,16 +5,16 @@
     </div>
     <div class="main-tabbar-wrapper">
       <div class="main-tabbar">
-        <div class="main-tabbar-item"  v-link="{path:'/demand',activeClass: 'current'}">
+        <div class="main-tabbar-item"  v-link="{path:'/main/demand',activeClass: 'current'}">
           <demand-icon></demand-icon>
         </div>
-        <div class="main-tabbar-item" v-link="{path:'/square',activeClass: 'current'}">
+        <div class="main-tabbar-item" v-link="{path:'/main/square',activeClass: 'current'}">
           <square-icon></square-icon>
         </div>
-        <div class="main-tabbar-item" v-link="{path:'/message',activeClass: 'current'}">
+        <div class="main-tabbar-item" v-link="{path:'/main/message',activeClass: 'current'}">
           <message-icon></message-icon>
         </div>
-        <div class="main-tabbar-item" v-link="{path:'/profile',activeClass: 'current'}">
+        <div class="main-tabbar-item" v-link="{path:'/main/profile',activeClass: 'current'}">
           <profile-icon></profile-icon>
         </div>
 

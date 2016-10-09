@@ -19,7 +19,11 @@ Vue.use(Api);
 const FastClick = require('fastclick');
 FastClick.attach(document.body);
 
-
+//let bak=window.getComputedStyle;
+//window.getComputedStyle=function (...arg){
+//  console.log(...arg);
+//  return bak(...arg);
+//}
 
 
 
