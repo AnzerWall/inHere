@@ -261,6 +261,13 @@
 			<version>0.4.8</version>
 		</dependency>
 
+		<!--xml解析工具-->
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
 		<!-- redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>

@@ -2,17 +2,16 @@ package com.inHere.entity;
 
 import java.util.Date;
 
+/**
+ * 工具实体类
+ */
 public class Tools {
+
     private Integer toolId;
-
     private String toolName;
-
     private String toolPic;
-
     private String toolUrl;
-
     private Date createTime;
-
     private Date updateTime;
 
     public Integer getToolId() {
