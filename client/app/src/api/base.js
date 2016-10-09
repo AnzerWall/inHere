@@ -14,20 +14,29 @@ import {java_api_base,url_base,node_api_base} from '../common/config.js'
 
  function checkResult(res){
   if(res.ok){
-    if(typeof res.body!=="object"){
-      return Promise.reject(new Error("api通讯失败，res.body为空"))
+    if(typeof res.body!=="object"||!res.body){
+      return Promise.reject({
+        type:'API_ERROR',
+        code:500,
+        message:"api通讯失败，res.body为空"
+      })
     }else{
       if(res.body.code===200){
         return Promise.resolve(res.body.data)
       }else{
-        if(res.body.message)
-          return Promise.reject(new Error(res.body.status+" : "+res.body.message,res.body.code));
-        else
-          return Promise.reject(new Error(res.body.status,res.body.code));
+        return Promise.reject({
+          type:'API_ERROR',
+          code:res.body.code,
+          message:res.body.status
+        });
       }
     }
   }else{
-    return Promise.reject(new Error("api通讯失败，res.ok不等于true"))
+    return Promise.reject({
+      type:'API_ERROR',
+      code:500,
+      message:'api通讯失败'
+    });
   }
 
 
