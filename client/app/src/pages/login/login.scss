@@ -78,10 +78,13 @@ $MAIN_COLOR: #00cc4d;
     line-height: pxToRem(54px);
     height: pxToRem(54px);
     color: white;
+    font-size: pxToRem(16px);
   }
   .register-hint{
     color: $MAIN_COLOR;
     position: fixed;
     bottom: pxToRem(19px);
+    font-size: pxToRem(16px);
+
   }
 }

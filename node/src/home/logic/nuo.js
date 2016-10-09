@@ -76,11 +76,14 @@ export default class extends Base {
         let Get=this.get();
         this.data={
             limit:Get.limit,
-            offset:Get.offset
+            offset:Get.offset,
+            mine:Get.mine,
+
         };
         this.schema=Joi.object().keys({
             limit:Joi.number().integer().min(1).max(50).default(10),
-            offset:Joi.number().integer().min(0).default(0)
+            offset:Joi.number().integer().min(0).default(0),
+            mine:Joi.number().valid([0,1]).integer().default(0)
         });
     }
     async giveUpAction(){
@@ -109,6 +112,71 @@ export default class extends Base {
         };
         this.schema=Joi.object().keys({
             id:Joi.number().integer()
+        });
+    }
+    async targetCountAction(){
+        let Joi=this.Joi;
+        this.data={
+            id:this.get('id'),
+            index:this.get('index')
+        };
+        this.schema=Joi.object().keys({
+            id:Joi.number().integer().required(),
+            index:Joi.number().integer().required()
+        });
+    }
+    async targetDoTodoAction(){
+        let Joi=this.Joi;
+        let Post=this.post();
+
+        this.data={
+            id:this.get('id'),
+            index:this.get('index'),
+            todo:Post.todo
+        };
+        this.schema=Joi.object().keys({
+            id:Joi.number().integer().required(),
+            index:Joi.number().integer().required(),
+            todo:Joi.string().required()
+
+        });
+    }
+    async targetCompleteAction(){
+        let Joi=this.Joi;
+        this.data={
+            id:this.get('id'),
+            index:this.get('index')
+        };
+        this.schema=Joi.object().keys({
+            id:Joi.number().integer().required(),
+            index:Joi.number().integer().required(),
+
+        });
+    }
+    async targetSignInAction(){
+        let Joi=this.Joi;
+
+        this.data={
+            id:this.get('id'),
+            index:this.get('index')
+        };
+        this.schema=Joi.object().keys({
+            id:Joi.number().integer().required(),
+            index:Joi.number().integer().required()
+        });
+    }
+    async targetAnswerAction(){
+        let Joi=this.Joi;
+        let Post=this.post();
+        this.data={
+            id:this.get('id'),
+            index:this.get('index'),
+            answer:Post.answer
+        };
+        this.schema=Joi.object().keys({
+            id:Joi.number().integer().required(),
+            index:Joi.number().integer().required(),
+            answer:Joi.string().required()
         });
     }
 }

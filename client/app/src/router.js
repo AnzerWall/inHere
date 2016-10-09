@@ -51,6 +51,10 @@ import ActivityList from 'pages/square/activity-list.vue'
 import ActivityDetails from 'pages/square/activity-details.vue'
 export default{
   '/': {
+    component: Index
+
+  },
+  '/main': {
     component: Main,
     subRoutes: {
       '/': {
