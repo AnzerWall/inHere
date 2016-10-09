@@ -26,8 +26,7 @@ public class LoginFilter extends AccessControlFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         HttpServletRequest req = (HttpServletRequest) request;
-        log.info("--->"+mappedValue);
-
+        //log.info("--->"+mappedValue);
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return Boolean.TRUE;
         }
@@ -39,17 +38,23 @@ public class LoginFilter extends AccessControlFilter {
         log.info("登录拦截, 用户未登录");
         PrintWriter out = null;
         try {
-            out = response.getWriter();
-            response.setCharacterEncoding("UTF-8");
+            /**
+             * 设置response：
+             * 1、采用PrintWriter方式（response.getWriter()），需要在调用getPrintWriter()之前调用设置，如 setContentType、setCharacterEncoding等
+             * 2、采用ServletOutputStream方式（response.getOutputStream()），不受此限，（有问题，待解决）
+             */
             response.setContentType("application/json; charset=utf-8");
+
+            out = response.getWriter();
             JSONObject result = new JSONObject();
-            result.put("code", Code.NotFound.getCode());
-            result.put("status", Code.NotFound.getStatus());
-            out.write(objectMapper.writeValueAsString(result));
+            result.put("code", Code.NoLogin.getCode());
+            result.put("status", Code.NoLogin.getStatus());
+            log.info("--->" + result.toJSONString());
+            out.print(result.toJSONString());
         } catch (IOException e) {
             throw new SystemException(Code.Error.getCode(), Code.Error.getStatus());
-        }finally {
-            out.close();
+        } finally {
+            if (out != null) out.close();
         }
         return Boolean.FALSE;
     }

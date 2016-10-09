@@ -78,18 +78,18 @@ public class TokenManage {
      */
     public Token getToken(String tokenStr) {
         ShardedJedis jedis = shardedJedisPool.getResource();
+        Token token = null;
         Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
         if (userMap.size() > 1) {
-            Token token = new Token();
+            token = new Token();
             token.setKey(tokenStr);
             token.setUser_id(userMap.get("user_id"));
             token.setSchool_id(Integer.parseInt(userMap.get("school_id")));
             token.setRoles(JSONArray.parseArray(userMap.get("roles")));
             token.setPermissions(JSONArray.parseArray(userMap.get("permissions")));
-            return token;
         }
         jedis.close();
-        return null;
+        return token;
     }
 
     /**
