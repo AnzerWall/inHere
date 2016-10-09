@@ -19,9 +19,9 @@
 
   export default{
     ready(){
-//      setTimeout(()=>{
-//        this.$router.go('/main/demand/task');
-//      },5000)
+      setTimeout(()=>{
+        this.$router.go('/main/demand/task');
+      },1000)
     }
   }
 </script>
