@@ -69,8 +69,6 @@ public class LoginController {
     }
 
     /**
-     * TODO 退出删除一个一个Token资源
-     *
      * @param token
      * @return
      */
