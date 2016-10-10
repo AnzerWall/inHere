@@ -10,21 +10,17 @@ import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.UserDto;
 import com.inHere.entity.Token;
 import com.inHere.entity.User;
+import com.inHere.service.CommonService;
 import com.inHere.service.LoginService;
-import com.inHere.shiro.model.SessionKeyImpl;
+import com.inHere.service.UserService;
 import com.inHere.validator.LoginValidator;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.session.mgt.SessionKey;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Map;
 
@@ -40,6 +36,12 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private CommonService commonService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 登陆，创建一个Token资源
@@ -78,33 +80,62 @@ public class LoginController {
         log.info("进入logout()中-----");
         // 退出登陆
         loginService.logout(token);
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         return result;
     }
 
     /**
-     * TODO 注册一个Token资源
+     * 注册
      *
      * @return
      */
+    @Params(LoginValidator.class)
     @RequestMapping(path = "/logup", method = RequestMethod.POST)
-    public ReturnBaseDto<JSONObject> logup(HttpServletRequest request) {
-        String token = request.getParameter("token");
-        Subject subject = SecurityUtils.getSubject();
-//        subject.checkRole("admin");
-//        String a = subject.getSession().getAttribute("a").toString();
-//        log.info( a );
+    public ReturnBaseDto<JSONObject> logup(@RequestBody Map<String, Object> params) {
+        String user_id = (String) params.get("user_id");
+        String passed = (String) params.get("passwd");
+        Integer school_id = (Integer) params.get("school_id");
 
-        SessionKey key = new SessionKeyImpl().setSessionId(token);
+        userService.regUser(user_id, passed, school_id);
 
-//        log.info( SecurityUtils.getSecurityManager().getSession(key).getAttribute("a") );
         ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         return result;
     }
+
+    /**
+     * 检查用户user_id是否已存在
+     */
+    @RequestMapping(path = "check/{user_id}", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> checkUserId(@PathVariable String user_id){
+        JSONObject data = userService.checkUserIdExists(user_id);
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
+
+    /**
+     * 获取学校列表
+     *
+     * @return
+     */
+    @RequestMapping(path = "/schools", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> schoolList() {
+        JSONObject data = commonService.getSchools();
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
+
 
     /**
      * 后台登录

@@ -5,11 +5,14 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.FileType;
 import com.inHere.constant.Path;
+import com.inHere.dao.SchoolMapper;
 import com.inHere.dto.ReturnPhotoDto;
+import com.inHere.entity.School;
 import com.inHere.service.CommonService;
 import com.inHere.util.FileUtil;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +35,9 @@ public class CommonServiceImpl implements CommonService {
 
     @Value("${ip.root}")
     private String ip;
+
+    @Autowired
+    private SchoolMapper schoolMapper;
 
     /**
      * 图片输出：图片解析成JSONArray传输对象
@@ -107,8 +113,8 @@ public class CommonServiceImpl implements CommonService {
             String fineName = UUID.randomUUID().toString() + "-max." + fileType.getSuffix();
 
             // 检测文件夹是否存在
-            File photoDir =new File(Path.PhotoDir);
-            if( !(photoDir.exists()) ){
+            File photoDir = new File(Path.PhotoDir);
+            if (!(photoDir.exists())) {
                 photoDir.mkdir();
             }
             File maxFile = new File(Path.PhotoDir + fineName);
@@ -133,4 +139,24 @@ public class CommonServiceImpl implements CommonService {
         return photos;
     }
 
+    /**
+     * 获取学校列表信息
+     *
+     * @return
+     */
+    @Override
+    public JSONObject getSchools() {
+        JSONObject data = new JSONObject();
+        List<School> schools = schoolMapper.selectAll();
+        data.put("total", schools.size());
+        JSONArray items = new JSONArray();
+        for (School school : schools) {
+            JSONObject item = new JSONObject();
+            item.put("id", school.getId());
+            item.put("name", school.getSchool());
+            items.add(item);
+        }
+        data.put("items", items);
+        return data;
+    }
 }
