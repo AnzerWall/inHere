@@ -21,6 +21,9 @@ export default class extends think.controller.base {
       this.operator=new Operator(user_info);
 
     }
+    if(!this.operator.user_id){
+      return this.fail(401,'未登录');
+    }
     //this.header("Access-Control-Allow-Origin", "*");
     //this.header("Access-Control-Allow-Methods", "GET,PUT,DELETE,POST,OPTION,HEAD,PATCH");
     //this.header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");

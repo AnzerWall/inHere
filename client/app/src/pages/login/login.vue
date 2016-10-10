@@ -51,6 +51,8 @@
               //console.log(this.$route.query.__ref);
               if(this.$route.query.__ref){
                 this.$router.go(this.$route.query.__ref);
+              }else {
+                this.$router.go('/main/demand/task');
               }
             })
             .catch((e)=> {

@@ -60,6 +60,30 @@ export default class extends Base {
         });
         return await this.addMany(lst);
     }
+    isFinish(target){
+
+
+        switch(target.type){
+            case 1:
+                return (target.user_data.total_count||0)>=(target.type_data.total_count||0);
+            case 2:
+                let user_todo_list=target.user_data.todo_list||[];
+                let data_todo_list=target.type_data.todo_list||[];
+                for(let val of data_todo_list){
+                    if(user_todo_list.indexOf(val)===-1){
+                        return false;
+                    }
+                }
+                return true;
+            case 3:
+                return target.user_data.completed===true;
+            case 4:
+                return (target.user_data.sign_in_total||0)>=(target.type_data.sign_in_total||0);
+            case 5:
+                return (target.user_data.answer||"")===(target.type_data.answer||"");
+        }
+        return false;
+    }
     async getList(id,operator_id){
         let items=await this.where({target_list_id:id})
             .join(`tb_target_user AS data ON tb_target.target_id = data.relation_target_id`)
@@ -71,9 +95,9 @@ export default class extends Base {
                 delete item.relation_id;
                 delete item.relation_target_id;
                 item.user_id=operator_id;
-                item.has_finish= item.has_finish===true;
-                item.user_data=item.user_data?JSON.parse(item.user_data)||{}:{};
 
+                item.user_data=item.user_data?JSON.parse(item.user_data)||{}:{};
+                item.has_finish=this.isFinish(item);
             });
         }
         return items;

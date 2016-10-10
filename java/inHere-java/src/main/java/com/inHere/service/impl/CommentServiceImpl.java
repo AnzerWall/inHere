@@ -88,12 +88,14 @@ public class CommentServiceImpl implements CommentService {
         commentDto.setName(tmp.getName());
         commentDto.setCreate_time(tmp.getCreateTime().getTime());
         commentDto.setContent(tmp.getContent());
-
+        log.info("评论点赞--->" + tmp.getPraise());
         JSONObject praiseObj = JSON.parseObject(tmp.getPraise());
+        log.info("评论点赞--->" + praiseObj);
         if (praiseObj != null) {
             // 点赞数目
             commentDto.setPraise(praiseObj.size());
             boolean flag = praiseObj.containsKey(token.getUser_id());
+            log.info("评论是否点赞--->" + flag);
             // 是否点赞
             commentDto.setPraised(flag ? Field.Praised_YES : Field.Praised_NO);
         } else {

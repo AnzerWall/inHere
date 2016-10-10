@@ -6,16 +6,14 @@ import com.inHere.annotation.CurrentToken;
 import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
 import com.inHere.constant.Field;
+import com.inHere.dto.ActivityDto;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.entity.Token;
 import com.inHere.service.ActivityService;
 import com.inHere.validator.ActivityValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -56,7 +54,7 @@ public class ActivityController {
 
         JSONObject data = activityService.getList(params);
 
-        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<JSONObject>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
@@ -103,8 +101,14 @@ public class ActivityController {
         return result;
     }
 
-    @RequestMapping(path = "/activity", method = RequestMethod.POST)
-    public ReturnBaseDto<JSONObject> publish() {
+    /**
+     * 活动发布
+     * TODO 没做校验
+     *
+     * @return
+     */
+    @RequestMapping(path = "/admin/activity", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> publish(@RequestBody ActivityDto activity) {
 
         return null;
     }

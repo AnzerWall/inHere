@@ -4,9 +4,9 @@
       <div class="demand-head">
         <!--v-link见 vue-router文档，有中文-->
         <div class="demand-head-navbar">
-          <span class="navbar-item" v-link="{path:'/demand/task',activeClass:'current'}">任务</span>
-          <span class="navbar-item" v-link="{path:'/demand/lost',activeClass:'current'}">失物</span>
-          <span class="navbar-item" v-link="{path:'/demand/dating',activeClass:'current'}">走起</span>
+          <span class="navbar-item" v-link="{path:'/main/demand/task',activeClass:'current'}">任务</span>
+          <span class="navbar-item" v-link="{path:'/main/demand/lost',activeClass:'current'}">失物</span>
+          <span class="navbar-item" v-link="{path:'/main/demand/dating',activeClass:'current'}">走起</span>
         </div>
         <div class="demand-head-icon" @click="goToPublish">
           <add-icon></add-icon>

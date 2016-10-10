@@ -16,7 +16,7 @@
 
       </div>
       <div class="cao-center">
-        <message class="center-message" v-for="item in items" :item="item" :main_color="main_color" @on-click="onClick">
+        <message class="center-message" v-for="item in items" :item="item" :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise">
         </message>
       </div>
       <div class="cao-foot">
@@ -104,6 +104,8 @@
 <script>
   import Message from '../../components/square/message.vue';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
+  import praise from '../../util/praise.js';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
 
     export default{
         data(){
@@ -119,15 +121,23 @@
           PulseLoader
 
         },
+      vuex: {
+        getters: {
+          login_state,
+          token,
+          is_login,
+          school,
+          user_id
+        }
+      },
       route:{
         data(){
 
           var self=this;
-          var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
-          console.log(this.$route.query.label_id);
+          let url=`${this.$api.url_base}/ask_reply`;
           return this.$request
-            .get("http://115.28.67.181:8080/ask_reply")
-            .query({token:token})
+            .get(url)
+            .query({token:this.token})
             .query({
               ext_type:this.$route.query.ext_type,
               label_id:this.$route.query.label_id
@@ -150,6 +160,9 @@
         },
         onClick(id){
           this.$router.go('/cao-detail/'+id);
+        },
+        onclickpraise(ext_data,id,ext_type){
+          return praise.praise(ext_data,id,ext_type,this);
         }
 
       },

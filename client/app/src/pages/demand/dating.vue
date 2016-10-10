@@ -29,7 +29,8 @@
 <script type="text/ecmascript-6">
   import DemandCard from 'components/demand-card/demand-card.vue';
   import PhotosWipe from 'components/photoswipe/photoswipe.vue';
-  import Vue from 'vue';
+
+
   //https://github.com/greyby/vue-spinner
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
   //https://peachscript.github.io/vue-infinite-loading
