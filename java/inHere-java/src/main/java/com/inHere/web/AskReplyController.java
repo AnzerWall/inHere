@@ -79,6 +79,7 @@ public class AskReplyController {
 
     /**
      * 创建一个吐槽或问答资源
+     *
      * @return
      */
     @Authorization
@@ -118,6 +119,26 @@ public class AskReplyController {
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
         result.setData(data);
+        return result;
+    }
+
+    /**
+     * 关注问题
+     *
+     * @param item_id
+     * @param token
+     * @return
+     */
+    @Authorization
+    @Params(AskReplyValidator.class)
+    @RequestMapping(path = "/ask_reply/follow/{item_id}", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> follow(@PathVariable Integer item_id, @CurrentToken Token token) {
+
+        askReplyService.followAnIssue(token.getUser_id(), item_id);
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
         return result;
     }
 

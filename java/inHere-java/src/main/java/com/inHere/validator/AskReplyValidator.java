@@ -1,10 +1,14 @@
 package com.inHere.validator;
 
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.constant.Code;
 import com.inHere.constant.Field;
+import com.inHere.dao.AskReplyMapper;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnBaseDto;
+import com.inHere.entity.AskReply;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -24,6 +28,9 @@ import java.util.regex.Pattern;
 public class AskReplyValidator extends BaseValidator {
 
     Logger log = Logger.getLogger(getClass());
+
+    @Autowired
+    private AskReplyMapper askReplyMapper;
 
     /**
      * 获取问答、吐槽列表参数校验
@@ -134,6 +141,26 @@ public class AskReplyValidator extends BaseValidator {
             flag = true;
         }
         if (flag) return this.result("模块类型有错误哦~");
+        return null;
+    }
+
+
+    /**
+     * 关注问题参数校验
+     *
+     * @param item_id
+     * @return
+     */
+    public ReturnBaseDto<JSONObject> follow(Integer item_id) {
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.InputErr.getCode());
+        result.setStatus(Code.InputErr.getStatus());
+
+        AskReply askReply = askReplyMapper.selectByPrimaryKey(item_id);
+        if (askReply == null || !askReply.getExtType().equals(Field.ExtType_AskAnwser)) {
+            return result.setMessage("参数有错");
+        }
+
         return null;
     }
 

@@ -2,53 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.AskReplyMapper">
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from
-		tb_ask_reply
-		where id = #{id,jdbcType=INTEGER}
-	</delete>
-
-    <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.AskReply">
-        update tb_ask_reply
-        <set>
-            <if test="extType != null">
-                ext_type = #{extType,jdbcType=INTEGER},
-            </if>
-            <if test="extData != null">
-                ext_data = #{extData,jdbcType=CHAR},
-            </if>
-            <if test="labelId != null">
-                label_id = #{labelId,jdbcType=INTEGER},
-            </if>
-            <if test="title != null">
-                title = #{title,jdbcType=VARCHAR},
-            </if>
-            <if test="photos != null">
-                photos = #{photos,jdbcType=VARCHAR},
-            </if>
-            <if test="commentNum != null">
-                comment_num = #{commentNum,jdbcType=INTEGER},
-            </if>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="praise != null">
-                praise = #{praise,jdbcType=CHAR},
-            </if>
-            <if test="low != null">
-                low = #{low,jdbcType=CHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-
-
     <!-- BriefResultMap -->
     <resultMap id="BriefResultMap" type="com.inHere.entity.AskReply">
         <id column="a_id" property="id" jdbcType="INTEGER"/>
@@ -110,6 +63,15 @@
         select * from tb_ask_reply where id = #{id}
     </select>
 
+    <!-- 关注一条问题 -->
+    <insert id="followAnIssue">
+        INSERT INTO tb_ask_reply_user SET user_id = #{user_id}, ask_reply_id = #{item_id}
+    </insert>
+
+    <!--检查用户是否已关注问题-->
+    <select id="checkFollowed" resultType="Map">
+        SELECT * FROM tb_ask_reply_user WHERE user_id = #{user_id} AND ask_reply_id = #{item_id}
+    </select>
 
     <!-- 插入一条吐槽或问答 -->
     <insert id="insertSelective" parameterType="com.inHere.entity.AskReply">
@@ -258,5 +220,54 @@
         limit #{offset}, #{limit}
     </select>
 
+
+
+
+    <!-- 自动生成 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        tb_ask_reply
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.AskReply">
+        update tb_ask_reply
+        <set>
+            <if test="extType != null">
+                ext_type = #{extType,jdbcType=INTEGER},
+            </if>
+            <if test="extData != null">
+                ext_data = #{extData,jdbcType=CHAR},
+            </if>
+            <if test="labelId != null">
+                label_id = #{labelId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="photos != null">
+                photos = #{photos,jdbcType=VARCHAR},
+            </if>
+            <if test="commentNum != null">
+                comment_num = #{commentNum,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="praise != null">
+                praise = #{praise,jdbcType=CHAR},
+            </if>
+            <if test="low != null">
+                low = #{low,jdbcType=CHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
 </mapper>
