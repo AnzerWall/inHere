@@ -1,7 +1,8 @@
 <template lang="jade">
-    .fail
-        sad-svg
-        .fail-text {{text||'加载失败'}}    
+    .fail-bg
+        .fail
+            sad-svg
+            .fail-text {{text||'加载失败'}}    
 </template>
 
 <script>
@@ -17,6 +18,17 @@ module.exports = {
 </script>
 
 <style lang="scss" scoped>
+
+.fail-bg {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .fail {
     padding:10px;
