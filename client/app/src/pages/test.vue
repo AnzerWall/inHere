@@ -7,16 +7,17 @@
   <button @click="showNoti('noti')">noti</button>
   <tag-editor v-ref:tag-editor :tags.sync="tags" :tag.sync="tag" :editable="true" :show.sync="tagShow"></tag-editor>
   <noti v-ref:noti></noti>
+  <fail text="玲玉不让你看"></fail>
 </div>
 </template>
 
 <script>
-
+import fail from '../components/fail.vue'
 import tagEditor from '../components/publish/publish-tag-editor.vue'
 import noti from '../components/noti.vue'
 module.exports = {
     components:{
-        tagEditor,noti
+        tagEditor,noti,fail
     },
     methods:{
       showNoti(type){
