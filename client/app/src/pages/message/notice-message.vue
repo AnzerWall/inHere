@@ -66,12 +66,6 @@
     },
     props: {
       notice:Object,
-      item: {
-        type: Object
-      },
-      type: {
-        type: String
-      }
     },
     components: {
       MessageVip
