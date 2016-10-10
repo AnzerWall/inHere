@@ -12,7 +12,7 @@
               <div class="out" @click="$router.go('/cao?ext_type=11')"  >校外</div>
             </div>
           </div>
-          <div class="space"  @click="goToPublish"></div>
+          <div class="space"></div>
           <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color">
 
           </classify>
@@ -56,7 +56,7 @@
           </message>
       </div>
         </div>
-      <div class="foot">
+      <div class="foot" @click="goToPublish">
         <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">
       </div>
 

@@ -47,24 +47,19 @@
 
         // 验证数据格式
         if (self.content.text.length == 0){
-          Simpop({
-            mask: false,
-            content: '描述文字不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('描述文字不能为空哦~',{
+            timeout:1500
+          });
           return;
         }else if (self.content.lab_name===''){
-          Simpop({
-            mask: false,
-            content: '调皮，自定义标签不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('调皮，标签不能为空哦~',{
+            timeout:1500
+          });
           return;
         }
 
         if (message == "cao_out_publish") {
           var formData = new FormData();
-
           formData.append('ext_type',self.content.ext_type);
           formData.append("content", self.content.text);
           // 图片的验证和处理
@@ -76,28 +71,34 @@
           }
           formData.append('lab_name',self.content.lab_name);
 
+          this.$refs.noti.noti('正在发布中...',{
+            timeout:0,
+            bgColor:'red'
+          });
+
           return this.$request
             .post(`${this.$api.url_base}/ask_reply?token=${token}`)
             .send(formData)
             .then(function (res) {
               if (res.status===200){
-                Simpop({
-                  mask: false,
-                  content: '发布成功~',
-                  time: 1000
-                }).show(function () {
-                  window.history.back();
+                self.$refs.noti.noti('发布成功~',{
+                  timeout:1500,
+                  bgColor:'red',
+                  callback(result,vm){
+                    window.history.back();
+                  }
                 });
               }
             })
             .catch(function (err) {
-              Simpop({
-                content: err,
-                time: 1500
-              }).show();
+              self.$refs.noti.warning(err,{
+                timeout:1500
+              });
             })
         }else {
-         alert("非法操作");
+          self.$refs.noti.warning('非法操作',{
+            timeout:1500
+          });
         }
       }
     },
