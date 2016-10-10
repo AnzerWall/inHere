@@ -7,7 +7,7 @@
   <button @click="showNoti('noti')">noti</button>
   <tag-editor v-ref:tag-editor :tags.sync="tags" :tag.sync="tag" :editable="true" :show.sync="tagShow"></tag-editor>
   <noti v-ref:noti></noti>
-  <fail></fail>
+  <fail text="玲玉不让你看"></fail>
 </div>
 </template>
 

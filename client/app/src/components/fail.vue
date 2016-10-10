@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import sadSvg from '../svg/common/sad.vue'
+import sadSvg from '../svg/common/Sad.vue'
 module.exports = {
     components:{
         sadSvg
