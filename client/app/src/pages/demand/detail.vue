@@ -1,10 +1,11 @@
 <template>
-  <div class="response"v-if="!$loadingRouteData">
+  <div class="response">
+    <noti v-ref:noti></noti>
     <!--头部-->
     <div class="response-header">
       <div class="head" >
         <div class="head-left" @click="back">
-          <div class="head-message" >《 &nbsp;{{chinese(data.ext_type)}}</div>
+          <div class="head-message" >《 &nbsp;{{chinese(data && data.ext_type)}}</div>
         </div>
         <div class="head-right" >
           <div>
@@ -14,9 +15,11 @@
         </div>
       </div>
     </div>
+    <!--加载失败组件-->
+    <fail v-ref:noti v-if="!$loadingRouteData&&!data" ></fail>
 
     <!--下部内容-->
-    <div class="content" :style="{marginBottom:bottomHeight+'px'}">
+    <div class="content" :style="{marginBottom:bottomHeight+'px'}" v-if="data">
       <!--卡片-->
       <photos-wipe v-ref:viewer></photos-wipe>
       <header-card  :data="data" :is_detail="true" @view-image="View"></header-card>
@@ -95,9 +98,9 @@
             </div>
           </div>
           <!--评论条数-->
-          <div class="comment-number" :style="{color:main_color}">
+          <div class="comment-number" :style="{color:main_color}" >
             <div class="dian">*</div>
-            <div class="number">{{data.comment.total}}条评论</div>
+            <div class="number">{{(data.comment && total)||0}}条评论</div>
           </div>
           </div>
       </div>
@@ -111,7 +114,7 @@
         </span>
       </infinite-loading>
     </div>
-    <div class="detail-foot" >
+    <div class="detail-foot" v-if="data">
       <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
 
       <!--<textarea class="detail-textarea" placeholder="世界不如人意,人生如此艰难" v-model="content" @keyup.enter="submit(this.$request,this.content,this.data.id,this.ext_type)"></textarea>-->
@@ -232,6 +235,8 @@
   import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
   import InfiniteLoading from 'vue-infinite-loading';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
 
 
   export default{
@@ -243,7 +248,9 @@
       MenuIcon,
       PulseLoader,
       AutoTextarea,
-      InfiniteLoading
+      InfiniteLoading,
+      Noti,
+      Fail
     },
 
 
@@ -318,23 +325,41 @@
 
     route:{
       data(){
+        var self=this
         var id=this.$route.params.id;
         let url=`${this.$api.url_base}/demand/`+id;
-        var self=this;
         return this.$request
         .get(url)
           .query({token:this.token})
           .then(this.$api.checkResult)
-          .then(function(data){
+          .then((data=>{
           //  console.log(data);
-
-            self.data=data;
-            self.comments=data.comment.items;
-            self.user_id=data.user_id;
-            self.ext_type=data.ext_type;
-
-
-
+            this.data=data;
+            this.comments=data.comment.items;
+            this.user_id=data.user_id;
+            this.ext_type=data.ext_type;
+            this.total=data.comment.total;
+          }))
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              console.log(self.$refs.noti);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
           })
       },
 
@@ -346,7 +371,7 @@
 
       return {
 
-        data:{},
+        data:null,
         comments:[],
         user_id:"",
         ext_type:1,
@@ -358,7 +383,8 @@
         TYPE_DATING:6,
         content: "",
         placeholder:"世界不如人意,人生如此艰难",
-        bottomHeight:0
+        bottomHeight:0,
+        total:0
 
 
 
@@ -366,7 +392,7 @@
     },
     computed: {
       main_color(){
-
+        if(!this.data)return null;
         return helper.getMainColor(this.data)
       },
       want_sex(){

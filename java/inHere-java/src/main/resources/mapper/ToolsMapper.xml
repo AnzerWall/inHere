@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.ToolsMapper" >
+
+  <!--实体映射-->
   <resultMap id="BaseResultMap" type="com.inHere.entity.Tools" >
     <id column="tool_id" property="toolId" jdbcType="INTEGER" />
     <result column="tool_name" property="toolName" jdbcType="VARCHAR" />
@@ -9,9 +11,23 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Base_Column_List" >
-    tool_id, tool_name, tool_pic, tool_url, create_time, update_time
-  </sql>
+
+  <!--查找工具列表-->
+  <select id="selectTools" parameterType="Integer" resultMap="BaseResultMap">
+    SELECT tl.* FROM tb_tools tl
+    INNER JOIN tb_school_tools stl ON stl.`tool_id` = tl.`tool_id`
+    AND stl.`school_id` = #{school_id}
+    ORDER BY tl.`sort` ASC
+  </select>
+
+
+
+
+
+
+
+  <!-- 以下为自动生成代码 -->
+  <sql id="Base_Column_List">tool_id,tool_name,tool_pic,tool_url,create_time,update_time</sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

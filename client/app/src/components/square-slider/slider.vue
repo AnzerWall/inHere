@@ -52,7 +52,7 @@
       width: 73px;
     }
 </style>
-<script>
+<script type="text/ecmascript-6">
   import ColorValue from '../../util/color_constant.js'
 
 export default{
@@ -92,6 +92,7 @@ export default{
     goToTheTopic(id, square_type){
       // 根据 square_type类型  和 id 拼接url ，点击跳转到相应的话题详情页面
       this.$emit('go-to-the-topic',id,square_type);
+
     }
   },
   props:{

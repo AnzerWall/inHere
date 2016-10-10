@@ -32,8 +32,11 @@ public class TokenManage {
      */
     public Token createToken(User user) {
         ShardedJedis jedis = shardedJedisPool.getResource();
-        // 校验登录用户是否已存在,存在则删除
-        this.checkUserDel(user.getUserId());
+        Token token = checkUserReturnToken(user);
+        // 校验登录用户是否已存在,存在则返回token
+        if ( token != null ){
+            return token;
+        }
 
         String tokenStr = securityService.createToken(user.getUserId());
         JSONArray roles = new JSONArray(); // 赋予角色
@@ -44,12 +47,37 @@ public class TokenManage {
                 permissions.addAll(tmp.getPermissions());
             }
         }
-        Token token = new Token(tokenStr, user.getUserId(), user.getSchoolId(), roles, permissions);
+        token = new Token(tokenStr, user.getUserId(), user.getSchoolId(), roles, permissions);
         jedis.hmset("token:" + token.getKey(), token.toMap()); // token绑定用户信息
         jedis.set("user:" + user.getUserId(), token.getKey()); // 用户绑定token，保证单一登录
         // 过期时间12个小时
         jedis.expire("token:" + token.getKey(), 12 * 60 * 60);
         jedis.expire("user:" + user.getUserId(), 12 * 60 * 60);
+        jedis.close();
+        return token;
+    }
+
+    /**
+     * 检查用户是否存在,存在则返回token
+     *
+     * @param user
+     * @return
+     */
+    public Token checkUserReturnToken(User user) {
+        ShardedJedis jedis = shardedJedisPool.getResource();
+        Token token = null;
+        String tokenStr = jedis.get("user:" + user.getUserId());
+        if (tokenStr != null) {
+            Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
+            if (userMap.size() > 1) {
+                token = new Token();
+                token.setKey(tokenStr);
+                token.setUser_id(userMap.get("user_id"));
+                token.setSchool_id(Integer.parseInt(userMap.get("school_id")));
+                token.setRoles(JSONArray.parseArray(userMap.get("roles")));
+                token.setPermissions(JSONArray.parseArray(userMap.get("permissions")));
+            }
+        }
         jedis.close();
         return token;
     }
@@ -78,27 +106,25 @@ public class TokenManage {
      */
     public Token getToken(String tokenStr) {
         ShardedJedis jedis = shardedJedisPool.getResource();
+        Token token = null;
         Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
         if (userMap.size() > 1) {
-            Token token = new Token();
+            token = new Token();
             token.setKey(tokenStr);
             token.setUser_id(userMap.get("user_id"));
             token.setSchool_id(Integer.parseInt(userMap.get("school_id")));
             token.setRoles(JSONArray.parseArray(userMap.get("roles")));
             token.setPermissions(JSONArray.parseArray(userMap.get("permissions")));
-            return token;
         }
         jedis.close();
-        return null;
+        return token;
     }
 
     /**
-     * TODO 用户退出登录，清除token
-     *
      * @param token 登录用户的id
      */
     public void deleteToken(Token token) {
-
+        checkUserDel(token.getUser_id());
     }
 
 }

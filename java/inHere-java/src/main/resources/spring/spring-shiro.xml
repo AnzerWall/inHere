@@ -61,13 +61,16 @@
         <!-- Shiro访问约束配置,即过滤链的定义 -->
         <property name="filterChainDefinitions">
             <value>
-                /admin/activity = login
+                /admin/activity = login,role["post,get"]
+                /admin/util = login
+                /admin/notice = login,role
             </value>
         </property>
     </bean>
 
     <!-- 自定义权限校验过滤器 -->
     <bean id="login" class="com.inHere.shiro.filter.LoginFilter"/>
+    <bean id="role" class="com.inHere.shiro.filter.RoleFilter"/>
 
     <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

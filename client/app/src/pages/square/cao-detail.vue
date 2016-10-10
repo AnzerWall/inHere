@@ -32,9 +32,17 @@
 
       </div>
       <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
+        <!--评论组件-->
         <comment v-for="comment in comments" :list="comment" :number="number" :user_id="user_id" :main_color="main_color" @onclickpraise="onclickpraise"></comment>
+        <!--加载更多组件-->
+        <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+        </infinite-loading>
       </div>
       <div class="cao-detail-foot">
+        <!--输入框组件-->
         <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
         <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
       </div>
@@ -151,9 +159,6 @@
     border-width: 0;
     height: 0;
   }
-  .cao-detail-center{
-
-  }
   input::-webkit-input-placeholder {
 
     color:#cccccc;
@@ -187,6 +192,7 @@
   import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import InfiniteLoading from 'vue-infinite-loading';
 
     export default{
         data(){
@@ -238,7 +244,8 @@
           Comment,
           PhotosWipe,
           PulseLoader,
-          AutoTextarea
+          AutoTextarea,
+          InfiniteLoading,
         },
       filters:{
         fromNow
@@ -261,7 +268,36 @@
         },
         onclickpraise(ext_data,id,ext_type){
           return praise.praise(ext_data,id,ext_type,this);
-        }
+        },
+        onLoadMore(){
+          console.log('more');
+          var token = this.token;
+          var id=this.$route.params.id;
+          this.$request
+            .get(`${this.$api.url_base}/comments`)
+            .query({token: token})
+            .query({offset:( this.data.offset||0) + 5, limit: 5})
+            .query({ext_type: this.ext_type})
+            .query({item_id: id})
+            .then(this.$api.checkResult)
+            .then((data)=> {
+              //通知组件加载完毕
+              console.log(data);
+              this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+              this.comments = this.comments.concat(data.items);
+              this.data.offset = data.offset;
+              this.data.total = data.total;
+//            //判断是否已经不能加载到更多的数据
+              if (this.data.offset >= this.data.total) {
+                this.$broadcast('$InfiniteLoading:complete');
+              }
+            })
+            .catch(function (e) {
+              console.log(e);
+            })
+        },
+
       }
     }
 </script>

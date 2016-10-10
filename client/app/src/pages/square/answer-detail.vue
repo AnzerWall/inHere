@@ -32,6 +32,11 @@
     <!--评论组件-->
     <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}">
       <comment v-for="comment in comments" :list="comment" :main_color="main_color" :user_id="user_id" :number="number" @onclickpraise="onclickpraise"></comment>
+      <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+      </infinite-loading>
     </div>
     <!--评论输入-->
     <div class="answer-detail-foot">
@@ -227,7 +232,7 @@
     border-top: solid 1px #cccccc;
   }
 </style>
-<script>
+<script type="text/ecmascript-6">
   import Menu from 'svg/common/Menu.vue'
   import Comment from '../../components/comment/comment.vue'
   import {fromNow} from 'filter/time.js';
@@ -237,6 +242,7 @@
   import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import InfiniteLoading from 'vue-infinite-loading';
   export default{
     filters: {
       fromNow
@@ -292,7 +298,8 @@
       Comment,
       PulseLoader,
       PhotosWipe,
-      AutoTextarea
+      AutoTextarea,
+      InfiniteLoading,
     },
     computed: {
       main_color: function () {
@@ -312,6 +319,34 @@
       },
       onclickpraise(ext_data,id){
         return praise.praise(ext_data,id,null,this);
+      },
+      onLoadMore(){
+        console.log('more');
+        var token = this.token;
+        var id=this.$route.params.id;
+        this.$request
+          .get(`${this.$api.url_base}/comments`)
+          .query({token: token})
+          .query({offset:( this.data.offset||0) + 5, limit: 5})
+          .query({ext_type: this.ext_type})
+          .query({item_id: id})
+          .then(this.$api.checkResult)
+          .then((data)=> {
+          //通知组件加载完毕
+          console.log(data);
+        this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+        this.comments = this.comments.concat(data.items);
+        this.data.offset = data.offset;
+        this.data.total = data.total;
+//            //判断是否已经不能加载到更多的数据
+        if (this.data.offset >= this.data.total) {
+          this.$broadcast('$InfiniteLoading:complete');
+        }
+      })
+      .catch(function (e) {
+          console.log(e);
+        })
       }
     }
   }

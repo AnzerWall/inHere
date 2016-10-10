@@ -8,7 +8,7 @@
         <!--头部-->
         <div class="answer-head">
           <div class="top">
-            <div class="left" @click="$router.go('/square')">
+            <div class="left" @click="$router.go('/main/square')">
               <span>《&nbsp;&nbsp;有问必答</span>
             </div>
             <div class="right">

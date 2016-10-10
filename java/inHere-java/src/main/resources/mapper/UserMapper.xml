@@ -8,10 +8,8 @@
         <result column="passwd" property="passwd" jdbcType="VARCHAR"/>
         <result column="salt_key" property="saltKey" jdbcType="VARCHAR"/>
         <result column="user_name" property="userName" jdbcType="VARCHAR"/>
-        <result column="head_img" property="headImg" jdbcType="VARCHAR"/>
         <result column="contact_way" property="contactWay" jdbcType="CHAR"/>
         <result column="sex" property="sex" jdbcType="BIT"/>
-        <result column="area" property="area" jdbcType="VARCHAR"/>
         <result column="school_id" property="schoolId" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
@@ -27,10 +25,8 @@
         passwd,
         salt_key,
         user_name,
-        head_img,
         contact_way,
         sex,
-        area,
         school_id,
         create_time,
         update_time
@@ -41,10 +37,8 @@
         u.passwd,
         u.salt_key,
         u.user_name,
-        u.head_img,
         u.contact_way,
         u.sex,
-        u.area,
         u.school_id,
         u.create_time,
         u.update_time
@@ -93,17 +87,11 @@
             <if test="userName != null">
                 user_name,
             </if>
-            <if test="headImg != null">
-                head_img,
-            </if>
             <if test="contactWay != null">
                 contact_way,
             </if>
             <if test="sex != null">
                 sex,
-            </if>
-            <if test="area != null">
-                area,
             </if>
             <if test="schoolId != null">
                 school_id,
@@ -128,17 +116,11 @@
             <if test="userName != null">
                 #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="headImg != null">
-                #{headImg,jdbcType=VARCHAR},
-            </if>
             <if test="contactWay != null">
                 #{contactWay,jdbcType=CHAR},
             </if>
             <if test="sex != null">
                 #{sex,jdbcType=BIT},
-            </if>
-            <if test="area != null">
-                #{area,jdbcType=VARCHAR},
             </if>
             <if test="schoolId != null">
                 #{schoolId,jdbcType=INTEGER},
@@ -164,17 +146,11 @@
             <if test="userName != null">
                 user_name = #{userName,jdbcType=VARCHAR},
             </if>
-            <if test="headImg != null">
-                head_img = #{headImg,jdbcType=VARCHAR},
-            </if>
             <if test="contactWay != null">
                 contact_way = #{contactWay,jdbcType=CHAR},
             </if>
             <if test="sex != null">
                 sex = #{sex,jdbcType=BIT},
-            </if>
-            <if test="area != null">
-                area = #{area,jdbcType=VARCHAR},
             </if>
             <if test="schoolId != null">
                 school_id = #{schoolId,jdbcType=INTEGER},
