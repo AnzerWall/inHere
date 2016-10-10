@@ -6,7 +6,7 @@
       <div class="school" v-if="$route.query.ext_type==='10'" >
         <div class="header" >
           <div class="cao-top" >
-            <div class="left" @click="$router.go('/square')"><span>《 有槽必吐</span></div>
+            <div class="left" @click="$router.go('/main/square')"><span>《 有槽必吐</span></div>
             <div class="right">
               <div class="in">校内</div>
               <div class="out" @click="$router.go('/cao?ext_type=11')"  >校外</div>
@@ -37,7 +37,7 @@
       <div class="public" v-if="$route.query.ext_type==='11'">
         <div class="header" >
           <div class="cao-top" >
-            <div class="left" @click="$router.go('/square')">《 有槽必吐</div>
+            <div class="left" @click="$router.go('/main/square')">《 有槽必吐</div>
             <div class="right">
               <div class="in1" @click="$router.go('/cao?ext_type=10')" >校内</div>
               <div class="out1" >校外</div>

@@ -1,9 +1,10 @@
 /**
  * Created by lirongsheng on 16/10/8.
  */
-import {checkResult} from '../api/base.js'
+
+import {checkResult,url_base} from '../api/base.js'
+let url=`${url_base}/praise`;
 let praise=function(ext_data,id,ext_type,self){
-  var token="4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
   var item= function(ext_type){
     if(ext_type===null){
       return { item_id : id };
@@ -14,10 +15,10 @@ let praise=function(ext_data,id,ext_type,self){
   }(ext_type);
   console.log(ext_data,id,ext_type);
   self.$request
-    .post("http://115.28.67.181:8080/praise")
-    .query({token:token})
+    .post(url)
+    .query({token:self.token})
     .send(item)
-    .then(self.$api.checkResult)
+    .then(checkResult)
     .then((data=>{
       console.log(data);
       if(ext_data.praised==0){

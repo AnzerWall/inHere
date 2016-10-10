@@ -1,10 +1,10 @@
 /**
  * Created by lirongsheng on 16/9/26.
  */
-import {checkResult} from '../api/base.js'
+import {checkResult,url_base} from '../api/base.js';
 
 let post=function(request,content,id,ext_type,self){
-  var token = "4121581213c1605a1db4872d7cca6eed1b41259bffd8066d9573783b07214d6f";
+ let url=`${url_base}/comments`
   //var self = this;
   self.$request=request;
   self.content=content;
@@ -12,22 +12,21 @@ let post=function(request,content,id,ext_type,self){
   self.ext_type=ext_type;
   console.log(content);
   self.$request
-    .post("http://115.28.67.181:8080/comments")
-    .query({token: token})
+    .post(url)
+    .query({token: self.token})
     .send({content: self.content, item_id: self.id, ext_type: self.ext_type})
     .then(checkResult)
     .then(function (res) {
       self.content = "";
       self.$request//注意this问题。。。这里的this不等于外部的this,上次说过了
-        .get("http://115.28.67.181:8080/comments")
-        .query({token: token})
+        .get(url)
+        .query({token: self.token})
         .query({ext_type: self.ext_type})
         .query({item_id: self.id})
         .then(checkResult)
         .then(function (data) {
-          //console.log(data);
-          //console.log(self.ext_type);
           self.comments = data.items;
+          self.total=data.total;
 
 
         })
@@ -36,6 +35,8 @@ let post=function(request,content,id,ext_type,self){
       console.error(e);
     });
 }
+
 export default{
   post:post
 }
+

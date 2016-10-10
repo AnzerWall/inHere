@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="message-content">
-      <message-card v-for="notice in notices |limitBy num" :item="notice">
+      <message-card v-for="notice in notices |limitBy num" :item="notice" @click="selectedNotice=notice">
       </message-card>
       <!--更多官方提示-->
       <div class="notice-more" @click="allShow()" v-if="num<notices.length">
@@ -20,6 +20,7 @@
       <!--<message-card v-for="item in items" :item="item">-->
       <!--</message-card>-->
     </div>
+    <notice-message v-if="selectedNotice" :notice.sync="selectedNotice"></notice-message>
   </div>
 </template>
 <style scoped>
@@ -99,6 +100,7 @@
   import {total_chat_unread ,user_id,is_login,token} from '../../vuex/getters.js'
   import {pushUnreadChatList} from '../../vuex/actions/chat-action.js'
   import Websocket from '../../util/websocket_helper.js'
+  import NoticeMessage from '../message/notice-message.vue'
 
   export default{
     vuex: {
@@ -114,6 +116,7 @@
     },
     route: {
       data(t){
+        return;
         if (this.is_login) {
           console.log(`[Websocket] fetch unread chat list`);
           let p = Websocket.startRequest(this.$socket, "get_unread_chat", {token: this.token})
@@ -144,29 +147,31 @@
     },
     components: {
       ChatIcon,
-      MessageCard
+      MessageCard,
+      NoticeMessage
     },
     data(){
       return {
         num: 2,
         switch: true,
         newMessageCount: '66',
+        selectedNotice:null,
         notices: [
-//          {
-//            tag: 'notice',
-//            title: '肇庆学院',
-//            message: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
-//          },
-//          {
-//            tag: 'notice',
-//            title: '天翼校园一卡通',
-//            message: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-//          },
-//          {
-//            tag: 'notice',
-//            title: '计算机学院',
-//            message: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-//          }
+         {
+           tag: 'notice',
+           title: '肇庆学院',
+           content: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
+         },
+         {
+           tag: 'notice',
+           title: '天翼校园一卡通',
+           content: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+         },
+         {
+           tag: 'notice',
+           title: '计算机学院',
+           content: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+         }
         ],
         items: [
           {
