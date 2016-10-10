@@ -1,6 +1,6 @@
 package com.inHere.web;
 
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
 import com.inHere.constant.Code;
@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 /**
  * 工具控制类
@@ -29,15 +31,15 @@ public class ToolsController {
      */
     @Authorization
     @RequestMapping(path = "/tools", method = RequestMethod.GET)
-    public ReturnBaseDto<JSONArray> tools(@CurrentToken Token token) {
+    public ReturnBaseDto<JSONObject> tools(@CurrentToken Token token) throws IOException {
 
-        ReturnBaseDto<JSONArray> result = new ReturnBaseDto<>();
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
 
-        JSONArray items = toolsService.getList(token.getSchool_id());
+        JSONObject data = toolsService.getList(token.getSchool_id());
 
         result.setCode(Code.Success.getCode());
         result.setStatus(Code.Success.getStatus());
-        result.setData(items);
+        result.setData(data);
         return result;
     }
 

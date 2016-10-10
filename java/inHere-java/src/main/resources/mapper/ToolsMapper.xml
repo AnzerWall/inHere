@@ -17,6 +17,7 @@
     SELECT tl.* FROM tb_tools tl
     INNER JOIN tb_school_tools stl ON stl.`tool_id` = tl.`tool_id`
     AND stl.`school_id` = #{school_id}
+    ORDER BY tl.`sort` ASC
   </select>
 
 
