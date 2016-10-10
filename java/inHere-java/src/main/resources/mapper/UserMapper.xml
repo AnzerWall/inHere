@@ -61,17 +61,8 @@
       SELECT ro.* FROM tb_users_roles uro
       INNER JOIN tb_roles ro ON uro.`role_id` = ro.`id` AND uro.`user_id` = #{user_id}
     </select>
-    
-    
 
-
-    <!--      以下是自动生成，暂没用到        -->
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-        delete from
-        tb_user
-        where user_id = #{userId,jdbcType=VARCHAR}
-    </delete>
-
+    <!--插入用户-->
     <insert id="insertSelective" parameterType="com.inHere.entity.User">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -133,6 +124,14 @@
             </if>
         </trim>
     </insert>
+
+
+    <!--      以下是自动生成，暂没用到        -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from
+        tb_user
+        where user_id = #{userId,jdbcType=VARCHAR}
+    </delete>
 
     <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.User">
         update tb_user
