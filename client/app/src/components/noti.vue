@@ -1,6 +1,6 @@
 <template lang="jade">
     .warning-bg(v-show="wshow",transition="fade",:class="{darkbg:needBg,topmost:topMost}",@click.self="clickBg")
-        .warning-popup(v-show="wshow",transition="fade-down",:class="bgColor") 
+        .warning-popup(v-show="wshow",transition="fade-down",:class="bgColor")
             .warning-text {{warningInfo}}
             .warning-btn(v-if="['noti','warning'].indexOf(type)<0",@click="clickBack(true)") 确认
             .warning-btn(v-if="['confirm'].indexOf(type)>=0",@click="clickBack(false)") 取消
@@ -92,6 +92,7 @@ module.exports = {
                 if(this.timeout){
                     timer = setTimeout(_=>{
                         this.wshow=false;
+                      this.callback("",this);
                     },this.timeout);
                 }
             },300);
@@ -155,7 +156,7 @@ module.exports = {
     &.topmost {
         z-index:9000;
     }
-    
+
     .warning-popup {
       position: absolute;;
       left:0;
@@ -200,3 +201,4 @@ module.exports = {
 }
 
 </style>
+

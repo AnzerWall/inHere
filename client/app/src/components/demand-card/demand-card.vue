@@ -115,7 +115,7 @@
       chinese(type){
         switch (type) {
           case this.TYPE_EXPRESS:
-            return "快递";
+            return "兼职";
           case this.TYPE_SELL:
             return "转让";
           case this.TYPE_HELP:
@@ -141,7 +141,7 @@
         switch (sex) {
           case 1:
             return '求男生';
-          case 2:
+          case 0:
             return '求女生';
         }
         return '性别不限'

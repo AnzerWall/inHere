@@ -3,7 +3,8 @@
       <div class="slider-header">
         <a class="hot-item" v-for="topic in topics" @click="goToTheTopic(topic.id, square_type)">
           <div class="slider-topic" :style="{opacity: countOpacity($index), 'background-color':color(square_type), 'color':wrapper_color(square_type) }">
-            <span># {{topic.title}}{{topic.name}}</span>
+
+            <span><label v-if="!(square_type==2)"># </label>{{topic.title}}{{topic.name}}</span>
           </div>
         </a>
       </div>

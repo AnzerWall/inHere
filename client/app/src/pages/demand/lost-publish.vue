@@ -20,7 +20,7 @@
     </publish-time>
 
   </div>
-
+  <noti v-ref:noti></noti>
 </template>
 
 <style scoped>
@@ -34,7 +34,8 @@
   import PublishChoose from '../../components/publish/publish-choose.vue'
   import PublishTime from '../../components/publish/publish-time.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
-  import '../../components/publish/alert-view'
+  import {parseDateTime} from '../../filter/time'
+  import noti from '../../components/noti.vue'
 
   export default{
 
@@ -95,6 +96,7 @@
       PublishText,
       PublishChoose,
       PublishTime,
+      noti
     },
     vuex: {
       actions: {},
@@ -112,18 +114,21 @@
 
         // 验证数据格式
         if (self.content.ext_type===2 && self.content.text.length == 0){
-          Simpop({
-            content: '描述文字不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('描述文字不能为空哦~',{
+            timeout:1500
+          });
           return;
         }else if (self.content.thing.length == 0){
-          Simpop({
-            content: '说明是什么物品才能帮你快速找回哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('说明是什么物品才能帮你快速找回哦~',{
+            timeout:1500
+          });
           return;
         }
+
+        self.$refs.noti.noti('正在发布中...',{
+          timeout:1500,
+          bgColor:'blue'
+        });
 
         // 为了安全，还是做一下验证
         if (message == "publish_lost") {
@@ -132,16 +137,19 @@
           formData.append("ext_type", self.content.ext_type);
           formData.append("text", self.content.text);
           if (self.content.file.length>=1){
-            for (var i = 0; i<self.content.file.length; i++){
+            var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+            for (var i = 0; i < imageCount; i++) {
               formData.append("file", self.content.file[i]);
             }
           }
           formData.append("thing",self.content.thing);
           if (self.content.found_time && self.content.found_time!=''){
+            var found_time = parseDateTime(self.content.found_time);
             if (self.content.ext_type == 4) { // 丢失
-              formData.append("lose_time", Date.parse(self.content.found_time));
+
+              formData.append("lose_time", Date.parse(found_time));
             } else { // 捡到
-              formData.append("pickeup_time",Date.parse(self.content.found_time));
+              formData.append("pickeup_time",Date.parse(found_time));
             }
           }
 
@@ -150,31 +158,33 @@
             .send(formData)
             .then(function (res) {
               if (res.body.code === 200){
-                Simpop({
-                  mask: false,
-                  content: '发布成功~',
-                  time: 1000  //1秒后自动关闭
-                }).show(function () {
-                  window.history.back();
+                self.$refs.noti.noti('发布成功~',{
+                  timeout:1500,
+                  bgColor:'blue',
+                  callback(result,vm){
+                    window.history.back();
+                  }
                 });
               }else {
-                Simpop({
-                  content: '出了点小问题~',
-                  time: 1000  //1秒后自动关闭
-                }).show();
+                self.$refs.noti.warning('出了点小问题~',{
+                  timeout:1500
+                });
               }
-
             })
             .catch(function (err) {
-              Simpop({
-                content: err,
-                time: 2000  //2秒后自动关闭
-              }).show();
+              self.$refs.noti.warning(err,{
+                timeout:1500
+              });
             })
-
         }else {
-         alert("非法操作");
+          self.$refs.noti.warning('非法操作',{
+            timeout:1500
+          });
         }
+        self.$refs.noti.noti('',{
+          timeout:15,
+          bgColor:'blue'
+        });
       }
     }
   }

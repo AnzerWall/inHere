@@ -6,24 +6,22 @@
     </div>
 
     <div class="add-img-wrapper" :style="imgWrapperHeight">
-      <!--  multiple="multiple" -->
-      <input id="fileUpload"
-             v-on:change="addImage()"
-             type="file"
-             accept="image/jpeg, image/png, image/jpg, image/gif"
-             style="display: none;">
 
       <!--图片-->
       <div class="add-img order2" v-for="image in images" v-show="image.hasImage" @click.stop="deletePhotos($index)" :style="{'background-image': 'url('+image.src+')'}">
       </div>
       <!--添加按钮-->
       <div class="add-img order20" v-if="has_add_image">
-        <div class="dating-img">
-          <image-add @click="openFile()"></image-add>
+        <div class="dating-img add-img-top">
+          <image-add></image-add>
         </div>
+        <input id="fileUpload" class="add-img-bottom" v-on:change="addImage()" type="file"
+               accept="image/jpeg, image/png, image/jpg, image/gif">
       </div>
 
     </div>
+
+    <noti v-ref:noti></noti>
 
   </div>
 </template>
@@ -50,6 +48,7 @@
     border-bottom: 1px solid #d5d5d5;
   }
   .add-img{
+    position: relative;
     width:18vw;
     height: 18vw;
     background-color: white;
@@ -57,6 +56,11 @@
     align-items: center;
     justify-content: center;
     margin: 2vw;
+  }
+  .add-img-bottom{
+    position: absolute;
+    left: 0;
+    top: 20px;
   }
   .order2{
     order:2;
@@ -77,16 +81,17 @@
   input{
     border-style: none;
     outline: none;
-    text-align:right;
     padding-right: 20px;
-  }
-  img{
-
+    width:18vw;
+    height: inherit;
+    opacity: 0;
+    filter: alpha(opacity=0);
   }
 </style>
 
 <script type="text/ecmascript-6">
   import ImageAdd from 'svg/common/ImageAdd.vue'
+  import noti from '../../components/noti.vue'
 
   export default{
 
@@ -118,46 +123,29 @@
        */
       deletePhotos(index){
         var self = this;
-
-        Simpop({
-          title: '提示',
-          content: '确定删除图片吗？',
-          ok: function(){
-            // this.items.splice(index, 1)
-            self.image_publish.splice(index,1);
-            // 向子组件传播事件，删除图片列表数组中的images[index]与并添加一个默认的item元素，，实现将当前图像删除，并将后面的图片向前移动一个位置
-            self.images.splice(index,1);
-            self.index--;
-            if (self.index<4){
-              self.has_add_image = true;
+        this.$refs.noti.confirm('确定删除图片吗？',{
+          callback:function(result,vm){
+            if(result){
+              self.image_publish.splice(index,1);
+              // 向子组件传播事件，删除图片列表数组中的images[index]与并添加一个默认的item元素，，实现将当前图像删除，并将后面的图片向前移动一个位置
+              self.images.splice(index,1);
+              self.index--;
+              if (self.index<4){
+                self.has_add_image = true;
+              }
+              self.images.push({
+                hasImage:false,
+                src:""
+              })
             }
-            self.images.push({
-              hasImage:false,
-              src:""
-            })
-          },
-          cancel: function(){
-
           }
-        }).show();
-
+        })
       },
 
       /**
        *    图片上传并预览
-        * @param index
        */
-      openFile(){
-        if (this.index < 4){
-          var ofileUpload = document.getElementById("fileUpload");
-          ofileUpload.click();
 
-          // 这是个bug ，我也不知道为什么，后期要删除
-          ofileUpload.click();
-        }else {
-          console.log("图片超过四张");
-        }
-      },
       addImage() {  // 添加图片到formData 并预览
         var self = this;
         if (self.index < 4){
@@ -184,9 +172,9 @@
             }
           };
 
-            if (ofileUpload.files.length === 0) { return; }
-            var oFile = ofileUpload.files[0];
-            oFReader.readAsDataURL(oFile);
+          if (ofileUpload.files.length === 0) { return; }
+          var oFile = ofileUpload.files[0];
+          oFReader.readAsDataURL(oFile);
 
           /**
            *  多图片上传预览 这个方法还有问题，，，小泽后期再改 2016.9.9 11：08   勿删
@@ -221,7 +209,8 @@
       }
     },
     components:{
-      ImageAdd
+      ImageAdd,
+      noti
     },
     events:{
 

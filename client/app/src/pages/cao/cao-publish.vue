@@ -31,7 +31,7 @@
     width: 100%;
     height: 60px;
     border-bottom: 1px solid rgba(213,213,213,.5);
-    padding-top: 20px;
+    /*padding-top: 20px;*/
     position: fixed;
     z-index: 2000;
     align-items: center;
@@ -58,7 +58,7 @@
     opacity: 1;
   }
   .publish-content-header{
-    height: 80px;
+    height: 60px;
   }
 </style>
 <script>

@@ -1,5 +1,4 @@
 <template>
-  <photos-wipe v-ref:imageviewer></photos-wipe>
   <div>
     <!--图文-->
     <publish-picture :publish_text.sync="text" :image_publish.sync="content.file">
@@ -23,18 +22,14 @@
     </publish-text>
 
     <!--开始时间-->
+    <publish-time :key="publish_key.start_time" :publish_value.sync="content.start_time"
+                  :min_date.sync=today>
 
-    <!--<div style="border:1px solid black; width: 100%;height: 100px ">-->
-      <!--<input class=flatpickr data-date-format="d-m-Y">-->
-    <!--</div>-->
-      <publish-time :key="publish_key.start_time" :publish_value.sync="content.start_time"
-                    :min_date.sync=today>
-
-      </publish-time>
+    </publish-time>
 
     <!--结束时间-->
-      <publish-time :key="publish_key.end_time" :publish_value.sync="content.end_time"
-                    :min_date.sync="content.end_time"></publish-time>
+    <publish-time :key="publish_key.end_time" :publish_value.sync="content.end_time"
+                  :min_date.sync="content.end_time"></publish-time>
 
     <!--集中地-->
     <publish-text :key="publish_key.gathering_place" :publish_value.sync="content.gathering_place">
@@ -46,6 +41,7 @@
     </publish-time>
 
   </div>
+  <noti v-ref:noti></noti>
 </template>
 
 <style scoped>
@@ -59,8 +55,10 @@
   import PublishChoose from '../../components/publish/publish-choose.vue'
   import PublishTime from '../../components/publish/publish-time.vue'
   import PublishNumber from '../../components/publish/publish-number.vue'
-  import PhotosWipe from 'components/photoswipe/photoswipe.vue'
+  import {parseDateTime} from '../../filter/time'
+  import noti from '../../components/noti.vue'
   import '../../components/publish/alert-view'
+
   export default{
 
     data(){
@@ -133,7 +131,7 @@
       PublishChoose,
       PublishTime,
       PublishNumber,
-      PhotosWipe
+      noti
     },
     events: {
       'publish-demand': function (message) {
@@ -142,29 +140,25 @@
 
         // 数据是否为空和格式的校验
         if (self.text.length == 0) {
-          Simpop({
-            content: '描述文字不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('描述文字不能为空哦~',{
+            timeout:1500
+          });
           return;
         }else if( self.content.per_cost && !(/^[1-9]\d*(\.\d{0,2})?|0$/).exec(self.content.per_cost) ){
-          Simpop({
-            content: '调皮，人均消费是不小于零的数字哟~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('调皮，人均消费是不小于零的数字哟~',{
+            timeout:1500
+          });
           return;
         }
         else if (self.content.start_time===''){
-          Simpop({
-            content: '开始时间不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('活动开始时间不能为空哦~',{
+            timeout:1500
+          });
           return;
         }else if (self.content.end_time===''){
-          Simpop({
-            content: '活动结束时间不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('活动结束时间不能为空哦~',{
+            timeout:1500
+          });
           return;
         }
 
@@ -176,7 +170,8 @@
           formData.append("text", self.text);
           // 图片的验证和处理
           if (self.content.file.length > 0) {
-            for (var i = 0; i < self.content.file.length; i++) {
+            var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+            for (var i = 0; i < imageCount; i++) {
               formData.append("file", self.content.file[i]);
             }
           }
@@ -184,7 +179,8 @@
             formData.append("place", self.content.place);
           }
           formData.append("want_sex", self.content.want_sex);
-          formData.append("start_time", Date.parse(self.content.start_time));
+          var time = parseDateTime(self.content.start_time);
+          formData.append("start_time", time);
           formData.append("end_time", Date.parse(self.content.end_time));
           if (self.content.per_cost){
             formData.append("per_cost", self.content.per_cost);
@@ -217,12 +213,27 @@
             .post(`${this.$api.url_base}/demand?token=${token}`)
             .send(formData)
             .then(this.$api.checkResult)
-            .catch(function (err) {
-              console.log(err);
-              Simpop({
-                content: '发布失败~',
-                time: 2000  //2秒后自动关闭
-              }).show();
+            .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              self.$refs.noti.warning('发布失败~',{
+                timeout:1500
+              });
             })
         }
       },

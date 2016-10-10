@@ -3,7 +3,7 @@
   <div class="publish-detail">
     <div class="publish-key">{{key}}</div>
     <div class="publish-value">
-        <span @click="tagShow = !tagShow"><input :value="tag || '选择标签'"></span>
+        <span @click="tagShow = !tagShow"><input readonly :value="tag || '选择标签'"></span>
         <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="editable"></tag-editor>
     </div>
   </div>

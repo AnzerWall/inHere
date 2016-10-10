@@ -29,6 +29,8 @@
 
     </div>
   </div>
+
+  <noti v-ref:noti></noti>
 </template>
 <style scoped>
   .publish-header {
@@ -83,11 +85,13 @@
   import PublishTagChoose from '../../components/publish/publish-tag-choose.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
   import '../../components/publish/alert-view'
+  import noti from '../../components/noti.vue'
 
   export default{
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+        var token = this.token;
         return this.$request
           .get(`${this.$api.url_base}/ask_reply/labels?token=${token}`)
           .query({'ext_type':12,'limit':100})  // 获取50条数据，类型为问答10
@@ -133,20 +137,23 @@
 
         // 验证数据格式
         if (self.content.title.length === 0) {
-          Simpop({
-            mask: false,
-            content: '问题不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.noti('问题不能为空哦~',{
+            timeout:1500,
+            bgColor:'red'
+          });
           return;
         } else if (self.content.lab_name === '') {
-          Simpop({
-            mask: false,
-            content: '调皮，标签不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.noti('调皮，标签不能为空哦~',{
+            timeout:1500,
+            bgColor:'red'
+          });
           return;
         }
+
+        this.$refs.noti.noti('正在发布中...',{
+          timeout:0,
+          bgColor:'blue'
+        });
 
         var formData = new FormData();
         formData.append("ext_type", self.content.ext_type);
@@ -156,7 +163,8 @@
         }
         // 图片的验证和处理
         if (self.content.file.length > 0) {
-          for (var i = 0; i < self.content.file.length; i++) {
+          var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+          for (var i = 0; i < imageCount; i++) {
             formData.append("file", self.content.file[i]);
           }
         }
@@ -167,20 +175,27 @@
           .send(formData)
           .then(function (res) {
             if (res.status === 200) {
-              Simpop({
-                mask: false,
-                content: '发布成功~',
-                time: 1000  //1秒后自动关闭
-              }).show(function () {
-                window.history.back();
+              self.$refs.noti.noti('发布成功~',{
+                timeout:1500,
+                bgColor:'blue',
+                callback(result,vm){
+                  window.history.back();
+                }
               });
+//              Simpop({
+//                mask: false,
+//                content: '发布成功~',
+//                time: 1000  //1秒后自动关闭
+//              }).show(function () {
+//                window.history.back();
+//              });
             }
           })
           .catch(function (err) {
-            Simpop({
-              content: err,
-              time: 1500
-            }).show();
+            this.$refs.noti.noti(err,{
+              timeout:1500,
+              bgColor:'red'
+            });
           })
       }
     },
@@ -195,7 +210,8 @@
     components: {
       ConfirmIcon,
       PublishPicture,
-      PublishTagChoose
+      PublishTagChoose,
+      noti
     },
   }
 </script>

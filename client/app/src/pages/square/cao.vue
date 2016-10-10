@@ -12,7 +12,7 @@
               <div class="out" @click="$router.go('/cao?ext_type=11')"  >校外</div>
             </div>
           </div>
-          <div class="space"></div>
+          <div class="space"  @click="goToPublish"></div>
           <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color">
 
           </classify>
@@ -308,6 +308,13 @@
         }
       },
       methods:{
+          goToPublish(){
+            if (this.$route.query.ext_type == 10){
+              this.$router.go('/cao-publish/in');
+            } else {
+              this.$router.go('/cao-publish/out');
+            }
+          },
           filterLabel(id)
           {
             if(id==0){

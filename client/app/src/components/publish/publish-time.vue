@@ -4,15 +4,25 @@
   <div class="publish-detail">
     <div class="publish-key">{{key}}</div>
     <div class="publish-value">
-      <input type="date" v-model="publish_value">
+        <span>{{publish_value.replace('T',' ')}}</span>
+        <input type="datetime-local" v-model="publish_value">
     </div>
   </div>
 
 </template>
 
 <style scoped>
-
+  span{
+    float: right;
+    /*height: 1em;*/
+    text-align: right;
+    margin-right: 20px;
+  }
   input {
+    float: right;
+    width:70vw;
+    height: 1em;
+    opacity: 0;
     border-style: none;
     outline: none;
     text-align: right;
@@ -38,12 +48,8 @@
   }
 
   .publish-value {
-    /*width:80vw;*/
-
-  }
-
-  .timepicker {
-    text-align: right;
+    width:70vw;
+    height: 1em;
   }
 </style>
 <script>
@@ -66,6 +72,8 @@
         required: true,
         default: ""
       }
+    },
+    methods:{
     }
   }
 </script>

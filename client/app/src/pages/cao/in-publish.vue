@@ -9,6 +9,8 @@
     <publish-tag-choose :key="publish_key.tag" :tag.sync="content.lab_name" :tags="lab_items" :editable="!!1"></publish-tag-choose>
   </div>
 
+  <noti v-ref:noti></noti>
+
 </template>
 
 
@@ -17,11 +19,13 @@
   import PublishPicture from '../../components/publish/publish-picture.vue'
   import PublishTagChoose from '../../components/publish/publish-tag-choose.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
+  import noti from '../../components/noti.vue'
 
   export default{
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+        var token = this.token;
         return this.$request
           .get(`${this.$api.url_base}/ask_reply/labels?token=${token}`)
           .query({'ext_type':10,'limit':100})  // 获取50条数据，类型为问答10
@@ -73,17 +77,14 @@
 
         // 验证数据格式
         if (self.content.text.length == 0){
-          Simpop({
-            content: '描述文字不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('描述文字不能为空哦~',{
+            timeout:1500
+          });
           return;
         }else if (self.content.lab_name===''){
-          Simpop({
-            mask: false,
-            content: '调皮，自定义标签不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          self.$refs.noti.warning('调皮，标签不能为空哦~',{
+            timeout:1500
+          });
           return;
         }
 
@@ -93,40 +94,48 @@
           formData.append("content", self.content.text);
           // 图片的验证和处理
           if (self.content.file.length > 0) {
-            for (var i = 0; i < self.content.file.length; i++) {
+            var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+            for (var i = 0; i < imageCount; i++) {
               formData.append("file", self.content.file[i]);
             }
           }
           formData.append('lab_name',self.content.lab_name);
+
+          this.$refs.noti.noti('正在发布中...',{
+            timeout:0,
+            bgColor:'red'
+          });
 
           return this.$request
             .post(`${this.$api.url_base}/ask_reply?token=${token}`)
             .send(formData)
             .then(function (res) {
               if (res.status===200){
-                Simpop({
-                  mask: false,
-                  content: '发布成功~',
-                  time: 1000
-                }).show(function () {
-                  window.history.back();
+                self.$refs.noti.noti('发布成功~',{
+                  timeout:1500,
+                  bgColor:'red',
+                  callback(result,vm){
+                    window.history.back();
+                  }
                 });
               }
             })
             .catch(function (err) {
-              Simpop({
-                content: err,
-                time: 1500
-              }).show();
+              self.$refs.noti.warning(err,{
+                timeout:1500
+              });
             })
         }else {
-          alert("非法操作");
+          self.$refs.noti.warning('非法操作',{
+            timeout:1500
+          });
         }
       }
     },
     components:{
       PublishPicture,
-      PublishTagChoose
+      PublishTagChoose,
+      noti
     }
   }
 </script>

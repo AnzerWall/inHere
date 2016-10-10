@@ -44,6 +44,9 @@
       <publish-number :key="publish_key.pay" :publish_value.sync="content.pay"></publish-number>
     </div>
   </div>
+
+  <noti v-ref:noti></noti>
+
 </template>
 
 <style scoped>
@@ -59,6 +62,8 @@
   import PublishNumber from '../../components/publish/publish-number.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
   import '../../components/publish/alert-view'
+  import {parseDateTime} from '../../filter/time'
+  import noti from '../../components/noti.vue'
 
   export default{
 
@@ -133,7 +138,6 @@
     },
     methods: {
       changeTaskType: function (type) {
-//        console.log("父组件接收子组件的通信");
         this.publish_type = type;
       }
     },
@@ -142,7 +146,8 @@
       PublishTagChoose,
       PublishChoose,
       PublishTime,
-      PublishNumber
+      PublishNumber,
+      noti
     },
     vuex: {
       actions: {},
@@ -159,19 +164,21 @@
 
         // 数据是否为空和格式的校验
         if (self.content.text.length == 0) {
-          Simpop({
-            content: '描述文字不能为空哦~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('描述文字不能为空哦~',{
+            timeout:1500,
+            bgColor:'red'
+          });
           return;
         } else if (self.content.ext_type===2 && self.content.price === '') {
-          Simpop({
-            content: '乖，把出售价格写上去~',
-            time: 2000  //2秒后自动关闭
-          }).show();
+          this.$refs.noti.warning('乖，把出售价格写上去~',{
+            timeout:1500
+          });
           return;
         }
-
+        self.$refs.noti.noti('正在发布中...',{
+          timeout:1500,
+          bgColor:'blue'
+        });
         // 为了安全，还是做一下验证
         if (message === "publish_task") {
           // post提交，发表走起
@@ -180,7 +187,8 @@
           formData.append("text", self.content.text);
           // 图片的验证和处理
           if (self.content.file.length > 0) {
-            for (var i = 0; i < self.content.file.length; i++) {
+            var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+            for (var i = 0; i < imageCount; i++) {
               formData.append("file", self.content.file[i]);
             }
           }
@@ -193,8 +201,9 @@
               var quality = self.content.quality.replace(/成/, "");
               formData.append('quality', parseInt(quality));
             }
-            if (self.content.buy_time1 != '') {
-              formData.append('buy_time', Date.parse(self.content.buy_time));
+            if (self.content.buy_time != '') {
+              var time = parseDateTime(self.content.buy_time);
+              formData.append('buy_time',time);
             }
             if (self.content.original_price) {
               formData.append('original_price', self.content.original_price);
@@ -206,26 +215,26 @@
             .send(formData)
             .then(function (res) {
               if (res.body.code === 200){
-                Simpop({
-                  content: '发布成功~',
-                  time: 1000  //2秒后自动关闭
-                }).show(function () {
-                  window.history.back();
+                self.$refs.noti.noti('发布成功~',{
+                  timeout:1500,
+                  bgColor:'blue',
+                  callback(result,vm){
+                    window.history.back();
+                  }
                 });
               }else {
-                Simpop({
-                  content: '出了点小问题~',
-                  time: 1500  //1.5秒后自动关闭
-                }).show();
+                this.$refs.noti.warning(JSON.stringify(res.body),{
+                  timeout:1500,
+                  bgColor:'red'
+                });
               }
-              console.log("res"+res.body.code);
 
             })
             .catch(function (err) {
-              Simpop({
-                content: err,
-                time: 2000  //2秒后自动关闭
-              }).show();
+              this.$refs.noti.warning(err,{
+                timeout:1500,
+                bgColor:'red'
+              });
             })
         }
       },

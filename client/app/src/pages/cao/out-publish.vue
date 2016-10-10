@@ -8,6 +8,7 @@
     <publish-text :key="publish_key.tag" :publish_value.sync="content.lab_name"></publish-text>
   </div>
 
+  <noti v-ref:noti></noti>
 </template>
 
 <script type="text/ecmascript-6">
@@ -15,6 +16,7 @@
   import PublishPicture from '../../components/publish/publish-picture.vue'
   import PublishText from '../../components/publish/publish-text.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
+  import noti from '../../components/noti.vue'
 
   export default{
     data(){
@@ -67,7 +69,8 @@
           formData.append("content", self.content.text);
           // 图片的验证和处理
           if (self.content.file.length > 0) {
-            for (var i = 0; i < self.content.file.length; i++) {
+            var imageCount = self.content.file.length > 4 ? 4 : self.content.file.length;
+            for (var i = 0; i < imageCount; i++) {
               formData.append("file", self.content.file[i]);
             }
           }
@@ -108,7 +111,8 @@
     },
     components:{
       PublishPicture,
-      PublishText
+      PublishText,
+      noti
     }
   }
 </script>

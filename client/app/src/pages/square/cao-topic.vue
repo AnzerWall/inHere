@@ -19,7 +19,7 @@
         <message class="center-message" v-for="item in items" :item="item" :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise">
         </message>
       </div>
-      <div class="cao-foot">
+      <div class="cao-foot" @click="goToCaoPublish(items[0].label_name)">
         <input class="foot-message" placeholder="#{{items[0].label_name}}">
       </div>
 
@@ -163,6 +163,14 @@
         },
         onclickpraise(ext_data,id,ext_type){
           return praise.praise(ext_data,id,ext_type,this);
+        },
+        goToCaoPublish(toplc){
+          // 这里应该传递一个话题给发布页并显示在发布页的标签上 ，先这样吧
+          if (this.$route.query.ext_type == 10){
+            this.$router.go('/cao-publish/in');
+          } else {
+            this.$router.go('/cao-publish/out');
+          }
         }
 
       },

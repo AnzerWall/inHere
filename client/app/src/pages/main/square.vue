@@ -1,10 +1,10 @@
-s<template>
+<template>
   <div class="square-wrapper">
     <!--动画-->
-      <!--加载动画组件：小圆点-->
-      <div v-if="$loadingRouteData" class="loading-area">
-        <pulse-loader color="rgb(24, 184, 3)" size="12px"></pulse-loader>
-      </div>
+    <!--加载动画组件：小圆点-->
+    <div v-if="$loadingRouteData" class="loading-area">
+      <pulse-loader color="rgb(24, 184, 3)" size="12px"></pulse-loader>
+    </div>
     <div class="square-container" v-if="!$loadingRouteData">
       <!--社团活动入口-->
       <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}" @click="activityShow()">
@@ -17,21 +17,22 @@ s<template>
       </div>
 
       <!--有。必。栏目-->
-      <!--<div class="item">-->
-        <!--<div class="square-item" :style="{'color': color(1)}">-->
-          <!--<span class="square-item-tittle">* 有诺必行</span>-->
-          <!--<span @click="enter(1)">进入</span>-->
-        <!--</div>-->
-        <!--<square-slider :topics="target.items" :square_type="1" v-on:go-to-the-topic="goTopic"></square-slider>-->
-      <!--</div>-->
+
+      <div class="item">
+        <div class="square-item" :style="{'color': color(1)}">
+          <span class="square-item-tittle">* 有诺必行</span>
+          <span @click="enter(1)">进入</span>
+        </div>
+        <square-slider :topics="target_item" :square_type="1" v-on:go-to-the-topic="goTopic"></square-slider>
+      </div>
 
       <div class="item">
         <div class="square-item" :style="{'color': color(2)}">
           <span class="square-item-tittle">* 有问必答</span>
-          <span>进入</span>
+          <span @click="enter(2)">进入</span>
         </div>
         <square-slider :topics="ask_reply_items" :square_type="2" v-on:go-to-the-topic="goTopic"></square-slider>
-        <div class="sub">
+        <div class="sub"  @click="goTopic(ask_reply.best_reply.que_id, 2)">
           <p :style="{'color': color(2)}">#{{ask_reply.best_reply.que_title}}</p>
           <p>{{ask_reply.best_reply.best_answer}}</p>
         </div>
@@ -44,8 +45,8 @@ s<template>
         </div>
         <square-slider :topics="teasing_items" :square_type="3" v-on:go-to-the-topic="goTopic"></square-slider>
         <div class="sub">
-          <p :style="{'color': color(3)}">#{{teasing.best_teasing.lab_name}}</p>
-          <p>{{teasing.best_teasing.content}}</p>
+          <p :style="{'color': color(3)}" @click="goTopic(teasing.best_teasing.lab_id,3)">#{{teasing.best_teasing.lab_name}}</p>
+          <p @click="goToCaoDetail(teasing.best_teasing.teasing_id)">{{teasing.best_teasing.content}}</p>
         </div>
       </div>
 
@@ -53,6 +54,7 @@ s<template>
 
     </div>
   </div>
+  <noti v-ref:noti></noti>
 </template>
 <style scoped>
   .loading-area {
@@ -100,11 +102,11 @@ s<template>
     font-weight: bold;
     margin-bottom: 5px;
 
-    /* 保持一行  */
+    /* 保持三行  */
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
   }
 
@@ -151,6 +153,7 @@ s<template>
   import ColorValue from '../../util/color_constant.js'
   import {date} from '../../filter/time.js'
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js'
+  import noti from '../../components/noti.vue'
 
   export default{
     vuex: {
@@ -170,6 +173,7 @@ s<template>
       //页面加载数据钩子(或者叫事件)
       data(){
         let url=`${this.$api.url_base}/square`;
+        let self = this;
         return this.$request
           .get(url)
           .query({token:this.token})
@@ -181,42 +185,69 @@ s<template>
 //            this.target=data.target_list;
             this.ask_reply=data.ask_reply;
             this.teasing=data.teasing;
-
-//            this.target.items.push({
-//              id: -1,
-//              title: "更多"
-//            });
-//            this.ask_reply.items.push({
-//              id: -1,
-//              title: "更多"
-//            });
-//            this.teasing.items.push({
-//              id: -1,
-//              title: "更多"
-//            });
+          })
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
           })
       }
     },
     data: function () {
       return {
+        target_item: [
+          {
+            id: 2, //清单编号
+            title: "从修电脑到过夜"
+          }, {
+            id: 3, //清单编号
+            title: "如何成为一枚学神"
+          }, {
+            id: 4, //清单编号
+            title: "吃货攻略清单"
+          }, {
+            id: 5, //清单编号
+            title: "来到肇庆学院必去的5个地点"
+          }, {
+            id: 1, //清单编号
+            title: "it达人大一篇"
+          }, {
+            id: -1, //清单编号
+            title: "更多"
+          }
+        ],
         target: {},
         ask_reply: {},
         teasing: {},
-        best_reply: {},
-        activity: {}
+        activity: {},
       }
     },
     computed:{
       ask_reply_items(){
         let ret=[];
         if(this.ask_reply.items&&this.ask_reply.items.length){
-           ret= this.ask_reply.items.map((item)=>{
+          ret= this.ask_reply.items.map((item)=>{
             return {
               title:item.que_title,
               id:item.que_id
             }
           });
-        ret.push({
+          ret.push({
             id: -1,
             title: "更多"
           })
@@ -226,7 +257,7 @@ s<template>
       teasing_items(){
         let ret=[];
         if(this.teasing.items&&this.teasing.items.length){
-           ret= this.teasing.items.map((item)=>{
+          ret= this.teasing.items.map((item)=>{
             return {
               title:item.lab_name,
               id:item.lab_id
@@ -262,7 +293,7 @@ s<template>
         var hour = date.getHours();
         if (hour >= 0 && hour < 7) {
           //    跳转到深夜餐厅 待完成
-          alert("其实，这个功能我们还没做，嘻嘻~");
+          alert("其实，这个功能我们还没做，喵~");
         } else {
           alert("深夜餐厅只在深夜12点到凌晨6点开放喔~");
         }
@@ -270,7 +301,8 @@ s<template>
       enter(index){
         switch (index){
           case 1:{
-            alert("进入的栏目为" + index);
+//            alert("进入的栏目为" + index);
+            this.$router.go('/nuo');
             return;
           }
           case 2:{
@@ -303,18 +335,23 @@ s<template>
           }
           case 3:{
             if (id>0){
-              this.$router.go(`/cao-detail/${id}`);
+              this.$router.go(`/cao-topic?ext_type=10&label_id=${id}`);
             } else {
-              this.$router.go('/cao?ext_type=10');
+              this.$router.go('/label?ext_type=10');
+//              this.$router.go('/cao?ext_type=10');
             }
             return;
           }
         }
+      },
+      goToCaoDetail(id){
+        this.$router.go(`/cao-detail/${id}`);
       }
     },
     components: {
       PulseLoader,
-      SquareSlider
+      SquareSlider,
+      noti
     },
     filters: {
       date
