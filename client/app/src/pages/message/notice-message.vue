@@ -1,20 +1,26 @@
 <template>
-    <div>
-<div>
-  <div class="notice-message">
-      <span class="notice-title">
-         <message-vip class="photo"></message-vip>
-        <!--加上span制造空隙-->
-        <span>{{item.title}}</span>
-        </span>
-    <span class="close" @click="back()"><i class="fa fa-close fa-lg"></i></span>
-  </div>
-    <div class="message-div">{{item.content}}</div>
-
-</div>
-    </div>
+      <div class="notice-message-bg">
+        <div class="notice-message">
+            <span class="notice-title">
+               <message-vip class="photo"></message-vip>
+              <!--加上span制造空隙-->
+              <span>{{notice.title}}</span>
+              </span>
+          <span class="close" @click="back()"><i class="fa fa-close fa-lg"></i></span>
+        </div>
+          <div class="message-div">{{notice.content}}</div>
+      </div>
 </template>
 <style scoped>
+.notice-message-bg {
+  position: absolute;;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:1;
+  background: #FAFAFA;
+}
   .notice-message{
     padding: 20px 20px 20px 20px;
     border-bottom: 1px solid rgba(213, 213, 213, .5);
@@ -50,7 +56,8 @@
   export default{
     methods:{
       back(){
-        window.history.back()
+        this.notice = null;
+        // window.history.back()
       }
     },
     data(){
@@ -58,6 +65,7 @@
       }
     },
     props: {
+      notice:Object,
       item: {
         type: Object
       },
