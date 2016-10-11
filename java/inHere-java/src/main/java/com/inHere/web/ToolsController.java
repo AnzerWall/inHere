@@ -27,7 +27,7 @@ public class ToolsController {
     private ToolsService toolsService;
 
     /**
-     * 获取工具列表
+     * 获取工具列表，TODO 添加返回参数
      */
     @Authorization
     @RequestMapping(path = "/tools", method = RequestMethod.GET)
@@ -42,5 +42,13 @@ public class ToolsController {
         result.setData(data);
         return result;
     }
+
+    /**
+     * TODO 添加工具
+     */
+
+    /**
+     * TODO 工具修改
+     */
 
 }

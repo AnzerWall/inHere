@@ -38,6 +38,11 @@ public class Field {
     // 成色
     public final static Map<Integer, String> Quality = new LinkedHashMap<>();
 
+    // 显示
+    public final static Integer Is_Show_No = 0;
+    // 隐藏
+    public final static Integer Is_Show_Yes = 1;
+
 
     /*-------------------栏目模块常量---------------------*/
 

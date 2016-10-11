@@ -3,6 +3,7 @@ package com.inHere.validator;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.dao.ActivityMapper;
 import com.inHere.dao.AskReplyMapper;
+import com.inHere.dao.CommentMapper;
 import com.inHere.dao.DemandMapper;
 import com.inHere.dto.CommentDto;
 import com.inHere.dto.ParamsListDto;
@@ -27,6 +28,9 @@ public class CommentValidator extends BaseValidator {
 
     @Autowired
     private AskReplyMapper askReplyMapper;
+
+    @Autowired
+    private CommentMapper commentMapper;
 
     /**
      * 获取评论列表参数校验
@@ -57,6 +61,7 @@ public class CommentValidator extends BaseValidator {
      * @param commentDto
      * @return
      */
+    //@Transactional
     public ReturnBaseDto<JSONObject> createComment(@RequestBody CommentDto commentDto) {
         // flag = true 时有错
         boolean flag = false;
@@ -75,6 +80,9 @@ public class CommentValidator extends BaseValidator {
         flag = this.isEmpty(content);
         flag = flag || this.isTooLong(content, 300);
         if (flag) return this.result("评论内容可能为空或字数超长");
+
+        // 设置emoji的支持编码
+        //commentMapper.setNamesUtf8mb4();
 
         return null;
     }

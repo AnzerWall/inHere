@@ -49,10 +49,18 @@ public class CommentController {
         return result;
     }
 
+    /**
+     * 评论
+     * TODO 信息队列, 提醒
+     *
+     * @param commentDto
+     * @param token
+     * @return
+     */
     @Authorization
     @Params(CommentValidator.class)
     @RequestMapping(path = "/comments", method = RequestMethod.POST)
-    public ReturnBaseDto<JSONObject> createComment(@RequestBody CommentDto commentDto, @CurrentToken Token token){
+    public ReturnBaseDto<JSONObject> createComment(@RequestBody CommentDto commentDto, @CurrentToken Token token) {
 
         // 创建一条评论
         commentService.createComment(commentDto, token);

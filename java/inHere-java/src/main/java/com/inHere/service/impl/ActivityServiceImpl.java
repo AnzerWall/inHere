@@ -9,19 +9,22 @@ import com.inHere.dao.AskReplyMapper;
 import com.inHere.dao.CommentMapper;
 import com.inHere.dao.LabelMapper;
 import com.inHere.dto.ParamsListDto;
-import com.inHere.entity.Activity;
-import com.inHere.entity.AskReply;
-import com.inHere.entity.Comment;
-import com.inHere.entity.Label;
+import com.inHere.entity.*;
 import com.inHere.service.ActivityService;
 import com.inHere.service.CommentService;
 import com.inHere.service.CommonService;
 import com.inHere.service.PraiseService;
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -81,23 +84,22 @@ public class ActivityServiceImpl implements ActivityService {
             JSONObject obj = new JSONObject();
             obj.put("id", tmp.getId());
             obj.put("ext_type", tmp.getExtType());
+            // 获取扩展数据
+            JSONObject ext_data = JSON.parseObject(tmp.getExtData());
+            Object place = ext_data.get("place");
 
             // 解析图片
             JSONArray photos = commonService.photoResolution(tmp.getCoverImg());
 
             obj.put("cover_img", photos.size() > 0 ? photos.get(0) : "");
             obj.put("title", tmp.getTitle());
-            obj.put("user_name", tmp.getUser().getUserName());
+            obj.put("user_name", ext_data.get("user_name") != null ? ext_data.get("user_name") : null);
             obj.put("start_time", tmp.getStartTime());
             obj.put("end_time", tmp.getEndTime());
             obj.put("praise", praiseService.getPraiseSize(tmp.getPraise()));
             obj.put("praised", praiseService.praised(tmp.getPraise(), params.getTokenEntity().getUser_id()));
 
-            // 获取扩展数据
-            JSONObject ext_data = JSON.parseObject(tmp.getExtData());
-            Object place = ext_data.get("place");
-
-            obj.put("place", place != null ? place.toString() : "");
+            obj.put("place", place != null ? place.toString() : null);
             obj.put("url_type", tmp.getUrlType());
 
             // url_type 为1时，内容返回空字符串
@@ -124,17 +126,15 @@ public class ActivityServiceImpl implements ActivityService {
         if (activity != null) {
             data.put("id", activity.getId());
             data.put("ext_type", activity.getExtType());
+            // 获取扩展数据
+            JSONObject ext_data = JSON.parseObject(activity.getExtData());
+
             // 解析图片
             JSONArray photos = commonService.photoResolution(activity.getCoverImg());
             data.put("cover_img", photos.size() > 0 ? photos.get(0) : null);
             data.put("title", activity.getTitle());
-            data.put("user_name", activity.getUser().getUserName());
-
-            // 获取扩展数据
-            JSONObject ext_data = JSON.parseObject(activity.getExtData());
-            Object place = ext_data.get("place");
-
-            data.put("place", place != null ? place.toString() : null);
+            data.put("user_name", ext_data.get("user_name") != null ? ext_data.get("user_name").toString() : null);
+            data.put("place", ext_data.get("place") != null ? ext_data.get("place").toString() : null);
             data.put("praise", praiseService.getPraiseSize(activity.getPraise()));
             data.put("praised", praiseService.praised(activity.getPraise(), params.getTokenEntity().getUser_id()));
             data.put("start_time", activity.getStartTime());
@@ -164,7 +164,9 @@ public class ActivityServiceImpl implements ActivityService {
         JSONArray photos = commonService.photoResolution(activity.getCoverImg());
         ac.put("cover_img", photos.size() > 0 ? photos.get(0) : null);
         ac.put("title", activity.getTitle());
-        ac.put("user_name", activity.getUser().getUserName());
+        // 获取扩展数据
+        JSONObject ext_data = JSON.parseObject(activity.getExtData());
+        ac.put("user_name", ext_data.get("user_name") != null ? ext_data.get("user_name").toString() : null);
         ac.put("start_time", activity.getStartTime());
         ac.put("end_time", activity.getEndTime());
 
@@ -224,6 +226,110 @@ public class ActivityServiceImpl implements ActivityService {
         data.put("ask_reply", ask_reply);
         data.put("teasing", teasing);
         return data;
+    }
+
+    /**
+     * 新建一个活动、广告
+     *
+     * @return
+     */
+    @Override
+    public boolean createActivity(MultipartHttpServletRequest multiRequest, Integer type) throws IOException {
+        Activity obj = this.newActivity(multiRequest, type);
+        activityMapper.insertSelective(obj);
+        return true;
+    }
+
+    /**
+     * 新建一个活动
+     *
+     * @return
+     */
+    public Activity newActivity(MultipartHttpServletRequest multiRequest, Integer type) throws IOException {
+        Activity obj = new Activity();
+
+        String title = multiRequest.getParameter("title");// 标题，不可为空
+        String place = multiRequest.getParameter("place");
+        String user_name = multiRequest.getParameter("user_name");// 组织名称, 不可为空
+        Long start_time = Long.parseLong(multiRequest.getParameter("start_time"));
+        Long end_time = Long.parseLong(multiRequest.getParameter("end_time"));
+        Integer url_type = Integer.parseInt(multiRequest.getParameter("url_type"));
+        String url_content = multiRequest.getParameter("url_content");
+
+        // 获取上传图片集合
+        List<MultipartFile> fileList = multiRequest.getFiles("file");
+        // 解析图片
+        JSONArray photos = commonService.resolverPhotos(fileList);
+
+        obj.setTitle(title);
+        obj.setExtType(type);
+        JSONObject ext_data = new JSONObject();
+        if (type.equals(Field.ExtType_Activity)) {
+            ext_data.put("place", place);
+        }
+        // 活动组织
+        ext_data.put("user_name", user_name);
+
+        obj.setExtDataJSON(ext_data);
+        obj.setCoverImg(photos.toJSONString());
+        obj.setStartTime(new Date(start_time));
+        obj.setEndTime(new Date(end_time));
+        obj.setUrlType(url_type);
+        obj.setUrlContent(url_content);
+        obj.setIs_show(Field.Is_Show_Yes);
+        // 发布用户
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getPrincipal();
+        obj.setUserId(user.getUserId());
+
+        return obj;
+    }
+
+    /**
+     * 关闭一条活动或广告
+     */
+    public void closeActivity(Integer id) {
+        activityMapper.closeActivity(id);
+    }
+
+    /**
+     * 更新一条活动
+     *
+     * @param multiRequest
+     * @throws IOException
+     */
+    @Transactional
+    @Override
+    public void updateActivity(MultipartHttpServletRequest multiRequest, Integer item_id) throws IOException {
+        String title = multiRequest.getParameter("title");
+        String place = multiRequest.getParameter("place");
+        String user_name = multiRequest.getParameter("user_name");
+        String start_time = multiRequest.getParameter("start_time");
+        String end_time = multiRequest.getParameter("end_time");
+
+        // 获取上传图片集合
+        List<MultipartFile> fileList = multiRequest.getFiles("file");
+        // 解析图片
+        JSONArray photos = commonService.resolverPhotos(fileList);
+
+        String url_content = multiRequest.getParameter("url_content");
+
+        Activity activity = new Activity();
+        activity.setTitle(title);
+
+        JSONObject obj = new JSONObject();
+        obj.put("place", place);
+        obj.put("user_name", user_name);
+        activity.setExtDataJSON(obj);
+        activity.setCoverImg(photos.size() > 0 ? photos.toJSONString() : null);
+        if (start_time != null)
+            activity.setStartTime(new Date(Long.parseLong(start_time)));
+        if (end_time != null)
+            activity.setEndTime(new Date(Long.parseLong(end_time)));
+        activity.setUrlContent(url_content);
+        activity.setId(item_id);
+
+        activityMapper.updateByPrimaryKeySelective(activity);
     }
 
 }

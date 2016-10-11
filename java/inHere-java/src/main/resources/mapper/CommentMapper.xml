@@ -23,6 +23,11 @@
 		praise
 	</sql>
 
+	<!--设置emoji的支持编码-->
+	<update id="setNamesUtf8mb4">
+		SET NAMES utf8mb4
+	</update>
+
 	<!-- 插入一条评论 -->
 	<insert id="insertComment">
 		INSERT INTO tb_comment SET

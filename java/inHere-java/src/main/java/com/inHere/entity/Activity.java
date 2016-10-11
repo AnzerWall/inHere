@@ -1,5 +1,7 @@
 package com.inHere.entity;
 
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -18,6 +20,9 @@ public class Activity {
 	private Date updateTime;
 	private String praise;
 	private String urlContent;
+	private Integer is_show;
+
+	private JSONObject extDataJSON;
 
 	private User user; // 发布者
 
@@ -131,6 +136,22 @@ public class Activity {
 
 	public void setUrlContent(String urlContent) {
 		this.urlContent = urlContent == null ? null : urlContent.trim();
+	}
+
+	public Integer getIs_show() {
+		return is_show;
+	}
+
+	public void setIs_show(Integer is_show) {
+		this.is_show = is_show;
+	}
+
+	public JSONObject getExtDataJSON() {
+		return extDataJSON;
+	}
+
+	public void setExtDataJSON(JSONObject extDataJSON) {
+		this.extDataJSON = extDataJSON;
 	}
 
 	@Override

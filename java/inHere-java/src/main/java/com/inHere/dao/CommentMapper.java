@@ -51,4 +51,9 @@ public interface CommentMapper {
      * @return
      */
     Integer praise(@Param("user_id") String user_id, @Param("id") Integer id);
+
+    /**
+     * 设置emoji的支持编码
+     */
+    void setNamesUtf8mb4();
 }

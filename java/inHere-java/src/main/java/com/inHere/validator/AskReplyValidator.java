@@ -87,9 +87,9 @@ public class AskReplyValidator extends BaseValidator {
         if (flag) return this.result("只能提交不超过4张图片，每张大小不能超过1M的哦~");
 
         flag = this.isEmpty(lab_name);
-        flag = flag || (lab_name.length() < 1 || lab_name.length() > 20);
+        flag = flag || (lab_name.length() < 1 || lab_name.length() > 50);
         if (flag) {
-            return this.result("标题参数有错哦~");
+            return this.result("标签参数有错哦~");
         }
 
         // 问答参数校验

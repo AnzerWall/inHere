@@ -62,8 +62,8 @@
         <property name="filterChainDefinitions">
             <value>
                 /admin/activity = login,role["post,get"]
-                /admin/util = login
-                /admin/notice = login,role
+                /admin/ad = login
+                /admin/activity/* = login
             </value>
         </property>
     </bean>
