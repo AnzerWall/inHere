@@ -44,7 +44,7 @@
               <div class="center-right" :style="{color:main_color}">¥{{data.ext_data.original_price}}</div>
             </div>
             <div class="center-all">
-              <div class="center-left">价格</div>
+              <div class="center-left">售价</div>
               <div class="center-right" :style="{color:main_color}">¥{{data.ext_data.price}}</div>
             </div>
             <div class="center-all" >

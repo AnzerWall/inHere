@@ -27,8 +27,6 @@ let post=function(request,content,id,ext_type,self){
         .then(function (data) {
           self.comments = data.items;
           self.total=data.total;
-
-
         })
     })
     .catch(function (e) {

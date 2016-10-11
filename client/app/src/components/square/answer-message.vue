@@ -10,7 +10,7 @@
           {{item.ext_data.best_reply.best_answer}}
         </div>
         <div class="message-bottom">
-          <div class="bottom-left">
+          <div class="bottom-left" @click="$router.go('/answer-detail/'+item.id)">
             <!--标签名-->
             <div class="identity" :style="{backgroundColor:color}">#{{item.label_name}}</div>
             <div class="dian">·</div>
@@ -18,9 +18,9 @@
             <div class="time" :style="{color:color}">{{item.create_time|fromNow}}</div>
           </div>
           <div class="bottom-right">
-            <div v-if="item.ext_data.comment_num!==0" class="bottom-have">
+            <div v-if="item.ext_data.comment_num!==0" class="bottom-have" >
               <!--评论数-->
-              <div class="comment">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment"></icon-comment-icon>
+              <div class="comment"@click="$router.go('/answer-detail/'+item.id)">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment" @click="$router.go('/answer-detail/'+item.id)"></icon-comment-icon>
               <!--点赞数-->
               <div class="like" :style="{color:message_color}">{{item.ext_data.praise}}</div><icon-like-icon @click="onclickpraise(item.ext_data,item.ext_data.best_reply.id)" :style="{fill:message_color}"></icon-like-icon>
             </div>

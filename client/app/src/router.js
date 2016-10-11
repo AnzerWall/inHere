@@ -44,6 +44,7 @@ import CaoOutPublish from 'pages/cao/out-publish.vue'
 import AskPublish from 'pages/cao/ask-publish.vue'
 
 import LoginPage from 'pages/login/login.vue'
+import Register from 'pages/register/register.vue'
 
 //import ChatTalk from 'pages/message/chat-talk.vue'
 //import NoticeMessage from 'pages/message/notice-message.vue'
@@ -188,5 +189,8 @@ export default{
   },
   '/ask-publish':{
     component: AskPublish
+  },
+  '/register':{
+    component:Register
   }
 }
