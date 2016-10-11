@@ -1,13 +1,13 @@
 <template>
     <div class="body">
       <photos-wipe v-ref:viewer></photos-wipe>
-      <div class="message">
-        <div class="top">
-          <div class="message-text" @click="onClick(item.id)">
+      <div class="message" >
+        <div class="top" @click="onClick(item.id)">
+          <div class="message-text" >
             {{item.ext_data.content}}
           </div>
         </div>
-        <div class="center hide-scroll">
+        <div class="center hide-scroll" @click="onClick(item.id)">
 
           <div class="image-wrapper " v-if="item.ext_data.photos&& item.ext_data.photos!=0"  >
             <img class="image" v-for="photo in item.ext_data.photos" v-lazy="photo.src" @click.stop="onClickImage($index)">
@@ -17,13 +17,13 @@
         </div>
 
         <div class="bottom">
-          <div class="left">
+          <div class="left" @click="onClick(item.id)">
               <div class="identity" :style="{backgroundColor:main_color}">#{{item.label_name}}</div>
             <div class="dian">·</div>
             <div class="time" :style="{color:main_color}">{{item.create_time|fromNow}}</div>
           </div>
           <div class="right">
-            <div class="comment">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment"></icon-comment-icon>
+            <div class="comment" @click="onClick(item.id)">{{item.ext_data.comment_num}}</div><icon-comment-icon class="icon-comment" @click="onClick(item.id)"></icon-comment-icon>
             <div class="like" :style="{color:message_color}">{{item.ext_data.praise}}</div><icon-like-icon @click="onclickpraise(item.ext_data,item.id,item.ext_type)" :style="{fill:message_color}"></icon-like-icon>
           </div>
         </div>

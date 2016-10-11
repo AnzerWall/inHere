@@ -1,28 +1,36 @@
 <template>
   <div class="main">
+    <noti v-ref:noti></noti>
+
     <div class="body" v-if="!$loadingRouteData">
 
       <!--校内-->
-      <div class="school" v-if="$route.query.ext_type==='10'" >
+      <div class="school" v-if="$route.query.ext_type==='10'">
         <div class="header" >
           <div class="cao-top" >
             <div class="left" @click="$router.go('/main/square')"><span>《 有槽必吐</span></div>
             <div class="right">
               <div class="in">校内</div>
-              <div class="out" @click="$router.go('/cao?ext_type=11')"  >校外</div>
+              <div class="out" @click="$router.go('/cao?ext_type=11')&&clean(this.labels,this.items)">校外</div>
             </div>
           </div>
           <div class="space"></div>
-          <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color">
+          <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color" v-if="data">
 
           </classify>
 
 
         </div>
 
+
         <div class="message">
           <message v-for="item in items" :item.sync="item"  :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise" >
           </message>
+          <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+          </infinite-loading>
         </div>
 
         <!--&lt;!&ndash;<div @click="$router.go('/cao?type=school&tag=1')"> 小道消息</div>&ndash;&gt;-->
@@ -39,21 +47,28 @@
           <div class="cao-top" >
             <div class="left" @click="$router.go('/main/square')">《 有槽必吐</div>
             <div class="right">
-              <div class="in1" @click="$router.go('/cao?ext_type=10')" >校内</div>
+              <div class="in1" @click="$router.go('/cao?ext_type=10')&&clean(this.labels,this.items)" >校内</div>
               <div class="out1" >校外</div>
             </div>
           </div>
           <div class="space1"></div>
-          <slider :topics="labels" class="classify"  :square_type="4" v-on:go-to-the-topic='goToTopic'>
+          <slider :topics="labels" class="classify"  :square_type="4" v-on:go-to-the-topic='goToTopic' v-if="data">
 
           </slider>
 
 
         </div>
+        <!--加载失败图标组件-->
+        <fail v-ref:noti class="cao-fail"></fail>
 
         <div class="message">
           <message v-for="item in items" :item.sync="item" :main_color="main_color"  @on-click="onClick" @onclickpraise="onclickpraise">
           </message>
+          <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+          </infinite-loading>
       </div>
         </div>
       <div class="foot" @click="goToPublish">
@@ -72,10 +87,7 @@
 
 </template>
 <style scoped>
-  .main{
 
-
-  }
   .body{
     font-size: 16px;
     position: relative;
@@ -136,6 +148,7 @@
   }
   .message{
     width: 100%;
+    margin-bottom: 50px;
   }
   .cao-loading-area {
     display: flex;
@@ -157,6 +170,10 @@
     margin: 15px 20px;
     width: 100%;
   }
+  .cao-fail{
+    margin-top: 300px ;
+  }
+
 
 
 </style>
@@ -167,6 +184,9 @@
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import InfiniteLoading from 'vue-infinite-loading';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
 
 
     export default{
@@ -180,122 +200,18 @@
             }
           ],
           items:[],
-          ext_data:{}
-
-
-
-//
-//            topic:[
-//              {id: 11,title:"小道消息"},
-//              {id: 11,title:"老师"},
-//              {id: 11,title:"宿舍"},
-//              {id: 11,title:"官方消息"},
-//              {id: 11,title:"说说那些情"},
-//              {id: 11,title:"更多"}
-//            ],
-//
-//
-//              item:[
-//                {id: 11,title:"你们饭堂有什么奇葩菜"},
-//                {id: 11,title:"啥地方了撒娇噶是家里发生的了"},
-//                {id: 11,title:"士大夫撒个垃圾死了"},
-//                {id: 11,title:"是否撒娇过拉丝家乐福"},
-//                {id: 11,title:"说说那些情大沙发"},
-//                {id: 11,title:"更多"}
-//                ],
-//
-//
-//
-//          items:[{
-//            content:'这个实训的老师太垃圾了啊啊啊啊啊啊啊啊啊啊啊啊',
-//            identity:'老师',
-//            time:'15分钟前',
-//            comment:'333',
-//            like:'231',
-//            images: [
-//              {
-//
-//                src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                w: 360,
-//                h: 480
-//
-//              },
-//              {
-//                src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
-//                w: 690,
-//                h: 920
-//              },
-//              {
-//                src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
-//                w: 360,
-//                h: 480
-//              },
-//              {
-//                src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                w: 360,
-//                h: 480
-//
-//              },
-//
-//            ]
-//
-//
-//
-//          },
-//            {
-//              content:'这个实训的老师太垃圾了啊啊啊啊啊啊啊啊啊啊啊啊',
-//              identity:'老师',
-//              time:'15分钟前',
-//              comment:'333',
-//              like:'231',
-//
-//            },
-//            {
-//              content:'这个实训的老师太垃圾了啊啊啊啊啊啊啊啊啊啊啊啊',
-//              identity:'老师',
-//              time:'15分钟前',
-//              comment:'333',
-//              like:'231',
-//              images: [
-//                {
-//
-//                  src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                  w: 360,
-//                  h: 480
-//
-//                },
-//                {
-//                  src: 'http://ww1.sinaimg.cn/mw690/e910bd00jw1f7c1ndknjwj20qo0zktat.jpg',
-//                  w: 690,
-//                  h: 920
-//                },
-//                {
-//                  src: 'http://ww3.sinaimg.cn/mw690/e910bd00jw1f7c3j00tqij20qo0zkjts.jpg',
-//                  w: 360,
-//                  h: 480
-//                },
-//                {
-//                  src: 'http://ww4.sinaimg.cn/mw690/e910bd00jw1f7c80cfvyoj20qo0zk75i.jpg',
-//                  w: 360,
-//                  h: 480
-//
-//                },
-//
-//              ]
-//
-//
-//
-//            },
-//          ]
+          ext_data:{},
+          data:null
         }
       },
       components: {
         Message,
         Classify,
         Slider,
-        PulseLoader
-
-
+        PulseLoader,
+        InfiniteLoading,
+        Noti,
+        Fail
       },
       vuex: {
 
@@ -308,6 +224,33 @@
         }
       },
       methods:{
+        onLoadMore(){
+          console.log('more');
+          var token = this.token;
+          var id=this.$route.params.id;
+          this.$request
+            .get(`${this.$api.url_base}/ask_reply`)
+            .query({token: token})
+            .query({offset:( this.data.offset||0) + 5, limit: 5})
+            .query({ext_type: this.$route.query.ext_type})
+            .then(this.$api.checkResult)
+            .then((data)=> {
+              //通知组件加载完毕
+              console.log(data);
+              this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+              this.items = this.items.concat(data.list.items);
+              this.data.offset = data.list.offset;
+              this.data.total = data.list.total;
+//            //判断是否已经不能加载到更多的数据
+              if (this.data.offset >= this.data.total) {
+                this.$broadcast('$InfiniteLoading:complete');
+              }
+            })
+            .catch(function (e) {
+              console.log(e);
+            })
+        },
           goToPublish(){
             if (this.$route.query.ext_type == 10){
               this.$router.go('/cao-publish/in');
@@ -337,7 +280,6 @@
             }
 
           }
-
         },
         onClick(id){
           this.$router.go('/cao-detail/'+id);
@@ -345,6 +287,10 @@
         onclickpraise(ext_data,id,ext_type){
           return praise.praise(ext_data, id, ext_type, this);
         },
+//        clean(labels,items){
+//          return labels==[]&&items==[];
+//
+//        }
       },
       computed:{
         main_color(){
@@ -359,24 +305,41 @@
 
           var self=this;
 
-          let url=`${this.$api.url_base}/ask_reply/`
+          let url=`${this.$api.url_base}/ask_reply`
           return this.$request
             .get(url)
             .query({ext_type:this.$route.query.ext_type})
             .query({token:this.token})
             .then(this.$api.checkResult)
             .then(function(data){
+              self.data=data;
               self.labels=data.labels;
               self.items=data.list.items;
-              self.code=data.code;
               self.labels.push({
                 id:0,
                 name:"更多"
               });
-
-
-
-
+            })
+            .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(self.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
             })
         },
       },

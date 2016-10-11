@@ -1,53 +1,57 @@
 <template>
-  <div v-if="!$loadingRouteData">
-    <!--点击图片放大组件-->
-    <photos-wipe v-ref:viewer></photos-wipe>
-    <div class="cao-detail">
-      <div class="cao-detail-head">
-        <div class="head-top">
-          <div class="head-top-left"><span @click="back">《 有槽必吐</span></div>
-          <div class="head-top-right"><menu-icon></menu-icon></div>
-        </div>
-        <div class="head-label">
-          <div class="head-label-top">
-            <!--标签名-->
-            <div class="label-top-name">#{{data.label_name}}</div>
-            <div class="label-top-dian">·</div>
-            <!--发表时间-->
-            <div class="label-top-time">{{data.create_time|fromNow}}</div>
+  <div>
+    <noti v-ref:noti></noti>
+    <div v-if="!$loadingRouteData">
+      <!--点击图片放大组件-->
+      <photos-wipe v-ref:viewer></photos-wipe>
+      <div class="cao-detail">
+        <div class="cao-detail-head">
+          <div class="head-top">
+            <div class="head-top-left"><span @click="back">《 有槽必吐</span></div>
+            <div class="head-top-right"><menu-icon></menu-icon></div>
           </div>
-          <div class="head-label-bottom">
-            <!--标签内容-->
-            {{ext_data.content}}
-          </div>
-          <!--图片-->
-          <div class="head-image hide-scroll">
-            <div class="image-wrapper " v-if="images&& images.length!=0"  >
-              <img class="image" v-for="image in images" v-lazy="image.src" @click.stop="onClickImage($index)">
+          <div class="head-label" v-if="data">
+            <div class="head-label-top">
+              <!--标签名-->
+              <div class="label-top-name">#{{data.label_name}}</div>
+              <div class="label-top-dian">·</div>
+              <!--发表时间-->
+              <div class="label-top-time">{{data.create_time|fromNow}}</div>
             </div>
-            <div class="image-space" v-if="images&& images.length!=0"></div>
+            <div class="head-label-bottom">
+              <!--标签内容-->
+              {{ext_data.content}}
+            </div>
+            <!--图片-->
+            <div class="head-image hide-scroll">
+              <div class="image-wrapper " v-if="images&& images.length!=0"  >
+                <img class="image" v-for="image in images" v-lazy="image.src" @click.stop="onClickImage($index)">
+              </div>
+              <div class="image-space" v-if="images&& images.length!=0"></div>
+            </div>
+
           </div>
-
+          <!--加载失败图标组件-->
+          <fail v-ref:noti class="cao-detail-fail" v-if="!data"></fail>
         </div>
+        <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
 
-      </div>
-      <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
-        <!--评论组件-->
-        <comment v-for="comment in comments" :list="comment" :number="number" :user_id="user_id" :main_color="main_color" @onclickpraise="onclickpraise"></comment>
-        <!--加载更多组件-->
-        <infinite-loading :on-infinite="onLoadMore">
+          <!--评论组件-->
+          <comment v-for="comment in comments" :list="comment" :number="number" :user_id="user_id" :main_color="main_color" @onclickpraise="onclickpraise"></comment>
+          <!--加载更多组件-->
+          <infinite-loading :on-infinite="onLoadMore">
         <span slot="no-more">
           没有更多了...
         </span>
-        </infinite-loading>
-      </div>
-      <div class="cao-detail-foot">
-        <!--输入框组件-->
-        <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
-        <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
+          </infinite-loading>
+        </div>
+        <div class="cao-detail-foot">
+          <!--输入框组件-->
+          <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+          <!--<input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">-->
+        </div>
       </div>
     </div>
-
   </div>
   <!--圆点过度-->
   <div v-if="$loadingRouteData" class="cao-detail-loading-area">
@@ -180,6 +184,9 @@
     /*padding: 10px 0px 10px 20px;*/
     border-top: solid 1px #cccccc;
   }
+  .cao-detail-fail{
+    margin-top: 300px;
+  }
 
 </style>
 <script type="text/ecmascript-6">
@@ -193,11 +200,13 @@
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
   import InfiniteLoading from 'vue-infinite-loading';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
 
     export default{
         data(){
           return{
-            data:{},
+            data:null,
             number:1,
             user_id:"",
             ext_data:{},
@@ -237,6 +246,27 @@
               this.user_id=data.user_id;
               this.ext_type=data.ext_type;
               }))
+            .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
         }
       },
         components: {
@@ -246,6 +276,8 @@
           PulseLoader,
           AutoTextarea,
           InfiniteLoading,
+          Noti,
+          Fail
         },
       filters:{
         fromNow

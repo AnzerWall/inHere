@@ -2,8 +2,9 @@
       <div v-if="$loadingRouteData" class="answer-loading-area">
         <pulse-loader color="rgb(38, 162, 255)" size="12px"></pulse-loader>
       </div>
-  <div class="response"v-if="!$loadingRouteData">
-      <div class="answer">
+  <div class="response">
+    <noti v-ref:noti></noti>
+      <div class="answer" v-if="!$loadingRouteData">
 
         <!--头部-->
         <div class="answer-head">
@@ -18,15 +19,22 @@
             </div>
           </div>
 
-          <classify :lists="labels" class="classify" :color="color" @filter-label="filterLabel">
+          <classify :lists="labels" class="classify" :color="color" @filter-label="filterLabel" v-if="data">
           </classify>
 
         </div>
+        <!--加载失败图标组件-->
+        <fail v-ref:noti class="answer-fail" v-if="!data"></fail>
         <!--中部-->
         <div class="answer-center">
 
-            <answer-message v-for="item in items" :item="item" :color="color" @onclickpraise="onclickpraise"></answer-message>
-
+          <answer-message v-for="item in items" :item="item" :color="color" @onclickpraise="onclickpraise">
+          </answer-message>
+          <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+          </infinite-loading>
 
         </div>
       </div>
@@ -87,6 +95,9 @@
     justify-content: center;;
     margin-top: 200px;
   }
+  .answer-fail{
+    margin-top: 300px;
+  }
 
 
 </style>
@@ -98,12 +109,16 @@
   import praise from '../../util/praise.js';
   import AnswerMessage from '../../components/square/answer-message.vue';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import InfiniteLoading from 'vue-infinite-loading';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
 
 
 
     export default{
       data(){
         return {
+          data:null,
           labels: [
 
             {
@@ -122,7 +137,10 @@
         Classify,
 
         PulseLoader,
-        AnswerMessage
+        AnswerMessage,
+        InfiniteLoading,
+        Noti,
+        Fail
 
 
       },
@@ -143,13 +161,34 @@
             .then(this.$api.checkResult)
             .then(function (data) {
               console.info(data)
-              self.ext_type = data.list.items.ext_type;
+              self.data=data;
               self.labels = data.labels;
               self.items = data.list.items;
               self.labels.push({
                 id:0,
                 name:"更多"
               })
+            })
+            .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(self.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
             })
         }
       },
@@ -168,7 +207,33 @@
           onclickpraise(ext_data,id){
             console.log(id);
             return praise.praise(ext_data,id,null,this);
-          }
+          },
+          onLoadMore(){
+            console.log('more');
+            var token = this.token;
+            this.$request
+              .get(`${this.$api.url_base}/ask_reply`)
+              .query({token: token})
+              .query({offset:( this.data.offset||0) + 5, limit: 5})
+              .query({ext_type: 12})
+              .then(this.$api.checkResult)
+              .then((data)=> {
+                //通知组件加载完毕
+                console.log(data);
+                this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+                this.items = this.items.concat(data.list.items);
+                this.data.offset = data.list.offset;
+                this.data.total = data.list.total;
+//            //判断是否已经不能加载到更多的数据
+                if (this.data.offset >= this.data.total) {
+                  this.$broadcast('$InfiniteLoading:complete');
+                }
+              })
+              .catch(function (e) {
+                console.log(e);
+              })
+          },
         },
       vuex: {
         actions: {

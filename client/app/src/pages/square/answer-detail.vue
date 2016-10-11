@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <noti v-ref:noti></noti>
+  <div v-if="!$loadingRouteData">
     <!--图片放大插件-->
     <photos-wipe v-ref:viewer></photos-wipe>
     <!--头部-->
@@ -8,7 +9,7 @@
         <div class="ard-left"><span @click="back">《&nbsp有问必答</span></div>
         <menu class="ard-right"></menu>
       </div>
-      <div class="ard-head">
+      <div class="ard-head" v-if="data">
         <div class="ard-ask">
           <div class="ard-tt">
             <div class="ard-tag hide">#{{data.label_name}}</div>
@@ -29,6 +30,8 @@
 
       </div>
     </div>
+    <!--加载失败图标组件-->
+    <fail v-ref:noti class="answer-detail-fail" v-if="!data"></fail>
     <!--评论组件-->
     <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}">
       <comment v-for="comment in comments" :list="comment" :main_color="main_color" :user_id="user_id" :number="number" @onclickpraise="onclickpraise"></comment>
@@ -231,6 +234,9 @@
     /*padding: 10px 0px 10px 20px;*/
     border-top: solid 1px #cccccc;
   }
+  .answer-detail-fail{
+    margin-top: 0px;
+  }
 </style>
 <script type="text/ecmascript-6">
   import Menu from 'svg/common/Menu.vue'
@@ -243,6 +249,8 @@
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
   import InfiniteLoading from 'vue-infinite-loading';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
   export default{
     filters: {
       fromNow
@@ -277,13 +285,34 @@
 
             }
           })
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              console.log(this.$refs.noti);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
+          })
       }
     },
     data(){
       return {
         comments: [],
         user_id:'',
-        data:{},
+        data:null,
         number:1,
         ext_data:[],
         photos:[],
@@ -300,6 +329,8 @@
       PhotosWipe,
       AutoTextarea,
       InfiniteLoading,
+      Noti,
+      Fail
     },
     computed: {
       main_color: function () {
@@ -340,7 +371,7 @@
         this.data.offset = data.offset;
         this.data.total = data.total;
 //            //判断是否已经不能加载到更多的数据
-        if (this.data.offset >= this.data.total) {
+        if (this.data.offset >=this.data.total) {
           this.$broadcast('$InfiniteLoading:complete');
         }
       })
