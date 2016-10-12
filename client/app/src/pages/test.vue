@@ -2,6 +2,7 @@
     <div class="test">
         <div @click="clickTag()">{{tag || '选择标签'}}</div>
         <button @click="showChangePassword()">修改密码</button>
+        <button @click="showMenu()">弹出菜单</button>
         <br>
         <button @click="showNoti('alert')">alert</button>
         <button @click="showNoti('confirm')">confirm</button>
@@ -11,11 +12,13 @@
         <noti v-ref:noti></noti>
         <!-- <fail text="玲玉不让你看"></fail> -->
         <change-password v-ref:changepassword></change-password>
+        <menu v-ref:menu></menu>
     </div>
 </template>
 <script>
 import fail from '../components/fail.vue'
 import tagEditor from '../components/publish/publish-tag-editor.vue'
+import menu from '../components/menu.vue'
 import noti from '../components/noti.vue'
 import changePassword from '../components/change-password.vue'
 module.exports = {
@@ -23,9 +26,33 @@ module.exports = {
         tagEditor,
         noti,
         fail,
-        changePassword
+        changePassword,
+        menu
     },
     methods: {
+        showMenu(){
+            this.$refs.menu.show({
+                btns:[{
+                    title:'按钮1',
+                    event:function(){
+                        console.log('event1')
+                        return true;
+                    }
+                },{
+                    title:'按钮2',
+                    event:function(){
+                        console.log('event2')
+                        return false;
+                    }
+                },{
+                    title:'按钮3',
+                    event:function(){
+                        console.log('event3')
+                        return true;
+                    }
+                }]
+            })
+        },
         showChangePassword() {
             this.$refs.changepassword.show({
                 validator(oldPwd, newPwd1, newPwd2) {
