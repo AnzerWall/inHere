@@ -123,6 +123,7 @@
       <!--<textarea class="detail-textarea" placeholder="世界不如人意,人生如此艰难" v-model="content" @keyup.enter="submit(this.$request,this.content,this.data.id,this.ext_type)"></textarea>-->
     </div>
 
+    <menu v-ref:menu></menu>
 
   </div>
   <!--加载动画组件：小圆点-->
@@ -240,6 +241,7 @@
   import InfiniteLoading from 'vue-infinite-loading';
   import Noti from 'components/noti.vue';
   import Fail from 'components/fail.vue';
+  import Menu from '../../components/menu.vue'
 
 
   export default{
@@ -253,7 +255,8 @@
       AutoTextarea,
       InfiniteLoading,
       Noti,
-      Fail
+      Fail,
+      Menu
     },
 
 
@@ -265,6 +268,17 @@
           module_type:this.ext_type,
           module_id:id
         }});
+      },
+      clickMenu(){
+        this.$refs.menu.show({
+          btns:[{
+            title:'结束',
+            event(){
+              alert('结束');
+              return true;
+            }
+          }]
+        })
       },
       onLoadMore(){
         console.log('more');

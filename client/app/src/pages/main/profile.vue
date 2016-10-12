@@ -6,12 +6,12 @@
         <div class="text">
           {{user_id}} / {{school}}
         </div>
-        <div class="icon"><menu-icon style="fill:#ccc"></menu-icon></div>
+        <div class="icon" @click="clickMenu()"><menu-icon style="fill:#ccc"></menu-icon></div>
       </div>
     </div>
     <div class="profile-content">
       <div class="profile-tools-inner" :style="{'width': grid_field_width}">
-        <div class="grid"  v-for="item in tool_list" :style="{'background-image': 'url('+ item.svg.src+')',width:grid_width,height:grid_width}" >
+        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.icon+')',width:grid_width,height:grid_width}" @click="clickTool(item)">
             <div class="title" :style="{color:item.color}">{{item.title}}</div>
         </div>
 
@@ -20,6 +20,7 @@
 
       </div>
     </div>
+    <menu v-ref:menu></menu>
   </div>
 </template>
 <style scoped>
@@ -119,9 +120,12 @@
   import {token,login_state,is_login,school,user_id,tool_list} from '../../vuex/getters.js'
   import {fetchToolList} from '../../vuex/actions/tool-action.js'
   import MenuIcon from 'svg/common/Menu.vue'
+
+  import menu from '../../components/menu.vue'
+
   export default{
     components:{
-      MenuIcon
+      MenuIcon,menu
     },
     vuex: {
       actions: {
@@ -143,42 +147,42 @@
        grid_width:this.getGridWidth(),
 //       username:"小泽",
 //       school:"肇庆学院",
-//       tools:[{
-//         url:"",
-//         icon:"/static/image/profile/Fankajilu.svg",
-//         title:"饭卡记录",
-//         color:"#FF3A3A"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/Kuaidichaxun.svg",
-//         title:"快递查询",
-//         color:"#16A82E"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/Qimochengji.svg",
-//         title:"期末成绩",
-//         color:"#4F8794"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/Shuifeichaxun.svg",
-//         title:"水费查询",
-//         color:"#0098FF"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/siliujichengji.svg",
-//         title:"四六级成绩",
-//         color:"#FFA600"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/Wodehuida.svg",
-//         title:"我的回答",
-//         color:"#09CE88"
-//       },{
-//         url:"",
-//         icon:"/static/image/profile/Wodemubiao.svg",
-//         title:"我的目标",
-//         color:"#7300FF"
-//       }]
+       tools:[{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Fankajilu.svg",
+         title:"饭卡记录",
+         color:"#FF3A3A"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Kuaidichaxun.svg",
+         title:"快递查询",
+         color:"#16A82E"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Qimochengji.svg",
+         title:"期末成绩",
+         color:"#4F8794"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Shuifeichaxun.svg",
+         title:"水费查询",
+         color:"#0098FF"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/siliujichengji.svg",
+         title:"四六级成绩",
+         color:"#FFA600"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Wodehuida.svg",
+         title:"我的回答",
+         color:"#09CE88"
+       },{
+         url:"http://m.kuaidi100.com/",
+         icon:"/static/image/profile/Wodemubiao.svg",
+         title:"我的目标",
+         color:"#7300FF"
+       }]
      }
     },
     ready(){
@@ -189,6 +193,33 @@
       }
     },
     methods:{
+      clickMenu(){
+        this.$refs.menu.show({
+          title:'菜单',
+          btns:[{
+            title:'关于',
+            event(){
+              alert('关于');
+              return true;
+            }
+          },{
+            title:'登出',
+            event(){
+              alert('登出');
+              return true;
+            }
+          }]
+        })
+      },
+      clickTool(item){
+        this.$router.go({
+          path:'/tool',
+          query:{
+            title:item.title,
+            url:item.url
+          }
+        })
+      },
       getGridFieldWidth(){
             let body_width=document.body.clientWidth;
             let num=Math.floor(body_width/122);

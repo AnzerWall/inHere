@@ -1,6 +1,8 @@
 <template>
-  <div class="details">
+  <!--模板详情页-->
+  <div class="details" v-if="url_type==1">
     <div class="head" :style="{'background-image': 'url('+cover_img.src+')'}">
+      <div class="dark"></div>
       <div class="content">
         <div class="back" @click="back()">《</div>
         <div class="title">{{data.title}}</div>
@@ -18,20 +20,32 @@
       </div>
     </div>
     <!--正文内容-->
-    <div class="d-content">
-      <iframe v-el:myiframe scrolling="no" frameborder="0" @load="changeFrameHeight()" width="100%"
-              v-bind:src="data.content"></iframe>
-    </div>
+
     <!--评论组件-->
-    <div class="a-r-length">
+    <div class="a-r-length" v-if="!$loadingRouteData" >
       <div class="a-r-star">*</div>
-      {{lists.length}}条评论
+      {{total}}条评论
     </div>
     <div class="activity-reply">
 
-      <comment :comments="lists" :main_color="main_color" :user_id="user_id" :number="number"></comment>
+      <comment v-for="list in comments" :list="list" :main_color="main_color" :user_id="user_id" :number="number"></comment>
+    </div>
+    <!--输入组件-->
+    <div class="detail-foot" v-if="data">
+      <auto-textarea :height.sync="bottomHeight" :placeholder="placeholder" :value.sync="content" @enter="submit(this.$request,content,this.data.id,this.ext_type)" ></auto-textarea>
+
+      <!--<textarea class="detail-textarea" placeholder="世界不如人意,人生如此艰难" v-model="content" @keyup.enter="submit(this.$request,this.content,this.data.id,this.ext_type)"></textarea>-->
     </div>
   </div>
+
+
+  <!--url详情页-->
+  <div v-if="url_type==0" class="url_style">
+    <div class="activity-head"><span class="activity-title" @click="back()">《 {{title}}</span></div>
+      <iframe v-el:myiframe scrolling="yes" frameborder="0" height="100%" width="100%"
+              v-bind:src="url_content"></iframe>
+  </div>
+
 </template>
 <style scoped>
 
@@ -44,6 +58,20 @@
     background-size: cover;
     background-position: center;
   }
+
+  .head .dark {
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    background: rgba(0,0,0,.2);
+  }
+
+  .head .content {
+    position: relative;
+  }
+
 
   .back {
     margin-left: 7px;
@@ -108,9 +136,57 @@
     margin-left: 2px;
   }
 
-  .d-content {
-    padding: 20px 0 20px 0;
+  .detail-foot{
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 1;
+    width: 100%;
+    border-top: solid 1px #cccccc;
+    /*padding: 10px 0px 10px 20px;*/
   }
+  .url_style {
+    /*padding: 20px 0 20px 0;*/
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    display: flex;
+    flex-direction: column;
+  }
+  /*.url_style .d_content {*/
+    /*flex:1;*/
+    /*display:flex;*/
+  /*}*/
+  .url_style .activity-head{
+    flex:none;
+  }
+
+  /*.url_style .d_content iframe {*/
+    /*flex:1;*/
+  /*}*/
+
+
+
+  .activity-head {
+    padding: 0;
+    margin: 0;
+    background-color: white;
+    width: 100%;
+    height: 60px;
+    /*position: fixed;*/
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    border-bottom: solid 1px rgba(213, 213, 213, .5);
+    z-index: 200;
+  }
+
+  .activity-title {
+    font-weight: bold;
+  }
+
 
   .activity-reply {
     padding: 20px 0 20px 0;
@@ -141,6 +217,9 @@
   import Comment from '../../components/comment/comment.vue'
   import IconLike from 'svg/common/comment/IconLike.vue'
   import {fromNow} from 'filter/time.js';
+  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import post from '../../util/comment_post.js';
+  import AutoTextarea from '../../components/auto-textarea/auto-textarea.vue';
   export default{
     filters: {
       fromNow
@@ -149,28 +228,48 @@
       back(){
         window.history.back()
       },
-      changeFrameHeight(){
-        this.$els.myiframe.height = document.documentElement.clientHeight;
+      submit(request,content,id,ext_type){
+        console.log(content);
+        return post.post(request,content,id,ext_type,this);
       }
-
     },
-//    评论组件数据请求
+    vuex: {
+      getters: {
+        login_state,
+        token,
+        is_login,
+        school,
+        user_id
+      }
+    },
     route: {
       data(){
         var id = this.$route.params.id;
-        var token = "19e7aae2d81da63d62cfa36eb69706069e7a97bb61c8901782d8c1d98765ea94";
-        return this.$request
-          .get('http://115.28.67.181:8080/activity/' + id)
-          .query({token: token})
-          .then(this.$api.checkResult)
-          .then(function (data) {
-            return {
-              data: data,
-              lists: data.comment.items,
-              user_id: data.user_id,
-              cover_img: data.cover_img
-            }
-          })
+        let url=`${this.$api.url_base}/activity/`+id;
+        this.url_type = this.$route.query.url_type;
+        this.url_content = this.$route.query.url_content;
+        this.title = this.$route.query.title;
+        console.log(this.$route.query);
+        if(this.url_type)
+          return this.$request
+            .get(url)
+            .query({token: this.token})
+            .then(this.$api.checkResult)
+            .then(function (data) {
+              return {
+                data: data,
+                id:data.id,
+                comments: data.comment.items,
+                user_id: data.user_id,
+                cover_img: data.cover_img,
+                ext_type:data.ext_type,
+                total:data.comment.total
+              }
+            })
+        else {
+//          this.url_content = this.$route.query.url_content;
+//          console.log(this.$route.query)
+        }
       }
     },
     data(){
@@ -179,18 +278,26 @@
         user_id: '',
         data: {},
         number: 1,
-        cover_img: []
+        cover_img: [],
+        url_content:'',
+        url_type:1,
+        title:'',
+        content: "",
+        placeholder:"世界不如人意,人生如此艰难",
+        bottomHeight:0
       }
     },
     components: {
       IconLike,
-      Comment
+      Comment,
+      AutoTextarea
     },
     computed: {
       main_color: function () {
         return "#03b719"
       }
     }
+
   }
 
 </script>

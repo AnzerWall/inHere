@@ -1,7 +1,9 @@
 <template lang="jade">
 .menu-bg(v-show="mshow",transition="fade",@click.self="hide()")
     .menu(v-show="mshow",transition="fade-down")
-        .menu-title {{title}}
+        .menu-header
+            .menu-title(:style="{opacity:0.5}") {{title}}
+            svg-close.menu-close(@click="hide()")
         .menu-item(v-for="item in data",@click="clickMenu(item)") {{item.title}}
 </template>
 
@@ -20,7 +22,11 @@
     }]
 }
 */
+import svgClose from '../svg/common/Close.vue'
 module.exports = {
+    components:{
+        svgClose
+    },
     data(){
         return {
             title:'',
@@ -35,7 +41,7 @@ module.exports = {
         },
         show(config){
             config = config || {};
-            config.title = config.title || ' ';
+            config.title = config.title || '';
             config.btns = config.btns || [];
             this.title = config.title;
             this.data = config.btns;
@@ -74,14 +80,22 @@ module.exports = {
     right: 0;
     background: rgba(0, 0, 0, 0.2);
     text-align: center;
+    z-index: 8000;
     .menu {
-        z-index: 8000;
         background: white;
         color: black;
         display: flex;
         flex-direction: column;
-        .menu-title {
+        .menu-header {
             padding: 22px;
+            display: flex;
+            .menu-title {
+                text-align: left;
+                flex:1;
+            }
+            .menu-close {
+
+            }
         }
         .menu-item {
             margin: 4px 4px;
