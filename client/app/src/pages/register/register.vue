@@ -150,7 +150,7 @@
         var school_id = this.id;
         var self = this;
         if (user_id == ''){
-          self.$refs.noti.warning("请填写用户名",{
+          self.$refs.noti.warning("请填写用户名~",{
             timeout:2000
           });
           return 1;
