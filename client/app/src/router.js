@@ -43,6 +43,8 @@ import CaoInPublish from 'pages/cao/in-publish.vue'
 import CaoOutPublish from 'pages/cao/out-publish.vue'
 import AskPublish from 'pages/cao/ask-publish.vue'
 
+import Tool from 'pages/profile/tool.vue'
+
 import LoginPage from 'pages/login/login.vue'
 import Register from 'pages/register/register.vue'
 
@@ -167,6 +169,9 @@ export default{
   },
   '/label':{
     component:Label
+  },
+  '/tool':{
+    component:Tool
   },
   '/answer-detail/:id':{
     component:AnswerDetail

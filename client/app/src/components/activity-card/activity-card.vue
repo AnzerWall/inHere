@@ -77,52 +77,66 @@ border-radius: 4px;
   }
 </style>
 <script type="text/ecmascript-6">
-  import {fromNow} from 'filter/time.js';
+import {
+    fromNow
+} from 'filter/time.js';
 import IconLike from 'svg/common/comment/IconLike.vue'
-    export default{
-      filters:{
+export default {
+    filters: {
         fromNow
-      },
-        data(){
-            return{
+    },
+    data() {
+        return {
 
+        }
+    },
+    methods: {
+        clickCard(item) {
+            if (item.url_type) {
+                this.$router.go({
+                    path: '/activity/' + item.id,
+                    query: {
+                        url_type: item.url_type,
+                        url_content: item.url_content,
+                        title: item.title
+                    }
+                })
+            } else {
+                this.$router.go({
+                    path: '/tool',
+                    query: {
+                        url: item.url_content,
+                        title: item.title
+                    }
+                })
             }
-        },
-      methods:{
-        clickCard(item){
-          this.$router.go({
-            path:'/activity/'+item.id,
-            query:{
-            url_type:item.url_type,
-              url_content:item.url_content,
-              title:item.title
-          }})
         }
-      },
-     props: ['item'],
-//       item: {
-//              type: Object,
-//              required: true,
-//              default: ()=>({
-//                id: 1,
-//                cover_img: "resources/activity/1-max.jpg",
-//                title: "活动标题",
-//                user_name:　"组织名称",
-//                start_time: "开始时间",
-//                end_time: "结束时间",
-//                praise: 0,
-//            place: "地方",
-//            url: "http://ip:port/activity/23"
-//
-//        })
-//}
+    },
+    props: ['item'],
+    //       item: {
+    //              type: Object,
+    //              required: true,
+    //              default: ()=>({
+    //                id: 1,
+    //                cover_img: "resources/activity/1-max.jpg",
+    //                title: "活动标题",
+    //                user_name:　"组织名称",
+    //                start_time: "开始时间",
+    //                end_time: "结束时间",
+    //                praise: 0,
+    //            place: "地方",
+    //            url: "http://ip:port/activity/23"
+    //
+    //        })
+    //}
 
 
 
 
-        components:{
-          IconLike
+    components: {
+        IconLike
 
-        }
     }
+}
 </script>
+
