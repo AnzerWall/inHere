@@ -18,8 +18,9 @@ export default class extends Base {
         let id=await this.Model.create({
             title:this.data.title,
             text:this.data.text,
-            target_total:this.data.target_list.length
-        }, this.operator.user_id);
+            nuo_total:this.data.target_list.length
+        }, this.operator.user_id
+        , this.operator.school_id);
         let list=await this.TargetModel.createMany(this.data.target_list,id);
         return this.success({
             id:id,
@@ -27,7 +28,6 @@ export default class extends Base {
         });
     }
     isFinish(target){
-
 
             switch(target.type){
                 case 1:
@@ -73,11 +73,16 @@ export default class extends Base {
             return this.fail(10006,"无法对非计数型的目标进行计数");
         //console.log(target);
         //return this.success({});
+        target.user_data.total_count=Math.min((target.user_data.total_count+1)||1,target.type_data.total_count||0);
+        let isFinish=this.isFinish(target);
 
+        if(isFinish)
+            await this.RelationModel.updateProcess(nuo.id,this.operator.user_id,index+1);
         let ret=await this.TargetRelationModel.upsertInfo(target.target_id,this.operator.user_id, {
-                total_count:Math.min((target.user_data.total_count+1)||1,target.type_data.total_count||0)
-            });
-       // console.log(ret);
+                total_count:target.user_data.total_count
+            },isFinish?1:0);
+
+        // console.log(ret);
         return this.success({
             affect_row:ret
         })
@@ -114,10 +119,15 @@ export default class extends Base {
         user_todo_list.push(todo);
         //console.log(target);
         //return this.success({});
+        target.user_data.todo_list=user_todo_list;
+        let isFinish=this.isFinish(target);
 
+        if(isFinish)
+            await this.RelationModel.updateProcess(nuo.id,this.operator.user_id,index+1);
         let ret=await this.TargetRelationModel.upsertInfo(target.target_id,this.operator.user_id, {
             todo_list:user_todo_list
-        });
+        },isFinish);
+
         // console.log(ret);
         return this.success({
             affect_row:ret
@@ -173,9 +183,7 @@ export default class extends Base {
         //console.log(target);
         //return this.success({});
         let now=moment();
-        console.log(now.month(),now.hour(),now.date(),now.weekday());
-
-
+        //console.log(now.month(),now.hour(),now.date(),now.weekday());
         let hour=now.hour();
         if(target.type_data.hour_min!==0){
             if(hour<target.type_data.hour_min){
@@ -202,9 +210,14 @@ export default class extends Base {
                 return  this.fail(10007,"不在可以完成时间范围内");
             }
         }
+        target.user_data.completed=true;
+        let isFinish=this.isFinish(target);
+
+        if(isFinish)
+            await this.RelationModel.updateProcess(nuo.id,this.operator.user_id,index+1);
         let ret=await this.TargetRelationModel.upsertInfo(target.target_id,this.operator.user_id, {
             completed:true
-        });
+        },isFinish);
         // console.log(ret);
         return this.success({
             affect_row:ret
@@ -228,7 +241,7 @@ export default class extends Base {
         let target=nuo.target_list[index];
         if(target.type!==4)
             return this.fail(10006,"无法对非签到型进行签到");
-        let now=moment();
+        let now = moment('2016-10-7 12:40','YYYY-MM-DD HH:mm');
 
         let hour=now.hour();
         if(target.type_data.hour_min!==0){
@@ -245,7 +258,7 @@ export default class extends Base {
            let last_time=moment(target.user_data.last_sign_in_time);
             let hour_diff=Math.abs(now.diff(last_time,'hour'));
             let days_diff=Math.abs(moment([now.year(),now.month(),now.date()]).diff([last_time.year(),last_time.month(),last_time.date()],'days'));
-            console.log(days_diff,hour_diff,now.year(),now.month(),now.date(),last_time.year(),last_time.month(),last_time.date());
+            //console.log(days_diff,hour_diff,now.year(),now.month(),now.date(),last_time.year(),last_time.month(),last_time.date());
 
             if(days_diff<1)
                 return  this.fail(10008,"今天已经签到");
@@ -257,11 +270,16 @@ export default class extends Base {
             }
         }
         //console.log(moment([la]).diff(now,'hour'),moment(target.user_data.last_sign_time).diff(now,'hour'));
+        target.user_data.sign_in_total=Math.min(((target.user_data.sign_in_total||0)+1)||1,target.type_data.sign_in_total||0);
+        target.user_data.last_sign_in_time=now.valueOf();
+        let isFinish=this.isFinish(target);
 
+        if(isFinish)
+            await this.RelationModel.updateProcess(nuo.id,this.operator.user_id,index+1);
         let ret=await this.TargetRelationModel.upsertInfo(target.target_id,this.operator.user_id, {
-            sign_in_total:Math.min(((target.user_data.sign_in_total||0)+1)||1,target.type_data.sign_in_total||0),
-            last_sign_in_time:now.valueOf()
-        });
+            sign_in_total:target.user_data.sign_in_total,
+            last_sign_in_time:target.user_data.last_sign_in_time
+        },isFinish);
         // console.log(ret);
         return this.success({
             affect_row:ret
@@ -289,19 +307,24 @@ export default class extends Base {
         if(answer!==target.type_data.answer){
             return this.fail(10007,"错误的回答");
         }
+        target.user_data.answer=answer;
+        let isFinish=this.isFinish(target);
+
+        if(isFinish)
+            await this.RelationModel.updateProcess(nuo.id,this.operator.user_id,index+1);
         let ret=await this.TargetRelationModel.upsertInfo(target.target_id,this.operator.user_id, {
             answer:answer
-        });
+        },isFinish);
         // console.log(ret);
         return this.success({
             affect_row:ret
         })
     }
-    async updateAction() {
-        return this.success({
-            affect_row: await this.Model.updateInfo(this.get("id"), this.data)
-        });
-    }
+    //async updateAction() {
+    //    return this.success({
+    //        affect_row: await this.Model.updateInfo(this.get("id"), this.data)
+    //    });
+    //}
 
     async praiseAction() {
 
@@ -318,8 +341,11 @@ export default class extends Base {
 
     async getListAction() {
 
-        return this.success(await this.Model.getList(this.data, this.operator.user_id));
+        let ret=await this.Model.getList(this.data, this.operator.user_id,this.operator.school_id,this.data.mine);
+
+        return this.success(ret);
     }
+
 
     async joinItAction() {
         let id = this.get("id");
@@ -341,6 +367,7 @@ export default class extends Base {
     async getAction(){
         let id = this.get("id");
         let operator_id = this.operator.user_id;
+
         let ret=await this.Model.get(id,operator_id);
         if(think.isEmpty(ret))
             return this.fail(10002,"无法找到该有诺必行");

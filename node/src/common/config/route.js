@@ -38,7 +38,7 @@ export default [
     }],
 
     ["nuo/:id",{
-        post:"nuo/update",
+        //post:"nuo/update",
         get:"nuo/get"
     }],
     ["nuo",{

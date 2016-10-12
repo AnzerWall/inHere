@@ -1,8 +1,10 @@
 <template>
   <div class="nuo-create-wrapper">
+    <noti v-ref:noti></noti>
+
     <div class="nuo-create-head">
       <!--:style="{ 'background-color': 'rgba(0,0,0,0)'}"-->
-      <div class="nuo-create-head-left">《 有诺必行</div>
+      <div class="nuo-create-head-left" @click="back">《 有诺必行</div>
       <div class="nuo-create-head-right">
         <confirm-icon style="fill:white;" @click="createNuo"></confirm-icon>
       </div>
@@ -33,9 +35,12 @@
 <script type="text/ecmascript-6">
   import AddIcon from 'svg/nuo/nuo_add.vue'
   import Selector from 'components/publish/publish-tag-editor.vue'
+  import Noti from 'components/noti.vue'
 
   import ConfirmIcon from 'svg/common/Confirm.vue'
   import TargetInput from 'components/target-input/target-input.vue'
+  import {token, login_state, is_login} from '../../vuex/getters.js'
+
   import _ from 'lodash'
   export default{
     data(){
@@ -63,42 +68,45 @@
       }
     },
     methods: {
+      back(){
+        window.history.back();
+      },
       createNuo(){
         for(let index in this.target_list){
           let target=this.target_list[index];
           if(!target.title||!target.text){
-            console.error(`[目标${index+1}]标题或者描述不能为空`);
+            this.$refs.noti.warning(`[目标${index+1}]标题或者描述不能为空`,{timeout:1000});
             return;
           }
           if(target.type===1){
               if(!_.isNumber(target.type_data.total_count)||target.type_data.total_count>10000||target.type_data.total_count<1){
-                console.error(`[目标${index+1}]总数量不合法`);
+                this.$refs.noti.warning(`[目标${index+1}]总数量不合法`,{timeout:1000});
                 return;
               }
 
           }
           if(target.type===2){
             if(target.type_data.todo_list.length<1){
-              console.error(`[目标${index+1}]要做的事情不能为空列表`);
+              this.$refs.noti.warning(`[目标${index+1}]要做的事情不能为空列表`,{timeout:1000});
               return;
             }
           }
           if(target.type===3){
             if(_.isEmpty(target.type_data)){
-              console.error(`[目标${index+1}]至少需要选择中时间限制`);
+              this.$refs.noti.warning(`[目标${index+1}]至少需要选择中时间限制`,{timeout:1000});
               return;
             }
           }
           if(target.type===4){
             if(!_.isNumber(target.type_data.sign_in_total)||target.type_data.sign_in_total>10000||target.type_data.sign_in_total<1){
-              console.error(`[目标${index+1}]签到天数不合法`);
+              this.$refs.noti.warning(`[目标${index+1}]签到天数不合法`,{timeout:1000});
               return;
 
             }
           }
           if(target.type===5){
             if(!target.type_data.question||!target.type_data.answer){
-              console.error(`[目标${index+1}]问题和回答不能为空`);
+              this.$refs.noti.warning(`[目标${index+1}]问题和回答不能为空`,{timeout:1000});
               return;
 
             }
@@ -114,11 +122,27 @@
 
           })
           .then(this.$api.checkResult)
-          .then(function(d){
-            console.log(d);
+          .then(()=>{
+            window.history.back();
           })
           .catch(function(e){
-            console.log(e);
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`,{timeout:1000});//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{timeout:1000})
+              }
+            } else {
+              console.error(e.stack||e);
+              return this.$refs.noti.warning(`未知错误:${e.message}`,{timeout:1000})
+            }
           })
       },
       showAddMenu(){
@@ -134,6 +158,11 @@
       }
 
     },
-    components: {ConfirmIcon, TargetInput, AddIcon, Selector}
+    components: {ConfirmIcon, TargetInput, AddIcon, Selector,Noti},
+    vuex: {
+      getters: {
+        token
+      }
+    }
   }
 </script>

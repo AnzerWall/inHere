@@ -13,7 +13,7 @@ fakeApi(request);
 import {java_api_base,url_base,node_api_base} from '../common/config.js'
 
  function checkResult(res){
-  if(res.ok){
+  if(res&&res.ok){
     if(typeof res.body!=="object"||!res.body){
       return Promise.reject({
         type:'API_ERROR',
@@ -27,7 +27,7 @@ import {java_api_base,url_base,node_api_base} from '../common/config.js'
         return Promise.reject({
           type:'API_ERROR',
           code:res.body.code,
-          message:res.body.status
+          message:res.body.status+" "+(res.body.message||"")
         });
       }
     }

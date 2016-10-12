@@ -8,6 +8,7 @@ import Base from './base.js'
 
 export default class extends Base {
     async createAction(){
+
         let Joi=this.Joi;
         let post=this.post();
         this.data={
@@ -37,20 +38,20 @@ export default class extends Base {
         });
 
     }
-    async updateAction(){
-        let Joi=this.Joi;
-        let post=this.post();
-        let id=this.get('id');
-        this.data={
-            title:post.title,
-            text:post.text,
-            id:id
-        };
-        this.schema=Joi.object().keys({
-            text:Joi.string().allow(''),
-            title:Joi.string().allow('')
-        });
-    }
+    //async updateAction(){
+    //    let Joi=this.Joi;
+    //    let post=this.post();
+    //    let id=this.get('id');
+    //    this.data={
+    //        title:post.title,
+    //        text:post.text,
+    //        id:id
+    //    };
+    //    this.schema=Joi.object().keys({
+    //        text:Joi.string().allow(''),
+    //        title:Joi.string().allow('')
+    //    });
+    //}
     async praiseAction(){
         let Joi=this.Joi;
         this.data={

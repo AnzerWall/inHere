@@ -16,7 +16,13 @@
 
         </nuo-card>
         <div class="nuo-detail-timeline">
-          <nuo-timeline v-for="target in data.target_list" :data="target"></nuo-timeline>
+          <nuo-timeline v-for="target in data.target_list"
+                        :data="target"
+                        :padding="$index!==0&&! data.target_list[$index-1].completed"
+                        :doing="($index===0|| data.target_list[$index-1].completed)&&!data.target_list[$index].completed"
+                        :final="$index===data.target_list[$index].length-1"
+                        :nuo_id="data.id"
+                        @action="action(target)"></nuo-timeline>
 
         </div>
       </div>
@@ -33,40 +39,56 @@
 
 </style>
 
-<script>
+<script type="text/ecmascript-6">
   import MenuIcon from 'svg/common/Menu.vue'
   import NuoCard from 'components/nuo-card/nuo-card.vue'
   import NuoTimeline from 'components/nuo-timeline/nuo-timeline.vue'
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+  import {token, login_state, is_login} from '../../vuex/getters.js'
+
   export default{
+    vuex: {
+      getters: {
+        token
+      }
+    },
     components: {
       MenuIcon,
       NuoCard,
       PulseLoader,
-      NuoTimeline,
+      NuoTimeline
 
     },
+
     route: {
       data(){
+        return this.load();
+      }
+    },
+    methods: {
+
+      action(target){
+        this.load();
+      },
+
+      load(){
         let id = this.$route.params.id;
-        let token = "607f90267bd7f8dcedbf2709c60ab42471d5acbe1aff80f6751a2536487c4d74";
+        let token = this.token;
         let url_base = this.$api.node_api_base;
 
         return this.$request
           .get(`${url_base}/nuo/${id}`)//GET方法 url为/demand
           .query({token: token})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
           .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
-          .then(function (data) {
+          .then( (data)=> {
             //处理数据，具体见vue-router文档data钩子页说明
-            console.log(data);
-            return {
-              data: data
-            }
+//            console.log(data);
+
+            this.data = data || {};
+            this.target_list = this.data.target_list || [];
           })
 
-      }
-    },
-    methods: {
+      },
       back(){
         window.history.back();
       },
@@ -141,10 +163,13 @@
             });
         }
       }
-    },
-    data(){
+    }
+    ,
+    data()
+    {
       return {
-        data: undefined
+        data: {},
+        target_list: []
       }
     }
   }

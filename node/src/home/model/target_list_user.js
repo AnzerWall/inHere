@@ -11,33 +11,54 @@ import Base from  './base.js'
  status         tinyint(4)    (NULL)           YES             (NULL)                   select,insert,update,references  是否通过，0-未，1-已
  */
 export default class extends Base {
-    async getMine(target_list_id,operator_id){
+    async getMine(target_list_id, operator_id) {
         return await this.where({
-            target_list_id:target_list_id,
-            user_id:operator_id
-        })
+                target_list_id: target_list_id,
+                user_id: operator_id
+            })
             .find();
     }
-    async create(target_list_id,operator_id){
+
+    async create(target_list_id, operator_id) {
         return await this.add({
-            target_list_id:target_list_id,
-            user_id:operator_id,
-            status:0,
-            process:0,
-            has_give_up:0
+            target_list_id: target_list_id,
+            user_id: operator_id,
+            status: 0,
+            nuo_process: 0,
+            give_up_count: 0
         })
     }
-    async joinIt(target_list_id,operator_id){
-        return await this.execute(`INSERT INTO ${this.getTableName()} set target_list_id=${target_list_id},user_id='${operator_id}',process=0,has_give_up=0,status=1 ON DUPLICATE KEY UPDATE   status=1`)
+
+    async joinIt(target_list_id, operator_id) {
+        return await this.execute(`INSERT INTO ${this.getTableName()} set target_list_id=${target_list_id},user_id='${operator_id}',nuo_process=0,give_up_count=0,status=1
+        ON DUPLICATE KEY UPDATE   status=1`)
     }
-    async giveUp(target_list_id,operator_id){
-        return this.where({
-            target_list_id:target_list_id,
-            user_id:operator_id
+
+    async giveUp(target_list_id, operator_id) {
+        return await this.where({
+            target_list_id: target_list_id,
+            user_id: operator_id
         }).update({
-            status:0,
-            has_give_up:1
+            status: 0
         })
+            .increment('give_up_count',1)
+    }
+
+    async updateProcess(target_list_id, operator_id,process) {
+
+
+        let user_id=this.parseValue(operator_id);
+        let sql=`
+        INSERT INTO ${this.getTableName()}
+        SET  target_list_id=${target_list_id},
+         user_id=${user_id},
+         nuo_process=${process}
+        ON DUPLICATE KEY UPDATE
+         nuo_process=${process}
+        `;
+        return this.execute(sql);
+
+
     }
 
 }

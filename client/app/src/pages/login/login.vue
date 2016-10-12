@@ -1,5 +1,7 @@
 <template>
   <div class="login-wrapper">
+    <noti v-ref:noti></noti>
+
     <div class="title">
       <span class="logo">在这</span>
       <span class="text">登录</span>
@@ -27,6 +29,8 @@
 <script type="text/ecmascript-6">
   import {login} from '../../vuex/actions/user-action.js';
   import {token,login_state,is_login} from '../../vuex/getters.js'
+  import Noti from 'components/noti.vue'
+
   export default{
     data(){
 
@@ -44,10 +48,10 @@
       onLogin(){
 //        console.dir(this);
         if (this.username && this.password) {
-          console.log(this.username, this.password);
+//          console.log(this.username, this.password);
           this.login(this.username, this.password)
+//            .then(this.$api.checkResult)
             .then(()=> {
-
               //console.log(this.$route.query.__ref);
               if(this.$route.query.__ref){
                 this.$router.go(this.$route.query.__ref);
@@ -56,7 +60,16 @@
               }
             })
             .catch((e)=> {
-              console.log(e.message)
+              if (e.type === 'API_ERROR') {
+                if (e.code === 23333) {
+                  return this.$refs.noti.warning(`参数验证失败`,{timeout:1000})
+                }else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{timeout:1000})
+                }
+              } else {
+                console.error(e.stack||e);
+                return this.$refs.noti.warning(`未知错误:${e.message}`,{timeout:1000})
+              }
             });
         }
       }
@@ -71,6 +84,6 @@
         is_login
       }
     },
-    components: {}
+    components: {Noti}
   }
 </script>

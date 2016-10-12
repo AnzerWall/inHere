@@ -12,20 +12,21 @@
       <div class="nuo-card-process-like-hate-count" v-if="data.status===0">
         <div class="like-count">{{data.praise_count}} LIKE</div>
         <div class="hike-count"> {{data.low_count}} HATE</div>
-        <div class="has-give-up" v-if="data.ha_give_up===true">曾放弃</div>
+        <div class="has-give-up" v-if="data.give_up_count>0">曾放弃</div>
       </div>
     </div>
 
     <div class="nuo-car-tail-like-hate" v-if="data.status===1">
-      <div class="btn-like" :style="{opacity: data.praised?1:0.5}"  @click="like">
+      <div class="btn-like" :style="{opacity: data.praised?1:0.5}" @click="like">
         {{data.praise_count}} LIKE
-
       </div>
-      <div class="btn-hate" :style="{opacity: data.is_low?1:0.5}"  @click="hate">
+      <div class="btn-hate" :style="{opacity: data.is_low?1:0.5}" @click="hate">
         {{data.low_count}} HATE
       </div>
     </div>
-    <div class="nuo-car-tail-join" v-if="data.status===0" @click="join" :class=" {'nuo-card-radius-bottom': hide_radius!==true}"> 加入我的目标</div>
+    <div class="nuo-car-tail-join" v-if="data.status===0" @click="join"
+         :class=" {'nuo-card-radius-bottom': hide_radius!==true}"> 加入我的目标
+    </div>
 
   </div>
   <!--</div>-->
@@ -37,35 +38,36 @@
 
   export default{
     props: {
-      hide_radius:{
-        type:Boolean,
-        default:false
+      hide_radius: {
+        type: Boolean,
+        default: false
       },
       data: {
         type: Object,
         default: ()=> {
           return {
+            "id": 0,
+            "title": "test",
+            "text": "test",
+            "creator_id": "",
+            "create_time": 1473817466000,
+            "update_time": 1473817466000,
+            "school_id": 1,
+            "give_up_count": 0,
+            "nuo_process": 0,
+            "nuo_total": 0,
+            "status": 0,
+            "praised": false,
+            "is_low": false,
+            "praise_count": 0,
+            "low_count": 0
 
-              "id": 0,
-              "title": "test",
-              "text": "test",
-              "create_time": 1473817466000,
-              "update_time": 1473817466000,
-              "target_total": 0,
-              "process": 3,
-              "has_give_up": false,
-              "status": 0,
-              "praised": false,
-              "is_low": false,
-              "praise_count": 233,
-              "low_count": 256,
-              "process_total": 10
 
           }
         }
       }
     },
-    methods:{
+    methods: {
       join(){
 
         this.$emit('join')
@@ -83,8 +85,8 @@
     },
     computed: {
       process(){
-        if (this.data.target_total == 0)return 0;
-        else return Math.floor((this.data.process / this.data.target_total) * 100)
+        if (this.data.nuo_total == 0)return 0;
+        else return Math.floor((this.data.nuo_process / this.data.nuo_total) * 100)
       }
     }
 

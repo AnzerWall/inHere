@@ -1,13 +1,13 @@
-$MAIN_COLOR: #25d367;
+$MAIN_COLOR: #19c74d;
 .nuo-timeline-wrapper {
   padding: 0 15px;
   .nuo-timeline-content {
 
     padding-left: 40px;
-  //  padding-top: 30px;
+    //  padding-top: 30px;
     position: relative;
     //overflow: hidden;
-    .placehoder-area{
+    .placehoder-area {
       height: 40px;
       width: 100%;
     }
@@ -27,8 +27,16 @@ $MAIN_COLOR: #25d367;
         color: white;
         font-size: 1rem;
         line-height: 40px;
-        background-color: $MAIN_COLOR;
+        background-color:$MAIN_COLOR;
+
         border-radius: 30px;
+        &.padding{
+          background-color:#cccccc ;
+        }
+        &.doing{
+          background-color:#FFC107 ;
+        }
+
       }
       .nuo-timeline-timeline-line {
         flex-shrink: 1;
@@ -42,8 +50,11 @@ $MAIN_COLOR: #25d367;
     }
     .title {
       color: $MAIN_COLOR;
-      font-weight: bold;
+      //font-weight: bold;
       font-size: 1.05rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
       padding-top: 10px;
     }
     .text {
@@ -64,7 +75,8 @@ $MAIN_COLOR: #25d367;
       .process {
         color: $MAIN_COLOR;
         font-size: 0.9rem;
-        font-weight: bold;
+        display: inline-block;
+        //font-weight: bold;
         align-self: flex-end;
         padding-top: 10px;
         padding-bottom: 5px;
@@ -77,8 +89,10 @@ $MAIN_COLOR: #25d367;
       display: flex;
       flex-direction: column;
       .nuo-checkbox-list {
-        padding-bottom: 40px;
+        padding-top: 15px;
+
       }
+
     }
     .nuo-timeline-type3 {
       padding-left: 15px;
@@ -89,7 +103,7 @@ $MAIN_COLOR: #25d367;
         color: $MAIN_COLOR;
         align-self: flex-end;
         font-size: 0.9rem;
-        font-weight: bold;
+        //font-weight: bold;
         padding-top: 15px;
         padding-bottom: 5px;
       }
@@ -103,7 +117,7 @@ $MAIN_COLOR: #25d367;
         color: $MAIN_COLOR;
         align-self: flex-end;
         font-size: 0.9rem;
-        font-weight: bold;
+        //font-weight: bold;
         padding-top: 15px;
         padding-bottom: 5px;
       }
@@ -117,23 +131,25 @@ $MAIN_COLOR: #25d367;
         color: $MAIN_COLOR;
         align-self: flex-end;
         font-size: 0.9rem;
-        font-weight: bold;
+        //font-weight: bold;
         padding-top: 15px;
         padding-bottom: 5px;
       }
       //.input-field{
-        input {
-          &:focus { outline: none; }
-
-          border-radius: 7px;
-          border: solid 1px $MAIN_COLOR;
-          padding:12px 8px;
-          font-variant: normal;
-          font-weight: normal;
-          //height:47-8*2px;
-
-          outline: hidden;
+      input {
+        &:focus {
+          outline: none;
         }
+
+        border-radius: 4px;
+        border: solid 1px $MAIN_COLOR;
+        padding: 12px 8px;
+        font-variant: normal;
+        font-weight: normal;
+        //height:47-8*2px;
+
+        outline: hidden;
+      }
       //}
 
     }
