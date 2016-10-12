@@ -15,8 +15,11 @@
         </div>
       </div>
     </div>
-    <!--加载失败组件-->
-    <fail v-ref:noti v-if="!$loadingRouteData&&!data" ></fail>
+
+    <div class="answer-detail-fail" v-if="!data&&!$loadingRouteData"  @click="load()">
+      <!--加载失败图标组件-->
+      <fail text="加载失败,点击刷新"></fail>
+    </div>
 
     <!--下部内容-->
     <div class="content" :style="{marginBottom:bottomHeight+'px'}" v-if="data">
@@ -310,6 +313,46 @@
       submit(request,content,id,ext_type){
         console.log(content);
         return post.post(request,content,id,ext_type,this);
+
+      },
+      load(){
+        var id=this.$route.params.id;
+        return this.$request
+          .get(`${this.$api.url_base}/demand/`+id)
+          .query({token:this.token})
+          .then(this.$api.ckeckResult)
+          .then((res)=>{
+
+            var data =res.body.data;
+            this.data=data;
+            this.comments=data.comment.items;
+            this.user_id=data.user_id;
+            this.ext_type=data.ext_type;
+            this.total=data.comment.total;
+          })
+          .catch((e)=> {
+            console.log("adadddasd")
+            console.log(e)
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              console.log(this.$refs.noti);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
+          })
 
       }
     },

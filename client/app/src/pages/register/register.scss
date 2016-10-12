@@ -94,6 +94,8 @@ $MAIN_COLOR: #00cc4d;
     position: fixed;
     bottom: pxToRem(19px);
     font-size: pxToRem(16px);
+    left: 50%;
+    transform: translateX(-50%);
 
   }
 }

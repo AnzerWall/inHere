@@ -1,6 +1,6 @@
 <template>
   <noti v-ref:noti></noti>
-  <div v-if="!$loadingRouteData">
+  <div >
     <!--图片放大插件-->
     <photos-wipe v-ref:viewer></photos-wipe>
     <!--头部-->
@@ -9,7 +9,7 @@
         <div class="ard-left"><span @click="back">《&nbsp有问必答</span></div>
         <menu class="ard-right"></menu>
       </div>
-      <div class="ard-head" v-if="data">
+      <div class="ard-head" v-if="data&&!$loadingRouteData">
         <div class="ard-ask">
           <div class="ard-tt">
             <div class="ard-tag hide">#{{data.label_name}}</div>
@@ -30,10 +30,13 @@
 
       </div>
     </div>
-    <!--加载失败图标组件-->
-    <fail v-ref:noti class="answer-detail-fail" v-if="!data"></fail>
+    <div class="answer-detail-fail" v-if="!data&&!$loadingRouteData"  @click="load()">
+      <!--加载失败图标组件-->
+      <fail text="加载失败,点击刷新"></fail>
+    </div>
+
     <!--评论组件-->
-    <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}">
+    <div class="ard-reply" :style="{marginBottom:bottomHeight+'px'}" v-if="data&&!$loadingRouteData">
       <comment v-for="comment in comments" :list="comment" :main_color="main_color" :user_id="user_id" :number="number" @onclickpraise="onclickpraise"></comment>
       <infinite-loading :on-infinite="onLoadMore">
         <span slot="no-more">
@@ -56,6 +59,7 @@
     margin: 0;
     padding: 0;
     position: fixed;
+    top:0px;
     width: 100%;
     height: 60px;
     background-color: #0274FF;
@@ -194,6 +198,8 @@
     /*padding: 0 10px ;*/
     overflow: auto;
     width: 100%;position: relative;
+     flex-direction: row;
+     flex-wrap: nowrap;
 
   }
    .ard-image-wrapper{
@@ -378,6 +384,52 @@
       .catch(function (e) {
           console.log(e);
         })
+      },
+      load(){
+        var id=this.$route.params.id;
+        return this.$request
+          .get(`${this.$api.url_base}/ask_reply/`+id)
+          .query({ext_type:12})
+
+          .query({token:this.token})
+          .then(this.$api.ckeckResult)
+          .then((res)=>{
+
+            var data =res.body.data;
+            this.data=data;
+            console.log(data);
+            this.ext_data=data.ext_data;
+            console.log(this.ext_data);
+            this.comments= data.reply_list.items;
+            this.user_id=data.user_id;
+            this.photos=data.ext_data.photos;
+            this.ext_type=data.ext_type
+
+          })
+          .catch((e)=> {
+            console.log("adadddasd")
+            console.log(e)
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              console.log(this.$refs.noti);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
+          })
+
       }
     }
   }

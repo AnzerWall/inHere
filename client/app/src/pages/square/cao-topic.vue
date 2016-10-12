@@ -1,8 +1,7 @@
 <template>
-
   <div class="response">
     <noti v-ref:noti></noti>
-    <div class="cao-detail" v-if="!$loadingRouteData" >
+    <div class="cao-detail"  >
       <div class="cao-header" >
         <div class="header-cao">
           <div class="header-top" >
@@ -10,16 +9,19 @@
           </div>
         </div>
 
-        <div class="header-label_name">
+        <div class="header-label_name" v-if="data&&!$loadingRouteData">
           <div class="header-bottom">
             #{{items[0].label_name}}
           </div>
         </div>
 
       </div>
-      <!--加载失败图标组件-->
-      <fail v-ref:noti class="cao-topic-fail" v-if="!data"></fail>
-      <div class="cao-center">
+      <div v-if="!data&&!$loadingRouteData" @click="load()" class="cao-topic-fail" >
+        <!--加载失败图标组件-->
+        <fail  text="加载失败,点击刷新"></fail>
+      </div>
+
+      <div class="cao-center" v-if="data&&!$loadingRouteData">
         <message class="center-message" v-for="item in items" :item="item" :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise">
         </message>
         <infinite-loading :on-infinite="onLoadMore">
@@ -231,15 +233,54 @@
         })
 
         },
-        goToCaoPublish(topic){
+        goToCaoPublish(toplc){
+          // 这里应该传递一个话题给发布页并显示在发布页的标签上 ，先这样吧
           if (this.$route.query.ext_type == 10){
-            this.$router.go(`/cao-publish/in?topic=${topic}`);
+            this.$router.go('/cao-publish/in');
           } else {
-            this.$router.go(`/cao-publish/out?topic=${topic}`);
+            this.$router.go('/cao-publish/out');
           }
-        }
+        },
+        //        点击重新刷新
+        load(){
+          return this.$request
+            .get(`${this.$api.url_base}/ask_reply`)
+            .query({ext_type:this.$route.query.ext_type,
+              label_id:this.$route.query.label_id})
+            .query({token:this.token})
+            .then(this.$api.ckeckResult)
+            .then((res)=>{
 
-      }
+              var data =res.body.data;
+              this.data=data;
+              this.items=data.list.items;
+            })
+            .catch((e)=> {
+              console.log("adadddasd")
+              console.log(e)
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
+
+        }
+        },
 
     }
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div class="label">
+    <div class="label" >
+      <noti v-ref:noti></noti>
       <div class="label-header">
         <!--有槽必吐-->
         <div class="label-header-cao" v-if="$route.query.ext_type==='10'">
@@ -13,9 +14,13 @@
           <span @click="back">《 有问必答排行榜</span>
         </div>
       </div>
-      <div class="label-body" >
+      <div @click="load()" v-if="!data&&!$loadingRouteData">
+        <!--加载失败图标组件-->
+        <fail  class="label-fail" text="加载失败,点击刷新" ></fail>
+      </div>
+      <div class="label-body" v-if="data&&!$loadingRouteData">
         <!--排行榜列表-->
-        <div v-for="list in lists">
+        <div v-for="list in lists" >
           <div class="label-body-list" :style="{opacity: countOpacity($index)}" @click="onClick($route.query.ext_type,list.id)">
             <!--排行榜次序-->
             <div class="body-list-number" :style="{ 'background-color':number_color($index), 'color':num_color($index)}"> {{$index+1}}</div>
@@ -28,9 +33,13 @@
             </div>
           </div>
         </div>
+        <infinite-loading :on-infinite="onLoadMore">
+        <span slot="no-more">
+          没有更多了...
+        </span>
+        </infinite-loading>
 
       </div>
-
     </div>
 </template>
 <style >
@@ -106,18 +115,26 @@
 
 
 
+
 </style>
 <script type="text/ecmascript-6">
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
+  import Noti from 'components/noti.vue';
+  import Fail from 'components/fail.vue';
+  import InfiniteLoading from 'vue-infinite-loading';
 
     export default{
         data(){
             return{
-              lists:[]
+              lists:[],
+              data:null,
 
             }
         },
         components:{
+          Noti,
+          Fail,
+          InfiniteLoading
 
         },
       vuex: {
@@ -140,8 +157,32 @@
             })
             .then(this.$api.checkResult)
             .then((data=>{
+              this.data=data;
               this.lists=data.items
               }))
+            .catch((e)=> {
+              console.log("adadddasd")
+              console.log(e)
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
         }
       },
       methods:{
@@ -200,6 +241,70 @@
           }
           else if(ext_type==12)
             this.$router.go('/answer-topic?label_id='+id)
+
+        },
+        onLoadMore(){
+          console.log('more');
+          var token = this.token;
+          this.$request
+            .get(`${this.$api.url_base}/ask_reply/labels`)
+            .query({token: token})
+            .query({offset:( this.data.offset||0) + 5, limit: 5})
+            .query({ext_type: this.$route.query.ext_type})
+            .then(this.$api.checkResult)
+            .then((data)=> {
+              //通知组件加载完毕
+              console.log(data);
+              this.$broadcast('$InfiniteLoading:loaded');
+//           //更新数据数组
+              this.lists = this.lists.concat(data.items);
+              this.data.offset = data.offset;
+              this.data.total = data.total;
+//            //判断是否已经不能加载到更多的数据
+              if (this.data.offset >=this.data.total) {
+                this.$broadcast('$InfiniteLoading:complete');
+              }
+            })
+            .catch(function (e) {
+              console.log(e);
+            })
+        },
+        //        点击重新刷新
+        load(){
+          return this.$request
+            .get(`${this.$api.url_base}/ask_reply/labels`)
+            .query({ext_type:this.$route.query.ext_type})
+            .query({token:this.token})
+            .then(this.$api.ckeckResult)
+            .then((res)=>{
+
+              var data =res.body.data;
+              this.data=data;
+              this.lists=data.items;
+            })
+            .catch((e)=> {
+              console.log("adadddasd")
+              console.log(e)
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
 
         }
 

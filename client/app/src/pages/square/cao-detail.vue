@@ -1,7 +1,7 @@
 <template>
   <div>
     <noti v-ref:noti></noti>
-    <div v-if="!$loadingRouteData">
+    <div >
       <!--点击图片放大组件-->
       <photos-wipe v-ref:viewer></photos-wipe>
       <div class="cao-detail">
@@ -10,7 +10,7 @@
             <div class="head-top-left"><span @click="back">《 有槽必吐</span></div>
             <div class="head-top-right"><menu-icon></menu-icon></div>
           </div>
-          <div class="head-label" v-if="data">
+          <div class="head-label" v-if="data&&!$loadingRouteData" >
             <div class="head-label-top">
               <!--标签名-->
               <div class="label-top-name">#{{data.label_name}}</div>
@@ -31,10 +31,13 @@
             </div>
 
           </div>
-          <!--加载失败图标组件-->
-          <fail v-ref:noti class="cao-detail-fail" v-if="!data"></fail>
+          <div @click="load()" v-if="!data&&!$loadingRouteData">
+            <!--加载失败图标组件-->
+            <fail  class="cao-detail-fail" text="加载失败,点击刷新" ></fail>
+          </div>
+
         </div>
-        <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}">
+        <div  class="cao-detail-center" :style="{marginBottom:bottomHeight+'px'}" v-if="data&&!$loadingRouteData">
 
           <!--评论组件-->
           <comment v-for="comment in comments" :list="comment" :number="number" :user_id="user_id" :main_color="main_color" @onclickpraise="onclickpraise"></comment>
@@ -329,6 +332,49 @@
               console.log(e);
             })
         },
+        //        点击重新刷新
+        load(){
+          var id=this.$route.params.id;
+          console.log(id)
+          return this.$request
+            .get(`${this.$api.url_base}/ask_reply/`+id)
+            .query({token:this.token})
+            .then(this.$api.ckeckResult)
+            .then((res)=>{
+
+              var data =res.body.data;
+              this.data=data;
+              console.log(data)
+              this.ext_data=data.ext_data;
+              this.images=data.ext_data.photos;
+              this.comments=data.reply_list.items;
+              this.user_id=data.user_id;
+              this.ext_type=data.ext_type;
+            })
+            .catch((e)=> {
+              console.log(e)
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
+
+        }
 
       }
     }

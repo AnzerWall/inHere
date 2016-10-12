@@ -4,7 +4,7 @@
       </div>
   <div class="response">
     <noti v-ref:noti></noti>
-      <div class="answer" v-if="!$loadingRouteData">
+      <div class="answer" >
 
         <!--头部-->
         <div class="answer-head">
@@ -19,14 +19,16 @@
             </div>
           </div>
 
-          <classify :lists="labels" class="classify" :color="color" @filter-label="filterLabel" v-if="data">
+          <classify :lists="labels" class="classify" :color="color" @filter-label="filterLabel" v-if="data&&!$loadingRouteData" >
           </classify>
 
         </div>
         <!--加载失败图标组件-->
-        <fail v-ref:noti class="answer-fail" v-if="!data"></fail>
+        <div class="answer-fail" v-if="!data&&!$loadingRouteData" @click="load()">
+          <fail text="加载失败,点击刷新"></fail>
+        </div>
         <!--中部-->
-        <div class="answer-center">
+        <div class="answer-center" v-if="data&&!$loadingRouteData">
 
           <answer-message v-for="item in items" :item="item" :color="color" @onclickpraise="onclickpraise">
           </answer-message>
@@ -234,6 +236,45 @@
                 console.log(e);
               })
           },
+          //        点击重新刷新
+          load(){
+            return this.$request
+              .get(`${this.$api.url_base}/ask_reply`)
+              .query({ext_type:12})
+              .query({token:this.token})
+              .then(this.$api.ckeckResult)
+              .then((res)=>{
+
+                var data =res.body.data;
+                this.data=data;
+                this.labels = data.labels;
+                this.items = data.list.items;
+              })
+              .catch((e)=> {
+                console.log("adadddasd")
+                console.log(e)
+                if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                  if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                    return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                  } else if (e.code === 401) {
+                    return this.$router.go({
+                      path: '/login',
+                      query: {
+                        __ref: this.$route.path//告诉login页面要跳转回来的页面
+                      }
+                    });
+                  } else {
+                    return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                  }
+                } else {
+                  console.error(e.stack||e);
+                  console.log(this.$refs.noti);
+                  return this.$refs.noti.warning(`未知错误:${e.message}`)
+                }
+                //后续显示重试按钮
+              })
+
+          }
         },
       vuex: {
         actions: {

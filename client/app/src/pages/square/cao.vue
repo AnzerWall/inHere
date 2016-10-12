@@ -2,7 +2,7 @@
   <div class="main">
     <noti v-ref:noti></noti>
 
-    <div class="body" v-if="!$loadingRouteData">
+    <div class="body" >
 
       <!--校内-->
       <div class="school" v-if="$route.query.ext_type==='10'">
@@ -11,22 +11,28 @@
             <div class="left" @click="$router.go('/main/square')"><span>《 有槽必吐</span></div>
             <div class="right">
               <div class="in">校内</div>
-              <div class="out" @click="$router.go('/cao?ext_type=11')&&clean(this.labels,this.items)">校外</div>
+              <div class="out" @click="$router.go('/cao?ext_type=11')">校外</div>
             </div>
           </div>
           <div class="space"></div>
-          <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color" v-if="data">
+          <classify :lists="labels" class="classify" @filter-label="filterLabel" :color="color" v-if="data" >
 
           </classify>
 
 
         </div>
+        <div @click="load()">
+          <!--加载失败图标组件-->
+          <fail v-ref:fail class="cao-fail" v-if="!data&&!$loadingRouteData" text="加载失败,点击刷新" >
+          </fail>
+        </div>
 
 
-        <div class="message">
+
+        <div class="message" v-if="data&&!$loadingRouteData">
           <message v-for="item in items" :item.sync="item"  :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise" >
           </message>
-          <infinite-loading :on-infinite="onLoadMore">
+          <infinite-loading :on-infinite="onLoadMore" v-if="!$loadingRouteData">
         <span slot="no-more">
           没有更多了...
         </span>
@@ -52,19 +58,22 @@
             </div>
           </div>
           <div class="space1"></div>
-          <slider :topics="labels" class="classify"  :square_type="4" v-on:go-to-the-topic='goToTopic' v-if="data">
+          <slider :topics="labels" class="classify"  :square_type="4" v-on:go-to-the-topic='goToTopic' v-if="data" v-if="!$loadingRouteData">
 
           </slider>
 
 
         </div>
         <!--加载失败图标组件-->
-        <fail v-ref:noti class="cao-fail"></fail>
+        <div @click="load()">
+          <fail v-ref:fail class="cao-fail" v-if="!data&&!$loadingRouteData" text="加载失败,点击刷新"></fail>
+        </div>
 
-        <div class="message">
+
+        <div class="message" v-if="data&&!$loadingRouteData">
           <message v-for="item in items" :item.sync="item" :main_color="main_color"  @on-click="onClick" @onclickpraise="onclickpraise">
           </message>
-          <infinite-loading :on-infinite="onLoadMore">
+          <infinite-loading :on-infinite="onLoadMore" v-if="!$loadingRouteData">
         <span slot="no-more">
           没有更多了...
         </span>
@@ -192,13 +201,7 @@
     export default{
       data(){
         return {
-          labels:[
-
-            {
-              id: 1,
-              name: ""
-            }
-          ],
+          labels:[],
           items:[],
           ext_data:{},
           data:null
@@ -287,10 +290,54 @@
         onclickpraise(ext_data,id,ext_type){
           return praise.praise(ext_data, id, ext_type, this);
         },
-//        clean(labels,items){
-//          return labels==[]&&items==[];
-//
-//        }
+        clean(labels,items){
+          console.log(labels,items);
+          return labels==null&&items==null;
+
+        },
+//        点击重新刷新
+        load(){
+          return this.$request
+            .get(`${this.$api.url_base}/ask_reply`)
+            .query({ext_type:this.$route.query.ext_type})
+            .query({token:this.token})
+            .then(this.$api.ckeckResult)
+            .then((res)=>{
+
+              var data =res.body.data;
+              this.data=data;
+              this.labels=data.labels;
+              this.items=data.list.items;
+              this.labels.push({
+                id:0,
+                name:"更多"
+              });
+            })
+            .catch((e)=> {
+              console.log("adadddasd")
+              console.log(e)
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                }
+              } else {
+                console.error(e.stack||e);
+                console.log(this.$refs.noti);
+                return this.$refs.noti.warning(`未知错误:${e.message}`)
+              }
+              //后续显示重试按钮
+            })
+
+        }
       },
       computed:{
         main_color(){
