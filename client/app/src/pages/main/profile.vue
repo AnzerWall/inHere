@@ -11,7 +11,7 @@
     </div>
     <div class="profile-content">
       <div class="profile-tools-inner" :style="{'width': grid_field_width}">
-        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.icon+')',width:grid_width,height:grid_width}" v-link="'/test'">
+        <div class="grid"  v-for="item in tool_list" :style="{'background-image': 'url('+ item.svg.src+')',width:grid_width,height:grid_width}" >
             <div class="title" :style="{color:item.color}">{{item.title}}</div>
         </div>
 
@@ -116,7 +116,8 @@
 
 </style>
 <script type="text/ecmascript-6">
-  import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js'
+  import {token,login_state,is_login,school,user_id,tool_list} from '../../vuex/getters.js'
+  import {loadToolList} from '../../vuex/actions/tool-action.js'
   import MenuIcon from 'svg/common/Menu.vue'
   export default{
     components:{
@@ -124,14 +125,15 @@
     },
     vuex: {
       actions: {
-
+        loadToolList
       },
       getters: {
         login_state,
         token,
         is_login,
         school,
-        user_id
+        user_id,
+        tool_list
       }
     },
 
@@ -141,45 +143,46 @@
        grid_width:this.getGridWidth(),
 //       username:"小泽",
 //       school:"肇庆学院",
-       tools:[{
-         url:"",
-         icon:"/static/image/profile/Fankajilu.svg",
-         title:"饭卡记录",
-         color:"#FF3A3A"
-       },{
-         url:"",
-         icon:"/static/image/profile/Kuaidichaxun.svg",
-         title:"快递查询",
-         color:"#16A82E"
-       },{
-         url:"",
-         icon:"/static/image/profile/Qimochengji.svg",
-         title:"期末成绩",
-         color:"#4F8794"
-       },{
-         url:"",
-         icon:"/static/image/profile/Shuifeichaxun.svg",
-         title:"水费查询",
-         color:"#0098FF"
-       },{
-         url:"",
-         icon:"/static/image/profile/siliujichengji.svg",
-         title:"四六级成绩",
-         color:"#FFA600"
-       },{
-         url:"",
-         icon:"/static/image/profile/Wodehuida.svg",
-         title:"我的回答",
-         color:"#09CE88"
-       },{
-         url:"",
-         icon:"/static/image/profile/Wodemubiao.svg",
-         title:"我的目标",
-         color:"#7300FF"
-       }]
+//       tools:[{
+//         url:"",
+//         icon:"/static/image/profile/Fankajilu.svg",
+//         title:"饭卡记录",
+//         color:"#FF3A3A"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/Kuaidichaxun.svg",
+//         title:"快递查询",
+//         color:"#16A82E"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/Qimochengji.svg",
+//         title:"期末成绩",
+//         color:"#4F8794"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/Shuifeichaxun.svg",
+//         title:"水费查询",
+//         color:"#0098FF"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/siliujichengji.svg",
+//         title:"四六级成绩",
+//         color:"#FFA600"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/Wodehuida.svg",
+//         title:"我的回答",
+//         color:"#09CE88"
+//       },{
+//         url:"",
+//         icon:"/static/image/profile/Wodemubiao.svg",
+//         title:"我的目标",
+//         color:"#7300FF"
+//       }]
      }
     },
     ready(){
+      this.loadToolList(this.token);
       window.onresize=()=>{
         this.grid_field_width=this.getGridFieldWidth();
         this.grid_width=this.getGridWidth();

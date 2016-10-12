@@ -11,3 +11,5 @@ export const PUSH_CHAT_DATA="PUSH_CHAT_DATA";//加载
 //
 
 export const CHANGE_CHAT_SEND_STATUS='CHANGE_CHAT_SEND_STATUS';
+
+export const LOAD_TOOL_LIST='LOAD_TOOL_LIST';

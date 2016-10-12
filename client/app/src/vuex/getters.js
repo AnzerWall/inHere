@@ -25,3 +25,6 @@ export function total_chat_unread(state){
 
   return _.reduce(state.chat.chat_list,(sum,item)=>sum+=item.unread,0);
 }
+export function tool_list(state){
+  return state.tool.list;
+}
