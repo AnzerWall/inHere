@@ -1,6 +1,6 @@
 <template>
     <div>
-<div class="b-card"  :style="{'background-image': 'url('+item.cover_img.src+')'}"@click="$router.go('/activity/'+item.id)">
+<div class="b-card"  :style="{'background-image': 'url('+item.cover_img.src+')'}"@click="clickCard(item)">
   <div class="b-activity-content-bg">
   <div class="b-title">{{item.title}}</div>
   <div class="b-user">
@@ -88,6 +88,17 @@ import IconLike from 'svg/common/comment/IconLike.vue'
 
             }
         },
+      methods:{
+        clickCard(item){
+          this.$router.go({
+            path:'/activity/'+item.id,
+            query:{
+            url_type:item.url_type,
+              url_content:item.url_content,
+              title:item.title
+          }})
+        }
+      },
      props: ['item'],
 //       item: {
 //              type: Object,
@@ -105,6 +116,8 @@ import IconLike from 'svg/common/comment/IconLike.vue'
 //
 //        })
 //}
+
+
 
 
         components:{
