@@ -2,9 +2,9 @@
     .tag-editor-bg(v-show="show",@click.self="toggleShow()",transition="fade-up")
         noti(v-ref:noti)
         .tag-editor
-            input.line(@keypress="chkLength",placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag(tmptag)",v-if="editable")
+            input.line(@keypress="chkLength",placeholder="自定义标签",v-model="tmptag",@keypress.13="clickTag({name:tmptag,value:tmptag})",v-if="editable")
             .lines
-                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item.value)")
+                .line.selector(v-for="item in tags | filterBy tmptag in 'name'",@click="clickTag(item)")
                     span {{item.name}}
             .line.cancel(@click="toggleShow()") 取消
         //- .warning-popup(v-show="warningInfo",transition="fade-down") {{warningInfo}}
@@ -22,6 +22,7 @@ module.exports = {
             default:false
         },
         tag: {},
+        tagName: {},
         editable: {
             type: Boolean,
             default: false
@@ -60,11 +61,12 @@ module.exports = {
         showMe(){
             this.toggleShow(true);
         },
-        clickTag(str) {
+        clickTag(item) {
             if (!this.chkLength()) return;
-            this.tag = str;
+            this.tag = item.value;
+            this.tagName=item.name;
             this.toggleShow();
-            this.$emit('select', str);
+            this.$emit('select', item.value);
         },
         toggleShow(t) {
             this.show = t!=undefined?t:!this.show
