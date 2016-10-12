@@ -197,6 +197,12 @@
         this.$refs.menu.show({
           title:'菜单',
           btns:[{
+            title:'关于',
+            event(){
+              alert('关于');
+              return true;
+            }
+          },{
             title:'登出',
             event(){
               alert('登出');

@@ -10,7 +10,7 @@
         <div class="head-right" >
           <div>
             <send-chat-icon :style="{fill:main_color}" class="sendchat"  ></send-chat-icon>
-            <menu-icon :style="{fill:main_color}"></menu-icon>
+            <menu-icon :style="{fill:main_color}" @click="clickMenu()"></menu-icon>
           </div>
         </div>
       </div>
@@ -123,6 +123,7 @@
       <!--<textarea class="detail-textarea" placeholder="世界不如人意,人生如此艰难" v-model="content" @keyup.enter="submit(this.$request,this.content,this.data.id,this.ext_type)"></textarea>-->
     </div>
 
+    <menu v-ref:menu></menu>
 
   </div>
   <!--加载动画组件：小圆点-->
@@ -240,6 +241,7 @@
   import InfiniteLoading from 'vue-infinite-loading';
   import Noti from 'components/noti.vue';
   import Fail from 'components/fail.vue';
+  import Menu from '../../components/menu.vue'
 
 
   export default{
@@ -253,11 +255,23 @@
       AutoTextarea,
       InfiniteLoading,
       Noti,
-      Fail
+      Fail,
+      Menu
     },
 
 
     methods: {
+      clickMenu(){
+        this.$refs.menu.show({
+          btns:[{
+            title:'结束',
+            event(){
+              alert('结束');
+              return true;
+            }
+          }]
+        })
+      },
       onLoadMore(){
         console.log('more');
         var token = this.token;
