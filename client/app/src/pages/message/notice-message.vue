@@ -6,7 +6,9 @@
               <!--加上span制造空隙-->
               <span>{{notice.title}}</span>
               </span>
-          <span class="close" @click="back()"><i class="fa fa-close fa-lg"></i></span>
+          <span class="close" @click="back()">
+          <svg-close></svg-close>
+          </span>
         </div>
           <div class="message-div">{{notice.content}}</div>
       </div>
@@ -52,6 +54,7 @@
   }
 </style>
 <script>
+  import svgClose from 'svg/common/Close.vue'
   import MessageVip from 'svg/main/message/MessageVip.vue'
   export default{
     methods:{
@@ -68,7 +71,7 @@
       notice:Object,
     },
     components: {
-      MessageVip
+      MessageVip,svgClose
     }
   }
 </script>

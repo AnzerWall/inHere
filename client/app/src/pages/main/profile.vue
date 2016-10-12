@@ -195,6 +195,7 @@
     methods:{
       clickMenu(){
         this.$refs.menu.show({
+          title:'菜单',
           btns:[{
             title:'登出',
             event(){
