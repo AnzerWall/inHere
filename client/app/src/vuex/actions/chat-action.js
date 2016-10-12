@@ -5,10 +5,13 @@
  * Created by anzer on 2016/9/18.
  */
 import request from '../../api/base.js'
-import { PUSH_CHAT_DATA,CHANGE_CHAT_SEND_STATUS } from '../mutation-types.js'
+import { PUSH_CHAT_DATA,CHANGE_CHAT_SEND_STATUS,READ_CHAT } from '../mutation-types.js'
 
 import _ from 'lodash'
+export  function readChat({dispatch},module_type,module_id,chat_user,user_id){
+  dispatch(READ_CHAT,module_type,module_id,chat_user,user_id);
 
+}
 export  function pushUnreadChatList({dispatch},list,user_id){
 
     dispatch(PUSH_CHAT_DATA,list,user_id);

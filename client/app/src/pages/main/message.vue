@@ -10,11 +10,11 @@
       </div>
     </div>
     <div class="message-content">
-      <message-card v-for="notice in notices |limitBy num" :item="notice" @click="selectedNotice=notice">
+      <message-card v-for="notice in notice_list |limitBy num" :item="notice" @click="selectedNotice=notice" type="notice">
       </message-card>
       <!--更多官方提示-->
-      <div class="notice-more" @click="allShow()" v-if="num<notices.length">
-        <span class="notice-span">还有{{notices.length-2}}条官方通知</span>
+      <div class="notice-more" @click="allShow()" v-if="num<notice_list.length">
+        <span class="notice-span">还有{{notice_list.length-2}}条官方通知</span>
       </div>
 
       <!--<message-card v-for="item in items" :item="item">-->
@@ -97,8 +97,9 @@
 <script type="text/ecmascript-6">
   import MessageCard from 'components/message-card/message-card.vue'
   import ChatIcon from'svg/main/message/Chat.vue'
-  import {total_chat_unread ,user_id,is_login,token} from '../../vuex/getters.js'
+  import {total_chat_unread ,user_id,is_login,token,notice_list} from '../../vuex/getters.js'
   import {pushUnreadChatList} from '../../vuex/actions/chat-action.js'
+  import {fetchNotice} from '../../vuex/actions/notice-action.js'
   import Websocket from '../../util/websocket_helper.js'
   import NoticeMessage from '../message/notice-message.vue'
 
@@ -108,15 +109,16 @@
         total_chat_unread,
         user_id,
         is_login,
-        token
+        token,
+        notice_list
       },
       actions: {
-        pushUnreadChatList
+        pushUnreadChatList,
+        fetchNotice
       }
     },
     route: {
       data(t){
-        return;
         if (this.is_login) {
           console.log(`[Websocket] fetch unread chat list`);
           let p = Websocket.startRequest(this.$socket, "get_unread_chat", {token: this.token})
@@ -125,23 +127,12 @@
               this.pushUnreadChatList(data, this.user_id);
             });
         }
-        let url = `${this.$api.node_api_base}/notice`;
-        return this.$request
-          .get(url)
-          .query({token: this.token})
-          .then(this.$api.checkResult)
-          .then((data)=> {
-            console.log(data);
-            this.notices=data.items.map((item)=>{
-              item.tag='notice';
-              return item;
-            });
-          });
+        return this.fetchNotice(this.token,this.user_id);
       }
     },
     methods: {
       allShow(){
-        this.num = this.notices.length;
+        this.num = this.notice_list.length;
       }
 
     },
@@ -156,23 +147,24 @@
         switch: true,
         newMessageCount: '66',
         selectedNotice:null,
-        notices: [
-         {
-           tag: 'notice',
-           title: '肇庆学院',
-           content: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
-         },
-         {
-           tag: 'notice',
-           title: '天翼校园一卡通',
-           content: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-         },
-         {
-           tag: 'notice',
-           title: '计算机学院',
-           content: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
-         }
-        ],
+//        notices:[],
+//        notices: [
+//         {
+//           tag: 'notice',
+//           title: '肇庆学院',
+//           content: '【重磅| 学生宿舍第一批空调已抵达！很好！这很夏天！】'
+//         },
+//         {
+//           tag: 'notice',
+//           title: '天翼校园一卡通',
+//           content: '温馨提示：国庆期间天翼一卡通服务中心上班时间为2,4,6号，8号后正常上班。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+//         },
+//         {
+//           tag: 'notice',
+//           title: '计算机学院',
+//           content: '温馨提示：国庆期间断网，对大家造成的不便表示歉意。由于校园网上学期办理的包学期有效期到2013年9月30日，为了避免10月1日断网，建议大四需要充值校园网的尽量在国庆放假前前往一卡通服务中心的前台充值。请周知！（30元/月，尽量自备零钱哦亲）'
+//         }
+//        ],
         items: [
           {
             tag: 'my',

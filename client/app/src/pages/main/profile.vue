@@ -117,7 +117,7 @@
 </style>
 <script type="text/ecmascript-6">
   import {token,login_state,is_login,school,user_id,tool_list} from '../../vuex/getters.js'
-  import {loadToolList} from '../../vuex/actions/tool-action.js'
+  import {fetchToolList} from '../../vuex/actions/tool-action.js'
   import MenuIcon from 'svg/common/Menu.vue'
   export default{
     components:{
@@ -125,7 +125,7 @@
     },
     vuex: {
       actions: {
-        loadToolList
+        fetchToolList
       },
       getters: {
         login_state,
@@ -182,7 +182,7 @@
      }
     },
     ready(){
-      this.loadToolList(this.token);
+      this.fetchToolList(this.token,this.user_id);
       window.onresize=()=>{
         this.grid_field_width=this.getGridFieldWidth();
         this.grid_width=this.getGridWidth();

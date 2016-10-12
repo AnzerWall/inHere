@@ -55,7 +55,7 @@
 </style>
 <script type="text/ecmascript-6">
   import {token,is_login,user_id} from '../../vuex/getters.js'
-  import {pushUnreadChatList,recordSendingMessage,failSendingMessage,successSendingMessage} from '../../vuex/actions/chat-action.js'
+  import {pushUnreadChatList,recordSendingMessage,failSendingMessage,successSendingMessage,readChat} from '../../vuex/actions/chat-action.js'
   import {fromNowAndFormat}  from '../../filter/time.js'
   import Websocket from '../../util/websocket_helper.js'
   import ImageIcon from 'svg/common/Image.vue'
@@ -71,6 +71,7 @@
       fromNowAndFormat
     },
     sockets: {
+
       typing(data){
 
         let chat_user = this.$route.query.chat_user;
@@ -216,6 +217,7 @@
         user_id
       },
       actions: {
+        readChat,
         pushUnreadChatList,
         recordSendingMessage,
         successSendingMessage,
@@ -265,7 +267,7 @@
         let chat_user = this.$route.query.chat_user;
         let module_type = _.toNumber(this.$route.query.module_type);
         let module_id = _.toNumber(this.$route.query.module_id);
-
+        this.readChat(module_type,module_id,chat_user,this.user_id);
 
         if (this.is_login) {
           console.log(`[Websocket] fetch  chat `);

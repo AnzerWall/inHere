@@ -9,7 +9,7 @@
         </div>
         <div class="head-right" >
           <div>
-            <send-chat-icon :style="{fill:main_color}" class="sendchat"  ></send-chat-icon>
+            <send-chat-icon :style="{fill:main_color}" class="sendchat"  @click="chat" ></send-chat-icon>
             <menu-icon :style="{fill:main_color}"></menu-icon>
           </div>
         </div>
@@ -258,6 +258,14 @@
 
 
     methods: {
+      chat(){
+        var id=this.$route.params.id;
+        this.$router.go({path:'/chat',query:{
+          chat_user:this.user_id,
+          module_type:this.ext_type,
+          module_id:id
+        }});
+      },
       onLoadMore(){
         console.log('more');
         var token = this.token;

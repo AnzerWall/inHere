@@ -6,7 +6,7 @@
  */
 
 
-import {LOAD_TOOL_LIST,FETCH_TOOL_LIST} from '../mutation-types.js'
+import {LOAD_NOTICE_LIST,FETCH_NOTICE_LIST} from '../mutation-types.js'
 import Storage from '../../storage/storage'
 // 该模块的初始状态
 let state = {
@@ -15,22 +15,24 @@ let state = {
 
 // 相关的 mutations
 let mutations = {
-  [LOAD_TOOL_LIST](state,user_id){
+  [LOAD_NOTICE_LIST](state,user_id){
     if (user_id) {
       try {
-        state.list = JSON.parse(Storage.get(`tool_list|${user_id}`) || '[]');
-        console.log("[LocalStorage] load tool list data");
+        state.list = JSON.parse(Storage.get(`notice_list|${user_id}`) || '[]');
+        console.log("[LocalStorage] load notice data");
       } catch (e) {
         console.error(e);
       }
 
     }
   },
-  [FETCH_TOOL_LIST](state,list,user_id){
+
+  [FETCH_NOTICE_LIST](state,list,user_id){
     state.list=list||[];
     if (user_id) {
-      Storage.set(`tool_list|${user_id}`, JSON.stringify(state.list));
+      Storage.set(`notice_list|${user_id}`, JSON.stringify(state.list));
     }
+
   }
 };
 

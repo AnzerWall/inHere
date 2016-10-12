@@ -23,8 +23,20 @@ export function chat_list(state){
 }
 export function total_chat_unread(state){
 
-  return _.reduce(state.chat.chat_list,(sum,item)=>sum+=item.unread,0);
+  return  _.reduce(state.chat.chat_list,(sum,chat)=>{
+    return _.reduce(chat.items,(sum2,item)=>{
+        if(state.user.login_state.user_id===item.rev_user)
+          return sum2+(item.read?0:1);
+        else
+          return sum2;
+      },0);
+
+
+  },0);
 }
 export function tool_list(state){
   return state.tool.list;
+}
+export function notice_list(state){
+  return state.notice.list;
 }

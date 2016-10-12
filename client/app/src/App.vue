@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view ></router-view>
   </div>
 </template>
 
@@ -36,7 +36,8 @@
 
   import store from './vuex/store.js'
   import {loadLocalLoginState} from './vuex/actions/user-action.js'
-
+  import {loadNotice} from './vuex/actions/notice-action.js'
+  import {loadToolList} from './vuex/actions/tool-action.js'
   import {user_id} from './vuex/getters.js'
   import websocket from './util/websocket_helper.js'
   import {pushUnreadChatList} from './vuex/actions/chat-action.js'
@@ -57,14 +58,29 @@
     vuex:{
       actions:{
         loadLocalLoginState,
+        loadNotice,
+        loadToolList,
         pushUnreadChatList
       },
       getters:{
         user_id
       }
     },
+    methods:{
+      init(){
+        console.log('[INIT]加载用户数据');
+        this.loadLocalLoginState();
+        this.loadNotice(this.user_id);
+        this.loadToolList(this.user_id);
+      }
+    },
+    events:{
+      init(){
+        this.init();
+      }
+    },
     ready(){
-      this.loadLocalLoginState();
+      this.init();
     }
   }
 

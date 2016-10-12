@@ -2,11 +2,11 @@
  * Created by anzer on 2016/9/20.
  */
 import Storage from '../../storage/storage'
-import { LOAD_CHAT_DATA,PUSH_CHAT_DATA,CHANGE_CHAT_SEND_STATUS } from '../mutation-types.js'
+import { LOAD_CHAT_DATA,PUSH_CHAT_DATA,CHANGE_CHAT_SEND_STATUS,READ_CHAT} from '../mutation-types.js'
 import _ from 'lodash'
 let state = {
   chat_list: [],
-  send_chat_list:[],
+  send_chat_list: [],
 //  fail_chat_list:[]
 };
 function getDataKey(item, user_id) {
@@ -24,7 +24,7 @@ function getChatUser(item, user_id) {
   }
 }
 let mutations = {
-  [LOAD_CHAT_DATA](state, user_id){
+  [LOAD_CHAT_DATA](state, user_id){//从本地存储中读取对话信息
 
     if (user_id) {
 
@@ -37,31 +37,42 @@ let mutations = {
 
     }
   },
-  [CHANGE_CHAT_SEND_STATUS](state,status,request_key,doc ){
-    if(status===0){
-      let data= _.cloneDeep(doc);
-      data.id=request_key;
-      data.create_time=Date.now();
-      data.status=0;
+  [READ_CHAT](state, module_type, module_id, chat_user, user_id){
+    let index = _.findIndex(state.chat_list, (item)=>item.module_type === module_type && item.module_id === module_id && item.chat_user === chat_user);
+    if (index === -1)return;
+    let chat = state.chat_list[index];
+    chat.unread = 0;
+    for (let item of chat.items) {
+      item.read = true;
+    }
+
+    Storage.set(`chat_list|${user_id}`, JSON.stringify(state.chat_list));
+  },
+  [CHANGE_CHAT_SEND_STATUS](state, status, request_key, doc){
+    if (status === 0) {
+      let data = _.cloneDeep(doc);
+      data.id = request_key;
+      data.create_time = Date.now();
+      data.status = 0;
       state.send_chat_list.push(data);
-    }else if(status===1){
-      let index= _.findIndex( state.send_chat_list,(item)=>item.id===request_key&&item.status===0);
+    } else if (status === 1) {
+      let index = _.findIndex(state.send_chat_list, (item)=>item.id === request_key && item.status === 0);
       console.log(index);
-      if(index!=-1){
+      if (index != -1) {
         state.send_chat_list.splice(index, 1);
 
       }
-    }else if(status===2){
-      let index= _.findIndex( state.send_chat_list,(item)=>item.id===request_key&&item.status===0);
-      if(index!=-1){
-        state.send_chat_list[index].status=2;
+    } else if (status === 2) {
+      let index = _.findIndex(state.send_chat_list, (item)=>item.id === request_key && item.status === 0);
+      if (index != -1) {
+        state.send_chat_list[index].status = 2;
         //let doc=
         //state.fail_chat_list.push(doc);
         //state.send_chat_list.$remove(index);
 
       }
-    }else{
-      console.error(CHANGE_CHAT_SEND_STATUS,arguments);
+    } else {
+      console.error(CHANGE_CHAT_SEND_STATUS, arguments);
     }
 
   },
@@ -78,10 +89,10 @@ let mutations = {
           let key = getDataKey(v[0], user_id);//按照对话的对方以及模块类型和模块id生成key
           let module_type = v[0].module_type;
           let module_id = v[0].module_id;
-          let chat_user = getChatUser(v[0],user_id);//获取对话中的对方的user_id
+          let chat_user = getChatUser(v[0], user_id);//获取对话中的对方的user_id
           let index = _.findIndex(state.chat_list, (item)=>item.chat_user == chat_user && item.module_type == module_type && item.module_id == module_id);
-          let items =(index === -1 ? {} : state.chat_list[index]).items || [];
-          items=_.uniqBy(items.concat(v), "id");
+          let items = (index === -1 ? {} : state.chat_list[index]).items || [];
+          items = _.uniqBy(items.concat(v), "id");
           items.sort((a, b)=>( a.create_time > b.create_time));
           //let items = _.uniqBy(((chat_data[key] || {}).items || []).concat(v), "id");
           let ret = {
@@ -107,14 +118,15 @@ let mutations = {
       let key = getDataKey(data, user_id);
       let module_type = data.module_type;
       let module_id = data.module_id;
-      let chat_user = getChatUser(data,user_id);//获取对话中的对方的user_id
+      let chat_user = getChatUser(data, user_id);//获取对话中的对方的user_id
       let index = _.findIndex(state.chat_list, (item)=>item.chat_user == chat_user && item.module_type == module_type && item.module_id == module_id);
 
-      let items =state.chat_list[index];
+      let items = state.chat_list[index];
 
-      items=((index === -1 ? {} : items).items || []);
+      items = ((index === -1 ? {} : items).items || []);
       items.push(data);
-      items=_.uniqBy(items, "id");
+      items = _.uniqBy(items, "id");
+
       let ret = {
         module_id,
         module_type,

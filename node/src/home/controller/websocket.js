@@ -101,16 +101,28 @@ export default class extends think.controller.base {
                 for(let item of ret){
                     item.create_time = new Date(item.create_time).getTime();
                     if(item.content_type===1){
-                        path.resolve(this.chat_upload,item.content)
-                        item.content=await this.readFile(   path.resolve(this.chat_upload,item.content));
+                        path.resolve(this.chat_upload,item.content);
+                        if(think.isFile(path.resolve)){
+                            item.content=await this.readFile(   path.resolve(this.chat_upload,item.content));
+                            item.content=item.content.toString();
+                        }
+                        else{
+                            item.content="[图片]";
+                            item.content_type=0;
+                        }
+
+
                     }
                 }
+                if(id_list.length)
+                await Model.where(`id in (${id_list.join(',')})`).update({read:1})
 
 
 
                 // await Model.where({rev_user:operator.user_id}).select();
                 // console.log(ret);
                 think.log(id_list, "debug");
+
 
                 socket.emit("end_request", {
                     request_key: request_key,
@@ -284,25 +296,32 @@ export default class extends think.controller.base {
                 title: title,
                 content_type: data.content_type,
                 content: data.content,
-                read: false
+                read: 0
             };
-            let  upload_path =path.resolve(this.chat_upload, operator.user_id);
-            think.mkdir(upload_path);
+            if(data.content_type===1){
+                let  upload_path =path.resolve(this.chat_upload, operator.user_id);
+                think.mkdir(upload_path);
+                let fileName=uuid.v1();
+                await this.writeFile(path.resolve(upload_path,fileName),data.content);
+                doc.content= `${operator.user_id}/${fileName}`;
+            }
 
-            let fileName=uuid.v1();
 
-            await this.writeFile(path.resolve(upload_path,fileName),data.content);
-            doc.content= `${operator.user_id}/${fileName}`;
+
+
 
 
             let isOnline=await Room.isOnlineByUserId(data.rev_user);
-            if(isOnline) doc.read = true;
+            console.log(isOnline,data.rev_user);
+            if(isOnline) doc.read = 1;
             let id = await this.model('chat').create(doc);
             doc.id=id;
-
             doc.content=data.content;
             if (isOnline) {
                 let rev_user = await Room.getOperatorByUserId(data.rev_user);
+                console.log(rev_user);
+                doc.read=0;
+                console.log(doc);
                 socket.to(rev_user.socket_id).emit("chat", doc);
                 //console.log("rev_user online " + rev_user.socket_id);
 
@@ -365,18 +384,26 @@ export default class extends think.controller.base {
             let ret = await Model.getChat(data.module_type, data.module_id, operator.user_id, data.chat_user);
 
             if (think.isArray(ret)) {
-                let id_list = ret.map(item=>item.id);
+                let id_list = ret.map(item=>item.id).filter(item=>item.rev_user===operator.user_id);
                 for(let item of ret){
                     item.create_time = new Date(item.create_time).getTime();
                     if(item.content_type===1){
-                        console.log( path.resolve(this.chat_upload,item.content));
-                        item.content=await this.readFile(   path.resolve(this.chat_upload,item.content));
-                        item.content=item.content.toString();
+                        if(think.isFile(path.resolve)){
+                            item.content=await this.readFile(   path.resolve(this.chat_upload,item.content));
+                             item.content=item.content.toString();
+                        }
+                        else{
+                            item.content="[图片]";
+                            item.content_type=0;
+                        }
+
 
                     }
                 }
-
                 think.log(id_list, "debug");
+                if(id_list.length)
+                await Model.where(`id in (${id_list.join(',')})`).update({read:1});
+
                 //  console.log(ret)
                 socket.emit("end_request", {
                     request_key: request_key,

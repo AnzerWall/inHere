@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="demand-content">
-      <router-view></router-view>
+      <router-view ></router-view>
     </div>
 
   </div>

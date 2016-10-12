@@ -1,7 +1,7 @@
 <template>
   <div class="main-wrapper">
     <div class="main-content">
-      <router-view ></router-view>
+      <router-view keep-alive></router-view>
     </div>
     <div class="main-tabbar-wrapper">
       <div class="main-tabbar">

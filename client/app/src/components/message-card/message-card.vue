@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--官方通知-->
-    <div class="notice-div" v-if="item.tag==='notice'">
+    <div class="notice-div" v-if="type==='notice'">
       <span class="n-title  bold">
          <message-vip class="photo"></message-vip>
         <!--加上span制造空隙-->
