@@ -6,7 +6,7 @@
         <div class="text">
           {{user_id}} / {{school}}
         </div>
-        <div class="icon"><menu-icon style="fill:#ccc"></menu-icon></div>
+        <div class="icon" @click="clickMenu()"><menu-icon style="fill:#ccc"></menu-icon></div>
       </div>
     </div>
     <div class="profile-content">
@@ -20,6 +20,7 @@
 
       </div>
     </div>
+    <menu v-ref:menu></menu>
   </div>
 </template>
 <style scoped>
@@ -119,9 +120,12 @@
   import {token,login_state,is_login,school,user_id,tool_list} from '../../vuex/getters.js'
   import {loadToolList} from '../../vuex/actions/tool-action.js'
   import MenuIcon from 'svg/common/Menu.vue'
+
+  import menu from '../../components/menu.vue'
+
   export default{
     components:{
-      MenuIcon
+      MenuIcon,menu
     },
     vuex: {
       actions: {
@@ -189,6 +193,17 @@
       }
     },
     methods:{
+      clickMenu(){
+        this.$refs.menu.show({
+          btns:[{
+            title:'登出',
+            event(){
+              alert('登出');
+              return true;
+            }
+          }]
+        })
+      },
       clickTool(item){
         this.$router.go({
           path:'/tool',

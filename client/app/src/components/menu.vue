@@ -1,7 +1,7 @@
 <template lang="jade">
 .menu-bg(v-show="mshow",transition="fade",@click.self="hide()")
     .menu(v-show="mshow",transition="fade-down")
-        .menu-title {{title}}
+        .menu-title(@click="hide()",:style="{opacity:0.5}") {{title}}
         .menu-item(v-for="item in data",@click="clickMenu(item)") {{item.title}}
 </template>
 
@@ -35,7 +35,7 @@ module.exports = {
         },
         show(config){
             config = config || {};
-            config.title = config.title || ' ';
+            config.title = config.title || '关闭';
             config.btns = config.btns || [];
             this.title = config.title;
             this.data = config.btns;
@@ -74,8 +74,8 @@ module.exports = {
     right: 0;
     background: rgba(0, 0, 0, 0.2);
     text-align: center;
+    z-index: 8000;
     .menu {
-        z-index: 8000;
         background: white;
         color: black;
         display: flex;
