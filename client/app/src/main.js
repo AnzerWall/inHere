@@ -39,7 +39,7 @@ Vue.use(VueRouter);
         transition.next();
         return;
   }
-  if(transition.to.name!="login"&&store.state.user.is_login===false){
+  if(transition.to.name!="login"&&transition.to.name!='index'&&store.state.user.is_login===false){
     transition.redirect({
       name: 'login',
       query: {

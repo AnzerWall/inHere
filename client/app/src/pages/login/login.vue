@@ -53,7 +53,7 @@
 //            .then(this.$api.checkResult)
             .then(()=> {
               //console.log(this.$route.query.__ref);
-              this.dispatch('init');
+              this.$dispatch('init');
               if(this.$route.query.__ref){
                 this.$router.go(this.$route.query.__ref);
               }else {
