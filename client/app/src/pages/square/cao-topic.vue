@@ -231,15 +231,15 @@
         })
 
         },
-        goToCaoPublish(toplc){
-          // 这里应该传递一个话题给发布页并显示在发布页的标签上 ，先这样吧
+        goToCaoPublish(topic){
           if (this.$route.query.ext_type == 10){
-            this.$router.go('/cao-publish/in');
+            this.$router.go(`/cao-publish/in?topic=${topic}`);
           } else {
-            this.$router.go('/cao-publish/out');
+            this.$router.go(`/cao-publish/out?topic=${topic}`);
           }
         }
-        },
+
+      }
 
     }
 </script>

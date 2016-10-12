@@ -1,10 +1,18 @@
 <template>
 
-  <div class="publish-detail">
+  <div class="publish-detail" v-if="isPublish">
     <div class="publish-key">{{key}}</div>
     <div class="publish-value">
         <span @click="tagShow = !tagShow"><input readonly :value="tag || '选择标签'"></span>
-        <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="editable"></tag-editor>
+        <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="editable" :maxlength="maxlength"></tag-editor>
+    </div>
+  </div>
+
+  <div class="publish-detail" v-if="!isPublish">
+    <div class="register-key">{{key}}</div>
+    <div class="register-value">
+      <span @click="tagShow = !tagShow"><input readonly :value="tag || '选择标签'"></span>
+      <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="editable" :maxlength="maxlength"></tag-editor>
     </div>
   </div>
 
@@ -19,7 +27,6 @@
   }
   .publish-detail {
     width:100%;
-    font-weight: bold;
     border-bottom: 1px solid #d5d5d5;
     display: flex;
     flex-wrap: nowrap;
@@ -28,13 +35,24 @@
   }
   .publish-key {
     padding: 28px 18px;
+    font-weight: bold;
     color: gray;
     opacity: 0.85;
   }
+  .register-key{
+    padding: 25px 18px;
+  }
   .publish-value{
+    font-weight: bold;
     overflow-x: auto;
     width:70vw;
     padding: 28px 18px 28px 0;
+    text-align:right;
+  }
+  .register-value{
+    overflow-x: auto;
+    width:70vw;
+    padding: 25px 18px 28px 0;
     text-align:right;
   }
   span{
@@ -54,6 +72,12 @@
       TagEditor
     },
     props:{
+      //  isPublish == true 发布样式  false 其他样式
+      isPublish:{
+        type:Boolean,
+        required:true,
+        default:true
+      },
       key:{
         type:String,
         required:true,
@@ -90,6 +114,10 @@
         type:Boolean,
         required:true,
         default:true
+      },
+      maxlength: {
+        type: Number,
+        default: 6
       }
     }
   }

@@ -5,7 +5,7 @@
     <div class="publish-key">{{key}}</div>
     <div class="publish-value">
         <span>{{publish_value.replace('T',' ')}}</span>
-        <input type="datetime-local" v-model="publish_value">
+        <input type="datetime-local" :max="max_time" :min="min_time" v-model="publish_value">
     </div>
   </div>
 
@@ -71,6 +71,14 @@
         type: String,
         required: true,
         default: ""
+      },
+      max_time:{
+        type: String,
+        required:false
+      },
+      min_time:{
+        type:String,
+        required:false
       }
     },
     methods:{

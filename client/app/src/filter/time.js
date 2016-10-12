@@ -34,3 +34,6 @@ export function now(timestamp){
 export function parseDateTime(datetime) {
   return moment(datetime).valueOf();
 }
+export function datetime_now() {
+  return moment().format('YYYY-MM-DDTHH:mm');
+}

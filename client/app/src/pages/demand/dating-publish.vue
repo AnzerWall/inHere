@@ -21,15 +21,11 @@
 
     </publish-text>
 
-    <!--开始时间-->
-    <publish-time :key="publish_key.start_time" :publish_value.sync="content.start_time"
-                  :min_date.sync=today>
-
-    </publish-time>
+    <!--开始时间       :max_time="min_time_start"    -->
+    <publish-time :key="publish_key.start_time" :publish_value.sync="content.start_time" :min_time="min_time_start" ></publish-time>
 
     <!--结束时间-->
-    <publish-time :key="publish_key.end_time" :publish_value.sync="content.end_time"
-                  :min_date.sync="content.end_time"></publish-time>
+    <publish-time :key="publish_key.end_time" :publish_value.sync="content.end_time" :min_time="content.start_time"></publish-time>
 
     <!--集中地-->
     <publish-text :key="publish_key.gathering_place" :publish_value.sync="content.gathering_place">
@@ -37,7 +33,7 @@
 
     <!--集中时间-->
     <publish-time :key="publish_key.gathering_time" :publish_value.sync="content.gathering_time"
-                  :min_date.sync=today :max_date.sync="content.start_time">
+                  :min_time="content.start_time" :max_time="content.end_time">
     </publish-time>
 
   </div>
@@ -56,6 +52,7 @@
   import PublishTime from '../../components/publish/publish-time.vue'
   import PublishNumber from '../../components/publish/publish-number.vue'
   import {parseDateTime} from '../../filter/time'
+  import {datetime_now} from '../../filter/time'
   import noti from '../../components/noti.vue'
   import '../../components/publish/alert-view'
 
@@ -76,6 +73,8 @@
           gathering_place: "",      // "集中地点",
           gathering_time: "",        // 集中时间
         },
+        min_time_start:datetime_now(),
+//        max_time_end:"",
         publish_key: {
           per_cost: "人均消费",
           want_sex: "求陪同",
@@ -164,6 +163,12 @@
 
         // 为了安全，还是做一下验证
         if (message === "publish_dating") {
+
+          self.$refs.noti.noti('正在发布中...',{
+            timeout:1500,
+            bgColor:'blue'
+          });
+
           // post提交，发表走起
           var formData = new FormData();
           formData.append("ext_type", self.content.ext_type);
@@ -179,44 +184,39 @@
             formData.append("place", self.content.place);
           }
           formData.append("want_sex", self.content.want_sex);
-          var time = parseDateTime(self.content.start_time);
+          time = parseDateTime(self.content.start_time);
           formData.append("start_time", time);
-          formData.append("end_time", Date.parse(self.content.end_time));
+          time = parseDateTime(self.content.end_time);
+          formData.append("end_time", time);
           if (self.content.per_cost){
             formData.append("per_cost", self.content.per_cost);
           }
           if (self.content.gathering_time!=''){
-            formData.append("gathering_time", Date.parse(self.content.gathering_time));
+            var time = parseDateTime(self.content.gathering_time);
+            formData.append("gathering_time", time);
           }
           if (self.content.gathering_place) {
             formData.append("gathering_place", self.content.gathering_place);
           }
-//          function (res) {
-//            if (res.body.code === 200){
-//              Simpop({
-//                mask: false,
-//                content: '发布成功~',
-//                time: 1000
-//              }).show(function () {
-//                window.history.back();
-//              });
-//            }else {
-//              Simpop({
-//                content: '出了点小问题~',
-//                time: 1500
-//              }).show();
-//            }
-//            console.log("res"+res.body.code);
-//
-//          })
           return this.$request
             .post(`${this.$api.url_base}/demand?token=${token}`)
             .send(formData)
             .then(this.$api.checkResult)
+            .then(function () {
+              self.$refs.noti.warning('发布成功~',{
+                timeout:1500,
+                bgColor:'blue',
+                callback(result,vm){
+                  window.history.back();
+                }
+              });
+            })
             .catch((e)=> {
               if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
                 if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
-                  return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                  return this.$refs.noti.warning(`参数验证失败`,{
+                    timeout:1500
+                  })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
                 } else if (e.code === 401) {
                   return this.$router.go({
                     path: '/login',
@@ -225,15 +225,16 @@
                     }
                   });
                 } else {
-                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                    timeout:1500
+                  })
                 }
               } else {
                 console.error(e.stack||e);
-                return this.$refs.noti.warning(`未知错误:${e.message}`)
+                return this.$refs.noti.warning(`未知错误:${e.message}`,{
+                  timeout:1500
+                })
               }
-              self.$refs.noti.warning('发布失败~',{
-                timeout:1500
-              });
             })
         }
       },

@@ -18,7 +18,7 @@
       </div>
       <div class="btn " @click="onLogin">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</div>
     </div>
-    <div class="register-hint">还没有账号?</div>
+    <div class="register-hint" v-link="{path:'/register'}">还没有账号?</div>
   </div>
 </template>
 <style src="./login.scss" scoped lang="scss"></style>

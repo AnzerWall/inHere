@@ -25,6 +25,7 @@
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+        this.content.lab_name = this.$route.query.topic;
         var token = this.token;
         return this.$request
           .get(`${this.$api.url_base}/ask_reply/labels?token=${token}`)
@@ -36,6 +37,32 @@
               item.value = item.name;
               return item;
             });
+          })
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`,{
+                  timeout:1500
+                })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                  timeout:1500
+                })
+              }
+            } else {
+              console.error(e.stack||e);
+              return this.$refs.noti.warning(`网络出错啦:${e.message}`,{
+                timeout:2000
+              })
+            }
+            //后续显示重试按钮
           })
       }
     },
@@ -109,19 +136,18 @@
           return this.$request
             .post(`${this.$api.url_base}/ask_reply?token=${token}`)
             .send(formData)
-            .then(function (res) {
-              if (res.status===200){
-                self.$refs.noti.noti('发布成功~',{
-                  timeout:1500,
-                  bgColor:'red',
-                  callback(result,vm){
-                    window.history.back();
-                  }
-                });
-              }
+            .then(this.$api.checkResult)//处理code等信息，返回data
+            .then(function () {
+              self.$refs.noti.noti('发布成功~',{
+                timeout:1500,
+                bgColor:'red',
+                callback(result,vm){
+                  window.history.back();
+                }
+              });
             })
             .catch(function (err) {
-              self.$refs.noti.warning(err,{
+              self.$refs.noti.warning("是不是网络出错了呢："+err,{
                 timeout:1500
               });
             })

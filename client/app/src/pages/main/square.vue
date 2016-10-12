@@ -5,15 +5,21 @@
     <div v-if="$loadingRouteData" class="loading-area">
       <pulse-loader color="rgb(24, 184, 3)" size="12px"></pulse-loader>
     </div>
-    <div class="square-container" v-if="!$loadingRouteData">
+
+    <div class="fail" v-if="!$loadingRouteData && is_fail"  @click="load()">
+      <fail text="加载失败,点击刷新"></fail>
+    </div>
+
+    <div class="square-container" v-if="!$loadingRouteData && !is_fail">
       <!--社团活动入口-->
       <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}" @click="activityShow()">
-        <div class="activity-content-bg"></div>
-        <div class="activity-content">
+        <!--<div class="">-->
+        <div class="activity-content activity-content-bg">
           <div class="square-activity-tittle"><span>{{activity.title}}</span></div>
           <span>@{{activity.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>{{activity.start_time |date}} ~ {{activity.end_time |date}}</span>
         </div>
+        <!--</div>-->
       </div>
 
       <!--有。必。栏目-->
@@ -57,9 +63,12 @@
   <noti v-ref:noti></noti>
 </template>
 <style scoped>
+  .fail{
+    margin: auto;
+  }
   .loading-area {
     display: flex;
-    justify-content: center;;
+    justify-content: center;
     margin-top: 180px;
   }
 
@@ -80,7 +89,7 @@
   }
 
   .activity-content, .activity-content-bg {
-    height: 47px;
+    /*height: 70px;*/
     position: absolute;
     bottom: 0px;
     padding: 30px 0 15px 0;
@@ -92,7 +101,7 @@
   }
 
   .activity-content-bg {
-    width: 100%;
+    /*width: 100%;*/
     opacity: 0.75;
     background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   }
@@ -102,11 +111,11 @@
     font-weight: bold;
     margin-bottom: 5px;
 
-    /* 保持三行  */
+    /* 保持一行  */
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 
@@ -154,6 +163,7 @@
   import {date} from '../../filter/time.js'
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js'
   import noti from '../../components/noti.vue'
+  import fail from '../../components/fail.vue'
 
   export default{
     vuex: {
@@ -172,6 +182,7 @@
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
+//        this.load();
         let url=`${this.$api.url_base}/square`;
         let self = this;
         return this.$request
@@ -179,7 +190,8 @@
           .query({token:this.token})
           .then(this.$api.checkResult)//处理code等信息，返回data
           .then((data)=> {
-            console.log(data);
+            self.is_fail = false;
+              console.log(data);
             //处理数据
             this.activity=data.activity;
 //            this.target=data.target_list;
@@ -189,7 +201,9 @@
           .catch((e)=> {
             if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
               if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
-                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                return this.$refs.noti.warning(`参数验证失败`,{
+                  timeout:1500
+                })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
               } else if (e.code === 401) {
                 return this.$router.go({
                   path: '/login',
@@ -198,18 +212,24 @@
                   }
                 });
               } else {
-                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+               this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                 timeout:1500
+               })
               }
             } else {
               console.error(e.stack||e);
-              return this.$refs.noti.warning(`未知错误:${e.message}`)
+              this.$refs.noti.warning(`网络出错啦:${e.message}`,{
+                timeout:2000
+              })
             }
             //后续显示重试按钮
+            this.is_fail = true;
           })
       }
     },
     data: function () {
       return {
+        is_fail:false,
         target_item: [
           {
             id: 2, //清单编号
@@ -273,6 +293,51 @@
     },
 
     methods: {
+      load(){
+//        this.load();
+        let url=`${this.$api.url_base}/square`;
+        let self = this;
+        return this.$request
+          .get(url)
+          .query({token:this.token})
+          .then(this.$api.checkResult)//处理code等信息，返回data
+          .then((data)=> {
+            self.is_fail = false;
+            console.log(data);
+            //处理数据
+            this.activity=data.activity;
+//            this.target=data.target_list;
+            this.ask_reply=data.ask_reply;
+            this.teasing=data.teasing;
+          })
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`,{
+                  timeout:1500
+                })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                  timeout:1500
+                })
+              }
+            } else {
+              console.error(e.stack||e);
+              this.$refs.noti.warning(`是不是网络信号太弱了呢：${e.message}`,{
+                timeout:2000
+              })
+            }
+            //后续显示重试按钮
+            this.is_fail = true;
+          })
+      },
       activityShow(){
         this.$router.go('/activity');
       },
@@ -351,7 +416,8 @@
     components: {
       PulseLoader,
       SquareSlider,
-      noti
+      noti,
+      fail
     },
     filters: {
       date

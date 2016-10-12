@@ -8,8 +8,8 @@ let Type = {
   TYPE_EXPRESS: 1,
   TYPE_SELL: 2,
   TYPE_HELP: 3,
-  TYPE_FOUND: 4,
-  TYPE_LOST: 5,
+  TYPE_LOST: 4,
+  TYPE_FOUND: 5,
   TYPE_DATING: 6
 };
 let getMainColor = function (data) {

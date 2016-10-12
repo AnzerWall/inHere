@@ -26,7 +26,7 @@
       <!--成色-->
       <publish-tag-choose :key="publish_key.quality" :tag.sync="content.quality" :tags="lab_items" :editable="!1"></publish-tag-choose>
       <!--购买时间-->
-      <publish-time :key="publish_key.buy_time1" :publish_value.sync="content.buy_time"></publish-time>
+      <publish-time :key="publish_key.buy_time1" :publish_value.sync="content.buy_time" :max_time="max_time"></publish-time>
 
     </div>
 
@@ -61,8 +61,8 @@
   import PublishTime from '../../components/publish/publish-time.vue'
   import PublishNumber from '../../components/publish/publish-number.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
-  import '../../components/publish/alert-view'
   import {parseDateTime} from '../../filter/time'
+  import {datetime_now} from '../../filter/time'
   import noti from '../../components/noti.vue'
 
   export default{
@@ -83,6 +83,7 @@
           original_price: "",          //"原价",
           price: "",                   //"售价"
         },
+        max_time:datetime_now(),
         publish_type: "",          // 发布任务的类型  1、快递  2、转让 3、帮忙
         lab_items:[
           {name:"1成",value:"1成"},

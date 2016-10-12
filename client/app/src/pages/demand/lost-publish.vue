@@ -16,7 +16,7 @@
     </publish-text>
 
     <!--捡到、丢失时间-->
-    <publish-time :key="publish_key.found_time" :publish_value.sync="content.found_time" :max_date.sync=today>
+    <publish-time :key="publish_key.found_time" :publish_value.sync="content.found_time" :max_time="max_time">
     </publish-time>
 
   </div>
@@ -35,6 +35,7 @@
   import PublishTime from '../../components/publish/publish-time.vue'
   import {token, login_state, is_login} from '../../vuex/getters.js'
   import {parseDateTime} from '../../filter/time'
+  import {datetime_now} from '../../filter/time'
   import noti from '../../components/noti.vue'
 
   export default{
@@ -48,6 +49,7 @@
           thing: "",               //"东西名称",
           found_time: "",               //"丢失/捡到时间",
         },
+        max_time:datetime_now(),
         publish_key: {
           ext_type: "类型",
           thing: "什么物品",
@@ -108,6 +110,10 @@
     },
     events: {
       'publish-demand': function (message) {
+
+        alert(this.max_time);
+        return;
+
         var self = this;
         let token = this.token;
         var BOUNDARYPREFIX = 'nbglme';
@@ -147,9 +153,9 @@
             var found_time = parseDateTime(self.content.found_time);
             if (self.content.ext_type == 4) { // 丢失
 
-              formData.append("lose_time", Date.parse(found_time));
+              formData.append("lose_time", found_time);
             } else { // 捡到
-              formData.append("pickeup_time",Date.parse(found_time));
+              formData.append("pickeup_time",found_time);
             }
           }
 

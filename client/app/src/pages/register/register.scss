@@ -60,7 +60,7 @@ $MAIN_COLOR: #00cc4d;
       }
       .input-title{
         flex-grow: 0;;
-        width: 3rem;
+        width: 4rem;
       }
       input{
         &:focus{
@@ -71,6 +71,9 @@ $MAIN_COLOR: #00cc4d;
         flex-grow: 1;
         margin: 0;
         padding:0 15px;
+      }
+      .school_text{
+        text-align: right;
       }
     }
 
@@ -86,14 +89,11 @@ $MAIN_COLOR: #00cc4d;
     color: white;
     font-size: pxToRem(16px);
   }
-  .register-hint{
+  .login-hint{
     color: $MAIN_COLOR;
     position: fixed;
     bottom: pxToRem(19px);
     font-size: pxToRem(16px);
-    left: 50%;
-    transform: translateX(-50%);
-    width:100%;
 
   }
 }
