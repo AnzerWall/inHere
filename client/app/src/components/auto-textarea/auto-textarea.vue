@@ -29,6 +29,7 @@
     box-sizing: border-box;
     resize: none;
     overflow: hidden;
+    overflow-y:auto;
     padding: 0;
     width: 85%;
     margin: 15px 20px;
