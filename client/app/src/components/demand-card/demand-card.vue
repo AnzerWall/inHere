@@ -9,7 +9,7 @@
 
     </div>
     <div class="demand-card-content">
-      <div class="text">{{data.text}}</div>
+      <div>{{data.text}}</div>
       <div class="image-wrapper hide-scroll" v-if="data.photos&& data.photos.length!=0">
         <img class="image" v-for="item in data.photos" v-lazy="item.src" @click.stop="onClickImage($index)">
       </div>

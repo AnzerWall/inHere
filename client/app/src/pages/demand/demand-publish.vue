@@ -45,7 +45,7 @@
     justify-content: space-between;
   }
   .publish-nav{
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: 0 10px;
   }
   .navbar_item{

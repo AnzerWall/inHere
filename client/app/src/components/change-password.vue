@@ -44,6 +44,7 @@ module.exports = {
         },
         hide(){
             this.wshow=false;
+            this.$refs.noti.hide();
         },
         clickConfirm(){
             var chk = this.validator(this.oldPwd,this.newPwd1,this.newPwd2);
@@ -53,8 +54,15 @@ module.exports = {
                 })
             }
             else {
-                var tmp = this.confirm(this.oldPwd,this.newPwd1);
-                if(tmp)this.hide();
+                this.confirm(this.oldPwd,this.newPwd1,shouldHide=>{
+                    // if(shouldHide)
+                    this.oldPwd = '';
+                    this.newPwd1 = '';
+                    this.newPwd2 = '';
+                    this.hide();
+                });
+                // var tmp = this.confirm(this.oldPwd,this.newPwd1);
+                // if(tmp)this.hide();
             }
         }
     }

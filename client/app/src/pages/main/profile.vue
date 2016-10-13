@@ -21,6 +21,7 @@
       </div>
     </div>
     <menu v-ref:menu></menu>
+    <noti v-ref:noti></noti>
   </div>
 </template>
 <style scoped>
@@ -120,12 +121,12 @@
   import {token,login_state,is_login,school,user_id,tool_list} from '../../vuex/getters.js'
   import {fetchToolList} from '../../vuex/actions/tool-action.js'
   import MenuIcon from 'svg/common/Menu.vue'
-
+  import noti from '../../components/noti.vue'
   import menu from '../../components/menu.vue'
 
   export default{
     components:{
-      MenuIcon,menu
+      MenuIcon,menu,noti
     },
     vuex: {
       actions: {
@@ -194,6 +195,10 @@
     },
     methods:{
       clickMenu(){
+        var token = this.token;
+        var is_login = this.is_login;
+        var self = this;
+        var api_base = this.$api.url_base;
         this.$refs.menu.show({
           title:'菜单',
           btns:[{
@@ -205,7 +210,28 @@
           },{
             title:'登出',
             event(){
-              alert('登出');
+
+              if (is_login == true){
+                self.$request
+                  .del(`${api_base}/logout?token=${token}`)
+                  .end(function (err, res) {
+                    console.log("123456");
+                    if (err){
+                      self.$refs.noti.warning(`出了点小问题,未能成功登出`,{
+                        timeout:1500
+                      })
+                    } else if (res.body.code == 200 || res.body.code == 401){
+                      self.$router.go('/login');
+                      return true;
+                    } else {
+                      self.$refs.noti.warning(`出了点小问题,未能成功登出`,{
+                        timeout:1500
+                      })
+                    }
+                  })
+              } else {
+                self.$router.go('/login');
+              }
               return true;
             }
           }]

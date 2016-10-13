@@ -10,11 +10,11 @@
       <div class="login-input-field">
         <div class="login-input-field-username">
           <span class="input-title">用户名</span>
-          <input v-model="username">
+          <input v-model="username" placeholder="请输入用户名">
         </div>
         <div class="login-input-field-password">
           <span class="input-title">密&nbsp;&nbsp;码</span>
-          <input type="password" v-model="password">
+          <input type="password" placeholder="请输入密码" v-model="password">
         </div>
 
       </div>
@@ -65,11 +65,11 @@
                 if (e.code === 23333) {
                   return this.$refs.noti.warning(`参数验证失败`,{timeout:1000})
                 }else {
-                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{timeout:1000})
+                  return this.$refs.noti.warning(`${e.message}`,{timeout:1000})
                 }
               } else {
                 console.error(e.stack||e);
-                return this.$refs.noti.warning(`未知错误:${e.message}`,{timeout:1000})
+                return this.$refs.noti.warning(`${e.message}`,{timeout:1000})
               }
             });
         }
