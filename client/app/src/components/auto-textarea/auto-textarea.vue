@@ -23,6 +23,9 @@
     position: absolute;
     opacity: 0;
     right: -9999px;
+
+
+
   }
 
   .auto-textarea, .auto-textarea-hidden  {
