@@ -44,6 +44,7 @@ module.exports = {
         },
         hide(){
             this.wshow=false;
+            this.$refs.noti.hide();
         },
         clickConfirm(){
             var chk = this.validator(this.oldPwd,this.newPwd1,this.newPwd2);
