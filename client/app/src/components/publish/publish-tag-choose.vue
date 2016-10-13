@@ -75,7 +75,7 @@
       //  isPublish == true 发布样式  false 其他样式
       isPublish:{
         type:Boolean,
-        required:true,
+        required:false,
         default:true
       },
       key:{

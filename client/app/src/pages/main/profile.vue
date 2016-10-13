@@ -11,7 +11,7 @@
     </div>
     <div class="profile-content">
       <div class="profile-tools-inner" :style="{'width': grid_field_width}">
-        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.icon+')',width:grid_width,height:grid_width}" @click="clickTool(item)">
+        <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.svg.src+')',width:grid_width,height:grid_width}" @click="clickTool(item)">
             <div class="title" :style="{color:item.color}">{{item.title}}</div>
         </div>
 
@@ -125,6 +125,44 @@
   import menu from '../../components/menu.vue'
 
   export default{
+    route: {
+      data(){
+        var token = this.token;
+        return this.$request
+          .get(`${this.$api.url_base}/tools?token=${token}`)
+          .then(this.$api.checkResult)//处理code等信息，返回data
+          .then((data)=> {
+            //处理数据
+            this.tools = data.items;
+          })
+          .catch((e)=> {
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`,{
+                  timeout:1500
+                })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                  timeout:1500
+                })
+              }
+            } else {
+              console.error(e.stack||e);
+              return this.$refs.noti.warning(`网络出错啦:${e.message}`,{
+                timeout:2000
+              })
+            }
+            //后续显示重试按钮
+          })
+      }
+    },
     components:{
       MenuIcon,menu,noti
     },
@@ -150,37 +188,51 @@
 //       school:"肇庆学院",
        tools:[{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Fankajilu.svg",
+         svg: {
+           src: "/static/image/profile/Fankajilu.svg"
+         },
          title:"饭卡记录",
          color:"#FF3A3A"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Kuaidichaxun.svg",
+         svg: {
+           src: "/static/image/profile/Kuaidichaxun.svg"
+         },
          title:"快递查询",
          color:"#16A82E"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Qimochengji.svg",
+         svg: {
+           src: "/static/image/profile/Qimochengji.svg"
+         },
          title:"期末成绩",
          color:"#4F8794"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Shuifeichaxun.svg",
+         svg: {
+           src: "/static/image/profile/Shuifeichaxun.svg"
+         },
          title:"水费查询",
          color:"#0098FF"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/siliujichengji.svg",
+         svg: {
+           src: "/static/image/profile/siliujichengji.svg"
+         },
          title:"四六级成绩",
          color:"#FFA600"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Wodehuida.svg",
+         svg: {
+           src: "/static/image/profile/Wodehuida.svg"
+         },
          title:"我的回答",
          color:"#09CE88"
        },{
          url:"http://m.kuaidi100.com/",
-         icon:"/static/image/profile/Wodemubiao.svg",
+         svg: {
+           src: "/static/image/profile/Wodemubiao.svg"
+         },
          title:"我的目标",
          color:"#7300FF"
        }]
