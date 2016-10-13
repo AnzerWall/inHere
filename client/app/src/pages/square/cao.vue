@@ -5,13 +5,13 @@
     <div class="body" >
 
       <!--校内-->
-      <div class="school" v-if="$route.query.ext_type==='10'">
+      <div class="school">
         <div class="header" >
           <div class="cao-top" >
             <div class="left" @click="$router.go('/main/square')"><span>《 有槽必吐</span></div>
             <div class="right">
               <div class="in">校内</div>
-              <div class="out" @click="$router.go('/cao?ext_type=11')">校外</div>
+              <div class="out" @click="$router.go('/cao-out')">校外</div>
             </div>
           </div>
           <div class="space"></div>
@@ -26,62 +26,20 @@
           <fail v-ref:fail class="cao-fail" v-if="!data&&!$loadingRouteData" text="加载失败,点击刷新" >
           </fail>
         </div>
-
-
-
         <div class="message" v-if="data&&!$loadingRouteData">
+          <!--message组件-->
           <message v-for="item in items" :item.sync="item"  :main_color="main_color" @on-click="onClick" @onclickpraise="onclickpraise" >
           </message>
+          <!--无限加载组件-->
           <infinite-loading :on-infinite="onLoadMore" v-if="!$loadingRouteData">
         <span slot="no-more">
           没有更多了...
         </span>
           </infinite-loading>
         </div>
-
-        <!--&lt;!&ndash;<div @click="$router.go('/cao?type=school&tag=1')"> 小道消息</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div v-if="$route.query.tag==='1'">到付件案件了解到该了解爱死了几个垃圾管理</div>&ndash;&gt;-->
-
-
       </div>
-
-
-
-      <!--校外-->
-      <div class="public" v-if="$route.query.ext_type==='11'">
-        <div class="header" >
-          <div class="cao-top" >
-            <div class="left" @click="$router.go('/main/square')">《 有槽必吐</div>
-            <div class="right">
-              <div class="in1" @click="$router.go('/cao?ext_type=10')&&clean(this.labels,this.items)" >校内</div>
-              <div class="out1" >校外</div>
-            </div>
-          </div>
-          <div class="space1"></div>
-          <slider :topics="labels" class="classify"  :square_type="4" v-on:go-to-the-topic='goToTopic' v-if="data" v-if="!$loadingRouteData">
-
-          </slider>
-
-
-        </div>
-        <!--加载失败图标组件-->
-        <div @click="load()">
-          <fail v-ref:fail class="cao-fail" v-if="!data&&!$loadingRouteData" text="加载失败,点击刷新"></fail>
-        </div>
-
-
-        <div class="message" v-if="data&&!$loadingRouteData">
-          <message v-for="item in items" :item.sync="item" :main_color="main_color"  @on-click="onClick" @onclickpraise="onclickpraise">
-          </message>
-          <infinite-loading :on-infinite="onLoadMore" v-if="!$loadingRouteData">
-        <span slot="no-more">
-          没有更多了...
-        </span>
-          </infinite-loading>
-      </div>
-        </div>
       <div class="foot" @click="goToPublish">
-        <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难">
+        <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难" disabled>
       </div>
 
     </div>
@@ -144,17 +102,7 @@
     width: 100%;
     height: 60px;
   }
-  .cao-top .right .out1{
-    padding: 0px 5px;
-  }
-  .cao-top .right .in1{
-    padding: 0px 5px;
-    opacity: 0.5;
-  }
-  .space1{
-    height: 60px;
-    width: 100%;
-  }
+
   .message{
     width: 100%;
     margin-bottom: 50px;
@@ -189,7 +137,6 @@
 <script type="text/ecmascript-6">
   import Message from '../../components/square/message.vue';
   import Classify from '../../components/square/classify.vue';
-  import Slider from '../../components/square-slider/slider.vue';
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
   import praise from '../../util/praise.js';
   import {token,login_state,is_login,school,user_id} from '../../vuex/getters.js';
@@ -210,7 +157,6 @@
       components: {
         Message,
         Classify,
-        Slider,
         PulseLoader,
         InfiniteLoading,
         Noti,
@@ -235,7 +181,7 @@
             .get(`${this.$api.url_base}/ask_reply`)
             .query({token: token})
             .query({offset:( this.data.offset||0) + 5, limit: 5})
-            .query({ext_type: this.$route.query.ext_type})
+            .query({ext_type: 10})
             .then(this.$api.checkResult)
             .then((data)=> {
               //通知组件加载完毕
@@ -255,11 +201,7 @@
             })
         },
           goToPublish(){
-            if (this.$route.query.ext_type == 10){
               this.$router.go('/cao-publish/in');
-            } else {
-              this.$router.go('/cao-publish/out');
-            }
           },
           filterLabel(id)
           {
@@ -270,20 +212,7 @@
               this.$router.go('/cao-topic?ext_type=10&label_id='+id);
             }
           },
-        goToTopic(id,cao_type){
-          switch (cao_type){
-            case 4:{
-              if(id==0){
-                this.$router.go('/label?ext_type=11');
-              }
-              else{
-                this.$router.go('/cao-topic?ext_type=11&label_id='+id);
-              }
 
-            }
-
-          }
-        },
         onClick(id){
           this.$router.go('/cao-detail/'+id);
         },
@@ -299,7 +228,7 @@
         load(){
           return this.$request
             .get(`${this.$api.url_base}/ask_reply`)
-            .query({ext_type:this.$route.query.ext_type})
+            .query({ext_type:10})
             .query({token:this.token})
             .then(this.$api.ckeckResult)
             .then((res)=>{
@@ -355,7 +284,7 @@
           let url=`${this.$api.url_base}/ask_reply`
           return this.$request
             .get(url)
-            .query({ext_type:this.$route.query.ext_type})
+            .query({ext_type:10})
             .query({token:this.token})
             .then(this.$api.checkResult)
             .then(function(data){

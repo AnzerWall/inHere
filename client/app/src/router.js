@@ -16,6 +16,7 @@ import DemandDetail from  'pages/demand/detail.vue'
 import DemandTask from  'pages/demand/task.vue'
 import DemandLost from  'pages/demand/lost.vue'
 import DemandDating from  'pages/demand/dating.vue'
+import Myinfo from 'pages/myinfo/myinfo.vue'
 
 import DemandPublish from 'pages/demand/demand-publish.vue'
 import TaskPublish from 'pages/demand/task-publish.vue'
@@ -31,6 +32,7 @@ import  NuoDetailPage from 'pages/nuo/detail.vue'
 import  CreateNuoPage from 'pages/nuo/create.vue'
 
 import Cao from 'pages/square/cao.vue'
+import CaoOut from 'pages/square/cao-out.vue'
 import Answer from 'pages/square/answer.vue'
 import CaoTopic from 'pages/square/cao-topic.vue'
 import AnswerTopic from 'pages/square/answer-topic.vue'
@@ -88,6 +90,9 @@ export default{
       },
       '/profile': {
         component: Profile
+      },
+      '/myinfo':{
+        component:Myinfo
       }
     }
   },
@@ -154,6 +159,9 @@ export default{
   // },
   '/cao':{
     component:Cao,
+  },
+  '/cao-out':{
+    component:CaoOut
   },
   '/answer':{
     component:Answer
