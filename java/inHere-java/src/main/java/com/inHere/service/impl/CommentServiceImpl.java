@@ -4,15 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.constant.Field;
-import com.inHere.dao.CommentMapper;
-import com.inHere.dao.NameUsedMapper;
+import com.inHere.dao.*;
 import com.inHere.dto.CommentDto;
 import com.inHere.dto.ParamsListDto;
 import com.inHere.dto.ReturnCommentDto;
-import com.inHere.entity.Comment;
-import com.inHere.entity.Name;
-import com.inHere.entity.NameUsed;
-import com.inHere.entity.Token;
+import com.inHere.entity.*;
 import com.inHere.redis.TokenManage;
 import com.inHere.service.CommentService;
 import org.apache.log4j.Logger;
@@ -35,6 +31,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private TokenManage tokenManage;
+
+    @Autowired
+    private DemandMapper demandMapper;
+
+    @Autowired
+    private AskReplyMapper askReplyMapper;
+
+    @Autowired
+    private AskReplyUserMapper askReplyUserMapper;
 
     /**
      * 获取评论列表
@@ -140,12 +145,12 @@ public class CommentServiceImpl implements CommentService {
         commentMapper.insertComment(commentDto, token.getUser_id(), nameObj.getName());
 
         // 发布信息，添加提醒数据进入信息队列
-
-        tokenManage.publish("test");
+        String tipInfo = this.getTipMessage(commentDto, token.getUser_id()).toJSONString();
+        tokenManage.publish(tipInfo);
     }
 
     /**
-     * 获取提醒信息
+     * 获取提醒信息 TODO 记得检查一番
      */
     public JSONObject getTipMessage(CommentDto commentDto, String user_id) {
         JSONObject msg = new JSONObject();
@@ -154,6 +159,7 @@ public class CommentServiceImpl implements CommentService {
         msg.put("item_id", commentDto.getItem_id());
         msg.put("from", user_id);
 
+        JSONArray to_users = new JSONArray();
         if (ext_type == Field.ExtType_Express
                 || ext_type == Field.ExtType_Sell
                 || ext_type == Field.ExtType_Help
@@ -161,10 +167,23 @@ public class CommentServiceImpl implements CommentService {
                 || ext_type == Field.ExtType_Found
                 || ext_type == Field.ExtType_Dating) {
 
-
-
+            Demand tmp = demandMapper.selectByPrimaryKey(commentDto.getItem_id());
+            to_users.add(tmp.getUserId());
         }
-        msg.put("to_users", "");
+        if (ext_type == Field.ExtType_InTeasing
+                || ext_type == Field.ExtType_OutTeasing) {
+            AskReply tmp = askReplyMapper.selectByPrimaryKey(commentDto.getItem_id());
+            to_users.add(tmp.getUserId());
+        }
+        if (ext_type == Field.ExtType_Activity) {
+            AskReply tmp = askReplyMapper.selectByPrimaryKey(commentDto.getItem_id());
+            to_users.add(tmp.getUserId());
+            List<AskReplyUser> list = askReplyUserMapper.selectByAskReplyId(commentDto.getItem_id());
+            for (AskReplyUser arUser : list) {
+                to_users.add(arUser.getUserId());
+            }
+        }
+        msg.put("to_users", to_users.toJSONString());
         msg.put("content", commentDto.getContent());
         return msg;
     }

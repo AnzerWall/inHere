@@ -2,31 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.inHere.dao.AskReplyUserMapper">
 
-	<resultMap id="BaseResultMap" type="com.inHere.entity.AskReplyUser">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="user_id" property="userId" jdbcType="VARCHAR" />
-		<result column="ask_reply_id" property="askReplyId" jdbcType="INTEGER" />
-	</resultMap>
+    <resultMap id="BaseResultMap" type="com.inHere.entity.AskReplyUser">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <id column="ask_reply_id" property="askReplyId" jdbcType="INTEGER"/>
+    </resultMap>
 
-	<sql id="Base_Column_List">
-		id, user_id, ask_reply_id
+    <sql id="Base_Column_List">
+		user_id, ask_reply_id
 	</sql>
 
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from tb_ask_reply_user
-		where id = #{id,jdbcType=INTEGER}
-	</select>
+    <select id="selectByAskReplyId" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_ask_reply_user
+        where ask_reply_id = #{ask_reply_id}
+    </select>
 
-	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from
 		tb_ask_reply_user
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 
-	<insert id="insert" parameterType="com.inHere.entity.AskReplyUser">
+    <insert id="insert" parameterType="com.inHere.entity.AskReplyUser">
 		insert into tb_ask_reply_user
 		(id, user_id, ask_reply_id
 		)
@@ -36,47 +35,47 @@
 		)
 	</insert>
 
-	<insert id="insertSelective" parameterType="com.inHere.entity.AskReplyUser">
-		insert into tb_ask_reply_user
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="userId != null">
-				user_id,
-			</if>
-			<if test="askReplyId != null">
-				ask_reply_id,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="userId != null">
-				#{userId,jdbcType=VARCHAR},
-			</if>
-			<if test="askReplyId != null">
-				#{askReplyId,jdbcType=INTEGER},
-			</if>
-		</trim>
-	</insert>
+    <insert id="insertSelective" parameterType="com.inHere.entity.AskReplyUser">
+        insert into tb_ask_reply_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="askReplyId != null">
+                ask_reply_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="askReplyId != null">
+                #{askReplyId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 
-	<update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.AskReplyUser">
-		update tb_ask_reply_user
-		<set>
-			<if test="userId != null">
-				user_id = #{userId,jdbcType=VARCHAR},
-			</if>
-			<if test="askReplyId != null">
-				ask_reply_id = #{askReplyId,jdbcType=INTEGER},
-			</if>
-		</set>
-		where id = #{id,jdbcType=INTEGER}
-	</update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.inHere.entity.AskReplyUser">
+        update tb_ask_reply_user
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="askReplyId != null">
+                ask_reply_id = #{askReplyId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
-	<!-- 选择关注某问答的用户 -->
-	<select id="selectFollowUser" resultMap="BaseResultMap">
+    <!-- 选择关注某问答的用户 -->
+    <select id="selectFollowUser" resultMap="BaseResultMap">
 		SELECT * FROM tb_ask_reply_user
 		WHERE user_id = #{user_id} AND ask_reply_id = #{ask_reply_id}
 	</select>

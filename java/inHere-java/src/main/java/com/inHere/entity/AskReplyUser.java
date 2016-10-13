@@ -2,19 +2,9 @@ package com.inHere.entity;
 
 public class AskReplyUser {
 
-	private Integer id;
-
 	private String userId;
 
 	private Integer askReplyId;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getUserId() {
 		return userId;

@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.inHere.entity.AskReplyUser;
 
+import java.util.List;
+
 public interface AskReplyUserMapper {
 
 	int deleteByPrimaryKey(Integer id);
@@ -12,7 +14,7 @@ public interface AskReplyUserMapper {
 
 	int insertSelective(AskReplyUser record);
 
-	AskReplyUser selectByPrimaryKey(Integer id);
+	List<AskReplyUser> selectByAskReplyId(Integer ask_reply_id);
 
 	int updateByPrimaryKeySelective(AskReplyUser record);
 

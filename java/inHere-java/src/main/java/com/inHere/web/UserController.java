@@ -38,6 +38,14 @@ public class UserController {
      */
 
     /**
+     * TODO 获取权限列表
+     */
+
+    /**
+     * TODO 获取用户权限列表
+     */
+
+    /**
      * TODO 分配角色
      */
 
