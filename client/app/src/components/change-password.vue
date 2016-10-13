@@ -53,8 +53,15 @@ module.exports = {
                 })
             }
             else {
-                var tmp = this.confirm(this.oldPwd,this.newPwd1);
-                if(tmp)this.hide();
+                this.confirm(this.oldPwd,this.newPwd1,shouldHide=>{
+                    // if(shouldHide)
+                    this.oldPwd = '';
+                    this.newPwd1 = '';
+                    this.newPwd2 = '';
+                    this.hide();
+                });
+                // var tmp = this.confirm(this.oldPwd,this.newPwd1);
+                // if(tmp)this.hide();
             }
         }
     }

@@ -30,23 +30,23 @@ module.exports = {
         menu
     },
     methods: {
-        showMenu(){
+        showMenu() {
             this.$refs.menu.show({
-                btns:[{
-                    title:'按钮1',
-                    event:function(){
+                btns: [{
+                    title: '按钮1',
+                    event: function() {
                         console.log('event1')
                         return true;
                     }
-                },{
-                    title:'按钮2',
-                    event:function(){
+                }, {
+                    title: '按钮2',
+                    event: function() {
                         console.log('event2')
                         return false;
                     }
-                },{
-                    title:'按钮3',
-                    event:function(){
+                }, {
+                    title: '按钮3',
+                    event: function() {
                         console.log('event3')
                         return true;
                     }
@@ -57,11 +57,14 @@ module.exports = {
             this.$refs.changepassword.show({
                 validator(oldPwd, newPwd1, newPwd2) {
                     console.log(oldPwd, newPwd1, newPwd2);
-                    return newPwd1===newPwd2?null:'两个新密码不一样';
+                    return newPwd1 === newPwd2 ? null : '两个新密码不一样';
                 },
-                confirm(oldPwd,newPwd) {
+                confirm(oldPwd, newPwd, hide) {
                     alert(`旧密码:${oldPwd},新密码:${newPwd}`);
-                    return true;
+
+                    setTimeout(function() {
+                        hide();
+                    }, 2000);
                 }
             })
         },

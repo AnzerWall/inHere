@@ -151,7 +151,7 @@
 
 
             },
-            confirm(oldPwd,newPwd){
+            confirm(oldPwd,newPwd,hide){
               console.log("11")
               let url=`${this.$api.url_base}/user/change_pwd`;
               console.log(url)
@@ -161,13 +161,13 @@
                 .send({old_pwd:oldPwd,new_pwd:newPwd})
                 .then(this.$api.checkResult)
                 .then((res)=>{
-                  return true;
+                  cosnole.log('修改成功');
+                  hide();
                 })
                 .catch((e)=>{
                  if(e.code==412){
                    this.$refs.noti.warning(`${e.message}`);
                  }
-                  return false;
                 })
 
 
