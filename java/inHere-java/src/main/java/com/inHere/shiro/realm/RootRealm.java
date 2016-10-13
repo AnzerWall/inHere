@@ -39,7 +39,7 @@ public class RootRealm extends AuthorizingRealm {
     private SecurityService securityService;
 
     /**
-     * 认证, 错误抛异常处理（RuntimeException）
+     * 认证, 错误抛异常处理（RuntimeException） TODO token绑定redis里
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) {

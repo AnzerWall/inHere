@@ -5,10 +5,11 @@ import com.inHere.entity.Roles;
 import com.inHere.entity.Token;
 import com.inHere.entity.User;
 import com.inHere.service.SecurityService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import redis.clients.jedis.ShardedJedis;
-import redis.clients.jedis.ShardedJedisPool;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import java.util.Map;
 
@@ -20,21 +21,52 @@ import java.util.Map;
 @Component
 public class TokenManage {
 
+    private static final String CHANNEL_FOLLOW = "follow";
+    private static boolean IsSubscribe = false;
+
+    Logger log = Logger.getLogger(getClass());
+
     @Autowired
     private SecurityService securityService;
 
     @Autowired
-    private ShardedJedisPool shardedJedisPool;
+    private JedisPool jedisPool;
+
+    @Autowired
+    private PubSubListener pubSubListener;
+
+    /**
+     * 订阅一个频道
+     */
+    public void subscribe() {
+        if (!IsSubscribe) {
+            // 开一个线程进行订阅
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Jedis jedis = jedisPool.getResource();
+                    try {
+                        TokenManage.IsSubscribe = true;
+                        jedis.subscribe(pubSubListener, TokenManage.CHANNEL_FOLLOW);
+                    } catch (Exception e) {
+                        TokenManage.IsSubscribe = false;
+                        log.error("subscribe error", e);
+                    }
+                    jedis.close();
+                }
+            }).start();
+        }
+    }
 
     /**
      * @param user 指定用户的id
      * @return 生成的token
      */
     public Token createToken(User user) {
-        ShardedJedis jedis = shardedJedisPool.getResource();
+        Jedis jedis = jedisPool.getResource();
         Token token = checkUserReturnToken(user);
         // 校验登录用户是否已存在,存在则返回token
-        if ( token != null ){
+        if (token != null) {
             return token;
         }
 
@@ -64,7 +96,7 @@ public class TokenManage {
      * @return
      */
     public Token checkUserReturnToken(User user) {
-        ShardedJedis jedis = shardedJedisPool.getResource();
+        Jedis jedis = jedisPool.getResource();
         Token token = null;
         String tokenStr = jedis.get("user:" + user.getUserId());
         if (tokenStr != null) {
@@ -89,7 +121,7 @@ public class TokenManage {
      * @return
      */
     public void checkUserDel(String user_id) {
-        ShardedJedis jedis = shardedJedisPool.getResource();
+        Jedis jedis = jedisPool.getResource();
         String token = jedis.get("user:" + user_id);
         if (token != null) {
             jedis.del("token:" + token);
@@ -105,7 +137,7 @@ public class TokenManage {
      * @return
      */
     public Token getToken(String tokenStr) {
-        ShardedJedis jedis = shardedJedisPool.getResource();
+        Jedis jedis = jedisPool.getResource();
         Token token = null;
         Map<String, String> userMap = jedis.hgetAll("token:" + tokenStr);
         if (userMap.size() > 1) {
@@ -118,6 +150,18 @@ public class TokenManage {
         }
         jedis.close();
         return token;
+    }
+
+    /**
+     * 发布一条提醒信息，把提醒信息加入信息队列
+     */
+    public void publish(String msg) {
+        // 先订阅频道
+        this.subscribe();
+        Jedis jedis = jedisPool.getResource();
+        jedis.lpush("tip_message_list", msg);
+        jedis.publish(CHANNEL_FOLLOW, "tip_message_list");
+        jedis.close();
     }
 
     /**

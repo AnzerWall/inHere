@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * TODO 创建管理员
+     * TODO 创建管理员, 添加字段is_admin（是否为管理员）、available（是否可用）
      */
 
     /**

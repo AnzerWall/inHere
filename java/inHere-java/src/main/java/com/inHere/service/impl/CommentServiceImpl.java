@@ -13,6 +13,7 @@ import com.inHere.entity.Comment;
 import com.inHere.entity.Name;
 import com.inHere.entity.NameUsed;
 import com.inHere.entity.Token;
+import com.inHere.redis.TokenManage;
 import com.inHere.service.CommentService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     private NameUsedMapper nameUsedMapper;
+
+    @Autowired
+    private TokenManage tokenManage;
 
     /**
      * 获取评论列表
@@ -70,7 +74,7 @@ public class CommentServiceImpl implements CommentService {
         for (Comment tmp : comments) {
             ReturnCommentDto commentDto = this.setCommentDto(tmp, token, floor);
             array.add(commentDto);
-            -- floor;
+            --floor;
         }
         return array;
     }
@@ -127,13 +131,42 @@ public class CommentServiceImpl implements CommentService {
     //@Transactional
     public void createComment(CommentDto commentDto, Token token) {
         NameUsed nameUsed = nameUsedMapper.searchName(commentDto.getExt_type(), commentDto.getItem_id(), token.getUser_id());
-        if( nameUsed == null ){
+        if (nameUsed == null) {
             nameUsed = new NameUsed(commentDto.getExt_type(), commentDto.getItem_id(), token.getUser_id());
             // 随机插入匿名
             nameUsedMapper.insertRandomName(nameUsed);
         }
         Name nameObj = nameUsedMapper.selectNameByUsedID(nameUsed.getId());
         commentMapper.insertComment(commentDto, token.getUser_id(), nameObj.getName());
+
+        // 发布信息，添加提醒数据进入信息队列
+
+        tokenManage.publish("test");
+    }
+
+    /**
+     * 获取提醒信息
+     */
+    public JSONObject getTipMessage(CommentDto commentDto, String user_id) {
+        JSONObject msg = new JSONObject();
+        Integer ext_type = commentDto.getExt_type();
+        msg.put("ext_type", ext_type);
+        msg.put("item_id", commentDto.getItem_id());
+        msg.put("from", user_id);
+
+        if (ext_type == Field.ExtType_Express
+                || ext_type == Field.ExtType_Sell
+                || ext_type == Field.ExtType_Help
+                || ext_type == Field.ExtType_Lost
+                || ext_type == Field.ExtType_Found
+                || ext_type == Field.ExtType_Dating) {
+
+
+
+        }
+        msg.put("to_users", "");
+        msg.put("content", commentDto.getContent());
+        return msg;
     }
 
 }

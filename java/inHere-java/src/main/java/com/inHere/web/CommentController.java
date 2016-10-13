@@ -51,7 +51,7 @@ public class CommentController {
 
     /**
      * 评论
-     * TODO 信息队列, 提醒
+     * 信息队列, 提醒
      *
      * @param commentDto
      * @param token

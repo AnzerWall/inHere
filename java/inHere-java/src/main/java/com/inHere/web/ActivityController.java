@@ -65,6 +65,14 @@ public class ActivityController {
         return result;
     }
 
+    /**
+     * 获取活动详细信息
+     *
+     * @param item_id
+     * @param token
+     * @return
+     * @throws IOException
+     */
     @Authorization
     @RequestMapping(path = "/activity/{item_id}", method = RequestMethod.GET)
     public ReturnBaseDto<JSONObject> getOneActivity(@PathVariable Integer item_id, @CurrentToken Token token)
@@ -129,6 +137,14 @@ public class ActivityController {
         return this.activityAd(request, Field.ExtType_AD);
     }
 
+    /**
+     * 插入活动、广告
+     *
+     * @param request
+     * @param type
+     * @return
+     * @throws IOException
+     */
     public ReturnBaseDto<JSONObject> activityAd(HttpServletRequest request, Integer type) throws IOException {
         // 将request变成多部分request
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
@@ -142,13 +158,36 @@ public class ActivityController {
     }
 
     /**
-     * 修改活动、广告
+     * 修改活动
      *
      * @return
      */
     @Params(ActivityValidator.class)
     @RequestMapping(path = "/admin/activity/{item_id}", method = RequestMethod.POST)
-    public ReturnBaseDto<JSONObject> update(HttpServletRequest request, @PathVariable Integer item_id) throws IOException {
+    public ReturnBaseDto<JSONObject> updateActivity(HttpServletRequest request, @PathVariable Integer item_id) throws IOException {
+        return update(request, item_id);
+    }
+
+    /**
+     * 修改广告
+     *
+     * @return
+     */
+    @Params(ActivityValidator.class)
+    @RequestMapping(path = "/admin/ad/{item_id}", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> updateAd(HttpServletRequest request, @PathVariable Integer item_id) throws IOException {
+        return update(request, item_id);
+    }
+
+    /**
+     * 更新活动和广告
+     *
+     * @param request
+     * @param item_id
+     * @return
+     * @throws IOException
+     */
+    public ReturnBaseDto<JSONObject> update(HttpServletRequest request, Integer item_id) throws IOException {
         // 将request变成多部分request
         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 
