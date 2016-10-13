@@ -33,7 +33,7 @@
 
     <!--集中时间-->
     <publish-time :key="publish_key.gathering_time" :publish_value.sync="content.gathering_time"
-                  :min_time="content.start_time" :max_time="content.end_time">
+                  :min_time="min_time_start" :max_time="content.start_time">
     </publish-time>
 
   </div>
@@ -134,6 +134,16 @@
     },
     events: {
       'publish-demand': function (message) {
+
+        if (this.is_login == false){
+          return this.$router.go({
+            path: '/login',
+            query: {
+              __ref: this.$route.path//告诉login页面要跳转回来的页面
+            }
+          });
+        }
+
         var self = this;
         let token = this.token;
 
@@ -188,7 +198,7 @@
           formData.append("start_time", time);
           time = parseDateTime(self.content.end_time);
           formData.append("end_time", time);
-          if (self.content.per_cost){
+          if (self.content.per_cost && self.content.per_cost!=0){
             formData.append("per_cost", self.content.per_cost);
           }
           if (self.content.gathering_time!=''){
@@ -203,11 +213,11 @@
             .send(formData)
             .then(this.$api.checkResult)
             .then(function () {
-              self.$refs.noti.warning('发布成功~',{
+              self.$refs.noti.noti('发布成功~',{
                 timeout:1500,
                 bgColor:'blue',
                 callback(result,vm){
-                  window.history.back();
+                  this.$router.go('/main/demand/dating');
                 }
               });
             })
@@ -231,7 +241,7 @@
                 }
               } else {
                 console.error(e.stack||e);
-                return this.$refs.noti.warning(`未知错误:${e.message}`,{
+                return this.$refs.noti.warning(`${e.message}`,{
                   timeout:1500
                 })
               }

@@ -160,6 +160,16 @@
     },
     events: {
       'publish-demand': function (message) {
+
+        if (this.is_login == false){
+          return this.$router.go({
+            path: '/login',
+            query: {
+              __ref: this.$route.path//告诉login页面要跳转回来的页面
+            }
+          });
+        }
+
         var self = this;
         let token = this.token;
 
@@ -193,7 +203,7 @@
               formData.append("file", self.content.file[i]);
             }
           }
-          if ((self.content.ext_type === 1 || self.content.ext_type === 3) && self.content.pay != '') { // 1、兼职、3、帮忙
+          if ((self.content.ext_type === 1 || self.content.ext_type === 3) && self.content.pay != '' && self.content.pay != 0) { // 1、兼职、3、帮忙
             formData.append('pay', self.content.pay);
           }
           else if (self.content.ext_type === 2) { // 2、转让
@@ -206,7 +216,7 @@
               var time = parseDateTime(self.content.buy_time);
               formData.append('buy_time',time);
             }
-            if (self.content.original_price) {
+            if (self.content.original_price && self.content.original_price!=0) {
               formData.append('original_price', self.content.original_price);
             }
           }
@@ -214,29 +224,77 @@
           return this.$request
             .post(`${this.$api.url_base}/demand?token=${token}`)
             .send(formData)
-            .then(function (res) {
-              if (res.body.code === 200){
-                self.$refs.noti.noti('发布成功~',{
-                  timeout:1500,
-                  bgColor:'blue',
-                  callback(result,vm){
-                    window.history.back();
-                  }
-                });
-              }else {
-                this.$refs.noti.warning(JSON.stringify(res.body),{
-                  timeout:1500,
-                  bgColor:'red'
-                });
-              }
-
-            })
-            .catch(function (err) {
-              this.$refs.noti.warning(err,{
+            .then(this.$api.checkResult)
+            .then(function () {
+              self.$refs.noti.noti('发布成功~',{
                 timeout:1500,
-                bgColor:'red'
+                bgColor:'blue',
+                callback(result,vm){
+                  this.$router.go('/main/demand/task');
+                }
               });
             })
+            .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+                if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                  return this.$refs.noti.warning(`参数验证失败`,{
+                    timeout:1500
+                  })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                    timeout:1500
+                  })
+                }
+              } else {
+                console.error(e.stack||e);
+                return this.$refs.noti.warning(`${e.message}`,{
+                  timeout:1500
+                })
+              }
+            })
+//            .then(function (res) {
+//              if (res.body.code === 200){
+//                self.$refs.noti.noti('发布成功~',{
+//                  timeout:1500,
+//                  bgColor:'blue',
+//                  callback(result,vm){
+//                    window.history.back();
+//                  }
+//                });
+//              }else if (res.body.code === 401){
+//                self.$refs.noti.noti('你还没有登录~',{
+//                  timeout:1500,
+//                  bgColor:'blue',
+//                  callback(result,vm){
+//                    return this.$router.go({
+//                      path: '/login',
+//                      query: {
+//                        __ref: this.$route.path//告诉login页面要跳转回来的页面
+//                      }
+//                    });
+//                  }
+//                });
+//              }else{
+//                this.$refs.noti.warning(JSON.stringify(res.body),{
+//                  timeout:1500,
+//                  bgColor:'red'
+//                });
+//              }
+//
+//            })
+//            .catch(function (err) {
+//              this.$refs.noti.warning(err,{
+//                timeout:1500,
+//                bgColor:'red'
+//              });
+//            })
         }
       },
 

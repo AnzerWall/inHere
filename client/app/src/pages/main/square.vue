@@ -13,13 +13,13 @@
     <div class="square-container" v-if="!$loadingRouteData && !is_fail">
       <!--社团活动入口-->
       <div class="square-activity" :style="{'background-image': 'url('+activity.cover_img.src+')'}" @click="activityShow()">
-        <!--<div class="">-->
-        <div class="activity-content activity-content-bg">
-          <div class="square-activity-tittle"><span>{{activity.title}}</span></div>
-          <span>@{{activity.user_name}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span>{{activity.start_time |date}} ~ {{activity.end_time |date}}</span>
+        <div class="activity-content-bg">
+          <div class="activity-content">
+            <div class="square-activity-tittle"><span>{{activity.title}}</span></div>
+            <span>@{{activity.user_name}}&nbsp;&nbsp;</span>
+            <span>{{activity.start_time |date}} ~ {{activity.end_time |date}}</span>
+          </div>
         </div>
-        <!--</div>-->
       </div>
 
       <!--有。必。栏目-->
@@ -88,22 +88,19 @@
     background-position: center;
   }
 
-  .activity-content, .activity-content-bg {
+  .activity-content-bg {
     /*height: 70px;*/
     position: absolute;
     bottom: 0px;
     padding: 30px 0 15px 0;
     color: white;
+    width: 100%;
+    opacity: 0.75;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   }
 
   .activity-content {
     padding-left: 15px;
-  }
-
-  .activity-content-bg {
-    /*width: 100%;*/
-    opacity: 0.75;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
   }
 
   .square-activity-tittle {

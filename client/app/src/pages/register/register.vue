@@ -7,12 +7,12 @@
     <div class="login-input-field-wrapper">
       <div class="login-input-field">
         <div class="login-input-field-username">
-          <span class="input-title">用户名</span>
-          <input v-model="username" @blur="checkUserName()">
+          <span class="input-title">账&nbsp;&nbsp;号</span>
+          <input v-model="username" placeholder="请输入6~16位字符的账号" @blur="checkUserName()">
         </div>
         <div class="login-input-field-password">
           <span class="input-title">密&nbsp;&nbsp;码</span>
-          <input type="password" v-model="password" @blur="checkPsw()">
+          <input type="password" placeholder="请输入6~16位字符的密码" v-model="password" @blur="checkPsw()">
         </div>
         <div class="login-input-field-password">
           <span class="input-title">学&nbsp;&nbsp;校</span>
@@ -96,12 +96,12 @@
         var user_id = this.username;
         var self = this;
         if (user_id == ''){
-          self.$refs.noti.warning("请填写用户名",{
+          self.$refs.noti.warning("请填写账号",{
             timeout:2000
           });
           return 1;
         }else if ( !(/^\w{6,16}$/).exec(user_id)){
-          self.$refs.noti.warning('用户名是6~16位的字符串哦',{
+          self.$refs.noti.warning('账号是6~16位的字符串哦',{
             timeout:2000
           });
           return 1;
@@ -111,7 +111,7 @@
           .then(this.$api.checkResult)//处理code等信息，返回data
           .then(function (date) {
             if (date.is_exists == true){
-               self.$refs.noti.warning('用户名已经存在了，换一个吧~',{
+               self.$refs.noti.warning('账号已经存在了，换一个吧~',{
                 timeout:2200,
                 callback(){
                   self.username = '';

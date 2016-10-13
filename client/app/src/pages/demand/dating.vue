@@ -3,7 +3,7 @@
     <!--$loadingRouteData当路由数据加载中为true，否则为false-->
     <div v-if="!$loadingRouteData">
       <photos-wipe v-ref:viewer></photos-wipe>
-      <demand-card v-for="item in list" :data="item" :is_detail="false"  @view-image="viewImage"
+      <demand-card v-for="item in list" :data="item" :is_detail="false" @view-image="viewImage"
                    @click="$router.go('/demand-detail/'+item.id)"></demand-card>
       <!--加载更多组件-->
       <infinite-loading :on-infinite="onLoadMore">
@@ -29,7 +29,7 @@
 <script type="text/ecmascript-6">
   import DemandCard from 'components/demand-card/demand-card.vue';
   import PhotosWipe from 'components/photoswipe/photoswipe.vue';
-
+  import {token, login_state, is_login} from '../../vuex/getters.js'
 
   //https://github.com/greyby/vue-spinner
   import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
@@ -55,7 +55,7 @@
           .query({offset: this.data.offset + 5, limit: this.data.limit})
           .then(this.$api.checkResult)
           .then((data=> {
-           // console.log(data);
+            // console.log(data);
             //通知组件加载完毕
             this.$broadcast('$InfiniteLoading:loaded');
             //更新数据数组
@@ -74,19 +74,45 @@
     route: {
       //页面加载数据钩子(或者叫事件)
       data(){
-        var token = "19e7aae2d81da63d62cfa36eb69706069e7a97bb61c8901782d8c1d98765ea94";
+        var token = this.token;
         return this.$request
-          .get("http://115.28.67.181:8080/demand")//GET方法 url为/demand
-          .query({token: token})
-          .query({ext_type: [6]})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
-          .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
-          .then(function (data) {
-            //处理数据，具体见vue-router文档data钩子页说明
-            return {
-              data: data,
-              list: data.items
-            }
-          })
+            .get(`${this.$api.url_base}/demand`)//GET方法 url为/demand
+            .query({token: token})
+            .query({ext_type: [6]})//    传递query，   url变为 /demand?ext_type=1&ext_type=2&ext_type=3 过滤信息
+            .then(this.$api.checkResult)//一个辅助函数，用于处理code等信息，直接返回data
+            .then(function (data) {
+              //处理数据，具体见vue-router文档data钩子页说明
+              return {
+                data: data,
+                list: data.items
+              }
+            })
+            .catch((e)=> {
+               if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+               if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                    return this.$refs.noti.warning(`参数验证失败`,{
+                    timeout:1500
+                  })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+                } else if (e.code === 401) {
+                  return this.$router.go({
+                    path: '/login',
+                    query: {
+                      __ref: this.$route.path//告诉login页面要跳转回来的页面
+                    }
+                  });
+                } else {
+                  return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`,{
+                    timeout:1500
+                  })
+                }
+              } else {
+                console.error(e.stack||e);
+                return this.$refs.noti.warning(`${e.message}`,{
+                  timeout:1500
+                })
+        }
+      })
+
       }
     },
     data(){
@@ -94,6 +120,14 @@
         list: [],
         data: {}
       }
-    }
+    },
+    vuex: {
+      actions: {},
+      getters: {
+        login_state,
+        token,
+        is_login
+      }
+    },
   }
 </script>

@@ -115,13 +115,13 @@
             tag:"求男生",
             id:"wantSexMale",
             isChecked:false,
-            value:0
+            value:1
           },
           {
             tag:"求女生",
             id:"wantSexFemale",
             isChecked:false,
-            value:1
+            value:0
           }
         ])
       },
@@ -139,6 +139,7 @@
         self.publish_value = self.labels[index].value;
         console.log("changeBg,emit给父组件通信");
         self.$emit('change-type',index);
+
       }
     }
   }
