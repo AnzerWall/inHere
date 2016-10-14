@@ -1,7 +1,7 @@
 <template>
     <div class="body">
       <photos-wipe v-ref:viewer></photos-wipe>
-      <div class="message" >
+      <div class="cao-message" >
         <div class="top" @click="onClick(item.id)">
           <div class="message-text" >
             {{item.ext_data.content}}

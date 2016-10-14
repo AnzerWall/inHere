@@ -3,7 +3,7 @@
 <!--112 8-->
     <div class="profile-head-wrapper">
       <div class="profile-head">
-        <div class="text">
+        <div class="text" @click="$router.go('/main/myinfo')">
           {{user_id}} / {{school}}
         </div>
         <div class="icon" @click="clickMenu()"><menu-icon style="fill:#ccc"></menu-icon></div>

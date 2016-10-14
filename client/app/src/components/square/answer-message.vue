@@ -1,6 +1,6 @@
 <template>
     <div>
-      <div class="message" >
+      <div class="answer-message" >
         <!--问题标题-->
         <div class="message-title" @click="$router.go('/answer-detail/'+item.id)">
           {{item.ext_data.title}}
