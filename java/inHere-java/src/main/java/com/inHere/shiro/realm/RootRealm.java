@@ -4,6 +4,7 @@ import com.inHere.dao.UserMapper;
 import com.inHere.entity.Permissions;
 import com.inHere.entity.Roles;
 import com.inHere.entity.User;
+import com.inHere.redis.TokenManage;
 import com.inHere.service.SecurityService;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -37,6 +38,9 @@ public class RootRealm extends AuthorizingRealm {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private TokenManage tokenManage;
 
     /**
      * 认证, 错误抛异常处理（RuntimeException） TODO token绑定redis里
@@ -74,6 +78,7 @@ public class RootRealm extends AuthorizingRealm {
                     User userTmp = (User) principal.getPrimaryPrincipal();
                     if (userTmp.getUserId().equals(user_id)) {
                         log.info("------>清除该用户以前登录时保存的session");
+                        tokenManage.checkUserDel(userTmp.getUserId());
                         sessionManager.getSessionDAO().delete(session);
                     }
                 }

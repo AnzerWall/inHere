@@ -6,10 +6,12 @@ import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
 import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
+import com.inHere.constant.Field;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.UserDto;
 import com.inHere.entity.Token;
 import com.inHere.entity.User;
+import com.inHere.redis.TokenManage;
 import com.inHere.service.CommonService;
 import com.inHere.service.LoginService;
 import com.inHere.service.UserService;
@@ -42,6 +44,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TokenManage tokenManage;
 
     /**
      * 登陆，创建一个Token资源
@@ -98,7 +103,7 @@ public class LoginController {
         String passed = (String) params.get("passwd");
         Integer school_id = (Integer) params.get("school_id");
 
-        userService.regUser(user_id, passed, school_id);
+        userService.regUser(user_id, passed, school_id, Field.Is_Admin_No);
 
         ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
         result.setCode(Code.Success.getCode());
@@ -110,7 +115,7 @@ public class LoginController {
      * 检查用户user_id是否已存在
      */
     @RequestMapping(path = "check/{user_id}", method = RequestMethod.GET)
-    public ReturnBaseDto<JSONObject> checkUserId(@PathVariable String user_id){
+    public ReturnBaseDto<JSONObject> checkUserId(@PathVariable String user_id) {
         JSONObject data = userService.checkUserIdExists(user_id);
 
         ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
@@ -158,6 +163,7 @@ public class LoginController {
         subject.login(token);
 
         User user = (User) subject.getPrincipal();
+        tokenManage.pushToken(user, subject.getSession().getId().toString());
 
         // 返回用户信息
         UserDto userDto = new UserDto();

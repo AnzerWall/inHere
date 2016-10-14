@@ -22,6 +22,9 @@ public class User {
     private Date createTime;
     private Date updateTime;
 
+    private Integer is_admin;
+    private Integer available;
+
     // school对象
     private School school;
 
@@ -138,6 +141,22 @@ public class User {
 
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
+    }
+
+    public Integer getIs_admin() {
+        return is_admin;
+    }
+
+    public void setIs_admin(Integer is_admin) {
+        this.is_admin = is_admin;
+    }
+
+    public Integer getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Integer available) {
+        this.available = available;
     }
 
     @Override

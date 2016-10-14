@@ -1,6 +1,7 @@
 package com.inHere.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.User;
 
 import java.io.IOException;
@@ -34,7 +35,7 @@ public interface UserService {
      * @param passwd
      * @param school_id
      */
-    void regUser(String user_id, String passwd, Integer school_id);
+    void regUser(String user_id, String passwd, Integer school_id, Integer is_admin);
 
     /**
      * 获取用户信息
@@ -60,4 +61,6 @@ public interface UserService {
      * @param user_id
      */
     void change(Map<String, Object> params, String user_id) throws IOException;
+
+    ReturnListDto getList(Integer offset, Integer limit, Integer is_admin, String user_id, String user_name) throws IOException;
 }

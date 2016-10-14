@@ -11,6 +11,7 @@
         <result column="contact_way" property="contactWay" jdbcType="CHAR"/>
         <result column="sex" property="sex" jdbcType="BIT"/>
         <result column="school_id" property="schoolId" jdbcType="INTEGER"/>
+        <result column="is_admin" property="is_admin" jdbcType="INTEGER"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <association property="school" javaType="School">
@@ -28,6 +29,7 @@
         contact_way,
         sex,
         school_id,
+        is_admin,
         create_time,
         update_time
     </sql>
@@ -40,9 +42,50 @@
         u.contact_way,
         u.sex,
         u.school_id,
+        u.is_admin,
         u.create_time,
         u.update_time
     </sql>
+
+    <!--查找用户列表-->
+    <select id="selectUserList" resultMap="BaseResultMap">
+        SELECT
+        s.id s_school_id,
+        s.school s_school,
+        <include refid="Alias_Column_List"/>
+        FROM tb_user u
+        left join tb_school s on u.school_id = s.id
+        <where>
+            <if test="is_admin != null">
+                u.`is_admin` = #{is_admin}
+            </if>
+            <if test="user_id != null">
+                AND u.`user_id` LIKE '%${user_id}%'
+            </if>
+            <if test="user_name != null">
+                AND u.`user_name` LIKE '%${user_name}%'
+            </if>
+        </where>
+        order by u.`is_admin` desc
+        limit #{offset}, #{limit}
+    </select>
+
+    <select id="getCount" resultType="Integer">
+        SELECT count(*) FROM tb_user
+        <where>
+            <if test="is_admin != null">
+                is_admin = #{is_admin}
+            </if>
+            <if test="user_id != null">
+                AND user_id LIKE '%${user_id}%'
+            </if>
+            <if test="user_name != null">
+                AND user_name LIKE '%${user_name}%'
+            </if>
+        </where>
+        order by is_admin desc
+        limit #{offset}, #{limit}
+    </select>
 
     <!-- 获取用户信息 -->
     <select id="selectByPrimaryKey" resultMap="BaseResultMap"
@@ -87,6 +130,9 @@
             <if test="schoolId != null">
                 school_id,
             </if>
+            <if test="is_admin != null">
+                is_admin,
+            </if>
             <if test="createTime != null">
                 create_time,
             </if>
@@ -115,6 +161,9 @@
             </if>
             <if test="schoolId != null">
                 #{schoolId,jdbcType=INTEGER},
+            </if>
+            <if test="is_admin != null">
+                #{is_admin,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},

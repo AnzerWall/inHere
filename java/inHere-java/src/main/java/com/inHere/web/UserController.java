@@ -3,10 +3,15 @@ package com.inHere.web;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
+import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
+import com.inHere.constant.Field;
 import com.inHere.dto.ReturnBaseDto;
+import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Token;
 import com.inHere.service.UserService;
+import com.inHere.validator.LoginValidator;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +27,51 @@ import java.util.Map;
 @RestController
 public class UserController {
 
+    Logger log = Logger.getLogger(getClass());
+
     @Autowired
     private UserService userService;
 
     /**
-     * TODO 创建管理员, 添加字段is_admin（是否为管理员）、available（是否可用）
+     * 创建管理员, TODO 未做校验
      */
+    @Params(LoginValidator.class)
+    @RequestMapping(path = "/admin", method = RequestMethod.POST)
+    public ReturnBaseDto<JSONObject> adminLogup(@RequestBody Map<String, Object> params) {
+        String user_id = (String) params.get("user_id");
+        String passed = (String) params.get("passwd");
+        Integer school_id = (Integer) params.get("school_id");
+
+        userService.regUser(user_id, passed, school_id, Field.Is_Admin_Yes);
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        return result;
+    }
 
     /**
-     * TODO 获取用户列表(过滤、检索)
+     * 获取用户列表(过滤、检索), TODO 未做校验
      */
+    @RequestMapping(path = "/users", method = RequestMethod.GET)
+    public ReturnBaseDto<ReturnListDto> userList(Integer offset, Integer limit, Integer is_admin, String user_id, String user_name) throws IOException {
+
+        log.info("--->" + offset);
+        if( offset == null ){
+            offset = 0;
+        }
+        if (limit == null){
+            limit = 10;
+        }
+
+        ReturnListDto data = userService.getList(offset, limit, is_admin, user_id, user_name);
+
+        ReturnBaseDto<ReturnListDto> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
     /**
      * TODO 获取角色列表

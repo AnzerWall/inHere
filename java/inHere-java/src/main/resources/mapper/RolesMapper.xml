@@ -6,5 +6,9 @@
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
 
+    <select id="selectRole" resultType="Roles">
+        SELECT ro.* FROM tb_roles ro, tb_users_roles uro
+        WHERE uro.`user_id` = #{user_id} and uro.`role_id` = ro.`id`
+    </select>
 
 </mapper>

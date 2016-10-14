@@ -43,6 +43,11 @@ public class Field {
     // 隐藏
     public final static Integer Is_Show_Yes = 1;
 
+    // 是管理员
+    public final static Integer Is_Admin_Yes = 1;
+    // 非管理员
+    public final static Integer Is_Admin_No = 0;
+
 
     /*-------------------栏目模块常量---------------------*/
 

@@ -90,6 +90,30 @@ public class TokenManage {
     }
 
     /**
+     * 后台token绑定redis
+     */
+    public void pushToken(User user, String tokenStr) {
+        Jedis jedis = jedisPool.getResource();
+
+        JSONArray roles = new JSONArray(); // 赋予角色
+        JSONArray permissions = new JSONArray();// 赋予权限
+        if (user.getRoles() != null) {
+            for (Roles tmp : user.getRoles()) {
+                roles.add(tmp.getRole());
+                permissions.addAll(tmp.getPermissions());
+            }
+        }
+        Token token = new Token(tokenStr, user.getUserId(), user.getSchoolId(), roles, permissions);
+        jedis.hmset("token:" + token.getKey(), token.toMap()); // token绑定用户信息
+        jedis.set("user:" + user.getUserId(), token.getKey()); // 用户绑定token，保证单一登录
+        // 过期时间12个小时
+        jedis.expire("token:" + token.getKey(), 12 * 60 * 60);
+        jedis.expire("user:" + user.getUserId(), 12 * 60 * 60);
+        jedis.close();
+
+    }
+
+    /**
      * 检查用户是否存在,存在则返回token
      *
      * @param user

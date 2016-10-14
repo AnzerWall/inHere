@@ -1,8 +1,12 @@
 package com.inHere.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.inHere.dao.RolesMapper;
 import com.inHere.dao.UserMapper;
+import com.inHere.dto.ReturnListDto;
+import com.inHere.entity.Roles;
 import com.inHere.entity.User;
 import com.inHere.service.SecurityService;
 import com.inHere.service.UserService;
@@ -25,6 +29,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private RolesMapper rolesMapper;
 
     @Override
     public User getUserByUserId(String user_id) {
@@ -52,7 +59,7 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public void regUser(String user_id, String passwd, Integer school_id) {
+    public void regUser(String user_id, String passwd, Integer school_id, Integer is_admin) {
         List<String> security = securityService.encrypt(passwd);
         String password = security.get(0);
         String saltKey = security.get(1);
@@ -61,6 +68,9 @@ public class UserServiceImpl implements UserService {
         user.setUserId(user_id);
         user.setPasswd(password);
         user.setSaltKey(saltKey);
+        user.setIs_admin(is_admin);
+        // 默认可用
+        user.setAvailable(1);
         user.setSchoolId(school_id);
         user.setCreateTime(new Date());
 
@@ -145,6 +155,57 @@ public class UserServiceImpl implements UserService {
         userInfo.setContactWay(contact.toJSONString());
 
         userMapper.updateByPrimaryKeySelective(userInfo);
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    @Override
+    public ReturnListDto getList(Integer offset, Integer limit, Integer is_admin, String user_id, String user_name) throws IOException {
+        ReturnListDto listDto = new ReturnListDto();
+
+        List<User> list = userMapper.selectUserList(offset, limit, is_admin, user_id, user_name);
+
+        // 获取总条数
+        Integer total = userMapper.getCount(offset, limit, is_admin, user_id, user_name);
+        Integer total_page = (total == 0 ? total : total / limit + 1);
+        listDto.setLimit(limit);
+        listDto.setOffset(offset);
+        listDto.setTotal(total);
+        listDto.setTotal_page(total_page);
+
+        JSONArray items = this.setItems(list);
+        listDto.setItems(items);
+
+        return listDto;
+    }
+
+
+    public JSONArray setItems(List<User> list) throws IOException {
+        JSONArray items = new JSONArray();
+        for (User user : list) {
+            JSONObject obj = new JSONObject();
+            obj.put("user_id", user.getUserId());
+            obj.put("user_name", user.getUserName());
+            JSONObject contact = user.getContactWay() != null ? JSON.parseObject(user.getContactWay()) : new JSONObject();
+            obj.put("phone", contact.get("phone"));
+            obj.put("qq", contact.get("qq"));
+            obj.put("school", user.getSchool().getSchool());
+            obj.put("is_admin", user.getIs_admin());
+            Roles role = rolesMapper.selectRole(user.getUserId());
+            JSONObject roleObj = new JSONObject();
+            if (role != null) {
+                roleObj.put("role_id", role.getId());
+                roleObj.put("role", role.getRole());
+                roleObj.put("role_name", role.getDescription());
+            }
+            obj.put("role", role != null ? roleObj : null);
+            items.add(obj);
+        }
+
+        return items;
     }
 
 }
