@@ -46,7 +46,7 @@
       onLoadMore(){
         var token = this.token;
         this.$request
-          .get(`${this.$api.url_base}demand`)//GET方法 url为/demand
+          .get(`${this.$api.url_base}/demand`)//GET方法 url为/demand
           .query({token: token})
           .query({ext_type: [1, 2, 3]})
           .query({offset: this.data.offset + 5, limit: this.data.limit})

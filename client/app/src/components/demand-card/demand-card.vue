@@ -125,7 +125,7 @@
           case this.TYPE_LOST:
             return "丢失";
           case this.TYPE_DATING:
-            return "约";
+            return "走起";
           default:
             return "其他"
         }
