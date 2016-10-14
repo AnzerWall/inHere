@@ -1,26 +1,27 @@
 <template>
   <div>
-        <div class="tab-content">
-          <div>
+    <div class="tab-content">
+      <div>
 
-            <n3-select :value.sync="type" :options="type_list">
+        <n3-select :value.sync="type" :options="type_list">
 
-            </n3-select>
-            <n3-select :value.sync="status" :options="status_list">
+        </n3-select>
+        <n3-select :value.sync="status" :options="status_list">
 
-            </n3-select>
-          </div>
-          <n3-data-table class="table-content"
-                         key="id"
-                         :filter="true"
-                         :source="list"
-                         :columns="columns"
-                         :select-col="false"
-                         :selection="selection"
-                         :on-change="dataChange"
-          ></n3-data-table>
-        </div>
-
+        </n3-select>
+      </div>
+      <n3-data-table class="table-content"
+                     key="id"
+                     :filter="true"
+                     :source="list"
+                     :columns="columns"
+                     :select-col="false"
+                     :selection="selection"
+                     :on-change="dataChange"
+                     sort-column="id"
+                     :pagination.sync="pagination"
+      ></n3-data-table>
+    </div>
 
 
   </div>
@@ -50,7 +51,8 @@
         pay: item.ext_data.pay || 0,
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
       })
     } else if (item.ext_type === 2) {
       source.push({
@@ -65,7 +67,9 @@
         original_price: item.ext_data.original_price || 0,
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
+
       })
     } else if (item.ext_type === 3) {
       source.push({
@@ -77,7 +81,9 @@
         pay: item.ext_data.pay || 0,
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
+
       })
     } else if (item.ext_type === 4) {
       source.push({
@@ -90,7 +96,9 @@
         lose_time: item.ext_data.lose_time || 0,
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
+
       })
     } else if (item.ext_type === 5) {
       source.push({
@@ -103,7 +111,9 @@
         pickeup_time: item.ext_data.pickeup_time || 0,
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
+
       })
     } else if (item.ext_type === 6) {
       source.push({
@@ -121,11 +131,18 @@
         gathering_place: item.ext_data.gathering_place || "",
         is_end: items.is_end ? '已结束' : '未结束',
         create_time: item.create_time,
-        update_time: item.edit_time
+        update_time: item.edit_time,
+        status: 0
+
       })
     }
   }
   let columns_common = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+//      width: '40%'
+    },
     {
       title: '描述',
       dataIndex: 'text',
@@ -133,27 +150,27 @@
     }, {
       title: '图片',
       dataIndex: '',
-      render:(text,record,index)=>{
-        let ret='';
-        let photos=record.photos||[];
-        for(let i in photos){
-          let photo=photos[i];
-          ret+= `
-        <n3-popover effect="fade"   placement="left" trigger="hover" :header="false">
-          <div slot="content">
-            <img src="${photo.src}" style="width: 200px;height:200px;">
-          </div>
-               <n3-button >图片{{${(+i)+1}}}</n3-button>
-          </n3-popover>
-          `
-        }
-        return ret;
-
-      }
+//      render: (text, record, index)=> {
+//        let ret = '';
+//        let photos = record.photos || [];
+//        for (let i in photos) {
+//          let photo = photos[i];
+//          ret += `
+//        <n3-popover effect="fade"   placement="left" trigger="hover" :header="false">
+//          <div slot="content">
+//            <img src="${photo.src}" style="width: 200px;height:200px;">
+//          </div>
+//               <n3-button >图片{{${(+i) + 1}}}</n3-button>
+//          </n3-popover>
+//          `
+//        }
+//        return ret;
+//
+//      }
     }, {
       title: '是否已结束',
       dataIndex: 'is_end',
-      filter:true
+//      filter: true
     }
   ];
   let columns_operator = [
@@ -253,11 +270,43 @@
   ];
   export default{
     methods: {
+      getData(type, status, query, filter, current=1, page_size=10){
+        console.log(type, status, query, filter,current,page_size);
+        return source.filter(item=> {
+          if (type != item.type)return false;
+          if (status != item.status)return false;
+          if (query) {
+            let reg = new RegExp(query);
+            if (!reg.test(item.title))return false;
+          }
+          return true;
+        }).slice((current - 1) * page_size,current * page_size)
+      },
+      count(type, status, query, filter){
+        return source.filter(item=> {
+          if (type != item.type)return false;
+          if (status != item.status)return false;
+          if (query) {
+            let reg = new RegExp(query);
+            if (!reg.test(item.title))return false;
+          }
+          return true;
+        }).length;
+      },
+      change(){
+        this.list = this.getData(this.type, this.status, this.query,  this.filter ,  this.current,this.page_size);
+        this.pagination.total=this.count(this.type, this.status, this.query,  this.filter);
+      },
       dataChange(pagination, query, sort, filter){
         console.log(pagination, query, sort, filter);
+        this.query = query;
+        this.filter = filter;
+        this.page_size= pagination.pagesize;
+        this.current=pagination.current;
+
+        this.change();
       },
       changeType(type = 1){
-        console.log(`changeType:${type}`);
         if (type === 1)
           this.columns = columns_common.concat(columns_1).concat(columns_operator);
         else if (type === 2)
@@ -270,30 +319,40 @@
           this.columns = columns_common.concat(columns_5).concat(columns_operator);
         else if (type === 6)
           this.columns = columns_common.concat(columns_6).concat(columns_operator);
-        this.list=source.filter((item)=>item.type===type)
+        //   this.list=source.filter((item)=>item.type===type)
       }
 
     },
     route: {
       data(){
-        this.type = 1;
+        this.change();
       }
     },
     watch: {
       type(newValue, oldValue){
-        this.changeType(newValue)
+        this.change();
+
+      },
+      status(newValue, oldValue){
+        this.change();
+
       }
     },
     data(){
       return {
-        status:0,
-        status_list:[{
+        query: "",
+        filter: [],
+        status: 0,
+        current:1,
+
+        page_size:10,
+        status_list: [{
           label: '未核审',
           value: 0
-        },{
+        }, {
           label: '已核审',
           value: 1
-        },{
+        }, {
           label: '已屏蔽',
           value: 2
         }],
@@ -316,16 +375,13 @@
           label: '走起',
           value: 6
         }],
-        type: 0,
+        type: 5,
 //        filter_list: [{
 //          title: '描述',
 //          dataIndex: 'text',
 //          options: [{value: "v白", label: "v白"}, {value: "t红", label: "t红"}],
 //          value: [],
 //        }],
-        query: {
-          type: 1
-        },
 
         list: [],
         selection: {
@@ -334,23 +390,17 @@
           },
           onSelectAll(){
           },
-//          getCheckboxProps(record){
-//            if (record.key == 2) {
-//              return {
-//                disabled: true
-//              }
-//            } else {
-//              return {
-//                disabled: false
-//              }
-//            }
-//          }
+          getCheckboxProps(record){
+            return {
+              disabled: false
+            }
+          }
         },
         columns: columns_common,
-        pagination:{
-          current:0,
-          total:0,
-          pagesize:10
+        pagination: {
+          current:1,
+          total: 0,
+          pagesize: 10
         }
       }
     }
