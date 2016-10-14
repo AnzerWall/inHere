@@ -13,14 +13,17 @@
 
     </div>
     <div class="nuo-info">
-      <input class="nuo-title" v-model="title">
+      <input class="nuo-title" v-model="title" placeholder="目标标题">
       <div class="textarea-wrapper"  >
-        <textarea class="nuo-text" rows="4" v-model="text"></textarea>
+        <textarea class="nuo-text" rows="4" v-model="text" placeholder="目标描述"></textarea>
 
       </div>
     </div>
     <div :class="{'target-list':target_list.length!=0}">
-      <target-input  v-for="item in target_list" :index="$index" :type_data.sync="item.type_data"  :type.sync="item.type" :title.sync="item.title"  :text.sync="item.text"></target-input>
+      <target-input  v-for="item in target_list" :index="$index" :type_data.sync="item.type_data"  :type.sync="item.type" :title.sync="item.title"  :text.sync="item.text"
+                     @up="up($index)"
+                     @down="down($index)"
+                     @del="remove($index)"></target-input>
 
     </div>
     <selector :show.sync="add_menu_show" @select="addTarget" :tags="target_type_list" :editable="false"></selector>
@@ -155,6 +158,35 @@
           type: type,
           type_data: {}
         });
+      },
+      remove(index){
+        this.target_list.splice(index,1);
+      },
+      up(index){
+        console.log('up',index,this.target_list.length);
+
+        if(index!=0){
+          let a= this.target_list[index];
+          let b= this.target_list[index-1];
+          this.target_list.$set(index,b);
+          this.target_list.$set(index-1,a);
+
+        }
+
+      },
+      down(index){
+        console.log('down',index,this.target_list.length);
+        if(index!= this.target_list.length-1){
+          let a= this.target_list[index];
+          let b= this.target_list[index+1];
+          this.target_list.$set(index,b);
+          this.target_list.$set(index+1,a);
+
+        }
+
+
+
+
       }
 
     },

@@ -7,10 +7,13 @@
       <span class="target-type" v-if="type===4">{{index+1}}.每日签到型</span>
       <span class="target-type" v-if="type===5"> {{index+1}}.回答问题型</span>
       <div class="icon-group">
-        <span @click="up" class="icon" style="transform:translateY(-1px)">
+        <span class="icon" >
+          <del-icon  @click="del" ></del-icon>
+        </span>
+        <span @click="down" class="icon" style="transform:translateY(-1px)">
           <move-icon></move-icon>
         </span>
-        <span @click="down" class="icon right-move-icon" style="transform: rotate(180deg) translateY(-2px) ">
+        <span @click="up" class="icon right-move-icon" style="transform: rotate(180deg) translateY(-2px) ">
           <move-icon></move-icon>
         </span>
 
@@ -20,9 +23,9 @@
     </div>
     <div class="target-info-wrapper">
       <div class="target-info">
-        <input class="target-title" v-model="title">
+        <input class="target-title" v-model="title" placeholder="目标标题">
         <div class="textarea-wrapper">
-          <textarea class="target-text" v-model="text" rows="4"></textarea>
+          <textarea class="target-text" v-model="text" rows="4" placeholder="目标描述" ></textarea>
 
         </div>
       </div>
@@ -30,7 +33,7 @@
       <div v-if="type===1">
         <div class="input-cell">
           <div class="input-cell-title">数量</div>
-          <div class="input-cell-input"><input v-model="count"></div>
+          <div class="input-cell-input"><input v-model="count" ></div>
         </div>
       </div>
       <div v-if="type===2">
@@ -213,6 +216,9 @@
       delTodo(index){
         //  console.log(index);
         this.todos.splice(index, 1);
+      },
+      del(){
+        this.$emit('del')
       },
       up(){
         this.$emit('up')

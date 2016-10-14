@@ -1,6 +1,6 @@
 <template>
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill:#CCCCCC">
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill:#25d367">
     <!-- Generator: Sketch Beta 40.1 (33801) - http://www.bohemiancoding.com/sketch -->
     <title>Page 1</title>
     <desc>Created with Sketch Beta.</desc>
