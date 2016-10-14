@@ -36,7 +36,7 @@
         </div>
       </div>
 
-      <div class="btn" v-if="[TYPE_LOST,TYPE_FOUND].indexOf(data.ext_type)!=-1&&!is_detail">
+      <div class="btn" v-if="[TYPE_LOST,TYPE_FOUND].indexOf(data.ext_type)!=-1&&!is_detail" @click.stop="chat()">
         联系TA
       </div>
     </div>
@@ -129,7 +129,14 @@
           default:
             return "其他"
         }
-      }
+      },
+      chat(){
+        this.$router.go({path:'/chat',query:{
+          chat_user:this.data.user_id,
+          module_type:this.data.ext_type,
+          module_id:this.data.id
+        }});
+      },
     },
     computed: {
       main_color(){
