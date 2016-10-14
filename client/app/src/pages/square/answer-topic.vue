@@ -29,7 +29,7 @@
         </infinite-loading>
       </div>
       <div class="answer-foot">
-        <input class="answer-foot-message" placeholder="#{{items[0].label_name}}" disabled>
+        <input class="answer-foot-message" placeholder="#{{items[0].label_name}}" readonly>
       </div>
 
 
