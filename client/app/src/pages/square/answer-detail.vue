@@ -451,7 +451,7 @@
               .query({ext_type: 12})
               .then(this.$api.checkResult)
               .then((data)=>{
-                this.follow1=data.ext_data.follow()
+                this.follow1=data.ext_data.follow
               })
 
           })
