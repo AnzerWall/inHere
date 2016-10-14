@@ -1,8 +1,11 @@
 import Vue from 'vue'
-import App from './App'
+import RootPage from './root.vue'
+import VueRouter from 'vue-router'
+import RouteConfig from './router.js'
+import N3Components from 'N3-components'
+N3Components.install(Vue)
 
-/* eslint-disable no-new */
-new Vue({
-  el: 'body',
-  components: { App }
-})
+Vue.use(VueRouter);
+const router = new VueRouter();
+router.map(RouteConfig);
+router.start(RootPage,"#app");
