@@ -31,7 +31,7 @@
         </infinite-loading>
       </div>
       <div class="cao-foot" @click="goToCaoPublish(items[0].label_name)">
-        <input class="foot-message" placeholder="#{{items[0].label_name}}" disabled>
+        <input class="foot-message" placeholder="#{{items[0].label_name}}" readonly>
       </div>
 
     </div>
@@ -46,7 +46,7 @@
 
   }
   .cao-header{
-    width: 100%;
+
     color: #ffffff;
 
   }
@@ -61,7 +61,6 @@
   .header-top{
    width: 100%;
 
-    display: flex;
     height: 60px;
     align-items: center;
     font-size: 16px;

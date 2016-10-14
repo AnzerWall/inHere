@@ -25,6 +25,8 @@
   flex-wrap: nowrap;
   position: absolute;
   left: 0;
+  right:0;
+  overflow-x:auto;
   padding: 0 25px 0 15px;
 }
 .image-space {
@@ -35,12 +37,15 @@
 .image {
   border: solid 3px white;
   box-shadow: 0px 2px 16px rgba(0, 0, 0, .2);
-  margin-left: 10px;
+  margin-left: 0;
+  margin-right:10px;
   margin-bottom: 5px;
   margin-top: 5px;
   height: 130px;
 
 }
+
+
 .hide-scroll::-webkit-scrollbar,
 .hide-scroll::-webkit-scrollbar-track,
 .hide-scroll::-webkit-scrollbar-thumb {

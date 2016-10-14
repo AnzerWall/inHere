@@ -11,6 +11,7 @@
 
           <div class="image-wrapper " v-if="item.ext_data.photos&& item.ext_data.photos!=0"  >
             <img class="image" v-for="photo in item.ext_data.photos" v-lazy="photo.src" @click.stop="onClickImage($index)">
+            <div style="height:10px;width:15px;">&nbsp;</div>
           </div>
 
           <div class="image-space" v-if="item.ext_data.photos&& item.ext_data.photos.length!=0"></div>

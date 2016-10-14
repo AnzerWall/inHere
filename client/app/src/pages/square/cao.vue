@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="foot" @click="goToPublish">
-        <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难" disabled>
+        <input  class="text" type="text" placeholder="世界不如人意,人生如此艰难" readonly>
       </div>
 
     </div>
