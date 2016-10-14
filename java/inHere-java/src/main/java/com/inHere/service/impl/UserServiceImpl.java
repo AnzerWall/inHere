@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.inHere.dao.RolesMapper;
 import com.inHere.dao.UserMapper;
 import com.inHere.dto.ReturnListDto;
+import com.inHere.entity.Permissions;
 import com.inHere.entity.Roles;
 import com.inHere.entity.User;
 import com.inHere.service.SecurityService;
@@ -206,6 +207,55 @@ public class UserServiceImpl implements UserService {
         }
 
         return items;
+    }
+
+    /**
+     * 获取角色列表
+     *
+     * @return
+     */
+    @Override
+    public JSONObject getRoles() {
+        List<Roles> list = rolesMapper.getRoles();
+
+        JSONObject data = new JSONObject();
+        data.put("total", list.size());
+        JSONArray items = new JSONArray();
+        for (Roles role : list) {
+            items.add(role);
+        }
+        data.put("items", items);
+
+        return data;
+    }
+
+    /**
+     * 获取权限列表
+     *
+     * @param user_id
+     * @return
+     */
+    @Override
+    public JSONObject getAuths(String user_id) {
+        JSONObject data = new JSONObject();
+        if (user_id != null) {
+            Roles role = rolesMapper.selectRole(user_id);
+            data.put("total", role.getPermissions().size());
+            JSONArray items = new JSONArray();
+            for (Permissions perm : role.getPermissions()) {
+                items.add(perm);
+            }
+            data.put("items", items);
+        } else {
+            List<Permissions> list = rolesMapper.getPermissions();
+            data.put("total", list.size());
+            JSONArray items = new JSONArray();
+            for (Permissions perm : list) {
+                items.add(perm);
+            }
+            data.put("items", items);
+        }
+        return data;
     }
 
 }

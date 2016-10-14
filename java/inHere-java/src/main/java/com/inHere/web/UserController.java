@@ -3,14 +3,12 @@ package com.inHere.web;
 import com.alibaba.fastjson.JSONObject;
 import com.inHere.annotation.Authorization;
 import com.inHere.annotation.CurrentToken;
-import com.inHere.annotation.Params;
 import com.inHere.constant.Code;
 import com.inHere.constant.Field;
 import com.inHere.dto.ReturnBaseDto;
 import com.inHere.dto.ReturnListDto;
 import com.inHere.entity.Token;
 import com.inHere.service.UserService;
-import com.inHere.validator.LoginValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,9 +31,8 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 创建管理员, TODO 未做校验
+     * 创建管理员, TODO 未做校验, 判断用户是否存在
      */
-    @Params(LoginValidator.class)
     @RequestMapping(path = "/admin", method = RequestMethod.POST)
     public ReturnBaseDto<JSONObject> adminLogup(@RequestBody Map<String, Object> params) {
         String user_id = (String) params.get("user_id");
@@ -57,10 +54,10 @@ public class UserController {
     public ReturnBaseDto<ReturnListDto> userList(Integer offset, Integer limit, Integer is_admin, String user_id, String user_name) throws IOException {
 
         log.info("--->" + offset);
-        if( offset == null ){
+        if (offset == null) {
             offset = 0;
         }
-        if (limit == null){
+        if (limit == null) {
             limit = 10;
         }
 
@@ -74,12 +71,34 @@ public class UserController {
     }
 
     /**
-     * TODO 获取角色列表
+     * 获取角色列表
      */
+    @RequestMapping(path = "/roles", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getRoles() {
+
+        JSONObject data = userService.getRoles();
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
     /**
-     * TODO 获取权限列表
+     * 获取权限列表
      */
+    @RequestMapping(path = "/auth", method = RequestMethod.GET)
+    public ReturnBaseDto<JSONObject> getAuths(String user_id) {
+
+        JSONObject data = userService.getAuths(user_id);
+
+        ReturnBaseDto<JSONObject> result = new ReturnBaseDto<>();
+        result.setCode(Code.Success.getCode());
+        result.setStatus(Code.Success.getStatus());
+        result.setData(data);
+        return result;
+    }
 
     /**
      * TODO 获取用户权限列表

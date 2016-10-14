@@ -63,4 +63,19 @@ public interface UserService {
     void change(Map<String, Object> params, String user_id) throws IOException;
 
     ReturnListDto getList(Integer offset, Integer limit, Integer is_admin, String user_id, String user_name) throws IOException;
+
+    /**
+     * 获取角色列表
+     *
+     * @return
+     */
+    JSONObject getRoles();
+
+    /**
+     * 获取权限列表
+     *
+     * @param user_id
+     * @return
+     */
+    JSONObject getAuths(String user_id);
 }

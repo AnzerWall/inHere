@@ -1,6 +1,9 @@
 package com.inHere.dao;
 
+import com.inHere.entity.Permissions;
 import com.inHere.entity.Roles;
+
+import java.util.List;
 
 public interface RolesMapper {
 
@@ -11,5 +14,19 @@ public interface RolesMapper {
      * @return
      */
     Roles selectRole(String user_id);
+
+    /**
+     * 获取角色列表
+     *
+     * @return
+     */
+    List<Roles> getRoles();
+
+    /**
+     * 获取权限列表
+     *
+     * @return
+     */
+    List<Permissions> getPermissions();
 
 }

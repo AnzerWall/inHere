@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.inHere.dao.RolesMapper" >
+<mapper namespace="com.inHere.dao.RolesMapper">
 
     <!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->
-    <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
     <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>-->
+
+    <!--获取-->
+    <resultMap id="IncludePermissionsResultMap" type="Roles">
+        <id column="ro_id" property="id" jdbcType="INTEGER"/>
+        <result column="ro_role" property="role" jdbcType="VARCHAR"/>
+        <result column="ro_desc" property="description" jdbcType="VARCHAR"/>
+        <result column="ro_available" property="available" jdbcType="INTEGER"/>
+        <!-- 权限列表 -->
+        <collection property="permissions" ofType="Permissions">
+            <id column="id" property="id" jdbcType="INTEGER"/>
+            <result column="permission" property="permission" jdbcType="VARCHAR"/>
+            <result column="description" property="description" jdbcType="VARCHAR"/>
+            <result column="available" property="available" jdbcType="INTEGER"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Roles_Column">
+        ro.id ro_id,
+        ro.role ro_role,
+        ro.description ro_desc,
+        ro.available ro_available
+    </sql>
 
     <select id="selectRole" resultType="Roles">
         SELECT ro.* FROM tb_roles ro, tb_users_roles uro
         WHERE uro.`user_id` = #{user_id} and uro.`role_id` = ro.`id`
+    </select>
+
+    <select id="getRoles" resultMap="IncludePermissionsResultMap">
+        select
+        <include refid="Roles_Column"></include>,
+        pe.*
+        from tb_roles ro, tb_roles_permissions rope, tb_permissions pe
+        where ro.`id` = rope.`role_id` and rope.`permission_id` = pe.`id`
+    </select>
+
+    <!--获取权限列表-->
+    <select id="getPermissions" resultType="Permissions">
+        select * from tb_permissions
     </select>
 
 </mapper>
