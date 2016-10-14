@@ -83,7 +83,6 @@
                 this.$refs.noti.warning(`[目标${index+1}]总数量不合法`,{timeout:1000});
                 return;
               }
-
           }
           if(target.type===2){
             if(target.type_data.todo_list.length<1){
@@ -115,6 +114,7 @@
 
         this.$request
           .post(`${this.$api.node_api_base}/nuo`)
+          .query({token:this.token})
           .send({
             title:this.title,
             text:this.text,
