@@ -13,6 +13,7 @@
         <div class="like-count">{{data.praise_count}} LIKE</div>
         <div class="hike-count"> {{data.low_count}} HATE</div>
         <div class="has-give-up" v-if="data.give_up_count>0">曾放弃</div>
+        <div class="has-give-up" v-if="data.nuo_process===data.nuo_total">已完成</div>
       </div>
     </div>
 

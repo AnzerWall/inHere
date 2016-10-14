@@ -61,11 +61,13 @@ export default class extends Base {
     }
 
     async get(id, operator_id) {
+        let user_id=this.parseValue(operator_id);
 
-        let ret = await this.where({id: id})
+        let ret = await this.where(`id=${id} `)
             .field('id,title,text,type,type_data,creator_id,create_time,update_time,praise,low,school_id,data.give_up_count,data.status,data.nuo_process,nuo_total')
-            .join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id AND removed=0`)
+            .join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id AND removed=0 AND (user_id=${user_id} OR user_id IS NULL)`)
             .find();
+        console.log(ret);
         if (!think.isEmpty(ret)) {
             ret.praise = JSON.parse(ret.praise);
             ret.low = JSON.parse(ret.low);
@@ -95,15 +97,15 @@ export default class extends Base {
         mine = mine === 1;
         let ret;
         if (mine) {
-            ret = await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id AND  school_id=${school_id}`)
-                .where(`school_id=1 AND removed=0 AND (data.status IS NOT NULL OR creator_id=${user_id})`)
+            ret = await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id AND  school_id=${school_id} AND (data.user_id=${user_id} OR data.user_id IS  NULL )`)
+                .where(`school_id=1 AND removed=0 AND (data.user_id IS NULL OR data.status IS NOT NULL OR creator_id=${user_id}) `)
                 .field('id,title,text,type,type_data,creator_id,create_time,update_time,praise,low,school_id,data.give_up_count,data.status,data.nuo_process,nuo_total')
                 .limit(param.offset, param.limit)
                 .countSelect();
 
         } else {
-            ret = await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id`)
-                .where('school_id=1 AND removed=0 ')
+            ret = await this.join(`tb_target_list_user AS data ON tb_target_list.id = data.target_list_id  AND (data.user_id=${user_id} OR data.user_id IS  NULL )`)
+                .where(`school_id=1 AND removed=0`)
                 .limit(param.offset, param.limit)
                 .field('id,title,text,type,type_data,creator_id,create_time,update_time,praise,low,school_id,data.give_up_count,data.status,data.nuo_process,nuo_total')
                 .countSelect();
