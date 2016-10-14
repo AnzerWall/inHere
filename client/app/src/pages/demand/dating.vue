@@ -47,9 +47,9 @@
         this.$refs.viewer.show(index, photos);
       },
       onLoadMore(){
-        var token = "19e7aae2d81da63d62cfa36eb69706069e7a97bb61c8901782d8c1d98765ea94"
+        var token = this.token;
         this.$request
-          .get("http://115.28.67.181:8080/demand")//GET方法 url为/demand
+          .get(`${this.$api.url_base}/demand`)//GET方法 url为/demand
           .query({token: token})
           .query({ext_type: [6]})
           .query({offset: this.data.offset + 5, limit: this.data.limit})

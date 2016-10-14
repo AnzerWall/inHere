@@ -11,10 +11,12 @@
     </div>
     <div class="profile-content">
       <div class="profile-tools-inner" :style="{'width': grid_field_width}">
+        <div class="grid"  v-for="item in my_tools" :style="{'background-image': 'url('+ item.svg.src+')',width:grid_width,height:grid_width}" @click="showMyTool(item)">
+          <div class="title">{{item.title}}</div>
+        </div>
         <div class="grid"  v-for="item in tools" :style="{'background-image': 'url('+ item.svg.src+')',width:grid_width,height:grid_width}" @click="clickTool(item)">
             <div class="title" :style="{color:item.color}">{{item.title}}</div>
         </div>
-
       </div>
       <div class="profile-timeline-wrapper">
 
@@ -134,6 +136,7 @@
           .then((data)=> {
             //处理数据
             this.tools = data.items;
+//            this.tools = this.tools.push();
           })
           .catch((e)=> {
             if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
@@ -184,8 +187,21 @@
      return {
        grid_field_width:this.getGridFieldWidth(),
        grid_width:this.getGridWidth(),
-//       username:"小泽",
-//       school:"肇庆学院",
+       my_tools:[{   // 我的回答、目标
+         url:[],
+         svg: {
+           src: "/static/image/profile/Wodehuida.svg"
+         },
+         title:"我的问答",
+         color:"#09CE88"
+       },{
+         url:"http://m.kuaidi100.com/",
+         svg: {
+           src: "/static/image/profile/Wodemubiao.svg"
+         },
+         title:"我的目标",
+         color:"#7300FF"
+       }],
        tools:[{
          url:"http://m.kuaidi100.com/",
          svg: {
@@ -221,20 +237,6 @@
          },
          title:"四六级成绩",
          color:"#FFA600"
-       },{
-         url:"http://m.kuaidi100.com/",
-         svg: {
-           src: "/static/image/profile/Wodehuida.svg"
-         },
-         title:"我的回答",
-         color:"#09CE88"
-       },{
-         url:"http://m.kuaidi100.com/",
-         svg: {
-           src: "/static/image/profile/Wodemubiao.svg"
-         },
-         title:"我的目标",
-         color:"#7300FF"
        }]
      }
     },
@@ -288,6 +290,29 @@
             }
           }]
         })
+      },
+
+      showMyTool(item){
+        if (item.title === '我的问答'){
+          this.$router.go({
+            path:'/my-ask',
+            query:{
+              title:item.title,
+              url:item.url
+            }
+          })
+//          this.$router.go({
+//            path:'/my-ask',
+//            query:{
+//              title:item.title,
+//              url:item.url
+//            }
+//          })
+        } else if (item.title === '我的目标'){
+          this.$router.go('/nuo?mine=1');
+        } else if (item.title === '我的请求'){
+
+        }
       },
       clickTool(item){
         this.$router.go({

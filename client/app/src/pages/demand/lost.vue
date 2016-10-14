@@ -113,6 +113,31 @@
               list: data.items
             }
           })
+          .catch((e)=> {
+              if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`, {
+                  timeout: 1500
+                })//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`, {
+                  timeout: 1500
+                })
+              }
+            } else {
+              console.error(e.stack || e);
+              return this.$refs.noti.warning(`${e.message}`, {
+                timeout: 1500
+              })
+            }
+          })
       }
     },
     data(){
