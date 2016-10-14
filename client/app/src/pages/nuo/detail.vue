@@ -15,7 +15,7 @@
         <nuo-card :hide_radius="true" :data="data" @like="like(data)" @hate="hate(data)" @join="join(data)">
 
         </nuo-card>
-        <div class="nuo-detail-timeline" v-if="data.status!=0">
+        <div class="nuo-detail-timeline" v-show="data.status!=0">
           <nuo-timeline v-for="target in data.target_list"
                         :data="target"
                         :padding="$index!==0&&! data.target_list[$index-1].completed"

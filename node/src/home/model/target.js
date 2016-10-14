@@ -88,9 +88,12 @@ export default class extends Base {
     }
 
     async getList(id, operator_id) {
+        let user_id=this.parseValue(operator_id);
         let items = await this.where({target_list_id: id})
             .field('target_id,title,text,type,type_data,index,data.user_data,data.completed')
-            .join(`tb_target_user AS data ON tb_target.target_id = data.relation_target_id`)
+            .join(`tb_target_user AS data ON tb_target.target_id = data.relation_target_id
+            AND user_id=${user_id}
+            `)
             .select();
 
         if (think.isArray(items)) {
