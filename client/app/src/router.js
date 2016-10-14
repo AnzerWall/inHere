@@ -46,6 +46,7 @@ import CaoOutPublish from 'pages/cao/out-publish.vue'
 import AskPublish from 'pages/cao/ask-publish.vue'
 
 import Tool from 'pages/profile/tool.vue'
+import MyAsk from 'pages/profile/my_ask.vue'
 
 import LoginPage from 'pages/login/login.vue'
 import Register from 'pages/register/register.vue'
@@ -180,6 +181,9 @@ export default{
   },
   '/tool':{
     component:Tool
+  },
+  '/my-ask':{
+    component:MyAsk
   },
   '/answer-detail/:id':{
     component:AnswerDetail

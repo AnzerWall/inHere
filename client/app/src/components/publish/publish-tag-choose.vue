@@ -34,10 +34,12 @@
     align-content: center;
   }
   .publish-key {
-    padding: 28px 18px;
+    width: 4em;
+    padding: 28px 0 28px 18px;
     font-weight: bold;
     color: gray;
     opacity: 0.85;
+    white-space: nowrap;
   }
   .register-key{
     padding: 25px 18px;

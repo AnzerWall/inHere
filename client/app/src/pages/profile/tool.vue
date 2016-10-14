@@ -1,7 +1,8 @@
 <template>
     <div class="url_style">
         <div class="activity-head"><span class="activity-title" @click="back()">《 {{title}}</span></div>
-        <iframe v-el:myiframe scrolling="yes" frameborder="0" height="100%" width="100%" v-bind:src="url"></iframe>
+        <iframe v-el:myiframe scrolling="yes" frameborder="0" height="100%" width="100%" v-bind:src="url" v-if="isWebView"></iframe>
+
     </div>
 </template>
 <script>
@@ -11,6 +12,13 @@ module.exports = {
             title:'',
             url:''
         }
+    },
+    props:{
+      isWebView:{
+        type:Boolean,
+        required:false,
+        default:true
+      }
     },
     route:{
         data(){

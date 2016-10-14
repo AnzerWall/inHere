@@ -7,7 +7,7 @@
             {{item.ext_data.content}}
           </div>
         </div>
-        <div class="center hide-scroll" @click="onClick(item.id)">
+        <div class="center hide-scroll" style="right:0;overflow-x:auto;" @click="onClick(item.id)">
 
           <div class="image-wrapper " v-if="item.ext_data.photos&& item.ext_data.photos!=0"  >
             <img class="image" v-for="photo in item.ext_data.photos" v-lazy="photo.src" @click.stop="onClickImage($index)">

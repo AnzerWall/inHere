@@ -27,8 +27,8 @@
 
         </div>
         <div class="right">
-          <div class="pay" v-if="TYPE_EXPRESS===data.ext_type&&!is_detail">{{'¥ '+data.ext_data.pay}}</div>
-          <div class="pay" v-if="TYPE_SELL===data.ext_type&&!is_detail">{{'¥ '+data.ext_data.price}}</div>
+          <div class="pay" v-if="TYPE_EXPRESS===data.ext_type&&!is_detail">{{'¥ '+(data.ext_data.pay||0)}}</div>
+          <div class="pay" v-if="TYPE_SELL===data.ext_type&&!is_detail">{{'¥ '+(data.ext_data.price||0)}}</div>
           <div class="like-text" v-if="data.ext_type===TYPE_DATING">{{data.praise}}</div>
           <pay-icon v-if="[TYPE_EXPRESS,TYPE_SELL].indexOf(data.ext_type)!=-1&&!is_detail" class="icon"></pay-icon>
           <like-icon v-if="data.ext_type===TYPE_DATING&&!data.praised" class=" like-icon"></like-icon>
