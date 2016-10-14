@@ -42,6 +42,10 @@ module.exports = {
             warningInfo: ''
         }
     },
+    ready(){
+      var tmp = this.tags.find(item=>item.value==this.tag);
+      if(tmp)this.tagName = tmp.name;
+    },
     watch: {
         show(val) {
             if (val) {

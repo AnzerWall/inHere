@@ -29,7 +29,7 @@
         </infinite-loading>
       </div>
       <div class="answer-foot">
-        <input class="answer-foot-message" placeholder="#{{items[0].label_name}}">
+        <input class="answer-foot-message" placeholder="#{{items[0].label_name}}" disabled>
       </div>
 
 
@@ -198,6 +198,9 @@
             .query({token: token})
             .query({offset:( this.data.offset||0) + 5, limit: 5})
             .query({ext_type: 12})
+            .query({
+              label_id:this.$route.query.label_id
+            })
             .then(this.$api.checkResult)
             .then((data)=> {
               //通知组件加载完毕

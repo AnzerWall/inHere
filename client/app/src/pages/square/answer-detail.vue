@@ -24,7 +24,12 @@
               </div>
               <div class="ard-image-space" v-if="photos&& photos.length!=0"></div>
             </div>
-            <div class="ard-attention"><span class="attention-font">关&nbsp&nbsp注&nbsp&nbsp问&nbsp&nbsp题</span></div>
+            <div class="ard-attention" @click="follow()" v-if="follow1==0">
+              <span class="attention-font" >关&nbsp&nbsp注&nbsp&nbsp问&nbsp&nbsp题</span>
+            </div>
+            <div class="ard-attention"  v-if="follow1==1">
+              <span class="attention-font">已&nbsp&nbsp关&nbsp&nbsp注</span>
+            </div>
           </div>
         </div>
 
@@ -288,6 +293,7 @@
               user_id: data.user_id,
               photos:data.ext_data.photos,
               ext_type:data.ext_type,
+              follow1:data.ext_data.follow,
 
             }
           })
@@ -326,6 +332,7 @@
         placeholder:'说点什么?',
         content:"",
         bottomHeight:0,
+        follow1:0,
       }
     },
     components: {
@@ -390,11 +397,9 @@
         return this.$request
           .get(`${this.$api.url_base}/ask_reply/`+id)
           .query({ext_type:12})
-
           .query({token:this.token})
           .then(this.$api.ckeckResult)
           .then((res)=>{
-
             var data =res.body.data;
             this.data=data;
             console.log(data);
@@ -430,6 +435,26 @@
             //后续显示重试按钮
           })
 
+      },
+      follow(){
+        var token = this.token;
+        var id=this.$route.params.id;
+        let url=`${this.$api.url_base}/ask_reply/follow/`+id;
+        this.$request
+          .post(url)
+          .query({token:token})
+          .then(this.$api.ckeckResult)
+          .then((res)=>{
+            this.$request
+              .get(`${this.$api.url_base}/ask_reply/`+id)
+              .query({token:this.token})
+              .query({ext_type: 12})
+              .then(this.$api.checkResult)
+              .then((data)=>{
+                this.follow1=data.ext_data.follow()
+              })
+
+          })
       }
     }
   }

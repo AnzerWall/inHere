@@ -31,7 +31,7 @@
         </infinite-loading>
       </div>
       <div class="cao-foot" @click="goToCaoPublish(items[0].label_name)">
-        <input class="foot-message" placeholder="#{{items[0].label_name}}">
+        <input class="foot-message" placeholder="#{{items[0].label_name}}" disabled>
       </div>
 
     </div>
@@ -215,7 +215,8 @@
             .get(`${this.$api.url_base}/ask_reply`)
             .query({token: token})
             .query({offset:( this.data.offset||0) + 5, limit: 5})
-            .query({ext_type: this.$route.query.ext_type})
+            .query({ext_type: this.$route.query.ext_type,
+              label_id:this.$route.query.label_id})
             .query({item_id: id})
             .then(this.$api.checkResult)
             .then((data)=> {

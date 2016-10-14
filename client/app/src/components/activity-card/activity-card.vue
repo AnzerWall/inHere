@@ -1,7 +1,7 @@
 <template>
     <div>
-<div class="b-card"  :style="{'background-image': 'url('+item.cover_img.src+')'}"@click="clickCard(item)">
-  <div class="b-activity-content-bg">
+<div class="b-card"  :style="{'background-image': 'url('+item.cover_img.src+')'}">
+  <div class="b-activity-content-bg" @click="clickCard(item)">
   <div class="b-title">{{item.title}}</div>
   <div class="b-user">
     <span class="ad " v-if="item.ext_type==='9'">广告</span>
@@ -10,9 +10,9 @@
   </div>
   </div>
   <div class="b-base">
-    <span class="b-address"v-if="item.place">{{item.place}}</span>
+    <span class="b-address"v-if="item.place" @click="clickCard(item)">{{item.place}}</span>
     <span></span>
-    <span class="b-like font-b">{{item.praise}}<icon-like class="icon"></icon-like></span>
+    <span class="b-like font-b" @click="onclickpraise(item,item.id,item.ext_type)" >{{item.praise}}<icon-like class="icon" :style="{fill:activityColor}"></icon-like></span>
 
   </div>
 </div>
@@ -81,6 +81,7 @@ import {
     fromNow
 } from 'filter/time.js';
 import IconLike from 'svg/common/comment/IconLike.vue'
+import color from '../../util/praise_color.js';
 export default {
     filters: {
         fromNow
@@ -110,7 +111,11 @@ export default {
                     }
                 })
             }
-        }
+        },
+      onclickpraise(ext_data,id,ext_type){
+        console.log(ext_data,id,ext_type);
+        this.$emit('onclickpraise',ext_data,id,ext_type);
+      },
     },
     props: ['item'],
     //       item: {
@@ -136,7 +141,12 @@ export default {
     components: {
         IconLike
 
+    },
+  computed:{
+    activityColor(){
+      return color.activityColor(this.item);
     }
+  }
 }
 </script>
 

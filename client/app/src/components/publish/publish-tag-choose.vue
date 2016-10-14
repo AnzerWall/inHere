@@ -11,8 +11,8 @@
   <div class="publish-detail" v-if="!isPublish">
     <div class="register-key">{{key}}</div>
     <div class="register-value">
-      <span @click="tagShow = !tagShow"><input readonly :value="tag || '选择标签'"></span>
-      <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :editable="editable" :maxlength="maxlength"></tag-editor>
+      <span @click="tagShow = !tagShow"><input readonly :value="tag_name || '选择标签'"></span>
+      <tag-editor :show.sync="tagShow" :tag.sync="tag" :tags.sync="tags" :tag-name.sync="tag_name" :editable="editable" :maxlength="maxlength"></tag-editor>
     </div>
   </div>
 
@@ -84,6 +84,11 @@
         default:"# 标签"
       },
       tag:{
+        type:String,
+        required:true,
+        default:""
+      },
+      tag_name:{
         type:String,
         required:true,
         default:""

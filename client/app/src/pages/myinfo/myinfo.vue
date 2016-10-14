@@ -20,7 +20,7 @@
         <!--用户名-->
         <div class="myinfo-main-list">
           <div class="myinfo-main-list-left">用户名</div>
-          <div class="myinfo-main-list-right"><input type="text"  class="myinfo-input" v-model="user_name" value="{{data.user_name}}" @blur="checkUserName(user_name,this)"></div>
+          <div class="myinfo-main-list-right"><input type="text"  class="myinfo-input" v-model="user_name" value="{{data.user_name}}" @blur="checkUserName(user_name,this)" maxlength="9"></div>
         </div>
         <!--密码-->
         <div class="myinfo-main-list">
@@ -39,12 +39,12 @@
         <!--手机-->
         <div class="myinfo-main-list">
           <div class="myinfo-main-list-left">手机</div>
-          <div class="myinfo-main-list-right"><input  type="text"  class="myinfo-input" v-model="phone" value="{{data.phone}}" @blur="checkPhone(phone,this)"></div>
+          <div class="myinfo-main-list-right"><input  type="number" pattern="\d*" class="myinfo-input" v-model="phone" value="{{data.phone}}" @blur="checkPhone(phone,this)"  maxlength="16"></div>
         </div>
         <!--QQ-->
         <div class="myinfo-main-list">
           <div class="myinfo-main-list-left">QQ</div>
-          <div class="myinfo-main-list-right"><input  type="text" class="myinfo-input" v-model="qq" value="{{data.qq}}" @blur="checkQQ(qq,this)"></div></div>
+          <div class="myinfo-main-list-right"><input  type="number" pattern="\d*" class="myinfo-input" v-model="qq" value="{{data.qq}}" @blur="checkQQ(qq,this)" maxlength="16"></div></div>
         </div>
       <!--修改密码组件-->
       <change-password v-ref:changepassword></change-password>
@@ -241,13 +241,19 @@
           }
         },
         checkPhone(phone,self){
-          if(!(/^1[34578]\d{9}$/).exec(phone)){
+          if(phone==''){
+            self.$refs.noti.warning('手机号为空,请填手机号')
+          }
+          else if(!(/^1[34578]\d{9}$/).exec(phone)){
             self.$refs.noti.warning("手机号码有误，请重填")
           }
           return 1;
         },
         checkQQ(qq,self){
-          if(!(/[1-9][0-9]{4,14}/).exec(qq)){
+          if(qq==''){
+            self.$refs.noti.warning('QQ号为空,请填QQ号')
+          }
+          else if(!(/[1-9][0-9]{4,14}/).exec(qq)){
             self.$refs.noti.warning("QQ号码有误，请重填")
           }
         }

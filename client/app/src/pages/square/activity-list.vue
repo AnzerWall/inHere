@@ -1,15 +1,16 @@
 <template>
-  <div v-if="!$loadingRouteData">
+  <div>
+    <noti v-ref:noti></noti>
     <!--活动头部-->
     <div class="activity-head"><span class="activity-title" @click="back()">《 现在有{{data.total}}个活动</span></div>
 
     <!--活动列表-->
-    <div class="activity-content" >
-      <activity-card v-for="list in lists" :item="list">
+    <div class="activity-content">
+      <activity-card v-for="list in lists" :item="list" @onclickpraise="onclickpraise">
 
       </activity-card>
       <!--加载更多组件-->
-      <infinite-loading :on-infinite="onLoadMore">
+      <infinite-loading :on-infinite="onLoadMore" v-if="data">
         <span slot="no-more">
           没有更多了...
         </span>
@@ -17,7 +18,12 @@
     </div>
 
   </div>
-  <!--加载动画组件：小圆点-->
+  <!--加载失败图标组件-->
+  <div class="activity-list-fail" v-if="!data&&!$loadingRouteData" @click="load()">
+    <fail text="加载失败,点击刷新"></fail>
+  </div>
+
+  <!--加载动画组件： 小圆点-->
   <div v-if="$loadingRouteData" class="loading-area">
     <pulse-loader color="rgb(38, 162, 255)" size="12px"></pulse-loader>
   </div>
@@ -60,6 +66,7 @@
   import InfiniteLoading from 'vue-infinite-loading';
   import Noti from 'components/noti.vue';
   import Fail from 'components/fail.vue';
+  import praise from '../../util/praise.js';
   export default{
     methods: {
       back(){
@@ -88,7 +95,46 @@
           .catch(function (e) {
             console.log(e);
           })
-      }
+      },
+      load(){
+        return this.$request
+          .get(`${this.$api.url_base}/activity/`)
+          .query({token:this.token})
+          .then(this.$api.ckeckResult)
+          .then((res)=>{
+            var data =res.body.data;
+            this.data=data;
+            console.log(data);
+            this.url_type=data.url_type;
+            this.lists=data.items;
+          })
+          .catch((e)=> {
+            console.log("adadddasd")
+            console.log(e)
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
+          })
+
+      },
+      onclickpraise(ext_data,id,ext_type){
+        return praise.praise(ext_data, id, ext_type, this);
+      },
 
     },
     vuex: {
@@ -105,6 +151,7 @@
       //页面加载数据钩子(或者叫事件)
       data(){
 
+        var self=this
         let url = `${this.$api.url_base}/activity/`;
         return this.$request
           .get(url)//GET方法 url为/activity
@@ -120,12 +167,36 @@
               lists: data.items
             }
           })
+          .catch((e)=> {
+            console.log("adadddasd")
+            if (e.type === 'API_ERROR') {//判断是api访问出错还是其他错，仅限被checkResult处理过。。详见checkResult。。
+              if (e.code === 23333) {//根据code判断出错类型,比如未登录时候跳转啊
+                return this.$refs.noti.warning(`参数验证失败`)//这里以及后边的return是为了结束函数。。。仅此而已 ，常用技巧  : )
+              } else if (e.code === 401) {
+                return this.$router.go({
+                  path: '/login',
+                  query: {
+                    __ref: this.$route.path//告诉login页面要跳转回来的页面
+                  }
+                });
+              } else {
+                return this.$refs.noti.warning(`与服务器通讯失败:${e.message}`)
+              }
+            } else {
+              console.error(e.stack||e);
+              console.log(self.$refs.noti);
+              return this.$refs.noti.warning(`未知错误:${e.message}`)
+            }
+            //后续显示重试按钮
+          })
       }
     },
     data(){
       return {
 
-        lists: []
+        lists: [],
+        data: null,
+        url_type: 0
       }
     },
     components: {
@@ -134,6 +205,7 @@
       InfiniteLoading,
       Noti,
       Fail
+
 
     }
   }
